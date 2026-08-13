@@ -298,7 +298,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 .flow-branch::before { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line-strong); }.flow-branch span { z-index: 1; padding: 2px 7px; background: var(--canvas); }
 .flow-options { width: 100%; display: grid; grid-template-columns: 1fr; gap: 9px; }
 .flow-card { padding: 13px; border: 1px solid var(--line); border-top: 3px solid var(--cobalt); border-radius: 9px; background: var(--surface); text-align: center; }
-.flow-card.caution { border-top-color: var(--amber); }.flow-card small { display: block; color: var(--ink-faint); font-size: 8px; text-transform: uppercase; letter-spacing: .05em; }.flow-card strong { display: block; margin-top: 4px; font-size: 11px; }.flow-card > span { display: block; color: var(--ink-faint); }.flow-card p { margin: 0; color: var(--cobalt-dark); font-size: 11px; font-weight: 650; }
+.flow-card.caution { border-top-color: var(--amber); }.flow-card small { display: block; color: var(--ink-faint); font-size: 8px; text-transform: uppercase; letter-spacing: .05em; }.flow-card strong { display: block; margin-top: 4px; font-size: 11px; }
 .source-list, .history-list { display: grid; margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
 .source-list article, .history-list article { display: flex; gap: 11px; padding: 14px; border-bottom: 1px solid var(--line); }.source-list article:last-child, .history-list article:last-child { border-bottom: 0; }.source-list article > span { width: 25px; height: 25px; flex: 0 0 25px; display: grid; place-items: center; border-radius: 7px; background: var(--cobalt-soft); color: var(--cobalt-dark); font-size: 9px; font-weight: 700; }.source-list h2, .history-list h2 { margin: 0; font-size: 11px; }.source-list p, .history-list p { margin: 2px 0; color: var(--ink-muted); font-size: 11px; }.source-list small { display: block; color: var(--ink-faint); font-size: 10px; }
 .history-list article { align-items: center; }.history-list .status-dot { color: var(--green); background: var(--green); }
@@ -344,7 +344,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .anki-inline { font-size: 9px; }
 }
 
-@media (min-width: 620px) { .flow-options { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 620px) { .flow-options { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); } }
 
 @media (min-width: 760px) {
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

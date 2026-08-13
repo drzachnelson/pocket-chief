@@ -1,0 +1,116 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import { BREAST_FIBROEPITHELIAL_SOURCE as SOURCE } from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-breast-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Both lesions are fibroepithelial, and the split is age, growth rate, and stromal cellularity. A stable, mobile, rubbery mass in a woman 35 or younger with a concordant triple test can be watched; rapid enlargement, older age, or focal stromal hypercellularity on core biopsy moves the plan to excision with margins.",
+  }, SOURCE),
+  sourced({
+    id: "block-breast-fibroadenoma",
+    type: "bullets",
+    heading: "Fibroadenoma essentials",
+    items: [
+      "Most common breast lesion in adolescents and women under 30–35 years; painless, mobile, firm, rubbery, and may fluctuate with menses or pregnancy.",
+      "Benign fibroepithelial tumor of the terminal duct lobular unit, with fibrous stroma compressing epithelium into slit-like spaces.",
+      "Coarse popcorn calcifications on mammography signal chronic involution, not malignancy.",
+      "Complex fibroadenoma — cysts over 3 mm, sclerosing adenosis, epithelial calcifications, or papillary apocrine metaplasia — carries a 1.5–3x relative risk of later breast cancer.",
+      "Excise for age over 35, enlargement or symptoms, size over 2–3 cm, giant fibroadenoma over 5 cm, or complex histology.",
+      "In children and adolescents, avoid radical excision that injures the developing breast bud.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-breast-phyllodes",
+    type: "bullets",
+    heading: "Phyllodes essentials",
+    items: [
+      "Usually presents in the 40s to 50s as a rapidly enlarging, large, firm mass that can stretch overlying skin or cause pressure necrosis.",
+      "Biphasic epithelial and mesenchymal tumor with leaf-like stromal projections into cleft-like spaces.",
+      "Graded benign, borderline, or malignant by mitotic count, stromal cellularity, atypia, stromal overgrowth, and margin character.",
+      "Spreads hematogenously to lung and bone like a soft tissue sarcoma; nodal metastasis occurs in under 1 percent.",
+      "Wide local excision targeting a 1 cm negative margin; mastectomy is reserved for lesions too large for clear margins or acceptable cosmesis.",
+      "Routine axillary dissection and sentinel node biopsy are not indicated.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-breast-flow",
+    type: "flow",
+    heading: "Decision flow after core needle biopsy",
+    nodes: [
+      { id: "workup", label: "Firm breast mass worked up with exam, imaging, and core needle biopsy" },
+      { id: "benign", label: "Fibroadenoma histology · age 35 or under · concordant triple test", tone: "good" },
+      { id: "suspicious", label: "Phyllodes histology · rapid growth · age over 35 · size over 2–3 cm", tone: "caution" },
+      { id: "observe", label: "Observe with serial ultrasound every six months", tone: "good" },
+      { id: "excise", label: "Excise — simple excision for fibroadenoma, wide local excision to 1 cm margins for phyllodes", tone: "caution" },
+    ],
+    edges: [
+      { from: "workup", to: "benign", label: "concordant and low risk" },
+      { from: "workup", to: "suspicious", label: "discordant or high risk" },
+      { from: "benign", to: "observe" },
+      { from: "suspicious", to: "excise" },
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-breast-comparison",
+    type: "table",
+    heading: "Compare the two lesions",
+    columns: ["Feature", "Fibroadenoma", "Phyllodes tumor"],
+    rows: [
+      ["Peak age", "Adolescents and women under 30–35 years", "Perimenopausal and postmenopausal women in their 40s to 50s"],
+      ["Growth", "Slow, mobile, rubbery; may fluctuate with hormones", "Rapid enlargement, often large at presentation"],
+      ["Histology", "Fibrous stroma compressing epithelium in the terminal duct lobular unit", "Biphasic tumor with leaf-like stromal projections into cleft-like spaces"],
+      ["Malignant potential", "Essentially benign; complex variants carry a 1.5–3x relative risk", "Benign, borderline, or malignant by stromal cellularity, atypia, and mitoses"],
+      ["Imaging clue", "Coarse popcorn calcifications with involution", "Large circumscribed mass outgrowing a presumed fibroadenoma"],
+      ["Spread", "Local growth only, non-metastatic", "Hematogenous to lung and bone; nodal disease under 1 percent"],
+      ["Operation", "Observation or simple excisional biopsy without wide margins", "Wide local excision targeting 1 cm negative margins"],
+      ["Axillary staging", "Not applicable", "No axillary dissection and no sentinel node biopsy"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-breast-grading",
+    type: "table",
+    heading: "Grade the phyllodes tumor",
+    columns: ["Grade", "Mitoses", "Stroma and margin"],
+    rows: [
+      ["Benign", "Fewer than 5 per 10 HPF", "Mild stromal cellularity, minimal atypia, circumscribed border"],
+      ["Borderline", "5 to 9 per 10 HPF", "Moderate cellularity and atypia, focally infiltrative border"],
+      ["Malignant", "10 or more per 10 HPF", "Marked stromal overgrowth, marked atypia, infiltrative border"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-breast-sequence",
+    type: "sequence",
+    heading: "Triple test sequence",
+    steps: [
+      { title: "Examine the mass", detail: "Record size, mobility, consistency, and any interval growth the patient reports." },
+      { title: "Image by age", detail: "Ultrasound first in younger women, adding mammography when age or findings warrant it." },
+      { title: "Core needle biopsy", detail: "Sample with a core needle rather than fine needle aspiration so stromal architecture can be assessed." },
+      { title: "Check concordance", detail: "Observation is acceptable only when exam, imaging, and pathology all read benign." },
+      { title: "Reassess growth", detail: "Re-image at six-month intervals and excise any mass that enlarges or becomes symptomatic." },
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-breast-warning",
+    type: "warning",
+    heading: "A rapidly growing fibroadenoma is phyllodes until proven otherwise",
+    text: "Stromal hypercellularity in a phyllodes tumor is often focal, so a core needle biopsy reading fibroadenoma does not exclude it. Any fibroadenoma-like mass that enlarges rapidly warrants excision with margins rather than continued observation.",
+  }, SOURCE),
+  references("block-breast-references", [SOURCE]),
+];
+
+export const fibroadenomaPhyllodesTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000000201",
+  versionId: "00000000-0000-4000-8000-000000000203",
+  slug: "fibroadenoma-vs-phyllodes-tumor",
+  title: "Fibroadenoma vs Phyllodes Tumor",
+  aliases: ["fibroadenoma", "fibroadenomatous disease", "complex fibroadenoma", "giant fibroadenoma", "phyllodes tumor", "cystosarcoma phyllodes", "fibroepithelial breast lesion"],
+  scoreNodeId: "breast-benign",
+  scoreCategory: "SCORE · Breast · Benign Breast Disease",
+  tags: ["breast", "fibroepithelial", "phyllodes", "absite", "score"],
+  sourceId: SOURCE,
+  blocks,
+  reviewedAt: "2026-08-13T00:00:00.000Z",
+});

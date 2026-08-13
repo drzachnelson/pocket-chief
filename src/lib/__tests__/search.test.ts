@@ -11,8 +11,18 @@ describe("topic search", () => {
     expect(searchTopics("common bile dcut", demoTopics)[0]?.slug).toBe("choledocholithiasis");
   });
 
+  it("does not let one- or two-letter words in body text carry a token match", () => {
+    expect(searchTopics("acute wound", demoTopics)).toEqual([]);
+  });
+
+  it("still ranks the right topic when a body word is a genuine prefix", () => {
+    expect(searchTopics("phyllodes", demoTopics)[0]?.slug).toBe("fibroadenoma-vs-phyllodes-tumor");
+  });
+
   it("never includes draft-only topics", () => {
     const draftOnly = { ...demoTopics[0], id: "draft", slug: "secret", title: "Secret Draft", approvedVersion: null };
-    expect(searchTopics("secret", [...demoTopics, draftOnly])).toEqual([]);
+    // Asserts the draft is absent rather than that nothing matched: seeded
+    // content legitimately contains words this query prefixes ("secretase").
+    expect(searchTopics("secret", [...demoTopics, draftOnly]).map((topic) => topic.slug)).not.toContain("secret");
   });
 });

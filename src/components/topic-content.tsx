@@ -3,7 +3,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { BookmarkSimple, CheckCircle, Copy, DownloadSimple, Lightning, X } from "@phosphor-icons/react";
 import type { ClozeDraft, SuppliedSource, Topic, TopicBlock, TopicVersion } from "@/lib/types";
 import { buildAnkiMobileUrl, createFallbackCloze, sendToAnkiConnect, toAnkiTsv } from "@/lib/anki";
@@ -25,6 +25,28 @@ function contextImageDataUrl(heading: string, text: string, diagram: string) {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
+/**
+ * Groups flow nodes into rows by their longest distance from the root, so a
+ * decision tree of any width renders as successive rows of cards.
+ */
+function flowLevels(block: Extract<TopicBlock, { type: "flow" }>) {
+  const depth = new Map<string, number>();
+  const resolve = (id: string, seen: Set<string>): number => {
+    if (depth.has(id)) return depth.get(id)!;
+    if (seen.has(id)) return 0;
+    const incoming = block.edges.filter((edge) => edge.to === id);
+    const value = incoming.length ? Math.max(...incoming.map((edge) => resolve(edge.from, new Set([...seen, id])) + 1)) : 0;
+    depth.set(id, value);
+    return value;
+  };
+  const levels: Array<Array<{ node: (typeof block.nodes)[number]; label?: string }>> = [];
+  for (const node of block.nodes) {
+    const level = resolve(node.id, new Set());
+    (levels[level] ??= []).push({ node, label: block.edges.find((edge) => edge.to === node.id)?.label });
+  }
+  return levels.filter(Boolean);
+}
+
 function SupportMark({ block }: { block: TopicBlock }) {
   const supported = block.claims.every((claim) => claim.status === "cited" && claim.citationIds.length > 0);
   return <span className={`support-mark ${supported ? "supported" : "unsupported"}`} title={supported ? "All factual claims linked to supplied sources" : "Unresolved source support"}><CheckCircle size={13} weight="fill" />{supported ? "Supported" : "Needs support"}</span>;
@@ -38,7 +60,30 @@ function Block({ block, onMakeCard }: { block: TopicBlock; onMakeCard: (text: st
   if (block.type === "bullets") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<ul className="clinical-list">{block.items.map((item) => <li key={item}><span>{item}</span><button aria-label={`Make Anki card from ${item}`} onClick={() => onMakeCard(item, block)}><Lightning size={13} /></button></li>)}</ul></section>;
   if (block.type === "table") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<div className="table-scroll"><table><thead><tr>{block.columns.map((column) => <th key={column}>{column}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{cell}</th> : <td key={`${row[0]}-${cell}`}>{cell}</td>)}</tr>)}</tbody></table></div></section>;
   if (block.type === "sequence") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{step.title}</strong><p>{step.detail}</p></div><button aria-label={`Make Anki card from ${step.title}`} onClick={() => onMakeCard(`${step.title}: ${step.detail}`, block)}><Lightning size={13} /></button></li>)}</ol></section>;
-  if (block.type === "flow") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<div className="decision-flow"><div className="flow-start">{block.nodes[0].label}</div><div className="flow-branch"><span>Compare the source-linked paths</span></div><div className="flow-options">{block.nodes.slice(1, 3).map((node) => <div key={node.id} className={`flow-card ${node.tone}`}><small>{block.edges.find((edge) => edge.from === block.nodes[0].id && edge.to === node.id)?.label ?? "Path"}</small><strong>{node.label}</strong><span>↓</span><p>{block.nodes.find((item) => block.edges.some((edge) => edge.from === node.id && edge.to === item.id))?.label}</p></div>)}</div></div></section>;
+  if (block.type === "flow") {
+    const [roots, ...branches] = flowLevels(block);
+    return (
+      <section id={block.id} data-block-id={block.id} className="topic-block">
+        {header}
+        <div className="decision-flow">
+          {roots.map(({ node }) => <div key={node.id} className="flow-start">{node.label}</div>)}
+          {branches.map((level, index) => (
+            <Fragment key={`level-${index + 1}`}>
+              <div className="flow-branch"><span>{index === 0 ? "Compare the source-linked paths" : "Then"}</span></div>
+              <div className="flow-options">
+                {level.map(({ node, label }) => (
+                  <div key={node.id} className={`flow-card ${node.tone ?? "default"}`}>
+                    <small>{label ?? "Path"}</small>
+                    <strong>{node.label}</strong>
+                  </div>
+                ))}
+              </div>
+            </Fragment>
+          ))}
+        </div>
+      </section>
+    );
+  }
   if (block.type === "image") return <figure id={block.id} data-block-id={block.id} className="topic-block"><Image src={`/api/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{block.caption}</figcaption>}</figure>;
   return null;
 }

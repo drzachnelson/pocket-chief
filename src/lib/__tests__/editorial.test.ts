@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { approveDraft, createDraft, normalizeClaimSupport, requireOwnerAttestation, restoreVersion, reviseDraftBlock, supportWarnings } from "@/lib/editorial";
-import { choledocholithiasisTopic } from "@/lib/seed";
+import { choledocholithiasisTopic, demoTopics } from "@/lib/seed";
 
 describe("editorial workflow", () => {
   it("blocks approval while any factual claim needs support", () => {
@@ -18,6 +18,13 @@ describe("editorial workflow", () => {
 
   it("keeps every rendered unit in the reviewed launch topic source-linked", () => {
     expect(supportWarnings(choledocholithiasisTopic.approvedVersion!.blocks, new Set(choledocholithiasisTopic.approvedVersion!.sourceIds))).toEqual([]);
+  });
+
+  it("keeps every seeded launch topic source-linked", () => {
+    for (const topic of demoTopics) {
+      const approved = topic.approvedVersion!;
+      expect(supportWarnings(approved.blocks, new Set(approved.sourceIds))).toEqual([]);
+    }
   });
 
   it("keeps the approved version immutable while a revision is drafted", () => {
