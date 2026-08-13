@@ -52,6 +52,7 @@ Import the private GitHub repository, add the production environment variables a
 - iPhone/iPad: review the cloze, then use **Open in AnkiMobile**.
 - Desktop: keep Anki open with AnkiConnect listening on its standard local port, then use **Send to desktop Anki**.
 - If AnkiConnect is unavailable, Pocket Chief automatically downloads a UTF-8 tab-separated import file.
+- The reviewed cloze wording is saved privately before close or export, so backups contain the edited card rather than the first generated suggestion.
 - Deck, Cloze note type, field mapping, and tag prefix are configurable in Settings.
 
 ## Backups

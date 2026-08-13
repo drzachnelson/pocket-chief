@@ -52,6 +52,7 @@ export class DemoRepository implements ContentRepository {
   }
 
   async addCard(card: ClozeDraft) { return structuredClone(demoStore.addCard(card)); }
+  async updateCard(card: ClozeDraft) { return structuredClone(demoStore.updateCard(card)); }
   async getCards(ids: string[]) { return structuredClone(demoStore.getCards(ids)); }
   async listCards() { return structuredClone(demoStore.cards()); }
   async setBookmark(topicId: string, saved: boolean) { demoStore.setBookmark(topicId, saved); }

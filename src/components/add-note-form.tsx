@@ -17,7 +17,7 @@ export function AddNoteForm({ taxonomy }: { taxonomy: TaxonomyNode[] }) {
 
   async function submit(event: React.FormEvent, mode: "ai" | "notes_only" = "ai") {
     event.preventDefault(); setMessage("");
-    const assessment = detectLikelyPHI(notes);
+    const assessment = detectLikelyPHI([title, notes, sourceDetails].join("\n"));
     if (assessment.blocked) {
       setMessage(`Draft blocked. Remove possible ${assessment.reasons.join(", ")}.`);
       return;

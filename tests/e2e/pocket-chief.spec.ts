@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import JSZip from "jszip";
 
 test("search, read, save, and draft a cloze", async ({ page }) => {
   await page.goto("/");
@@ -13,6 +14,18 @@ test("search, read, save, and draft a cloze", async ({ page }) => {
   await page.getByRole("button", { name: /Make Anki card from Age alone/ }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(page.getByLabel("Cloze text")).toHaveValue(/\{\{c1::Age alone}}/);
+  const reviewedText = `{{c1::Age alone}} is not an age-based contraindication to exploration (${test.info().project.name}).`;
+  await page.getByLabel("Cloze text").fill(reviewedText);
+  const updateResponse = page.waitForResponse((response) => response.request().method() === "PATCH" && response.url().includes("/api/anki/drafts/"));
+  await page.getByRole("button", { name: "Close" }).click();
+  const saved = await updateResponse;
+  expect(saved.status()).toBe(200);
+  expect((await saved.json()).draft.clozeText).toBe(reviewedText);
+  await expect(page.getByRole("dialog")).not.toBeVisible();
+  const backup = await page.request.get("/api/backup");
+  const zip = await JSZip.loadAsync(await backup.body());
+  const cards = JSON.parse(await zip.file("anki-drafts.json")!.async("string")) as Array<{ clozeText: string }>;
+  expect(cards.some((card) => card.clozeText === reviewedText)).toBe(true);
 });
 
 test("mobile navigation exposes four primary destinations", async ({ page }) => {
@@ -50,4 +63,24 @@ test("creates, revises, approves, finds, and restores a source-bound topic", asy
   await page.getByRole("button", { name: "Restore as draft" }).click();
   await expect(page).toHaveURL(/\/drafts\//);
   await expect(page.getByText(/Private draft · Version/)).toBeVisible();
+});
+
+test("requires explicit owner confirmation before linking every statement", async ({ page }, testInfo) => {
+  const title = `Citation Confirmation ${testInfo.project.name}`;
+  const created = await page.request.post("/api/topics/drafts", {
+    data: { title, rawNotes: "A supported educational statement.", imageIds: [], sourceMetadata: [{ title: "Owner notes", kind: "user_notes" }], scoreNodeId: "biliary", tags: [], mode: "notes_only" },
+  });
+  const payload = await created.json();
+  const block = payload.draft.blocks[0];
+  block.claims[0].text = "A different generic claim.";
+  await page.request.patch(`/api/topics/drafts/${payload.draft.id}/blocks/${block.id}`, { data: { block } });
+
+  await page.goto(`/drafts/${payload.draft.id}`);
+  await expect(page.getByText(/support issue/)).toBeVisible();
+  const link = page.getByRole("button", { name: "Confirm & link every statement" });
+  await expect(link).toBeDisabled();
+  await page.getByLabel("I confirmed the selected source supports every statement shown in this block.").check();
+  await expect(link).toBeEnabled();
+  await link.click();
+  await expect(page.getByText("Ready for approval")).toBeVisible();
 });

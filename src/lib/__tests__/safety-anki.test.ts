@@ -11,6 +11,7 @@ describe("safety and Anki portability", () => {
 
   it("does not block ordinary educational notes", () => {
     expect(detectLikelyPHI("CBD stones under 6 mm may be amenable to a transcystic approach.").blocked).toBe(false);
+    expect(detectLikelyPHI("Acute Wound Care\nOperative Decision Review").blocked).toBe(false);
   });
 
   it.each([
@@ -36,7 +37,9 @@ describe("safety and Anki portability", () => {
       duplicateHash: await createDuplicateHash("Completion cholangiography documents duct clearance."),
     };
     expect(buildAnkiMobileUrl(draft, { deck: "Pocket Chief", noteType: "Cloze", tagPrefix: "pc::" })).toContain("anki://x-callback-url/addnote");
-    expect(toAnkiTsv([draft])).toContain("{{c1::cholangiography}}");
+    const tsv = toAnkiTsv([draft], { deck: "Pocket Chief", noteType: "Cloze", tagPrefix: "pc::" });
+    expect(tsv).toContain("{{c1::cholangiography}}");
+    expect(tsv).toContain("pc::pocket-chief pc::biliary");
   });
 
   it("chooses a meaningful subject instead of a stopword for deterministic cloze", () => {

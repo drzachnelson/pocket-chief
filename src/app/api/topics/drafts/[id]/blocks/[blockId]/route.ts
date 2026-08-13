@@ -2,6 +2,7 @@ import { apiOwner } from "@/lib/auth";
 import { reviseDraftBlock, supportWarnings } from "@/lib/editorial";
 import { reviseBlockSchema } from "@/lib/schemas";
 import { getRepository } from "@/lib/repository";
+import { detectLikelyPHI } from "@/lib/safety";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string; blockId: string }> }) {
   const { owner, response } = await apiOwner(); if (response || !owner) return response!;
@@ -10,7 +11,9 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const draft = await repository.getDraft(id);
   if (!draft) return Response.json({ error: "Draft not found." }, { status: 404 });
   try {
-    const { block } = reviseBlockSchema.parse(await request.json());
+    const { block, supportAttestation } = reviseBlockSchema.parse(await request.json());
+    if (detectLikelyPHI(JSON.stringify(block)).blocked) return Response.json({ error: "Remove possible patient identifiers before saving.", code: "PHI_SUSPECTED" }, { status: 422 });
+    if (block.claims.some((claim) => claim.status === "cited") && supportAttestation !== true) return Response.json({ error: "Confirm that the selected source supports every cited statement.", code: "SUPPORT_ATTESTATION_REQUIRED" }, { status: 422 });
     const revised = reviseDraftBlock(draft, blockId, block);
     const validSources = new Set((await repository.listSources(draft.sourceIds)).map((source) => source.id));
     revised.warnings = supportWarnings(revised.blocks, validSources);

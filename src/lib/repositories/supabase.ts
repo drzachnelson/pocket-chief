@@ -182,6 +182,13 @@ export class SupabaseRepository implements ContentRepository {
     return card;
   }
 
+  async updateCard(card: ClozeDraft) {
+    const { data, error } = await this.client.from("anki_drafts").update({ cloze_text: card.clozeText, additional_context: card.additionalContext, source_block_ids: card.sourceBlockIds, context_image_path: card.contextImageRef, tags: card.tags, duplicate_hash: card.duplicateHash }).eq("id", card.id).select("id").single();
+    assertNoError(error);
+    if (!data) throw new Error("Anki draft not found.");
+    return card;
+  }
+
   private mapCard(row: CardRow): ClozeDraft {
     return { id: row.id, clozeText: row.cloze_text, additionalContext: row.additional_context, sourceBlockIds: row.source_block_ids, contextImageRef: row.context_image_path ?? "", tags: row.tags, duplicateHash: row.duplicate_hash };
   }

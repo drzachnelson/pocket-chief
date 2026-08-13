@@ -4,6 +4,9 @@ import { POST as createDraft } from "@/app/api/topics/drafts/route";
 import { POST as approveDraft } from "@/app/api/topics/drafts/[id]/approve/route";
 import { PATCH as updateBlock } from "@/app/api/topics/drafts/[id]/blocks/[blockId]/route";
 import { POST as restoreVersion } from "@/app/api/topics/versions/[id]/restore/route";
+import { POST as createCloze } from "@/app/api/anki/drafts/route";
+import { PATCH as updateCloze } from "@/app/api/anki/drafts/[id]/route";
+import { getRepository } from "@/lib/repository";
 import { resetDemoStore } from "@/lib/store";
 
 describe("authenticated API contracts in demo mode", () => {
@@ -25,6 +28,21 @@ describe("authenticated API contracts in demo mode", () => {
     const response = await createDraft(request);
     expect(response.status).toBe(422);
     expect(await response.json()).toMatchObject({ code: "PHI_SUSPECTED" });
+  });
+
+  it("rejects suspected PHI in titles and source metadata before drafting", async () => {
+    for (const body of [
+      { title: "John Smith", rawNotes: "Educational notes.", sourceMetadata: [{ title: "Owner notes", kind: "user_notes" }] },
+      { title: "Educational Review", rawNotes: "Educational notes.", sourceMetadata: [{ title: "Owner notes", kind: "user_notes", details: "MRN 12345678" }] },
+    ]) {
+      const response = await createDraft(new Request("http://localhost/api/topics/drafts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...body, imageIds: [], scoreNodeId: "biliary", tags: [] }),
+      }));
+      expect(response.status).toBe(422);
+      expect(await response.json()).toMatchObject({ code: "PHI_SUSPECTED" });
+    }
   });
 
   it("creates a real topic, keeps its draft out of search, approves it, and restores with the next version", async () => {
@@ -57,10 +75,24 @@ describe("authenticated API contracts in demo mode", () => {
     const payload = await created.json();
     const block = payload.draft.blocks[0];
     block.claims[0].citationIds = ["invented-source"];
-    const updated = await updateBlock(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block }) }), { params: Promise.resolve({ id: payload.draft.id, blockId: block.id }) });
+    const updated = await updateBlock(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block, supportAttestation: true }) }), { params: Promise.resolve({ id: payload.draft.id, blockId: block.id }) });
     expect(updated.status).toBe(200);
     expect((await updated.json()).draft.warnings[0]).toMatch(/Needs support/);
     const approved = await approveDraft(new Request("http://localhost", { method: "POST" }), { params: Promise.resolve({ id: payload.draft.id }) });
     expect(approved.status).toBe(409);
+  });
+
+  it("persists the owner's reviewed Anki edit for later backup", async () => {
+    const created = await createCloze(new Request("http://localhost/api/anki/drafts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ selection: "Completion imaging documents duct clearance.", topicId: "topic-choledocholithiasis", sourceBlockIds: ["block-sequence"], contextImageRef: "context.svg", tags: ["biliary"] }),
+    }));
+    const payload = await created.json();
+    const reviewedText = "{{c1::Completion imaging}} documents duct clearance.";
+    const updated = await updateCloze(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clozeText: reviewedText }) }), { params: Promise.resolve({ id: payload.draft.id }) });
+
+    expect(updated.status).toBe(200);
+    expect((await (await getRepository()).listCards())[0].clozeText).toBe(reviewedText);
   });
 });

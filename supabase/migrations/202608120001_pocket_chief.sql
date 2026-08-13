@@ -293,6 +293,38 @@ $$;
 revoke all on function public.replace_topic_draft(uuid,jsonb,text[],uuid[]) from public;
 grant execute on function public.replace_topic_draft(uuid,jsonb,text[],uuid[]) to authenticated;
 
+create or replace function public.topic_block_expected_claims(block jsonb) returns text[] language sql immutable set search_path = public as $$
+  select case block->>'type'
+    when 'summary' then array[coalesce(block->>'text', '')]
+    when 'prose' then array[coalesce(block->>'text', '')]
+    when 'warning' then array[coalesce(block->>'text', '')]
+    when 'bullets' then array(
+      select item.value from jsonb_array_elements_text(coalesce(block->'items', '[]'::jsonb)) with ordinality item(value, position)
+      order by item.position
+    )
+    when 'table' then array(
+      select (
+        select string_agg(cell.value, ' — ' order by cell.position)
+        from jsonb_array_elements_text(row_item.value) with ordinality cell(value, position)
+      )
+      from jsonb_array_elements(coalesce(block->'rows', '[]'::jsonb)) with ordinality row_item(value, position)
+      order by row_item.position
+    )
+    when 'sequence' then array(
+      select concat(step.value->>'title', ': ', step.value->>'detail')
+      from jsonb_array_elements(coalesce(block->'steps', '[]'::jsonb)) with ordinality step(value, position)
+      order by step.position
+    )
+    when 'flow' then array(
+      select node.value->>'label'
+      from jsonb_array_elements(coalesce(block->'nodes', '[]'::jsonb)) with ordinality node(value, position)
+      order by node.position
+    )
+    else '{}'::text[]
+  end
+$$;
+revoke all on function public.topic_block_expected_claims(jsonb) from public;
+
 create or replace function public.approve_topic_version(version_id uuid) returns public.topic_versions language plpgsql security definer set search_path = public as $$
 declare
   target public.topic_versions;
@@ -311,11 +343,21 @@ begin
 
   select count(*) into incomplete_block_count
   from jsonb_array_elements(target.content) block(value)
-  where block.value->>'type' not in ('references', 'image')
-    and (
-      jsonb_array_length(coalesce(block.value->'claims', '[]'::jsonb)) = 0
-      or (block.value->>'type' = 'bullets' and jsonb_array_length(coalesce(block.value->'claims', '[]'::jsonb)) < jsonb_array_length(coalesce(block.value->'items', '[]'::jsonb)))
-    );
+  cross join lateral (select public.topic_block_expected_claims(block.value) as units) expected
+  where (
+    jsonb_array_length(coalesce(block.value->'claims', '[]'::jsonb)) <> cardinality(expected.units)
+    or exists (
+      select 1
+      from unnest(expected.units) with ordinality unit(claim_text, position)
+      left join lateral (
+        select claim.value
+        from jsonb_array_elements(coalesce(block.value->'claims', '[]'::jsonb)) with ordinality claim(value, position)
+        where claim.position = unit.position
+      ) claim_item on true
+      where claim_item.value is null
+        or regexp_replace(btrim(coalesce(claim_item.value->>'text', '')), '\s+', ' ', 'g') <> regexp_replace(btrim(unit.claim_text), '\s+', ' ', 'g')
+    )
+  );
 
   select count(*) into supported_claim_count from (
     select distinct block_id, claim_id

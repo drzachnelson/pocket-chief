@@ -53,6 +53,7 @@ export const demoStore = {
   replaceDraft(id: string, draft: TopicVersion) { currentState().drafts.delete(id); currentState().drafts.set(draft.id, structuredClone(draft)); return draft; },
   addSource(source: SuppliedSource) { if (!currentState().sources.some((item) => item.id === source.id)) currentState().sources.push(structuredClone(source)); return source; },
   addCard(card: ClozeDraft) { currentState().clozeDrafts.set(card.id, structuredClone(card)); return card; },
+  updateCard(card: ClozeDraft) { if (!currentState().clozeDrafts.has(card.id)) throw new Error("Anki draft not found."); currentState().clozeDrafts.set(card.id, structuredClone(card)); return card; },
   setBookmark(topicId: string, saved: boolean) { if (saved) currentState().bookmarks.add(topicId); else currentState().bookmarks.delete(topicId); },
   recordRecentView(topicId: string) { currentState().recentViews = [{ topicId, viewedAt: new Date().toISOString() }, ...currentState().recentViews.filter((item) => item.topicId !== topicId)]; },
   getCards(ids: string[]) { return ids.flatMap((id) => currentState().clozeDrafts.get(id) ? [currentState().clozeDrafts.get(id)!] : []); },
