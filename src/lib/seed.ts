@@ -2,7 +2,7 @@ import type { SuppliedSource, TaxonomyNode, Topic, TopicBlock, TopicVersion } fr
 
 export const suppliedSources: SuppliedSource[] = [
   {
-    id: "source-user-notes",
+    id: "00000000-0000-4000-8000-000000000102",
     title: "User-supplied choledocholithiasis study packet",
     kind: "user_notes",
     citation: "Personal study notes supplied to Pocket Chief, August 12, 2026.",
@@ -17,7 +17,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "biliary", title: "Biliary Tract", slug: "biliary-tract", parentId: "alimentary", order: 2 },
 ];
 
-const cited = (id: string, text: string) => ({ id, text, citationIds: ["source-user-notes"], status: "cited" as const });
+const cited = (id: string, text: string) => ({ id, text, citationIds: ["00000000-0000-4000-8000-000000000102"], status: "cited" as const });
 const citedUnits = (prefix: string, units: string[]) => units.map((text, index) => cited(`${prefix}-${index + 1}`, text));
 
 const summaryBlock: TopicBlock = {
@@ -70,6 +70,8 @@ const flowBlock: TopicBlock = {
       ">8 stones · >1 cm · proximal · fragile/tortuous duct",
       "Transcystic choledochoscopy + clearance",
       "Choledochotomy or intra/post-op ERCP",
+      "favorable",
+      "relative contraindications",
     ]),
   };
 const sequenceBlock: TopicBlock = {
@@ -117,17 +119,17 @@ const pearlsBlock: TopicBlock = {
       cited("claim-pearl-morbidity", "Transcystic exploration avoids choledochotomy and T-tube morbidity when it succeeds."),
     ],
   };
-const referencesBlock: TopicBlock = { id: "block-references", type: "references", heading: "Supplied sources", sourceIds: ["source-user-notes"], claims: [] };
+const referencesBlock: TopicBlock = { id: "block-references", type: "references", heading: "Supplied sources", sourceIds: ["00000000-0000-4000-8000-000000000102"], claims: [] };
 
 export const choledoBlocks: TopicBlock[] = [summaryBlock, pearlsBlock, flowBlock, comparisonBlock, sequenceBlock, warningBlock, referencesBlock];
 
 const approvedVersion: TopicVersion = {
-  id: "version-choledo-1",
-  topicId: "topic-choledocholithiasis",
+  id: "00000000-0000-4000-8000-000000000103",
+  topicId: "00000000-0000-4000-8000-000000000101",
   versionNumber: 1,
   status: "approved",
   blocks: choledoBlocks,
-  sourceIds: ["source-user-notes"],
+  sourceIds: ["00000000-0000-4000-8000-000000000102"],
   scoreNodeId: "biliary",
   tags: ["biliary", "common-bile-duct", "absite", "score"],
   warnings: [],
@@ -137,7 +139,7 @@ const approvedVersion: TopicVersion = {
 };
 
 export const choledocholithiasisTopic: Topic = {
-  id: "topic-choledocholithiasis",
+  id: "00000000-0000-4000-8000-000000000101",
   slug: "choledocholithiasis",
   title: "Choledocholithiasis",
   aliases: ["CBD stones", "common bile duct stones", "duct exploration", "LTCBDE"],

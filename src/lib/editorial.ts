@@ -7,8 +7,15 @@ export function factualUnits(block: TopicBlock): string[] {
   if (block.type === "bullets") return block.items;
   if (block.type === "table") return block.rows.map((row) => row.join(" — "));
   if (block.type === "sequence") return block.steps.map((step) => `${step.title}: ${step.detail}`);
-  if (block.type === "flow") return block.nodes.map((node) => node.label);
+  if (block.type === "flow") return [...block.nodes.map((node) => node.label), ...block.edges.flatMap((edge) => edge.label ? [edge.label] : [])];
   return [];
+}
+
+export function requireOwnerAttestation(blocks: TopicBlock[]): TopicBlock[] {
+  return blocks.map((block) => ({
+    ...clone(block),
+    claims: block.claims.map((claim) => ({ ...clone(claim), citationIds: [], status: "needs_support" as const })),
+  })) as TopicBlock[];
 }
 
 const comparable = (value: string) => value.trim().replace(/\s+/g, " ");

@@ -41,6 +41,7 @@ export const demoStore = {
   drafts: () => [...currentState().drafts.values()],
   sources: () => currentState().sources,
   taxonomy: () => currentState().taxonomy,
+  saveTaxonomyNode(node: TaxonomyNode) { const index = currentState().taxonomy.findIndex((item) => item.id === node.id); if (index >= 0) currentState().taxonomy[index] = structuredClone(node); else currentState().taxonomy.push(structuredClone(node)); return node; },
   cards: () => [...currentState().clozeDrafts.values()],
   bookmarkedTopicIds: () => [...currentState().bookmarks],
   recentViews: () => [...currentState().recentViews],
@@ -52,7 +53,11 @@ export const demoStore = {
   saveDraft(draft: TopicVersion) { currentState().drafts.set(draft.id, structuredClone(draft)); return draft; },
   replaceDraft(id: string, draft: TopicVersion) { currentState().drafts.delete(id); currentState().drafts.set(draft.id, structuredClone(draft)); return draft; },
   addSource(source: SuppliedSource) { if (!currentState().sources.some((item) => item.id === source.id)) currentState().sources.push(structuredClone(source)); return source; },
-  addCard(card: ClozeDraft) { currentState().clozeDrafts.set(card.id, structuredClone(card)); return card; },
+  addCard(card: ClozeDraft) {
+    const existing = [...currentState().clozeDrafts.values()].find((item) => item.duplicateHash === card.duplicateHash);
+    if (existing) { const updated = { ...card, id: existing.id, clozeText: existing.clozeText }; currentState().clozeDrafts.set(existing.id, structuredClone(updated)); return updated; }
+    currentState().clozeDrafts.set(card.id, structuredClone(card)); return card;
+  },
   updateCard(card: ClozeDraft) { if (!currentState().clozeDrafts.has(card.id)) throw new Error("Anki draft not found."); currentState().clozeDrafts.set(card.id, structuredClone(card)); return card; },
   setBookmark(topicId: string, saved: boolean) { if (saved) currentState().bookmarks.add(topicId); else currentState().bookmarks.delete(topicId); },
   recordRecentView(topicId: string) { currentState().recentViews = [{ topicId, viewedAt: new Date().toISOString() }, ...currentState().recentViews.filter((item) => item.topicId !== topicId)]; },

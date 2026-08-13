@@ -45,8 +45,11 @@ test("creates, revises, approves, finds, and restores a source-bound topic", asy
   await page.getByLabel("Topic title").fill(title);
   await page.getByLabel("Source notes").fill("Educational wound care principles from the owner supplied study packet.");
   await page.getByLabel("Source details").fill("Personal study notes, section one");
+  await page.getByLabel("Personal tags").fill("wound, operative");
   await page.getByRole("button", { name: "Save notes only" }).click();
   await expect(page).toHaveURL(/\/drafts\//);
+  await page.getByLabel("I confirmed the selected source supports every statement shown in this block.").check();
+  await page.getByRole("button", { name: "Confirm & link every statement" }).click();
   await expect(page.getByText("Ready for approval")).toBeVisible();
 
   await page.getByLabel("Ask AI to restructure this draft").fill("Focus the draft on operative wound principles.");
@@ -73,7 +76,7 @@ test("requires explicit owner confirmation before linking every statement", asyn
   const payload = await created.json();
   const block = payload.draft.blocks[0];
   block.claims[0].text = "A different generic claim.";
-  await page.request.patch(`/api/topics/drafts/${payload.draft.id}/blocks/${block.id}`, { data: { block } });
+  await page.request.patch(`/api/topics/drafts/${payload.draft.id}/blocks/${block.id}`, { data: { block, supportAttestation: true } });
 
   await page.goto(`/drafts/${payload.draft.id}`);
   await expect(page.getByText(/support issue/)).toBeVisible();
@@ -83,4 +86,16 @@ test("requires explicit owner confirmation before linking every statement", asyn
   await expect(link).toBeEnabled();
   await link.click();
   await expect(page.getByText("Ready for approval")).toBeVisible();
+});
+
+test("adds and edits the owner's SCORE organization", async ({ page }, testInfo) => {
+  const title = `Vascular ${testInfo.project.name}`;
+  await page.goto("/settings");
+  await page.getByLabel("Add category").fill(title);
+  await page.getByRole("button", { name: "Add category" }).click();
+  await expect(page.getByRole("button", { name: new RegExp(title) })).toBeVisible();
+  await page.getByRole("button", { name: new RegExp(title) }).click();
+  await page.getByLabel("Edit category").fill(`${title} Updated`);
+  await page.getByRole("button", { name: "Save category" }).click();
+  await expect(page.getByRole("button", { name: new RegExp(`${title} Updated`) })).toBeVisible();
 });

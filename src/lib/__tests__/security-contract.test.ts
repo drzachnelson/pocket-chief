@@ -22,6 +22,8 @@ describe("Supabase security contract", () => {
     expect(sql).toContain("pocket_chief_owner_only_signup");
     expect(sql).toContain("current_approved_version_id");
     expect(sql).toContain("search_approved_topics");
+    expect(sql).toContain("ensure_launch_topic");
+    expect(sql).toContain("'choledocholithiasis'");
   });
 
   it("creates drafts and restores versions transactionally while proving citation completeness", () => {
@@ -35,5 +37,7 @@ describe("Supabase security contract", () => {
     expect(sql).toContain("cardinality(expected.units)");
     expect(sql).toContain("source_id = any(target.source_ids)");
     expect(sql).toContain("max(version_number)");
+    expect(sql).toContain("save_anki_draft");
+    expect(sql).toContain("on conflict (owner_id, duplicate_hash) do update");
   });
 });

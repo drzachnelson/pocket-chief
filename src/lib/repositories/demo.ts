@@ -10,6 +10,7 @@ export class DemoRepository implements ContentRepository {
   async getTopicBySlug(slug: string) { return structuredClone(demoStore.getTopicBySlug(slug) ?? null); }
   async getTopicById(id: string) { return structuredClone(demoStore.getTopic(id) ?? null); }
   async listTaxonomy() { return structuredClone(demoStore.taxonomy()); }
+  async saveTaxonomyNode(node: Parameters<ContentRepository["saveTaxonomyNode"]>[0]) { return structuredClone(demoStore.saveTaxonomyNode(node)); }
   async listSources(ids?: string[]) { return structuredClone(ids ? demoStore.sources().filter((source) => ids.includes(source.id)) : demoStore.sources()); }
 
   async createTopicDraft(record: TopicDraftRecord) {

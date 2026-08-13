@@ -309,8 +309,15 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 .support-confirm { display: grid; justify-items: start; gap: 9px; margin-top: 13px; padding: 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--cobalt-soft); }
 .support-confirm label { display: flex; align-items: flex-start; gap: 8px; color: var(--ink-muted); font-size: 10px; line-height: 1.45; }
 .support-confirm input { width: 14px; height: 14px; margin-top: 1px; accent-color: var(--cobalt); }
+.taxonomy-card { grid-column: 1 / -1; }
+.taxonomy-editor-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 7px; margin: 14px 0; }
+.taxonomy-editor-list button { display: flex; justify-content: space-between; align-items: center; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-strong); color: var(--ink-muted); font: inherit; font-size: 10px; cursor: pointer; }
+.taxonomy-editor-list button:hover { border-color: var(--cobalt); color: var(--cobalt-dark); }
+.taxonomy-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+.taxonomy-form .form-footer, .taxonomy-form .form-message { grid-column: 1 / -1; }
 
 @media (max-width: 759px) {
+  .taxonomy-form { grid-template-columns: 1fr; }
   .topic-header { padding-bottom: 10px; }
   .topic-header .tag-row { display: none; }
   .topic-header .eyebrow { margin-bottom: 5px; font-size: 9px; }

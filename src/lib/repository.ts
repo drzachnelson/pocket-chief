@@ -23,6 +23,7 @@ export interface ContentRepository {
   getTopicBySlug(slug: string): Promise<Topic | null>;
   getTopicById(id: string): Promise<Topic | null>;
   listTaxonomy(): Promise<TaxonomyNode[]>;
+  saveTaxonomyNode(node: TaxonomyNode): Promise<TaxonomyNode>;
   listSources(ids?: string[]): Promise<SuppliedSource[]>;
   createTopicDraft(record: TopicDraftRecord): Promise<{ topic: Topic; draft: TopicVersion }>;
   getDraft(id: string): Promise<TopicVersion | null>;

@@ -103,6 +103,10 @@ export function parseTopicDraftOutput(value: unknown): { blocks: TopicBlock[]; w
   return topicDraftOutputSchema.parse(withoutNullOptionals(value)) as { blocks: TopicBlock[]; warnings: string[] };
 }
 
+export function assertGeneratedOutputIsPhiFree(value: unknown) {
+  if (detectLikelyPHI(JSON.stringify(value)).blocked) throw new Error("PHI_SUSPECTED");
+}
+
 function extractOutputText(payload: unknown): string | null {
   if (!payload || typeof payload !== "object") return null;
   const candidate = payload as { output_text?: string; output?: Array<{ type?: string; content?: Array<{ type?: string; text?: string }> }> };
@@ -136,7 +140,11 @@ export async function draftTopic(input: TopicDraftInput): Promise<{ blocks: Topi
   const phi = detectLikelyPHI(input.rawNotes);
   if (phi.blocked) throw new Error("PHI_SUSPECTED");
   const generated = await responsesApi(`Create a compact general-surgery topic from only these owner-supplied notes. Never add facts. Every factual claim must use one of these source IDs: ${input.sourceIds.join(", ")}. If a claim lacks support, mark it needs_support. Notes:\n${input.rawNotes}`, "topic_draft", topicDraftJsonSchema, "medium");
-  if (generated && typeof generated === "object") return parseTopicDraftOutput(generated);
+  if (generated && typeof generated === "object") {
+    const parsed = parseTopicDraftOutput(generated);
+    assertGeneratedOutputIsPhiFree(parsed);
+    return parsed;
+  }
   const sourceId = input.sourceIds[0];
   const claimStatus = sourceId ? "cited" as const : "needs_support" as const;
   const block: TopicBlock = { id: crypto.randomUUID(), type: "summary", heading: "Draft summary", text: input.rawNotes, claims: [{ id: crypto.randomUUID(), text: input.rawNotes, citationIds: sourceId ? [sourceId] : [], status: claimStatus }] };
@@ -148,6 +156,7 @@ export async function draftCloze(selection: string, topicId: string, sourceBlock
   if (phi.blocked) throw new Error("PHI_SUSPECTED");
   const schema = { type: "object", additionalProperties: false, required: ["clozeText", "additionalContext"], properties: { clozeText: { type: "string" }, additionalContext: { type: "string" } } };
   const generated = await responsesApi(`Create exactly one editable Anki cloze deletion from this educational passage. Preserve meaning and add no facts. Passage: ${selection}`, "cloze_draft", schema, "low") as { clozeText?: string; additionalContext?: string } | null;
+  if (generated) assertGeneratedOutputIsPhiFree(generated);
   const fallback = createFallbackCloze(selection);
   const clozeText = generated?.clozeText || fallback;
   return { id: crypto.randomUUID(), clozeText, additionalContext: generated?.additionalContext || `Pocket Chief · ${topicId}`, sourceBlockIds, contextImageRef, tags, duplicateHash: await createDuplicateHash(clozeText.replace(/{{c\d+::|}}/g, "")) };

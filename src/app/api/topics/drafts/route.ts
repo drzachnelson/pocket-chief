@@ -1,6 +1,6 @@
 import { apiOwner } from "@/lib/auth";
 import { draftTopic } from "@/lib/ai";
-import { createDraft, normalizeClaimSupport, supportWarnings } from "@/lib/editorial";
+import { createDraft, normalizeClaimSupport, requireOwnerAttestation, supportWarnings } from "@/lib/editorial";
 import { checkRateLimit, requestKey } from "@/lib/rate-limit";
 import { draftRequestSchema } from "@/lib/schemas";
 import { detectLikelyPHI } from "@/lib/safety";
@@ -30,13 +30,13 @@ export async function POST(request: Request) {
     const sources: SuppliedSource[] = body.sourceMetadata.map((source) => ({ id: source.id || crypto.randomUUID(), title: source.title, kind: source.kind, citation: source.citation || source.title, suppliedAt: new Date().toISOString(), url: source.url, details: source.details }));
     const input = { topicId, rawNotes: body.rawNotes, imageIds: body.imageIds, sourceIds: sources.map((source) => source.id), scoreNodeId: body.scoreNodeId, tags: body.tags };
     const generated = body.mode === "ai" ? await draftTopic(input) : {
-      blocks: [{ id: crypto.randomUUID(), type: "summary" as const, heading: "Owner notes", text: body.rawNotes, claims: [{ id: crypto.randomUUID(), text: body.rawNotes, citationIds: [sources[0].id], status: "cited" as const }] }] satisfies TopicBlock[],
+      blocks: [{ id: crypto.randomUUID(), type: "summary" as const, heading: "Owner notes", text: body.rawNotes, claims: [{ id: crypto.randomUUID(), text: body.rawNotes, citationIds: [], status: "needs_support" as const }] }] satisfies TopicBlock[],
       warnings: ["Notes-only draft: organize and review this source before approval."],
     };
     const basedOn = existing?.approvedVersion ?? undefined;
     const base = createDraft(input, basedOn ?? undefined);
     const validSourceIds = new Set(sources.map((source) => source.id));
-    const blocks = normalizeClaimSupport(generated.blocks, validSourceIds);
+    const blocks = requireOwnerAttestation(normalizeClaimSupport(generated.blocks, validSourceIds));
     const claimWarnings = supportWarnings(blocks, validSourceIds);
     const draft = { ...base, id: crypto.randomUUID(), blocks, warnings: [...generated.warnings, ...claimWarnings] };
     const taxonomy = await repository.listTaxonomy();

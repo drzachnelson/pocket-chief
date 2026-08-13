@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseTopicDraftOutput, topicDraftJsonSchema } from "@/lib/ai";
+import { assertGeneratedOutputIsPhiFree, parseTopicDraftOutput, topicDraftJsonSchema } from "@/lib/ai";
 
 describe("AI structured output contract", () => {
   it("publishes the complete discriminated block union", () => {
@@ -19,5 +19,9 @@ describe("AI structured output contract", () => {
 
   it("rejects arbitrary block shapes", () => {
     expect(() => parseTopicDraftOutput({ blocks: [{ type: "summary", invented: true }], warnings: [] })).toThrow();
+  });
+
+  it("rejects suspected identifiers introduced by generated output", () => {
+    expect(() => assertGeneratedOutputIsPhiFree({ clozeText: "Patient Jane Smith, MRN 12345678" })).toThrow("PHI_SUSPECTED");
   });
 });
