@@ -10,6 +10,7 @@ Pocket Chief is a private, installable, search-first general surgery reference. 
 - Draft, targeted revision, support validation, direct approval, immutable approved versions, restore, bookmarks, and recent-view contracts.
 - Typo-tolerant approved-only search across title, aliases, headings, body, SCORE category, and tags.
 - Owner-only Supabase passwordless auth, private Storage, RLS, signup allowlist, signed media, immutable version, and approval policy migration.
+- Idempotent first-owner bootstrap installs the reviewed choledocholithiasis launch topic in Supabase; Settings supports owner edits and additions to the SCORE hierarchy, and Add accepts searchable personal tags.
 - OpenAI Responses API adapter with schema-constrained topic and cloze outputs, configurable `gpt-5.6-terra`, PHI rejection, route rate limits, and deterministic local fallbacks.
 - AnkiMobile URL export, AnkiConnect detection, automatic UTF-8 TSV fallback, editable cloze review, duplicate hashes, and context-section/decision-flow image.
 - Installable PWA shell, IndexedDB-approved content cache, saved topics, recents, stale-version invalidation, sign-out cache clearing, and portable ZIP backup.
@@ -30,7 +31,7 @@ The example environment enables a local demo without transmitting notes. Open `h
 
 ### Supabase
 
-1. Create a Supabase project and run `supabase/migrations/202608120001_pocket_chief.sql`.
+1. Create a Supabase project and run `supabase/migrations/202608120001_pocket_chief.sql`. The authenticated app installs the reviewed launch topic on the owner's first request.
 2. Insert the exact lowercase owner email into `public.owner_allowlist` before inviting the user.
 3. In Authentication → Providers → Email, disable public signup and keep passwordless email enabled.
 4. Invite only the owner email.

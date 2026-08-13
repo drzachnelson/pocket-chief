@@ -11,8 +11,8 @@ export async function POST(request: Request) {
     const body = clozeRequestSchema.parse(await request.json());
     const draft = await draftCloze(body.selection, body.topicId, body.sourceBlockIds, body.contextImageRef, body.tags);
     const repository = await getRepository();
-    await repository.addCard(draft, body.topicId); await repository.audit("anki.draft.created", draft.id, owner.email);
-    return Response.json({ draft }, { status: 201 });
+    const persisted = await repository.addCard(draft, body.topicId); await repository.audit("anki.draft.created", persisted.id, owner.email);
+    return Response.json({ draft: persisted }, { status: 201 });
   } catch (error) {
     return Response.json({ error: error instanceof Error && error.message === "PHI_SUSPECTED" ? "Remove possible patient identifiers." : "Could not create the cloze draft." }, { status: 422 });
   }

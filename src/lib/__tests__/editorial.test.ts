@@ -16,6 +16,10 @@ describe("editorial workflow", () => {
     expect(() => approveDraft(draft, "owner@example.com")).toThrow(/support/i);
   });
 
+  it("keeps every rendered unit in the reviewed launch topic source-linked", () => {
+    expect(supportWarnings(choledocholithiasisTopic.approvedVersion!.blocks, new Set(choledocholithiasisTopic.approvedVersion!.sourceIds))).toEqual([]);
+  });
+
   it("keeps the approved version immutable while a revision is drafted", () => {
     const draft = createDraft({
       topicId: choledocholithiasisTopic.id,

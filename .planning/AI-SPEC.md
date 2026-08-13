@@ -18,7 +18,8 @@
 - Run PHI heuristics before any model request; block suspected names with identifiers, MRNs, dates of birth, phone numbers, emails, or patient-specific narratives.
 - Supply stable source IDs to the model. A claim may cite only those IDs.
 - Mark unmapped factual claims `needs_support`; approval fails while any remain.
-- Treat each rendered factual unit as its claim contract: one claim for each prose/summary/warning body, bullet, table row, procedure step, and decision-flow node. Claim text must match that rendered unit exactly, and the owner must explicitly confirm the selected source supports every unit before linking it.
+- Treat each rendered factual unit as its claim contract: one claim for each prose/summary/warning body, bullet, table row, procedure step, decision-flow node, and labeled decision edge. Claim text must match that rendered unit exactly, and the owner must explicitly confirm the selected source supports every unit before linking it.
+- Generated claims always enter review as `needs_support`, even if the model proposes valid source IDs. Model outputs are screened again for suspected PHI before persistence.
 - Screen titles, raw notes, source titles/citations/URLs/details, revision instructions, edited blocks, and reviewed cloze text for suspected PHI before storage or model use.
 - Never retrieve external medical evidence automatically in v1.
 - Never log raw inputs or generated medical text.

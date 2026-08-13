@@ -1,6 +1,6 @@
 import { apiOwner } from "@/lib/auth";
 import { draftTopic } from "@/lib/ai";
-import { normalizeClaimSupport, supportWarnings } from "@/lib/editorial";
+import { normalizeClaimSupport, requireOwnerAttestation, supportWarnings } from "@/lib/editorial";
 import { checkRateLimit, requestKey } from "@/lib/rate-limit";
 import { revisionPromptSchema } from "@/lib/schemas";
 import { getRepository } from "@/lib/repository";
@@ -22,7 +22,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       : { blocks: targetBlocks, warnings: ["Local preview kept the current source-bound blocks because AI drafting is not configured."] };
     const retained = body.blockIds.length ? draft.blocks.filter((block) => !body.blockIds.includes(block.id)) : [];
     const validSources = new Set((await repository.listSources(draft.sourceIds)).map((source) => source.id));
-    const blocks = normalizeClaimSupport([...retained, ...generated.blocks], validSources);
+    const generatedBlocks = process.env.OPENAI_API_KEY ? requireOwnerAttestation(normalizeClaimSupport(generated.blocks, validSources)) : normalizeClaimSupport(generated.blocks, validSources);
+    const blocks = [...retained, ...generatedBlocks];
     const revised = { ...draft, blocks, warnings: [...generated.warnings, ...supportWarnings(blocks, validSources)] };
     const persisted = await repository.replaceDraft(id, revised); await repository.audit("topic.draft.revised", persisted.id, owner.email, { blocks: generated.blocks.length });
     return Response.json({ draft: persisted });

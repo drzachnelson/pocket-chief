@@ -38,7 +38,7 @@ function Block({ block, onMakeCard }: { block: TopicBlock; onMakeCard: (text: st
   if (block.type === "bullets") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<ul className="clinical-list">{block.items.map((item) => <li key={item}><span>{item}</span><button aria-label={`Make Anki card from ${item}`} onClick={() => onMakeCard(item, block)}><Lightning size={13} /></button></li>)}</ul></section>;
   if (block.type === "table") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<div className="table-scroll"><table><thead><tr>{block.columns.map((column) => <th key={column}>{column}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{cell}</th> : <td key={`${row[0]}-${cell}`}>{cell}</td>)}</tr>)}</tbody></table></div></section>;
   if (block.type === "sequence") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{step.title}</strong><p>{step.detail}</p></div><button aria-label={`Make Anki card from ${step.title}`} onClick={() => onMakeCard(`${step.title}: ${step.detail}`, block)}><Lightning size={13} /></button></li>)}</ol></section>;
-  if (block.type === "flow") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<div className="decision-flow"><div className="flow-start">{block.nodes[0].label}</div><div className="flow-branch"><span>Assess burden, location & anatomy</span></div><div className="flow-options">{block.nodes.slice(1, 3).map((node) => <div key={node.id} className={`flow-card ${node.tone}`}><small>{node.tone === "good" ? "Favorable" : "Relative contraindications"}</small><strong>{node.label}</strong><span>↓</span><p>{block.nodes.find((item) => block.edges.some((edge) => edge.from === node.id && edge.to === item.id))?.label}</p></div>)}</div></div></section>;
+  if (block.type === "flow") return <section id={block.id} data-block-id={block.id} className="topic-block">{header}<div className="decision-flow"><div className="flow-start">{block.nodes[0].label}</div><div className="flow-branch"><span>Compare the source-linked paths</span></div><div className="flow-options">{block.nodes.slice(1, 3).map((node) => <div key={node.id} className={`flow-card ${node.tone}`}><small>{block.edges.find((edge) => edge.from === block.nodes[0].id && edge.to === node.id)?.label ?? "Path"}</small><strong>{node.label}</strong><span>↓</span><p>{block.nodes.find((item) => block.edges.some((edge) => edge.from === node.id && edge.to === item.id))?.label}</p></div>)}</div></div></section>;
   if (block.type === "image") return <figure id={block.id} data-block-id={block.id} className="topic-block"><Image src={`/api/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{block.caption}</figcaption>}</figure>;
   return null;
 }
@@ -60,9 +60,13 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
   useEffect(() => {
     let active = true;
     fetch("/api/anki/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ selection, topicId: topic.id, sourceBlockIds: [block.id], contextImageRef: contextRef, tags: ["pocket-chief", ...topic.tags] }) })
-      .then(async (response) => response.ok ? response.json() as Promise<{ draft: ClozeDraft }> : null)
+      .then(async (response) => {
+        const value = await response.json() as { draft?: ClozeDraft; error?: string };
+        if (!response.ok || !value.draft) throw new Error(value.error ?? "Could not save this private draft.");
+        return { draft: value.draft };
+      })
       .then((value) => { if (active && value?.draft.clozeText) { textRef.current = value.draft.clozeText; setText(value.draft.clozeText); setPersistedDraft(value.draft); } })
-      .catch(() => { if (active) setStatus("Could not save this private draft. Export stays disabled."); });
+      .catch((error) => { if (active) setStatus(`${error instanceof Error ? error.message : "Could not save this private draft."} Export stays disabled.`); });
     return () => { active = false; };
   }, [block.id, contextRef, selection, topic.id, topic.tags]);
 

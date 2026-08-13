@@ -7,6 +7,7 @@ import { POST as restoreVersion } from "@/app/api/topics/versions/[id]/restore/r
 import { POST as createCloze } from "@/app/api/anki/drafts/route";
 import { PATCH as updateCloze } from "@/app/api/anki/drafts/[id]/route";
 import { getRepository } from "@/lib/repository";
+import { POST as createTaxonomy, PATCH as updateTaxonomy } from "@/app/api/taxonomy/route";
 import { resetDemoStore } from "@/lib/store";
 
 describe("authenticated API contracts in demo mode", () => {
@@ -56,6 +57,11 @@ describe("authenticated API contracts in demo mode", () => {
     expect(payload.topic.title).toBe("Acute Wound Care");
     expect((await (await search(new Request("http://localhost/api/search?q=acute+wound"))).json()).results).toEqual([]);
 
+    const block = payload.draft.blocks[0];
+    block.claims = [{ ...block.claims[0], text: block.text, citationIds: [payload.draft.sourceIds[0]], status: "cited" }];
+    const attested = await updateBlock(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block, supportAttestation: true }) }), { params: Promise.resolve({ id: payload.draft.id, blockId: block.id }) });
+    expect(attested.status).toBe(200);
+
     const approved = await approveDraft(new Request("http://localhost", { method: "POST" }), { params: Promise.resolve({ id: payload.draft.id }) });
     expect(approved.status).toBe(200);
     const approvedPayload = await approved.json();
@@ -82,6 +88,16 @@ describe("authenticated API contracts in demo mode", () => {
     expect(approved.status).toBe(409);
   });
 
+  it("rejects cited block updates without explicit owner support attestation", async () => {
+    const created = await createDraft(new Request("http://localhost/api/topics/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: "Attestation Guard", rawNotes: "Educational statement.", imageIds: [], sourceMetadata: [{ title: "Owner notes", kind: "user_notes" }], scoreNodeId: "biliary", tags: [], mode: "notes_only" }) }));
+    const payload = await created.json();
+    const block = payload.draft.blocks[0];
+    block.claims[0] = { ...block.claims[0], citationIds: [payload.draft.sourceIds[0]], status: "cited" };
+    const response = await updateBlock(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block }) }), { params: Promise.resolve({ id: payload.draft.id, blockId: block.id }) });
+    expect(response.status).toBe(422);
+    expect(await response.json()).toMatchObject({ code: "SUPPORT_ATTESTATION_REQUIRED" });
+  });
+
   it("persists the owner's reviewed Anki edit for later backup", async () => {
     const created = await createCloze(new Request("http://localhost/api/anki/drafts", {
       method: "POST",
@@ -94,5 +110,24 @@ describe("authenticated API contracts in demo mode", () => {
 
     expect(updated.status).toBe(200);
     expect((await (await getRepository()).listCards())[0].clozeText).toBe(reviewedText);
+  });
+
+  it("reuses an existing duplicate Anki draft instead of dead-ending export", async () => {
+    const body = { selection: "Completion imaging documents duct clearance.", topicId: "topic-choledocholithiasis", sourceBlockIds: ["block-sequence"], contextImageRef: "context.svg", tags: ["biliary"] };
+    const first = await createCloze(new Request("http://localhost/api/anki/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+    const second = await createCloze(new Request("http://localhost/api/anki/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+    expect(first.status).toBe(201);
+    expect(second.status).toBe(201);
+    expect((await second.json()).draft.id).toBe((await first.json()).draft.id);
+    expect((await (await getRepository()).listCards())).toHaveLength(1);
+  });
+
+  it("creates and edits owner taxonomy nodes", async () => {
+    const created = await createTaxonomy(new Request("http://localhost/api/taxonomy", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: "Vascular Surgery", parentId: null, order: 4 }) }));
+    const payload = await created.json();
+    expect(created.status).toBe(201);
+    const updated = await updateTaxonomy(new Request("http://localhost/api/taxonomy", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: payload.node.id, title: "Vascular", parentId: null, order: 4 }) }));
+    expect(updated.status).toBe(200);
+    expect((await updated.json()).node.title).toBe("Vascular");
   });
 });

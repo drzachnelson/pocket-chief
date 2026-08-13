@@ -316,9 +316,14 @@ create or replace function public.topic_block_expected_claims(block jsonb) retur
       order by step.position
     )
     when 'flow' then array(
-      select node.value->>'label'
-      from jsonb_array_elements(coalesce(block->'nodes', '[]'::jsonb)) with ordinality node(value, position)
-      order by node.position
+      select value from (
+        select node.value->>'label' as value, node.position as position
+        from jsonb_array_elements(coalesce(block->'nodes', '[]'::jsonb)) with ordinality node(value, position)
+        union all
+        select edge.value->>'label' as value, jsonb_array_length(coalesce(block->'nodes', '[]'::jsonb)) + edge.position as position
+        from jsonb_array_elements(coalesce(block->'edges', '[]'::jsonb)) with ordinality edge(value, position)
+        where nullif(edge.value->>'label', '') is not null
+      ) flow_claims order by position
     )
     else '{}'::text[]
   end
@@ -388,6 +393,70 @@ end;
 $$;
 revoke all on function public.approve_topic_version(uuid) from public;
 grant execute on function public.approve_topic_version(uuid) to authenticated;
+
+create or replace function public.ensure_launch_topic(p_content jsonb) returns void language plpgsql security definer set search_path = public as $$
+declare
+  biliary_id uuid;
+  launch_topic_id constant uuid := '00000000-0000-4000-8000-000000000101';
+  launch_source_id constant uuid := '00000000-0000-4000-8000-000000000102';
+  launch_version_id constant uuid := '00000000-0000-4000-8000-000000000103';
+begin
+  if auth.uid() is null then raise exception 'Owner authentication required'; end if;
+  if exists (select 1 from public.topics where owner_id = auth.uid() and slug = 'choledocholithiasis') then return; end if;
+  perform public.ensure_default_taxonomy();
+  select id into biliary_id from public.taxonomy_nodes where owner_id = auth.uid() and slug = 'biliary-tract';
+
+  insert into public.sources (id, owner_id, title, kind, citation, details, supplied_at)
+  values (
+    launch_source_id,
+    auth.uid(),
+    'User-supplied choledocholithiasis study packet',
+    'user_notes',
+    'Personal study notes supplied to Pocket Chief, August 12, 2026.',
+    'A synthesis the owner identified as referencing SCORE, Fiser, and Sabiston. No edition or page details were supplied.',
+    '2026-08-12T00:00:00.000Z'
+  ) on conflict (id) do nothing;
+
+  insert into public.topics (id, owner_id, taxonomy_node_id, title, slug, aliases, personal_tags)
+  values (launch_topic_id, auth.uid(), biliary_id, 'Choledocholithiasis', 'choledocholithiasis', array['CBD stones', 'common bile duct stones', 'duct exploration', 'LTCBDE'], array['biliary', 'common-bile-duct', 'absite', 'score']);
+
+  insert into public.topic_versions (id, owner_id, topic_id, version_number, status, content, warnings, source_ids)
+  values (launch_version_id, auth.uid(), launch_topic_id, 1, 'draft', p_content, '{}', array[launch_source_id]);
+  perform public.sync_claim_citations(launch_version_id);
+  perform public.approve_topic_version(launch_version_id);
+end;
+$$;
+revoke all on function public.ensure_launch_topic(jsonb) from public;
+grant execute on function public.ensure_launch_topic(jsonb) to authenticated;
+
+create or replace function public.save_anki_draft(
+  p_id uuid,
+  p_topic_id uuid,
+  p_cloze_text text,
+  p_additional_context text,
+  p_source_block_ids text[],
+  p_context_image_path text,
+  p_tags text[],
+  p_duplicate_hash text
+) returns public.anki_drafts language plpgsql security definer set search_path = public as $$
+declare
+  saved public.anki_drafts;
+begin
+  if auth.uid() is null then raise exception 'Owner authentication required'; end if;
+  insert into public.anki_drafts (id, owner_id, topic_id, cloze_text, additional_context, source_block_ids, context_image_path, tags, duplicate_hash)
+  values (p_id, auth.uid(), p_topic_id, p_cloze_text, p_additional_context, p_source_block_ids, p_context_image_path, coalesce(p_tags, '{}'), p_duplicate_hash)
+  on conflict (owner_id, duplicate_hash) do update set
+    topic_id = excluded.topic_id,
+    additional_context = excluded.additional_context,
+    source_block_ids = excluded.source_block_ids,
+    context_image_path = excluded.context_image_path,
+    tags = excluded.tags
+  returning * into saved;
+  return saved;
+end;
+$$;
+revoke all on function public.save_anki_draft(uuid,uuid,text,text,text[],text,text[],text) from public;
+grant execute on function public.save_anki_draft(uuid,uuid,text,text,text[],text,text[],text) to authenticated;
 
 create or replace function public.restore_topic_version(p_source_version_id uuid, p_new_version_id uuid) returns uuid language plpgsql security definer set search_path = public as $$
 declare

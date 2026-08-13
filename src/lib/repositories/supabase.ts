@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { ContentRepository, MediaExport, TopicDraftRecord } from "@/lib/repository";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { choledoBlocks } from "@/lib/seed";
 import type { ClozeDraft, SuppliedSource, TaxonomyNode, Topic, TopicBlock, TopicVersion } from "@/lib/types";
 
 interface TaxonomyRow { id: string; parent_id: string | null; title: string; slug: string; sort_order: number }
@@ -55,7 +56,12 @@ function mapVersion(row: VersionRow, scoreNodeId: string, tags: string[]): Topic
 export class SupabaseRepository implements ContentRepository {
   private constructor(private readonly client: SupabaseClient) {}
 
-  static async create() { return new SupabaseRepository(await createSupabaseServerClient() as SupabaseClient); }
+  static async create() {
+    const client = await createSupabaseServerClient() as SupabaseClient;
+    const seeded = await client.rpc("ensure_launch_topic", { p_content: choledoBlocks });
+    assertNoError(seeded.error);
+    return new SupabaseRepository(client);
+  }
 
   private async loadLibrary() {
     const [taxonomyResult, topicResult, versionResult] = await Promise.all([
@@ -102,6 +108,14 @@ export class SupabaseRepository implements ContentRepository {
     const ensured = await this.client.rpc("ensure_default_taxonomy");
     assertNoError(ensured.error);
     return (await this.loadLibrary()).nodes;
+  }
+
+  async saveTaxonomyNode(node: TaxonomyNode) {
+    const user = (await this.client.auth.getUser()).data.user;
+    if (!user) throw new Error("Owner authentication required.");
+    const { data, error } = await this.client.from("taxonomy_nodes").upsert({ id: node.id, owner_id: user.id, parent_id: node.parentId ?? null, title: node.title, slug: node.slug, sort_order: node.order }).select("id,parent_id,title,slug,sort_order").single();
+    assertNoError(error);
+    return mapTaxonomy(data as unknown as TaxonomyRow);
   }
 
   async listSources(ids?: string[]) {
@@ -177,9 +191,9 @@ export class SupabaseRepository implements ContentRepository {
   }
 
   async addCard(card: ClozeDraft, topicId: string) {
-    const { error } = await this.client.from("anki_drafts").insert({ id: card.id, owner_id: (await this.client.auth.getUser()).data.user?.id, topic_id: topicId, cloze_text: card.clozeText, additional_context: card.additionalContext, source_block_ids: card.sourceBlockIds, context_image_path: card.contextImageRef, tags: card.tags, duplicate_hash: card.duplicateHash });
+    const { data, error } = await this.client.rpc("save_anki_draft", { p_id: card.id, p_topic_id: topicId, p_cloze_text: card.clozeText, p_additional_context: card.additionalContext, p_source_block_ids: card.sourceBlockIds, p_context_image_path: card.contextImageRef, p_tags: card.tags, p_duplicate_hash: card.duplicateHash });
     assertNoError(error);
-    return card;
+    return data ? this.mapCard(data as unknown as CardRow) : card;
   }
 
   async updateCard(card: ClozeDraft) {

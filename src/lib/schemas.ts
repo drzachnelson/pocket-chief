@@ -56,3 +56,5 @@ export const ankiExportSchema = z.object({
   mode: z.enum(["tsv", "ankimobile", "ankiconnect"]),
   settings: z.object({ deck: z.string().min(1), noteType: z.string().min(1), tagPrefix: z.string(), fieldMap: z.object({ text: z.string(), extra: z.string() }).optional() }),
 });
+
+export const taxonomyNodeSchema = z.object({ id: z.string().min(1).max(180).optional(), title: z.string().min(1).max(180), parentId: z.string().min(1).max(180).nullable().optional(), order: z.number().int().min(0).max(10_000) });
