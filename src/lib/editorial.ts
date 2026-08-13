@@ -8,13 +8,18 @@ export function factualUnits(block: TopicBlock): string[] {
   if (block.type === "table") return block.rows.map((row) => row.join(" — "));
   if (block.type === "sequence") return block.steps.map((step) => `${step.title}: ${step.detail}`);
   if (block.type === "flow") return [...block.nodes.map((node) => node.label), ...block.edges.flatMap((edge) => edge.label ? [edge.label] : [])];
+  if (block.type === "image") return [block.alt, ...(block.caption ? [block.caption] : [])];
   return [];
 }
 
-export function requireOwnerAttestation(blocks: TopicBlock[]): TopicBlock[] {
+const restrictReferenceSourceIds = (block: TopicBlock, validSourceIds: ReadonlySet<string>) =>
+  block.type === "references" ? { sourceIds: block.sourceIds.filter((id) => validSourceIds.has(id)) } : {};
+
+export function requireOwnerAttestation(blocks: TopicBlock[], validSourceIds: ReadonlySet<string>): TopicBlock[] {
   return blocks.map((block) => ({
     ...clone(block),
     claims: block.claims.map((claim) => ({ ...clone(claim), citationIds: [], status: "needs_support" as const })),
+    ...restrictReferenceSourceIds(block, validSourceIds),
   })) as TopicBlock[];
 }
 
@@ -46,6 +51,7 @@ export function normalizeClaimSupport(blocks: TopicBlock[], validSourceIds: Read
       const citationIds = [...new Set(claim.citationIds.filter((id) => validSourceIds.has(id)))];
       return { ...clone(claim), citationIds, status: claim.status === "cited" && citationIds.length > 0 ? "cited" as const : "needs_support" as const };
     }),
+    ...restrictReferenceSourceIds(block, validSourceIds),
   })) as TopicBlock[];
 }
 

@@ -1,5 +1,6 @@
 import { apiOwner } from "@/lib/auth";
 import { getRepository } from "@/lib/repository";
+import { recentViewRequestSchema } from "@/lib/schemas";
 
 export async function GET() {
   const { response } = await apiOwner(); if (response) return response;
@@ -8,8 +9,9 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const { response } = await apiOwner(); if (response) return response;
-  const body = await request.json().catch(() => ({})) as { topicId?: string };
-  if (!body.topicId) return Response.json({ error: "Invalid recent-view request." }, { status: 422 });
-  await (await getRepository()).recordRecentView(body.topicId);
-  return Response.json({ recorded: true });
+  try {
+    const body = recentViewRequestSchema.parse(await request.json());
+    await (await getRepository()).recordRecentView(body.topicId);
+    return Response.json({ recorded: true });
+  } catch { return Response.json({ error: "The recent-view request is invalid or could not be completed.", code: "INVALID_RECENT_VIEW" }, { status: 422 }); }
 }

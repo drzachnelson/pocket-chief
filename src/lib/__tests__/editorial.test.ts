@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { approveDraft, createDraft, normalizeClaimSupport, restoreVersion, reviseDraftBlock, supportWarnings } from "@/lib/editorial";
+import { approveDraft, createDraft, normalizeClaimSupport, requireOwnerAttestation, restoreVersion, reviseDraftBlock, supportWarnings } from "@/lib/editorial";
 import { choledocholithiasisTopic } from "@/lib/seed";
 
 describe("editorial workflow", () => {
@@ -102,6 +102,29 @@ describe("editorial workflow", () => {
       claims: [{ id: "hidden", text: "A hidden assertion.", citationIds: ["source"], status: "cited" as const }],
     };
     expect(supportWarnings([references], new Set(["source"]))).toEqual(["Needs support: A hidden assertion."]);
+  });
+
+  it("strips a references block's sourceIds that fall outside the version's valid source IDs", () => {
+    const references = {
+      id: "references",
+      type: "references" as const,
+      sourceIds: ["real-source", "forged-source"],
+      claims: [],
+    };
+    expect(normalizeClaimSupport([references], new Set(["real-source"]))[0]).toMatchObject({ sourceIds: ["real-source"] });
+  });
+
+  it("blanks claim support and strips invalid reference sourceIds together", () => {
+    const summary = { id: "s", type: "summary" as const, text: "Fact.", claims: [{ id: "c", text: "Fact.", citationIds: ["real-source"], status: "cited" as const }] };
+    const references = { id: "r", type: "references" as const, sourceIds: ["real-source", "forged-source"], claims: [] };
+    const result = requireOwnerAttestation([summary, references], new Set(["real-source"]));
+    expect(result[0].claims[0]).toMatchObject({ citationIds: [], status: "needs_support" });
+    expect(result[1]).toMatchObject({ sourceIds: ["real-source"] });
+  });
+
+  it("requires support for rendered image alt text and captions", () => {
+    const image = { id: "image", type: "image" as const, mediaId: "media", alt: "Operative anatomy.", caption: "The duct lies medially.", claims: [] };
+    expect(supportWarnings([image], new Set(["source"]))).toEqual(["Needs support: Operative anatomy.", "Needs support: The duct lies medially."]);
   });
 
   it("allocates a restore after the highest existing version", () => {

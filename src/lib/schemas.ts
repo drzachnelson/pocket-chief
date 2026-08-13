@@ -58,3 +58,6 @@ export const ankiExportSchema = z.object({
 });
 
 export const taxonomyNodeSchema = z.object({ id: z.string().min(1).max(180).optional(), title: z.string().min(1).max(180), parentId: z.string().min(1).max(180).nullable().optional(), order: z.number().int().min(0).max(10_000) });
+
+export const bookmarkRequestSchema = z.object({ topicId: z.uuid(), saved: z.boolean() });
+export const recentViewRequestSchema = z.object({ topicId: z.uuid() });

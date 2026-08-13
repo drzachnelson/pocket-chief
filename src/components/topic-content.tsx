@@ -50,6 +50,7 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
   const [persistedDraft, setPersistedDraft] = useState<ClozeDraft | null>(null);
   const [saving, setSaving] = useState(false);
   const textRef = useRef(defaultCloze);
+  const userEditedRef = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const contextRef = useMemo(() => {
     const nearestFlow = topic.approvedVersion?.blocks.find((item) => item.type === "flow");
@@ -65,7 +66,7 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
         if (!response.ok || !value.draft) throw new Error(value.error ?? "Could not save this private draft.");
         return { draft: value.draft };
       })
-      .then((value) => { if (active && value?.draft.clozeText) { textRef.current = value.draft.clozeText; setText(value.draft.clozeText); setPersistedDraft(value.draft); } })
+      .then((value) => { if (active && value?.draft) { setPersistedDraft(value.draft); if (!userEditedRef.current && value.draft.clozeText) { textRef.current = value.draft.clozeText; setText(value.draft.clozeText); } } })
       .catch((error) => { if (active) setStatus(`${error instanceof Error ? error.message : "Could not save this private draft."} Export stays disabled.`); });
     return () => { active = false; };
   }, [block.id, contextRef, selection, topic.id, topic.tags]);
@@ -108,7 +109,7 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
     <dialog ref={dialogRef} open className="anki-dialog" aria-labelledby="anki-title">
       <div className="dialog-head"><div><p className="eyebrow">Review before export</p><h2 id="anki-title">Make Anki card</h2></div><button className="icon-button" disabled={!persistedDraft || saving} onClick={close} aria-label="Close"><X size={17} /></button></div>
       <div className="context-preview"><small>Context image attached</small><strong>{block.heading}</strong><p>{excerpt(block)}</p></div>
-      <div className="field"><label htmlFor="cloze-text">Cloze text</label><textarea id="cloze-text" value={text} onChange={(event) => { textRef.current = event.target.value; setText(event.target.value); }} /><small>Edit the single deletion. Your reviewed wording is saved before close or export, and a rendered image of this section travels with the card.</small></div>
+      <div className="field"><label htmlFor="cloze-text">Cloze text</label><textarea id="cloze-text" value={text} onChange={(event) => { userEditedRef.current = true; textRef.current = event.target.value; setText(event.target.value); }} /><small>Edit the single deletion. Your reviewed wording is saved before close or export, and a rendered image of this section travels with the card.</small></div>
       {status && <p className="form-message" role="status">{status}</p>}
       <div className="dialog-actions"><button className="button ghost" disabled={!persistedDraft || saving} onClick={copyTsv}><Copy size={15} />Copy row</button><button className="button secondary" disabled={!persistedDraft || saving} onClick={exportDesktop}><DownloadSimple size={15} />Send to desktop Anki</button><button className="button" disabled={!persistedDraft || saving} onClick={openMobile}>Open in AnkiMobile</button></div>
     </dialog>

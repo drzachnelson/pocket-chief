@@ -1,6 +1,6 @@
 import { apiOwner } from "@/lib/auth";
 import { draftTopic } from "@/lib/ai";
-import { createDraft, normalizeClaimSupport, requireOwnerAttestation, supportWarnings } from "@/lib/editorial";
+import { createDraft, requireOwnerAttestation, supportWarnings } from "@/lib/editorial";
 import { checkRateLimit, requestKey } from "@/lib/rate-limit";
 import { draftRequestSchema } from "@/lib/schemas";
 import { detectLikelyPHI } from "@/lib/safety";
@@ -36,9 +36,9 @@ export async function POST(request: Request) {
     const basedOn = existing?.approvedVersion ?? undefined;
     const base = createDraft(input, basedOn ?? undefined);
     const validSourceIds = new Set(sources.map((source) => source.id));
-    const blocks = requireOwnerAttestation(normalizeClaimSupport(generated.blocks, validSourceIds));
+    const blocks = requireOwnerAttestation(generated.blocks, validSourceIds);
     const claimWarnings = supportWarnings(blocks, validSourceIds);
-    const draft = { ...base, id: crypto.randomUUID(), blocks, warnings: [...generated.warnings, ...claimWarnings] };
+    const draft = { ...base, id: crypto.randomUUID(), blocks, warnings: [...generated.warnings, ...claimWarnings], topicTitle: body.title, topicSlug: slug, aliases: existing?.aliases ?? [] };
     const taxonomy = await repository.listTaxonomy();
     const scoreNode = taxonomy.find((node) => node.id === body.scoreNodeId || node.slug === body.scoreNodeId);
     const persisted = await repository.createTopicDraft({

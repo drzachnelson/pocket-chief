@@ -1,5 +1,6 @@
 import { apiOwner } from "@/lib/auth";
 import { getRepository } from "@/lib/repository";
+import { bookmarkRequestSchema } from "@/lib/schemas";
 
 export async function GET() {
   const { response } = await apiOwner(); if (response) return response;
@@ -8,8 +9,9 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const { response } = await apiOwner(); if (response) return response;
-  const body = await request.json().catch(() => ({})) as { topicId?: string; saved?: boolean };
-  if (!body.topicId || typeof body.saved !== "boolean") return Response.json({ error: "Invalid bookmark request." }, { status: 422 });
-  await (await getRepository()).setBookmark(body.topicId, body.saved);
-  return Response.json({ saved: body.saved });
+  try {
+    const body = bookmarkRequestSchema.parse(await request.json());
+    await (await getRepository()).setBookmark(body.topicId, body.saved);
+    return Response.json({ saved: body.saved });
+  } catch { return Response.json({ error: "The bookmark request is invalid or could not be completed.", code: "INVALID_BOOKMARK" }, { status: 422 }); }
 }

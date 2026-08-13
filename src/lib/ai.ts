@@ -115,14 +115,14 @@ function extractOutputText(payload: unknown): string | null {
   return null;
 }
 
-async function responsesApi(input: string, name: string, schema: object, effort: "low" | "medium") {
+async function responsesApi(input: string, name: string, schema: object, effort: "low" | "medium", model: string) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return null;
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: process.env.POCKET_CHIEF_TOPIC_MODEL || "gpt-5.6-terra",
+      model,
       reasoning: { effort },
       input,
       text: { format: { type: "json_schema", name, strict: true, schema } },
@@ -139,7 +139,7 @@ async function responsesApi(input: string, name: string, schema: object, effort:
 export async function draftTopic(input: TopicDraftInput): Promise<{ blocks: TopicBlock[]; warnings: string[] }> {
   const phi = detectLikelyPHI(input.rawNotes);
   if (phi.blocked) throw new Error("PHI_SUSPECTED");
-  const generated = await responsesApi(`Create a compact general-surgery topic from only these owner-supplied notes. Never add facts. Every factual claim must use one of these source IDs: ${input.sourceIds.join(", ")}. If a claim lacks support, mark it needs_support. Notes:\n${input.rawNotes}`, "topic_draft", topicDraftJsonSchema, "medium");
+  const generated = await responsesApi(`Create a compact general-surgery topic from only these owner-supplied notes. Never add facts. Every factual claim must use one of these source IDs: ${input.sourceIds.join(", ")}. If a claim lacks support, mark it needs_support. Notes:\n${input.rawNotes}`, "topic_draft", topicDraftJsonSchema, "medium", process.env.POCKET_CHIEF_TOPIC_MODEL || "gpt-5.6-terra");
   if (generated && typeof generated === "object") {
     const parsed = parseTopicDraftOutput(generated);
     assertGeneratedOutputIsPhiFree(parsed);
@@ -155,7 +155,7 @@ export async function draftCloze(selection: string, topicId: string, sourceBlock
   const phi = detectLikelyPHI(selection);
   if (phi.blocked) throw new Error("PHI_SUSPECTED");
   const schema = { type: "object", additionalProperties: false, required: ["clozeText", "additionalContext"], properties: { clozeText: { type: "string" }, additionalContext: { type: "string" } } };
-  const generated = await responsesApi(`Create exactly one editable Anki cloze deletion from this educational passage. Preserve meaning and add no facts. Passage: ${selection}`, "cloze_draft", schema, "low") as { clozeText?: string; additionalContext?: string } | null;
+  const generated = await responsesApi(`Create exactly one editable Anki cloze deletion from this educational passage. Preserve meaning and add no facts. Passage: ${selection}`, "cloze_draft", schema, "low", process.env.POCKET_CHIEF_CLOZE_MODEL || process.env.POCKET_CHIEF_TOPIC_MODEL || "gpt-5.6-terra") as { clozeText?: string; additionalContext?: string } | null;
   if (generated) assertGeneratedOutputIsPhiFree(generated);
   const fallback = createFallbackCloze(selection);
   const clozeText = generated?.clozeText || fallback;
