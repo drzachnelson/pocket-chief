@@ -22,7 +22,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       : { blocks: targetBlocks, warnings: ["Local preview kept the current source-bound blocks because AI drafting is not configured."] };
     const retained = body.blockIds.length ? draft.blocks.filter((block) => !body.blockIds.includes(block.id)) : [];
     const validSources = new Set((await repository.listSources(draft.sourceIds)).map((source) => source.id));
-    const generatedBlocks = process.env.OPENAI_API_KEY ? requireOwnerAttestation(normalizeClaimSupport(generated.blocks, validSources)) : normalizeClaimSupport(generated.blocks, validSources);
+    const generatedBlocks = process.env.OPENAI_API_KEY ? requireOwnerAttestation(generated.blocks, validSources) : normalizeClaimSupport(generated.blocks, validSources);
     const blocks = [...retained, ...generatedBlocks];
     const revised = { ...draft, blocks, warnings: [...generated.warnings, ...supportWarnings(blocks, validSources)] };
     const persisted = await repository.replaceDraft(id, revised); await repository.audit("topic.draft.revised", persisted.id, owner.email, { blocks: generated.blocks.length });

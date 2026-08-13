@@ -8,6 +8,8 @@ import { POST as createCloze } from "@/app/api/anki/drafts/route";
 import { PATCH as updateCloze } from "@/app/api/anki/drafts/[id]/route";
 import { getRepository } from "@/lib/repository";
 import { POST as createTaxonomy, PATCH as updateTaxonomy } from "@/app/api/taxonomy/route";
+import { POST as setBookmark } from "@/app/api/bookmarks/route";
+import { POST as recordRecentView } from "@/app/api/recent/route";
 import { resetDemoStore } from "@/lib/store";
 
 describe("authenticated API contracts in demo mode", () => {
@@ -88,6 +90,15 @@ describe("authenticated API contracts in demo mode", () => {
     expect(approved.status).toBe(409);
   });
 
+  it("rejects a block update whose body id does not match the URL blockId", async () => {
+    const created = await createDraft(new Request("http://localhost/api/topics/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: "Id Mismatch Guard", rawNotes: "Educational statement.", imageIds: [], sourceMetadata: [{ title: "Owner notes", kind: "user_notes" }], scoreNodeId: "biliary", tags: [], mode: "notes_only" }) }));
+    const payload = await created.json();
+    const block = { ...payload.draft.blocks[0], id: "some-other-block-id" };
+    const response = await updateBlock(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block, supportAttestation: true }) }), { params: Promise.resolve({ id: payload.draft.id, blockId: payload.draft.blocks[0].id }) });
+    expect(response.status).toBe(422);
+    expect(await response.json()).toMatchObject({ code: "BLOCK_ID_MISMATCH" });
+  });
+
   it("rejects cited block updates without explicit owner support attestation", async () => {
     const created = await createDraft(new Request("http://localhost/api/topics/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: "Attestation Guard", rawNotes: "Educational statement.", imageIds: [], sourceMetadata: [{ title: "Owner notes", kind: "user_notes" }], scoreNodeId: "biliary", tags: [], mode: "notes_only" }) }));
     const payload = await created.json();
@@ -129,5 +140,33 @@ describe("authenticated API contracts in demo mode", () => {
     const updated = await updateTaxonomy(new Request("http://localhost/api/taxonomy", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: payload.node.id, title: "Vascular", parentId: null, order: 4 }) }));
     expect(updated.status).toBe(200);
     expect((await updated.json()).node.title).toBe("Vascular");
+  });
+
+  it("rejects a non-UUID topicId on bookmark and recent-view requests", async () => {
+    const bookmark = await setBookmark(new Request("http://localhost/api/bookmarks", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ topicId: "not-a-uuid", saved: true }) }));
+    expect(bookmark.status).toBe(422);
+    const recent = await recordRecentView(new Request("http://localhost/api/recent", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ topicId: "not-a-uuid" }) }));
+    expect(recent.status).toBe(422);
+  });
+
+  it("rejects taxonomy cycles", async () => {
+    const parent = await (await createTaxonomy(new Request("http://localhost/api/taxonomy", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: "Parent", parentId: null, order: 4 }) }))).json();
+    const child = await (await createTaxonomy(new Request("http://localhost/api/taxonomy", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title: "Child", parentId: parent.node.id, order: 5 }) }))).json();
+    const cyclic = await updateTaxonomy(new Request("http://localhost/api/taxonomy", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: parent.node.id, title: "Parent", parentId: child.node.id, order: 4 }) }));
+    expect(cyclic.status).toBe(422);
+    expect(await cyclic.json()).toMatchObject({ code: "TAXONOMY_CYCLE" });
+  });
+
+  it("keeps approved topic metadata live until a later draft is approved", async () => {
+    const topicId = "00000000-0000-4000-8000-000000000101";
+    const repository = await getRepository();
+    const created = await createDraft(new Request("http://localhost/api/topics/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ topicId, title: "Updated Biliary Topic", rawNotes: "Revised educational statement.", imageIds: [], sourceMetadata: [{ title: "Owner revision", kind: "user_notes" }], scoreNodeId: "biliary", tags: ["updated"], mode: "notes_only" }) }));
+    const payload = await created.json();
+    expect((await repository.getTopicById(topicId))!.title).toBe("Choledocholithiasis");
+    const block = payload.draft.blocks[0];
+    block.claims[0] = { ...block.claims[0], citationIds: [payload.draft.sourceIds[0]], status: "cited" };
+    await updateBlock(new Request("http://localhost", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block, supportAttestation: true }) }), { params: Promise.resolve({ id: payload.draft.id, blockId: block.id }) });
+    await approveDraft(new Request("http://localhost", { method: "POST" }), { params: Promise.resolve({ id: payload.draft.id }) });
+    expect((await repository.getTopicById(topicId))!.title).toBe("Updated Biliary Topic");
   });
 });

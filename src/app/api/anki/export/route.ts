@@ -5,8 +5,10 @@ import { getRepository } from "@/lib/repository";
 
 export async function POST(request: Request) {
   const { owner, response } = await apiOwner(); if (response || !owner) return response!;
+  let body: ReturnType<typeof ankiExportSchema.parse>;
+  try { body = ankiExportSchema.parse(await request.json()); }
+  catch { return Response.json({ error: "The export request is invalid." }, { status: 422 }); }
   try {
-    const body = ankiExportSchema.parse(await request.json());
     const repository = await getRepository();
     const drafts = await repository.getCards(body.draftIds);
     if (drafts.length !== body.draftIds.length) return Response.json({ error: "One or more Anki drafts were not found." }, { status: 404 });

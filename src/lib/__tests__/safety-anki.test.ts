@@ -15,6 +15,30 @@ describe("safety and Anki portability", () => {
   });
 
   it.each([
+    ["narrative readmission with POD marker", "The patient was readmitted on POD 3 with fevers."],
+    ["s/p narrative discharge", "S/p cholecystectomy, the patient was discharged home in stable condition."],
+    ["narrative taken back to the OR", "The patient was taken back to the OR for a bile leak."],
+  ])("blocks %s before external processing", (_label, value) => {
+    expect(detectLikelyPHI(value).blocked).toBe(true);
+  });
+
+  it.each([
+    ["general typical-presentation prose", "Patients with choledocholithiasis typically present with right upper quadrant pain and jaundice."],
+    ["general management guidance", "A patient with a dilated common bile duct on ultrasound should undergo further workup."],
+    ["spelled-out postoperative day without narrative verb", "Post-operative day 3 fever should prompt evaluation for infection, DVT, or atelectasis."],
+  ])("does not block %s", (_label, value) => {
+    expect(detectLikelyPHI(value).blocked).toBe(false);
+  });
+
+  it.each([
+    ["lowercase-typed full name", "john smith was seen today for rlq pain"],
+    ["all-caps full name", "JOHN SMITH presented with pain"],
+    ["lowercase patient-prefixed name", "patient john doe here for follow-up"],
+  ])("blocks %s regardless of letter case", (_label, value) => {
+    expect(detectLikelyPHI(value).blocked).toBe(true);
+  });
+
+  it.each([
     ["full name", "John Smith was transferred for evaluation"],
     ["street address", "Lives at 123 Main Street, Boston"],
     ["social security number", "SSN 123-45-6789"],

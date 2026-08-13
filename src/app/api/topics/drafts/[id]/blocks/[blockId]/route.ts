@@ -12,6 +12,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   if (!draft) return Response.json({ error: "Draft not found." }, { status: 404 });
   try {
     const { block, supportAttestation } = reviseBlockSchema.parse(await request.json());
+    if (block.id !== blockId) return Response.json({ error: "The block id does not match the requested block.", code: "BLOCK_ID_MISMATCH" }, { status: 422 });
     if (detectLikelyPHI(JSON.stringify(block)).blocked) return Response.json({ error: "Remove possible patient identifiers before saving.", code: "PHI_SUSPECTED" }, { status: 422 });
     if (block.claims.some((claim) => claim.status === "cited") && supportAttestation !== true) return Response.json({ error: "Confirm that the selected source supports every cited statement.", code: "SUPPORT_ATTESTATION_REQUIRED" }, { status: 422 });
     const revised = reviseDraftBlock(draft, blockId, block);

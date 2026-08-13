@@ -28,6 +28,33 @@ test("search, read, save, and draft a cloze", async ({ page }) => {
   expect(cards.some((card) => card.clozeText === reviewedText)).toBe(true);
 });
 
+test("edits made while the draft is still saving are not lost on close", async ({ page }) => {
+  await page.route("**/api/anki/drafts", async (route) => {
+    if (route.request().method() === "POST") await new Promise((resolve) => setTimeout(resolve, 800));
+    await route.continue();
+  });
+  await page.goto("/");
+  await page.getByLabel("Search Pocket Chief").fill("choledochoithiasis");
+  await page.getByRole("button", { name: "Search" }).click();
+  const result = page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ });
+  await expect(result).toBeVisible();
+  await result.click();
+  await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
+  await page.getByRole("button", { name: "Save" }).click();
+  await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
+  await page.getByRole("button", { name: /Make Anki card from Repositioning may help/ }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  const reviewedText = `{{c1::Repositioning}} may help reposition proximal stones for retrieval (race, ${test.info().project.name}).`;
+  await page.getByLabel("Cloze text").fill(reviewedText);
+  await page.waitForTimeout(1000);
+  await expect(page.getByLabel("Cloze text")).toHaveValue(reviewedText);
+  const updateResponse = page.waitForResponse((response) => response.request().method() === "PATCH" && response.url().includes("/api/anki/drafts/"));
+  await page.getByRole("button", { name: "Close" }).click();
+  const saved = await updateResponse;
+  expect(saved.status()).toBe(200);
+  expect((await saved.json()).draft.clozeText).toBe(reviewedText);
+});
+
 test("mobile navigation exposes four primary destinations", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/");

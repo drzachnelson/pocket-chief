@@ -17,7 +17,7 @@ function db() {
       database.createObjectStore("saved", { keyPath: "id" });
       database.createObjectStore("recent", { keyPath: "id" });
     },
-  });
+  }).catch((error) => { databasePromise = undefined; throw error; });
   return databasePromise;
 }
 
