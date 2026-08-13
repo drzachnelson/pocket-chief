@@ -14,6 +14,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const recent = await repository.listRecentTopics();
   const results = q ? await repository.searchTopics(q) : reviewed;
   const sectionCount = reviewed.reduce((count, topic) => count + (topic.approvedVersion?.blocks.filter((block) => block.type !== "references").length ?? 0), 0);
+  const sectionsCovered = new Set(reviewed.map((topic) => topic.scoreNodeId)).size;
+  const savedCount = (await repository.listBookmarkedTopics()).length;
   return (
     <>
       <section className="search-hero">
@@ -43,10 +45,10 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             <RecentTopics fallback={recent.length ? recent : reviewed} />
           </section>
           <section className="section">
-            <div className="section-heading"><h2>Continue building</h2><span>4 launch packets remaining</span></div>
+            <div className="section-heading"><h2>Continue building</h2><span>{sectionsCovered} SCORE {sectionsCovered === 1 ? "section" : "sections"} covered</span></div>
             <div className="topic-grid">
               <Link href="/add" className="topic-card"><span className="topic-icon"><Plus size={19} /></span><span><h3>Add the next topic packet</h3><p>Paste notes and attach source details</p></span><span className="topic-card-meta">Online only</span></Link>
-              <Link href="/saved" className="topic-card"><span className="topic-icon"><ClockCounterClockwise size={19} /></span><span><h3>Return to saved topics</h3><p>Private bookmarks available offline</p></span><span className="topic-card-meta">0 saved</span></Link>
+              <Link href="/saved" className="topic-card"><span className="topic-icon"><ClockCounterClockwise size={19} /></span><span><h3>Return to saved topics</h3><p>Private bookmarks available offline</p></span><span className="topic-card-meta">{savedCount} saved</span></Link>
             </div>
           </section>
         </>
