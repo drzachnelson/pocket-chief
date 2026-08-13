@@ -6,5 +6,5 @@
 - Selected visual direction: Clinical Atlas
 - Seed topic supplied: choledocholithiasis
 - Additional launch topics pending: four user-provided note packets
-- Verified locally: unit/integration suite, lint, typecheck, production build, desktop/mobile browser workflows, and Clinical Atlas visual QA
+- Verified locally: unit/integration suite, lint, typecheck, production build, desktop/mobile browser workflows, Clinical Atlas visual QA, and forward Supabase hardening migration contract
 - External setup pending: Supabase project and migration, OpenAI API key, private GitHub remote, Vercel project, and the next four source packets

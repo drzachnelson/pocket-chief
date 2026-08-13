@@ -64,7 +64,7 @@ export const demoStore = {
   getCards(ids: string[]) { return ids.flatMap((id) => currentState().clozeDrafts.get(id) ? [currentState().clozeDrafts.get(id)!] : []); },
   approveVersion(version: TopicVersion) {
     const topic = currentState().topics.find((item) => item.id === version.topicId);
-    if (topic) { topic.approvedVersion = structuredClone(version); topic.versions.push(structuredClone(version)); topic.updatedAt = version.reviewedAt ?? version.createdAt; }
+    if (topic) { topic.title = version.topicTitle ?? topic.title; topic.slug = version.topicSlug ?? topic.slug; topic.aliases = version.aliases ?? topic.aliases; topic.scoreNodeId = version.scoreNodeId; topic.tags = version.tags; topic.approvedVersion = structuredClone(version); topic.versions.push(structuredClone(version)); topic.updatedAt = version.reviewedAt ?? version.createdAt; }
     currentState().drafts.delete(version.id.replace(/-approved$/, "-draft"));
     return version;
   },

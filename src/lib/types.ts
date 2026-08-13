@@ -93,6 +93,9 @@ export interface TopicVersion {
   reviewedAt?: string;
   reviewedBy?: string;
   basedOnVersion?: number;
+  topicTitle?: string;
+  topicSlug?: string;
+  aliases?: string[];
 }
 
 export interface Topic {
