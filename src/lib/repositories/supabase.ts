@@ -6,7 +6,7 @@ import type { ClozeDraft, SuppliedSource, TaxonomyNode, Topic, TopicBlock, Topic
 
 interface TaxonomyRow { id: string; parent_id: string | null; title: string; slug: string; sort_order: number }
 interface TopicRow { id: string; taxonomy_node_id: string | null; title: string; slug: string; aliases: string[]; personal_tags: string[]; current_approved_version_id: string | null; updated_at: string }
-interface VersionRow { id: string; topic_id: string; version_number: number; status: "draft" | "approved"; content: TopicBlock[]; warnings: string[]; source_ids: string[]; based_on_version: number | null; reviewed_at: string | null; reviewed_by: string | null; created_at: string }
+interface VersionRow { id: string; topic_id: string; version_number: number; status: "draft" | "approved"; content: TopicBlock[]; warnings: string[]; source_ids: string[]; based_on_version: number | null; proposed_title: string | null; proposed_slug: string | null; proposed_taxonomy_node_id: string | null; proposed_aliases: string[] | null; proposed_tags: string[] | null; reviewed_at: string | null; reviewed_by: string | null; created_at: string }
 interface SourceRow { id: string; title: string; kind: SuppliedSource["kind"]; citation: string; url: string | null; details: string | null; supplied_at: string }
 interface CardRow { id: string; topic_id: string | null; cloze_text: string; additional_context: string; source_block_ids: string[]; context_image_path: string | null; tags: string[]; duplicate_hash: string }
 interface MediaRow { id: string; storage_path: string; mime_type: string }
@@ -20,7 +20,9 @@ function categoryFor(id: string | null, nodes: TaxonomyNode[]) {
   const byId = new Map(nodes.map((node) => [node.id, node]));
   const path: string[] = [];
   let current = byId.get(id);
-  while (current) {
+  const visited = new Set<string>();
+  while (current && !visited.has(current.id)) {
+    visited.add(current.id);
     path.unshift(current.title);
     current = current.parentId ? byId.get(current.parentId) : undefined;
   }
@@ -43,23 +45,36 @@ function mapVersion(row: VersionRow, scoreNodeId: string, tags: string[]): Topic
     status: row.status,
     blocks: row.content,
     sourceIds: row.source_ids,
-    scoreNodeId,
-    tags,
+    scoreNodeId: row.proposed_taxonomy_node_id ?? scoreNodeId,
+    tags: row.proposed_tags ?? tags,
     warnings: row.warnings,
     createdAt: row.created_at,
     reviewedAt: row.reviewed_at ?? undefined,
     reviewedBy: row.reviewed_by ?? undefined,
     basedOnVersion: row.based_on_version ?? undefined,
+    topicTitle: row.proposed_title ?? undefined,
+    topicSlug: row.proposed_slug ?? undefined,
+    aliases: row.proposed_aliases ?? undefined,
   };
 }
+
+let launchTopicSeedAttempt: Promise<void> | null = null;
 
 export class SupabaseRepository implements ContentRepository {
   private constructor(private readonly client: SupabaseClient) {}
 
   static async create() {
     const client = await createSupabaseServerClient() as SupabaseClient;
-    const seeded = await client.rpc("ensure_launch_topic", { p_content: choledoBlocks });
-    assertNoError(seeded.error);
+    launchTopicSeedAttempt ??= (async () => {
+      try {
+        const { error } = await client.rpc("ensure_launch_topic", { p_content_text: JSON.stringify(choledoBlocks) });
+        if (error) { launchTopicSeedAttempt = null; console.error("[pocket-chief] ensure_launch_topic seed failed:", error.message); }
+      } catch (error) {
+        launchTopicSeedAttempt = null;
+        console.error("[pocket-chief] ensure_launch_topic seed failed:", error instanceof Error ? error.message : error);
+      }
+    })();
+    await launchTopicSeedAttempt;
     return new SupabaseRepository(client);
   }
 
@@ -67,7 +82,7 @@ export class SupabaseRepository implements ContentRepository {
     const [taxonomyResult, topicResult, versionResult] = await Promise.all([
       this.client.from("taxonomy_nodes").select("id,parent_id,title,slug,sort_order").order("sort_order"),
       this.client.from("topics").select("id,taxonomy_node_id,title,slug,aliases,personal_tags,current_approved_version_id,updated_at").order("title"),
-      this.client.from("topic_versions").select("id,topic_id,version_number,status,content,warnings,source_ids,based_on_version,reviewed_at,reviewed_by,created_at").order("version_number"),
+      this.client.from("topic_versions").select("id,topic_id,version_number,status,content,warnings,source_ids,based_on_version,proposed_title,proposed_slug,proposed_taxonomy_node_id,proposed_aliases,proposed_tags,reviewed_at,reviewed_by,created_at").order("version_number"),
     ]);
     assertNoError(taxonomyResult.error); assertNoError(topicResult.error); assertNoError(versionResult.error);
     const nodes = ((taxonomyResult.data ?? []) as unknown as TaxonomyRow[]).map(mapTaxonomy);
@@ -149,7 +164,7 @@ export class SupabaseRepository implements ContentRepository {
   }
 
   async getDraft(id: string) {
-    const { data, error } = await this.client.from("topic_versions").select("id,topic_id,version_number,status,content,warnings,source_ids,based_on_version,reviewed_at,reviewed_by,created_at").eq("id", id).eq("status", "draft").maybeSingle();
+    const { data, error } = await this.client.from("topic_versions").select("id,topic_id,version_number,status,content,warnings,source_ids,based_on_version,proposed_title,proposed_slug,proposed_taxonomy_node_id,proposed_aliases,proposed_tags,reviewed_at,reviewed_by,created_at").eq("id", id).eq("status", "draft").maybeSingle();
     assertNoError(error);
     if (!data) return null;
     const topic = await this.getTopicById((data as unknown as VersionRow).topic_id);
@@ -173,7 +188,7 @@ export class SupabaseRepository implements ContentRepository {
   }
 
   async getVersion(id: string) {
-    const { data, error } = await this.client.from("topic_versions").select("id,topic_id,version_number,status,content,warnings,source_ids,based_on_version,reviewed_at,reviewed_by,created_at").eq("id", id).maybeSingle();
+    const { data, error } = await this.client.from("topic_versions").select("id,topic_id,version_number,status,content,warnings,source_ids,based_on_version,proposed_title,proposed_slug,proposed_taxonomy_node_id,proposed_aliases,proposed_tags,reviewed_at,reviewed_by,created_at").eq("id", id).maybeSingle();
     assertNoError(error);
     if (!data) return null;
     const row = data as unknown as VersionRow;

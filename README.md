@@ -31,7 +31,7 @@ The example environment enables a local demo without transmitting notes. Open `h
 
 ### Supabase
 
-1. Create a Supabase project and run `supabase/migrations/202608120001_pocket_chief.sql`. The authenticated app installs the reviewed launch topic on the owner's first request.
+1. Create a Supabase project and run both files in `supabase/migrations/` in timestamp order. The forward hardening migration also upgrades an environment that already applied the foundation migration. The authenticated app installs the cryptographically verified reviewed launch topic on the owner's first request.
 2. Insert the exact lowercase owner email into `public.owner_allowlist` before inviting the user.
 3. In Authentication → Providers → Email, disable public signup and keep passwordless email enabled.
 4. Invite only the owner email.
@@ -42,7 +42,7 @@ The `topic-media` bucket is private. Media must be stored below the owner UUID p
 
 ### OpenAI
 
-Set `OPENAI_API_KEY` only in the server environment. `POCKET_CHIEF_TOPIC_MODEL` defaults to `gpt-5.6-terra`. Topic generation uses medium reasoning; cloze generation uses low reasoning. Raw notes are not written to application logs.
+Set `OPENAI_API_KEY` only in the server environment. `POCKET_CHIEF_TOPIC_MODEL` defaults to `gpt-5.6-terra`. `POCKET_CHIEF_CLOZE_MODEL` configures the cloze-drafting model independently and falls back to `POCKET_CHIEF_TOPIC_MODEL` when unset. Topic generation uses medium reasoning; cloze generation uses low reasoning. Raw notes are not written to application logs.
 
 ### Vercel
 

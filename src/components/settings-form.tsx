@@ -6,6 +6,7 @@ import { Check, DownloadSimple, PencilSimple, Plus, SignOut } from "@phosphor-ic
 import { clearPrivateOfflineData } from "@/lib/offline";
 import { defaultAnkiSettings, loadAnkiSettings, saveAnkiSettings } from "@/lib/anki-settings";
 import type { TaxonomyNode } from "@/lib/types";
+import { taxonomyDescendantIds } from "@/lib/taxonomy";
 
 export function SettingsForm({ initialTaxonomy }: { initialTaxonomy: TaxonomyNode[] }) {
   const router = useRouter();
@@ -28,6 +29,7 @@ export function SettingsForm({ initialTaxonomy }: { initialTaxonomy: TaxonomyNod
     setTaxonomy((current) => [...current.filter((node) => node.id !== data.node!.id), data.node!].sort((a, b) => a.order - b.order));
     setEditingId(null); setTaxonomyTitle(""); setTaxonomyParent(""); setTaxonomyStatus("SCORE organization saved.");
   }
+  const unavailableParents = editingId ? taxonomyDescendantIds(editingId, taxonomy) : new Set<string>();
   return (
     <div className="settings-grid">
       <form className="form-card" onSubmit={save}>
@@ -48,7 +50,7 @@ export function SettingsForm({ initialTaxonomy }: { initialTaxonomy: TaxonomyNod
         <div className="taxonomy-editor-list">{taxonomy.map((node) => <button type="button" key={node.id} onClick={() => editNode(node)}><span>{node.parentId ? "↳" : "•"} {node.title}</span><PencilSimple size={14} /></button>)}</div>
         <form onSubmit={saveNode} className="taxonomy-form">
           <div className="field"><label htmlFor="taxonomy-title">{editingId ? "Edit category" : "Add category"}</label><input id="taxonomy-title" required value={taxonomyTitle} onChange={(event) => setTaxonomyTitle(event.target.value)} placeholder="e.g., Vascular Surgery" /></div>
-          <div className="field"><label htmlFor="taxonomy-parent">Parent category</label><select id="taxonomy-parent" value={taxonomyParent} onChange={(event) => setTaxonomyParent(event.target.value)}><option value="">Top level</option>{taxonomy.filter((node) => node.id !== editingId).map((node) => <option value={node.id} key={node.id}>{node.title}</option>)}</select></div>
+          <div className="field"><label htmlFor="taxonomy-parent">Parent category</label><select id="taxonomy-parent" value={taxonomyParent} onChange={(event) => setTaxonomyParent(event.target.value)}><option value="">Top level</option>{taxonomy.filter((node) => node.id !== editingId && !unavailableParents.has(node.id)).map((node) => <option value={node.id} key={node.id}>{node.title}</option>)}</select></div>
           {taxonomyStatus && <p className="form-message" role="status">{taxonomyStatus}</p>}
           <div className="form-footer">{editingId && <button type="button" className="button ghost" onClick={() => { setEditingId(null); setTaxonomyTitle(""); setTaxonomyParent(""); }}>Cancel</button>}<button className="button secondary" type="submit"><Plus size={15} />{editingId ? "Save category" : "Add category"}</button></div>
         </form>
