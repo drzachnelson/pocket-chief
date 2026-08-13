@@ -35,7 +35,7 @@ The example environment enables a local demo without transmitting notes. Open `h
 3. In Authentication → Providers → Email, disable public signup and keep passwordless email enabled.
 4. Invite only the owner email.
 5. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and the server-only `POCKET_CHIEF_OWNER_EMAIL`.
-6. Remove `NEXT_PUBLIC_POCKET_CHIEF_DEMO` or set it to `false` in production.
+6. Do not set `POCKET_CHIEF_DEMO` in production. Production fails closed when private auth is incomplete.
 
 The `topic-media` bucket is private. Media must be stored below the owner UUID path; the app returns a 60-second signed URL through `/api/media/:id`.
 

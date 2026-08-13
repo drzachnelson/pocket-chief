@@ -2,12 +2,18 @@ import Link from "next/link";
 import { ClockCounterClockwise, Notebook, Plus } from "@phosphor-icons/react/dist/ssr";
 import { SearchForm } from "@/components/search-form";
 import { TopicCard } from "@/components/topic-card";
-import { demoTopics } from "@/lib/seed";
-import { searchTopics } from "@/lib/search";
+import { RecentTopics } from "@/components/recent-topics";
+import { getRepository } from "@/lib/repository";
+
+export const dynamic = "force-dynamic";
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const { q = "" } = await searchParams;
-  const results = searchTopics(q, demoTopics);
+  const repository = await getRepository();
+  const reviewed = (await repository.listTopics()).filter((topic) => topic.approvedVersion);
+  const recent = await repository.listRecentTopics();
+  const results = q ? await repository.searchTopics(q) : reviewed;
+  const sectionCount = reviewed.reduce((count, topic) => count + (topic.approvedVersion?.blocks.filter((block) => block.type !== "references").length ?? 0), 0);
   return (
     <>
       <section className="search-hero">
@@ -28,13 +34,13 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
       ) : (
         <>
           <div className="metric-strip" aria-label="Library summary">
-            <div className="metric"><strong>1</strong><span>Reviewed topic</span></div>
-            <div className="metric"><strong>7</strong><span>Structured sections</span></div>
+            <div className="metric"><strong>{reviewed.length}</strong><span>Reviewed {reviewed.length === 1 ? "topic" : "topics"}</span></div>
+            <div className="metric"><strong>{sectionCount}</strong><span>Structured sections</span></div>
             <div className="metric"><strong>Offline</strong><span>Ready after first visit</span></div>
           </div>
           <section className="section">
             <div className="section-heading"><h2>Recently reviewed</h2><Link href="/topics">Browse curriculum</Link></div>
-            <div className="topic-grid">{demoTopics.map((topic) => <TopicCard key={topic.id} topic={topic} />)}</div>
+            <RecentTopics fallback={recent.length ? recent : reviewed} />
           </section>
           <section className="section">
             <div className="section-heading"><h2>Continue building</h2><span>4 launch packets remaining</span></div>

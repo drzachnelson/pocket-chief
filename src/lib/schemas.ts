@@ -10,13 +10,14 @@ export const sourceMetadataSchema = z.object({
 });
 
 export const draftRequestSchema = z.object({
-  topicId: z.string().optional(),
+  topicId: z.uuid().optional(),
   title: z.string().min(1).max(180),
   rawNotes: z.string().min(1).max(100_000),
   imageIds: z.array(z.string()).max(20).default([]),
   sourceMetadata: z.array(sourceMetadataSchema).min(1).max(30),
   scoreNodeId: z.string().min(1),
   tags: z.array(z.string().min(1).max(80)).max(30).default([]),
+  mode: z.enum(["ai", "notes_only"]).default("ai"),
 });
 
 const claimSchema = z.object({

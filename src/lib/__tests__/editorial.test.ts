@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { approveDraft, createDraft, reviseDraftBlock } from "@/lib/editorial";
+import { approveDraft, createDraft, normalizeClaimSupport, restoreVersion, reviseDraftBlock, supportWarnings } from "@/lib/editorial";
 import { choledocholithiasisTopic } from "@/lib/seed";
 
 describe("editorial workflow", () => {
@@ -29,7 +29,7 @@ describe("editorial workflow", () => {
       ...draft.blocks[0],
       claims: [{ id: "claim-1", text: "Initial note", citationIds: ["source-user-notes"], status: "cited" }],
     });
-    const approved = approveDraft(cited, "owner@example.com");
+    const approved = approveDraft(cited, "owner@example.com", new Set(["source-user-notes"]));
     const next = createDraft({
       topicId: approved.topicId,
       sourceIds: approved.sourceIds,
@@ -41,5 +41,35 @@ describe("editorial workflow", () => {
 
     expect(next.versionNumber).toBe(approved.versionNumber + 1);
     expect(approved.status).toBe("approved");
+  });
+
+  it("rejects invented citation IDs even when a claim says cited", () => {
+    const block = {
+      id: "summary",
+      type: "summary" as const,
+      text: "A factual assertion.",
+      claims: [{ id: "claim", text: "A factual assertion.", citationIds: ["invented-source"], status: "cited" as const }],
+    };
+
+    expect(supportWarnings([block], new Set(["real-source"]))).toEqual(["Needs support: A factual assertion."]);
+    expect(normalizeClaimSupport([block], new Set(["real-source"]))[0].claims[0]).toMatchObject({ citationIds: [], status: "needs_support" });
+    expect(() => approveDraft({
+      id: "topic-v1-draft",
+      topicId: "topic",
+      versionNumber: 1,
+      status: "draft",
+      blocks: [block],
+      sourceIds: ["real-source"],
+      scoreNodeId: "biliary",
+      tags: [],
+      warnings: [],
+      createdAt: new Date().toISOString(),
+    }, "owner@example.com", new Set(["real-source"]))).toThrow(/support/i);
+  });
+
+  it("allocates a restore after the highest existing version", () => {
+    const restored = restoreVersion(choledocholithiasisTopic.approvedVersion!, 4);
+    expect(restored.versionNumber).toBe(5);
+    expect(restored.id).toContain("v5-draft");
   });
 });

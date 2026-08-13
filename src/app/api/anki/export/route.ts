@@ -1,15 +1,16 @@
 import { buildAnkiMobileUrl, sendToAnkiConnect, toAnkiTsv } from "@/lib/anki";
 import { apiOwner } from "@/lib/auth";
 import { ankiExportSchema } from "@/lib/schemas";
-import { demoStore } from "@/lib/store";
+import { getRepository } from "@/lib/repository";
 
 export async function POST(request: Request) {
   const { owner, response } = await apiOwner(); if (response || !owner) return response!;
   try {
     const body = ankiExportSchema.parse(await request.json());
-    const drafts = demoStore.getCards(body.draftIds);
+    const repository = await getRepository();
+    const drafts = await repository.getCards(body.draftIds);
     if (drafts.length !== body.draftIds.length) return Response.json({ error: "One or more Anki drafts were not found." }, { status: 404 });
-    demoStore.audit("anki.exported", drafts[0].id, owner.email, { count: drafts.length, mode: body.mode });
+    await repository.audit("anki.exported", drafts[0].id, owner.email, { count: drafts.length, mode: body.mode });
     if (body.mode === "ankimobile") return Response.json({ urls: drafts.map((draft) => buildAnkiMobileUrl(draft, body.settings)) });
     if (body.mode === "ankiconnect") {
       const noteIds = [];

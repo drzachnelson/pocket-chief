@@ -29,6 +29,7 @@ function levenshtein(a: string, b: string): number {
 export function searchTopics(query: string, topics: Topic[]): Topic[] {
   const needle = normalize(query);
   if (!needle) return topics.filter((topic) => topic.approvedVersion);
+  const needleWords = needle.split(" ");
   return topics
     .filter((topic) => topic.approvedVersion)
     .map((topic) => {
@@ -39,13 +40,19 @@ export function searchTopics(query: string, topics: Topic[]): Topic[] {
         if (field === needle) score = Math.max(score, 100);
         else if (field.startsWith(needle)) score = Math.max(score, 80);
         else if (field.includes(needle)) score = Math.max(score, 60);
-        const words = field.split(" ");
-        for (const word of words) {
-          const distance = levenshtein(needle, word);
-          const tolerance = needle.length > 10 ? 3 : needle.length > 5 ? 2 : 1;
-          if (distance <= tolerance) score = Math.max(score, 45 - distance * 5);
-        }
       }
+      const tokenScores = needleWords.map((token) => {
+        let tokenScore = 0;
+        for (const field of fields) for (const word of field.split(" ")) {
+          if (word === token) tokenScore = Math.max(tokenScore, 50);
+          else if (word.startsWith(token) || token.startsWith(word)) tokenScore = Math.max(tokenScore, 42);
+          const distance = levenshtein(token, word);
+          const tolerance = token.length > 10 ? 3 : token.length >= 4 ? 2 : 1;
+          if (distance <= tolerance) tokenScore = Math.max(tokenScore, 38 - distance * 5);
+        }
+        return tokenScore;
+      });
+      if (tokenScores.every((value) => value > 0)) score = Math.max(score, tokenScores.reduce((sum, value) => sum + value, 0) / tokenScores.length);
       return { topic, score };
     })
     .filter((entry) => entry.score > 0)

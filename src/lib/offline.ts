@@ -1,4 +1,4 @@
-import { openDB } from "idb";
+import { deleteDB, openDB, type IDBPDatabase } from "idb";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
 const DB_NAME = "pocket-chief-private";
@@ -7,8 +7,10 @@ export function shouldReplaceCachedTopic(cachedVersion: number | undefined, inco
   return cachedVersion === undefined || incomingVersion > cachedVersion;
 }
 
+let databasePromise: Promise<IDBPDatabase> | undefined;
+
 function db() {
-  return openDB(DB_NAME, 1, {
+  databasePromise ??= openDB(DB_NAME, 1, {
     upgrade(database) {
       database.createObjectStore("topics", { keyPath: "id" });
       database.createObjectStore("taxonomy", { keyPath: "id" });
@@ -16,6 +18,7 @@ function db() {
       database.createObjectStore("recent", { keyPath: "id" });
     },
   });
+  return databasePromise;
 }
 
 export async function cacheApprovedTopic(topic: Topic) {
@@ -64,8 +67,19 @@ export async function recordRecentView(topic: Topic) {
   await database.put("recent", { ...topic, viewedAt: new Date().toISOString() });
 }
 
+export async function getRecentTopics(limit = 6): Promise<Topic[]> {
+  const database = await db();
+  const topics = await database.getAll("recent") as Array<Topic & { viewedAt: string }>;
+  return topics.sort((a, b) => b.viewedAt.localeCompare(a.viewedAt)).slice(0, limit);
+}
+
 export async function clearPrivateOfflineData() {
-  if (typeof indexedDB !== "undefined") indexedDB.deleteDatabase(DB_NAME);
+  if (databasePromise) {
+    const database = await databasePromise;
+    database.close();
+    databasePromise = undefined;
+  }
+  if (typeof indexedDB !== "undefined") await deleteDB(DB_NAME, { blocked: () => console.warn("Pocket Chief offline storage deletion is waiting for another tab to close.") });
   if (typeof caches !== "undefined") {
     await Promise.all((await caches.keys()).filter((key) => key.startsWith("pocket-chief")).map((key) => caches.delete(key)));
   }
