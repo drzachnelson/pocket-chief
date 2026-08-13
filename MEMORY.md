@@ -14,3 +14,4 @@
 - The visual system is Clinical Atlas: cool neutrals, one cobalt accent, compact dividers, Geist typography, and restrained motion.
 - Anki exports use a reviewed cloze card with the relevant section, nearest diagram, and a Pocket Chief deep link.
 - Pocket Chief never accepts PHI or patient-specific information.
+- V1 is implemented and locally verified. External launch remains pending Supabase/OpenAI credentials, GitHub authentication, and Vercel provisioning; four additional source packets are still needed for the five-topic launch library.

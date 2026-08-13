@@ -1,17 +1,107 @@
+import { z } from "zod";
 import { topicBlockSchema } from "@/lib/schemas";
 import { detectLikelyPHI } from "@/lib/safety";
 import type { ClozeDraft, TopicBlock, TopicDraftInput } from "@/lib/types";
 import { createDuplicateHash, createFallbackCloze } from "@/lib/anki";
 
-const topicDraftJsonSchema = {
+const nullableString = { anyOf: [{ type: "string" }, { type: "null" }] } as const;
+const claimJsonSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["id", "text", "citationIds", "status"],
+  properties: {
+    id: { type: "string" },
+    text: { type: "string" },
+    citationIds: { type: "array", items: { type: "string" } },
+    status: { type: "string", enum: ["cited", "needs_support"] },
+  },
+} as const;
+
+function blockJsonSchema(type: string, properties: Record<string, unknown>, required: string[]) {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["id", "type", "heading", "claims", ...required],
+    properties: {
+      id: { type: "string" },
+      type: { type: "string", const: type },
+      heading: nullableString,
+      claims: { type: "array", items: claimJsonSchema },
+      ...properties,
+    },
+  };
+}
+
+export const topicDraftJsonSchema = {
   type: "object",
   additionalProperties: false,
   required: ["blocks", "warnings"],
   properties: {
-    blocks: { type: "array", minItems: 1, items: { type: "object" } },
+    blocks: {
+      type: "array",
+      minItems: 1,
+      items: {
+        anyOf: [
+          blockJsonSchema("summary", { text: { type: "string" } }, ["text"]),
+          blockJsonSchema("prose", { text: { type: "string" } }, ["text"]),
+          blockJsonSchema("warning", { text: { type: "string" } }, ["text"]),
+          blockJsonSchema("bullets", { items: { type: "array", items: { type: "string" } } }, ["items"]),
+          blockJsonSchema("table", { columns: { type: "array", items: { type: "string" } }, rows: { type: "array", items: { type: "array", items: { type: "string" } } } }, ["columns", "rows"]),
+          blockJsonSchema("flow", {
+            nodes: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["id", "label", "tone"],
+                properties: {
+                  id: { type: "string" },
+                  label: { type: "string" },
+                  tone: { anyOf: [{ type: "string", enum: ["default", "good", "caution"] }, { type: "null" }] },
+                },
+              },
+            },
+            edges: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["from", "to", "label"],
+                properties: { from: { type: "string" }, to: { type: "string" }, label: nullableString },
+              },
+            },
+          }, ["nodes", "edges"]),
+          blockJsonSchema("sequence", {
+            steps: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["title", "detail"],
+                properties: { title: { type: "string" }, detail: { type: "string" } },
+              },
+            },
+          }, ["steps"]),
+          blockJsonSchema("image", { mediaId: { type: "string" }, alt: { type: "string" }, caption: nullableString }, ["mediaId", "alt", "caption"]),
+          blockJsonSchema("references", { sourceIds: { type: "array", items: { type: "string" } } }, ["sourceIds"]),
+        ],
+      },
+    },
     warnings: { type: "array", items: { type: "string" } },
   },
-};
+} as const;
+
+const topicDraftOutputSchema = z.object({ blocks: z.array(topicBlockSchema).min(1), warnings: z.array(z.string()) }).strict();
+
+function withoutNullOptionals(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(withoutNullOptionals);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(Object.entries(value).flatMap(([key, item]) => item === null ? [] : [[key, withoutNullOptionals(item)]]));
+}
+
+export function parseTopicDraftOutput(value: unknown): { blocks: TopicBlock[]; warnings: string[] } {
+  return topicDraftOutputSchema.parse(withoutNullOptionals(value)) as { blocks: TopicBlock[]; warnings: string[] };
+}
 
 function extractOutputText(payload: unknown): string | null {
   if (!payload || typeof payload !== "object") return null;
@@ -46,11 +136,7 @@ export async function draftTopic(input: TopicDraftInput): Promise<{ blocks: Topi
   const phi = detectLikelyPHI(input.rawNotes);
   if (phi.blocked) throw new Error("PHI_SUSPECTED");
   const generated = await responsesApi(`Create a compact general-surgery topic from only these owner-supplied notes. Never add facts. Every factual claim must use one of these source IDs: ${input.sourceIds.join(", ")}. If a claim lacks support, mark it needs_support. Notes:\n${input.rawNotes}`, "topic_draft", topicDraftJsonSchema, "medium");
-  if (generated && typeof generated === "object") {
-    const value = generated as { blocks?: unknown[]; warnings?: string[] };
-    const blocks = (value.blocks ?? []).map((block) => topicBlockSchema.parse(block)) as TopicBlock[];
-    return { blocks, warnings: value.warnings ?? [] };
-  }
+  if (generated && typeof generated === "object") return parseTopicDraftOutput(generated);
   const sourceId = input.sourceIds[0];
   const claimStatus = sourceId ? "cited" as const : "needs_support" as const;
   const block: TopicBlock = { id: crypto.randomUUID(), type: "summary", heading: "Draft summary", text: input.rawNotes, claims: [{ id: crypto.randomUUID(), text: input.rawNotes, citationIds: sourceId ? [sourceId] : [], status: claimStatus }] };

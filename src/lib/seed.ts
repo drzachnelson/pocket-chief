@@ -94,6 +94,7 @@ const pearlsBlock: TopicBlock = {
       cited("claim-pearl-age", "Age alone is not a contraindication to operative duct exploration."),
       cited("claim-pearl-position", "Repositioning may help move proximal stones distally."),
       cited("claim-pearl-adjunct", "Warm saline and glucagon are adjuncts described in the supplied packet."),
+      cited("claim-pearl-morbidity", "Successful transcystic exploration avoids choledochotomy and T-tube morbidity."),
     ],
   };
 const referencesBlock: TopicBlock = { id: "block-references", type: "references", heading: "Supplied sources", sourceIds: ["source-user-notes"], claims: [] };

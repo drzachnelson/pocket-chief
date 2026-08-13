@@ -4,7 +4,7 @@
 - Public signup is disabled in Supabase and rejected again by the database trigger.
 - Every private table has owner-scoped row-level security.
 - Approved topic versions cannot be updated or deleted.
-- Approval is performed through a guarded database function and fails when a claim lacks a source.
+- Approval is performed through a guarded database function that rebuilds claim citations from the draft, proves every source belongs to the owner and version, and fails on incomplete support.
 - Topic media is stored in a non-public bucket under the owner UUID and served with 60-second signed links.
 - Service credentials and the owner email stay server-only. The Supabase URL and anon key are browser-safe identifiers; RLS remains the authority.
 - All pages return `noindex, nofollow, noarchive`, and the app does not emit raw note content into logs.

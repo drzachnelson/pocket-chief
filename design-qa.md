@@ -47,10 +47,12 @@ Post-fix evidence in `design-comparison-mobile.png` shows aligned header/search/
 - Search, Topics, Saved, Add, Settings, Sign in, and topic routes
 - mobile and desktop navigation
 - light and dark theme
+- Add → notes-only/AI draft → source review → approval → approved-only search → restore-as-draft
+- draft-review panel at desktop and 393 × 852 mobile, including support-ready and blocked controls
 
 ## Browser console
 
-Final production tab: no console warnings or errors.
+Final current-build tab: no console warnings or errors.
 
 ## Focused-region evidence
 

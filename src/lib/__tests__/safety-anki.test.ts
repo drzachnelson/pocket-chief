@@ -13,6 +13,18 @@ describe("safety and Anki portability", () => {
     expect(detectLikelyPHI("CBD stones under 6 mm may be amenable to a transcystic approach.").blocked).toBe(false);
   });
 
+  it.each([
+    ["full name", "John Smith was transferred for evaluation"],
+    ["street address", "Lives at 123 Main Street, Boston"],
+    ["social security number", "SSN 123-45-6789"],
+    ["full date", "Seen on 08/12/2026 for pain"],
+    ["account identifier", "Account number: AB1234567"],
+    ["health plan identifier", "Member ID ZXY-992810"],
+    ["IP address", "Device address 192.168.10.24"],
+  ])("blocks %s before external processing", (_label, value) => {
+    expect(detectLikelyPHI(value).blocked).toBe(true);
+  });
+
   it("encodes an AnkiMobile cloze URL and emits UTF-8 TSV", async () => {
     const draft = {
       id: "card-1",

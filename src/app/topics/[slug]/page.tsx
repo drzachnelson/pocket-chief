@@ -2,20 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TopicContent } from "@/components/topic-content";
-import { demoTopics, suppliedSources } from "@/lib/seed";
+import { getRepository } from "@/lib/repository";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const topic = demoTopics.find((item) => item.slug === slug);
+  const topic = await (await getRepository()).getTopicBySlug(slug);
   return { title: topic?.title ?? "Topic" };
 }
 
-export function generateStaticParams() { return demoTopics.map(({ slug }) => ({ slug })); }
-
 export default async function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const topic = demoTopics.find((item) => item.slug === slug);
+  const repository = await getRepository();
+  const topic = await repository.getTopicBySlug(slug);
   if (!topic?.approvedVersion) notFound();
+  const suppliedSources = await repository.listSources(topic.approvedVersion.sourceIds);
   const blocks = topic.approvedVersion.blocks.filter((block) => block.heading && block.type !== "references");
   return (
     <div className="topic-layout">

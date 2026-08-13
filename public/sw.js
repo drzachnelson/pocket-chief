@@ -13,7 +13,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET" || new URL(event.request.url).origin !== self.location.origin) return;
   const url = new URL(event.request.url);
-  if (url.pathname.startsWith("/api/") && url.pathname !== "/api/search") return;
+  if (url.pathname.startsWith("/api/") && !["/api/search", "/api/library"].includes(url.pathname)) return;
   event.respondWith(fetch(event.request).then((response) => {
     if (response.ok) caches.open(CONTENT).then((cache) => cache.put(event.request, response.clone()));
     return response;

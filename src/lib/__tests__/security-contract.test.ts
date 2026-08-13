@@ -23,4 +23,13 @@ describe("Supabase security contract", () => {
     expect(sql).toContain("current_approved_version_id");
     expect(sql).toContain("search_approved_topics");
   });
+
+  it("creates drafts and restores versions transactionally while proving citation completeness", () => {
+    expect(sql).toContain("create_topic_draft");
+    expect(sql).toContain("replace_topic_draft");
+    expect(sql).toContain("restore_topic_version");
+    expect(sql).toContain("jsonb_array_elements(target.content)");
+    expect(sql).toContain("source_id = any(target.source_ids)");
+    expect(sql).toContain("max(version_number)");
+  });
 });
