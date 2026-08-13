@@ -29,6 +29,10 @@ describe("Supabase security contract", () => {
     expect(sql).toContain("replace_topic_draft");
     expect(sql).toContain("restore_topic_version");
     expect(sql).toContain("jsonb_array_elements(target.content)");
+    expect(sql).toContain("topic_block_expected_claims");
+    expect(sql).toContain("jsonb_array_elements(coalesce(block->'rows'");
+    expect(sql).toContain("string_agg(cell.value, ' — '");
+    expect(sql).toContain("cardinality(expected.units)");
     expect(sql).toContain("source_id = any(target.source_ids)");
     expect(sql).toContain("max(version_number)");
   });

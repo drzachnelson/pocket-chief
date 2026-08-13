@@ -38,7 +38,7 @@ export const topicBlockSchema = z.discriminatedUnion("type", [
   z.object({ ...base, type: z.literal("references"), sourceIds: z.array(z.string()) }),
 ]);
 
-export const reviseBlockSchema = z.object({ block: topicBlockSchema });
+export const reviseBlockSchema = z.object({ block: topicBlockSchema, supportAttestation: z.literal(true).optional() });
 export const revisionPromptSchema = z.object({ instruction: z.string().min(3).max(5000), blockIds: z.array(z.string()).max(20).default([]) });
 
 export const clozeRequestSchema = z.object({
@@ -48,6 +48,8 @@ export const clozeRequestSchema = z.object({
   contextImageRef: z.string().max(100_000),
   tags: z.array(z.string()).max(40).default([]),
 });
+
+export const clozeUpdateSchema = z.object({ clozeText: z.string().min(5).max(4000) });
 
 export const ankiExportSchema = z.object({
   draftIds: z.array(z.string()).min(1),

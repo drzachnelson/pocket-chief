@@ -2,20 +2,32 @@ import type { TopicBlock, TopicDraftInput, TopicVersion } from "@/lib/types";
 
 const clone = <T,>(value: T): T => structuredClone(value);
 
+export function factualUnits(block: TopicBlock): string[] {
+  if (block.type === "summary" || block.type === "prose" || block.type === "warning") return [block.text];
+  if (block.type === "bullets") return block.items;
+  if (block.type === "table") return block.rows.map((row) => row.join(" — "));
+  if (block.type === "sequence") return block.steps.map((step) => `${step.title}: ${step.detail}`);
+  if (block.type === "flow") return block.nodes.map((node) => node.label);
+  return [];
+}
+
+const comparable = (value: string) => value.trim().replace(/\s+/g, " ");
+
 export function supportWarnings(blocks: TopicBlock[], validSourceIds?: ReadonlySet<string>): string[] {
   const warnings: string[] = [];
   for (const block of blocks) {
-    if (block.type !== "references" && block.type !== "image" && block.claims.length === 0) {
-      warnings.push(`Needs support: ${block.heading ?? "Untitled factual block"}`);
-    }
-    if (block.type === "bullets" && block.claims.length < block.items.length) {
-      warnings.push(`Needs support: ${block.heading ?? "Bullet list"} has uncited items.`);
-    }
-    for (const claim of block.claims) {
+    const units = factualUnits(block);
+    units.forEach((unit, index) => {
+      const claim = block.claims[index];
+      if (!claim || comparable(claim.text) !== comparable(unit)) {
+        warnings.push(`Needs support: ${unit}`);
+        return;
+      }
       const citationsAreValid = claim.citationIds.length > 0
         && (!validSourceIds || claim.citationIds.every((id) => validSourceIds.has(id)));
       if (claim.status !== "cited" || !citationsAreValid) warnings.push(`Needs support: ${claim.text}`);
-    }
+    });
+    for (const claim of block.claims.slice(units.length)) warnings.push(`Needs support: ${claim.text}`);
   }
   return [...new Set(warnings)];
 }

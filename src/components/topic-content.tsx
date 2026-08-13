@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BookmarkSimple, CheckCircle, Copy, DownloadSimple, Lightning, X } from "@phosphor-icons/react";
 import type { ClozeDraft, SuppliedSource, Topic, TopicBlock, TopicVersion } from "@/lib/types";
-import { buildAnkiMobileUrl, createDuplicateHash, createFallbackCloze, sendToAnkiConnect, toAnkiTsv } from "@/lib/anki";
+import { buildAnkiMobileUrl, createFallbackCloze, sendToAnkiConnect, toAnkiTsv } from "@/lib/anki";
 import { loadAnkiSettings } from "@/lib/anki-settings";
 import { isTopicSaved, recordRecentView, setTopicSaved } from "@/lib/offline";
 
@@ -47,6 +47,9 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
   const defaultCloze = useMemo(() => createFallbackCloze(selection), [selection]);
   const [text, setText] = useState(defaultCloze);
   const [status, setStatus] = useState("");
+  const [persistedDraft, setPersistedDraft] = useState<ClozeDraft | null>(null);
+  const [saving, setSaving] = useState(false);
+  const textRef = useRef(defaultCloze);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const contextRef = useMemo(() => {
     const nearestFlow = topic.approvedVersion?.blocks.find((item) => item.type === "flow");
@@ -58,18 +61,31 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
     let active = true;
     fetch("/api/anki/drafts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ selection, topicId: topic.id, sourceBlockIds: [block.id], contextImageRef: contextRef, tags: ["pocket-chief", ...topic.tags] }) })
       .then(async (response) => response.ok ? response.json() as Promise<{ draft: ClozeDraft }> : null)
-      .then((value) => { if (active && value?.draft.clozeText) setText(value.draft.clozeText); })
-      .catch(() => undefined);
+      .then((value) => { if (active && value?.draft.clozeText) { textRef.current = value.draft.clozeText; setText(value.draft.clozeText); setPersistedDraft(value.draft); } })
+      .catch(() => { if (active) setStatus("Could not save this private draft. Export stays disabled."); });
     return () => { active = false; };
   }, [block.id, contextRef, selection, topic.id, topic.tags]);
 
   async function draft(): Promise<ClozeDraft> {
-    return { id: crypto.randomUUID(), clozeText: text, additionalContext: `Pocket Chief · ${topic.title} · ${block.heading ?? "Note"}`, sourceBlockIds: [block.id], contextImageRef: contextRef, tags: ["pocket-chief", ...topic.tags], duplicateHash: await createDuplicateHash(text.replace(/{{c\d+::|}}/g, "")) };
+    if (!persistedDraft) throw new Error("The private cloze draft is not ready.");
+    const reviewedText = textRef.current;
+    if (persistedDraft.clozeText === reviewedText) return persistedDraft;
+    setSaving(true);
+    try {
+      const response = await fetch(`/api/anki/drafts/${persistedDraft.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clozeText: reviewedText }) });
+      const data = await response.json() as { draft?: ClozeDraft; error?: string };
+      if (!response.ok || !data.draft) throw new Error(data.error ?? "Could not save the reviewed cloze draft.");
+      setPersistedDraft(data.draft);
+      setStatus("Reviewed card saved privately");
+      return data.draft;
+    } finally { setSaving(false); }
   }
-  async function copyTsv() { const value = toAnkiTsv([await draft()], loadAnkiSettings()); await navigator.clipboard.writeText(value); setStatus("TSV copied"); }
-  async function openMobile() { window.location.href = buildAnkiMobileUrl(await draft(), loadAnkiSettings()); }
+  async function copyTsv() { try { const value = toAnkiTsv([await draft()], loadAnkiSettings()); await navigator.clipboard.writeText(value); setStatus("TSV copied"); } catch (error) { setStatus(error instanceof Error ? error.message : "Could not save this card."); } }
+  async function openMobile() { try { window.location.href = buildAnkiMobileUrl(await draft(), loadAnkiSettings()); } catch (error) { setStatus(error instanceof Error ? error.message : "Could not save this card."); } }
   async function exportDesktop() {
-    const card = await draft();
+    let card: ClozeDraft;
+    try { card = await draft(); }
+    catch (error) { setStatus(error instanceof Error ? error.message : "Could not save this card."); return; }
     const settings = loadAnkiSettings();
     try { await sendToAnkiConnect(card, settings); setStatus("Added through AnkiConnect"); }
     catch {
@@ -78,14 +94,19 @@ function AnkiDialog({ selection, topic, block, onClose }: { selection: string; t
       setStatus("AnkiConnect was unavailable; downloaded a UTF-8 import file.");
     }
   }
+  async function close() {
+    if (!persistedDraft) { setStatus("Saving the private draft. Try closing again in a moment."); return; }
+    try { if (persistedDraft.clozeText !== textRef.current) await draft(); onClose(); }
+    catch (error) { setStatus(error instanceof Error ? error.message : "Could not save this card."); }
+  }
 
   return (
     <dialog ref={dialogRef} open className="anki-dialog" aria-labelledby="anki-title">
-      <div className="dialog-head"><div><p className="eyebrow">Review before export</p><h2 id="anki-title">Make Anki card</h2></div><button className="icon-button" onClick={onClose} aria-label="Close"><X size={17} /></button></div>
+      <div className="dialog-head"><div><p className="eyebrow">Review before export</p><h2 id="anki-title">Make Anki card</h2></div><button className="icon-button" disabled={!persistedDraft || saving} onClick={close} aria-label="Close"><X size={17} /></button></div>
       <div className="context-preview"><small>Context image attached</small><strong>{block.heading}</strong><p>{excerpt(block)}</p></div>
-      <div className="field"><label htmlFor="cloze-text">Cloze text</label><textarea id="cloze-text" value={text} onChange={(event) => setText(event.target.value)} /><small>Edit the single deletion. A rendered image of this section travels with the card.</small></div>
+      <div className="field"><label htmlFor="cloze-text">Cloze text</label><textarea id="cloze-text" value={text} onChange={(event) => { textRef.current = event.target.value; setText(event.target.value); }} /><small>Edit the single deletion. Your reviewed wording is saved before close or export, and a rendered image of this section travels with the card.</small></div>
       {status && <p className="form-message" role="status">{status}</p>}
-      <div className="dialog-actions"><button className="button ghost" onClick={copyTsv}><Copy size={15} />Copy row</button><button className="button secondary" onClick={exportDesktop}><DownloadSimple size={15} />Send to desktop Anki</button><button className="button" onClick={openMobile}>Open in AnkiMobile</button></div>
+      <div className="dialog-actions"><button className="button ghost" disabled={!persistedDraft || saving} onClick={copyTsv}><Copy size={15} />Copy row</button><button className="button secondary" disabled={!persistedDraft || saving} onClick={exportDesktop}><DownloadSimple size={15} />Send to desktop Anki</button><button className="button" disabled={!persistedDraft || saving} onClick={openMobile}>Open in AnkiMobile</button></div>
     </dialog>
   );
 }

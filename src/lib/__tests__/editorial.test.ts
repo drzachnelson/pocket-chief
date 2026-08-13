@@ -67,6 +67,39 @@ describe("editorial workflow", () => {
     }, "owner@example.com", new Set(["real-source"]))).toThrow(/support/i);
   });
 
+  it("requires an exact supported claim for every table row and flow node", () => {
+    const table = {
+      id: "table",
+      type: "table" as const,
+      columns: ["Feature", "Choice"],
+      rows: [["Small stone", "Transcystic"], ["Large stone", "Alternative route"]],
+      claims: [{ id: "claim", text: "The table describes stone choices.", citationIds: ["source"], status: "cited" as const }],
+    };
+    const flow = {
+      id: "flow",
+      type: "flow" as const,
+      nodes: [{ id: "one", label: "Stone found" }, { id: "two", label: "Clear the duct" }],
+      edges: [{ from: "one", to: "two" }],
+      claims: [{ id: "one", text: "Stone found", citationIds: ["source"], status: "cited" as const }],
+    };
+
+    expect(supportWarnings([table, flow], new Set(["source"]))).toEqual([
+      "Needs support: Small stone — Transcystic",
+      "Needs support: Large stone — Alternative route",
+      "Needs support: Clear the duct",
+    ]);
+  });
+
+  it("rejects extraneous claims hidden in non-factual blocks", () => {
+    const references = {
+      id: "references",
+      type: "references" as const,
+      sourceIds: ["source"],
+      claims: [{ id: "hidden", text: "A hidden assertion.", citationIds: ["source"], status: "cited" as const }],
+    };
+    expect(supportWarnings([references], new Set(["source"]))).toEqual(["Needs support: A hidden assertion."]);
+  });
+
   it("allocates a restore after the highest existing version", () => {
     const restored = restoreVersion(choledocholithiasisTopic.approvedVersion!, 4);
     expect(restored.versionNumber).toBe(5);

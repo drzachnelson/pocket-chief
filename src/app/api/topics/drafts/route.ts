@@ -15,7 +15,13 @@ export async function POST(request: Request) {
   if (!rate.allowed) return Response.json({ error: "Drafting limit reached. Try again shortly.", code: "RATE_LIMITED" }, { status: 429 });
   try {
     const body = draftRequestSchema.parse(await request.json());
-    const phi = detectLikelyPHI(body.rawNotes);
+    const phi = detectLikelyPHI([
+      body.title,
+      body.rawNotes,
+      ...body.imageIds,
+      ...body.tags,
+      ...body.sourceMetadata.flatMap((source) => [source.title, source.citation, source.url, source.details]),
+    ].filter((value): value is string => Boolean(value)).join("\n"));
     if (phi.blocked) return Response.json({ error: "Remove possible patient identifiers before drafting.", code: "PHI_SUSPECTED", fields: phi.reasons }, { status: 422 });
     const repository = await getRepository();
     const slug = slugify(body.title);

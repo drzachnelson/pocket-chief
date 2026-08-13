@@ -41,7 +41,7 @@ export function toAnkiTsv(drafts: ClozeDraft[], settings: AnkiSettings = { deck:
     settings.deck,
     cleanTsv(draft.clozeText),
     cleanTsv(`${draft.additionalContext}<br><img src="${draft.contextImageRef}">`),
-    cleanTsv(draft.tags.join(" ")),
+    cleanTsv(draft.tags.map((tag) => `${settings.tagPrefix}${tag}`).join(" ")),
   ].join("\t"));
   return `${header}${rows.join("\n")}\n`;
 }

@@ -4,6 +4,7 @@ import { normalizeClaimSupport, supportWarnings } from "@/lib/editorial";
 import { checkRateLimit, requestKey } from "@/lib/rate-limit";
 import { revisionPromptSchema } from "@/lib/schemas";
 import { getRepository } from "@/lib/repository";
+import { detectLikelyPHI } from "@/lib/safety";
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { owner, response } = await apiOwner(); if (response || !owner) return response!;
@@ -14,6 +15,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   if (!draft) return Response.json({ error: "Draft not found." }, { status: 404 });
   try {
     const body = revisionPromptSchema.parse(await request.json());
+    if (detectLikelyPHI(body.instruction).blocked) return Response.json({ error: "Remove possible patient identifiers before revising.", code: "PHI_SUSPECTED" }, { status: 422 });
     const targetBlocks = body.blockIds.length ? draft.blocks.filter((block) => body.blockIds.includes(block.id)) : draft.blocks;
     const generated = process.env.OPENAI_API_KEY
       ? await draftTopic({ topicId: draft.topicId, rawNotes: `Current source-bound draft:\n${JSON.stringify(targetBlocks)}\n\nRevision instruction:\n${body.instruction}`, imageIds: [], sourceIds: draft.sourceIds, scoreNodeId: draft.scoreNodeId, tags: draft.tags })

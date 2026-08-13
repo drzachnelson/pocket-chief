@@ -3,23 +3,12 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle, LinkSimple, SpinnerGap, Warning } from "@phosphor-icons/react";
-import { supportWarnings } from "@/lib/editorial";
+import { factualUnits, supportWarnings } from "@/lib/editorial";
 import type { SuppliedSource, Topic, TopicBlock, TopicVersion } from "@/lib/types";
-
-function claimText(block: TopicBlock) {
-  if (block.type === "summary" || block.type === "prose" || block.type === "warning") return block.text;
-  if (block.type === "bullets") return block.items.join(" ");
-  if (block.type === "table") return block.rows.flat().join(" ");
-  if (block.type === "sequence") return block.steps.map((step) => `${step.title}: ${step.detail}`).join(" ");
-  if (block.type === "flow") return block.nodes.map((node) => node.label).join(" ");
-  return block.heading ?? "Source-linked content";
-}
 
 function supportedBlock(block: TopicBlock, sourceId: string): TopicBlock {
   const cited = (text: string, index: number) => ({ id: block.claims[index]?.id ?? crypto.randomUUID(), text, citationIds: [sourceId], status: "cited" as const });
-  if (block.type === "bullets") return { ...block, claims: block.items.map(cited) };
-  const claims = block.claims.length ? block.claims.map((claim) => ({ ...claim, citationIds: [sourceId], status: "cited" as const })) : [cited(claimText(block), 0)];
-  return { ...block, claims };
+  return { ...block, claims: factualUnits(block).map(cited) } as TopicBlock;
 }
 
 function Preview({ block }: { block: TopicBlock }) {
@@ -40,14 +29,18 @@ export function DraftReview({ initialDraft, topic, sources }: { initialDraft: To
   const [instruction, setInstruction] = useState("");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const [confirmedBlocks, setConfirmedBlocks] = useState<Set<string>>(new Set());
   const support = useMemo(() => supportWarnings(draft.blocks, new Set(sources.map((source) => source.id))), [draft, sources]);
 
   async function linkBlock(block: TopicBlock) {
-    if (!sourceId) return;
+    if (!sourceId || !confirmedBlocks.has(block.id)) return;
     setBusy(true); setStatus("");
-    const response = await fetch(`/api/topics/drafts/${draft.id}/blocks/${block.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block: supportedBlock(block, sourceId) }) });
+    const response = await fetch(`/api/topics/drafts/${draft.id}/blocks/${block.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ block: supportedBlock(block, sourceId), supportAttestation: true }) });
     const data = await response.json() as { draft?: TopicVersion; error?: string };
-    if (response.ok && data.draft) setDraft(data.draft); else setStatus(data.error ?? "Could not update source support.");
+    if (response.ok && data.draft) {
+      setDraft(data.draft);
+      setConfirmedBlocks((current) => { const next = new Set(current); next.delete(block.id); return next; });
+    } else setStatus(data.error ?? "Could not update source support.");
     setBusy(false);
   }
 
@@ -78,7 +71,8 @@ export function DraftReview({ initialDraft, topic, sources }: { initialDraft: To
         <div className="draft-blocks">
           {draft.blocks.map((block) => {
             const blockWarnings = supportWarnings([block], new Set(sources.map((source) => source.id)));
-            return <article className="draft-block" key={block.id}><div className="block-heading"><div><small>{block.type}</small><h2>{block.heading ?? "Untitled block"}</h2></div><span className={`support-mark ${blockWarnings.length ? "unsupported" : "supported"}`}>{blockWarnings.length ? "Needs support" : "Supported"}</span></div><Preview block={block} />{blockWarnings.length > 0 && sourceId && <button className="button secondary small" onClick={() => linkBlock(block)} disabled={busy}><LinkSimple size={14} />Link this block to selected source</button>}</article>;
+            const confirmed = confirmedBlocks.has(block.id);
+            return <article className="draft-block" key={block.id}><div className="block-heading"><div><small>{block.type}</small><h2>{block.heading ?? "Untitled block"}</h2></div><span className={`support-mark ${blockWarnings.length ? "unsupported" : "supported"}`}>{blockWarnings.length ? "Needs support" : "Supported"}</span></div><Preview block={block} />{blockWarnings.length > 0 && sourceId && <div className="support-confirm"><label><input type="checkbox" checked={confirmed} onChange={(event) => setConfirmedBlocks((current) => { const next = new Set(current); if (event.target.checked) next.add(block.id); else next.delete(block.id); return next; })} />I confirmed the selected source supports every statement shown in this block.</label><button className="button secondary small" onClick={() => linkBlock(block)} disabled={busy || !confirmed}><LinkSimple size={14} />Confirm & link every statement</button></div>}</article>;
           })}
         </div>
       </section>

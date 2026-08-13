@@ -31,6 +31,7 @@ export interface ContentRepository {
   getVersion(id: string): Promise<TopicVersion | null>;
   restoreVersion(id: string): Promise<TopicVersion>;
   addCard(card: ClozeDraft, topicId: string): Promise<ClozeDraft>;
+  updateCard(card: ClozeDraft): Promise<ClozeDraft>;
   getCards(ids: string[]): Promise<ClozeDraft[]>;
   listCards(): Promise<ClozeDraft[]>;
   setBookmark(topicId: string, saved: boolean): Promise<void>;
