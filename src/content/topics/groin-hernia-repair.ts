@@ -1,0 +1,150 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import { HERNIA_SOURCE as SOURCE } from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-ghr-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Recurrence rates between modern groin hernia repairs have largely converged, so the operation is now chosen on chronic pain, on whether the femoral canal needs covering, and on which plane has already been operated on. The unifying idea is Fruchaud's myopectineal orifice: direct, indirect, and femoral hernias are three failures of one window, and a posterior repair covers all three at once while an anterior repair addresses only what is in front of it. Everything dangerous in the laparoscopic version lies below the iliopubic tract.",
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-open",
+    type: "table",
+    heading: "The open repairs",
+    columns: ["Repair", "What is constructed", "Where it stands"],
+    rows: [
+      ["Lichtenstein", "Macroporous mesh laid without tension from the pubic tubercle past the internal ring, secured to rectus sheath medially, inguinal ligament inferiorly, and conjoint tendon superiorly, with a keyhole for the cord", "The standard open repair, and the comparator against which every other technique is measured"],
+      ["Bassini", "The conjoint tendon sutured down to the inguinal ligament, closing the canal under tension", "Historical, and the tension in that suture line is precisely what tension-free repair was designed to eliminate"],
+      ["Shouldice", "A four-layer imbricated running reconstruction of the posterior wall with continuous monofilament", "The best pure tissue repair, approaching mesh recurrence rates in dedicated hands, and the answer when mesh must be avoided"],
+      ["McVay", "The transversus abdominis aponeurosis sutured to Cooper's ligament, with a transition stitch onto the femoral sheath", "The tissue repair that also obliterates the femoral canal, and it demands a relaxing incision in the anterior rectus sheath to work"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-fruchaud",
+    type: "bullets",
+    heading: "The myopectineal orifice of Fruchaud",
+    items: [
+      "The myopectineal orifice is the single weak window in the groin through which every groin hernia, without exception, passes.",
+      "It is bounded above by the arching fibers of internal oblique and transversus abdominis, medially by the lateral edge of the rectus, laterally by the iliopsoas, and below by the pecten of the pubis.",
+      "The inguinal ligament divides it into an upper compartment transmitting the cord and a lower compartment transmitting the femoral vessels.",
+      "Direct, indirect, and femoral hernias are three failures of one orifice, which is why a single sheet of preperitoneal mesh covering it treats all three at once.",
+      "An anterior repair addresses only the defect in front of it, which is the anatomical reason an occult femoral hernia survives an inguinal operation.",
+      "The iliopubic tract, a thickening of transversalis fascia running deep and parallel to the inguinal ligament, is the landmark that orients every posterior repair.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-lap",
+    type: "table",
+    heading: "TAPP versus TEP",
+    columns: ["Feature", "TAPP", "TEP"],
+    rows: [
+      ["Plane of access", "Through the peritoneal cavity, raising a peritoneal flap to reach the preperitoneal space", "Entirely within the preperitoneal space, never entering the abdomen"],
+      ["Closure requirement", "The flap has to be closed over the mesh so bowel cannot reach it and adhere", "Nothing to close, because the peritoneum was never opened"],
+      ["Working space", "Generous, with the anatomy oriented immediately on entry", "Confined, and it collapses if the peritoneum tears early"],
+      ["Plays to its strength in", "Large or incarcerated hernias, and any case where bowel needs inspecting", "Patients with prior intraperitoneal surgery, since adhesions and viscera are avoided entirely"],
+      ["Characteristic risk", "Port site hernia and visceral injury from entering the abdomen", "A steeper learning curve, with conversion if the space is lost"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-danger",
+    type: "table",
+    heading: "The laparoscopic danger zones",
+    columns: ["Zone", "Boundaries", "What is at risk"],
+    rows: [
+      ["Triangle of doom", "Vas deferens medially, gonadal vessels laterally, reflected peritoneal fold inferiorly, with its apex at the internal ring", "External iliac artery and vein, and the deep circumflex iliac vein"],
+      ["Triangle of pain", "Gonadal vessels medially, iliopubic tract superolaterally, reflected peritoneal fold inferiorly — so it sits lateral to the doom, sharing the gonadal vessels as their common border", "Femoral nerve, lateral femoral cutaneous nerve, femoral branch of the genitofemoral nerve, and the anterior femoral cutaneous nerves"],
+      ["Corona mortis", "An anastomosis between the obturator and the external iliac or inferior epigastric systems, crossing the superior pubic ramus near Cooper's ligament", "A vessel that retracts behind bone when torn, bleeds torrentially, and is present in a substantial minority of patients"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-fixation",
+    type: "bullets",
+    heading: "Where fixation may and may not go",
+    items: [
+      "Fixation is safe on Cooper's ligament, on the rectus muscle and pubic tubercle medially, and on the anterior abdominal wall above the iliopubic tract.",
+      "Place nothing below the iliopubic tract lateral to the internal spermatic vessels, because that is the triangle of pain and the injury is permanent.",
+      "Place nothing within the triangle of doom, where the external iliac vessels lie immediately beneath the peritoneum with nothing in between.",
+      "Stay off the pubic symphysis itself, since a tack driven into periosteum there produces osteitis pubis.",
+      "Mesh must overlap the entire myopectineal orifice generously, because inadequate overlap rather than inadequate fixation is the usual cause of recurrence.",
+      "Fixation can often be omitted for smaller defects, and self-gripping mesh or fibrin glue both lower chronic pain compared with tacks.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-nerves",
+    type: "table",
+    heading: "The groin nerves and their injury syndromes",
+    columns: ["Nerve", "How it is injured", "Resulting deficit"],
+    rows: [
+      ["Ilioinguinal", "On opening the external oblique aponeurosis, since it lies on top of the cord rather than inside it — the nerve most often injured in open repair", "Numbness over the base of the penis and upper scrotum, or the mons and labium majus, with a patch of upper medial thigh"],
+      ["Iliohypogastric", "By high medial sutures, by the relaxing incision, or by fixation at the superior edge of the mesh", "Sensory loss over the suprapubic skin, and a frequently overlooked source of chronic pain after open repair"],
+      ["Genital branch of the genitofemoral", "During dissection of the cord, which it travels inside alongside the cremasteric vessels", "Loss of the cremasteric reflex, since this branch is the motor supply to the cremaster, together with scrotal or labial sensory loss"],
+      ["Lateral femoral cutaneous", "By fixation placed below the iliopubic tract laterally — the nerve most often injured in laparoscopic repair", "Meralgia paresthetica, with numbness and burning across the lateral thigh"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-choice",
+    type: "flow",
+    heading: "Choosing an approach",
+    nodes: [
+      { id: "elective", label: "Groin hernia listed for elective repair" },
+      { id: "primary", label: "Primary and unilateral" },
+      { id: "bilateral", label: "Bilateral, or a groin hernia in a woman" },
+      { id: "recurrent", label: "Recurrent after a previous repair" },
+      { id: "either", label: "Open Lichtenstein or laparoscopic repair, decided by surgeon expertise and patient preference" },
+      { id: "laparoscopic", label: "Laparoscopic repair, treating both sides or covering an occult femoral defect in one operation", tone: "good" },
+      { id: "posterior", label: "Posterior approach, laparoscopic or open preperitoneal, through tissue that has not been dissected", tone: "good" },
+      { id: "anterior", label: "Anterior open approach, through tissue that has not been dissected", tone: "good" },
+    ],
+    edges: [
+      { from: "elective", to: "primary", label: "first presentation on one side" },
+      { from: "elective", to: "bilateral", label: "both sides, or a woman in whom the femoral canal must be covered" },
+      { from: "elective", to: "recurrent", label: "previous repair on the same side" },
+      { from: "primary", to: "either" },
+      { from: "bilateral", to: "laparoscopic" },
+      { from: "recurrent", to: "posterior", label: "the first repair was anterior" },
+      { from: "recurrent", to: "anterior", label: "the first repair was preperitoneal or laparoscopic" },
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-currency",
+    type: "prose",
+    heading: "Board answer versus current practice",
+    text: "The trial most questions are still written from randomized open against laparoscopic repair and found higher recurrence in the laparoscopic arm, driven overwhelmingly by surgeons early in their experience — the keyed answer remains that open Lichtenstein is the safe default and that laparoscopic repair is operator dependent. What the same trial also showed, and what practice acted on, is less acute pain and faster return to work after laparoscopic repair. With experience the recurrence difference disappears, so the modern indications are specific rather than general: bilateral hernias, recurrence after an anterior repair, and any groin hernia in a woman, where the femoral canal has to be covered. Answer the exam with the recurrence finding and operate on the indications.",
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-complications",
+    type: "bullets",
+    heading: "Complications worth anticipating",
+    items: [
+      "Urinary retention is the most common early complication, and its risk rises with general or spinal anesthesia, older age, and prostatic enlargement.",
+      "Chronic postoperative inguinal pain affects roughly one patient in ten and is now the outcome that separates techniques, since recurrence rates have converged.",
+      "Ischemic orchitis follows thrombosis of the pampiniform plexus rather than arterial injury, declares itself days after the operation with a swollen tender testis, and can end in atrophy.",
+      "The risk of ischemic orchitis is highest after repair of a recurrent hernia, which is the argument for dividing a large indirect sac and leaving its distal part rather than stripping it out of the scrotum.",
+      "A seroma in the bed of a dissected large sac is expected, and it is managed by observation rather than aspiration, which risks seeding the mesh.",
+      "Recurrence after modern mesh repair is uncommon, and when it happens it is usually medial at the pubic tubercle, where overlap was insufficient.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ghr-warning",
+    type: "warning",
+    heading: "Sudden massive bleeding while placing a deep suture",
+    text: "During a McVay or Bassini repair the femoral vein lies immediately lateral to the Cooper's ligament suture line, and a bite taken too far laterally enters it. If brisk dark bleeding appears as a suture is placed or tied, the working assumption is femoral vein injury. Remove that suture, pack and hold direct pressure for several minutes rather than grabbing blindly with a clamp, and only then obtain proximal and distal control and repair the venotomy under vision. Blind clamping converts a controllable hole into an unrepairable one.",
+  }, SOURCE),
+  references("block-ghr-references", [SOURCE]),
+];
+
+export const groinHerniaRepairTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000000507",
+  versionId: "00000000-0000-4000-8000-000000000517",
+  slug: "groin-hernia-repair",
+  title: "Groin Hernia Repair",
+  aliases: ["Lichtenstein", "Bassini", "Shouldice", "McVay", "TAPP", "TEP", "triangle of doom", "triangle of pain", "corona mortis", "Fruchaud", "myopectineal orifice", "iliopubic tract", "meralgia paresthetica", "inguinodynia", "ischemic orchitis", "mesh repair"],
+  scoreNodeId: "hernia-procedures",
+  scoreCategory: "SCORE · Hernia · Operations & Procedures",
+  tags: ["hernia", "groin", "operative-technique", "laparoscopy", "absite", "score"],
+  sourceId: SOURCE,
+  blocks,
+  reviewedAt: "2026-08-14T00:00:00.000Z",
+});

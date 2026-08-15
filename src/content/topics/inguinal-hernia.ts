@@ -1,0 +1,129 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import { HERNIA_SOURCE as SOURCE } from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-ih-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Every groin hernia question turns on one relationship: the neck of the sac against the inferior epigastric vessels. Lateral is indirect and congenital, medial is direct and acquired, and the distinction is made in the operating room rather than in the clinic. What actually decides management is not which type it is but whether it is reducible, because an asymptomatic hernia can be watched while an irreducible tender one is an emergency.",
+  }, SOURCE),
+  sourced({
+    id: "block-ih-direct-indirect",
+    type: "table",
+    heading: "Direct versus indirect",
+    columns: ["Feature", "Indirect", "Direct"],
+    rows: [
+      ["Origin", "Congenital, through a processus vaginalis that never closed", "Acquired, from progressive failure of the transversalis fascia"],
+      ["Relation to the inferior epigastric vessels", "Lateral", "Medial"],
+      ["Route", "Through the internal ring and along the inguinal canal", "Straight through the floor inside Hesselbach's triangle"],
+      ["Relation to the cord", "Inside the cord, within the internal spermatic fascia", "Alongside the cord, pushing transversalis fascia ahead of it"],
+      ["Reach into the scrotum", "Common, because the sac follows the cord to the testis", "Unusual unless the defect has become very large"],
+      ["Typical patient", "The most common hernia at every age and in both sexes", "Older men, and distinctly uncommon in women"],
+      ["Strangulation risk", "Higher, because the internal ring is a narrow neck", "Lower, because the neck of the defect is broad"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ih-hesselbach",
+    type: "bullets",
+    heading: "Hesselbach's triangle",
+    items: [
+      "Hesselbach's triangle is the weak patch of inguinal floor through which every direct hernia passes.",
+      "The medial border is the lateral edge of the rectus abdominis.",
+      "The lateral border is the inferior epigastric vessels.",
+      "The inferior border is the inguinal ligament, also named Poupart's ligament.",
+      "The floor of the triangle is transversalis fascia, reinforced across its medial third by the conjoint tendon where one is present.",
+      "Hesselbach originally described the inferior border as Cooper's ligament; the inguinal ligament is the convention now taught and tested.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ih-canal-walls",
+    type: "table",
+    heading: "The four walls of the inguinal canal",
+    columns: ["Wall", "Formed by", "Why it matters in the operation"],
+    rows: [
+      ["Anterior", "External oblique aponeurosis throughout, reinforced laterally by internal oblique", "The first layer divided in any open repair, and where the ilioinguinal nerve comes into view"],
+      ["Posterior", "Transversalis fascia, reinforced medially by the conjoint tendon", "The floor that fails in a direct hernia and the layer every repair rebuilds"],
+      ["Superior", "Arching fibers of internal oblique and transversus abdominis", "The upper bite for a Lichtenstein mesh or a Bassini suture line"],
+      ["Inferior", "Inguinal ligament, ending medially in the lacunar ligament", "The lower bite for mesh, and the structure McVay abandons in favor of Cooper's ligament"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ih-contents",
+    type: "bullets",
+    heading: "What the canal carries",
+    items: [
+      "In men the canal transmits the spermatic cord; in women it transmits the round ligament of the uterus.",
+      "The cord carries three arteries: the testicular artery, the cremasteric artery, and the artery to the vas deferens.",
+      "The cord carries three further structures: the vas deferens, the pampiniform venous plexus, and lymphatics draining to the para-aortic nodes.",
+      "The genital branch of the genitofemoral nerve travels inside the cord and supplies motor fibers to the cremaster.",
+      "The ilioinguinal nerve lies on top of the cord rather than within it, which is why it is the nerve met first when the external oblique is opened.",
+      "A patent processus in a girl fills to produce a hydrocele of the canal of Nuck, the counterpart of a communicating hydrocele in a boy.",
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ih-nyhus",
+    type: "table",
+    heading: "Nyhus classification",
+    columns: ["Type", "Description", "What it implies"],
+    rows: [
+      ["Type I", "Indirect hernia with an internal ring of normal caliber", "The pediatric pattern, where high ligation of the sac alone is enough"],
+      ["Type II", "Indirect hernia with a dilated internal ring but an intact posterior wall", "The ring can be addressed without rebuilding the floor"],
+      ["Type IIIA", "Direct hernia through a weakened posterior wall", "The floor itself has to be reconstructed or bridged with mesh"],
+      ["Type IIIB", "Indirect hernia that has destroyed the posterior wall, including pantaloon and massive scrotal hernias", "Behaves as a floor defect and needs the same reconstruction"],
+      ["Type IIIC", "Femoral hernia", "Grouped with the floor defects because the myopectineal orifice is the shared point of failure"],
+      ["Type IV", "Recurrent hernia, subclassified as direct, indirect, femoral, or combined", "Drives the decision to approach through tissue that has not been operated on"],
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ih-decision",
+    type: "flow",
+    heading: "From bulge to decision",
+    nodes: [
+      { id: "bulge", label: "Reducible groin bulge with a cough impulse" },
+      { id: "minimal", label: "Asymptomatic or minimally symptomatic", tone: "good" },
+      { id: "symptomatic", label: "Painful, enlarging, or limiting activity" },
+      { id: "acute", label: "Irreducible and tender, with obstruction or skin change", tone: "caution" },
+      { id: "watch", label: "Watchful waiting, with counselling that repair usually becomes necessary", tone: "good" },
+      { id: "elective", label: "Elective repair" },
+      { id: "emergent", label: "Emergent exploration with assessment of bowel viability", tone: "caution" },
+    ],
+    edges: [
+      { from: "bulge", to: "minimal", label: "no pain and no limitation" },
+      { from: "bulge", to: "symptomatic", label: "symptoms already present" },
+      { from: "bulge", to: "acute", label: "incarceration or strangulation" },
+      { from: "minimal", to: "watch" },
+      { from: "symptomatic", to: "elective" },
+      { from: "acute", to: "emergent" },
+      { from: "watch", to: "elective", label: "symptoms develop, which they do in most patients given enough time" },
+    ],
+  }, SOURCE),
+  sourced({
+    id: "block-ih-watchful-waiting",
+    type: "prose",
+    heading: "Board answer versus current practice",
+    text: "Older teaching repairs every inguinal hernia on diagnosis, on the reasoning that the strangulation risk only accumulates. Two randomized trials undercut that: watchful waiting for a minimally symptomatic hernia in a man proved safe, with acute events running well under one percent per year. The finding that changed practice, though, is the crossover — roughly seven in ten men assigned to watch had come to operation by ten years, most for pain rather than for an emergency. So watchful waiting is a legitimate answer when the question stresses that the hernia is asymptomatic, and the honest counselling is that waiting defers an operation rather than avoiding one.",
+  }, SOURCE),
+  sourced({
+    id: "block-ih-en-masse",
+    type: "warning",
+    heading: "Reduction en masse",
+    text: "Forceful taxis can push the hernia sac and its strangulated contents back through the abdominal wall as a unit, so the bulge disappears while the bowel inside stays obstructed and ischemic. The examination then looks reassuring and the patient continues to deteriorate. Never apply force, never attempt reduction when there is fever, leukocytosis, peritonitis, or skin change over the hernia, and re-examine anyone whose pain persists after a bulge has apparently reduced.",
+  }, SOURCE),
+  references("block-ih-references", [SOURCE]),
+];
+
+export const inguinalHerniaTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000000501",
+  versionId: "00000000-0000-4000-8000-000000000511",
+  slug: "inguinal-hernia",
+  title: "Inguinal Hernia",
+  aliases: ["inguinal hernia", "direct hernia", "indirect hernia", "groin hernia", "Hesselbach triangle", "Hesselbach's triangle", "inguinal canal", "internal ring", "Nyhus", "processus vaginalis", "canal of Nuck", "spermatic cord", "reduction en masse", "watchful waiting", "Poupart ligament"],
+  scoreNodeId: "hernia-conditions",
+  scoreCategory: "SCORE · Hernia · Diseases & Conditions",
+  tags: ["hernia", "groin", "abdominal-wall", "anatomy", "absite", "score"],
+  sourceId: SOURCE,
+  blocks,
+  reviewedAt: "2026-08-14T00:00:00.000Z",
+});

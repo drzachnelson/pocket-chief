@@ -11,6 +11,10 @@ export function SearchForm({ defaultValue = "" }: { defaultValue?: string }) {
   const [query, setQuery] = useState(defaultValue);
   const [cached, setCached] = useState<Topic[]>([]);
   const [offlineSearch, setOfflineSearch] = useState(false);
+  // Resync the field when navigation changes the query prop. Adjusted during
+  // render rather than in an effect, so there is no second render pass.
+  const [lastDefault, setLastDefault] = useState(defaultValue);
+  if (defaultValue !== lastDefault) { setLastDefault(defaultValue); setQuery(defaultValue); }
   useEffect(() => { getCachedTopics().then(setCached).catch(() => undefined); }, []);
   const quick = query.trim().length >= 2 ? searchTopics(query, cached).slice(0, 4) : [];
   return (

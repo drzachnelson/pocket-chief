@@ -30,7 +30,7 @@ node node_modules/vitest/vitest.mjs run src/lib/__tests__/content-contract.test.
 node node_modules/vitest/vitest.mjs run -t "keeps flow graphs renderable"
 ```
 
-**Dev server**: use the Browser pane preview (`preview_start` with `{name: "pocket-chief"}`), never Bash. The `.claude/launch.json` entry at the vault root runs it on port **3210**.
+**Dev server**: use the Browser pane preview (`preview_start` with `{name: "pocket-chief"}`), never Bash. The `.claude/launch.json` entry at the vault root prefers port **3210** and falls back to an assigned port (`autoPort`). Next 16 still refuses a second `next dev` for this directory on *any* port, so if another chat has one running you cannot start your own — and that server keeps serving its cached library. Confirm with `curl -s localhost:3210/api/library` before concluding new content failed to register.
 
 **E2E**:
 

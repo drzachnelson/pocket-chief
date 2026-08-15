@@ -42,6 +42,12 @@ export interface TopicInput {
   scoreCategory: string;
   tags: string[];
   sourceId: string;
+  /**
+   * Further sources this topic's blocks cite. `sourced()` tags one source per
+   * block, so a topic drawing on several works needs each of them listed on the
+   * version or `supportWarnings` rejects the citations it does not recognize.
+   */
+  additionalSourceIds?: string[];
   blocks: TopicBlock[];
   reviewedAt: string;
 }
@@ -54,7 +60,7 @@ export function buildTopic(input: TopicInput): Topic {
     versionNumber: 1,
     status: "approved",
     blocks: input.blocks,
-    sourceIds: [input.sourceId],
+    sourceIds: [...new Set([input.sourceId, ...input.additionalSourceIds ?? []])],
     scoreNodeId: input.scoreNodeId,
     tags: input.tags,
     warnings: [],

@@ -14,3 +14,8 @@ output/
 *.tsbuildinfo
 next-env.d.ts
 .scratch/
+
+# Licensed reference corpora stay on this machine. The authored topics in
+# src/content/ cite them, but the source texts themselves are not redistributed.
+Pocket Chief Resources/*
+!Pocket Chief Resources/score-module-outline.md
