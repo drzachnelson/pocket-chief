@@ -46,7 +46,23 @@ Set `OPENAI_API_KEY` only in the server environment. `POCKET_CHIEF_TOPIC_MODEL` 
 
 ### Vercel
 
-Import the private GitHub repository, add the production environment variables above, deploy `main`, then verify the exact owner login before using private content. Do not deploy with demo mode enabled.
+Import the private GitHub repository (`drzachnelson/pocket-chief`), add the production environment variables above, deploy `main`, then verify the exact owner login before using private content. Do not deploy with demo mode enabled.
+
+### Installing the library
+
+`ensure_launch_topic` installs only the sha256-pinned choledocholithiasis topic. Every other authored topic in `src/content/` reaches a hosted deployment through one owner-authenticated call, made after the first successful owner sign-in:
+
+```bash
+curl -X POST https://<deployment>/api/library/install -H "Cookie: <owner session>"
+```
+
+Easier from the browser devtools console while signed in as the owner:
+
+```js
+await fetch("/api/library/install", { method: "POST" }).then((r) => r.json())
+```
+
+It replays each topic through the same `createTopicDraft` → `approveDraft` path a hand-authored topic takes, so RLS and the claim-support invariant still apply. It is idempotent — a slug that already carries an approved version is reported as `present` and left alone — so it is safe to re-run after adding topics. The response reports `installed`, `present`, and `failed` counts plus a per-topic list, and returns 207 when any topic failed.
 
 ## Anki setup
 
