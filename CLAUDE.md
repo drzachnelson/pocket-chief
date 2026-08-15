@@ -97,5 +97,6 @@ Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` sk
 ## Environment gotchas
 
 - The vault lives in iCloud-synced Documents. iCloud can evict `node_modules` and `.next` contents (commands hang at 0% CPU) and create `name 2.ext` conflict copies inside `.next` that break `tsc`. Remedy: reinstall `node_modules`, delete the conflict copies.
-- There is **no git remote** on this repository. Work commits locally on the feature branch; publishing to GitHub is still pending auth setup.
+- The remote is the private repo `drzachnelson/pocket-chief`, and `main` is the default branch. The licensed corpora under `Pocket Chief Resources/` are deliberately gitignored except for `score-module-outline.md` — never commit the SCORE module texts or Fiser chapters.
+- The vault's `.claude/launch.json` must use vault-relative paths for the `pocket-chief` entry. An absolute path pins it to one machine's home directory and the preview dies with `MODULE_NOT_FOUND`.
 - Adding topics has repeatedly exposed assumptions built when the library held one topic — two search-scoring flaws and several hardcoded single-topic UI strings so far. When a test that expected an empty result set starts failing after new content lands, check whether the app was only ever correct for one topic before changing the test.
