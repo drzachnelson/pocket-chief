@@ -44,7 +44,9 @@ export function searchTopics(query: string, topics: Topic[]): Topic[] {
     .filter((topic) => topic.approvedVersion)
     .map((topic) => {
       const approved = topic.approvedVersion!;
-      const fields = [topic.title, ...topic.aliases, topic.scoreCategory, ...topic.tags, ...approved.blocks.map(blockText)].map(normalize);
+      // Identity is what a user types from memory; body is everything the topic renders.
+      const identity = [topic.title, ...topic.aliases, topic.scoreCategory, ...topic.tags].map(normalize);
+      const fields = [...identity, ...approved.blocks.map(blockText).map(normalize)];
       let score = 0;
       for (const field of fields) {
         if (field === needle) score = Math.max(score, 100);
@@ -56,6 +58,12 @@ export function searchTopics(query: string, topics: Topic[]): Topic[] {
         for (const field of fields) for (const word of field.split(" ")) {
           if (word === token) tokenScore = Math.max(tokenScore, 50);
           else if (word.length >= 3 && (word.startsWith(token) || token.startsWith(word))) tokenScore = Math.max(tokenScore, 42);
+        }
+        // Typo tolerance is deliberately confined to identity fields. Fuzzing every
+        // word of every block means any short token finds a neighbour once the library
+        // grows — "wound" reached topics through "round" and "found" — and the noise
+        // scales with the corpus while the benefit does not.
+        for (const field of identity) for (const word of field.split(" ")) {
           const distance = editDistance(token, word);
           const tolerance = token.length > 10 ? 2 : token.length >= 4 ? 1 : 0;
           if (distance <= tolerance) tokenScore = Math.max(tokenScore, 38 - distance * 5);
