@@ -12,6 +12,9 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
     css: true,
-    exclude: ["tests/e2e/**", "node_modules/**"],
+    // `.claude/worktrees/**` holds full checkouts of other branches, which duplicate every unit
+    // test and surface Playwright specs that vitest cannot run. The e2e glob is anchored so it
+    // matches those copies too, not just the one at the repo root.
+    exclude: ["**/tests/e2e/**", "**/node_modules/**", "**/.claude/**"],
   },
 });
