@@ -7,6 +7,10 @@ export const HERNIA_SOURCE = "00000000-0000-4000-8000-000000000500";
 export const SCORE_ARTERIAL_SOURCE = "00000000-0000-4000-8000-000000000600";
 export const FISER_VASCULAR_SOURCE = "00000000-0000-4000-8000-000000000601";
 export const USPSTF_AAA_SOURCE = "00000000-0000-4000-8000-000000000602";
+export const ACUTE_LIVER_FAILURE_SOURCE = "00000000-0000-4000-8000-000000000700";
+export const CARDIAC_PACING_SOURCE = "00000000-0000-4000-8000-000000000800";
+export const PARAESOPHAGEAL_HERNIA_SOURCE = "00000000-0000-4000-8000-000000000900";
+export const RENAL_ARTERY_DISEASE_SOURCE = "00000000-0000-4000-8000-000000001000";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -76,5 +80,40 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "US Preventive Services Task Force. Screening for Abdominal Aortic Aneurysm: US Preventive Services Task Force Recommendation Statement. JAMA. 2019;322(22):2211-2218. https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/abdominal-aortic-aneurysm-screening",
     suppliedAt: "2026-08-14T00:00:00.000Z",
     details: "Added beyond the two study sources during review and pending the owner's sign-off. Neither the SCORE module nor Fiser carries the Task Force grades, and they diverge from the Society for Vascular Surgery recommendation specifically for women, which is the part most likely to be tested. Verified against the Task Force's published recommendation on August 14, 2026.",
+  },
+  {
+    id: ACUTE_LIVER_FAILURE_SOURCE,
+    title: "User-supplied acute liver failure study packet",
+    kind: "user_notes",
+    citation: "Personal study notes supplied to Pocket Chief, August 16, 2026.",
+    suppliedAt: "2026-08-16T00:00:00.000Z",
+    details: "A comprehensive study guide on Acute Liver Failure (ALF) covering pathophysiology, acute vs chronic differentiation, etiologies and subtype timing, core diagnostic triad, etiology-directed workup panel, AFLP vs HELLP histology, West Haven encephalopathy staging, King's College transplant criteria, neurocritical care and ICP protocol, and outcomes/prognostic factors.",
+  },
+  {
+    id: CARDIAC_PACING_SOURCE,
+    title: "User-supplied cardiac pacing study packet & SCORE module",
+    kind: "user_notes",
+    citation: "Personal study notes supplied to Pocket Chief, August 16, 2026; and Kennedy R. Cardiac Pacing. SCORE Curriculum, Surgical Critical Care module, Surgical Council on Resident Education, April 15, 2024. https://www.surgicalcore.org/modulecontent.aspx?id=1000533",
+    suppliedAt: "2026-08-16T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000533",
+    details: "A comprehensive study guide and SCORE module on Temporary Cardiac Pacing covering indications and relative/absolute contraindications, transcutaneous pad placement vectors, transvenous RIJ/subclavian/femoral access and lead positioning, epicardial wire placement, preoperative preparation and electrolyte optimization, NASPE/NBG pacing nomenclature and common modes (VVI, AAI, DDD, VOO/DOO), pacer malfunction troubleshooting (undersensing, oversensing, failure to capture, failure to fire), and critical complication management (tamponade, perforation, R-on-T lethal arrhythmias).",
+  },
+  {
+    id: PARAESOPHAGEAL_HERNIA_SOURCE,
+    title: "User-supplied paraesophageal hernia study packet & SCORE module",
+    kind: "user_notes",
+    citation: "Personal study notes supplied to Pocket Chief, August 16, 2026; and Zarour L, Hunter JG. Paraesophageal Hernia Repair. SCORE Curriculum, Esophagus module, Surgical Council on Resident Education, November 2, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=1000574",
+    suppliedAt: "2026-08-16T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000574",
+    details: "A comprehensive study guide and SCORE module on Paraesophageal Hernia (PEH) Repair covering hiatal hernia classification (Types I–IV), elective and emergent surgical indications, Borchardt triad, emergent diagnostic workup pathway, elective preoperative diagnostic evaluation, LES physiology and reflux barrier dynamics, key operative anatomy and vagal nerve relationships, step-by-step laparoscopic and open operative technique, indications for gastrostomy/gastropexy, acute and chronic postoperative complications, SAGES guidelines, and revisional surgery metrics.",
+  },
+  {
+    id: RENAL_ARTERY_DISEASE_SOURCE,
+    title: "User-supplied renal artery disease study packet & SCORE module",
+    kind: "user_notes",
+    citation: "Personal study notes supplied to Pocket Chief, August 16, 2026; and Costanza MJ. Renal Artery Disease. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, August 13, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=165638",
+    suppliedAt: "2026-08-16T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=165638",
+    details: "A comprehensive study guide and SCORE module on Renal Artery Disease & Renovascular Hypertension covering atherosclerotic RAS vs fibromuscular dysplasia (FMD) differentiation, RAAS axis pathophysiology and biochemical cascade, unilateral vs bilateral/solitary hemodynamics and volume status, high-risk screening criteria, noninvasive and invasive diagnostic modalities (duplex ultrasound, CTA, MRA, DSA), medical, endovascular (angioplasty with stenting vs PTA alone), and open surgical revascularization strategies (aortorenal, thromboendarterectomy, hepatorenal, splenorenal bypass), non-viable kidney thresholds and nephrectomy indications, clinical outcomes and complication metrics, postoperative duplex surveillance protocols, and high-yield ABSITE/SCORE board review essentials.",
   },
 ];
