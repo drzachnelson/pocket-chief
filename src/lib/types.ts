@@ -16,6 +16,7 @@ interface BaseBlock {
 export interface SummaryBlock extends BaseBlock {
   type: "summary" | "prose" | "warning";
   text: string;
+  tone?: "pearl" | "mnemonic" | "danger";
 }
 
 export interface BulletsBlock extends BaseBlock {

@@ -29,7 +29,7 @@ const claimSchema = z.object({
 
 const base = { id: z.string(), heading: z.string().optional(), claims: z.array(claimSchema) };
 export const topicBlockSchema = z.discriminatedUnion("type", [
-  z.object({ ...base, type: z.enum(["summary", "prose", "warning"]), text: z.string() }),
+  z.object({ ...base, type: z.enum(["summary", "prose", "warning"]), text: z.string(), tone: z.enum(["pearl", "mnemonic", "danger"]).optional() }),
   z.object({ ...base, type: z.literal("bullets"), items: z.array(z.string()) }),
   z.object({ ...base, type: z.literal("table"), columns: z.array(z.string()), rows: z.array(z.array(z.string())) }),
   z.object({ ...base, type: z.literal("flow"), nodes: z.array(z.object({ id: z.string(), label: z.string(), tone: z.enum(["default", "good", "caution"]).optional() })), edges: z.array(z.object({ from: z.string(), to: z.string(), label: z.string().optional() })) }),

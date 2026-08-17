@@ -3,6 +3,7 @@ import { ClockCounterClockwise, Notebook, Plus } from "@phosphor-icons/react/dis
 import { SearchForm } from "@/components/search-form";
 import { TopicCard } from "@/components/topic-card";
 import { RecentTopics } from "@/components/recent-topics";
+import { FavoriteTopics } from "@/components/favorite-topics";
 import { getRepository } from "@/lib/repository";
 
 export const dynamic = "force-dynamic";
@@ -13,14 +14,14 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const reviewed = (await repository.listTopics()).filter((topic) => topic.approvedVersion);
   const recent = await repository.listRecentTopics();
   const results = q ? await repository.searchTopics(q) : reviewed;
-  const sectionCount = reviewed.reduce((count, topic) => count + (topic.approvedVersion?.blocks.filter((block) => block.type !== "references").length ?? 0), 0);
   const sectionsCovered = new Set(reviewed.map((topic) => topic.scoreNodeId)).size;
-  const savedCount = (await repository.listBookmarkedTopics()).length;
+  const favorites = await repository.listBookmarkedTopics();
+  const savedCount = favorites.length;
   return (
     <>
       <section className="search-hero">
         <p className="eyebrow">Private clinical atlas</p>
-        <h1 className="page-title">The answer you need,<br />before the next case.</h1>
+        <h1 className="visually-hidden">Pocket Chief</h1>
         <p className="page-lede">Search reviewed general surgery notes, decision flows, procedures, and high-yield board pearls.</p>
         <SearchForm defaultValue={q} />
         <p className="search-hint">Titles, aliases, headings, SCORE categories, body text, and tags · typo tolerant</p>
@@ -35,14 +36,13 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         </section>
       ) : (
         <>
-          <div className="metric-strip" aria-label="Library summary">
-            <div className="metric"><strong>{reviewed.length}</strong><span>Reviewed {reviewed.length === 1 ? "topic" : "topics"}</span></div>
-            <div className="metric"><strong>{sectionCount}</strong><span>Structured sections</span></div>
-            <div className="metric"><strong>Offline</strong><span>Ready after first visit</span></div>
-          </div>
           <section className="section">
-            <div className="section-heading"><h2>Recently reviewed</h2><Link href="/topics">Browse curriculum</Link></div>
-            <RecentTopics fallback={recent.length ? recent : reviewed} />
+            <div className="section-heading"><h2>Recently viewed</h2><Link href="/topics">Browse curriculum</Link></div>
+            <RecentTopics fallback={recent.length ? recent : reviewed.slice(0, 6)} />
+          </section>
+          <section className="section">
+            <div className="section-heading"><h2>Favorites</h2><Link href="/saved">View all saved</Link></div>
+            <FavoriteTopics fallback={favorites} />
           </section>
           <section className="section">
             <div className="section-heading"><h2>Continue building</h2><span>{sectionsCovered} SCORE {sectionsCovered === 1 ? "section" : "sections"} covered</span></div>

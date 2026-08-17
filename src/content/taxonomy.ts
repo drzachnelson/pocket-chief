@@ -13,5 +13,12 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "hernia-conditions", title: "Diseases & Conditions", slug: "hernia-diseases-conditions", parentId: "hernia", order: 9 },
   { id: "hernia-procedures", title: "Operations & Procedures", slug: "hernia-operations-procedures", parentId: "hernia", order: 10 },
   { id: "arterial-disease", title: "Arterial Disease", slug: "arterial-disease", parentId: "score", order: 11 },
-  { id: "arterial-procedures", title: "Operations & Procedures", slug: "arterial-operations-procedures", parentId: "arterial-disease", order: 12 },
+  { id: "arterial-conditions", title: "Diseases & Conditions", slug: "arterial-diseases-conditions", parentId: "arterial-disease", order: 12 },
+  { id: "arterial-procedures", title: "Operations & Procedures", slug: "arterial-operations-procedures", parentId: "arterial-disease", order: 13 },
+  { id: "critical-care", title: "Surgical Critical Care", slug: "surgical-critical-care", parentId: "score", order: 14 },
+  { id: "critical-care-conditions", title: "Diseases & Conditions", slug: "critical-care-diseases-conditions", parentId: "critical-care", order: 15 },
+  { id: "critical-care-procedures", title: "Operations & Procedures", slug: "critical-care-operations-procedures", parentId: "critical-care", order: 16 },
+  { id: "esophagus", title: "Esophagus", slug: "esophagus", parentId: "score", order: 17 },
+  { id: "esophagus-conditions", title: "Diseases & Conditions", slug: "esophagus-diseases-conditions", parentId: "esophagus", order: 18 },
+  { id: "esophagus-procedures", title: "Operations & Procedures", slug: "esophagus-operations-procedures", parentId: "esophagus", order: 19 },
 ];
