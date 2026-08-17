@@ -1,6 +1,17 @@
 import { expect, test } from "@playwright/test";
 import JSZip from "jszip";
 
+// The demo store lives on `globalThis`, so every test in a run shares one set of
+// bookmarks even though each gets a fresh browser context. Without this, a topic
+// bookmarked by an earlier test is hydrated back into the next test's IndexedDB and
+// its Save button starts out reading "Saved offline".
+test.beforeEach(async ({ page }) => {
+  const bookmarked = await page.request.get("/api/bookmarks");
+  if (!bookmarked.ok()) return;
+  const { topics = [] } = await bookmarked.json() as { topics?: Array<{ id: string }> };
+  for (const topic of topics) await page.request.post("/api/bookmarks", { data: { topicId: topic.id, saved: false } });
+});
+
 test("search, read, save, and draft a cloze", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("Search Pocket Chief").fill("choledochoithiasis");
@@ -9,7 +20,7 @@ test("search, read, save, and draft a cloze", async ({ page }) => {
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
-  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
   await page.getByRole("button", { name: /Make Anki card from Age alone/ }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -40,7 +51,7 @@ test("edits made while the draft is still saving are not lost on close", async (
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
-  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
   await page.getByRole("button", { name: /Make Anki card from Repositioning may help/ }).click();
   await expect(page.getByRole("dialog")).toBeVisible();

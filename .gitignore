@@ -19,3 +19,8 @@ next-env.d.ts
 # src/content/ cite them, but the source texts themselves are not redistributed.
 Pocket Chief Resources/*
 !Pocket Chief Resources/score-module-outline.md
+
+# Agent worktrees are full nested checkouts and local settings are per-machine;
+# only launch.json under .claude/ is shared.
+.claude/worktrees/
+.claude/settings.local.json
