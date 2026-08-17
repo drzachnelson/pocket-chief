@@ -11,6 +11,8 @@ import { groinHerniaInChildrenTopic } from "@/content/topics/groin-hernia-in-chi
 import { groinHerniaRepairTopic } from "@/content/topics/groin-hernia-repair";
 import { acuteLiverFailureTopic } from "@/content/topics/acute-liver-failure";
 import { inguinalHerniaTopic } from "@/content/topics/inguinal-hernia";
+import { malrotationOperationTopic } from "@/content/topics/malrotation-operation";
+import { malrotationTopic } from "@/content/topics/malrotation";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
 import { peritonealNeoplasmsTopic } from "@/content/topics/peritoneal-neoplasms";
@@ -52,4 +54,6 @@ export const demoTopics: Topic[] = [
   cardiacPacingTopic,
   paraesophagealHerniaRepairTopic,
   renalArteryDiseaseTopic,
+  malrotationTopic,
+  malrotationOperationTopic,
 ];
