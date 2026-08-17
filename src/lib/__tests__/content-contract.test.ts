@@ -3,6 +3,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { factualUnits, supportWarnings } from "@/lib/editorial";
+import { stripMarkup } from "@/lib/inline";
 import { choledoBlocks, demoTopics, suppliedSources, taxonomy } from "@/lib/seed";
 import { taxonomyAncestry } from "@/lib/taxonomy";
 import type { Topic, TopicBlock } from "@/lib/types";
@@ -96,6 +97,40 @@ describe("seeded content contract", () => {
       const printed = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");
       expect(topic.scoreCategory, `${topic.slug} category`).toBe(printed);
       expect(topic.tags, `${topic.slug} tags`).toEqual(topic.approvedVersion!.tags);
+    }
+  });
+
+  // Inline markup lives inside the plain strings, so nothing in the type system, the zod
+  // schema or the SQL can catch a malformed marker. These three guards are the only thing
+  // standing between a stray asterisk and a claim whose text no longer reads as English.
+  it("balances every inline marker", () => {
+    for (const [label, block] of eachBlock()) {
+      for (const unit of factualUnits(block)) {
+        expect(unit.split("**").length % 2, `${label}: unbalanced ** in "${unit.slice(0, 70)}"`).toBe(1);
+        expect((unit.match(/\[\[/g) ?? []).length, `${label}: unclosed [[ in "${unit.slice(0, 70)}"`).toBe((unit.match(/\]\]/g) ?? []).length);
+        expect(unit, `${label}: bold belongs outside the link, as **[[Term]]**`).not.toMatch(/\[\[[^\]]*\*\*/);
+      }
+    }
+  });
+
+  // `normalize()` in search.ts strips every non-alphanumeric, so a marker that splits a word
+  // turns one search token into two broken ones — "chole**docho**lithiasis" stops matching
+  // "choledocholithiasis" entirely. Whole-word wrapping is what keeps the index intact.
+  it("never lets a marker split a word", () => {
+    for (const [label, block] of eachBlock()) {
+      for (const unit of factualUnits(block)) {
+        expect(unit, `${label}: ** opens mid-word in "${unit.slice(0, 70)}"`).not.toMatch(/[A-Za-z0-9]\*\*[A-Za-z0-9]/);
+      }
+    }
+  });
+
+  it("keeps markup out of the text Anki exports", () => {
+    for (const [label, block] of eachBlock()) {
+      for (const unit of factualUnits(block)) {
+        const stripped = stripMarkup(unit);
+        expect(stripped, `${label}: stripMarkup left markers behind`).not.toMatch(/\*\*|\[\[|\]\]/);
+        expect(stripped.length, `${label}: stripMarkup emptied a factual unit`).toBeGreaterThan(0);
+      }
     }
   });
 
