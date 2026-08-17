@@ -538,7 +538,7 @@ Transcribed verbatim apart from repairing OCR ligatures (`ﬃ`, `ﬀ`). Duplicat
 
 ## How the current library maps to this outline
 
-The app's 16 topics do not map one-to-one onto the outline, because the first batches were authored from study packets before this outline was supplied.
+The app's 21 topics do not map one-to-one onto the outline, because the first batches were authored from study packets before this outline was supplied.
 
 **Exact matches** — General Abdomen is complete and uses the outline's own titles: Abdominal Pain, Rectus Sheath Hematoma, Desmoids & Fibromatoses, Peritoneal Neoplasms, Abdominal Exploration, Peritoneal Dialysis Catheter Insertion.
 
@@ -560,4 +560,17 @@ The app's 16 topics do not map one-to-one onto the outline, because the first ba
 
 **Breast** — only Fibroadenoma vs Phyllodes Tumor exists, mapping to Fibroadenoma and Phyllodes Tumors. The other 20 breast entries are open.
 
-Leave the existing splits alone. Going forward, prefer the outline's titles and granularity so coverage is countable.
+**Esophagus** — only Paraesophageal Hernia Repair exists, matching the outline entry exactly. The rest of the module is open.
+
+**Arterial Disease** — Abdominal and Aortoiliac Aneurysm Repair and Renal Artery Disease both match the outline exactly. The rest of the module is open.
+
+**Surgical Critical Care** — two entries, one of them only partial:
+
+| App topic | Outline entry | Status |
+|---|---|---|
+| Cardiac Pacing | Cardiac Pacing | exact |
+| Acute Liver Failure | Hepatic Failure and Hepatorenal Syndrome | **partial** |
+
+Acute Liver Failure covers ALF only. There is no hepatorenal syndrome content — no definition, no AKI-HRS diagnostic criteria, no type 1 versus type 2, no terlipressin/albumin, no TIPS or transplant pathway. The topic was briefly renamed to the outline's title and reverted, because a title promising HRS coverage the blocks do not deliver is worse than a title that is narrower than the outline. **Count this section as half covered.** Adding HRS needs source material and owner sign-off, not a rename.
+
+Leave the existing splits alone. Going forward, prefer the outline's titles and granularity so coverage is countable — but only rename a topic to an outline title when the content actually covers that title's scope. Matching the label without matching the content makes coverage look complete when it is not.
