@@ -21,4 +21,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "esophagus", title: "Esophagus", slug: "esophagus", parentId: "score", order: 17 },
   { id: "esophagus-conditions", title: "Diseases & Conditions", slug: "esophagus-diseases-conditions", parentId: "esophagus", order: 18 },
   { id: "esophagus-procedures", title: "Operations & Procedures", slug: "esophagus-operations-procedures", parentId: "esophagus", order: 19 },
+  { id: "pediatric", title: "Pediatric Surgery", slug: "pediatric-surgery", parentId: "score", order: 20 },
+  { id: "pediatric-conditions", title: "Diseases & Conditions", slug: "pediatric-diseases-conditions", parentId: "pediatric", order: 21 },
+  { id: "pediatric-procedures", title: "Operations & Procedures", slug: "pediatric-operations-procedures", parentId: "pediatric", order: 22 },
 ];
