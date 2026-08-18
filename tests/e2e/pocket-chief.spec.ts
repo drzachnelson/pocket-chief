@@ -137,3 +137,31 @@ test("adds and edits the owner's SCORE organization", async ({ page }, testInfo)
   await page.getByRole("button", { name: "Save category" }).click();
   await expect(page.getByRole("button", { name: new RegExp(`${title} Updated`) })).toBeVisible();
 });
+
+test("browses the curriculum by category and keeps collapse state across navigation", async ({ page }) => {
+  await page.goto("/topics");
+  const hernia = page.locator("details#hernia");
+  await expect(hernia.getByRole("heading", { name: "Hernia", exact: true })).toBeVisible();
+  await expect(hernia.getByRole("heading", { name: "Diseases & Conditions" })).toBeVisible();
+  await expect(hernia.getByRole("link", { name: /Inguinal Hernia/ })).toBeVisible();
+
+  // Collapsing writes the URL, which is what survives a round trip into a topic and back.
+  const breast = page.locator("details#breast");
+  await expect(breast.getByRole("link", { name: /Fibroadenoma/ })).toBeVisible();
+  await breast.getByRole("heading", { name: "Breast", exact: true }).click();
+  await expect(page).toHaveURL(/[?&]closed=breast/);
+  await expect(breast.getByRole("link", { name: /Fibroadenoma/ })).toBeHidden();
+
+  await hernia.getByRole("link", { name: /Inguinal Hernia/ }).click();
+  await expect(page).toHaveURL(/\/topics\/inguinal-hernia$/);
+  await page.goBack();
+  await expect(page).toHaveURL(/[?&]closed=breast/);
+  await expect(page.locator("details#breast").getByRole("link", { name: /Fibroadenoma/ })).toBeHidden();
+});
+
+test("category jump links open the section they land on", async ({ page }) => {
+  await page.goto("/topics?closed=hernia");
+  await expect(page.locator("details#hernia").getByRole("link", { name: /Inguinal Hernia/ })).toBeHidden();
+  await page.getByRole("navigation", { name: "SCORE categories" }).getByRole("link", { name: /^Hernia,/ }).click();
+  await expect(page.locator("details#hernia").getByRole("link", { name: /Inguinal Hernia/ })).toBeVisible();
+});

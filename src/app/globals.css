@@ -205,14 +205,36 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .spin { animation: spin 900ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.curriculum-layout { display: grid; gap: 22px; }
-.curriculum-tree { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
-.tree-node { display: flex; justify-content: space-between; gap: 10px; padding: 11px 13px; border-bottom: 1px solid var(--line); font-size: 11px; color: var(--ink-muted); }
-.tree-node:last-child { border-bottom: 0; }
-.tree-node.depth-1 { padding-left: 25px; }
-.tree-node.depth-2 { padding-left: 37px; background: var(--cobalt-soft); color: var(--cobalt-dark); font-weight: 680; }
-.tree-node small { color: var(--ink-faint); }
-.topic-grid.single { grid-template-columns: 1fr; }
+/* Curriculum browse. Categories are native <details> so the disclosure is free: keyboard,
+   Find-in-page expansion, and a no-JS default of everything visible. The rail is the jump
+   nav — real anchors, not the decorative mirror of the tree it replaced. */
+.curriculum-layout { display: grid; gap: var(--space-6); align-items: start; }
+.curriculum-rail { display: grid; gap: 1px; padding: var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
+.curriculum-rail > p { margin: 0 0 var(--space-2); color: var(--ink-faint); font-size: var(--text-2xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.curriculum-rail a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 38px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); color: var(--ink-muted); font-size: var(--text-sm); font-weight: 580; transition: background 150ms ease, color 150ms ease; }
+.curriculum-rail a:hover { background: var(--surface-muted); color: var(--cobalt-dark); }
+.curriculum-rail small { flex: 0 0 auto; color: var(--ink-faint); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+
+.curriculum-sections { display: grid; gap: var(--space-3); }
+.curriculum-section { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); scroll-margin-top: var(--space-5); }
+.curriculum-section > summary { display: flex; align-items: center; gap: var(--space-3); min-height: 52px; padding: var(--space-3) var(--space-5); cursor: pointer; list-style: none; }
+.curriculum-section > summary::-webkit-details-marker { display: none; }
+.curriculum-section > summary:focus-visible { outline: 3px solid var(--cobalt); outline-offset: -3px; border-radius: var(--radius-lg); }
+.curriculum-section > summary:hover h2 { color: var(--cobalt-dark); }
+.curriculum-section[open] > summary { border-bottom: 1px solid var(--line); }
+.curriculum-section h2 { flex: 1 1 auto; min-width: 0; margin: 0; font-size: var(--text-md); letter-spacing: -.01em; transition: color 150ms ease; }
+.curriculum-section-meta { flex: 0 0 auto; color: var(--ink-faint); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+/* Caret-down is the OPEN state, so closed is the rotated one — matching the topic sections. */
+.curriculum-disclosure { flex: 0 0 auto; width: 16px; height: 16px; display: grid; place-items: center; color: var(--ink-faint); transform: rotate(-90deg); transition: transform 160ms ease, color 150ms ease; }
+.curriculum-section[open] > summary .curriculum-disclosure { transform: none; color: var(--cobalt); }
+.curriculum-subsection { padding: var(--space-5); }
+.curriculum-subsection + .curriculum-subsection { border-top: 1px solid var(--line); }
+.curriculum-subsection > h3 { margin: 0 0 var(--space-3); color: var(--ink-muted); font-size: var(--text-xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.curriculum-empty { margin: 0; padding: 0 var(--space-5) var(--space-5); color: var(--ink-faint); font-size: var(--text-sm); }
+/* No height transition on the panel: animating ::details-content to `auto` over a subtree this
+   large stalls paint in Chrome, and the topic-page sections already open instantly. The caret
+   rotation carries the state change. */
+
 .launch-slots { margin-top: 18px; padding: 15px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-muted); }
 .launch-slots p, .launch-slots strong, .launch-slots small { display: block; }
 .launch-slots p { margin: 0; color: var(--ink-faint); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
@@ -417,6 +439,13 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 .taxonomy-form .form-footer, .taxonomy-form .form-message { grid-column: 1 / -1; }
 
 @media (max-width: 759px) {
+  /* Eight stacked rail links would push every topic below the fold, so the rail becomes a
+     horizontal chip row. Chips clear 44px; the section summaries clear 52px. */
+  .curriculum-rail { grid-auto-flow: column; grid-auto-columns: max-content; gap: var(--space-2); padding: 0; border: 0; background: none; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .curriculum-rail::-webkit-scrollbar { display: none; }
+  .curriculum-rail > p { display: none; }
+  .curriculum-rail a { min-height: 44px; border: 1px solid var(--line); background: var(--surface); }
+  .curriculum-subsection { padding: var(--space-4); }
   .taxonomy-form { grid-template-columns: 1fr; }
   .topic-header { padding-bottom: 10px; }
   .topic-header .tag-row { display: none; }
@@ -452,6 +481,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .main-content { padding: 38px 32px 80px; }
   .curriculum-layout { grid-template-columns: 210px minmax(0, 1fr); }
+  .curriculum-rail { position: sticky; top: var(--space-6); }
   .settings-grid { grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); }
   .anki-dialog { inset: 50% auto auto 50%; transform: translate(-50%, -50%); }
 }
