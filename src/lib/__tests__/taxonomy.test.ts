@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { taxonomyDescendantIds, taxonomyParentIsValid } from "@/lib/taxonomy";
+import { taxonomy } from "@/content/taxonomy";
+import { demoTopics } from "@/lib/seed";
+import { taxonomyDescendantIds, taxonomyParentIsValid, taxonomySections } from "@/lib/taxonomy";
+import type { TaxonomyNode, Topic } from "@/lib/types";
 
 const nodes = [
   { id: "root", title: "Root", slug: "root", order: 0 },
@@ -12,5 +15,67 @@ describe("taxonomy integrity", () => {
     expect([...taxonomyDescendantIds("root", nodes)]).toEqual(["child", "grandchild"]);
     expect(taxonomyParentIsValid("root", "grandchild", nodes)).toBe(false);
     expect(taxonomyParentIsValid("child", "root", nodes)).toBe(true);
+  });
+});
+
+const approved = demoTopics.filter((entry) => entry.approvedVersion);
+
+function topic(id: string, title: string, scoreNodeId: string): Topic {
+  return { id, slug: id, title, aliases: [], scoreNodeId, scoreCategory: "", tags: [], approvedVersion: null, versions: [], updatedAt: "2026-01-01T00:00:00.000Z" };
+}
+
+describe("taxonomySections", () => {
+  it("returns every top-level category in taxonomy order", () => {
+    const sections = taxonomySections(taxonomy, approved);
+    expect(sections.map((section) => section.node.id)).toEqual(["alimentary", "breast", "general-abdomen", "hernia", "arterial-disease", "critical-care", "esophagus", "pediatric"]);
+  });
+
+  it("counts every topic beneath a category, not just its direct children", () => {
+    const sections = taxonomySections(taxonomy, approved);
+    const hernia = sections.find((section) => section.node.id === "hernia")!;
+    expect(hernia.topics).toEqual([]);
+    expect(hernia.subsections.map((subsection) => subsection.node.id)).toEqual(["hernia-conditions", "hernia-procedures"]);
+    expect(hernia.topicCount).toBe(hernia.subsections.reduce((total, subsection) => total + subsection.topics.length, 0));
+    expect(hernia.topicCount).toBeGreaterThan(hernia.subsections[0]!.topics.length);
+  });
+
+  it("accounts for the whole approved library exactly once", () => {
+    const sections = taxonomySections(taxonomy, approved);
+    const listed = sections.flatMap((section) => [...section.topics, ...section.subsections.flatMap((subsection) => subsection.topics)]);
+    expect(sections.reduce((total, section) => total + section.topicCount, 0)).toBe(approved.length);
+    expect(new Set(listed.map((entry) => entry.id)).size).toBe(approved.length);
+  });
+
+  it("keeps a category with no approved topics, with a zero count and no subsections", () => {
+    const nodes: TaxonomyNode[] = [
+      { id: "score", title: "SCORE", slug: "score", order: 0 },
+      { id: "empty", title: "Empty", slug: "empty", parentId: "score", order: 1 },
+      { id: "empty-child", title: "Child", slug: "empty-child", parentId: "empty", order: 2 },
+    ];
+    const [section] = taxonomySections(nodes, []);
+    expect(section!.topicCount).toBe(0);
+    expect(section!.subsections).toEqual([]);
+  });
+
+  it("rolls grandchild topics up into their subsection", () => {
+    const nodes: TaxonomyNode[] = [
+      { id: "score", title: "SCORE", slug: "score", order: 0 },
+      { id: "cat", title: "Cat", slug: "cat", parentId: "score", order: 1 },
+      { id: "sub", title: "Sub", slug: "sub", parentId: "cat", order: 2 },
+      { id: "leaf", title: "Leaf", slug: "leaf", parentId: "sub", order: 3 },
+    ];
+    const [section] = taxonomySections(nodes, [topic("deep", "Deep", "leaf")]);
+    expect(section!.topicCount).toBe(1);
+    expect(section!.subsections[0]!.topics.map((entry) => entry.id)).toEqual(["deep"]);
+  });
+
+  it("sorts topics alphabetically inside a subsection", () => {
+    const nodes: TaxonomyNode[] = [
+      { id: "score", title: "SCORE", slug: "score", order: 0 },
+      { id: "cat", title: "Cat", slug: "cat", parentId: "score", order: 1 },
+      { id: "sub", title: "Sub", slug: "sub", parentId: "cat", order: 2 },
+    ];
+    const [section] = taxonomySections(nodes, [topic("z", "Zebra", "sub"), topic("a", "Aorta", "sub")]);
+    expect(section!.subsections[0]!.topics.map((entry) => entry.title)).toEqual(["Aorta", "Zebra"]);
   });
 });
