@@ -1,4 +1,4 @@
-import type { TaxonomyNode } from "@/lib/types";
+import type { TaxonomyNode, Topic } from "@/lib/types";
 
 export function taxonomyDescendantIds(nodeId: string, nodes: TaxonomyNode[]): Set<string> {
   const descendants = new Set<string>();
@@ -31,4 +31,26 @@ export function taxonomyParentIsValid(nodeId: string | undefined, parentId: stri
   if (!nodes.some((node) => node.id === parentId)) return false;
   if (!nodeId) return true;
   return parentId !== nodeId && !taxonomyDescendantIds(nodeId, nodes).has(parentId);
+}
+
+export interface TaxonomySubsection { node: TaxonomyNode; topics: Topic[] }
+export interface TaxonomySection { node: TaxonomyNode; subsections: TaxonomySubsection[]; topics: Topic[]; topicCount: number }
+
+// Topics hang off leaf nodes, so a category's count has to include everything beneath it.
+// Subsections are flattened to a single tier on purpose: SCORE is only ever
+// category → section → topic, and a second disclosure tier would repeat "Diseases &
+// Conditions" at two indents without buying any navigation.
+export function taxonomySections(nodes: TaxonomyNode[], topics: Topic[], rootId = "score"): TaxonomySection[] {
+  const byOrder = (a: { node: TaxonomyNode }, b: { node: TaxonomyNode }) => a.node.order - b.node.order;
+  const byTitle = (a: Topic, b: Topic) => a.title.localeCompare(b.title);
+  function topicsUnder(nodeId: string) {
+    const ids = taxonomyDescendantIds(nodeId, nodes);
+    ids.add(nodeId);
+    return topics.filter((topic) => ids.has(topic.scoreNodeId)).sort(byTitle);
+  }
+  return nodes.filter((node) => node.parentId === rootId).map((node) => {
+    const subsections = nodes.filter((child) => child.parentId === node.id).map((child) => ({ node: child, topics: topicsUnder(child.id) })).filter((subsection) => subsection.topics.length > 0).sort(byOrder);
+    const direct = topics.filter((topic) => topic.scoreNodeId === node.id).sort(byTitle);
+    return { node, subsections, topics: direct, topicCount: direct.length + subsections.reduce((total, subsection) => total + subsection.topics.length, 0) };
+  }).sort(byOrder);
 }
