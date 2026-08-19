@@ -100,3 +100,17 @@ Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` sk
 - The remote is the private repo `drzachnelson/pocket-chief`, and `main` is the default branch. The licensed corpora under `Pocket Chief Resources/` are deliberately gitignored except for `score-module-outline.md` — never commit the SCORE module texts or Fiser chapters.
 - The vault's `.claude/launch.json` must use vault-relative paths for the `pocket-chief` entry. An absolute path pins it to one machine's home directory and the preview dies with `MODULE_NOT_FOUND`.
 - Adding topics has repeatedly exposed assumptions built when the library held one topic — two search-scoring flaws and several hardcoded single-topic UI strings so far. When a test that expected an empty result set starts failing after new content lands, check whether the app was only ever correct for one topic before changing the test.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as GitHub issues in `drzachnelson/pocket-chief`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles, each label string equal to its name. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
