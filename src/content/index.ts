@@ -1,4 +1,5 @@
 import { abdominalAndAortoiliacAneurysmRepairTopic } from "@/content/topics/abdominal-and-aortoiliac-aneurysm-repair";
+import { abdominalExplorationForTraumaTopic } from "@/content/topics/abdominal-exploration-for-trauma";
 import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploration";
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
@@ -56,4 +57,5 @@ export const demoTopics: Topic[] = [
   renalArteryDiseaseTopic,
   malrotationTopic,
   malrotationOperationTopic,
+  abdominalExplorationForTraumaTopic,
 ];

@@ -215,7 +215,7 @@ export const malrotationOperationTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001115",
   slug: "malrotation-operation",
   title: "Malrotation Operation",
-  aliases: ["Ladd procedure", "Ladd's procedure", "Ladd operation", "malrotation operation", "malrotation repair", "volvulus operation", "midgut volvulus surgery", "detorsion", "Ladd bands", "laparoscopic Ladd", "cecopexy", "second look laparotomy", "bowel viability", "indocyanine green", "ICG", "mesenteric base widening", "nonrotation", "incidental appendectomy", "damage control", "short bowel syndrome", "heterotaxy", "neonatal laparotomy"],
+  aliases: ["Ladd procedure", "Ladd's procedure", "Ladd operation", "malrotation operation", "malrotation repair", "volvulus operation", "midgut volvulus surgery", "detorsion", "Ladd bands", "laparoscopic Ladd", "cecopexy", "second look laparotomy", "bowel viability", "indocyanine green", "ICG", "mesenteric base widening", "nonrotation", "incidental appendectomy", "damage control for midgut volvulus", "short bowel syndrome", "heterotaxy", "neonatal laparotomy"],
   scoreNodeId: "pediatric-procedures",
   scoreCategory: "SCORE · Pediatric Surgery · Operations & Procedures",
   tags: ["pediatric-surgery", "malrotation", "volvulus", "operative-technique", "emergency", "absite", "score"],

@@ -72,7 +72,7 @@ Content lives in `src/content/`, one file per topic, aggregated by `src/content/
 
 `src/lib/__tests__/content-contract.test.ts` validates all of the above plus renderer constraints. A PostToolUse hook (`.claude/hooks/pocket-chief-content.mjs`, wired in the vault's `.claude/settings.local.json`) runs it automatically on edits under `src/content/`.
 
-Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` skill rather than reconstructing the steps.
+Adding library content is a repeatable workflow — invoke the `/add-topic` skill (`.claude/skills/add-topic/`) rather than reconstructing the steps. It covers every route material arrives by: a Word or PDF document, pasted web or AI-search output, a SCORE module text, or a NotebookLM packet.
 
 ### Renderer constraints on content
 

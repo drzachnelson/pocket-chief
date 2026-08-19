@@ -15,6 +15,13 @@ export const SCORE_MALROTATION_SOURCE = "00000000-0000-4000-8000-000000001100";
 export const SCORE_MALROTATION_OPERATION_SOURCE = "00000000-0000-4000-8000-000000001101";
 export const FISER_PEDIATRIC_SOURCE = "00000000-0000-4000-8000-000000001102";
 export const MALROTATION_PACKET_SOURCE = "00000000-0000-4000-8000-000000001103";
+export const TRAUMA_LAPAROTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000001200";
+export const WSES_LIVER_TRAUMA_SOURCE = "00000000-0000-4000-8000-000000001201";
+export const WSES_BOWEL_INJURY_SOURCE = "00000000-0000-4000-8000-000000001202";
+export const WSES_AAST_DUODENOPANCREATIC_SOURCE = "00000000-0000-4000-8000-000000001203";
+export const PROPPR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000001204";
+export const UK_REBOA_TRIAL_SOURCE = "00000000-0000-4000-8000-000000001205";
+export const AAST_ACS_DCR_PROTOCOL_SOURCE = "00000000-0000-4000-8000-000000001206";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -159,5 +166,71 @@ export const suppliedSources: SuppliedSource[] = [
       "Corrected during review, against the packets as supplied: the malrotation summary carried markdown links to an external rare-disease site on gastroschisis, omphalocele, congenital diaphragmatic hernia, and prune belly syndrome, which were stripped as artifacts of whatever tool produced it; its adhesive obstruction figure of 4 to 10 percent conflated the SCORE overall rate of 4 to 5 percent with the open-repair arm of a comparative series and is now reported as two separate figures with their sources; a stray sentence attaching a historical 28 percent mortality of acute midgut volvulus to the adhesive obstruction bullet was moved to the outcome discussion where it belongs; and its statement that added cecopexy may reduce recurrence contradicted the operative playbook's instruction not to fix the bowel routinely, which is now written as the genuine split it is rather than as two confident opposite claims.",
       "Added beyond both packets during review and pending the owner's sign-off: reverse rotation as a fourth rotational variant, since the packet's classification listed only three and stopped short of the one that obstructs the colon; the explicit note that a Ladd procedure deliberately leaves the bowel in nonrotation, which is the same anatomy as the lowest-risk congenital variant; and the observation that the operative playbook and Fiser disagree on whether the cecum ends in the left upper or left lower quadrant, where the testable fact is simply that the colon goes left.",
     ].join(" "),
+  },
+  {
+    id: TRAUMA_LAPAROTOMY_PACKET_SOURCE,
+    title: "User-supplied abdominal exploration for trauma document",
+    kind: "user_notes",
+    citation: "Abdominal Exploration for Trauma. Literature synthesis supplied to Pocket Chief as a Word document, August 17, 2026.",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    details: [
+      "A cited synthesis of the trauma laparotomy literature supplied by the owner, carrying 38 numbered references. The works each block leans on are registered separately; the remainder are recorded here: Mentler (Am Fam Physician 2023) on WSES bowel injury; Risinger and Smith (JTACS 2023) and Chung and Scalea (Curr Opin Crit Care 2023) on damage control; King (NEJM 2019) on initial care of the severely injured; Daniel and Chung (JOMI) operative videos; Van Gent (Surg Clin North Am 2024) on the trauma bay; Cannon (NEJM 2018) on hemorrhagic shock; Brunskill (Cochrane 2025) on transfusion strategies; Barrett (NAEMSP/ACEP/ACS-COT) and the EAST systematic review on tranexamic acid; Jakob (WJES) on four-quadrant packing; Feliciano (Ann Surg 1990) and the ACR Appropriateness Criteria on retroperitoneal hematoma; the ACS Best Practices Guidelines on genitourinary injury; Cripps and Livingston (JTACS 2026) and Diggs (Am Surg 2023) on duodenal injury; Rehne Jensen and the EAST grade I-II colon trial; Fields and Salim (JTACS) and Tan (rectal trauma) on colorectal injury; Noorbakhsh (Injury 2024) on pancreaticoduodenectomy in trauma; Soltani and Jurkovich (JTACS 2025) and Biffl (high-grade pancreatic injury) on pancreatic trauma; Roberts (indications for damage control); the ACS Gastrointestinal Surgical Emergencies textbook, Rogers and Garcia (Chest 2018), Gottlieb (J Emerg Med), Balogh (Lancet 2014), and An and West (Crit Care Med 2008) on intra-abdominal hypertension; and Cambronero (JTACS 2023) on partial REBOA. Reference 3 in the document is an expert attribution rather than a work and carries no citable content.",
+      "Corrected during review, against the document as supplied: the small bowel threshold read \"50% circumference \u2192 transverse primary repair\" in both the organ-specific section and the board pearls, having lost its \"less than\" sign when HTML was pasted into Word, and is authored here as less than 50 percent; the damage control acidosis trigger read \"pH \u221214\", a corruption of the standard threshold, and is authored here as a pH below 7.2 with a rising base deficit, verified against the damage control literature. Literal <strong> tags survived in the retroperitoneal zone and compartment syndrome tables and were converted to inline emphasis.",
+      "Added beyond the document during review and pending the owner's sign-off: the base deficit figure accompanying the corrected acidosis threshold, and the cross-references to the existing Abdominal Exploration topic.",
+    ].join(" "),
+  },
+  {
+    id: WSES_LIVER_TRAUMA_SOURCE,
+    title: "WSES 2020 guidelines on liver trauma",
+    kind: "article",
+    citation: "Coccolini F, Coimbra R, Ordonez C, et al. Liver trauma: WSES 2020 guidelines. World Journal of Emergency Surgery. 2020;15(1):24. doi:10.1186/s13017-020-00302-7",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    url: "https://doi.org/10.1186/s13017-020-00302-7",
+    details: "Reference 21 of the supplied document. Backs the hepatic packing, Pringle, and retrohepatic caval passages, and the grade of recommendation quoted for zone 1 REBOA.",
+  },
+  {
+    id: WSES_BOWEL_INJURY_SOURCE,
+    title: "WSES guidelines on blunt and penetrating bowel injury",
+    kind: "article",
+    citation: "Smyth L, Bendinelli C, Lee N, et al. WSES guidelines on blunt and penetrating bowel injury: diagnosis, investigations, and treatment. World Journal of Emergency Surgery. 2022;17(1):13. doi:10.1186/s13017-022-00418-y",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    url: "https://doi.org/10.1186/s13017-022-00418-y",
+    details: "Reference 4 of the supplied document. Backs the hollow viscus passages, including the circumference threshold governing repair versus resection.",
+  },
+  {
+    id: WSES_AAST_DUODENOPANCREATIC_SOURCE,
+    title: "WSES-AAST guidelines on duodenopancreatic and extrahepatic biliary tree trauma",
+    kind: "article",
+    citation: "Coccolini F, Kobayashi L, Kluger Y, et al. Duodeno-pancreatic and extrahepatic biliary tree trauma: WSES-AAST guidelines. World Journal of Emergency Surgery. 2019;14:56. doi:10.1186/s13017-019-0278-6",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    url: "https://doi.org/10.1186/s13017-019-0278-6",
+    details: "Reference 7 of the supplied document. Backs the duodenal and pancreatic passages, including the retirement of diverticulization and pyloric exclusion.",
+  },
+  {
+    id: PROPPR_TRIAL_SOURCE,
+    title: "PROPPR randomized clinical trial",
+    kind: "article",
+    citation: "Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 vs a 1:1:2 ratio and mortality in patients with severe trauma: the PROPPR randomized clinical trial. JAMA. 2015;313(5):471-482. doi:10.1001/jama.2015.12",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    url: "https://doi.org/10.1001/jama.2015.12",
+    details: "Reference 11 of the supplied document. The trial behind the transfusion ratio entry in the board answer versus current practice table.",
+  },
+  {
+    id: UK_REBOA_TRIAL_SOURCE,
+    title: "UK-REBOA randomized clinical trial",
+    kind: "article",
+    citation: "Jansen JO, Hudson J, Cochran C, et al. Emergency department resuscitative endovascular balloon occlusion of the aorta in trauma patients with exsanguinating hemorrhage: the UK-REBOA randomized clinical trial. JAMA. 2023;330(19):1862-1871. doi:10.1001/jama.2023.20850",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    url: "https://doi.org/10.1001/jama.2023.20850",
+    details: "Reference 37 of the supplied document. The trial behind the REBOA caution.",
+  },
+  {
+    id: AAST_ACS_DCR_PROTOCOL_SOURCE,
+    title: "AAST/ACS-COT clinical protocol for damage-control resuscitation",
+    kind: "article",
+    citation: "LaGrone LN, Stein D, Cribari C, et al. American Association for the Surgery of Trauma/American College of Surgeons Committee on Trauma: clinical protocol for damage-control resuscitation for the adult trauma patient. Journal of Trauma and Acute Care Surgery. 2024;96(3):510-520. doi:10.1097/TA.0000000000004088",
+    suppliedAt: "2026-08-17T00:00:00.000Z",
+    url: "https://doi.org/10.1097/TA.0000000000004088",
+    details: "Reference 13 of the supplied document. Backs the resuscitation and preparation block.",
   },
 ];
