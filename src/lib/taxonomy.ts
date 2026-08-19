@@ -40,7 +40,18 @@ export interface TaxonomySection { node: TaxonomyNode; subsections: TaxonomySubs
 // Subsections are flattened to a single tier on purpose: SCORE is only ever
 // category → section → topic, and a second disclosure tier would repeat "Diseases &
 // Conditions" at two indents without buying any navigation.
-export function taxonomySections(nodes: TaxonomyNode[], topics: Topic[], rootId = "score"): TaxonomySection[] {
+//
+// The curriculum root is matched by SLUG, never by id. Node ids are readable strings in
+// the demo store but uuids in Supabase — `syncTaxonomy` in library-install.ts reconciles
+// the two by slug — so an id-keyed root matches nothing in production and empties
+// /topics while every demo-mode test still passes. The Settings editor saves a new
+// top-level category with no parent at all, so a parentless non-root node is a category
+// too; the root itself is a container and never a browsable one.
+export const curriculumRootSlug = "score";
+
+export function taxonomySections(nodes: TaxonomyNode[], topics: Topic[]): TaxonomySection[] {
+  const rootIds = new Set(nodes.filter((node) => node.slug === curriculumRootSlug).map((node) => node.id));
+  const isCategory = (node: TaxonomyNode) => (node.parentId ? rootIds.has(node.parentId) : !rootIds.has(node.id));
   const byOrder = (a: { node: TaxonomyNode }, b: { node: TaxonomyNode }) => a.node.order - b.node.order;
   const byTitle = (a: Topic, b: Topic) => a.title.localeCompare(b.title);
   function topicsUnder(nodeId: string) {
@@ -48,7 +59,7 @@ export function taxonomySections(nodes: TaxonomyNode[], topics: Topic[], rootId 
     ids.add(nodeId);
     return topics.filter((topic) => ids.has(topic.scoreNodeId)).sort(byTitle);
   }
-  return nodes.filter((node) => node.parentId === rootId).map((node) => {
+  return nodes.filter(isCategory).map((node) => {
     const subsections = nodes.filter((child) => child.parentId === node.id).map((child) => ({ node: child, topics: topicsUnder(child.id) })).filter((subsection) => subsection.topics.length > 0).sort(byOrder);
     const direct = topics.filter((topic) => topic.scoreNodeId === node.id).sort(byTitle);
     return { node, subsections, topics: direct, topicCount: direct.length + subsections.reduce((total, subsection) => total + subsection.topics.length, 0) };
