@@ -5,10 +5,15 @@ import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wal
 import { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
 import { choledocholithiasisTopic } from "@/content/topics/choledocholithiasis";
 import { desmoidTopic } from "@/content/topics/desmoid-tumors-and-fibromatoses";
+import { escharotomyTopic } from "@/content/topics/escharotomy";
+import { fasciotomyTopic } from "@/content/topics/fasciotomy";
 import { femoralHerniaTopic } from "@/content/topics/femoral-hernia";
 import { fibroadenomaPhyllodesTopic } from "@/content/topics/fibroadenoma-vs-phyllodes-tumor";
+import { fastExamTopic } from "@/content/topics/focused-assessment-with-sonography-for-trauma";
+import { gastrointestinalTractInjuryRepairTopic } from "@/content/topics/gastrointestinal-tract-injury-repair";
 import { groinHerniaInChildrenTopic } from "@/content/topics/groin-hernia-in-children";
 import { groinHerniaRepairTopic } from "@/content/topics/groin-hernia-repair";
+import { hepaticInjuryTopic } from "@/content/topics/hepatic-injury-packing-repair-and-resection";
 import { acuteLiverFailureTopic } from "@/content/topics/acute-liver-failure";
 import { inguinalHerniaTopic } from "@/content/topics/inguinal-hernia";
 import { malrotationOperationTopic } from "@/content/topics/malrotation-operation";
@@ -18,6 +23,8 @@ import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dia
 import { peritonealNeoplasmsTopic } from "@/content/topics/peritoneal-neoplasms";
 import { rectusSheathHematomaTopic } from "@/content/topics/rectus-sheath-hematoma";
 import { renalArteryDiseaseTopic } from "@/content/topics/renal-artery-disease";
+import { splenectomyAndSplenorrhaphyTopic } from "@/content/topics/splenectomy-and-splenorrhaphy";
+import { splenicInjuryTopic } from "@/content/topics/splenic-injury";
 import { umbilicalAndEpigastricHerniaTopic } from "@/content/topics/umbilical-and-epigastric-hernia";
 import { unusualHerniasTopic } from "@/content/topics/unusual-hernias";
 import { ventralAndIncisionalHerniaTopic } from "@/content/topics/ventral-and-incisional-hernia";
@@ -56,4 +63,11 @@ export const demoTopics: Topic[] = [
   renalArteryDiseaseTopic,
   malrotationTopic,
   malrotationOperationTopic,
+  splenicInjuryTopic,
+  splenectomyAndSplenorrhaphyTopic,
+  hepaticInjuryTopic,
+  gastrointestinalTractInjuryRepairTopic,
+  fastExamTopic,
+  fasciotomyTopic,
+  escharotomyTopic,
 ];

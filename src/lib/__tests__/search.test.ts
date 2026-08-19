@@ -11,8 +11,14 @@ describe("topic search", () => {
     expect(searchTopics("common bile dcut", demoTopics)[0]?.slug).toBe("choledocholithiasis");
   });
 
+  // The probe has to be words no topic contains: the guard under test is the
+  // `word.length >= 3` condition on prefix matching, so each token here begins
+  // with a short body word ("a", "to") that would otherwise carry it. Remove the
+  // guard and this query matches every topic in the library. The previous probe,
+  // "acute wound", stopped isolating the guard once the trauma section landed --
+  // fasciotomy contains both words outright, and matched them legitimately.
   it("does not let one- or two-letter words in body text carry a token match", () => {
-    expect(searchTopics("acute wound", demoTopics)).toEqual([]);
+    expect(searchTopics("asparagus toboggan", demoTopics)).toEqual([]);
   });
 
   it("still ranks the right topic when a body word is a genuine prefix", () => {

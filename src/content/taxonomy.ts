@@ -24,4 +24,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "pediatric", title: "Pediatric Surgery", slug: "pediatric-surgery", parentId: "score", order: 20 },
   { id: "pediatric-conditions", title: "Diseases & Conditions", slug: "pediatric-diseases-conditions", parentId: "pediatric", order: 21 },
   { id: "pediatric-procedures", title: "Operations & Procedures", slug: "pediatric-operations-procedures", parentId: "pediatric", order: 22 },
+  { id: "trauma", title: "Trauma", slug: "trauma", parentId: "score", order: 23 },
+  { id: "trauma-conditions", title: "Diseases & Conditions", slug: "trauma-diseases-conditions", parentId: "trauma", order: 24 },
+  { id: "trauma-procedures", title: "Operations & Procedures", slug: "trauma-operations-procedures", parentId: "trauma", order: 25 },
 ];
