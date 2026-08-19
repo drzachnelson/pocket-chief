@@ -21,6 +21,7 @@ export const TRAUMA_HEPATIC_PACKET_SOURCE = "00000000-0000-4000-8000-00000000120
 export const TRAUMA_GI_PACKET_SOURCE = "00000000-0000-4000-8000-000000001203";
 export const TRAUMA_FASCIOTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000001204";
 export const TRAUMA_ESCHAROTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000001205";
+export const TRAUMA_NECK_PACKET_SOURCE = "00000000-0000-4000-8000-000000001206";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -233,6 +234,19 @@ export const suppliedSources: SuppliedSource[] = [
     details: [
       "A synthesis the owner identified as SCORE and board-review material covering burn-induced compartment syndrome, incision anatomy, and release endpoints. Like the hepatic packet and unlike the FAST, splenic, gastrointestinal, and fasciotomy packets, it carries no reference list of its own, so it is registered as owner study notes rather than as a literature synthesis.",
       "Carried as a board-answer versus current-practice split rather than resolved: a compartment pressure above 30 mmHg is the textbook trigger, while measured pressures are unreliable in the edematous burn and examination drives the decision. Enzymatic debridement with bromelain is noted as an evolving alternative that surgical escharotomy still outperforms in large or critical burns.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_NECK_PACKET_SOURCE,
+    title: "Owner-supplied traumatic neck injury study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 19, 2026: \"Traumatic Neck Injury Pocket Chief\", carrying 20 numbered primary references.",
+    suppliedAt: "2026-08-19T00:00:00.000Z",
+    details: [
+      "The packet cites its literature in full: the no-zone systematic review (Ibraheem et al., J Trauma Acute Care Surg 2020), the diagnostic approach review (Siletz and Inaba, J Trauma Acute Care Surg 2024), the ACR Appropriateness Criteria for penetrating neck injury (Schroeder et al., J Am Coll Radiol 2017), Feliciano's penetrating cervical trauma review (World J Surg 2015), the operative airway and aerodigestive technique paper (Wall and Mattox, J Trauma Acute Care Surg 2025), the Western Trauma Association critical decisions algorithm (Sperry et al., J Trauma Acute Care Surg 2013), the selective nonoperative pharyngoesophageal series (Madsen et al., J Trauma Acute Care Surg 2018), the penetrating carotid outcomes analysis (Tanamal et al., J Vasc Surg 2026), and the blunt cerebrovascular injury literature including the argument against routine confirmatory angiography (Dyer et al., J Vasc Surg 2025). The papers themselves were not retrieved; the packet is the proximate source.",
+      "Corrected during review and pending the owner's sign-off: the blunt cerebrovascular injury screening line has lost its comparison operators in the supplied file, reading \"DAI with GCS 6\" and \"cervical bruit/thrill 50 yr\". Both are restored from the Denver criteria they are quoting — diffuse axonal injury with a Glasgow Coma Scale score below 6, and a cervical bruit or thrill in a patient under 50 years, where the age cutoff exists because a bruit in a younger patient is far more likely to mean injury than atherosclerosis. Only the operators were supplied; both numbers are the packet's own. This is the same class of defect as the hepatic packet's lethal-triad line, and the two documents appear to share whatever produced it.",
+      "An earlier export of this document, supplied August 18, 2026, was defective: it ended mid-sentence partway through its second section, holding only the zones table and the hard-versus-soft-signs list. No topic was authored from it. The complete export supplied August 19 carries all eight sections and the reference list, and is the version these topics are written from.",
+      "Three classic-versus-current splits are carried rather than resolved, because the packet flags each one explicitly and both sides remain examinable: mandatory Zone II exploration versus no-zone selective management driven by examination and computed tomography angiography; heparin infusion versus aspirin as the antithrombotic for blunt cerebrovascular injury; and temporary intraluminal shunting for carotid damage control, which board teaching favors and which a recent systematic review associates with a stroke-or-death rate approaching 100 percent.",
     ].join(" "),
   },
 ];

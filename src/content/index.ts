@@ -16,7 +16,9 @@ import { groinHerniaRepairTopic } from "@/content/topics/groin-hernia-repair";
 import { hepaticInjuryTopic } from "@/content/topics/hepatic-injury-packing-repair-and-resection";
 import { acuteLiverFailureTopic } from "@/content/topics/acute-liver-failure";
 import { inguinalHerniaTopic } from "@/content/topics/inguinal-hernia";
+import { neckTraumaAssessmentTopic } from "@/content/topics/initial-assessment-and-management-of-neck-trauma";
 import { malrotationOperationTopic } from "@/content/topics/malrotation-operation";
+import { neckInjuriesManagementTopic } from "@/content/topics/neck-injuries-management";
 import { malrotationTopic } from "@/content/topics/malrotation";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
@@ -70,4 +72,6 @@ export const demoTopics: Topic[] = [
   fastExamTopic,
   fasciotomyTopic,
   escharotomyTopic,
+  neckTraumaAssessmentTopic,
+  neckInjuriesManagementTopic,
 ];
