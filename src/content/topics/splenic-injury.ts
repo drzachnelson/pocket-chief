@@ -1,0 +1,185 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import { TRAUMA_SPLENIC_PACKET_SOURCE as PACKET } from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-splenic-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "The spleen is the **most commonly injured solid organ in blunt abdominal trauma**, and the default posture toward it has flipped over the last generation: in Western trauma centers, **85 to 90 percent** of splenic injuries are now managed nonoperatively, whatever the AAST grade, as long as the patient is hemodynamically stable. Stability is the fork in the road that matters more than grade. An unstable patient with a positive FAST goes to the operating room without a CT — that operative pathway is covered separately (see splenectomy and splenorrhaphy). A stable patient earns a dual-phase CT, and what that scan shows — a contained laceration, a vascular blush, active extravasation into the peritoneum — drives everything downstream: observation, splenic artery angioembolization, or a change of plan toward operation. This topic covers the epidemiology, presentation, workup, the 2018 AAST and WSES grading systems, and nonoperative management including angioembolization and follow-up surveillance.",
+  }, PACKET),
+  sourced({
+    id: "block-splenic-epidemiology",
+    type: "bullets",
+    heading: "Epidemiology",
+    items: [
+      "The spleen is the **most commonly injured solid organ in blunt abdominal trauma**, with more than **40,000 adult splenic injuries yearly** in the United States.",
+      "In Western countries, **85 to 90 percent** of splenic injuries are managed nonoperatively; the remainder undergo immediate splenectomy for shock or instability.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-presentation",
+    type: "bullets",
+    heading: "Clinical presentation",
+    items: [
+      "**Kehr sign**: referred left shoulder pain from diaphragmatic irritation by subdiaphragmatic blood.",
+      "Associated injury patterns include **left lower rib fractures (ribs 9 through 12)**, left flank ecchymosis, and a \"seat belt\" sign.",
+      "Concomitant hollow viscus injury occurs in up to roughly **3 percent** of blunt splenic trauma — maintain suspicion for peritonitis.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-algorithm",
+    type: "flow",
+    heading: "Stability-driven workup and management",
+    nodes: [
+      { id: "present", label: "Suspected splenic injury after blunt or penetrating trauma" },
+      { id: "unstable", label: "Hemodynamically unstable", tone: "caution" },
+      { id: "efast", label: "e-FAST" },
+      { id: "fastpos", label: "Positive FAST with ongoing shock", tone: "caution" },
+      { id: "or", label: "Immediate indication for laparotomy (see splenectomy and splenorrhaphy)", tone: "caution" },
+      { id: "stable", label: "Hemodynamically stable" },
+      { id: "ct", label: "Dual-phase IV-contrast CT, the modality of choice" },
+      { id: "blush", label: "Arterial phase pseudoaneurysm or AV fistula, or portal venous phase active extravasation (\"blush\")", tone: "caution" },
+      { id: "noblush", label: "No vascular injury on CT" },
+      { id: "sae", label: "Splenic artery angioembolization", tone: "good" },
+      { id: "nom", label: "Continue nonoperative management with serial monitoring", tone: "good" },
+    ],
+    edges: [
+      { from: "present", to: "unstable", label: "unstable" },
+      { from: "present", to: "stable", label: "stable" },
+      { from: "unstable", to: "efast" },
+      { from: "efast", to: "fastpos", label: "positive" },
+      { from: "fastpos", to: "or" },
+      { from: "stable", to: "ct" },
+      { from: "ct", to: "blush" },
+      { from: "ct", to: "noblush" },
+      { from: "blush", to: "sae", label: "first-line, regardless of grade" },
+      { from: "noblush", to: "nom" },
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-diagnosis",
+    type: "bullets",
+    heading: "Diagnosis and workup",
+    items: [
+      "Hemodynamically unstable patients go from **e-FAST straight to the operating room**; a positive FAST with ongoing shock is an immediate indication for laparotomy, and nonoperative management is contraindicated in unresponsive instability or peritonitis.",
+      "Hemodynamically stable patients receive **dual-phase IV-contrast CT**, the diagnostic modality of choice.",
+      "The **arterial phase** detects pseudoaneurysm and AV fistula; the **portal venous phase** is superior for parenchymal disruption and active extravasation (\"blush\").",
+      "Pitfall: heterogeneous early \"**zebra spleen**\" sinusoidal enhancement is a physiologic pattern that mimics laceration or infarction.",
+      "The emergent indications for laparotomy are unchanged: **hemodynamic instability and peritonitis**.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-aast-context",
+    type: "prose",
+    heading: "AAST Organ Injury Scale, 2018 revision",
+    text: "The pivotal change from the 1994 version is that vascular injury — pseudoaneurysm, AV fistula, or active bleeding — is now incorporated directly into the scale, automatically upgrading an injury to **at least grade IV**. The final grade is the highest of imaging, operative, or pathologic criteria, and advances one grade, up to grade III, for multiple injuries.",
+  }, PACKET),
+  sourced({
+    id: "block-splenic-aast-table",
+    type: "table",
+    heading: "AAST splenic injury grading",
+    columns: ["Grade", "Hematoma", "Laceration", "Vascular (2018 addition)"],
+    rows: [
+      ["I", "Subcapsular <10% surface", "Capsular tear <1 cm depth", "—"],
+      ["II", "Subcapsular 10 to 50%; intraparenchymal <5 cm", "1 to 3 cm depth", "—"],
+      ["III", "Subcapsular >50% or expanding/ruptured; intraparenchymal ≥5 cm", ">3 cm depth", "—"],
+      ["IV", "—", "Segmental/hilar devascularization >25%", "Any vascular injury (pseudoaneurysm/AVF) or active bleeding confined within the capsule"],
+      ["V", "Shattered spleen", "Completely shattered spleen", "Active bleeding extending into the peritoneum"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-aast-prognosis",
+    type: "prose",
+    heading: "Grading precision versus prognostic accuracy",
+    text: "The 2018-AAST correlates better with the need for operation than the 1994 version did, but the older 1994-AAST and the CT Severity Index actually outperform the 2018-AAST for predicting mortality.",
+  }, PACKET),
+  sourced({
+    id: "block-splenic-wses-table",
+    type: "table",
+    heading: "WSES classification (integrates hemodynamics)",
+    columns: ["WSES class", "Definition"],
+    rows: [
+      ["Class I", "Hemodynamically stable, AAST grade I to II"],
+      ["Class II", "Hemodynamically stable, AAST grade III"],
+      ["Class III", "Hemodynamically stable, AAST grade IV to V"],
+      ["Class IV", "Hemodynamically unstable, any AAST grade"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-nom",
+    type: "bullets",
+    heading: "Nonoperative management",
+    items: [
+      "Nonoperative management is the **standard of care for hemodynamically stable patients, irrespective of grade**, with overall success of **80 to 95 percent**, exceeding **90 percent** in well-selected patients.",
+      "Predictors of failure include a higher AAST grade, **age greater than 55**, a high Injury Severity Score, transfusion need, and an elevated shock index above **0.9**; age greater than 55, large hemoperitoneum, and blush are **not** by themselves absolute contraindications to nonoperative management.",
+      "Most failures occur early: roughly **60 percent within 24 hours** and **80 to 95 percent within 72 hours**.",
+      "High-grade injuries (**WSES Class II to III**) warrant continuous monitoring with serial hemoglobin/hematocrit roughly every **8 hours**; low-grade injuries can be checked every **12 to 24 hours**. VTE prophylaxis with low-molecular-weight heparin can generally be started within **48 to 72 hours**.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-nom-failure-table",
+    type: "table",
+    heading: "NOM failure rate by grade, without angioembolization",
+    columns: ["AAST grade", "Failure rate without SAE"],
+    rows: [
+      ["Grade I to II", "2 to 10 percent"],
+      ["Grade III", "10 to 20 percent"],
+      ["Grade IV", "40 to 43 percent"],
+      ["Grade V", "70 to 75 percent"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-sae",
+    type: "bullets",
+    heading: "Splenic artery angioembolization (SAE)",
+    items: [
+      "SAE is the **first-line intervention in a stable patient with arterial blush on CT, regardless of grade**.",
+      "Consider angiography — even without a blush — for grade IV or V injuries, and keep a low threshold in grade III with NOM-failure risk factors; small pseudoaneurysms may be safely observed.",
+      "Splenic salvage exceeds **90 percent** across grades; adding SAE significantly reduces NOM failure in grade IV (from **23 percent to 3 percent**) and grade V (from **63 percent to 9 percent**).",
+      "Immune function is **preserved after SAE** — CD4 counts are comparable to no intervention — so post-SAE OPSI vaccination is generally not indicated.",
+      "Practice-changing note: a more selective, targeted SAE strategy reduces procedural volume **without increasing splenectomy rates**.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-sae-technique-table",
+    type: "table",
+    heading: "Proximal versus distal SAE",
+    columns: ["Technique", "Notes"],
+    rows: [
+      ["Proximal (main-trunk)", "Effective, with infarction and infection rates equivalent to distal embolization; WSES conditionally favors this approach"],
+      ["Distal (superselective)", "Equally effective, with more minor segmental infarcts; contemporary US authors state no proven superiority over proximal"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-splenic-followup-imaging",
+    type: "prose",
+    heading: "Board answer versus current practice",
+    text: "WSES's 2022 consensus suggests routine follow-up imaging with CEUS or CT at **48 to 72 hours** for WSES Class II (grade III) or higher managed with nonoperative management, specifically to catch a delayed pseudoaneurysm before it ruptures. EAST's practice management guideline holds instead that repeat imaging should be **clinically driven** rather than routine. This is a genuine, unresolved split between two guideline bodies rather than an outdated-versus-current distinction — know both positions and be ready to state either as the reasoning behind it.",
+  }, PACKET),
+  sourced({
+    id: "block-splenic-followup",
+    type: "bullets",
+    heading: "Return to activity and surveillance",
+    items: [
+      "Return to activity is restricted for roughly **4 to 8 weeks**, scaled to grade; counsel patients on the risk of delayed rupture before discharge.",
+      "The purpose of follow-up imaging, where it is obtained, is to detect a **delayed pseudoaneurysm** that was not apparent on the index scan.",
+    ],
+  }, PACKET),
+  references("block-splenic-references", [PACKET]),
+];
+
+export const splenicInjuryTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000001210",
+  versionId: "00000000-0000-4000-8000-000000001220",
+  slug: "splenic-injury",
+  title: "Splenic Injury",
+  aliases: ["splenic trauma", "blunt splenic injury", "spleen injury", "spleen trauma", "AAST spleen grade", "AAST organ injury scale", "splenic laceration", "splenic hematoma", "splenic pseudoaneurysm", "splenic blush", "WSES splenic classification", "nonoperative management", "NOM", "splenic artery angioembolization", "SAE", "angioembolization", "Kehr sign", "e-FAST", "zebra spleen", "shock index", "delayed splenic rupture", "solid organ injury", "absite", "score"],
+  scoreNodeId: "trauma-conditions",
+  scoreCategory: "SCORE · Trauma · Diseases & Conditions",
+  tags: ["trauma", "spleen", "solid-organ-injury", "nonoperative-management", "absite", "score"],
+  sourceId: PACKET,
+  blocks,
+  reviewedAt: "2026-08-18T00:00:00.000Z",
+});

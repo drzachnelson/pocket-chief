@@ -57,7 +57,10 @@ describe("authenticated API contracts in demo mode", () => {
     const payload = await created.json();
     expect(created.status).toBe(201);
     expect(payload.topic.title).toBe("Acute Wound Care");
-    expect((await (await search(new Request("http://localhost/api/search?q=acute+wound"))).json()).results).toEqual([]);
+    // Asserts the draft is absent rather than that nothing matched: approved
+    // library content legitimately answers this query ("acute" and "wound" both
+    // appear outright in the fasciotomy topic).
+    expect((await (await search(new Request("http://localhost/api/search?q=acute+wound"))).json()).results.map((result: { title: string }) => result.title)).not.toContain("Acute Wound Care");
 
     const block = payload.draft.blocks[0];
     block.claims = [{ ...block.claims[0], text: block.text, citationIds: [payload.draft.sourceIds[0]], status: "cited" }];
@@ -67,7 +70,7 @@ describe("authenticated API contracts in demo mode", () => {
     const approved = await approveDraft(new Request("http://localhost", { method: "POST" }), { params: Promise.resolve({ id: payload.draft.id }) });
     expect(approved.status).toBe(200);
     const approvedPayload = await approved.json();
-    expect((await (await search(new Request("http://localhost/api/search?q=acute+wound"))).json()).results[0].title).toBe("Acute Wound Care");
+    expect((await (await search(new Request("http://localhost/api/search?q=acute+wound"))).json()).results.map((result: { title: string }) => result.title)).toContain("Acute Wound Care");
 
     const restored = await restoreVersion(new Request("http://localhost", { method: "POST" }), { params: Promise.resolve({ id: approvedPayload.version.id }) });
     expect(restored.status).toBe(201);

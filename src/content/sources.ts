@@ -15,6 +15,13 @@ export const SCORE_MALROTATION_SOURCE = "00000000-0000-4000-8000-000000001100";
 export const SCORE_MALROTATION_OPERATION_SOURCE = "00000000-0000-4000-8000-000000001101";
 export const FISER_PEDIATRIC_SOURCE = "00000000-0000-4000-8000-000000001102";
 export const MALROTATION_PACKET_SOURCE = "00000000-0000-4000-8000-000000001103";
+export const TRAUMA_FAST_PACKET_SOURCE = "00000000-0000-4000-8000-000000001200";
+export const TRAUMA_SPLENIC_PACKET_SOURCE = "00000000-0000-4000-8000-000000001201";
+export const TRAUMA_HEPATIC_PACKET_SOURCE = "00000000-0000-4000-8000-000000001202";
+export const TRAUMA_GI_PACKET_SOURCE = "00000000-0000-4000-8000-000000001203";
+export const TRAUMA_FASCIOTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000001204";
+export const TRAUMA_ESCHAROTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000001205";
+export const TRAUMA_NECK_PACKET_SOURCE = "00000000-0000-4000-8000-000000001206";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -158,6 +165,88 @@ export const suppliedSources: SuppliedSource[] = [
       "The operative playbook cites its literature in full, and the contemporary figures in these topics are drawn from it rather than from the SCORE modules: the ultrasound accuracy data (Nguyen et al., AJR 2022 and 2025; McCurdie et al., Pediatric Radiology 2024), the laparoscopic versus open comparisons (Isani et al., J Surg Res 2018; Zhang et al., JLAST 2022; Johnston et al., J Pediatr Surg 2024), the appendectomy survey (Al Smady et al., Pediatr Surg Int 2023), the recurrence risk factors (Duy et al., J Pediatr Surg 2025), the bowel-viability and second-look guidance (Bala et al., WSES, World J Emerg Surg 2022), and the heterotaxy outcomes (Huerta et al., J Pediatr Surg 2023; Landisch et al. and Salavitabar et al., J Pediatr Surg 2015). The papers themselves were not retrieved; the playbook is the proximate source.",
       "Corrected during review, against the packets as supplied: the malrotation summary carried markdown links to an external rare-disease site on gastroschisis, omphalocele, congenital diaphragmatic hernia, and prune belly syndrome, which were stripped as artifacts of whatever tool produced it; its adhesive obstruction figure of 4 to 10 percent conflated the SCORE overall rate of 4 to 5 percent with the open-repair arm of a comparative series and is now reported as two separate figures with their sources; a stray sentence attaching a historical 28 percent mortality of acute midgut volvulus to the adhesive obstruction bullet was moved to the outcome discussion where it belongs; and its statement that added cecopexy may reduce recurrence contradicted the operative playbook's instruction not to fix the bowel routinely, which is now written as the genuine split it is rather than as two confident opposite claims.",
       "Added beyond both packets during review and pending the owner's sign-off: reverse rotation as a fourth rotational variant, since the packet's classification listed only three and stopped short of the one that obstructs the colon; the explicit note that a Ladd procedure deliberately leaves the bowel in nonrotation, which is the same anatomy as the lowest-risk congenital variant; and the observation that the operative playbook and Fiser disagree on whether the cecum ends in the left upper or left lower quadrant, where the testable fact is simply that the colon goes left.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_FAST_PACKET_SOURCE,
+    title: "Owner-supplied FAST and E-FAST study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 18, 2026: \"FAST / E-FAST — Pocket Chief\", carrying 15 numbered primary references.",
+    suppliedAt: "2026-08-18T00:00:00.000Z",
+    details: [
+      "The packet cites its literature in full and the numeric performance figures in this topic are drawn from it rather than reconstructed: the Cochrane reviews of chest ultrasonography for pneumothorax (Chan et al., 2020, CD013031) and of ultrasound-based algorithms in blunt abdominal trauma (Stengel et al., 2015, CD004446), the WSES-AAST thoracic trauma guidelines (Coccolini et al., World J Emerg Surg 2025), the prehospital FAST individual-participant meta-analysis (Gamberini et al., Injury 2023), the lung ultrasound meta-analysis (Sheng et al., Respiration 2025), the ACR Appropriateness Criteria for major blunt trauma (Shyu et al., JACR 2020), the post-thoracotomy FAST performance series (Ghafil et al., World J Surg 2022), and King's review of initial care of the severely injured patient (NEJM 2019). The papers themselves were not retrieved; the packet is the proximate source.",
+      "Corrected during review, against the packet as supplied: inline numeric citation chips of the form [1] through [15] were stripped from every block, since the app has no route for them and they render as dead text.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_SPLENIC_PACKET_SOURCE,
+    title: "Owner-supplied splenic trauma, splenectomy, and splenorrhaphy study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 18, 2026: \"Traumatic Splenic Injury, Splenectomy & Splenorrhaphy\", carrying 20 numbered primary references.",
+    suppliedAt: "2026-08-18T00:00:00.000Z",
+    details: [
+      "The packet cites its literature in full: the WSES splenic trauma classification and guidelines (Coccolini et al., World J Emerg Surg 2017), the WSES 2022 consensus on follow-up after nonoperative management (Podda et al.), the EAST practice management guideline on selective nonoperative management (Stassen et al., J Trauma Acute Care Surg 2012), the 2018 AAST-OIS revision and its radiologic validation (Dixe de Oliveira Santo et al., RadioGraphics 2023; Morell-Hofert et al., Eur Radiol 2020), the targeted-embolization series (Marsh et al., J Trauma Acute Care Surg 2025), the contemporary management review (Werner and Zarzaur, J Trauma Acute Care Surg 2025), the TQIP-era outcome analyses (Huang et al., JAMA Netw Open 2025; Gerard et al., J Surg Res 2026), the SIR position statement on endovascular intervention for trauma (Padia et al., JVIR 2020), and the asplenia and post-splenectomy infection literature (Di Sabatino et al., Lancet 2011; Rubin and Schaffner, NEJM 2014; Casciani et al., JAMA Surg 2020). The papers themselves were not retrieved; the packet is the proximate source.",
+      "Split during review: the packet covers both the injury and its operations, and the SCORE curriculum outline lists \"Splenic Injury\" under Diseases and Conditions and \"Splenectomy and Splenorrhaphy\" under Operations and Procedures as separate entries. It is therefore authored as two topics — the disease is tested on grading and nonoperative selection, the operation on mobilization and hilar control — rather than one topic burying the operation inside the disease.",
+      "Carried as a genuine guideline split rather than resolved: WSES suggests routine follow-up imaging at 48 to 72 hours for grade III and above managed nonoperatively, while EAST holds that repeat imaging should be clinically driven. Both positions are stated in the topic.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_HEPATIC_PACKET_SOURCE,
+    title: "Owner-supplied traumatic hepatic injury study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 18, 2026: \"Traumatic Hepatic Injury (Packing, Repair, Resection) — Pocket Chief\".",
+    suppliedAt: "2026-08-18T00:00:00.000Z",
+    details: [
+      "A synthesis the owner identified as SCORE and board-review material covering the 2018 AAST liver injury scale, nonoperative management, and the operative repertoire from packing through resectional debridement. Unlike the FAST, splenic, gastrointestinal, and fasciotomy packets, this document carries no reference list of its own, so it is registered as owner study notes rather than as a literature synthesis.",
+      "Carried as a board-answer versus current-practice split rather than resolved: the Schrock atriocaval shunt remains a keyed examination answer for juxtahepatic venous injury while damage-control packing is the contemporary standard, and the topic prints both.",
+      "Corrected during review, against the packet as supplied: the damage-control line reads \"Triggers (lethal triad): hypothermia 4), coagulopathy\" in the source document, where the second element and its threshold are lost to a defect in the file itself rather than to conversion. The topic restores **acidosis** as the triad's named third element, which is standard keyed knowledge, and deliberately omits the mangled numeric threshold rather than guessing at it. This is content added beyond the packet and is pending the owner's sign-off.",
+      "Added beyond both packets during review and pending the owner's sign-off: a short block reconciling this packet's claim that the liver is the most commonly injured abdominal solid organ in both blunt and penetrating trauma with the splenic packet's claim that the spleen is the most commonly injured solid organ in blunt abdominal trauma. Neither was altered; the topic explains that the two are counting different denominators and says which answer a question about blunt, penetrating, or all mechanisms is asking for.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_GI_PACKET_SOURCE,
+    title: "Owner-supplied gastrointestinal tract injury repair study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 18, 2026: \"GI Tract Injury from Trauma – Repair Study Guide\", carrying 24 numbered primary references.",
+    suppliedAt: "2026-08-18T00:00:00.000Z",
+    details: [
+      "The packet cites its literature in full: the WSES guidelines on blunt and penetrating bowel injury (Smyth et al., World J Emerg Surg 2022), the WSES-AAST duodeno-pancreatic and extrahepatic biliary guidelines (Coccolini et al., 2019), the AAST/ACS-COT damage-control resuscitation protocol (LaGrone et al., J Trauma Acute Care Surg 2024), the appropriateness study on indications for damage control (Roberts et al., Ann Surg 2016), the EAST multicenter trials on primary repair versus resection for low-grade colon injury (Fitzgerald et al., 2024 and 2025), the destructive colon injury series (Mitchao et al., J Trauma Acute Care Surg 2022; Nekooei et al., Am J Surg 2026), the AAST multi-institutional and EAST guidelines on rectal injury (Brown et al., 2018; Bosarge et al., 2016), the stapled versus hand-sewn meta-analyses and AAST prospective study (Naumann et al., Surgery 2015; Bruns et al., 2017; Le et al., ANZ J Surg 2024), and the Surgical Infection Society intra-abdominal infection guidelines with the STOP-IT trial (Huston et al., Surg Infect 2024; Sawyer et al., NEJM 2015). The papers themselves were not retrieved; the packet is the proximate source.",
+      "Scoped during review: the packet opens with two sections on trauma laparotomy priorities and retroperitoneal exposure maneuvers that the existing Abdominal Exploration topic already covers in the same detail. The topic keeps only the damage-control decision that actually governs a bowel repair — staple and leave versus definitive anastomosis — and spends its length on the segment-by-segment repair the existing topic does not carry.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_FASCIOTOMY_PACKET_SOURCE,
+    title: "Owner-supplied fasciotomy and compartment syndrome study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 18, 2026: \"Fasciotomy — Pocket Chief Study Guide\", carrying 21 numbered primary references.",
+    suppliedAt: "2026-08-18T00:00:00.000Z",
+    details: [
+      "The packet cites its literature in full: the Lancet seminar on acute extremity compartment syndrome (von Keudell et al., 2015), the JAMA Surgery systematic review of diagnostic modalities (Mortensen et al., 2019), Matsen's original pressure-measurement work (J Bone Joint Surg Am 1980), the delayed-fasciotomy amputation analysis (Rothenberg et al., Ann Vasc Surg 2019), the vascular-trauma fasciotomy predictors (Kluckner et al., Injury 2021), the 2024 ACC/AHA multisociety lower-extremity peripheral artery disease guideline (Gornik et al., J Am Coll Cardiol), the incision-placement and forearm technique papers (Pallister et al., Injury 2016; Masquelet, OTSR 2010; Turkula and Fuller, J Orthop Trauma 2017), the shoelace plus negative-pressure closure series (Eceviz and Cevik, Adv Skin Wound Care 2020), and the rhabdomyolysis literature including the AAST critical care consensus document (Kodadek et al., Trauma Surg Acute Care Open 2022; Bosch et al., NEJM 2009; Zeng et al., Cochrane 2014). The papers themselves were not retrieved; the packet is the proximate source.",
+      "Carried as a genuine split rather than resolved: a delta pressure under 30 mmHg is the widely taught operative threshold, while the contemporary diagnostic literature holds that no pressure measurement is sensitive or specific enough to overrule serial clinical examination in an awake patient. Both are stated.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_ESCHAROTOMY_PACKET_SOURCE,
+    title: "Owner-supplied escharotomy study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 18, 2026: \"Escharotomy — SCORE / General Surgery Board Study Guide\".",
+    suppliedAt: "2026-08-18T00:00:00.000Z",
+    details: [
+      "A synthesis the owner identified as SCORE and board-review material covering burn-induced compartment syndrome, incision anatomy, and release endpoints. Like the hepatic packet and unlike the FAST, splenic, gastrointestinal, and fasciotomy packets, it carries no reference list of its own, so it is registered as owner study notes rather than as a literature synthesis.",
+      "Carried as a board-answer versus current-practice split rather than resolved: a compartment pressure above 30 mmHg is the textbook trigger, while measured pressures are unreliable in the edematous burn and examination drives the decision. Enzymatic debridement with bromelain is noted as an evolving alternative that surgical escharotomy still outperforms in large or critical burns.",
+    ].join(" "),
+  },
+  {
+    id: TRAUMA_NECK_PACKET_SOURCE,
+    title: "Owner-supplied traumatic neck injury study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 19, 2026: \"Traumatic Neck Injury Pocket Chief\", carrying 20 numbered primary references.",
+    suppliedAt: "2026-08-19T00:00:00.000Z",
+    details: [
+      "The packet cites its literature in full: the no-zone systematic review (Ibraheem et al., J Trauma Acute Care Surg 2020), the diagnostic approach review (Siletz and Inaba, J Trauma Acute Care Surg 2024), the ACR Appropriateness Criteria for penetrating neck injury (Schroeder et al., J Am Coll Radiol 2017), Feliciano's penetrating cervical trauma review (World J Surg 2015), the operative airway and aerodigestive technique paper (Wall and Mattox, J Trauma Acute Care Surg 2025), the Western Trauma Association critical decisions algorithm (Sperry et al., J Trauma Acute Care Surg 2013), the selective nonoperative pharyngoesophageal series (Madsen et al., J Trauma Acute Care Surg 2018), the penetrating carotid outcomes analysis (Tanamal et al., J Vasc Surg 2026), and the blunt cerebrovascular injury literature including the argument against routine confirmatory angiography (Dyer et al., J Vasc Surg 2025). The papers themselves were not retrieved; the packet is the proximate source.",
+      "Corrected during review and pending the owner's sign-off: the blunt cerebrovascular injury screening line has lost its comparison operators in the supplied file, reading \"DAI with GCS 6\" and \"cervical bruit/thrill 50 yr\". Both are restored from the Denver criteria they are quoting — diffuse axonal injury with a Glasgow Coma Scale score below 6, and a cervical bruit or thrill in a patient under 50 years, where the age cutoff exists because a bruit in a younger patient is far more likely to mean injury than atherosclerosis. Only the operators were supplied; both numbers are the packet's own. This is the same class of defect as the hepatic packet's lethal-triad line, and the two documents appear to share whatever produced it.",
+      "An earlier export of this document, supplied August 18, 2026, was defective: it ended mid-sentence partway through its second section, holding only the zones table and the hard-versus-soft-signs list. No topic was authored from it. The complete export supplied August 19 carries all eight sections and the reference list, and is the version these topics are written from.",
+      "Three classic-versus-current splits are carried rather than resolved, because the packet flags each one explicitly and both sides remain examinable: mandatory Zone II exploration versus no-zone selective management driven by examination and computed tomography angiography; heparin infusion versus aspirin as the antithrombotic for blunt cerebrovascular injury; and temporary intraluminal shunting for carotid damage control, which board teaching favors and which a recent systematic review associates with a stroke-or-death rate approaching 100 percent.",
     ].join(" "),
   },
 ];
