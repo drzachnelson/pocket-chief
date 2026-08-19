@@ -78,4 +78,28 @@ describe("taxonomySections", () => {
     const [section] = taxonomySections(nodes, [topic("z", "Zebra", "sub"), topic("a", "Aorta", "sub")]);
     expect(section!.subsections[0]!.topics.map((entry) => entry.title)).toEqual(["Aorta", "Zebra"]);
   });
+
+  // The store the owner actually browses keys nodes by uuid and carries the authored ids
+  // nowhere — `syncTaxonomy` reconciles the two sides by slug. A root matched by id left
+  // /topics empty in Supabase mode while all of the above still passed, so this mirrors
+  // that remapping and asserts the same categories come back.
+  it("finds the same categories when the store keys nodes by uuid", () => {
+    const storeId = new Map(taxonomy.map((node, index) => [node.id, `f47ac10b-58cc-4372-a567-${String(index).padStart(12, "0")}`]));
+    const stored: TaxonomyNode[] = taxonomy.map((node) => ({ ...node, id: storeId.get(node.id)!, parentId: node.parentId ? storeId.get(node.parentId) : undefined }));
+    const storedTopics = approved.map((entry) => ({ ...entry, scoreNodeId: storeId.get(entry.scoreNodeId)! }));
+    const sections = taxonomySections(stored, storedTopics);
+    expect(sections.map((section) => section.node.slug)).toEqual(taxonomySections(taxonomy, approved).map((section) => section.node.slug));
+    expect(sections.reduce((total, section) => total + section.topicCount, 0)).toBe(approved.length);
+  });
+
+  it("keeps a top-level category the owner added with no parent", () => {
+    const nodes: TaxonomyNode[] = [
+      { id: "score", title: "SCORE", slug: "score", order: 0 },
+      { id: "cat", title: "Cat", slug: "cat", parentId: "score", order: 1 },
+      { id: "owned", title: "Owner Category", slug: "owner-category", order: 2 },
+    ];
+    const sections = taxonomySections(nodes, [topic("t", "Topic", "owned")]);
+    expect(sections.map((section) => section.node.id)).toEqual(["cat", "owned"]);
+    expect(sections[1]!.topicCount).toBe(1);
+  });
 });
