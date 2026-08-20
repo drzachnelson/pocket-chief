@@ -1,9 +1,9 @@
-// v2 discards everything v1 held. The shell precache follows redirects, so any install that ran
-// while the deployment was unconfigured or signed out stored the "locked" or sign-in page under
-// "/", "/topics" and "/saved" — which is what an offline launch would then serve. The activate
-// handler already deletes any pocket-chief-* cache outside this pair, so renaming is the purge.
-const SHELL = "pocket-chief-shell-v2";
-const CONTENT = "pocket-chief-content-v2";
+// v3 discards v2's former Topics shell and guide markup. The shell precache follows redirects, so
+// an install while the deployment was unconfigured or signed out can store a locked/sign-in page
+// under "/", "/topics", and "/saved". The activate handler deletes every other pocket-chief-*
+// cache, so changing this pair is the explicit stale-shell purge.
+const SHELL = "pocket-chief-shell-v3";
+const CONTENT = "pocket-chief-content-v3";
 const SHELL_ASSETS = ["/", "/topics", "/saved", "/icon.svg", "/manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {

@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CaretDown, CaretLeft, CaretRight, X } from "@phosphor-icons/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { GlobalNavigation, GlobalNavigationFooter, useTopicsDrawer } from "@/components/app-shell";
 import type { TopicNavigationCategory, TopicNavigationSection, TopicNavigationTopic } from "@/lib/topic-navigation";
 
 const SIDEBAR_KEY = "pocket-chief-topics-sidebar-collapsed";
+const SIDEBAR_EVENT = "pocket-chief-topics-sidebar-change";
 const FOCUSABLE = "a[href], button:not([disabled])";
 
 function readCollapsedSidebar() {
@@ -16,6 +17,13 @@ function readCollapsedSidebar() {
 
 function saveCollapsedSidebar(collapsed: boolean) {
   try { window.localStorage?.setItem(SIDEBAR_KEY, String(collapsed)); } catch { /* private browsing can deny storage */ }
+  window.dispatchEvent(new Event(SIDEBAR_EVENT));
+}
+
+function subscribeCollapsedSidebar(update: () => void) {
+  window.addEventListener("storage", update);
+  window.addEventListener(SIDEBAR_EVENT, update);
+  return () => { window.removeEventListener("storage", update); window.removeEventListener(SIDEBAR_EVENT, update); };
 }
 
 function categoryTopics(category: TopicNavigationCategory) {
@@ -29,20 +37,18 @@ function activeTopic(navigation: TopicNavigationCategory[], pathname: string) {
 function useSectionSpy(sections: TopicNavigationSection[]) {
   const [active, setActive] = useState("");
   useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-    const visible = new Set<string>();
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) visible.add(entry.target.id); else visible.delete(entry.target.id);
-      }
-      const next = sections.find((section) => visible.has(section.id));
-      if (next) setActive(next.id);
-    }, { rootMargin: "0px 0px -70% 0px" });
-    for (const section of sections) {
-      const node = document.getElementById(section.id);
-      if (node) observer.observe(node);
+    function update() {
+      const marker = 112;
+      const current = sections.reduce<string>((closest, section) => {
+        const top = document.getElementById(section.id)?.getBoundingClientRect().top;
+        return top !== undefined && top <= marker ? section.id : closest;
+      }, "");
+      setActive(current || sections[0]?.id || "");
     }
-    return () => observer.disconnect();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("hashchange", update);
+    return () => { window.removeEventListener("scroll", update); window.removeEventListener("hashchange", update); };
   }, [sections]);
   return active;
 }
@@ -101,7 +107,9 @@ function TopicsDrawer({ navigation }: { navigation: TopicNavigationCategory[] })
 export function TopicsWorkspace({ navigation, children }: { navigation: TopicNavigationCategory[]; children: React.ReactNode }) {
   const { setContent } = useTopicsDrawer();
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(readCollapsedSidebar);
+  // The server snapshot keeps hydration stable; React picks up the browser preference after it
+  // mounts and also follows changes from this tab or another open Pocket Chief tab.
+  const collapsed = useSyncExternalStore(subscribeCollapsedSidebar, readCollapsedSidebar, () => false);
   useEffect(() => {
     setContent(<TopicsDrawer navigation={navigation} />);
     return () => setContent(null);
@@ -113,7 +121,7 @@ export function TopicsWorkspace({ navigation, children }: { navigation: TopicNav
       <GlobalNavigation />
       <div className="topics-sidebar-divider" />
       <TopicTree key={pathname} navigation={navigation} />
-      <button type="button" className="topics-sidebar-toggle" aria-label={label} onClick={() => setCollapsed((current) => { const next = !current; saveCollapsedSidebar(next); return next; })}>{collapsed ? <CaretRight size={15} /> : <CaretLeft size={15} />}<span>{collapsed ? "Expand" : "Collapse"}</span></button>
+      <button type="button" className="topics-sidebar-toggle" aria-label={label} onClick={() => saveCollapsedSidebar(!collapsed)}>{collapsed ? <CaretRight size={15} /> : <CaretLeft size={15} />}<span>{collapsed ? "Expand" : "Collapse"}</span></button>
       <GlobalNavigationFooter compact />
     </aside>
     {children}
