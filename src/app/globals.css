@@ -390,16 +390,22 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 .sequence-list > li:last-child { border-bottom: 0; }
 .step-number { color: var(--cobalt-dark); font-size: var(--text-xs); font-weight: 740; letter-spacing: .05em; }
 .sequence-list strong { display: block; font-size: var(--text-md); font-weight: 700; letter-spacing: -.005em; }.sequence-list p { margin: 2px 0 0; color: var(--ink); font-size: var(--text-md); line-height: 1.5; }
-.decision-flow { display: grid; justify-items: center; margin-top: var(--space-5); }
-.flow-start { width: min(100%, 460px); padding: 11px var(--space-5); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); text-align: center; font-size: var(--text-base); font-weight: 650; }
-.flow-branch { height: 52px; position: relative; display: grid; place-items: center; color: var(--ink-faint); font-size: var(--text-2xs); }
-.flow-branch::before { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line-strong); }.flow-branch span { z-index: 1; padding: 2px 7px; background: var(--canvas); }
-.flow-options { width: 100%; display: grid; grid-template-columns: 1fr; gap: 9px; }
-.flow-card { padding: var(--space-4); border: 1px solid var(--line); border-top: 3px solid var(--cobalt); border-radius: var(--radius-sm); background: var(--surface); text-align: center; }
-.flow-card.good { border-top-color: var(--green); background: color-mix(in srgb, var(--green-soft) 55%, var(--surface)); }
-.flow-card.caution { border-top-color: var(--amber); background: color-mix(in srgb, var(--amber-soft) 55%, var(--surface)); }
-.flow-card small { display: block; color: var(--ink-faint); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: .05em; }
-.flow-card strong { display: block; margin-top: var(--space-1); font-size: var(--text-base); font-weight: 680; }
+.decision-flow { width: 100%; margin-top: var(--space-5); overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.flow-canvas { --flow-columns: 1; --flow-min-width: 0px; position: relative; min-width: max(100%, var(--flow-min-width)); padding: var(--space-3) 18px var(--space-2); isolation: isolate; background-image: radial-gradient(circle, color-mix(in srgb, var(--line-strong) 44%, transparent) .8px, transparent .9px); background-size: 18px 18px; }
+.flow-connectors { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.flow-edge { fill: none; stroke: color-mix(in srgb, var(--ink-faint) 62%, var(--line)); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+.flow-connectors marker path { fill: color-mix(in srgb, var(--ink-faint) 62%, var(--line)); }
+.flow-edge-label { position: absolute; z-index: 2; max-width: 180px; padding: 2px 6px; transform: translate(-50%, -50%); border: 1px solid var(--line); border-radius: 4px; background: var(--canvas); color: var(--ink-muted); font-size: 9px; font-weight: 650; line-height: 1.25; letter-spacing: .045em; text-align: center; text-transform: uppercase; }
+.flow-level { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(var(--flow-columns), minmax(0, 1fr)); align-items: stretch; gap: 12px; }
+.flow-level + .flow-level { margin-top: 72px; }
+.flow-node { width: 100%; min-height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--space-4); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--surface) 96%, var(--surface-strong)); color: var(--ink); text-align: center; }
+.flow-node[data-single="true"] { width: min(100%, 460px); justify-self: center; }
+.flow-node.root { border-color: var(--cobalt); background: color-mix(in srgb, var(--cobalt-soft) 64%, var(--surface)); }
+.flow-node.good { border-color: color-mix(in srgb, var(--green) 62%, var(--line)); background: color-mix(in srgb, var(--green-soft) 58%, var(--surface)); }
+.flow-node.caution { border-color: color-mix(in srgb, var(--amber) 68%, var(--line)); background: color-mix(in srgb, var(--amber-soft) 62%, var(--surface)); }
+.flow-node small { display: block; margin-bottom: var(--space-1); color: var(--ink-faint); font-size: 9px; font-weight: 690; line-height: 1; letter-spacing: .095em; text-transform: uppercase; }
+.flow-node.root small { color: var(--cobalt-dark); }
+.flow-node strong { display: block; font-size: var(--text-base); font-weight: 680; line-height: 1.42; letter-spacing: -.005em; text-wrap: balance; }
 .source-list, .history-list { display: grid; margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
 .source-list article, .history-list article { display: flex; gap: 11px; padding: 14px; border-bottom: 1px solid var(--line); }.source-list article:last-child, .history-list article:last-child { border-bottom: 0; }.source-list article > span { width: 25px; height: 25px; flex: 0 0 25px; display: grid; place-items: center; border-radius: 7px; background: var(--cobalt-soft); color: var(--cobalt-dark); font-size: 9px; font-weight: 700; }.source-list h2, .history-list h2 { margin: 0; font-size: 12px; }.source-list p, .history-list p { margin: 2px 0; color: var(--ink-muted); font-size: 11px; }.source-list small { display: block; color: var(--ink-faint); font-size: 10px; }
 .history-list article { align-items: center; }.history-list .status-dot { color: var(--green); background: var(--green); }
@@ -471,11 +477,15 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .clinical-list li button { width: 25px; height: 25px; }
   .clinical-list li button::after { inset: -9.5px; }
   .sequence-list li { padding-block: var(--space-3); }
+  .flow-canvas { padding-inline: 10px; }
+  .flow-level { gap: 8px; }
+  .flow-level + .flow-level { margin-top: 76px; }
+  .flow-node { min-height: 78px; padding: var(--space-3) var(--space-2); }
+  .flow-node strong { font-size: var(--text-sm); line-height: 1.4; }
+  .flow-edge-label { max-width: 124px; padding-inline: 4px; font-size: 8px; letter-spacing: .035em; }
   .support-mark { font-size: 9px; }
   .anki-inline { font-size: 9px; }
 }
-
-@media (min-width: 620px) { .flow-options { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); } }
 
 @media (min-width: 760px) {
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
