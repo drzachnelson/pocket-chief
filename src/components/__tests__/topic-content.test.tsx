@@ -19,6 +19,17 @@ const topic: Topic = { id: "t1", slug: "paraesophageal", title: "Paraesophageal"
 const entries = [{ key: "choledocholithiasis", slug: "choledocholithiasis", title: "Choledocholithiasis" }, { key: "paraesophageal", slug: "paraesophageal", title: "Paraesophageal" }];
 
 describe("renderer redesign", () => {
+  it("keeps guide controls compact without a version-reviewed decoration", () => {
+    render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+
+    expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Collapse all" })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: /^Notes$/ })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: /Sources/ })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: /History/ })).toBeInTheDocument();
+    expect(screen.queryByText(/Version 1 reviewed/i)).not.toBeInTheDocument();
+  });
+
   it("renders inline markup, nesting, tones, and collapse state", () => {
     const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
 

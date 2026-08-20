@@ -15,7 +15,7 @@ export default async function TopicsPage() {
   const fallbackSlug = navigation.flatMap((category) => [...category.topics, ...category.children.flatMap((section) => section.topics)])[0]?.slug;
   return (
     <div className="topics-index-heading">
-      <div><p className="eyebrow">Editable curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the reviewed SCORE hierarchy.</p></div>
+      <div><p className="eyebrow">SCORE curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy.</p></div>
       <TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={fallbackSlug} />
     </div>
   );

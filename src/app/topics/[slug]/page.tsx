@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Fragment } from "react";
 import { TopicContent } from "@/components/topic-content";
 import { buildLinkIndex } from "@/lib/inline";
 import { getRepository } from "@/lib/repository";
@@ -24,10 +22,11 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   const suppliedSources = await repository.listSources(version.sourceIds);
   const linkEntries = buildLinkIndex(await repository.listTopics());
   const ancestry = taxonomyAncestry(topic.scoreNodeId, await repository.listTaxonomy());
+  const scorePath = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");
+  const updatedAt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(topic.updatedAt));
   return (
     <div className="topic-reading">
-      <nav className="breadcrumbs" aria-label="Breadcrumb">{ancestry.map((node) => <Fragment key={node.id}><Link href="/topics">{node.title === "SCORE Curriculum" ? "SCORE" : node.title}</Link><span>/</span></Fragment>)}<strong>{topic.title}</strong></nav>
-      <header className="topic-header"><div><p className="eyebrow">{topic.scoreCategory}</p><h1 className="page-title">{topic.title}</h1><div className="tag-row">{topic.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div></div></header>
+      <header className="topic-header"><div><p className="eyebrow">{scorePath}</p><h1 className="page-title">{topic.title}</h1><p className="topic-updated">Last updated {updatedAt}</p></div></header>
       <TopicContent topic={topic} sources={suppliedSources.filter((source) => version.sourceIds.includes(source.id))} linkEntries={linkEntries} />
     </div>
   );

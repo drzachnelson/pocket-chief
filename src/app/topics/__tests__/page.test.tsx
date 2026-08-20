@@ -29,6 +29,24 @@ function topic(slug: string, title: string, scoreNodeId: string): Topic {
 afterEach(() => { vi.clearAllMocks(); });
 
 describe("TopicsPage", () => {
+  it("uses neutral browse copy", async () => {
+    const taxonomy: TaxonomyNode[] = [
+      { id: "score", title: "SCORE", slug: "score", order: 0 },
+      { id: "stocked", title: "Stocked", slug: "stocked", parentId: "score", order: 1 },
+    ];
+    readRepository.mockResolvedValue({
+      listTaxonomy: vi.fn().mockResolvedValue(taxonomy),
+      listTopics: vi.fn().mockResolvedValue([topic("stocked-topic", "Stocked topic", "stocked")]),
+      listRecentTopics: vi.fn().mockResolvedValue([]),
+    } as never);
+    readDeviceRecents.mockResolvedValue([]);
+
+    render(await TopicsPage());
+
+    expect(screen.getByText("Browse the SCORE hierarchy.")).toBeInTheDocument();
+    expect(screen.queryByText(/Browse the reviewed SCORE hierarchy/i)).not.toBeInTheDocument();
+  });
+
   it("does not render empty curriculum branches", async () => {
     const taxonomy: TaxonomyNode[] = [
       { id: "score", title: "SCORE", slug: "score", order: 0 },

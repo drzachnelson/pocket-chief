@@ -22,7 +22,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
       <section className="search-hero">
         <p className="eyebrow">Private clinical atlas</p>
         <h1 className="visually-hidden">Pocket Chief</h1>
-        <p className="page-lede">Search reviewed general surgery notes, decision flows, procedures, and high-yield board pearls.</p>
+        <p className="page-lede">Search general surgery notes, decision flows, procedures, and high-yield board pearls.</p>
         <SearchForm defaultValue={q} />
         <p className="search-hint">Titles, aliases, headings, SCORE categories, body text, and tags · typo tolerant</p>
       </section>
@@ -31,7 +31,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <section className="section" aria-live="polite">
           <div className="section-heading"><h2>{results.length} {results.length === 1 ? "result" : "results"} for “{q}”</h2><Link href="/">Clear search</Link></div>
           {results.length ? <div className="topic-grid">{results.map((topic) => <TopicCard key={topic.id} topic={topic} />)}</div> : (
-            <div className="empty-state"><span className="empty-icon"><Notebook size={22} /></span><h2>No reviewed topic matches yet</h2><p>Try an alias or shorter term. Drafts stay out of search until you approve every supported claim.</p><Link className="button" href="/add"><Plus size={15} />Add source notes</Link></div>
+            <div className="empty-state"><span className="empty-icon"><Notebook size={22} /></span><h2>No topic matches yet</h2><p>Try an alias or shorter term.</p><Link className="button" href="/add"><Plus size={15} />Add source notes</Link></div>
           )}
         </section>
       ) : (
