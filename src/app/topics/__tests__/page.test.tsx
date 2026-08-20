@@ -29,6 +29,25 @@ function topic(slug: string, title: string, scoreNodeId: string): Topic {
 afterEach(() => { vi.clearAllMocks(); });
 
 describe("TopicsPage", () => {
+  it("does not render empty curriculum branches", async () => {
+    const taxonomy: TaxonomyNode[] = [
+      { id: "score", title: "SCORE", slug: "score", order: 0 },
+      { id: "stocked", title: "Stocked", slug: "stocked", parentId: "score", order: 1 },
+      { id: "empty", title: "Empty", slug: "empty", parentId: "score", order: 2 },
+    ];
+    readRepository.mockResolvedValue({
+      listTaxonomy: vi.fn().mockResolvedValue(taxonomy),
+      listTopics: vi.fn().mockResolvedValue([topic("stocked-topic", "Stocked topic", "stocked")]),
+      listRecentTopics: vi.fn().mockResolvedValue([]),
+    } as never);
+    readDeviceRecents.mockResolvedValue([]);
+
+    render(await TopicsPage());
+
+    expect(screen.queryAllByText("Empty")).toHaveLength(0);
+    expect(screen.queryByText("Not started")).not.toBeInTheDocument();
+  });
+
   it("uses the first approved topic in curriculum order as the final resume fallback", async () => {
     const taxonomy: TaxonomyNode[] = [
       { id: "score", title: "SCORE", slug: "score", order: 0 },
@@ -44,7 +63,7 @@ describe("TopicsPage", () => {
     } as never);
     readDeviceRecents.mockResolvedValue([]);
 
-    render(await TopicsPage({ searchParams: Promise.resolve({}) }));
+    render(await TopicsPage());
 
     expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/zebra");
   });
