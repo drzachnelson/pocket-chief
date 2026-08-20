@@ -1,10 +1,11 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { AppShell } from "@/components/app-shell";
 import { TopicsWorkspace } from "@/components/topics-workspace";
 import type { TopicNavigationCategory } from "@/lib/topic-navigation";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/topics" }));
+let currentPathname = "/topics";
+vi.mock("next/navigation", () => ({ usePathname: () => currentPathname }));
 
 const stored = new Map<string, string>();
 Object.defineProperty(window, "localStorage", { configurable: true, value: { getItem: (key: string) => stored.get(key) ?? null, setItem: (key: string, value: string) => stored.set(key, value) } });
@@ -13,11 +14,38 @@ const navigation: TopicNavigationCategory[] = [{
   id: "trauma", slug: "trauma", label: "Trauma", topics: [{ id: "neck", slug: "neck-trauma", label: "Neck trauma", updatedAt: "2026-08-20", taxonomyNodeId: "trauma", sections: [{ id: "assessment", label: "Assessment", level: 2 }] }], children: [],
 }];
 
+const branchedNavigation: TopicNavigationCategory[] = [{
+  id: "abdominal", slug: "abdominal", label: "Abdominal", topics: [], children: [
+    { id: "upper", slug: "upper", label: "Upper GI", topics: [{ id: "alpha", slug: "alpha-topic", label: "Alpha topic", updatedAt: "2026-08-20", taxonomyNodeId: "upper", sections: [] }], children: [] },
+    { id: "lower", slug: "lower", label: "Lower GI", topics: [{ id: "beta", slug: "beta-topic", label: "Beta topic", updatedAt: "2026-08-20", taxonomyNodeId: "lower", sections: [] }], children: [] },
+  ],
+}];
+
 function renderWorkspace() {
   return render(<AppShell><TopicsWorkspace navigation={navigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
 }
 
+afterEach(() => { currentPathname = "/topics"; });
+
 describe("TopicsWorkspace", () => {
+  it("keeps inactive child branches hidden until selected and restores the current topic path", () => {
+    currentPathname = "/topics/alpha-topic";
+    const view = render(<AppShell><TopicsWorkspace navigation={branchedNavigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
+
+    expect(screen.getByRole("link", { name: "Alpha topic" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Beta topic" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Lower GI" }));
+    expect(screen.getByRole("link", { name: "Beta topic" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Alpha topic" })).toBeInTheDocument();
+
+    currentPathname = "/topics/alpha-topic";
+    view.unmount();
+    render(<AppShell><TopicsWorkspace navigation={branchedNavigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
+    expect(screen.getByRole("link", { name: "Alpha topic" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Beta topic" })).not.toBeInTheDocument();
+  });
+
   it("opens the shared Topics drawer and restores focus after Escape", () => {
     renderWorkspace();
     const trigger = screen.getByRole("button", { name: "Topics" });
@@ -30,6 +58,17 @@ describe("TopicsWorkspace", () => {
 
     expect(screen.queryByRole("dialog", { name: "Topics" })).not.toBeInTheDocument();
     expect(trigger).toHaveFocus();
+  });
+
+  it("clears drawer open state when the workspace unmounts", () => {
+    const view = renderWorkspace();
+    fireEvent.click(screen.getByRole("button", { name: "Topics" }));
+    expect(screen.getByRole("dialog", { name: "Topics" })).toBeInTheDocument();
+
+    view.rerender(<AppShell><p>Other route content</p></AppShell>);
+
+    expect(screen.queryByRole("dialog", { name: "Topics" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Topics" })).toHaveAttribute("aria-expanded", "false");
   });
 
   it("closes the drawer after topic selection and remembers the desktop rail state", () => {

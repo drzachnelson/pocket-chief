@@ -16,7 +16,7 @@ export default async function TopicsPage() {
   return (
     <div className="topics-index-heading">
       <div><p className="eyebrow">SCORE curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy.</p></div>
-      <TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={fallbackSlug} />
+      <TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={fallbackSlug} approvedTopics={topics.map(({ id, slug }) => ({ id, slug }))} />
     </div>
   );
 }

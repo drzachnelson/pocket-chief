@@ -34,6 +34,11 @@ function activeTopic(navigation: TopicNavigationCategory[], pathname: string) {
   return navigation.flatMap(categoryTopics).find((topic) => pathname === `/topics/${topic.slug}`);
 }
 
+function activeBranch(navigation: TopicNavigationCategory[], topic?: TopicNavigationTopic) {
+  const category = navigation.find((candidate) => categoryTopics(candidate).some((item) => item.id === topic?.id));
+  return { categoryId: category?.id ?? null, subsectionId: category?.children.find((child) => child.topics.some((item) => item.id === topic?.id))?.id ?? null };
+}
+
 function useSectionSpy(sections: TopicNavigationSection[]) {
   const [active, setActive] = useState("");
   useEffect(() => {
@@ -64,17 +69,36 @@ function TopicSections({ topic, onSelect }: { topic: TopicNavigationTopic; onSel
 function TopicTree({ navigation, onSelect }: { navigation: TopicNavigationCategory[]; onSelect?: () => void }) {
   const pathname = usePathname();
   const currentTopic = activeTopic(navigation, pathname);
-  const [expanded, setExpanded] = useState<string | null>(() => navigation.find((category) => categoryTopics(category).some((topic) => topic.slug === currentTopic?.slug))?.id ?? null);
+  const active = activeBranch(navigation, currentTopic);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(active.categoryId);
+  const [expandedSubsections, setExpandedSubsections] = useState<Set<string>>(() => new Set(active.subsectionId ? [active.subsectionId] : []));
   return <nav className="topics-tree" aria-label="Topics curriculum">
     <p>Curriculum</p>
     {navigation.map((category) => {
-      const open = expanded === category.id;
+      const open = expandedCategory === category.id;
       const topics = categoryTopics(category);
       return <div key={category.id} className="topics-tree-category">
-        <button type="button" aria-label={category.label} aria-expanded={open} onClick={() => setExpanded(open ? null : category.id)}><CaretDown size={14} aria-hidden="true" /><span>{category.label}</span><small aria-hidden="true">{topics.length}</small></button>
+        <button type="button" aria-label={category.label} aria-expanded={open} onClick={() => {
+          if (open && active.categoryId === category.id) return;
+          setExpandedCategory(open ? null : category.id);
+          setExpandedSubsections(active.categoryId === category.id && active.subsectionId ? new Set([active.subsectionId]) : new Set());
+        }}><CaretDown size={14} aria-hidden="true" /><span>{category.label}</span><small aria-hidden="true">{topics.length}</small></button>
         {open && <div className="topics-tree-branch">
           {category.topics.map((topic) => <TopicLink key={topic.id} topic={topic} active={topic.slug === currentTopic?.slug} onSelect={onSelect} />)}
-          {category.children.map((child) => <div key={child.id} className="topics-tree-child"><p>{child.label}</p>{child.topics.map((topic) => <TopicLink key={topic.id} topic={topic} active={topic.slug === currentTopic?.slug} onSelect={onSelect} />)}</div>)}
+          {category.children.map((child) => {
+            const subsectionOpen = expandedSubsections.has(child.id);
+            return <div key={child.id} className="topics-tree-child">
+              <button type="button" aria-label={child.label} aria-expanded={subsectionOpen} onClick={() => {
+                if (subsectionOpen && active.subsectionId === child.id) return;
+                setExpandedSubsections((current) => {
+                  const next = new Set(current);
+                  if (subsectionOpen) next.delete(child.id); else next.add(child.id);
+                  return next;
+                });
+              }}><CaretDown size={12} aria-hidden="true" /><span>{child.label}</span><small aria-hidden="true">{child.topics.length}</small></button>
+              {subsectionOpen && child.topics.map((topic) => <TopicLink key={topic.id} topic={topic} active={topic.slug === currentTopic?.slug} onSelect={onSelect} />)}
+            </div>;
+          })}
         </div>}
       </div>;
     })}

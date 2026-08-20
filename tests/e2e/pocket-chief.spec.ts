@@ -170,6 +170,7 @@ test("canonical topic navigation keeps the workspace, active path, anchors, and 
   test.skip(testInfo.project.name !== "desktop-chrome", "Desktop workspace navigation only");
   await page.goto("/topics");
   await page.getByRole("button", { name: "Alimentary Tract" }).click();
+  await page.getByRole("button", { name: "Biliary Tract" }).click();
   await page.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
 
   await expect(page).toHaveURL(/\/topics\/choledocholithiasis$/);

@@ -7,10 +7,11 @@ import { getRecentTopics } from "@/lib/offline";
 export interface TopicsResumeProps {
   recentSlug?: string;
   fallbackSlug?: string;
+  approvedTopics: Array<{ id: string; slug: string }>;
 }
 
 /** Resolves a resume destination on-device before falling back to server metadata. */
-export function TopicsResume({ recentSlug, fallbackSlug }: TopicsResumeProps) {
+export function TopicsResume({ recentSlug, fallbackSlug, approvedTopics }: TopicsResumeProps) {
   const [resumeSlug, setResumeSlug] = useState<string | null>();
 
   useEffect(() => {
@@ -18,13 +19,15 @@ export function TopicsResume({ recentSlug, fallbackSlug }: TopicsResumeProps) {
     getRecentTopics()
       .then((recent) => {
         if (!active) return;
-        setResumeSlug(recent.find((topic) => topic.approvedVersion)?.slug ?? recentSlug ?? fallbackSlug ?? null);
+        const currentSlugById = new Map(approvedTopics.map((topic) => [topic.id, topic.slug]));
+        const resumeFromDevice = recent.map((topic) => currentSlugById.get(topic.id)).find(Boolean);
+        setResumeSlug(resumeFromDevice ?? recentSlug ?? fallbackSlug ?? null);
       })
       .catch(() => {
         if (active) setResumeSlug(recentSlug ?? fallbackSlug ?? null);
       });
     return () => { active = false; };
-  }, [fallbackSlug, recentSlug]);
+  }, [approvedTopics, fallbackSlug, recentSlug]);
 
   if (resumeSlug === undefined) return <section className="topics-resume" aria-label="Resume topic" />;
 

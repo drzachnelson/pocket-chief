@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useRef, useState } from "react";
 import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, Plus, ShieldCheck } from "@phosphor-icons/react";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
@@ -39,7 +39,11 @@ function TopicsDrawerProvider({ children }: { children: React.ReactNode }) {
     setOpen(false);
     triggerRef.current?.focus();
   };
-  const value = { isOpen, close, setContent, open: (trigger: HTMLElement) => { triggerRef.current = trigger; setOpen(true); } };
+  const registerContent = useCallback((next: React.ReactNode | null) => {
+    setContent(next);
+    if (!next) { setOpen(false); triggerRef.current = null; }
+  }, []);
+  const value = { isOpen, close, setContent: registerContent, open: (trigger: HTMLElement) => { triggerRef.current = trigger; setOpen(true); } };
   return <TopicsDrawerContext.Provider value={value}>{children}{isOpen ? content : null}</TopicsDrawerContext.Provider>;
 }
 
