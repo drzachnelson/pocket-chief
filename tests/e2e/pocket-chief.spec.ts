@@ -76,6 +76,45 @@ test("mobile navigation exposes four primary destinations", async ({ page }) => 
   await expect(navigation.getByRole("link", { name: "Add" })).toBeVisible();
 });
 
+test("decision flows keep labeled branches connected and readable on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 393, height: 852 });
+  await page.goto("/topics/fasciotomy");
+  const flow = page.getByRole("group", { name: "The diagnostic decision flowchart" });
+  await expect(flow).toBeVisible();
+
+  const metrics = await flow.evaluate((element) => ({
+    clientWidth: element.clientWidth,
+    scrollWidth: element.scrollWidth,
+  }));
+  expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+
+  const awake = await flow.locator('[data-node-id="awake"]').boundingBox();
+  const obtunded = await flow.locator('[data-node-id="obtunded"]').boundingBox();
+  expect(awake).not.toBeNull();
+  expect(obtunded).not.toBeNull();
+  expect(Math.abs(awake!.y - obtunded!.y)).toBeLessThanOrEqual(2);
+  expect(awake!.x).toBeLessThan(obtunded!.x);
+  expect(awake!.width).toBeGreaterThanOrEqual(150);
+  expect(obtunded!.width).toBeGreaterThanOrEqual(150);
+
+  const edges = flow.locator("path.flow-edge");
+  await expect(edges).toHaveCount(13);
+  for (let index = 0; index < await edges.count(); index += 1) {
+    await expect(edges.nth(index)).not.toHaveAttribute("d", "");
+  }
+  const rightBypass = await flow.locator('path[data-from="obtunded"][data-to="icp"]').getAttribute("d");
+  const leftBypass = await flow.locator('path[data-from="clinicalpos"][data-to="fasciotomy"]').getAttribute("d");
+  expect(rightBypass).not.toContain("H 5 ");
+  expect(leftBypass).toContain("H 5 ");
+  const flowBox = await flow.boundingBox();
+  const bypassLabel = await flow.getByText("clinical diagnosis alone is enough", { exact: true }).boundingBox();
+  expect(flowBox).not.toBeNull();
+  expect(bypassLabel).not.toBeNull();
+  expect(bypassLabel!.x).toBeGreaterThanOrEqual(flowBox!.x);
+  await expect(flow.getByText("awake and examinable", { exact: true })).toBeVisible();
+  await expect(flow.getByText("cannot be reliably examined", { exact: true })).toBeVisible();
+});
+
 test("creates, revises, approves, finds, and restores a source-bound topic", async ({ page }, testInfo) => {
   const title = `Operative Wound Review ${testInfo.project.name}`;
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");

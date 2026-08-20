@@ -3,7 +3,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BookmarkSimple, Brain, CaretDown, CaretUp, CheckCircle, Copy, DownloadSimple, Lightning, Warning, WarningOctagon, X } from "@phosphor-icons/react";
 import type { ClozeDraft, SuppliedSource, Topic, TopicBlock, TopicVersion } from "@/lib/types";
 import type { InlineSegment, LinkIndexEntry } from "@/lib/inline";
@@ -12,6 +12,7 @@ import { loadAnkiSettings } from "@/lib/anki-settings";
 import { bulletDepth, createLinkScope, headingLevel, parseInline, stripMarkup } from "@/lib/inline";
 import { isTopicSaved, recordRecentView, setTopicSaved } from "@/lib/offline";
 import { InlineText } from "@/components/inline-text";
+import { DecisionFlow } from "@/components/decision-flow";
 
 // Every string that leaves the reading view is stripped: an Anki card is plain text, and a
 // `**` or `[[` that survives into a flashcard is a defect the owner only sees at review time.
@@ -30,28 +31,6 @@ function contextImageDataUrl(rawHeading: string, rawText: string, rawDiagram: st
   const safe = (value: string) => value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" }[character]!));
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#f5f7fb"/><rect x="70" y="55" width="1060" height="520" rx="30" fill="#fff" stroke="#dfe4ec" stroke-width="3"/><rect x="70" y="55" width="16" height="520" rx="8" fill="#1748d2"/><text x="125" y="140" font-family="Arial,sans-serif" font-weight="700" font-size="34" fill="#182033">${safe(heading)}</text><foreignObject x="125" y="175" width="900" height="190"><div xmlns="http://www.w3.org/1999/xhtml" style="font:27px/1.4 Arial,sans-serif;color:#465168">${safe(text.slice(0, 240))}</div></foreignObject><rect x="125" y="395" width="900" height="80" rx="18" fill="#edf2ff" stroke="#b7c6f9"/><text x="155" y="430" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#1748d2">NEAREST DECISION FLOW</text><text x="155" y="458" font-family="Arial,sans-serif" font-size="18" fill="#465168">${safe(diagram.slice(0, 88))}</text><text x="125" y="535" font-family="Arial,sans-serif" font-size="20" fill="#1748d2">POCKET CHIEF · REVIEWED SECTION</text></svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-/**
- * Groups flow nodes into rows by their longest distance from the root, so a
- * decision tree of any width renders as successive rows of cards.
- */
-function flowLevels(block: Extract<TopicBlock, { type: "flow" }>) {
-  const depth = new Map<string, number>();
-  const resolve = (id: string, seen: Set<string>): number => {
-    if (depth.has(id)) return depth.get(id)!;
-    if (seen.has(id)) return 0;
-    const incoming = block.edges.filter((edge) => edge.to === id);
-    const value = incoming.length ? Math.max(...incoming.map((edge) => resolve(edge.from, new Set([...seen, id])) + 1)) : 0;
-    depth.set(id, value);
-    return value;
-  };
-  const levels: Array<Array<{ node: (typeof block.nodes)[number]; label?: string }>> = [];
-  for (const node of block.nodes) {
-    const level = resolve(node.id, new Set());
-    (levels[level] ??= []).push({ node, label: block.edges.find((edge) => edge.to === node.id)?.label });
-  }
-  return levels.filter(Boolean);
 }
 
 function SupportMark({ block }: { block: TopicBlock }) {
@@ -121,27 +100,7 @@ function Block({ block, expanded, linkEntries, selfSlug, onToggle, onMakeCard }:
   if (block.type === "bullets") return frame(<BulletList nodes={bulletTree(block.items, (text) => parseInline(text, scope))} onCard={(item) => onMakeCard(stripMarkup(item), block)} />);
   if (block.type === "table") return frame(<div className="table-scroll"><table><thead><tr>{block.columns.map((column) => <th key={column}>{inline(column)}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{inline(cell)}</th> : <td key={`${row[0]}-${cell}`}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>);
   if (block.type === "sequence") return frame(<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p></div><button aria-label={`Make Anki card from ${stripMarkup(step.title)}`} onClick={() => onMakeCard(stripMarkup(`${step.title}: ${step.detail}`), block)}><Lightning size={13} /></button></li>)}</ol>);
-  if (block.type === "flow") {
-    const [roots, ...branches] = flowLevels(block);
-    return frame(
-      <div className="decision-flow">
-        {roots.map(({ node }) => <div key={node.id} className="flow-start">{inline(node.label)}</div>)}
-        {branches.map((level, index) => (
-          <Fragment key={`level-${index + 1}`}>
-            <div className="flow-branch"><span>{index === 0 ? "Compare the source-linked paths" : "Then"}</span></div>
-            <div className="flow-options">
-              {level.map(({ node, label }) => (
-                <div key={node.id} className={`flow-card ${node.tone ?? "default"}`}>
-                  <small>{label ? inline(label) : "Path"}</small>
-                  <strong>{inline(node.label)}</strong>
-                </div>
-              ))}
-            </div>
-          </Fragment>
-        ))}
-      </div>,
-    );
-  }
+  if (block.type === "flow") return frame(<DecisionFlow block={block} renderInline={inline} />);
   if (block.type === "image") {
     const media = <><Image src={`/api/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
     return collapsible ? frame(<figure>{media}</figure>) : <figure id={block.id} data-block-id={block.id} className="topic-block">{media}</figure>;

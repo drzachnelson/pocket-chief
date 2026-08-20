@@ -71,4 +71,40 @@ describe("renderer redesign", () => {
     fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
     expect([...details].every((item) => item.open)).toBe(true);
   });
+
+  it("renders every supplied decision edge as a connector instead of flattening nodes by depth", () => {
+    const flow: TopicBlock = {
+      id: "flow-1",
+      type: "flow",
+      heading: "Treatment decision",
+      nodes: [
+        { id: "start", label: "Suspected condition" },
+        { id: "stable", label: "Stable", tone: "good" },
+        { id: "unstable", label: "Unstable", tone: "caution" },
+        { id: "observe", label: "Observe" },
+        { id: "operate", label: "Operate", tone: "caution" },
+      ],
+      edges: [
+        { from: "start", to: "stable", label: "stable" },
+        { from: "start", to: "unstable", label: "unstable" },
+        { from: "stable", to: "observe" },
+        { from: "unstable", to: "operate" },
+      ],
+      claims: [],
+    };
+    const flowVersion = { ...version, blocks: [flow] };
+    const flowTopic = { ...topic, approvedVersion: flowVersion, versions: [flowVersion] };
+    const { container } = render(<TopicContent topic={flowTopic} sources={[]} linkEntries={[]} />);
+
+    const diagram = container.querySelector(".decision-flow");
+    expect(diagram).toHaveAttribute("aria-label", "Treatment decision flowchart");
+    expect(diagram!.querySelectorAll(".flow-node[data-node-id]")).toHaveLength(flow.nodes.length);
+    expect(diagram!.querySelectorAll("svg.flow-connectors path.flow-edge")).toHaveLength(flow.edges.length);
+    for (const edge of flow.edges) {
+      expect(diagram!.querySelector(`path[data-from="${edge.from}"][data-to="${edge.to}"]`)).not.toBeNull();
+    }
+    expect(diagram!.querySelectorAll(".flow-relationship")).toHaveLength(flow.edges.length);
+    expect(diagram).not.toHaveTextContent("Compare the source-linked paths");
+    expect(diagram).not.toHaveTextContent("Then");
+  });
 });
