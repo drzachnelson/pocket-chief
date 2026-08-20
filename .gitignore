@@ -9,6 +9,7 @@ playwright-report/
 test-results/
 output/
 .superpowers/
+.worktrees/
 *.log
 .DS_Store
 *.tsbuildinfo

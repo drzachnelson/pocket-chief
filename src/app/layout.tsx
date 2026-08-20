@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "Pocket Chief", template: "%s · Pocket Chief" },
-  description: "A private, reviewed general surgery knowledge atlas.",
+  description: "A private general surgery knowledge atlas.",
   applicationName: "Pocket Chief",
   manifest: "/manifest.webmanifest",
   robots: { index: false, follow: false, nocache: true },

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Pocket Chief · General Surgery Atlas",
     short_name: "Pocket Chief",
-    description: "Private, reviewed general surgery notes for rapid reference.",
+    description: "Private general surgery notes for rapid reference.",
     start_url: "/",
     display: "standalone",
     background_color: "#f5f7fb",

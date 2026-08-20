@@ -11,7 +11,6 @@ export function TopicCard({ topic }: { topic: Topic }) {
         <p>{topic.scoreCategory}</p>
       </span>
       <span className="topic-card-meta">
-        <span className="status-pill"><span className="status-dot" />Reviewed</span>
         <ArrowRight size={14} aria-hidden="true" />
       </span>
     </Link>
