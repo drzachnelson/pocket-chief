@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CaretDown } from "@phosphor-icons/react/dist/ssr";
 import { CurriculumOpenState } from "@/components/curriculum-open-state";
 import { TopicCard } from "@/components/topic-card";
+import { TopicsResume } from "@/components/topics-resume";
 import { getRepository } from "@/lib/repository";
 import { taxonomySections } from "@/lib/taxonomy";
 
@@ -14,13 +15,13 @@ const updatedFormat = new Intl.DateTimeFormat("en-US", { month: "short", day: "n
 export default async function TopicsPage({ searchParams }: { searchParams: Promise<{ closed?: string }> }) {
   const [{ closed }, repository] = await Promise.all([searchParams, getRepository()]);
   const closedIds = new Set((closed ?? "").split(",").filter(Boolean));
-  const taxonomy = await repository.listTaxonomy();
-  const topics = (await repository.listTopics()).filter((topic) => topic.approvedVersion);
+  const [taxonomy, listedTopics, recentTopics] = await Promise.all([repository.listTaxonomy(), repository.listTopics(), repository.listRecentTopics(1)]);
+  const topics = listedTopics.filter((topic) => topic.approvedVersion);
   const sections = taxonomySections(taxonomy, topics);
   const stocked = sections.filter((section) => section.topicCount > 0);
   return (
     <>
-      <div className="page-heading"><div><p className="eyebrow">Editable curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy. Only the newest approved version is visible here and in search.</p></div></div>
+      <div className="page-heading"><div><p className="eyebrow">Editable curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy. Only the newest approved version is visible here and in search.</p></div><TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={topics[0]?.slug} /></div>
       <div className="curriculum-layout">
         <nav className="curriculum-rail" aria-label="SCORE categories">
           <p>Curriculum</p>
