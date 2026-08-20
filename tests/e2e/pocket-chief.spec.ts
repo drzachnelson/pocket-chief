@@ -237,7 +237,7 @@ test("mobile Topics drawer traps focus, restores it, and closes after topic or s
   await expect(drawer).toHaveCount(0);
 });
 
-test("a previously visited Topics guide remains readable offline in its workspace", async ({ page }) => {
+test("a previously visited Topics guide remains readable offline in its workspace", async ({ page }, testInfo) => {
   await page.goto("/topics/choledocholithiasis");
   await page.waitForFunction(async () => {
     await navigator.serviceWorker.ready;
@@ -246,13 +246,29 @@ test("a previously visited Topics guide remains readable offline in its workspac
   // Reload under worker control so the dynamic guide and its persistent workspace are cached.
   await page.reload();
   await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
+  if (testInfo.project.name === "mobile-chrome") {
+    await page.getByRole("button", { name: "Topics" }).click();
+    await page.getByRole("dialog", { name: "Topics" }).getByRole("link", { name: "Choose the route" }).click();
+  } else {
+    await page.getByLabel("Topics workspace").getByRole("link", { name: "Choose the route" }).click();
+  }
+  await expect(page).toHaveURL(/#block-comparison$/);
 
   await page.context().setOffline(true);
   try {
-    await page.goto("/topics/choledocholithiasis", { waitUntil: "domcontentloaded" });
+    await page.goto("/topics/choledocholithiasis#block-comparison", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
-    await expect(page.getByLabel("Topics workspace")).toBeAttached();
-    await expect(page.getByRole("button", { name: "Topics" })).toBeVisible();
+    if (testInfo.project.name === "mobile-chrome") {
+      await page.getByRole("button", { name: "Topics" }).click();
+      const drawer = page.getByRole("dialog", { name: "Topics" });
+      await expect(drawer.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
+      await expect(drawer.getByRole("link", { name: "Choose the route" })).toHaveAttribute("aria-current", "location");
+    } else {
+      const rail = page.getByLabel("Topics workspace");
+      await expect(rail).toBeVisible();
+      await expect(rail.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
+      await expect(rail.getByRole("link", { name: "Choose the route" })).toHaveAttribute("aria-current", "location");
+    }
   } finally {
     await page.context().setOffline(false);
   }
