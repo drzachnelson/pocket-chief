@@ -40,3 +40,22 @@
 ## Concerns
 
 - No implementation concerns. Task 2 will consume the new projection and replace the interim `/topics` presentation with the persistent workspace.
+
+## Fix Round 1 — taxonomy-ordered fallback
+
+- Review finding: `/topics` chose `topics[0]` as the fallback, which reflected repository/title order rather than curriculum order.
+- Fix: the page now builds the Task 1 navigation projection and derives its final fallback from the first projected topic, respecting taxonomy order before label order.
+
+### TDD evidence
+
+1. RED — `./node_modules/.bin/vitest run src/app/topics/__tests__/page.test.tsx`
+   - 1 test failed as expected: a title-alphabetical `Aorta` topic was selected (`/topics/aorta`) instead of taxonomy-first `Zebra` (`/topics/zebra`).
+2. GREEN — `./node_modules/.bin/vitest run src/app/topics/__tests__/page.test.tsx src/components/__tests__/topics-resume.test.tsx src/lib/__tests__/topic-navigation.test.ts`
+   - 3 files / 5 tests passed.
+
+### Output
+
+```text
+Test Files  3 passed (3)
+     Tests  5 passed (5)
+```

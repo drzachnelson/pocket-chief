@@ -5,6 +5,7 @@ import { TopicCard } from "@/components/topic-card";
 import { TopicsResume } from "@/components/topics-resume";
 import { getRepository } from "@/lib/repository";
 import { taxonomySections } from "@/lib/taxonomy";
+import { buildTopicNavigation } from "@/lib/topic-navigation";
 
 export const metadata: Metadata = { title: "Topics" };
 
@@ -18,10 +19,12 @@ export default async function TopicsPage({ searchParams }: { searchParams: Promi
   const [taxonomy, listedTopics, recentTopics] = await Promise.all([repository.listTaxonomy(), repository.listTopics(), repository.listRecentTopics(1)]);
   const topics = listedTopics.filter((topic) => topic.approvedVersion);
   const sections = taxonomySections(taxonomy, topics);
+  const navigation = buildTopicNavigation(taxonomy, topics);
+  const fallbackSlug = navigation.flatMap((category) => [...category.topics, ...category.children.flatMap((section) => section.topics)])[0]?.slug;
   const stocked = sections.filter((section) => section.topicCount > 0);
   return (
     <>
-      <div className="page-heading"><div><p className="eyebrow">Editable curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy. Only the newest approved version is visible here and in search.</p></div><TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={topics[0]?.slug} /></div>
+      <div className="page-heading"><div><p className="eyebrow">Editable curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy. Only the newest approved version is visible here and in search.</p></div><TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={fallbackSlug} /></div>
       <div className="curriculum-layout">
         <nav className="curriculum-rail" aria-label="SCORE categories">
           <p>Curriculum</p>
