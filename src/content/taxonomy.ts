@@ -27,4 +27,10 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "trauma", title: "Trauma", slug: "trauma", parentId: "score", order: 23 },
   { id: "trauma-conditions", title: "Diseases & Conditions", slug: "trauma-diseases-conditions", parentId: "trauma", order: 24 },
   { id: "trauma-procedures", title: "Operations & Procedures", slug: "trauma-operations-procedures", parentId: "trauma", order: 25 },
+  { id: "small-intestine", title: "Small Intestine", slug: "small-intestine", parentId: "score", order: 26 },
+  { id: "small-intestine-conditions", title: "Diseases & Conditions", slug: "small-intestine-diseases-conditions", parentId: "small-intestine", order: 27 },
+  { id: "small-intestine-procedures", title: "Operations & Procedures", slug: "small-intestine-operations-procedures", parentId: "small-intestine", order: 28 },
+  { id: "large-intestine", title: "Large Intestine", slug: "large-intestine", parentId: "score", order: 29 },
+  { id: "large-intestine-conditions", title: "Diseases & Conditions", slug: "large-intestine-diseases-conditions", parentId: "large-intestine", order: 30 },
+  { id: "large-intestine-procedures", title: "Operations & Procedures", slug: "large-intestine-operations-procedures", parentId: "large-intestine", order: 31 },
 ];

@@ -69,6 +69,18 @@ export function DecisionFlow({ block, renderInline }: { block: FlowBlock; render
   const nodeRefs = useRef(new Map<string, HTMLDivElement>());
   const [positionedEdges, setPositionedEdges] = useState<PositionedEdge[]>(() => block.edges.map((edge) => ({ ...edge, path: "", labelX: 0, labelY: 0, measured: false })));
   const markerId = `flow-arrow-${useId().replaceAll(":", "")}`;
+  // renderInline draws on a link scope the parent block consumes as it goes, so a term only
+  // links on its first pass and comes back as plain text on the next. Measurement re-renders
+  // this component without rebuilding that scope, so every label is rendered once here and the
+  // elements reused; rendering them inline instead makes the measured pass disagree with the
+  // server's and React reports a hydration mismatch.
+  const labels = useMemo(() => {
+    const edges = new Map<string, ReactNode>();
+    for (const edge of block.edges) if (edge.label) edges.set(`${edge.from}-${edge.to}`, renderInline(edge.label));
+    const nodes = new Map<string, ReactNode>();
+    for (const layer of layers) for (const node of layer) nodes.set(node.id, renderInline(node.label));
+    return { edges, nodes };
+  }, [block.edges, layers, renderInline]);
 
   useLayoutEffect(() => {
     const canvas = canvasRef.current;
@@ -149,7 +161,7 @@ export function DecisionFlow({ block, renderInline }: { block: FlowBlock; render
             className="flow-edge-label"
             style={{ left: edge.labelX, top: edge.labelY, visibility: edge.measured ? "visible" : "hidden" }}
           >
-            {renderInline(edge.label)}
+            {labels.edges.get(`${edge.from}-${edge.to}`)}
           </span>
         ) : null)}
 
@@ -170,7 +182,7 @@ export function DecisionFlow({ block, renderInline }: { block: FlowBlock; render
                   style={{ gridColumn: nodeColumn(index, layer.length, columns) }}
                 >
                   <small>{kind}</small>
-                  <strong>{renderInline(node.label)}</strong>
+                  <strong>{labels.nodes.get(node.id)}</strong>
                 </div>
               );
             })}
