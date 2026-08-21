@@ -4,6 +4,7 @@ import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
 import { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
 import { choledocholithiasisTopic } from "@/content/topics/choledocholithiasis";
+import { crohnDiseaseTopic } from "@/content/topics/crohn-disease";
 import { desmoidTopic } from "@/content/topics/desmoid-tumors-and-fibromatoses";
 import { escharotomyTopic } from "@/content/topics/escharotomy";
 import { fasciotomyTopic } from "@/content/topics/fasciotomy";
@@ -29,6 +30,7 @@ import { splenectomyAndSplenorrhaphyTopic } from "@/content/topics/splenectomy-a
 import { splenicInjuryTopic } from "@/content/topics/splenic-injury";
 import { umbilicalAndEpigastricHerniaTopic } from "@/content/topics/umbilical-and-epigastric-hernia";
 import { unusualHerniasTopic } from "@/content/topics/unusual-hernias";
+import { ulcerativeColitisTopic } from "@/content/topics/ulcerative-colitis";
 import { ventralAndIncisionalHerniaTopic } from "@/content/topics/ventral-and-incisional-hernia";
 import type { Topic } from "@/lib/types";
 
@@ -74,4 +76,6 @@ export const demoTopics: Topic[] = [
   escharotomyTopic,
   neckTraumaAssessmentTopic,
   neckInjuriesManagementTopic,
+  crohnDiseaseTopic,
+  ulcerativeColitisTopic,
 ];
