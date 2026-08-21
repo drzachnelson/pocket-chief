@@ -3,6 +3,7 @@ import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploratio
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
 import { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
+import { chestWallPleuraAndDiaphragmInjuriesTopic } from "@/content/topics/chest-wall-pleura-and-diaphragm-injuries";
 import { choledocholithiasisTopic } from "@/content/topics/choledocholithiasis";
 import { crohnDiseaseTopic } from "@/content/topics/crohn-disease";
 import { desmoidTopic } from "@/content/topics/desmoid-tumors-and-fibromatoses";
@@ -78,4 +79,5 @@ export const demoTopics: Topic[] = [
   neckInjuriesManagementTopic,
   crohnDiseaseTopic,
   ulcerativeColitisTopic,
+  chestWallPleuraAndDiaphragmInjuriesTopic,
 ];
