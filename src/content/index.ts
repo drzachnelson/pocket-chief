@@ -2,7 +2,9 @@ import { abdominalAndAortoiliacAneurysmRepairTopic } from "@/content/topics/abdo
 import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploration";
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
+import { cardiacInjuryTopic } from "@/content/topics/cardiac-injury";
 import { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
+import { chestWallPleuraAndDiaphragmInjuriesTopic } from "@/content/topics/chest-wall-pleura-and-diaphragm-injuries";
 import { choledocholithiasisTopic } from "@/content/topics/choledocholithiasis";
 import { crohnDiseaseTopic } from "@/content/topics/crohn-disease";
 import { desmoidTopic } from "@/content/topics/desmoid-tumors-and-fibromatoses";
@@ -28,9 +30,11 @@ import { rectusSheathHematomaTopic } from "@/content/topics/rectus-sheath-hemato
 import { renalArteryDiseaseTopic } from "@/content/topics/renal-artery-disease";
 import { splenectomyAndSplenorrhaphyTopic } from "@/content/topics/splenectomy-and-splenorrhaphy";
 import { splenicInjuryTopic } from "@/content/topics/splenic-injury";
+import { tracheobronchialAndLungInjuryTopic } from "@/content/topics/tracheobronchial-and-lung-injury";
 import { umbilicalAndEpigastricHerniaTopic } from "@/content/topics/umbilical-and-epigastric-hernia";
 import { unusualHerniasTopic } from "@/content/topics/unusual-hernias";
 import { ulcerativeColitisTopic } from "@/content/topics/ulcerative-colitis";
+import { vascularThoracicInjuryTopic } from "@/content/topics/vascular-thoracic-injury";
 import { ventralAndIncisionalHerniaTopic } from "@/content/topics/ventral-and-incisional-hernia";
 import type { Topic } from "@/lib/types";
 
@@ -78,4 +82,8 @@ export const demoTopics: Topic[] = [
   neckInjuriesManagementTopic,
   crohnDiseaseTopic,
   ulcerativeColitisTopic,
+  chestWallPleuraAndDiaphragmInjuriesTopic,
+  vascularThoracicInjuryTopic,
+  tracheobronchialAndLungInjuryTopic,
+  cardiacInjuryTopic,
 ];
