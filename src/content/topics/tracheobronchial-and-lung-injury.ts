@@ -218,7 +218,7 @@ export const tracheobronchialAndLungInjuryTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001244",
   slug: "tracheobronchial-and-lung-injury",
   title: "Tracheobronchial and Lung Injury",
-  aliases: ["pulmonary contusion", "tracheobronchial injury", "bronchial transection", "fallen lung sign", "Cardillo classification", "pulmonary tractotomy", "pneumonorrhaphy", "trauma pneumonectomy", "lung laceration", "lung parenchymal injury", "awake fiberoptic intubation", "double-lumen tube", "bronchoscopy trauma", "airway reconstruction", "tracheal repair", "bronchial repair", "hilar clamping", "hilar twist", "VV-ECMO", "endobronchial stenting", "absite", "score"],
+  aliases: ["pulmonary contusion", "tracheobronchial injury", "bronchial transection", "fallen lung sign", "Cardillo classification", "pulmonary tractotomy", "pneumonorrhaphy", "trauma pneumonectomy", "lung laceration", "lung parenchymal injury", "awake fiberoptic intubation", "double-lumen tube", "bronchoscopy trauma", "airway reconstruction", "tracheal repair", "bronchial repair", "hilar clamping", "hilar twist", "VV-ECMO", "endobronchial stenting"],
   scoreNodeId: "trauma-conditions",
   scoreCategory: "SCORE · Trauma · Diseases & Conditions",
   tags: ["trauma", "thoracic-trauma", "airway", "lung-injury", "absite", "score"],

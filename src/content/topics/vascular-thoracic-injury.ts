@@ -230,7 +230,7 @@ export const vascularThoracicInjuryTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001243",
   slug: "vascular-thoracic-injury",
   title: "Vascular Thoracic Injury",
-  aliases: ["blunt thoracic aortic injury", "BTAI", "traumatic aortic injury", "traumatic aortic transection", "aortic isthmus injury", "aortic pseudoaneurysm", "TEVAR", "thoracic endovascular aortic repair", "SVS BTAI grade", "resuscitative thoracotomy", "spinal cord ischemia", "CSF drain", "spinal cord perfusion pressure", "left subclavian artery revascularization", "massive hemothorax", "widened mediastinum", "great vessel injury", "thoracic vascular trauma", "absite", "score"],
+  aliases: ["blunt thoracic aortic injury", "BTAI", "traumatic aortic injury", "traumatic aortic transection", "aortic isthmus injury", "aortic pseudoaneurysm", "TEVAR", "thoracic endovascular aortic repair", "SVS BTAI grade", "resuscitative thoracotomy", "spinal cord ischemia", "CSF drain", "spinal cord perfusion pressure", "left subclavian artery revascularization", "massive hemothorax", "widened mediastinum", "great vessel injury", "thoracic vascular trauma"],
   scoreNodeId: "trauma-conditions",
   scoreCategory: "SCORE · Trauma · Diseases & Conditions",
   tags: ["trauma", "vascular", "aorta", "thoracic-trauma", "absite", "score"],

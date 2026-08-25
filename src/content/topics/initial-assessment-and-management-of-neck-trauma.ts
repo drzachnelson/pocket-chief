@@ -184,7 +184,7 @@ export const neckTraumaAssessmentTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001227",
   slug: "initial-assessment-and-management-of-neck-trauma",
   title: "Initial Assessment and Management of Neck Trauma",
-  aliases: ["neck trauma", "penetrating neck injury", "penetrating neck trauma", "cervical trauma", "neck zones", "Zone I", "Zone II", "Zone III", "no-zone", "no-zone approach", "hard signs", "soft signs", "BCVI", "blunt cerebrovascular injury", "Biffl grade", "Biffl scale", "Denver criteria", "Expanded Denver criteria", "Memphis criteria", "carotid dissection", "vertebral artery injury", "CTA neck", "CT angiography", "esophagography", "cricothyroidotomy", "laryngotracheal injury", "subcutaneous emphysema"],
+  aliases: ["neck trauma", "penetrating neck injury", "penetrating neck trauma", "cervical trauma", "neck zones", "Zone I", "Zone II", "Zone III", "no-zone", "no-zone approach", "hard signs", "soft signs", "BCVI", "blunt cerebrovascular injury", "Biffl grade", "Biffl scale", "Denver criteria", "Expanded Denver criteria", "Memphis criteria", "carotid dissection", "vertebral artery injury", "CTA neck", "CT angiography", "esophagography", "laryngotracheal injury", "subcutaneous emphysema"],
   scoreNodeId: "trauma-conditions",
   scoreCategory: "SCORE · Trauma · Diseases & Conditions",
   tags: ["trauma", "neck", "vascular", "bcvi", "diagnostics", "absite", "score"],
