@@ -33,4 +33,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "large-intestine", title: "Large Intestine", slug: "large-intestine", parentId: "score", order: 29 },
   { id: "large-intestine-conditions", title: "Diseases & Conditions", slug: "large-intestine-diseases-conditions", parentId: "large-intestine", order: 30 },
   { id: "large-intestine-procedures", title: "Operations & Procedures", slug: "large-intestine-operations-procedures", parentId: "large-intestine", order: 31 },
+  { id: "vascular-access", title: "Vascular Access", slug: "vascular-access", parentId: "score", order: 32 },
+  { id: "vascular-access-conditions", title: "Diseases & Conditions", slug: "vascular-access-diseases-conditions", parentId: "vascular-access", order: 33 },
+  { id: "vascular-access-procedures", title: "Operations & Procedures", slug: "vascular-access-operations-procedures", parentId: "vascular-access", order: 34 },
 ];

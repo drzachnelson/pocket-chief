@@ -2,6 +2,7 @@ import { abdominalAndAortoiliacAneurysmRepairTopic } from "@/content/topics/abdo
 import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploration";
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
+import { acuteLimbIschemiaTopic } from "@/content/topics/acute-limb-ischemia";
 import { cardiacInjuryTopic } from "@/content/topics/cardiac-injury";
 import { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
 import { chestWallPleuraAndDiaphragmInjuriesTopic } from "@/content/topics/chest-wall-pleura-and-diaphragm-injuries";
@@ -34,6 +35,7 @@ import { tracheobronchialAndLungInjuryTopic } from "@/content/topics/tracheobron
 import { umbilicalAndEpigastricHerniaTopic } from "@/content/topics/umbilical-and-epigastric-hernia";
 import { unusualHerniasTopic } from "@/content/topics/unusual-hernias";
 import { ulcerativeColitisTopic } from "@/content/topics/ulcerative-colitis";
+import { vascularExposurePrinciplesTopic } from "@/content/topics/vascular-exposure-principles";
 import { vascularThoracicInjuryTopic } from "@/content/topics/vascular-thoracic-injury";
 import { ventralAndIncisionalHerniaTopic } from "@/content/topics/ventral-and-incisional-hernia";
 import type { Topic } from "@/lib/types";
@@ -65,6 +67,8 @@ export const demoTopics: Topic[] = [
   groinHerniaRepairTopic,
   abdominalWallReconstructionTopic,
   abdominalAndAortoiliacAneurysmRepairTopic,
+  acuteLimbIschemiaTopic,
+  vascularExposurePrinciplesTopic,
   acuteLiverFailureTopic,
   cardiacPacingTopic,
   paraesophagealHerniaRepairTopic,

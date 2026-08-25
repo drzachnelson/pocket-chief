@@ -28,6 +28,8 @@ export const TRAUMA_TRACHEOBRONCHIAL_LUNG_PACKET_SOURCE = "00000000-0000-4000-80
 export const TRAUMA_CARDIAC_INJURY_PACKET_SOURCE = "00000000-0000-4000-8000-000000001232";
 export const CROHN_DISEASE_PACKET_SOURCE = "00000000-0000-4000-8000-000000001300";
 export const ULCERATIVE_COLITIS_PACKET_SOURCE = "00000000-0000-4000-8000-000000001301";
+export const ACUTE_LIMB_ISCHEMIA_PACKET_SOURCE = "00000000-0000-4000-8000-000000001400";
+export const VASCULAR_EXPOSURE_PRINCIPLES_PACKET_SOURCE = "00000000-0000-4000-8000-000000001401";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -332,6 +334,31 @@ export const suppliedSources: SuppliedSource[] = [
       "The Nicol and Navsaria randomized trial — the packet's central practice-changing citation — was independently verified by web search during review: 55 patients were randomized to sternotomy and 56 to subxiphoid pericardial window and drainage alone, 93 percent of the sternotomy group had no cardiac injury or a sealed tangential wound, and the drainage group had a shorter ICU and total hospital stay with no increase in mortality, matching the packet's figures exactly.",
       "The packet's own incision-selection table (left anterolateral thoracotomy versus median sternotomy, by exposure and use) is carried as the topic's operative-approach table unchanged.",
       "Three classic-versus-current splits are carried rather than resolved, because the packet names each explicitly as a flag: mandatory sternotomy for any hemopericardium versus drainage alone in a stable patient with a sealed injury at subxiphoid window (Nicol and Navsaria); the diagnostic subxiphoid pericardial window as the traditional screening step versus FAST having supplanted it as the standard first-line test; and high-sensitivity troponin cutoffs for blunt cardiac injury, which remain unstandardized even as a single-center series favors a lower threshold than conventional assays use.",
+    ].join(" "),
+  },
+  {
+    id: ACUTE_LIMB_ISCHEMIA_PACKET_SOURCE,
+    title: "Owner-supplied acute limb ischemia study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Acute Limb Ischemia Pocket Chief — SCORE / General Surgery Board Study Guide.\"",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature inline rather than in a consolidated bibliography, and each named study is registered with its real citation: the 2024 ACC/AHA multisociety lower-extremity peripheral artery disease guideline; the 2024 ESC guideline on peripheral arterial and aortic disease; Creager et al., NEJM, 2012; Bonaca et al., JACC, 2024; the Rochester, STILE, and TOPAS randomized trials with the Cochrane review of thrombolysis versus surgery for acute limb ischemia (Darwood et al., Cochrane, 2018); Jarosinski et al., J Vasc Surg, 2025; Kusumowardani et al., J Endovasc Ther, 2026; Herzig et al., JACC Cardiovascular Interventions, 2024; Natour et al., Annals of Vascular Surgery, 2023; and TASC II. The papers themselves were not retrieved; the packet is the proximate source.",
+      "Scoped during review against the existing Fasciotomy topic, which already carries the two-incision four-compartment lower-leg technique, its nerve pearls, and the delta-pressure-versus-absolute-pressure discrepancy in full: this topic keeps compartment syndrome and fasciotomy content limited to the acute-limb-ischemia-specific angle — timing relative to reperfusion, the class-specific indications, and the TASC II 20 mmHg threshold against the 30 mmHg/delta-P-under-30 threshold this packet supplies — rather than repeating the operative anatomy. The now-redundant \"acute limb ischemia\" alias was removed from the Fasciotomy topic accordingly, since a dedicated topic now owns that title.",
+      "Carried as a genuine cross-packet discrepancy rather than resolved: this packet frames warm limb ischemia's irreversible threshold as a 4-to-6-hour window narrowing the board-classic 6-hour rule, while the vascular exposure principles packet supplied alongside it states the threshold as a flat ~6 hours. Both figures are printed, here and in the Vascular Exposure Principles topic.",
+      "Three classic-versus-current splits are carried rather than resolved, because the packet flags each explicitly and both sides remain examinable: catheter-directed thrombolysis approximating open surgery in limb salvage, drawn from older high-dose-urokinase trials, versus contemporary low-dose pharmacomechanical technique that bleeds less; an endovascular-first trend on mortality grounds versus open embolectomy remaining preferred for clear embolic occlusion; and the fasciotomy pressure threshold, where an absolute pressure above 30 mmHg or a delta pressure under 30 mmHg (Creager, NEJM) sits against TASC II's lower 20 mmHg threshold.",
+    ].join(" "),
+  },
+  {
+    id: VASCULAR_EXPOSURE_PRINCIPLES_PACKET_SOURCE,
+    title: "Owner-supplied vascular exposure principles study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Vascular Exposure Principles Pocket Chief — SCORE / general surgery board-focused study guide.\"",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet is bracket-numbered but was not supplied with a consolidated bibliography beyond two named foundational reviews cited inline — Hoyt et al., Surgical Clinics of North America, 2001, and Fletcher, Annals of the Academy of Medicine Singapore, 1992, both registered here — plus the CREST trial, the EVAR-1/DREAM/OVER trials, a 2025 reconstructed individual-patient-data meta-analysis of EVAR versus open repair, the 2022 ACC/AHA aortic disease guideline, and Vascular Study Group of New England registry data on cranial nerve injury after carotid endarterectomy. The bracket numbers themselves are unresolved and the packet is the proximate source for the claims they tag; its own anatomy and complications tables are carried into the topic largely unchanged, with the citation-chip brackets stripped since the app has no route for them.",
+      "Carried as a genuine cross-packet discrepancy rather than resolved: this packet states warm limb ischemia's irreversible threshold as a flat ~6 hours, while the acute limb ischemia packet supplied alongside it narrows that to a 4-to-6-hour window. Both figures are printed, here and in the Acute Limb Ischemia topic.",
+      "Two classic-versus-current splits are carried rather than resolved, because the packet flags each explicitly: the most commonly injured cranial nerve in carotid exposure, where board teaching and the Society for Vascular Surgery guideline name the hypoglossal but the largest pooled meta-analysis (20,860 carotid endarterectomies) found the vagus injured more often; and EVAR's long-term durability against open repair, where boards teach equivalent long-term survival but a 2025 reconstructed-IPD meta-analysis found open repair holds a late survival advantage after roughly 11 months.",
     ].join(" "),
   },
 ];
