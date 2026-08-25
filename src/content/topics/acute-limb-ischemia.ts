@@ -1,0 +1,230 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import { ACUTE_LIMB_ISCHEMIA_PACKET_SOURCE as PACKET } from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-ali-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Acute limb ischemia is a sudden, less-than-two-week drop in limb perfusion that threatens viability, distinct from chronic limb-threatening ischemia, and it costs a life or a limb in up to 15 percent of patients. Two mechanisms drive every decision that follows: **embolism**, most often cardioembolic from atrial fibrillation, which strikes a limb with no collaterals and produces profound, poorly tolerated ischemia; and **in situ thrombosis**, which occurs on top of pre-existing atherosclerotic disease whose collaterals often make the same degree of occlusion far better tolerated. Get the mechanism wrong and the operative plan follows the wrong branch, so it is worked out **before** the limb is opened wherever possible.",
+  }, PACKET),
+  sourced({
+    id: "block-ali-triage",
+    type: "bullets",
+    heading: "Rapid triage rules",
+    items: [
+      "Suspected acute limb ischemia gets **therapeutic intravenous unfractionated heparin** immediately, unless a hard contraindication exists.",
+      "Skeletal muscle tolerates only about **4 to 6 hours** of warm ischemia before irreversible injury — the board-classic **6-hour** rule is really this 4-to-6-hour window.",
+      "**Rutherford IIb**, the immediately threatened limb, goes to emergent revascularization without waiting for cross-sectional imaging; imaging is acceptable only when it will not delay treatment.",
+      "**Rutherford III**, the irreversible limb, goes to primary amputation — revascularizing dead muscle causes fatal reperfusion toxemia rather than saving anything.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-mechanism",
+    type: "table",
+    heading: "Embolism versus in situ thrombosis",
+    columns: ["Feature", "Embolism", "In situ thrombosis"],
+    rows: [
+      ["Onset and severity", "Sudden and profound — no collaterals have formed", "Acute-on-chronic, often better tolerated because collaterals already exist"],
+      ["Most common source", "Atrial fibrillation, then post-MI left ventricular thrombus, prosthetic valve, endocarditis, aneurysmal mural thrombus, or paradoxical embolus", "Atherosclerotic plaque, a thrombosed bypass graft or stent, a popliteal aneurysm, or a hypercoagulable state"],
+      ["Suspect it when", "Atrial fibrillation, a structurally abnormal heart, or a normal contralateral vascular exam", "Longstanding claudication, prior revascularization, or diffusely diseased or absent contralateral pulses"],
+      ["Angiographic pattern", "A sharp cutoff or meniscus sign, minimal atherosclerosis, and few collaterals", "Diffuse disease, a tapered cutoff, and abundant collaterals"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-6ps",
+    type: "table",
+    heading: "Localizing and grading the ischemia: the 6 Ps",
+    columns: ["Finding", "Timing", "Note"],
+    rows: [
+      ["Pain", "Constant, moving distal to proximal", "The presenting symptom in nearly every patient"],
+      ["Paresthesia", "Earliest, most sensitive sign", "Starts in the first webspace, tracking the deep peroneal nerve territory"],
+      ["Pallor", "Early to intermediate", "Progresses to mottling; fixed, non-blanching marbling means tissue death"],
+      ["Poikilothermia", "Intermediate", "The limb feels cold against the contralateral side"],
+      ["Pulselessness", "Late", "A lost Doppler signal, more than an absent pulse on palpation, is what marks a limb as threatened"],
+      ["Paralysis", "Latest, most ominous", "Signals a limb running out of time to save"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-level",
+    type: "bullets",
+    heading: "Localizing the level of occlusion",
+    items: [
+      "Demarcation typically sits **one joint below** the level of arterial occlusion — ischemia reaching the mid-calf points to the distal superficial femoral artery or the adductor canal.",
+      "Loss of both femoral pulses points to an **aortic saddle embolus** in the Leriche distribution.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-rutherford",
+    type: "table",
+    heading: "Rutherford classification for acute limb ischemia",
+    columns: ["Class", "Sensory loss", "Motor deficit", "Doppler signals", "Management"],
+    rows: [
+      ["I — viable", "None", "No deficit", "Arterial and venous both audible", "Heparin, imaging as needed, non-emergent revascularization"],
+      ["IIa — marginally threatened", "Minimal, limited to the toes", "None", "Arterial often inaudible, venous audible", "Salvageable — heparin plus urgent revascularization, with catheter-directed thrombolysis or thrombectomy an option"],
+      ["IIb — immediately threatened", "Beyond the toes, with rest pain", "Mild to moderate weakness", "Arterial inaudible, venous audible", "Emergent revascularization — open embolectomy or rapid endovascular therapy — with fasciotomy considered"],
+      ["III — irreversible", "Profound, anesthetic", "Paralysis and rigor", "Arterial and venous both inaudible", "Primary amputation"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-class3-warning",
+    type: "warning",
+    heading: "Rutherford III means amputation, not revascularization",
+    tone: "danger",
+    text: "A Rutherford III limb is profoundly anesthetic with paralysis and rigor, and both arterial and venous Doppler signals are inaudible — restoring flow to muscle that is already dead does not save the limb, it releases potassium, myoglobin, and acid into the circulation and can kill the patient. **Primary amputation**, not revascularization, is the answer once the limb has crossed into class III.",
+  }, PACKET),
+  sourced({
+    id: "block-ali-workup",
+    type: "bullets",
+    heading: "Diagnosis and workup",
+    items: [
+      "**Bedside handheld continuous-wave Doppler** is the key test, since pulse palpation alone is unreliable in acute limb ischemia — assess both the arterial signal, graded triphasic to monophasic to inaudible, and the venous signal.",
+      "Most acute limb ischemia is treated **without additional imaging**; CTA, duplex, or MRA are reserved for viable or IIa limbs and obtained only when they will not delay revascularization.",
+      "Once revascularization is underway, send **creatine kinase, potassium, creatinine, urine myoglobin, lactate, and arterial pH** to track reperfusion sequelae.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-medical",
+    type: "bullets",
+    heading: "Immediate medical management",
+    items: [
+      "Give an **intravenous unfractionated heparin bolus of about 80 units per kilogram**, then an infusion, targeting an activated partial thromboplastin time — or an intraoperative activated clotting time above **250 seconds** — before any clamp goes on; heparin prevents propagation of clot, it does not lyse what has already formed.",
+      "Switch to **argatroban or bivalirudin** when heparin-induced thrombocytopenia is suspected or confirmed.",
+      "Give aggressive **intravenous crystalloid** to keep urine output brisk and protect against pigment nephropathy, and treat hyperkalemia and acidosis as they arise.",
+      "Provide analgesia and address the underlying embolic or thrombotic source once the patient is stabilized.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-technique-table",
+    type: "table",
+    heading: "Choosing a revascularization technique",
+    columns: ["Technique", "Best suited to", "Note"],
+    rows: [
+      ["Open surgical thromboembolectomy", "Embolic occlusion, and Rutherford IIb with a neurologic deficit where lytic infusion time is unsafe", "The historic gold standard, performed with a Fogarty balloon catheter"],
+      ["Catheter-directed thrombolysis", "Rutherford I to IIa, symptoms under 14 days, a thrombosed graft, or a popliteal aneurysm with poor runoff", "Delivered as tissue plasminogen activator or urokinase"],
+      ["Percutaneous mechanical or aspiration thrombectomy", "A rapidly expanding option across most Rutherford classes", "Reduces or eliminates lytic exposure and shortens the hospital stay"],
+      ["Systemic intravenous thrombolysis", "Nothing — it has no role in acute limb ischemia", "Reserved for other diagnoses entirely"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-flow",
+    type: "flow",
+    heading: "Choosing revascularization by Rutherford class",
+    nodes: [
+      { id: "suspect", label: "Acute limb ischemia suspected — Doppler exam and Rutherford class assigned" },
+      { id: "classI", label: "Class I — viable" },
+      { id: "classIIa", label: "Class IIa — marginally threatened" },
+      { id: "classIIb", label: "Class IIb — immediately threatened", tone: "caution" },
+      { id: "classIII", label: "Class III — irreversible", tone: "caution" },
+      { id: "nonemergent", label: "Heparin, imaging as needed, non-emergent revascularization", tone: "good" },
+      { id: "urgent", label: "Heparin plus urgent revascularization — catheter-directed thrombolysis or percutaneous thrombectomy", tone: "good" },
+      { id: "emergent", label: "Emergent revascularization — open embolectomy or rapid endovascular therapy, with fasciotomy considered", tone: "caution" },
+      { id: "amputation", label: "Primary amputation", tone: "caution" },
+    ],
+    edges: [
+      { from: "suspect", to: "classI", label: "viable" },
+      { from: "suspect", to: "classIIa", label: "marginally threatened" },
+      { from: "suspect", to: "classIIb", label: "immediately threatened" },
+      { from: "suspect", to: "classIII", label: "irreversible" },
+      { from: "classI", to: "nonemergent" },
+      { from: "classIIa", to: "urgent" },
+      { from: "classIIb", to: "emergent" },
+      { from: "classIII", to: "amputation" },
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-classic-vs-current",
+    type: "prose",
+    heading: "↳ Board answer versus current practice: thrombolysis and the endovascular-first trend",
+    text: "Board-classic teaching that catheter-directed thrombolysis and surgery give equivalent limb salvage, amputation, and death comes from older randomized trials — Rochester, STILE, and TOPAS — and a Cochrane review built on the same data, all run with prolonged high-dose urokinase and rarely reflecting how thrombolysis is actually delivered today. Thrombolysis in those trials caused more major bleeding, roughly **15 percent** against **5 percent** at 30 days, and more distal embolization than surgery; contemporary low-dose pharmacomechanical technique bleeds less than that historical figure. More recent observational data show an endovascular-first approach, especially catheter-directed thrombolysis, carrying lower mortality at similar amputation rates — but for embolic disease specifically, an endovascular-first strategy carried higher three-year amputation and more 30-day reintervention than open embolectomy, which is why open embolectomy stays the answer for a clear embolic occlusion even as endovascular options expand everywhere else.",
+  }, PACKET),
+  sourced({
+    id: "block-ali-open-technique",
+    type: "sequence",
+    heading: "Open thromboembolectomy: exposure and technique",
+    steps: [
+      { title: "Exposure", detail: "A vertical groin incision over the common femoral artery is the workhorse approach; control the common femoral, superficial femoral, and profunda femoris arteries individually." },
+      { title: "Arteriotomy", detail: "Make a transverse arteriotomy in non-diseased artery to avoid creating a stenosis, or a longitudinal one when endarterectomy or patch closure is anticipated." },
+      { title: "Fogarty passage", detail: "Size the balloon catheter to the vessel — 5 to 6 French for the aorta or iliac arteries, 4 French for the femoral or popliteal, and 2 to 3 French for tibial or upper-extremity vessels — and pass it both antegrade and retrograde until two clean passes return good inflow and back-flow." },
+      { title: "Completion angiography", detail: "Obtain completion angiography on every case to confirm runoff and exclude retained clot, dissection, or a distal embolus before closing." },
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-fasciotomy",
+    type: "bullets",
+    heading: "Compartment syndrome and fasciotomy in acute limb ischemia",
+    items: [
+      "Unlike in trauma, compartment pressure is usually **not** elevated at the time acute limb ischemia presents — it develops **after reperfusion**, so the risk window opens once flow is restored, not before.",
+      "Diagnosis is primarily **clinical** — pain out of proportion, pain on passive stretch, a rising creatine kinase — with pressure measurement as an adjunct rather than the primary test.",
+      "Fasciotomy after revascularization for clinical compartment syndrome is a firm indication; prophylactic fasciotomy is reasonable in a salvageable IIa or IIb limb, and after prolonged ischemia beyond **4 to 6 hours** — early, prophylactic fasciotomy carries a lower amputation rate than waiting for signs to declare themselves.",
+      "Two numeric thresholds are both taught and worth knowing together: an absolute compartment pressure above **30 mmHg**, or a delta pressure — diastolic minus compartment pressure — under **30 mmHg**, against a lower **20 mmHg** threshold given by TASC II. Board answers vary by which source is being quoted.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-rhabdo",
+    type: "bullets",
+    heading: "Rhabdomyolysis and reperfusion systemic care",
+    items: [
+      "Roughly **half** of patients with a creatine kinase above **5,000 U/L** develop acute kidney injury.",
+      "Treat with **aggressive intravenous hydration**; urine alkalinization may be used, but mannitol and plasmapheresis are not proven to help.",
+      "Monitor for **hyperkalemia, ARDS, and cardiac events** as the reperfusion cascade evolves systemically.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-etiologic-workup",
+    type: "bullets",
+    heading: "Etiologic workup after stabilization",
+    items: [
+      "**Electrocardiogram and telemetry** to catch occult atrial fibrillation, and **transthoracic or transesophageal echocardiography** to look for a left ventricular or atrial thrombus, a patent foramen ovale, or endocarditis.",
+      "**CT angiography of the chest, abdomen, and pelvis** when echocardiography is negative, looking for an aneurysm or a shaggy aorta as the embolic source.",
+      "**Arterial duplex** for an occult aneurysm — roughly **50 percent** of popliteal aneurysms are bilateral, and **40 to 60 percent** are associated with an abdominal aortic aneurysm.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-prevention",
+    type: "bullets",
+    heading: "Long-term prevention",
+    items: [
+      "A **cardioembolic source** is treated with indefinite anticoagulation, using a direct oral anticoagulant or warfarin.",
+      "**Atherothrombotic disease** is treated with a high-intensity statin, an antiplatelet agent, and smoking cessation; low-dose rivaroxaban plus aspirin is considered per the peripheral artery disease antithrombotic data, and dual antiplatelet therapy is added if a stent was placed.",
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-young",
+    type: "table",
+    heading: "Nonatherosclerotic causes in young patients",
+    columns: ["Condition", "Who gets it", "Classic finding"],
+    rows: [
+      ["Popliteal entrapment", "A young male athlete", "Pulses disappear on active plantarflexion or passive dorsiflexion, from an aberrant medial gastrocnemius"],
+      ["Arterial thoracic outlet syndrome", "Patients with a cervical rib", "A post-stenotic subclavian aneurysm that showers distal emboli"],
+      ["Cystic adventitial disease", "Isolated popliteal artery involvement", "A mucinous cyst producing the 'scimitar sign' on imaging"],
+      ["Buerger disease (thromboangiitis obliterans)", "A heavy smoker under 45", "Digital ischemia with corkscrew collaterals"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-ali-pearls",
+    type: "bullets",
+    heading: "Board pearls",
+    items: [
+      "**Atrial fibrillation** is the leading embolic source, and the **common femoral artery bifurcation** is the most common site an embolus lodges.",
+      "**Popliteal aneurysm** is the most common peripheral aneurysm, and it threatens the limb through thrombosis or embolism rather than rupture.",
+      "**Blue toe syndrome** — atheroembolism with palpable pedal pulses — is a distinct picture from acute limb ischemia and should not be mistaken for it.",
+    ],
+  }, PACKET),
+  references("block-ali-references", [PACKET]),
+];
+
+export const acuteLimbIschemiaTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000001410",
+  versionId: "00000000-0000-4000-8000-000000001420",
+  slug: "acute-limb-ischemia",
+  title: "Acute Limb Ischemia",
+  aliases: ["ALI", "acute arterial occlusion", "limb ischemia", "embolism vs thrombosis", "6 Ps", "blue toe syndrome", "popliteal entrapment", "cystic adventitial disease", "Buerger disease", "thromboangiitis obliterans", "catheter-directed thrombolysis", "CDT", "Fogarty embolectomy", "open thromboembolectomy", "aortic saddle embolus"],
+  scoreNodeId: "arterial-conditions",
+  scoreCategory: "SCORE · Arterial Disease · Diseases & Conditions",
+  tags: ["arterial-disease", "vascular", "acute-limb-ischemia", "emergency", "absite", "score"],
+  sourceId: PACKET,
+  reviewedAt: "2026-08-25T00:00:00.000Z",
+  blocks,
+});

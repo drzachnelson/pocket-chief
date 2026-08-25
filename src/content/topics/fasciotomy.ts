@@ -225,7 +225,7 @@ export const fasciotomyTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001225",
   slug: "fasciotomy",
   title: "Fasciotomy",
-  aliases: ["compartment syndrome", "acute compartment syndrome", "ACS", "fasciotomy", "four-compartment fasciotomy", "two-incision fasciotomy", "leg fasciotomy", "thigh fasciotomy", "forearm fasciotomy", "delta pressure", "delta P", "compartment pressure", "intracompartmental pressure", "ICP", "Rutherford", "Rutherford classification", "acute limb ischemia", "McQueen Court-Brown", "reperfusion injury", "crush syndrome", "rhabdomyolysis", "shoelace technique", "deep posterior compartment", "6 Ps"],
+  aliases: ["compartment syndrome", "acute compartment syndrome", "ACS", "fasciotomy", "four-compartment fasciotomy", "two-incision fasciotomy", "leg fasciotomy", "thigh fasciotomy", "forearm fasciotomy", "delta pressure", "delta P", "compartment pressure", "intracompartmental pressure", "ICP", "Rutherford", "Rutherford classification", "McQueen Court-Brown", "reperfusion injury", "crush syndrome", "rhabdomyolysis", "shoelace technique", "deep posterior compartment", "6 Ps"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
   tags: ["trauma", "compartment-syndrome", "operative-technique", "extremity", "absite", "score"],
