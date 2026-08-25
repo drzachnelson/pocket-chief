@@ -212,7 +212,7 @@ export const cardiacInjuryTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001245",
   slug: "cardiac-injury",
   title: "Cardiac Injury",
-  aliases: ["cardiac trauma", "penetrating cardiac injury", "blunt cardiac injury", "BCI", "myocardial contusion", "cardiac tamponade", "Beck triad", "pulsus paradoxus", "cardiac box", "AAST cardiac organ injury scale", "cardiac OIS", "resuscitative thoracotomy", "hemopericardium", "pericardial window", "subxiphoid window", "traumatic VSD", "post-pericardiotomy syndrome", "commotio cordis", "cardiac herniation", "coronary artery injury", "FAST cardiac", "absite", "score"],
+  aliases: ["cardiac trauma", "penetrating cardiac injury", "blunt cardiac injury", "BCI", "myocardial contusion", "cardiac tamponade", "Beck triad", "pulsus paradoxus", "cardiac box", "AAST cardiac organ injury scale", "cardiac OIS", "resuscitative thoracotomy", "hemopericardium", "pericardial window", "subxiphoid window", "traumatic VSD", "post-pericardiotomy syndrome", "commotio cordis", "cardiac herniation", "coronary artery injury", "FAST cardiac"],
   scoreNodeId: "trauma-conditions",
   scoreCategory: "SCORE · Trauma · Diseases & Conditions",
   tags: ["trauma", "thoracic-trauma", "cardiac", "absite", "score"],

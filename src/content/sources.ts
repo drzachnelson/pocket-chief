@@ -30,6 +30,12 @@ export const CROHN_DISEASE_PACKET_SOURCE = "00000000-0000-4000-8000-000000001300
 export const ULCERATIVE_COLITIS_PACKET_SOURCE = "00000000-0000-4000-8000-000000001301";
 export const ACUTE_LIMB_ISCHEMIA_PACKET_SOURCE = "00000000-0000-4000-8000-000000001400";
 export const VASCULAR_EXPOSURE_PRINCIPLES_PACKET_SOURCE = "00000000-0000-4000-8000-000000001401";
+export const CRITICAL_CARE_AIRWAY_PACKET_SOURCE = "00000000-0000-4000-8000-000000002000";
+export const CRITICAL_CARE_ARRHYTHMIAS_PACKET_SOURCE = "00000000-0000-4000-8000-000000001500";
+export const CRITICAL_CARE_FLUID_ACID_BASE_PACKET_SOURCE = "00000000-0000-4000-8000-000000001600";
+export const CRITICAL_CARE_HYPOVOLEMIC_SHOCK_PACKET_SOURCE = "00000000-0000-4000-8000-000000001700";
+export const CRITICAL_CARE_RESPIRATORY_FAILURE_PACKET_SOURCE = "00000000-0000-4000-8000-000000001800";
+export const CRITICAL_CARE_CARDIOGENIC_SHOCK_PACKET_SOURCE = "00000000-0000-4000-8000-000000001900";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -359,6 +365,71 @@ export const suppliedSources: SuppliedSource[] = [
       "The packet is bracket-numbered but was not supplied with a consolidated bibliography beyond two named foundational reviews cited inline — Hoyt et al., Surgical Clinics of North America, 2001, and Fletcher, Annals of the Academy of Medicine Singapore, 1992, both registered here — plus the CREST trial, the EVAR-1/DREAM/OVER trials, a 2025 reconstructed individual-patient-data meta-analysis of EVAR versus open repair, the 2022 ACC/AHA aortic disease guideline, and Vascular Study Group of New England registry data on cranial nerve injury after carotid endarterectomy. The bracket numbers themselves are unresolved and the packet is the proximate source for the claims they tag; its own anatomy and complications tables are carried into the topic largely unchanged, with the citation-chip brackets stripped since the app has no route for them.",
       "Carried as a genuine cross-packet discrepancy rather than resolved: this packet states warm limb ischemia's irreversible threshold as a flat ~6 hours, while the acute limb ischemia packet supplied alongside it narrows that to a 4-to-6-hour window. Both figures are printed, here and in the Acute Limb Ischemia topic.",
       "Two classic-versus-current splits are carried rather than resolved, because the packet flags each explicitly: the most commonly injured cranial nerve in carotid exposure, where board teaching and the Society for Vascular Surgery guideline name the hypoglossal but the largest pooled meta-analysis (20,860 carotid endarterectomies) found the vagus injured more often; and EVAR's long-term durability against open repair, where boards teach equivalent long-term survival but a 2025 reconstructed-IPD meta-analysis found open repair holds a late survival advantage after roughly 11 months.",
+    ].join(" "),
+  },
+  {
+    id: CRITICAL_CARE_AIRWAY_PACKET_SOURCE,
+    title: "Owner-supplied airway access, intubation, and surgical airways study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Airway Access, Intubation, and Surgical Airways — Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature inline for most high-yield points rather than relying only on its bracket numbers (which run to [62] without a supplied bibliography, so the packet is the proximate source for those): the ASA 2022 difficult-airway guideline's capnography sensitivity/specificity data; the Canadian Airway Focused Group (CAFG) 2021 first-pass-success data for video laryngoscopy; the 2025 Difficult Airway Society (DAS) guideline's emphasis on the physiologically difficult airway and continuous preoxygenation; the DAS/CAFG consensus naming scalpel-bougie-tube as the adult front-of-neck-access technique of choice; the TracMan trial (JAMA, 2013) on early-versus-late tracheostomy timing; and a 2015 Cochrane meta-analysis reaching the opposite mortality conclusion on the same question.",
+      "Independently checked during review: the pediatric front-of-neck-access age cutoff is less settled than the packet's single \"<8 years scalpel-bougie tracheostomy, ≥8 years cricothyroidotomy\" rule suggests. Current DAS pediatric guidance keeps needle cricothyroidotomy first-line under 8 years, with a scalpel technique reserved for needle failure, while separate otolaryngology-oriented reviews instead favor primary surgical tracheotomy under 8 when an otolaryngologist is immediately available — two different current answers, both correcting the same older \"no surgical cric under 10–12\" teaching. The topic below is written to reflect that the pediatric algorithm varies by guideline rather than presenting one clean age rule.",
+    ].join(" "),
+  },
+  {
+    id: CRITICAL_CARE_ARRHYTHMIAS_PACKET_SOURCE,
+    title: "Owner-supplied common cardiac arrhythmias study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Common Cardiac Arrhythmias — Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature throughout: the ACC (Kumbhani et al., 2026) and PACE (Ma et al., 2024) postoperative atrial fibrillation (POAF) incidence data; the AHA (Wigginton et al., 2025) caution on confirming an arrhythmia is the cause rather than the consequence of instability before cardioverting; the AHA (Panchal et al., 2020) and ACC/AHA/HRS (Page et al., 2015) narrow-complex-tachycardia termination data; the RACE II trial and the 2023 ACC/AHA/ACCP/HRS atrial fibrillation guideline supporting lenient rate control; the 2024 ESC CHA₂DS₂-VA scheme; the 2024 perioperative guideline and the 2023 ACC/AHA atrial fibrillation guideline on postoperative anticoagulation; the PROCAMIO trial on procainamide for stable monomorphic VT; the 2018 AHA advanced-cardiac-life-support update restoring lidocaine as a co-equal option for shock-refractory VF/pulseless VT; and the 2018 ACC/AHA/HRS bradyarrhythmia pacing guideline.",
+      "Independently verified during review: Landiolol (Rapiblyk) is a real, FDA-approved ultra-short-acting IV beta-blocker carrying the indication the packet describes, but the approval date is November 2024, not 2025 as supplied — corrected in the topic text below.",
+    ].join(" "),
+  },
+  {
+    id: CRITICAL_CARE_FLUID_ACID_BASE_PACKET_SOURCE,
+    title: "Owner-supplied fluid and acid-base disorders study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Fluid and Acid-Base Disorders — Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature throughout: Lorente et al. (Frontiers in Medicine, 2025) on postoperative dextrose-containing maintenance fluid; the SMART trial (Semler et al., NEJM, 2018) and the 2026 Surviving Sepsis Campaign favoring balanced crystalloids over normal saline; the BaSICS trial and Zampieri et al. (JAMA, 2021) on the traumatic-brain-injury and hyponatremia/alkalosis exceptions; Adrogué et al. (JAMA, 2022) on hypertonic saline dosing for severe symptomatic hyponatremia; Miller et al. (American Family Physician, 2023) on sodium correction-rate limits; Geldermann et al. (European Medical Journal, 2026) on potassium-binder preference over Kayexalate; a Cochrane review (Batterink et al., 2015) on IV calcium for hyperkalemia; the Endocrine Society (2023) and Guise and Wysolmerski (NEJM, 2022) hypercalcemia treatment sequence; the 2020 ASPEN refeeding-syndrome consensus and Schuetz et al. (Lancet, 2021) on prophylactic electrolyte dosing; and the PROPPR trial (Holcomb et al., JAMA, 2015) and a 2024 AAST/ACS damage-control-resuscitation protocol for transfusion ratios and tranexamic acid dosing.",
+      "Independently verified during review: a January 2025 JAMA Internal Medicine meta-analysis of 16 cohort studies (11,811 patients with severe hyponatremia) does show slower correction associated with higher mortality while osmotic demyelination syndrome stays rare (well under 1%) even with rapid correction, matching the packet's qualitative claim. The exact odds ratios the packet attributes to \"Ayus et al., 2025\" could not be independently confirmed against the source available during review and are carried as supplied rather than re-derived.",
+    ].join(" "),
+  },
+  {
+    id: CRITICAL_CARE_HYPOVOLEMIC_SHOCK_PACKET_SOURCE,
+    title: "Owner-supplied hypovolemic (hemorrhagic) shock study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Hypovolemic (Hemorrhagic) Shock — Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature throughout rather than relying on bracket numbers: the PROPPR trial (Holcomb et al., JAMA, 2015) on 1:1:1 transfusion ratios; the CRASH-2 trial and the PATCH-Trauma trial on tranexamic acid timing and functional outcome; AORTA registry data and the UK-REBOA randomized trial on resuscitative endovascular balloon occlusion of the aorta; and the SAFE trial on albumin in traumatic brain injury. The UK-REBOA stopped-for-harm finding and the PATCH-Trauma functional-outcome result were checked against training-era knowledge of both trials during review and are consistent with the packet's framing.",
+    ].join(" "),
+  },
+  {
+    id: CRITICAL_CARE_RESPIRATORY_FAILURE_PACKET_SOURCE,
+    title: "Owner-supplied respiratory failure, ARDS, PE, and pneumonia study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Respiratory Failure, ARDS, PE, and Pneumonia — Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature throughout: the Berlin ARDS definition (ARDS Definition Task Force, JAMA, 2012) and its validated severity strata (Fan et al., JAMA, 2018); a 2024 \"New Global Definition\" of ARDS (Matthay et al., AJRCCM, 2024); the ARDSNet/ARMA trial and the 2024 ATS (Qadir et al.) and 2023 ESICM lung-protective-ventilation guidelines; Amato et al. (NEJM, 2015) on driving pressure; the PROSEVA trial (Guérin et al., NEJM, 2013) on prone positioning; the 2026 Surviving Sepsis Campaign on neuromuscular-blockade dosing strategy; the 2024 SCCM focused corticosteroid update (Chaudhuri et al.) and the DEXA-ARDS trial (Villar, cited via Gorman et al., Lancet, 2022); the 2019 ESC pulmonary-embolism risk-stratification scheme and the 2026 AHA/ACC pulmonary-embolism guideline (Creager et al.); the PEITHO trial on submassive PE thrombolysis; and the 2016 IDSA/ATS hospital- and ventilator-associated pneumonia guideline (Kalil et al.).",
+      "Independently verified during review: the 2024 ATS and 2023 ESICM lung-protective-ventilation guidelines do state the tidal-volume target as 4–8 mL/kg predicted body weight rather than a fixed 6 mL/kg, matching the packet; the 2024 SCCM focused update did remove the PaO₂/FiO₂ <200 qualifier from its ARDS corticosteroid recommendation, also matching the packet; and the 2026 AHA/ACC pulmonary embolism guideline's five-category (A–E) clinical severity scheme is a real, newly published framework (Circulation/JACC, February 2026) replacing the traditional low/intermediate/high-risk model, confirming the packet's description of it.",
+    ].join(" "),
+  },
+  {
+    id: CRITICAL_CARE_CARDIOGENIC_SHOCK_PACKET_SOURCE,
+    title: "Owner-supplied cardiac failure and cardiogenic shock study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Cardiac Failure and Cardiogenic Shock — Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature throughout: Lüsebrink et al. (Lancet, 2024) and Samsky et al. (JAMA, 2021) on cardiogenic shock definition and its self-perpetuating spiral; van Diepen et al. (AHA, 2017) on expanded shock phenotypes beyond classic \"cold and wet\"; Thompson et al. (ACC/AHA, 2024) on perioperative heart-failure risk; the 2022 SCAI SHOCK staging update; the SHOCK and CULPRIT-SHOCK trials on revascularization strategy; the SOAP II and OPTIMA-CC trials on vasopressor choice; the DOREMI trial comparing milrinone and dobutamine; the IABP-SHOCK II, ECLS-SHOCK, ECMO-CS, and DanGer Shock trials on mechanical circulatory support; and the 2024 AHA/ACC perioperative guideline (drawing on the POISE and POISE-3 trials) on perioperative heart-failure medication management.",
+      "These trial results were checked against training-era knowledge during review — SHOCK, CULPRIT-SHOCK, IABP-SHOCK II, ECLS-SHOCK, DanGer Shock, and SOAP II are established landmark trials — and nothing in the packet's framing of them was inconsistent with the published trial reports.",
     ].join(" "),
   },
 ];

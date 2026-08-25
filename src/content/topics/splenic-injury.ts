@@ -175,7 +175,7 @@ export const splenicInjuryTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001220",
   slug: "splenic-injury",
   title: "Splenic Injury",
-  aliases: ["splenic trauma", "blunt splenic injury", "spleen injury", "spleen trauma", "AAST spleen grade", "AAST organ injury scale", "splenic laceration", "splenic hematoma", "splenic pseudoaneurysm", "splenic blush", "WSES splenic classification", "nonoperative management", "NOM", "splenic artery angioembolization", "SAE", "angioembolization", "Kehr sign", "e-FAST", "zebra spleen", "shock index", "delayed splenic rupture", "solid organ injury", "absite", "score"],
+  aliases: ["splenic trauma", "blunt splenic injury", "spleen injury", "spleen trauma", "AAST spleen grade", "AAST organ injury scale", "splenic laceration", "splenic hematoma", "splenic pseudoaneurysm", "splenic blush", "WSES splenic classification", "nonoperative management", "NOM", "splenic artery angioembolization", "SAE", "angioembolization", "Kehr sign", "e-FAST", "zebra spleen", "shock index", "delayed splenic rupture", "solid organ injury"],
   scoreNodeId: "trauma-conditions",
   scoreCategory: "SCORE · Trauma · Diseases & Conditions",
   tags: ["trauma", "spleen", "solid-organ-injury", "nonoperative-management", "absite", "score"],

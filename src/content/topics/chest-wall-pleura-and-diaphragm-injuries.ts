@@ -268,7 +268,7 @@ export const chestWallPleuraAndDiaphragmInjuriesTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001229",
   slug: "chest-wall-pleura-and-diaphragm-injuries",
   title: "Chest Wall, Pleura, and Diaphragm Injuries",
-  aliases: ["chest wall injuries", "pleural injuries", "diaphragmatic injury", "diaphragm injury", "diaphragmatic rupture", "diaphragmatic hernia trauma", "flail chest", "flail segment", "rib fractures", "sternal fracture", "SSRF", "surgical stabilization of rib fractures", "pneumothorax", "tension pneumothorax", "hemothorax", "retained hemothorax", "massive hemothorax", "blunt cardiac injury", "BCI", "VATS", "video-assisted thoracoscopic surgery", "tube thoracostomy", "chest tube", "needle decompression", "safe triangle", "thoracic trauma", "pulmonary contusion", "SOFRIB", "absite", "score"],
+  aliases: ["chest wall injuries", "pleural injuries", "diaphragmatic injury", "diaphragm injury", "diaphragmatic rupture", "diaphragmatic hernia trauma", "flail chest", "flail segment", "rib fractures", "sternal fracture", "SSRF", "surgical stabilization of rib fractures", "pneumothorax", "tension pneumothorax", "hemothorax", "retained hemothorax", "massive hemothorax", "blunt cardiac injury", "BCI", "VATS", "video-assisted thoracoscopic surgery", "tube thoracostomy", "chest tube", "needle decompression", "safe triangle", "thoracic trauma", "pulmonary contusion", "SOFRIB"],
   scoreNodeId: "trauma-conditions",
   scoreCategory: "SCORE · Trauma · Diseases & Conditions",
   tags: ["trauma", "chest-wall", "pleura", "diaphragm", "thoracic-trauma", "absite", "score"],
