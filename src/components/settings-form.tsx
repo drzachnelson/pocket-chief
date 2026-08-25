@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, DownloadSimple, PencilSimple, Plus, SignOut } from "@phosphor-icons/react";
+import { ArrowsClockwise, Check, DownloadSimple, PencilSimple, Plus, SignOut } from "@phosphor-icons/react";
 import { clearPrivateOfflineData } from "@/lib/offline";
 import { defaultAnkiSettings, loadAnkiSettings, saveAnkiSettings } from "@/lib/anki-settings";
 import type { TaxonomyNode } from "@/lib/types";
@@ -17,7 +17,22 @@ export function SettingsForm({ initialTaxonomy }: { initialTaxonomy: TaxonomyNod
   const [taxonomyTitle, setTaxonomyTitle] = useState("");
   const [taxonomyParent, setTaxonomyParent] = useState("");
   const [taxonomyStatus, setTaxonomyStatus] = useState("");
+  const [syncing, setSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState("");
   function save(event: React.FormEvent) { event.preventDefault(); saveAnkiSettings(settings); setSaved(true); window.setTimeout(() => setSaved(false), 2200); }
+  async function syncLibrary() {
+    setSyncing(true); setSyncStatus("");
+    try {
+      const response = await fetch("/api/library/install", { method: "POST" });
+      const data = await response.json() as { installed?: number; present?: number; failed?: number; error?: string };
+      if (!response.ok && response.status !== 207) { setSyncStatus(data.error ?? "Could not sync the library."); return; }
+      setSyncStatus(`Installed ${data.installed ?? 0}, already present ${data.present ?? 0}, failed ${data.failed ?? 0}.`);
+    } catch {
+      setSyncStatus("Could not sync the library.");
+    } finally {
+      setSyncing(false);
+    }
+  }
   async function signOut() { await fetch("/auth/sign-out", { method: "POST" }); await clearPrivateOfflineData(); navigator.serviceWorker?.controller?.postMessage({ type: "CLEAR_PRIVATE_DATA" }); router.replace("/auth/sign-in"); router.refresh(); }
   function editNode(node: TaxonomyNode) { setEditingId(node.id); setTaxonomyTitle(node.title); setTaxonomyParent(node.parentId ?? ""); setTaxonomyStatus(""); }
   async function saveNode(event: React.FormEvent) {
@@ -44,6 +59,12 @@ export function SettingsForm({ initialTaxonomy }: { initialTaxonomy: TaxonomyNod
         <div className="section-heading"><h2>Privacy & portability</h2><span>Private device data</span></div>
         <p className="settings-copy">Download a complete ZIP with approved topic Markdown and JSON, sources, tags, Anki drafts, media manifest, and export manifest.</p>
         <div className="settings-actions"><a href="/api/backup" className="button secondary"><DownloadSimple size={15} />Download backup</a><button className="button ghost danger" onClick={signOut}><SignOut size={15} />Sign out & clear offline data</button></div>
+      </section>
+      <section className="form-card">
+        <div className="section-heading"><h2>Library sync</h2><span>Owner action</span></div>
+        <p className="settings-copy">Installs any new topics authored in <code>src/content/</code> that were deployed but not yet written into the database.</p>
+        <div className="settings-actions"><button type="button" className="button secondary" disabled={syncing} onClick={syncLibrary}><ArrowsClockwise size={15} />{syncing ? "Syncing…" : "Sync library"}</button></div>
+        {syncStatus && <p className="form-message" role="status">{syncStatus}</p>}
       </section>
       <section className="form-card taxonomy-card">
         <div className="section-heading"><h2>SCORE organization</h2><span>Owner editable</span></div>
