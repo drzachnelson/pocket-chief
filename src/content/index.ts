@@ -21,6 +21,7 @@ import { fastExamTopic } from "@/content/topics/focused-assessment-with-sonograp
 import { gastrointestinalTractInjuryRepairTopic } from "@/content/topics/gastrointestinal-tract-injury-repair";
 import { groinHerniaInChildrenTopic } from "@/content/topics/groin-hernia-in-children";
 import { groinHerniaRepairTopic } from "@/content/topics/groin-hernia-repair";
+import { hemorrhoidsTopic } from "@/content/topics/hemorrhoids";
 import { hepaticInjuryTopic } from "@/content/topics/hepatic-injury-packing-repair-and-resection";
 import { acuteLiverFailureTopic } from "@/content/topics/acute-liver-failure";
 import { hypovolemicShockTopic } from "@/content/topics/hypovolemic-shock";
@@ -30,8 +31,10 @@ import { malrotationOperationTopic } from "@/content/topics/malrotation-operatio
 import { neckInjuriesManagementTopic } from "@/content/topics/neck-injuries-management";
 import { malrotationTopic } from "@/content/topics/malrotation";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
+import { percutaneousBreastBiopsyTopic } from "@/content/topics/percutaneous-breast-biopsy-and-cyst-aspiration";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
 import { peritonealNeoplasmsTopic } from "@/content/topics/peritoneal-neoplasms";
+import { proceduresForHemorrhoidsTopic } from "@/content/topics/procedures-for-hemorrhoids";
 import { rectusSheathHematomaTopic } from "@/content/topics/rectus-sheath-hematoma";
 import { renalArteryDiseaseTopic } from "@/content/topics/renal-artery-disease";
 import { respiratoryFailureArdsPulmonaryEmbolismAndPneumoniaTopic } from "@/content/topics/respiratory-failure-ards-pulmonary-embolism-and-pneumonia";
@@ -102,4 +105,7 @@ export const demoTopics: Topic[] = [
   hypovolemicShockTopic,
   respiratoryFailureArdsPulmonaryEmbolismAndPneumoniaTopic,
   cardiacFailureAndCardiogenicShockTopic,
+  hemorrhoidsTopic,
+  proceduresForHemorrhoidsTopic,
+  percutaneousBreastBiopsyTopic,
 ];

@@ -36,4 +36,8 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "vascular-access", title: "Vascular Access", slug: "vascular-access", parentId: "score", order: 32 },
   { id: "vascular-access-conditions", title: "Diseases & Conditions", slug: "vascular-access-diseases-conditions", parentId: "vascular-access", order: 33 },
   { id: "vascular-access-procedures", title: "Operations & Procedures", slug: "vascular-access-operations-procedures", parentId: "vascular-access", order: 34 },
+  { id: "breast-procedures", title: "Operations & Procedures", slug: "breast-operations-procedures", parentId: "breast", order: 35 },
+  { id: "anorectal", title: "Anorectal", slug: "anorectal", parentId: "score", order: 36 },
+  { id: "anorectal-conditions", title: "Diseases & Conditions", slug: "anorectal-diseases-conditions", parentId: "anorectal", order: 37 },
+  { id: "anorectal-procedures", title: "Operations & Procedures", slug: "anorectal-operations-procedures", parentId: "anorectal", order: 38 },
 ];
