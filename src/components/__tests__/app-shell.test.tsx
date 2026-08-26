@@ -2,22 +2,32 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { AppShell } from "@/components/app-shell";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/topics" }));
+let pathname = "/topics";
+vi.mock("next/navigation", () => ({ usePathname: () => pathname }));
 
 describe("AppShell", () => {
-  it("uses a button for the active mobile Topics destination", () => {
+  it("keeps Topics as a conventional link on the browse page", () => {
     render(<AppShell><p>Content</p></AppShell>);
 
-    expect(screen.getByRole("button", { name: "Topics" })).toHaveAttribute("aria-haspopup", "dialog");
+    expect(screen.getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "page");
+    expect(screen.queryByRole("button", { name: "Browse topics" })).not.toBeInTheDocument();
+  });
+
+  it("uses a distinct Browse topics drawer control inside a topic", () => {
+    pathname = "/topics/neck-trauma";
+    render(<AppShell><p>Content</p></AppShell>);
+
+    expect(screen.getByRole("button", { name: "Browse topics" })).toHaveAttribute("aria-haspopup", "dialog");
     expect(screen.queryByRole("link", { name: "Topics" })).not.toBeInTheDocument();
   });
 
-  it("renders the four primary mobile destinations and owner tools", () => {
+  it("renders three reader destinations without Add", () => {
+    pathname = "/topics";
     render(<AppShell><p>Content</p></AppShell>);
     expect(screen.getAllByRole("link", { name: /search/i }).length).toBeGreaterThan(0);
-    expect(screen.getByRole("button", { name: /topics/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Topics" })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /saved/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: /add/i }).length).toBeGreaterThan(0);
+    expect(screen.queryByRole("link", { name: /add/i })).not.toBeInTheDocument();
     expect(screen.getByText("Content")).toBeInTheDocument();
   });
 });

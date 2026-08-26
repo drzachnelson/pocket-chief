@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { TopicsBrowser } from "@/components/topics-browser";
 import { TopicsResume } from "@/components/topics-resume";
 import { getRepository } from "@/lib/repository";
-import { buildTopicNavigation } from "@/lib/topic-navigation";
+import { buildTopicNavigation, flattenTopicNavigation } from "@/lib/topic-navigation";
 
 export const metadata: Metadata = { title: "Topics" };
 
@@ -12,11 +13,14 @@ export default async function TopicsPage() {
   const [taxonomy, listedTopics, recentTopics] = await Promise.all([repository.listTaxonomy(), repository.listTopics(), repository.listRecentTopics(1)]);
   const topics = listedTopics.filter((topic) => topic.approvedVersion);
   const navigation = buildTopicNavigation(taxonomy, topics);
-  const fallbackSlug = navigation.flatMap((category) => [...category.topics, ...category.children.flatMap((section) => section.topics)])[0]?.slug;
+  const fallbackSlug = flattenTopicNavigation(navigation)[0]?.topic.slug;
   return (
-    <div className="topics-index-heading">
-      <div><p className="eyebrow">SCORE curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy.</p></div>
-      <TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={fallbackSlug} approvedTopics={topics.map(({ id, slug }) => ({ id, slug }))} />
-    </div>
+    <>
+      <div className="topics-index-heading">
+        <div><p className="eyebrow">SCORE curriculum</p><h1 className="page-title">Topics</h1><p className="page-lede">Browse the SCORE hierarchy.</p></div>
+        <TopicsResume recentSlug={recentTopics[0]?.slug} fallbackSlug={fallbackSlug} approvedTopics={topics.map(({ id, slug }) => ({ id, slug }))} />
+      </div>
+      <TopicsBrowser navigation={navigation} />
+    </>
   );
 }

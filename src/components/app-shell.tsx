@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, Plus, ShieldCheck } from "@phosphor-icons/react";
+import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, ShieldCheck } from "@phosphor-icons/react";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -12,7 +12,6 @@ export const primaryNavigation = [
   { href: "/", label: "Search", icon: MagnifyingGlass },
   { href: "/topics", label: "Topics", icon: Notebook },
   { href: "/saved", label: "Saved", icon: BookmarkSimple },
-  { href: "/add", label: "Add", icon: Plus },
 ];
 
 interface TopicsDrawerState {
@@ -52,8 +51,8 @@ function NavLink({ href, label, icon: Icon, mobile = false }: (typeof primaryNav
   const drawer = useContext(TopicsDrawerContext);
   const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
   const className = `${mobile ? "mobile-nav-link" : "side-nav-link"} ${active ? "active" : ""}`;
-  if (mobile && href === "/topics" && active) {
-    return <button type="button" className={className} aria-label={label} aria-current="page" aria-haspopup="dialog" aria-expanded={drawer?.isOpen ?? false} onClick={(event) => drawer?.open(event.currentTarget)}><Icon size={21} weight="fill" aria-hidden="true" /><span>{label}</span></button>;
+  if (mobile && href === "/topics" && pathname.startsWith("/topics/")) {
+    return <button type="button" className={className} aria-label="Browse topics" aria-current="page" aria-haspopup="dialog" aria-expanded={drawer?.isOpen ?? false} onClick={(event) => drawer?.open(event.currentTarget)}><Icon size={21} weight="fill" aria-hidden="true" /><span>{label}</span></button>;
   }
   return <Link href={href} className={className} aria-current={active ? "page" : undefined} aria-label={label}>
     <Icon size={mobile ? 21 : 18} weight={active ? "fill" : "regular"} aria-hidden="true" />
