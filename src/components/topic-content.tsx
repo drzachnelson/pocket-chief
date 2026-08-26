@@ -221,6 +221,10 @@ export function TopicContent({ topic, sources, linkEntries, nextTopic }: { topic
     if (!details) return;
     const blockId = details.dataset.blockId;
     if (blockId) setBlockOpen(blockId, true);
+    // The browser already made its own hash jump while this section was still closed, so it
+    // landed short of the heading. Re-aim once React has committed the open state and the
+    // sections below it have reflowed.
+    window.requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView());
   }, [setBlockOpen]);
 
   useEffect(() => {

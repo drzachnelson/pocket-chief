@@ -13,9 +13,14 @@ const offlineMocks = vi.hoisted(() => ({
 }));
 vi.mock("@/lib/offline", () => offlineMocks);
 
+// jsdom has no layout, so it leaves scrollIntoView undefined; the deep-link effect calls it.
+const scrollIntoView = vi.fn();
+Element.prototype.scrollIntoView = scrollIntoView;
+
 beforeEach(() => {
   offlineMocks.isTopicReviewed.mockReset().mockResolvedValue(false);
   offlineMocks.setTopicReviewed.mockReset().mockResolvedValue(undefined);
+  scrollIntoView.mockReset();
   window.history.replaceState({}, "", "/topics/paraesophageal");
 });
 
@@ -112,6 +117,18 @@ describe("renderer redesign", () => {
     await waitFor(() => expect(offlineMocks.setTopicReviewed).toHaveBeenCalledWith(topic, true));
     expect(screen.getByText("Reviewed on this device")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Next topic: Next topic — Foregut" })).toHaveAttribute("href", "/topics/next");
+  });
+
+  it("scrolls a deep-linked section into view once it has been opened", async () => {
+    window.history.replaceState({}, "", "/topics/paraesophageal#b1");
+    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    const details = container.querySelector<HTMLDetailsElement>("#b1")!;
+
+    // The browser makes its own hash jump while the section is still closed, so it lands short.
+    // Opening the section has to be followed by re-aiming at the target.
+    await waitFor(() => expect(details.open).toBe(true));
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalled());
+    expect(scrollIntoView.mock.instances[0]).toBe(details);
   });
 
   it("falls back to the topics index at the end of a category", () => {

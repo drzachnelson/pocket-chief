@@ -20,6 +20,8 @@ test("search, read, save, and draft a cloze", async ({ page }) => {
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
+  // Sections open collapsed, so the in-section Anki controls are hidden until the reader opens them.
+  await page.getByRole("button", { name: "Open all" }).click();
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
   await page.getByRole("button", { name: /Make Anki card from Age alone/ }).click();
@@ -28,7 +30,8 @@ test("search, read, save, and draft a cloze", async ({ page }) => {
   const reviewedText = `{{c1::Age alone}} is not an age-based contraindication to exploration (${test.info().project.name}).`;
   await page.getByLabel("Cloze text").fill(reviewedText);
   const updateResponse = page.waitForResponse((response) => response.request().method() === "PATCH" && response.url().includes("/api/anki/drafts/"));
-  await page.getByRole("button", { name: "Close" }).click();
+  // Scoped and exact: the reader's "Close all" section toggle also matches a loose "Close".
+  await page.getByRole("dialog").getByRole("button", { name: "Close", exact: true }).click();
   const saved = await updateResponse;
   expect(saved.status()).toBe(200);
   expect((await saved.json()).draft.clozeText).toBe(reviewedText);
@@ -51,6 +54,7 @@ test("edits made while the draft is still saving are not lost on close", async (
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
+  await page.getByRole("button", { name: "Open all" }).click();
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
   await page.getByRole("button", { name: /Make Anki card from Repositioning may help/ }).click();
@@ -60,7 +64,8 @@ test("edits made while the draft is still saving are not lost on close", async (
   await page.waitForTimeout(1000);
   await expect(page.getByLabel("Cloze text")).toHaveValue(reviewedText);
   const updateResponse = page.waitForResponse((response) => response.request().method() === "PATCH" && response.url().includes("/api/anki/drafts/"));
-  await page.getByRole("button", { name: "Close" }).click();
+  // Scoped and exact: the reader's "Close all" section toggle also matches a loose "Close".
+  await page.getByRole("dialog").getByRole("button", { name: "Close", exact: true }).click();
   const saved = await updateResponse;
   expect(saved.status()).toBe(200);
   expect((await saved.json()).draft.clozeText).toBe(reviewedText);
@@ -120,12 +125,20 @@ test("topic sections start collapsed, toggle together, and reviewed state persis
   await expect(page.getByText("Reviewed on this device")).toBeVisible();
   await page.reload();
   await expect(page.getByRole("button", { name: "Mark not reviewed" })).toBeVisible();
-  await expect(page.getByRole("link", { name: /^Next topic:/ })).toBeVisible();
+  // Choledocholithiasis is the only topic in Alimentary Tract, so its category ends here
+  // rather than wrapping into the next one.
+  await expect(page.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/topics");
+});
+
+test("a guide followed by another topic in its category links straight to it", async ({ page }) => {
+  await page.goto("/topics/escharotomy");
+  await expect(page.getByRole("link", { name: "Next topic: Fasciotomy — Trauma" })).toHaveAttribute("href", "/topics/fasciotomy");
 });
 
 test("decision flows keep labeled branches connected and readable on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("/topics/fasciotomy");
+  await page.getByRole("button", { name: "Open all" }).click();
   const flow = page.getByRole("group", { name: "The diagnostic decision flowchart" });
   await expect(flow).toBeVisible();
 
@@ -255,9 +268,12 @@ test("topics resumes a visited guide and excludes an empty curriculum branch", a
 test("canonical topic navigation keeps the workspace, active path, anchors, and exact update date", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Desktop workspace navigation only");
   await page.goto("/topics");
-  await page.getByRole("button", { name: "Alimentary Tract" }).click();
-  await page.getByRole("button", { name: "Biliary Tract" }).click();
-  await page.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
+  // The topics index renders the searchable browser alongside the workspace tree, so this
+  // walk has to stay inside the tree to keep naming its own links.
+  const tree = page.getByRole("navigation", { name: "Topics curriculum" });
+  await tree.getByRole("button", { name: "Alimentary Tract" }).click();
+  await tree.getByRole("button", { name: "Biliary Tract" }).click();
+  await tree.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
 
   await expect(page).toHaveURL(/\/topics\/choledocholithiasis$/);
   await expect(page.getByLabel("Topics workspace")).toBeVisible();

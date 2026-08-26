@@ -117,9 +117,6 @@ export function flattenTopicNavigation(navigation: TopicNavigationCategory[]): F
   ]);
 }
 
-/** Alias for consumers that want to make the ordering guarantee explicit. */
-export const flattenOrderedTopics = flattenTopicNavigation;
-
 /**
  * Find the next topic in the current top-level category. Categories are bounded:
  * the last topic in a category has no next topic rather than wrapping or crossing
