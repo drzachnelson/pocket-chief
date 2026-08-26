@@ -5,7 +5,7 @@ import { getRepository } from "@/lib/repository";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
 vi.mock("@/lib/repository", () => ({ getRepository: vi.fn() }));
-vi.mock("@/components/topic-content", () => ({ TopicContent: () => <div data-testid="topic-content" /> }));
+vi.mock("@/components/topic-content", () => ({ TopicContent: ({ nextTopic }: { nextTopic?: { slug: string; label: string; categoryLabel: string } }) => <div data-testid="topic-content" data-next-slug={nextTopic?.slug} data-next-label={nextTopic?.label} data-next-category={nextTopic?.categoryLabel} /> }));
 
 const readRepository = vi.mocked(getRepository);
 
@@ -20,10 +20,18 @@ const topic: Topic = {
   approvedVersion: { id: "v1", topicId: "neck-trauma", versionNumber: 1, status: "approved", blocks: [], sourceIds: [], scoreNodeId: "neck", tags: ["airway"], warnings: [], createdAt: "2026-08-20T00:30:00.000Z" }, versions: [],
 };
 
+const nextTopic: Topic = {
+  ...topic,
+  id: "neck-wound",
+  slug: "neck-wound",
+  title: "Neck wound",
+  approvedVersion: { ...topic.approvedVersion!, id: "v2", topicId: "neck-wound" },
+};
+
 describe("TopicPage", () => {
   it("renders one SCORE path and a UTC-stable last-updated label without tag chips or breadcrumbs", async () => {
     readRepository.mockResolvedValue({
-      getTopicBySlug: vi.fn().mockResolvedValue(topic), listSources: vi.fn().mockResolvedValue([]), listTopics: vi.fn().mockResolvedValue([topic]), listTaxonomy: vi.fn().mockResolvedValue(taxonomy),
+      getTopicBySlug: vi.fn().mockResolvedValue(topic), listSources: vi.fn().mockResolvedValue([]), listTopics: vi.fn().mockResolvedValue([topic, nextTopic]), listTaxonomy: vi.fn().mockResolvedValue(taxonomy),
     } as never);
 
     render(await TopicPage({ params: Promise.resolve({ slug: topic.slug }) }));
@@ -33,5 +41,17 @@ describe("TopicPage", () => {
     expect(screen.getByText("Last updated Aug 20, 2026")).toBeInTheDocument();
     expect(screen.queryByLabelText("Breadcrumb")).not.toBeInTheDocument();
     expect(screen.queryByText("airway")).not.toBeInTheDocument();
+    expect(screen.getByTestId("topic-content")).toHaveAttribute("data-next-slug", "neck-wound");
+    expect(screen.getByTestId("topic-content")).toHaveAttribute("data-next-category", "Trauma");
+  });
+
+  it("does not wrap into another category at the end", async () => {
+    readRepository.mockResolvedValue({
+      getTopicBySlug: vi.fn().mockResolvedValue(topic), listSources: vi.fn().mockResolvedValue([]), listTopics: vi.fn().mockResolvedValue([topic]), listTaxonomy: vi.fn().mockResolvedValue(taxonomy),
+    } as never);
+
+    render(await TopicPage({ params: Promise.resolve({ slug: topic.slug }) }));
+    const rendered = screen.getAllByTestId("topic-content").at(-1)!;
+    expect(rendered).not.toHaveAttribute("data-next-slug");
   });
 });

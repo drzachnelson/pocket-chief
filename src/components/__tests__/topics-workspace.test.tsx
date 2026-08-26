@@ -22,6 +22,7 @@ const branchedNavigation: TopicNavigationCategory[] = [{
 }];
 
 function renderWorkspace() {
+  currentPathname = "/topics/neck-trauma";
   return render(<AppShell><TopicsWorkspace navigation={navigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
 }
 
@@ -48,7 +49,7 @@ describe("TopicsWorkspace", () => {
 
   it("opens the shared Topics drawer and restores focus after Escape", () => {
     renderWorkspace();
-    const trigger = screen.getByRole("button", { name: "Topics" });
+    const trigger = screen.getAllByRole("button", { name: "Browse topics" })[0];
     trigger.focus();
     fireEvent.click(trigger);
 
@@ -62,19 +63,19 @@ describe("TopicsWorkspace", () => {
 
   it("clears drawer open state when the workspace unmounts", () => {
     const view = renderWorkspace();
-    fireEvent.click(screen.getByRole("button", { name: "Topics" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Browse topics" })[0]);
     expect(screen.getByRole("dialog", { name: "Topics" })).toBeInTheDocument();
 
     view.rerender(<AppShell><p>Other route content</p></AppShell>);
 
     expect(screen.queryByRole("dialog", { name: "Topics" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Topics" })).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getAllByRole("button", { name: "Browse topics" })[0]).toHaveAttribute("aria-expanded", "false");
   });
 
   it("closes the drawer after topic selection and remembers the desktop rail state", () => {
     stored.clear();
     renderWorkspace();
-    fireEvent.click(screen.getByRole("button", { name: "Topics" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Browse topics" })[0]);
     const drawer = screen.getByRole("dialog", { name: "Topics" });
     fireEvent.click(within(drawer).getByRole("button", { name: "Trauma" }));
     const topicLink = within(drawer).getByRole("link", { name: "Neck trauma" });
