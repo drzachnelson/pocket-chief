@@ -200,10 +200,18 @@ node node_modules/vitest/vitest.mjs run src/lib/__tests__/library.test.ts
 
 Expected: PASS, 5 tests.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Prove the approval filter actually bites**
+
+Every one of the 46 authored topics already carries an `approvedVersion` — `buildTopic()` sets it unconditionally — so the `every(...approvedVersion)` assertion in Step 1 would still pass if `approved()` were deleted outright. `library.json` is the app's entire public output, so "only approved content ships" needs a test that can actually fail.
+
+`vi.mock` is hoisted per file, so this needs its own file: mocking `@/content` inside `library.test.ts` would break the four tests there that deliberately read the real corpus. Create `src/lib/__tests__/library-approval.test.ts` that mocks `@/content` with a synthetic mix of approved and unapproved topics and asserts both `listTopics()` and `searchLibrary()` exclude the unapproved one. The mock factory must supply `suppliedSources` and `taxonomy` as well — `library.ts` imports all three named exports.
+
+Verify the test bites: temporarily change `approved()` to `() => demoTopics`, confirm the new file FAILS, then restore and confirm `git diff src/lib/library.ts` is empty.
+
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/lib/library.ts src/lib/__tests__/library.test.ts && git commit -m "feat(library): read authored content directly without a repository
+git add src/lib/library.ts src/lib/__tests__/library.test.ts src/lib/__tests__/library-approval.test.ts && git commit -m "feat(library): read authored content directly without a repository
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
