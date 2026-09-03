@@ -4,7 +4,7 @@
 
 **Goal:** Turn Pocket Chief into a self-contained static PWA that builds from this repository and deploys to GitHub Pages, with Vercel, Supabase, OpenAI, and the whole server-side authoring surface removed.
 
-**Architecture:** The 46 authored topics in `src/content/` already are the database. A new `src/lib/library.ts` reads them directly as pure functions, replacing the `ContentRepository` abstraction and both of its implementations. Pages become statically prerendered at build time (`output: "export"`); everything that used to be a server round-trip — bookmarks, recents, Anki drafts — becomes IndexedDB or local state, which `src/lib/offline.ts` already implements. A single `library.json` static asset seeds the offline cache and powers client-side search. GitHub Actions builds `out/` and publishes it to Pages under `basePath: "/pocket-chief"`.
+**Architecture:** The 46 authored topics in `src/content/` already are the database. A new `src/lib/library.ts` reads them directly as pure functions, replacing the `ContentRepository` abstraction and both of its implementations. Pages become statically prerendered at build time (`output: "export"`); the only state left — bookmarks and reading history — lives in IndexedDB, which `src/lib/offline.ts` already implements. A single `library.json` static asset seeds the offline cache and powers client-side search. Anki export is removed outright: flashcards now come from handing the published page to an assistant. GitHub Actions builds `out/` and publishes it to Pages under `basePath: "/pocket-chief"`.
 
 **Tech Stack:** Next.js 16 (App Router, `output: "export"`), React 19, TypeScript, Tailwind 4, `idb` for IndexedDB, Vitest, Playwright, GitHub Actions + GitHub Pages.
 
@@ -25,15 +25,15 @@
 | `src/content/**` | keep | The library. 46 approved topics. |
 | `src/lib/search.ts` | keep | `searchTopics(query, topics)` is already a pure function. |
 | `src/lib/offline.ts` | keep | IndexedDB layer. Already stores topics, taxonomy, saved, recent. |
-| `src/lib/anki.ts` | keep | Every function is browser-capable, including `sendToAnkiConnect`. |
-| `src/lib/taxonomy.ts`, `topic-navigation.ts`, `inline.ts`, `text.ts`, `anki-settings.ts` | keep | Pure, no server dependency. |
+| `src/lib/taxonomy.ts`, `topic-navigation.ts`, `inline.ts`, `text.ts` | keep | Pure, no server dependency. `stripMarkup` still feeds the decision-flow screen-reader descriptions. |
 | `src/lib/editorial.ts` | prune | Only `factualUnits` and `supportWarnings` are still reachable (Task 10). |
 | `src/lib/repository.ts`, `repositories/**`, `supabase/**`, `auth.ts`, `data-mode.ts`, `store.ts`, `proxy.ts`, `ai.ts`, `safety.ts`, `schemas.ts`, `rate-limit.ts`, `backup.ts`, `library-install.ts` | delete | Server-only. Nothing reachable in a static build. |
+| `src/lib/anki.ts`, `src/lib/anki-settings.ts` | delete | Anki export is removed from the product (Task 7). |
 | `src/app/api/**`, `src/app/auth/**`, `src/app/add/`, `src/app/drafts/`, `src/app/configuration-error/` | delete | No server, no auth, no AI drafting. |
 
 **Two behaviour changes the owner should expect, called out here so nobody rediscovers them as bugs:**
 
-1. **AnkiConnect on desktop gets less reliable.** It was a server-to-`127.0.0.1:8765` call; it becomes a browser-to-`127.0.0.1:8765` call from an `https://` page. Chrome exempts loopback from mixed-content blocking; Safari does not. The existing TSV fallback already handles the failure, and the primary path (iPhone → `anki://` URL scheme) is unaffected.
+1. **Anki export is gone entirely** — the per-block "Make Anki" buttons, the cloze dialog, the AnkiMobile URL scheme, AnkiConnect, the TSV fallback, and the Settings preferences for deck and field mapping. Flashcards now come from handing the published page URL to an assistant. This is a deliberate product decision, not an oversight; nothing in the plan restores it.
 2. **Response headers are gone.** GitHub Pages cannot set `X-Robots-Tag` or `Referrer-Policy`, and `headers()` is silently inert under `output: "export"`. Task 11 replaces them with `robots.txt` plus the `<meta name="robots">` the root layout already emits. If the repository is made public, treat the content as world-readable — the topics derive from licensed SCORE and Fiser material, and `noindex` is a crawler request, not access control.
 
 **Explicitly out of scope:** re-authoring `src/content/topics/choledocholithiasis.ts` through the `sourced()` helper. Its byte-pinning constraint disappears with the SQL, but rewriting it is a content change, not a migration change.
@@ -61,8 +61,10 @@
 | `next.config.ts` | `output: "export"`, `basePath`, `trailingSlash`, `images.unoptimized`; drop `headers()`. |
 | `src/app/page.tsx` | Server shell around a Suspense-wrapped client search experience. |
 | `src/app/topics/page.tsx`, `topics/layout.tsx`, `topics/[slug]/page.tsx` | Static library reads + `generateStaticParams`. |
-| `src/app/settings/page.tsx`, `src/components/settings-form.tsx` | Local-only: Anki preferences and clear-offline-data. |
-| `src/components/topic-content.tsx` | Local bookmarks, local recents, local Anki drafts, no restore. |
+| `src/app/settings/page.tsx`, `src/components/settings-form.tsx` | Local-only: clear offline data, and what the library is. |
+| `src/components/topic-content.tsx` | Local bookmarks and recents; no Anki, no restore. Loses roughly a third of its lines. |
+| `src/lib/types.ts` | Drop `ClozeDraft` and `AnkiSettings`. |
+| `src/app/globals.css` | Drop the five rule groups only the Anki dialog and its buttons used. |
 | `src/components/saved-library.tsx`, `favorite-topics.tsx`, `recent-topics.tsx`, `topics-resume.tsx`, `search-form.tsx`, `offline-hydrator.tsx`, `app-shell.tsx`, `service-worker-registration.tsx` | Drop every `/api/*` call and the `/add` destination. |
 | `public/sw.js` | basePath-aware, cache v4, no `/api/` special-casing. |
 | `src/app/manifest.ts` | basePath-aware `start_url`, `scope`, and icon paths. |
@@ -930,158 +932,282 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 ---
 
-## Task 7: TopicContent — local bookmarks, local recents, local Anki
+## Task 7: Strip Anki out of the reading view
 
-The Anki dialog's whole "persist the draft, then wait for it" state machine existed because a server owned the draft. Building the card locally removes it.
+The per-block "Make Anki" buttons, the selection-capture handler, the cloze dialog, and the SVG context-image generator all go. What is left is a reading view: blocks, bookmarks, reading history, and the three tabs.
 
 **Files:**
 - Modify: `src/components/topic-content.tsx`
-- Test: `src/components/__tests__/topic-content.test.tsx`
+- Modify: `src/lib/types.ts`
+- Modify: `src/app/globals.css`
+- Test: `src/components/__tests__/topic-content.test.tsx`, `src/lib/__tests__/content-contract.test.ts`
 
-- [ ] **Step 1: Replace the `AnkiDialog` component**
+- [ ] **Step 1: Rewrite `src/components/topic-content.tsx`**
 
-In `src/components/topic-content.tsx`, replace the entire `AnkiDialog` function (currently lines 111–182, from `function AnkiDialog(` through its closing `}`) with:
-
-```tsx
-function AnkiDialog({ selection, topic, block, onClose }: { selection: string; topic: Topic; block: TopicBlock; onClose: () => void }) {
-  const defaultCloze = useMemo(() => createFallbackCloze(selection), [selection]);
-  const [text, setText] = useState(defaultCloze);
-  const [status, setStatus] = useState("");
-  const contextRef = useMemo(() => {
-    const nearestFlow = topic.approvedVersion?.blocks.find((item) => item.type === "flow");
-    const diagram = nearestFlow?.type === "flow" ? nearestFlow.nodes.map((node) => node.label).join(" → ") : "No nearby diagram supplied.";
-    return contextImageDataUrl(block.heading ?? topic.title, excerpt(block), diagram);
-  }, [block, topic]);
-
-  // The card is assembled here and handed straight to an exporter. Nothing stores it: the atlas is
-  // static, and a half-written cloze belongs in Anki, not in a second copy of the library.
-  async function draft(): Promise<ClozeDraft> {
-    const clozeText = text.trim();
-    if (!clozeText) throw new Error("Write the cloze text before exporting.");
-    return { id: `${block.id}-cloze`, clozeText, additionalContext: excerpt(block), sourceBlockIds: [block.id], contextImageRef: contextRef, tags: ["pocket-chief", ...topic.tags], duplicateHash: await createDuplicateHash(clozeText) };
-  }
-
-  async function copyTsv() { try { await navigator.clipboard.writeText(toAnkiTsv([await draft()], loadAnkiSettings())); setStatus("TSV copied"); } catch (error) { setStatus(error instanceof Error ? error.message : "Could not build this card."); } }
-  async function openMobile() { try { window.location.href = buildAnkiMobileUrl(await draft(), loadAnkiSettings()); } catch (error) { setStatus(error instanceof Error ? error.message : "Could not build this card."); } }
-  async function exportDesktop() {
-    let card: ClozeDraft;
-    try { card = await draft(); }
-    catch (error) { setStatus(error instanceof Error ? error.message : "Could not build this card."); return; }
-    const settings = loadAnkiSettings();
-    // AnkiConnect is a plain-HTTP loopback call from an HTTPS page. Chrome allows it; Safari does
-    // not, and a stopped Anki fails the same way — the TSV download is the answer to both.
-    try { await sendToAnkiConnect(card, settings); setStatus("Added through AnkiConnect"); }
-    catch {
-      const blob = new Blob([toAnkiTsv([card], settings)], { type: "text/tab-separated-values;charset=utf-8" });
-      const anchor = document.createElement("a"); anchor.href = URL.createObjectURL(blob); anchor.download = "Pocket-Chief-Anki.tsv"; anchor.click(); URL.revokeObjectURL(anchor.href);
-      setStatus("AnkiConnect was unavailable; downloaded a UTF-8 import file.");
-    }
-  }
-
-  return (
-    <dialog open className="anki-dialog" aria-labelledby="anki-title">
-      <div className="dialog-head"><div><p className="eyebrow">Review before export</p><h2 id="anki-title">Make Anki card</h2></div><button className="icon-button" onClick={onClose} aria-label="Close"><X size={17} /></button></div>
-      <div className="context-preview"><small>Context image attached</small><strong>{block.heading && stripMarkup(block.heading)}</strong><p>{excerpt(block)}</p></div>
-      <div className="field"><label htmlFor="cloze-text">Cloze text</label><textarea id="cloze-text" value={text} onChange={(event) => setText(event.target.value)} /><small>Edit the single deletion, then export. A rendered image of this section travels with the card.</small></div>
-      {status && <p className="form-message" role="status">{status}</p>}
-      <div className="dialog-actions"><button className="button ghost" onClick={copyTsv}><Copy size={15} />Copy row</button><button className="button secondary" onClick={exportDesktop}><DownloadSimple size={15} />Send to desktop Anki</button><button className="button" onClick={openMobile}>Open in AnkiMobile</button></div>
-    </dialog>
-  );
-}
-```
-
-- [ ] **Step 2: Update the imports at the top of the file**
-
-Replace lines 3–15 (the whole import block after `"use client";`) with:
+Roughly a third of the file goes. Replace it in full:
 
 ```tsx
+"use client";
+
 import * as Tabs from "@radix-ui/react-tabs";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { BookmarkSimple, Brain, CaretDown, CaretUp, CheckCircle, Copy, DownloadSimple, Lightning, Warning, WarningOctagon, X } from "@phosphor-icons/react";
-import type { ClozeDraft, SuppliedSource, Topic, TopicBlock } from "@/lib/types";
+import { BookmarkSimple, Brain, CaretDown, CaretUp, CheckCircle, Warning, WarningOctagon } from "@phosphor-icons/react";
+import type { SuppliedSource, Topic, TopicBlock } from "@/lib/types";
 import type { InlineSegment, LinkIndexEntry } from "@/lib/inline";
-import { buildAnkiMobileUrl, createDuplicateHash, createFallbackCloze, sendToAnkiConnect, toAnkiTsv } from "@/lib/anki";
-import { loadAnkiSettings } from "@/lib/anki-settings";
-import { bulletDepth, createLinkScope, headingLevel, parseInline, stripMarkup } from "@/lib/inline";
+import { bulletDepth, createLinkScope, headingLevel, parseInline } from "@/lib/inline";
 import { isTopicSaved, recordRecentView, setTopicSaved } from "@/lib/offline";
 import { InlineText } from "@/components/inline-text";
 import { DecisionFlow } from "@/components/decision-flow";
-```
 
-This drops `useRouter` and the now-unused `TopicVersion` type, and adds `createDuplicateHash`.
+function SupportMark({ block }: { block: TopicBlock }) {
+  const supported = block.claims.every((claim) => claim.status === "cited" && claim.citationIds.length > 0);
+  return <span className={`support-mark ${supported ? "supported" : "unsupported"}`} title={supported ? "All factual claims linked to supplied sources" : "Unresolved source support"}><CheckCircle size={13} weight="fill" />{supported ? "Supported" : "Needs support"}</span>;
+}
 
-- [ ] **Step 3: Point the image block at a static path**
+const CALLOUT_ICONS = { pearl: CheckCircle, mnemonic: Brain, danger: WarningOctagon } as const;
 
-In the `Block` function, replace
+function CalloutIcon({ tone }: { tone?: "pearl" | "mnemonic" | "danger" }) {
+  const Icon = tone ? CALLOUT_ICONS[tone] : Warning;
+  return <span className="callout-icon"><Icon size={15} weight="fill" /></span>;
+}
 
-```tsx
-    const media = <><Image src={`/api/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
-```
+interface BulletNode { item: string; segments: InlineSegment[]; depth: 0 | 1 | 2; children: BulletNode[] }
 
-with
+/**
+ * Turns the flat `- ` / `-- ` prefixed items into real nesting. A flat list with left padding
+ * looks indented but tells a screen reader nothing about what belongs under what.
+ *
+ * Parsing happens here rather than in the leaf so every `parseInline` call for a block runs
+ * inside that block's render, in document order, against the one scope it was given.
+ */
+function bulletTree(items: string[], parse: (text: string) => InlineSegment[]): BulletNode[] {
+  const roots: BulletNode[] = [];
+  const stack: BulletNode[] = [];
+  for (const item of items) {
+    const { depth, text } = bulletDepth(item);
+    const node: BulletNode = { item, segments: parse(text), depth, children: [] };
+    // A `--` item that never got a `-` parent hangs off the nearest shallower item instead.
+    while (stack.length && stack[stack.length - 1].depth >= depth) stack.pop();
+    (stack[stack.length - 1]?.children ?? roots).push(node);
+    stack.push(node);
+  }
+  return roots;
+}
 
-```tsx
+function BulletList({ nodes, nested }: { nodes: BulletNode[]; nested?: boolean }) {
+  return <ul className={nested ? "clinical-list clinical-list-nested" : "clinical-list"}>{nodes.map((node) => <li key={node.item} data-depth={node.depth}><span><InlineText segments={node.segments} /></span>{node.children.length > 0 && <BulletList nodes={node.children} nested />}</li>)}</ul>;
+}
+
+function Block({ block, expanded, linkEntries, selfSlug, onToggle }: { block: TopicBlock; expanded: boolean; linkEntries: LinkIndexEntry[]; selfSlug: string; onToggle: (id: string, open: boolean) => void }) {
+  // Built fresh on every render, never memoized: parseInline records each linked key on the
+  // scope so a term fires once per block, which means a reused scope renders the second pass
+  // with every link already spent.
+  const scope = createLinkScope(linkEntries, selfSlug);
+  const inline = (text: string) => <InlineText segments={parseInline(text, scope)} />;
+  const title = block.heading ? headingLevel(block.heading) : null;
+  const callout = block.type === "summary" || block.type === "warning";
+  const collapsible = Boolean(title) && !callout;
+  const Heading = title?.level === 3 ? "h3" : "h2";
+  // Headings parse emphasis but not links — an anchor inside a <summary> would both navigate
+  // and toggle the section on the same click.
+  const headingNode = title && <Heading><InlineText segments={parseInline(title.text)} /></Heading>;
+  const icon = block.type === "warning" ? <CalloutIcon tone={block.tone} /> : null;
+  const actions = title && <div className="block-actions"><SupportMark block={block} /></div>;
+  const frame = (children: ReactNode, extra = "") => {
+    const anchors = { id: block.id, "data-block-id": block.id, ...(title?.level === 3 ? { "data-level": "3" } : {}) };
+    if (collapsible) return <details {...anchors} className={`topic-block section-block${extra}`} open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={title!.text}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{children}</details>;
+    return <section {...anchors} className={`topic-block${extra}`}>{title ? <div className="block-heading">{icon}{headingNode}{actions}</div> : icon}{children}</section>;
+  };
+  if (block.type === "summary") return frame(<p>{inline(block.text)}</p>, " summary-block");
+  if (block.type === "prose") return frame(<p>{inline(block.text)}</p>);
+  if (block.type === "warning") return frame(<p>{inline(block.text)}</p>, ` warning-block${block.tone ? ` tone-${block.tone}` : ""}`);
+  if (block.type === "bullets") return frame(<BulletList nodes={bulletTree(block.items, (text) => parseInline(text, scope))} />);
+  if (block.type === "table") return frame(<div className="table-scroll"><table><thead><tr>{block.columns.map((column) => <th key={column}>{inline(column)}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{inline(cell)}</th> : <td key={`${row[0]}-${cell}`}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>);
+  if (block.type === "sequence") return frame(<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p></div></li>)}</ol>);
+  if (block.type === "flow") return frame(<DecisionFlow block={block} renderInline={inline} />);
+  if (block.type === "image") {
     const media = <><Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
-```
+    return collapsible ? frame(<figure>{media}</figure>) : <figure id={block.id} data-block-id={block.id} className="topic-block">{media}</figure>;
+  }
+  return null;
+}
 
-No authored topic currently uses an image block, so this path is unexercised; it stays correct rather than pointing at a route that no longer exists.
-
-- [ ] **Step 4: Strip the server calls out of `TopicContent`**
-
-Delete the `const router = useRouter();` line.
-
-Replace the `useEffect` body's first two statements — `recordRecentView(topic)` and the `/api/recent` fetch — with just:
-
-```tsx
+export function TopicContent({ topic, sources, linkEntries }: { topic: Topic; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[] }) {
+  const [saved, setSaved] = useState(false);
+  const [savedReady, setSavedReady] = useState(false);
+  const [saveError, setSaveError] = useState("");
+  const savedTouched = useRef(false);
+  const version = topic.approvedVersion!;
+  const blocks = useMemo(() => version.blocks.filter((block) => block.type !== "references"), [version]);
+  // Callouts stay open prose; only headed non-callout sections carry a disclosure.
+  const collapsible = useMemo(() => blocks.filter((block) => block.heading && block.type !== "summary" && block.type !== "warning").map((block) => block.id), [blocks]);
+  const [collapsed, setCollapsed] = useState<ReadonlySet<string>>(() => new Set());
+  const allOpen = collapsed.size === 0;
+  // Mirroring every native toggle back into state is what lets "Expand all" reopen a section the
+  // reader closed by hand — otherwise React sees an unchanged `open` prop and leaves the DOM alone.
+  function setBlockOpen(id: string, open: boolean) {
+    setCollapsed((current) => { if (open !== current.has(id)) return current; const next = new Set(current); if (open) next.delete(id); else next.add(id); return next; });
+  }
+  useEffect(() => {
     recordRecentView(topic).catch(() => undefined);
-```
+    // A blocked IndexedDB request neither resolves nor rejects, so awaiting it alone left
+    // Save disabled forever. Racing a timeout means the button is always usable; the worst
+    // case is that it opens showing "Save" on a topic already saved on this device, which
+    // toggleSaved corrects on the next write.
+    Promise.race([isTopicSaved(topic.id), new Promise<boolean | undefined>((resolve) => setTimeout(() => resolve(undefined), 1500))])
+      .then((value) => { if (typeof value === "boolean" && !savedTouched.current) setSaved(value); }).catch(() => undefined).finally(() => setSavedReady(true));
+  }, [topic]);
 
-Replace the whole `toggleSaved` function with:
-
-```tsx
   function toggleSaved() {
     savedTouched.current = true;
     const next = !saved; setSaved(next); setSaveError("");
     setTopicSaved(topic, next).catch(() => setSaveError("This device blocked private storage, so the bookmark was not kept."));
   }
-```
 
-Delete the whole `restore` function.
-
-In the History tab, replace the version row so it no longer offers a restore action:
-
-```tsx
+  return (
+    <>
+      <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved offline" : "Save"}</button>{collapsible.length > 0 && <button className="expand-toggle" onClick={() => setCollapsed(allOpen ? new Set(collapsible) : new Set())}>{allOpen ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}{allOpen ? "Collapse all" : "Expand all"}</button>}{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
+      <Tabs.Root defaultValue="notes" className="topic-tabs">
+        <Tabs.List className="tabs-list" aria-label="Topic views"><Tabs.Trigger value="notes">Notes</Tabs.Trigger><Tabs.Trigger value="sources">Sources <span>{sources.length}</span></Tabs.Trigger><Tabs.Trigger value="history">History <span>{topic.versions.length}</span></Tabs.Trigger></Tabs.List>
+        <Tabs.Content value="notes"><article className="topic-article">{blocks.map((block) => <Block key={block.id} block={block} expanded={!collapsed.has(block.id)} linkEntries={linkEntries} selfSlug={topic.slug} onToggle={setBlockOpen} />)}</article></Tabs.Content>
+        <Tabs.Content value="sources"><div className="source-list">{sources.map((source, index) => <article key={source.id}><span>{index + 1}</span><div><h2>{source.title}</h2><p>{source.citation}</p>{source.details && <small>{source.details}</small>}</div></article>)}</div></Tabs.Content>
         <Tabs.Content value="history"><div className="history-list">{topic.versions.map((item) => <article key={item.id}><span className="status-dot" /><div><h2>Version {item.versionNumber} · {item.status}</h2><p>{item.reviewedAt ? `Reviewed ${new Date(item.reviewedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` : "Draft in review"}</p></div></article>)}</div></Tabs.Content>
+      </Tabs.Root>
+    </>
+  );
+}
 ```
 
-- [ ] **Step 5: Update the component test**
+- [ ] **Step 2: Drop the Anki types**
 
-`src/components/__tests__/topic-content.test.tsx` needs exactly one deletion. Remove line 6 — nothing in the component uses the router any more:
+In `src/lib/types.ts`, delete the last two interfaces:
+
+```ts
+export interface ClozeDraft {
+  id: string;
+  clozeText: string;
+  additionalContext: string;
+  sourceBlockIds: string[];
+  contextImageRef: string;
+  tags: string[];
+  duplicateHash: string;
+}
+
+export interface AnkiSettings {
+  deck: string;
+  noteType: string;
+  tagPrefix: string;
+  fieldMap?: { text: string; extra: string };
+}
+```
+
+- [ ] **Step 3: Remove the dead CSS**
+
+In `src/app/globals.css`, delete these rules. Match on the selector, not on a line number — earlier edits shift them.
+
+Three `.anki-inline` rules, immediately after `.support-mark.unsupported`:
+
+```css
+.anki-inline { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 4px var(--space-2); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-faint); font-size: var(--text-2xs); cursor: pointer; }
+.anki-inline::after { content: ""; position: absolute; inset: -11px 0; }
+.anki-inline:hover { background: var(--surface-strong); color: var(--cobalt-dark); }
+```
+
+The dialog group, five consecutive lines beginning `.anki-dialog {`, through the line containing `.dialog-actions`:
+
+```css
+.anki-dialog { position: fixed; z-index: var(--z-dialog); inset: auto 10px max(10px, env(safe-area-inset-bottom)); width: min(620px, calc(100% - 20px)); max-height: calc(100vh - 40px); overflow-y: auto; margin: 0 auto; padding: 18px; border: 1px solid var(--line-strong); border-radius: 15px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 90px rgb(0 0 0 / .35); }
+.anki-dialog::backdrop { background: rgb(7 12 24 / .45); backdrop-filter: blur(3px); }
+.dialog-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }.dialog-head h2 { margin: 0; font-size: 18px; }.dialog-head .eyebrow { margin-bottom: 2px; }
+.context-preview { margin: 15px 0; padding: 13px; border-left: 3px solid var(--cobalt); border-radius: 8px; background: var(--cobalt-soft); }.context-preview small, .context-preview strong { display: block; }.context-preview small { color: var(--cobalt-dark); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }.context-preview strong { margin-top: 4px; font-size: 12px; }.context-preview p { margin: 3px 0 0; color: var(--ink-muted); font-size: 11px; }
+.anki-dialog textarea { min-height: 110px; }.dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+```
+
+The three `.support-confirm` rules directly beneath them — those styled the draft-review attestation checkbox, which Task 9 deletes:
+
+```css
+.support-confirm { display: grid; justify-items: start; gap: 9px; margin-top: 13px; padding: 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--cobalt-soft); }
+.support-confirm label { display: flex; align-items: flex-start; gap: 8px; color: var(--ink-muted); font-size: 11px; line-height: 1.45; }
+.support-confirm input { width: 14px; height: 14px; margin-top: 1px; accent-color: var(--cobalt); }
+```
+
+One line inside the narrow-viewport media query, next to `.support-mark { font-size: 9px; }`:
+
+```css
+  .anki-inline { font-size: 9px; }
+```
+
+One line inside the `@media (min-width: 760px)` block:
+
+```css
+  .anki-dialog { inset: 50% auto auto 50%; transform: translate(-50%, -50%); }
+```
+
+Finally, correct the comment above `.block-heading > div`, which explains itself by reference to the deleted draft-review view:
+
+```css
+/* .block-heading > div is the actions group and must stay shrinkable next to a long heading.
+   Only .block-actions is pinned. */
+```
+
+- [ ] **Step 4: Update the component test**
+
+In `src/components/__tests__/topic-content.test.tsx`, delete the `next/navigation` mock on line 6:
 
 ```tsx
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 ```
 
-Everything else in that file already holds. The one Anki assertion it makes — `fireEvent.click(ankiInSummary)` then `expect(screen.getByRole("dialog")).toBeInTheDocument()` — passes sooner than before, because the dialog no longer waits on a network round-trip to render. Add one case at the end of the `describe` block to pin the new behaviour:
+In the test named `"renders inline markup, nesting, tones, and collapse state"`, delete the Anki assertion in the bullet section:
 
 ```tsx
-  it("opens the Anki dialog with its export actions immediately enabled", () => {
-    render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
-    fireEvent.click(screen.getByLabelText("Make Anki card from Top level item"));
-    const dialog = screen.getByRole("dialog");
-    expect(dialog).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Copy row/ })).toBeEnabled();
-    expect(screen.getByRole("button", { name: /Send to desktop Anki/ })).toBeEnabled();
-    expect(screen.getByRole("button", { name: /Open in AnkiMobile/ })).toBeEnabled();
-    expect((screen.getByLabelText("Cloze text") as HTMLTextAreaElement).value).toContain("{{c1::");
+    expect(screen.getByLabelText("Make Anki card from Deep one")).toBeInTheDocument();
+```
+
+and delete the final four lines of that same test, which click the in-summary Anki button:
+
+```tsx
+    // Anki button inside a summary must not toggle the section.
+    const ankiInSummary = details[0].querySelector("button.anki-inline")!;
+    fireEvent.click(ankiInSummary);
+    expect((details[0] as HTMLDetailsElement).open).toBe(true);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+```
+
+Then add one case at the end of the `describe` block, pinning the removal so nobody reintroduces it by accident:
+
+```tsx
+  it("offers no flashcard affordance anywhere in the reading view", () => {
+    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    expect(container.querySelector("button.anki-inline")).toBeNull();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.queryByText(/anki/i)).not.toBeInTheDocument();
   });
 ```
 
-- [ ] **Step 6: Run the test**
+`fireEvent` is still used by the collapse test, so leave its import alone.
+
+- [ ] **Step 5: Rename the content-contract case that justified itself by Anki**
+
+`stripMarkup` still matters — `src/components/decision-flow.tsx` builds its screen-reader edge descriptions with it, so a marker that survives stripping ends up read aloud. Only the name and comment need correcting. In `src/lib/__tests__/content-contract.test.ts`, change:
+
+```ts
+  it("keeps markup out of the text Anki exports", () => {
+```
+
+to:
+
+```ts
+  // decision-flow.tsx builds its accessible edge descriptions from stripped labels, so a marker
+  // that survives stripping is read aloud verbatim.
+  it("strips every inline marker without emptying a factual unit", () => {
+```
+
+- [ ] **Step 6: Run the affected tests**
 
 ```bash
-node node_modules/vitest/vitest.mjs run src/components/__tests__/topic-content.test.tsx
+node node_modules/vitest/vitest.mjs run src/components/__tests__/topic-content.test.tsx src/lib/__tests__/content-contract.test.ts
 ```
 
 Expected: PASS.
@@ -1092,17 +1218,19 @@ Expected: PASS.
 node node_modules/typescript/bin/tsc --noEmit && echo TYPES_OK
 ```
 
+`src/lib/anki.ts`, `src/lib/anki-settings.ts` and `src/components/settings-form.tsx` still reference the deleted types at this point — Task 8 rewrites the settings form and Task 9 deletes the two modules. If `tsc` reports errors confined to those three files, that is expected; anything else is not.
+
 ```bash
-git add src/components/topic-content.tsx src/components/__tests__/topic-content.test.tsx && git commit -m "refactor(topic): keep bookmarks, recents and Anki cards on the device
+git add src/components/topic-content.tsx src/components/__tests__/topic-content.test.tsx src/lib/types.ts src/app/globals.css src/lib/__tests__/content-contract.test.ts && git commit -m "refactor(topic): remove Anki export from the reading view
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
 
 ---
 
-## Task 8: Settings becomes local preferences only
+## Task 8: Settings becomes device storage only
 
-Taxonomy editing, library sync, backup download and sign-out all needed a server. Anki preferences and clearing offline data do not.
+With Anki gone, Settings holds one control: clearing what the app stored in this browser.
 
 **Files:**
 - Modify: `src/components/settings-form.tsx`
@@ -1116,38 +1244,26 @@ Replace the whole of `src/components/settings-form.tsx`:
 "use client";
 
 import { useState } from "react";
-import { Check, Trash } from "@phosphor-icons/react";
+import { Trash } from "@phosphor-icons/react";
 import { clearPrivateOfflineData } from "@/lib/offline";
-import { defaultAnkiSettings, loadAnkiSettings, saveAnkiSettings } from "@/lib/anki-settings";
 
 export function SettingsForm() {
-  const [saved, setSaved] = useState(false);
-  const [settings, setSettings] = useState(() => typeof window === "undefined" ? defaultAnkiSettings : loadAnkiSettings());
-  const [clearStatus, setClearStatus] = useState("");
-  function save(event: React.FormEvent) { event.preventDefault(); saveAnkiSettings(settings); setSaved(true); window.setTimeout(() => setSaved(false), 2200); }
+  const [status, setStatus] = useState("");
   async function clearOfflineData() {
-    setClearStatus("");
+    setStatus("");
     try {
       await clearPrivateOfflineData();
       navigator.serviceWorker?.controller?.postMessage({ type: "CLEAR_PRIVATE_DATA" });
-      setClearStatus("Cleared. Reload to restore the library from the app bundle.");
-    } catch { setClearStatus("Could not clear offline storage. Close other Pocket Chief tabs and try again."); }
+      setStatus("Cleared. Reload to restore the atlas from the app bundle.");
+    } catch { setStatus("Could not clear offline storage. Close other Pocket Chief tabs and try again."); }
   }
   return (
     <div className="settings-grid">
-      <form className="form-card" onSubmit={save}>
-        <div className="section-heading"><h2>Anki export</h2><span>Saved on this device</span></div>
-        <div className="field"><label htmlFor="deck">Deck</label><input id="deck" value={settings.deck} onChange={(event) => setSettings({ ...settings, deck: event.target.value })} /></div>
-        <div className="field"><label htmlFor="note-type">Cloze note type</label><input id="note-type" value={settings.noteType} onChange={(event) => setSettings({ ...settings, noteType: event.target.value })} /></div>
-        <div className="field"><label htmlFor="tag-prefix">Tag prefix</label><input id="tag-prefix" value={settings.tagPrefix} onChange={(event) => setSettings({ ...settings, tagPrefix: event.target.value })} /></div>
-        <div className="field"><label htmlFor="text-field">Field mapping</label><div className="field-pair"><input id="text-field" aria-label="Text field" value={settings.fieldMap.text} onChange={(event) => setSettings({ ...settings, fieldMap: { ...settings.fieldMap, text: event.target.value } })} /><input aria-label="Extra field" value={settings.fieldMap.extra} onChange={(event) => setSettings({ ...settings, fieldMap: { ...settings.fieldMap, extra: event.target.value } })} /></div></div>
-        <div className="form-footer"><button className="button" type="submit">{saved ? <><Check size={15} />Saved</> : "Save Anki settings"}</button></div>
-      </form>
       <section className="form-card">
         <div className="section-heading"><h2>Offline storage</h2><span>This device</span></div>
         <p className="settings-copy">Pocket Chief keeps the atlas, your bookmarks, and your reading history in this browser. Clearing removes all three; the atlas comes back on the next load, your bookmarks do not.</p>
         <div className="settings-actions"><button type="button" className="button ghost danger" onClick={clearOfflineData}><Trash size={15} />Clear offline data</button></div>
-        {clearStatus && <p className="form-message" role="status">{clearStatus}</p>}
+        {status && <p className="form-message" role="status">{status}</p>}
       </section>
       <section className="form-card">
         <div className="section-heading"><h2>The library</h2><span>Read only</span></div>
@@ -1169,7 +1285,7 @@ import { SettingsForm } from "@/components/settings-form";
 export const metadata: Metadata = { title: "Settings" };
 
 export default function SettingsPage() {
-  return <><div className="page-heading"><div><p className="eyebrow">Preferences</p><h1 className="page-title">Settings</h1><p className="page-lede">Configure Anki export and manage what Pocket Chief stores on this device.</p></div></div><SettingsForm /></>;
+  return <><div className="page-heading"><div><p className="eyebrow">Preferences</p><h1 className="page-title">Settings</h1><p className="page-lede">Manage what Pocket Chief stores on this device.</p></div></div><SettingsForm /></>;
 }
 ```
 
@@ -1179,25 +1295,24 @@ export default function SettingsPage() {
 node node_modules/typescript/bin/tsc --noEmit && echo TYPES_OK
 ```
 
-Expected: `TYPES_OK`.
+Expected: errors only in `src/lib/anki.ts` and `src/lib/anki-settings.ts`, which Task 9 deletes. No other file may appear.
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add src/app/settings src/components/settings-form.tsx && git commit -m "refactor(settings): keep only device-local preferences
+git add src/app/settings src/components/settings-form.tsx && git commit -m "refactor(settings): keep only the offline-storage control
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
 
 ---
-
 ## Task 9: Delete the server surface
 
 Everything below is now unreachable. This is the big deletion; it is safe because Tasks 4–8 removed every caller.
 
 **Files:**
 - Delete: `src/app/api/`, `src/app/auth/`, `src/app/add/`, `src/app/drafts/`, `src/app/configuration-error/`, `src/proxy.ts`, `src/lib/repository.ts`, `src/lib/repositories/`, `src/lib/supabase/`, `src/lib/auth.ts`, `src/lib/data-mode.ts`, `src/lib/store.ts`, `src/lib/ai.ts`, `src/lib/safety.ts`, `src/lib/schemas.ts`, `src/lib/rate-limit.ts`, `src/lib/backup.ts`, `src/lib/library-install.ts`, `src/components/add-note-form.tsx`, `src/components/draft-review.tsx`, `src/components/sign-in-form.tsx`, `supabase/`, and the tests listed below
-- Modify: `src/components/app-shell.tsx`, `src/lib/__tests__/content-contract.test.ts`, `src/lib/__tests__/safety-anki.test.ts`, `src/components/__tests__/app-shell.test.tsx`
+- Modify: `src/components/app-shell.tsx`, `src/lib/__tests__/content-contract.test.ts`, `src/components/__tests__/app-shell.test.tsx`
 
 - [ ] **Step 1: Delete the routes, pages and server modules**
 
@@ -1206,13 +1321,13 @@ git rm -r --quiet src/app/api src/app/auth src/app/add src/app/drafts src/app/co
 ```
 
 ```bash
-git rm --quiet src/proxy.ts src/lib/repository.ts src/lib/auth.ts src/lib/data-mode.ts src/lib/store.ts src/lib/ai.ts src/lib/safety.ts src/lib/schemas.ts src/lib/rate-limit.ts src/lib/backup.ts src/lib/library-install.ts src/components/add-note-form.tsx src/components/draft-review.tsx src/components/sign-in-form.tsx
+git rm --quiet src/proxy.ts src/lib/repository.ts src/lib/auth.ts src/lib/data-mode.ts src/lib/store.ts src/lib/ai.ts src/lib/safety.ts src/lib/schemas.ts src/lib/rate-limit.ts src/lib/backup.ts src/lib/library-install.ts src/lib/anki.ts src/lib/anki-settings.ts src/components/add-note-form.tsx src/components/draft-review.tsx src/components/sign-in-form.tsx
 ```
 
 - [ ] **Step 2: Delete the tests that covered them**
 
 ```bash
-git rm --quiet src/lib/__tests__/auth-mode.test.ts src/lib/__tests__/security-contract.test.ts src/lib/__tests__/ai-contract.test.ts src/lib/__tests__/ai-model-config.test.ts src/lib/__tests__/library-install.test.ts src/lib/__tests__/offline-backup.test.ts
+git rm --quiet src/lib/__tests__/auth-mode.test.ts src/lib/__tests__/security-contract.test.ts src/lib/__tests__/ai-contract.test.ts src/lib/__tests__/ai-model-config.test.ts src/lib/__tests__/library-install.test.ts src/lib/__tests__/offline-backup.test.ts src/lib/__tests__/safety-anki.test.ts src/lib/__tests__/anki-settings.test.ts
 ```
 
 `offline-backup.test.ts` also asserted `shouldReplaceCachedTopic`, which is still live. Re-add that one case as `src/lib/__tests__/offline-versioning.test.ts`:
@@ -1231,51 +1346,17 @@ describe("offline cache versioning", () => {
 });
 ```
 
-- [ ] **Step 3: Split the safety half out of the Anki test**
+- [ ] **Step 3: Confirm the Anki modules left nothing behind**
 
-`src/lib/__tests__/safety-anki.test.ts` covers two modules; `safety.ts` is gone. Rename the file and drop the PHI half:
+Task 7 removed the last runtime caller and Step 2 deleted both test files. Verify no import survives:
 
 ```bash
-git mv src/lib/__tests__/safety-anki.test.ts src/lib/__tests__/anki.test.ts
+grep -rn "@/lib/anki\|ClozeDraft\|AnkiSettings\|detectLikelyPHI" src --include='*.ts' --include='*.tsx' || echo ANKI_AND_PHI_FULLY_REMOVED
 ```
 
-Then replace the whole of `src/lib/__tests__/anki.test.ts` with just the Anki half:
+Expected: `ANKI_AND_PHI_FULLY_REMOVED`.
 
-```ts
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { buildAnkiMobileUrl, createDuplicateHash, createFallbackCloze, sendToAnkiConnect, toAnkiTsv } from "@/lib/anki";
-
-afterEach(() => vi.unstubAllGlobals());
-
-describe("Anki portability", () => {
-  it("encodes an AnkiMobile cloze URL and emits UTF-8 TSV", async () => {
-    const draft = {
-      id: "card-1",
-      clozeText: "Completion {{c1::cholangiography}} documents duct clearance.",
-      additionalContext: "Pocket Chief · Choledocholithiasis",
-      sourceBlockIds: ["block-sequence"],
-      contextImageRef: "context-card-1.png",
-      tags: ["pocket-chief", "biliary"],
-      duplicateHash: await createDuplicateHash("Completion cholangiography documents duct clearance."),
-    };
-    expect(buildAnkiMobileUrl(draft, { deck: "Pocket Chief", noteType: "Cloze", tagPrefix: "pc::" })).toContain("anki://x-callback-url/addnote");
-    const tsv = toAnkiTsv([draft], { deck: "Pocket Chief", noteType: "Cloze", tagPrefix: "pc::" });
-    expect(tsv).toContain("{{c1::cholangiography}}");
-    expect(tsv).toContain("pc::pocket-chief pc::biliary");
-  });
-
-  it("chooses a meaningful subject instead of a stopword for deterministic cloze", () => {
-    expect(createFallbackCloze("Age alone is not a contraindication to operative duct exploration.")).toBe("{{c1::Age alone}} is not a contraindication to operative duct exploration.");
-  });
-
-  it("reports AnkiConnect unavailability so the UI can download a fallback", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("connection refused")));
-    await expect(sendToAnkiConnect({ id: "1", clozeText: "{{c1::CBD}}", additionalContext: "Context", sourceBlockIds: ["b"], contextImageRef: "context.png", tags: [], duplicateHash: "abc" }, { deck: "Pocket Chief", noteType: "Cloze", tagPrefix: "pc::" })).rejects.toThrow("connection refused");
-  });
-});
-```
-
-PHI detection is deliberately gone, along with its twenty-odd assertions: it guarded free-text input on its way to a model, and the app no longer accepts free-text input or calls a model. Nothing else imported `detectLikelyPHI`.
+PHI detection went with `safety.ts`, deliberately: it guarded free-text input on its way to a model, and the app no longer accepts free-text input or calls a model. `stripMarkup` stays in `src/lib/inline.ts` — `decision-flow.tsx` still needs it, and `inline.test.ts` still covers it.
 
 - [ ] **Step 4: Drop the migration-digest assertion from the content contract**
 
@@ -1890,17 +1971,17 @@ In `tests/e2e/pocket-chief.spec.ts`, delete these five tests in full:
 - `"creates, revises, approves, finds, and restores a source-bound topic"`
 - `"requires explicit owner confirmation before linking every statement"`
 - `"adds and edits the owner's SCORE organization"`
-- `"edits made while the draft is still saving are not lost on close"`
+- `"edits made while the draft is still saving are not lost on close"` — this was entirely an Anki-draft race
 - the `test.beforeEach` block that clears bookmarks through `/api/bookmarks`
 
-Also delete the `import JSZip from "jszip";` line.
+Also delete the `import JSZip from "jszip";` line. Of the twelve original specs, seven go; five survive with path changes.
 
-- [ ] **Step 3: Rewrite the surviving Anki test**
+- [ ] **Step 3: Rewrite the search-read-save journey without Anki**
 
-Replace the first remaining test with a version that exercises the local card path:
+Replace the first remaining test:
 
 ```ts
-test("search, read, save, and build a cloze", async ({ page }) => {
+test("search, read, and save a topic", async ({ page }) => {
   await page.goto("./");
   await page.getByLabel("Search Pocket Chief").fill("choledochoithiasis");
   await page.getByRole("button", { name: "Search" }).click();
@@ -1908,23 +1989,16 @@ test("search, read, save, and build a cloze", async ({ page }) => {
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Make Anki/ })).toHaveCount(0);
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
-  await page.getByRole("button", { name: /Make Anki card from Age alone/ }).click();
-  await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByLabel("Cloze text")).toHaveValue(/\{\{c1::Age alone}}/);
-  await page.getByLabel("Cloze text").fill("{{c1::Age alone}} is not a contraindication to exploration.");
-  await page.getByRole("button", { name: "Copy row" }).click();
-  await expect(page.getByText("TSV copied")).toBeVisible();
-  await page.getByRole("button", { name: "Close" }).click();
-  await expect(page.getByRole("dialog")).not.toBeVisible();
 
   await page.goto("./saved/");
   await expect(page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
 });
 ```
 
-Clipboard access needs permission in Chromium; if `Copy row` fails, grant it in the test with `await page.context().grantPermissions(["clipboard-write"]);` immediately after `page.goto`.
+The typo in the search term is deliberate — it exercises the typo tolerance in `searchTopics`.
 
 - [ ] **Step 4: Fix the navigation count test**
 
@@ -2139,7 +2213,9 @@ A private, installable, search-first general surgery reference. Forty-six SCORE-
 - A Next.js app exported to static HTML. No server, no database, no accounts, no API keys.
 - The library is `src/content/` — one TypeScript file per topic, each block citing a supplied source.
 - Bookmarks, reading history, and the offline copy of the atlas live in the browser's IndexedDB. They belong to the device, not to an account.
-- Anki export runs in the browser: an `anki://` URL on iOS, AnkiConnect on desktop, and a UTF-8 TSV download when neither is available.
+- Typo-tolerant search over titles, aliases, headings, body text, SCORE categories, and tags, running entirely in the browser.
+
+For flashcards, hand a topic's URL to an assistant and ask it to write the cards. The app deliberately has no export of its own.
 
 ## Running it locally
 
@@ -2167,12 +2243,6 @@ Authoring is a commit, not an in-app flow. Invoke the `/score-topic` skill rathe
 `.github/workflows/deploy.yml` runs typecheck, lint, unit tests, and the static build on every push to `main`, then publishes `out/` to GitHub Pages. Set **Settings → Pages → Source** to **GitHub Actions** once.
 
 A Pages site is publicly reachable by URL on Free and Pro accounts, whatever the repository's visibility. `robots.txt` and the `noindex` metadata ask crawlers to stay away; they are not access control.
-
-## Anki setup
-
-- iPhone/iPad: review the cloze, then use **Open in AnkiMobile**.
-- Desktop: keep Anki open with AnkiConnect on its standard local port, then use **Send to desktop Anki**. Safari blocks the plain-HTTP loopback call from an HTTPS page; the TSV download is the fallback there.
-- Deck, note type, field mapping, and tag prefix are configurable in Settings and stored in this browser.
 
 ## Verification
 
@@ -2205,7 +2275,8 @@ Make these edits, keeping the file's structure:
 The app builds with `output: "export"` under `basePath: "/pocket-chief"`, in development as well as CI. Consequences worth knowing before you debug something:
 
 - Anything that needs a request at runtime — `searchParams` in a server component, a non-GET route handler, `headers()`, middleware — will fail the build or be silently inert. Search reads `?q=` on the client for exactly this reason.
-- Bookmarks, reading history, and Anki settings are per-device. Clearing site data clears them.
+- Bookmarks and reading history are per-device, in IndexedDB. Clearing site data clears them, and there is no server copy to restore from.
+- There is no Anki export. Flashcards come from handing a published topic URL to an assistant; do not reintroduce an in-app exporter without asking.
 - New content does not appear on HMR if a stale dev server from another chat is serving. Confirm with `curl -s localhost:3210/library.json` before concluding new content failed to register.
 ```
 
@@ -2235,8 +2306,8 @@ Pocket Chief is a static site. It has no server, no database, no accounts, and n
 **What that means in practice**
 
 - Everything the app knows ships in the build: the 46 authored topics and the SCORE taxonomy. Anyone who can load the site can read all of it.
-- Bookmarks, reading history, and Anki preferences are stored in the visitor's own browser (IndexedDB and `localStorage`). They never leave the device and are not readable by anyone else.
-- No user input is transmitted anywhere. The only outbound request the app can make is the AnkiConnect call to `127.0.0.1:8765`, which the reader triggers deliberately.
+- Bookmarks and reading history are stored in the visitor's own browser (IndexedDB), as is the Topics sidebar state (`localStorage`). None of it leaves the device or is readable by anyone else.
+- The app makes no outbound requests at all beyond fetching its own static assets from the origin it was served from. There is no analytics, no telemetry, no third-party script, and no API to call.
 
 **What it does not mean**
 
@@ -2250,17 +2321,19 @@ Never commit patient information, and never commit copied paid question stems or
 
 - [ ] **Step 5: Update `AGENTS.md`**
 
-Only the Workflow section describes a flow that no longer exists. Replace the five numbered steps under `# Workflow` with:
+Two edits. First, in `# Identity`, drop `Anki exports, ` from the routing sentence so it reads `...search, offline access, product design, implementation, and deployment.`
+
+Second, replace the five numbered steps under `# Workflow` with:
 
 ```markdown
 1. Gather the SCORE module text and any cross-checks without patient information.
 2. Author the topic as a file in `src/content/topics/`, every block built with `sourced()` so each rendered factual unit carries a citation.
 3. Register it in `src/content/index.ts`, add taxonomy nodes and sources as needed, and run the content contract test.
-4. Verify mobile, desktop, offline, and Anki behavior, then push to `main` and confirm the Pages deploy.
+4. Verify mobile, desktop, and offline behavior, then push to `main` and confirm the Pages deploy.
 5. Record durable product decisions in this workstation's `MEMORY.md`.
 ```
 
-Leave the Identity, Resources, and Editorial Rules sections alone — the voice, sourcing, paraphrasing, and no-patient-identifier rules all still apply, and the "treat all AI output as a draft until Zach explicitly approves it" rule now governs authored content files rather than an in-app approval button. Do not touch the `<!-- BEGIN:nextjs-agent-rules -->` block; `next dev` writes it.
+Leave the Resources and Editorial Rules sections alone — the voice, sourcing, paraphrasing, and no-patient-identifier rules all still apply, and the "treat all AI output as a draft until Zach explicitly approves it" rule now governs authored content files rather than an in-app approval button. Do not touch the `<!-- BEGIN:nextjs-agent-rules -->` block; `next dev` writes it.
 
 - [ ] **Step 6: Add `NOTICE.md`**
 
