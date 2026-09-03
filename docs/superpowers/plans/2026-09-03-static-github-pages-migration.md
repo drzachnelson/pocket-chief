@@ -204,7 +204,7 @@ Expected: PASS, 5 tests.
 
 Every one of the 46 authored topics already carries an `approvedVersion` — `buildTopic()` sets it unconditionally — so the `every(...approvedVersion)` assertion in Step 1 would still pass if `approved()` were deleted outright. `library.json` is the app's entire public output, so "only approved content ships" needs a test that can actually fail.
 
-`vi.mock` is hoisted per file, so this needs its own file: mocking `@/content` inside `library.test.ts` would break the four tests there that deliberately read the real corpus. Create `src/lib/__tests__/library-approval.test.ts` that mocks `@/content` with a synthetic mix of approved and unapproved topics and asserts both `listTopics()` and `searchLibrary()` exclude the unapproved one. The mock factory must supply `suppliedSources` and `taxonomy` as well — `library.ts` imports all three named exports.
+`vi.mock` is hoisted per file, so this needs its own file: mocking `@/content` inside `library.test.ts` would break the five tests there that deliberately read the real corpus. Wrap the fixtures in `vi.hoisted()` — a plain IIFE fails with "Cannot access 'fixtures' before initialization", because the `vi.mock` factory is hoisted above it. Create `src/lib/__tests__/library-approval.test.ts` that mocks `@/content` with a synthetic mix of approved and unapproved topics and asserts both `listTopics()` and `searchLibrary()` exclude the unapproved one. The mock factory must supply `suppliedSources` and `taxonomy` as well — `library.ts` imports all three named exports.
 
 Verify the test bites: temporarily change `approved()` to `() => demoTopics`, confirm the new file FAILS, then restore and confirm `git diff src/lib/library.ts` is empty.
 
