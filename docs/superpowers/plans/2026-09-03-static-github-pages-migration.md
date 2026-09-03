@@ -2294,6 +2294,20 @@ The app builds with `output: "export"` under `basePath: "/pocket-chief"`, in dev
 
 - In "Environment gotchas", replace the remote bullet with: the remote is `drzachnelson/pocket-chief`, `main` is the default branch and the deploy branch, and the licensed corpora under `Pocket Chief Resources/` stay gitignored except `score-module-outline.md`.
 
+- Also in "Environment gotchas", expand the iCloud bullet with the recovery that actually works, learned the hard way during this migration:
+
+```markdown
+- The vault lives in iCloud-synced Documents, and iCloud evicts `node_modules` wholesale. Evicted
+  files keep their directory entry but carry the `dataless` flag, and reading one blocks forever —
+  the process sits at 0% CPU with no output and no error. `brctl download` does not recover them.
+  Diagnose with `find node_modules -type f -flags +dataless | wc -l` (a healthy tree returns 0) and,
+  for a hung process, `lsof -p <pid>` names the exact file it is stuck on.
+  Recovery is `rm -rf node_modules` — unlink does not materialize, so it is fast — then reinstall.
+  `pnpm` is not on PATH; use `npx --yes pnpm@11.19.0 install`. The pnpm content-addressable store at
+  `~/Library/pnpm/store/v11` lives outside iCloud and stays healthy, so the reinstall needs no
+  network and takes about ten seconds.
+```
+
 - [ ] **Step 4: Rewrite `docs/SECURITY.md`**
 
 Twelve lines describing Supabase RLS and owner auth. Replace with:
