@@ -1,19 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { cacheApprovedTopic, cacheTaxonomy } from "@/lib/offline";
-import type { TaxonomyNode, Topic } from "@/lib/types";
+import { loadLibrary } from "@/lib/library-client";
 
+/** Seeds IndexedDB from the shipped library asset so saved and offline reads have content. */
 export function OfflineHydrator() {
-  useEffect(() => {
-    fetch("/api/library", { cache: "no-store" })
-      .then(async (response) => {
-        if (!response.ok) return;
-        const library = await response.json() as { topics: Topic[]; taxonomy: TaxonomyNode[] };
-        await cacheTaxonomy(library.taxonomy);
-        await Promise.all(library.topics.map(cacheApprovedTopic));
-      })
-      .catch(() => undefined);
-  }, []);
+  useEffect(() => { loadLibrary().catch(() => undefined); }, []);
   return null;
 }
