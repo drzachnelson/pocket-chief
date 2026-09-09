@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { getCachedTopics } from "@/lib/offline";
+import { loadLibrary } from "@/lib/library-client";
 import { searchTopics } from "@/lib/search";
 import type { Topic } from "@/lib/types";
 
@@ -15,7 +15,7 @@ export function SearchForm({ defaultValue = "" }: { defaultValue?: string }) {
   // render rather than in an effect, so there is no second render pass.
   const [lastDefault, setLastDefault] = useState(defaultValue);
   if (defaultValue !== lastDefault) { setLastDefault(defaultValue); setQuery(defaultValue); }
-  useEffect(() => { getCachedTopics().then(setCached).catch(() => undefined); }, []);
+  useEffect(() => { loadLibrary().then((library) => setCached(library.topics)).catch(() => undefined); }, []);
   const quick = query.trim().length >= 2 ? searchTopics(query, cached).slice(0, 4) : [];
   return (
     <div className="search-field-wrap">
