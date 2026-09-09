@@ -28,6 +28,19 @@ function renderWorkspace() {
 afterEach(() => { currentPathname = "/topics"; });
 
 describe("TopicsWorkspace", () => {
+  // `trailingSlash: true` makes the real usePathname() report "/topics/alpha-topic/". This suite
+  // previously mocked only the unslashed form, which is why it stayed green while the live
+  // curriculum tree silently stopped expanding on every topic page.
+  it.each([["without a trailing slash", "/topics/alpha-topic"], ["with a trailing slash", "/topics/alpha-topic/"]])(
+    "resolves the active topic %s", (_label, pathname) => {
+      currentPathname = pathname;
+      render(<AppShell><TopicsWorkspace navigation={branchedNavigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
+
+      expect(screen.getByRole("link", { name: "Alpha topic" })).toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: "Beta topic" })).not.toBeInTheDocument();
+    },
+  );
+
   it("keeps inactive child branches hidden until selected and restores the current topic path", () => {
     currentPathname = "/topics/alpha-topic";
     const view = render(<AppShell><TopicsWorkspace navigation={branchedNavigation}><p>Topic content</p></TopicsWorkspace></AppShell>);

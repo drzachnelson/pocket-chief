@@ -30,8 +30,12 @@ function categoryTopics(category: TopicNavigationCategory) {
   return [category, ...category.children].flatMap((item) => item.topics);
 }
 
+// `trailingSlash: true` means usePathname() reports "/topics/<slug>/", so an exact match against the
+// unslashed form silently finds nothing — collapsing the curriculum tree and dropping the in-page
+// section links on every topic page. Normalise before comparing rather than assuming either shape.
 function activeTopic(navigation: TopicNavigationCategory[], pathname: string) {
-  return navigation.flatMap(categoryTopics).find((topic) => pathname === `/topics/${topic.slug}`);
+  const path = pathname.replace(/\/+$/, "");
+  return navigation.flatMap(categoryTopics).find((topic) => path === `/topics/${topic.slug}`);
 }
 
 function activeBranch(navigation: TopicNavigationCategory[], topic?: TopicNavigationTopic) {

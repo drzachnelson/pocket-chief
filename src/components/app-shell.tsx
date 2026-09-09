@@ -8,6 +8,10 @@ import { ServiceWorkerRegistration } from "@/components/service-worker-registrat
 import { OfflineHydrator } from "@/components/offline-hydrator";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+// Next prefixes basePath onto <Link> and router navigations, but NOT onto a plain <form action>.
+// Left as "/" the header search submits to the origin root, outside the mount point, and 404s.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const primaryNavigation = [
   { href: "/", label: "Search", icon: MagnifyingGlass },
   { href: "/topics", label: "Topics", icon: Notebook },
@@ -67,7 +71,7 @@ export function MobileHeader() {
       <Link className="brand compact" href="/"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong><small>Private surgery atlas</small></span></Link>
       <div className="mobile-head-actions"><ThemeToggle compact /><Link className="icon-link" href="/settings" aria-label="Settings"><GearSix size={21} /></Link></div>
     </div>
-    <form action="/" role="search" className="mobile-global-search"><MagnifyingGlass size={17} aria-hidden="true" /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
+    <form action={`${basePath}/`} role="search" className="mobile-global-search"><MagnifyingGlass size={17} aria-hidden="true" /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
   </header>;
 }
 
