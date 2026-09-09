@@ -2454,6 +2454,21 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 ---
 
+## Post-migration follow-ups
+
+Found during execution, deliberately deferred. Not part of this plan's definition of done.
+
+**Trim `library.json`.** Measured after Task 3: the asset is 2673 KB raw, 391 KB gzipped. Two thirds of it is dead weight on the wire.
+
+- `versions[]` duplicates `approvedVersion` byte-for-byte in **46 of 46** topics — 1319 KB, 49% of the payload. `buildTopic()` in `src/content/authoring.ts` sets `versions: [approvedVersion]`, the same object, and `JSON.stringify` serializes it twice. The History tab reads only `id`, `versionNumber`, `status` and `reviewedAt` from those entries; nothing in the browser reads their `blocks`.
+- `claims[].text` and `claims[].id` add ~755 KB that no browser code reads. `SupportMark` needs only `claim.status` and `claim.citationIds.length`.
+
+Deferred because trimming requires narrowing `Topic`, `TopicVersion` and `Claim` in `src/lib/types.ts` — every field is currently required — and those types are read by the renderer, the IndexedDB cache and the content contract test. Type surgery on the app's central data type mid-migration risks the remaining tasks for a payload that is already double-cached (service worker and IndexedDB) and gzipped to 391 KB. Revisit once the migration has landed and the type's consumers have stopped moving.
+
+**Scope the service worker's offline cache lookup.** `public/sw.js` falls back with an unscoped `caches.match(event.request)`, which searches the `SHELL` cache (written once at install) and the `CONTENT` cache (refreshed on every successful online fetch) without preferring either. After a redeploy, a device that goes offline could resolve a stale `SHELL` copy of `library.json` over a fresher `CONTENT` one. Fix by trying `caches.open(CONTENT)` first, then falling back. Task 11 rewrites this file; fold it in there if convenient, otherwise afterwards.
+
+---
+
 ## Definition of done
 
 - [ ] `node node_modules/typescript/bin/tsc --noEmit` is clean.
