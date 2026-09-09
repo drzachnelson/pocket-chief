@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, Plus, ShieldCheck } from "@phosphor-icons/react";
+import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, ShieldCheck } from "@phosphor-icons/react";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -12,7 +12,6 @@ export const primaryNavigation = [
   { href: "/", label: "Search", icon: MagnifyingGlass },
   { href: "/topics", label: "Topics", icon: Notebook },
   { href: "/saved", label: "Saved", icon: BookmarkSimple },
-  { href: "/add", label: "Add", icon: Plus },
 ];
 
 interface TopicsDrawerState {
@@ -105,6 +104,5 @@ function TopicsRouteShell({ children }: { children: React.ReactNode }) {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  if (pathname.startsWith("/auth/")) return <main id="main-content" className="auth-main">{children}</main>;
   return <TopicsDrawerProvider><ServiceWorkerRegistration /><OfflineHydrator />{pathname.startsWith("/topics") ? <TopicsRouteShell>{children}</TopicsRouteShell> : <StandardShell>{children}</StandardShell>}</TopicsDrawerProvider>;
 }

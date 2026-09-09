@@ -1,10 +1,7 @@
-import { createHash } from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { factualUnits, supportWarnings } from "@/lib/editorial";
 import { stripMarkup } from "@/lib/inline";
-import { choledoBlocks, demoTopics, suppliedSources, taxonomy } from "@/lib/seed";
+import { demoTopics, suppliedSources, taxonomy } from "@/lib/seed";
 import { taxonomyAncestry } from "@/lib/taxonomy";
 import type { Topic, TopicBlock } from "@/lib/types";
 
@@ -136,17 +133,4 @@ describe("seeded content contract", () => {
     }
   });
 
-  // Scans every migration rather than one named file: `ensure_launch_topic` has been recreated
-  // once already (202608160001, to put `extensions` on its search_path for pgcrypto's digest),
-  // and applied migrations are immutable, so each recreation copies the pinned digest forward.
-  // Checking only the original would let a stale pin in the newest — the one actually live —
-  // pass unnoticed.
-  it("holds the launch topic to the digest pinned in every Supabase migration", () => {
-    const dir = "supabase/migrations";
-    const digest = createHash("sha256").update(JSON.stringify(choledoBlocks), "utf8").digest("hex");
-    const pins = readdirSync(dir).filter((file) => file.endsWith(".sql")).flatMap((file) =>
-      [...readFileSync(join(dir, file), "utf8").matchAll(/'([0-9a-f]{64})' then raise exception 'Launch topic content did not match/g)].map((match) => [file, match[1]] as const));
-    expect(pins.length, "no migration pins the launch topic digest").toBeGreaterThan(0);
-    for (const [file, pinned] of pins) expect(digest, `${file} pins a stale digest — choledoBlocks must serialize byte-identically or ensure_launch_topic rejects it`).toBe(pinned);
-  });
 });

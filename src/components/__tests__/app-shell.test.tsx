@@ -12,12 +12,11 @@ describe("AppShell", () => {
     expect(screen.queryByRole("link", { name: "Topics" })).not.toBeInTheDocument();
   });
 
-  it("renders the four primary mobile destinations and owner tools", () => {
+  it("renders the three primary mobile destinations", () => {
     render(<AppShell><p>Content</p></AppShell>);
     expect(screen.getAllByRole("link", { name: /search/i }).length).toBeGreaterThan(0);
     expect(screen.getByRole("button", { name: /topics/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /saved/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: /add/i }).length).toBeGreaterThan(0);
     expect(screen.getByText("Content")).toBeInTheDocument();
   });
 });
