@@ -1655,6 +1655,11 @@ Replace the whole of `src/app/manifest.ts`:
 ```ts
 import type { MetadataRoute } from "next";
 
+// `/manifest.webmanifest` is a route like any other, so `output: "export"` refuses to build it
+// without this — the same declaration `library.json/route.ts` needs, for the same reason. Omit it
+// and the build fails with "export const dynamic ... not configured on route /manifest.webmanifest".
+export const dynamic = "force-static";
+
 // Next rewrites hrefs in JSX but not values inside a manifest, so every path here is prefixed by
 // hand. `start_url` is what the installed icon opens; getting it wrong installs a 404.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -2340,6 +2345,12 @@ The app builds with `output: "export"` under `basePath: "/pocket-chief"`, in dev
   `pnpm` is not on PATH; use `npx --yes pnpm@11.19.0 install`. The pnpm content-addressable store at
   `~/Library/pnpm/store/v11` lives outside iCloud and stays healthy, so the reinstall needs no
   network and takes about ten seconds.
+- iCloud also evicts `.git/objects/pack/`, which every worktree shares with the main checkout. That
+  surfaces as `error: ... pack-*.pack is far too short to be a packfile` or `unable to read tree` on
+  an ordinary `git add` or `git commit`. `ls -la` shows the expected size while `du -sh` shows `0B`.
+  This is NOT repository corruption and `git fsck --unpack` is the wrong reflex — run
+  `brctl download <the named pack file>`, which does work here even though it does not for
+  `node_modules`, then retry the git command.
 ```
 
 - [ ] **Step 4: Rewrite `docs/SECURITY.md`**
