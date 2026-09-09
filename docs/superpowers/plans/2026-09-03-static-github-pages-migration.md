@@ -1956,10 +1956,12 @@ Expected: clean typecheck, clean lint, all tests pass.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add package.json pnpm-lock.yaml .env.example && git commit -m "chore(deps): drop Supabase, zod and jszip
+git add package.json pnpm-lock.yaml .env.example scripts/serve-out.mjs && git commit -m "chore(deps): drop Supabase, zod and jszip
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
+
+`scripts/serve-out.mjs` is new in Step 3 and must be staged too — leave it out and `package.json` ships a `serve` script pointing at a file that is not in the repository.
 
 ---
 
