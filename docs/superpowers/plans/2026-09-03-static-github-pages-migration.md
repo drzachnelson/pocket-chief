@@ -802,7 +802,9 @@ Leave everything else in the file alone — the offline-submit guard and the `de
 node node_modules/typescript/bin/tsc --noEmit && echo TYPES_OK
 ```
 
-Expected: `TYPES_OK`. `FavoriteTopics` still declares a `fallback` prop at this point; calling it with none is valid because the prop is optional. Task 6 removes it.
+Expected: `TYPES_OK`.
+
+**Task 6 must land in the same sitting as this one.** `FavoriteTopics` still declares its `fallback` prop here, and while omitting it typechecks, the runtime semantics are destructive: `fallback` defaults to `[]`, and the component treats that as the authoritative server-side bookmark list, so its reconciliation branch unsaves every topic in IndexedDB that is absent from it — which is all of them. Worse, the `[]` default is a fresh array identity each render and sits in the effect's dependency array, so it re-runs continuously rather than once on mount. Landing Task 5 alone leaves a branch where visiting the home page online wipes the device's bookmarks. Task 6 rewrites the component to read only from the device, deleting the reconciliation path entirely, which is the real fix — do not paper over it here.
 
 - [ ] **Step 5: Commit**
 
