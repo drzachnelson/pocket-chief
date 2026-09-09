@@ -30,7 +30,7 @@ export function TopicsResume({ fallbackSlug, approvedTopics }: TopicsResumeProps
 
   return (
     <section className="topics-resume" aria-label="Resume topic">
-      {resumeSlug ? <Link href={`/topics/${resumeSlug}`}>Resume topic</Link> : <p>No topic ready to resume.</p>}
+      {resumeSlug ? <Link className="button secondary" href={`/topics/${resumeSlug}`}>Resume topic</Link> : <p>No topic ready to resume.</p>}
     </section>
   );
 }

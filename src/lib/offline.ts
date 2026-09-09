@@ -10,12 +10,15 @@ export function shouldReplaceCachedTopic(cachedVersion: number | undefined, inco
 let databasePromise: Promise<IDBPDatabase> | undefined;
 
 function db() {
-  databasePromise ??= openDB(DB_NAME, 1, {
+  databasePromise ??= openDB(DB_NAME, 2, {
     upgrade(database) {
-      database.createObjectStore("topics", { keyPath: "id" });
-      database.createObjectStore("taxonomy", { keyPath: "id" });
-      database.createObjectStore("saved", { keyPath: "id" });
-      database.createObjectStore("recent", { keyPath: "id" });
+      // Keep upgrades additive: existing users may already have data in any of these
+      // stores, so never recreate an object store when moving from an older version.
+      if (!database.objectStoreNames.contains("topics")) database.createObjectStore("topics", { keyPath: "id" });
+      if (!database.objectStoreNames.contains("taxonomy")) database.createObjectStore("taxonomy", { keyPath: "id" });
+      if (!database.objectStoreNames.contains("saved")) database.createObjectStore("saved", { keyPath: "id" });
+      if (!database.objectStoreNames.contains("recent")) database.createObjectStore("recent", { keyPath: "id" });
+      if (!database.objectStoreNames.contains("reviewed")) database.createObjectStore("reviewed", { keyPath: "id" });
     },
   }).catch((error) => { databasePromise = undefined; throw error; });
   return databasePromise;
@@ -59,6 +62,21 @@ export async function setTopicSaved(topic: Topic, saved: boolean) {
 export async function isTopicSaved(topicId: string): Promise<boolean> {
   const database = await db();
   return Boolean(await database.get("saved", topicId));
+}
+
+export async function setTopicReviewed(topic: Topic, reviewed: boolean) {
+  const database = await db();
+  if (reviewed) {
+    await cacheApprovedTopic(topic);
+    await database.put("reviewed", { id: topic.id, reviewedAt: new Date().toISOString() });
+  } else {
+    await database.delete("reviewed", topic.id);
+  }
+}
+
+export async function isTopicReviewed(topicId: string): Promise<boolean> {
+  const database = await db();
+  return Boolean(await database.get("reviewed", topicId));
 }
 
 export async function getSavedTopics(): Promise<Topic[]> {

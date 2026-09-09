@@ -27,7 +27,7 @@ function topic(id: string, title: string, scoreNodeId: string): Topic {
 describe("taxonomySections", () => {
   it("returns every top-level category in taxonomy order", () => {
     const sections = taxonomySections(taxonomy, approved);
-    expect(sections.map((section) => section.node.id)).toEqual(["alimentary", "breast", "general-abdomen", "hernia", "arterial-disease", "critical-care", "esophagus", "pediatric", "trauma", "small-intestine", "large-intestine", "vascular-access"]);
+    expect(sections.map((section) => section.node.id)).toEqual(["alimentary", "breast", "general-abdomen", "hernia", "arterial-disease", "critical-care", "esophagus", "pediatric", "trauma", "small-intestine", "large-intestine", "vascular-access", "anorectal"]);
   });
 
   it("counts every topic beneath a category, not just its direct children", () => {

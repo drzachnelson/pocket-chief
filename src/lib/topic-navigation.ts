@@ -14,6 +14,8 @@ export interface TopicNavigationTopic {
   label: string;
   updatedAt: string;
   taxonomyNodeId: string;
+  /** Aliases and personal/curriculum tags used by the client-side topic index. */
+  searchTerms?: string[];
   sections: TopicNavigationSection[];
 }
 
@@ -24,6 +26,27 @@ export interface TopicNavigationCategory {
   parentId?: string;
   topics: TopicNavigationTopic[];
   children: TopicNavigationCategory[];
+}
+
+export interface FlattenedTopicNavigationEntry {
+  topic: TopicNavigationTopic;
+  categoryLabel: string;
+  subsectionLabel?: string;
+  categoryId: string;
+  subsectionId?: string;
+}
+
+function compactSearchTerms(values: Array<string | undefined>) {
+  const seen = new Set<string>();
+  return values
+    .map((value) => value?.trim())
+    .filter((value): value is string => Boolean(value))
+    .filter((value) => {
+      const key = value.toLocaleLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 }
 
 function navigationTopic(topic: Topic): TopicNavigationTopic {
@@ -40,6 +63,11 @@ function navigationTopic(topic: Topic): TopicNavigationTopic {
     label: topic.title,
     updatedAt: topic.updatedAt,
     taxonomyNodeId: topic.scoreNodeId,
+    searchTerms: compactSearchTerms([
+      ...topic.aliases,
+      ...topic.tags,
+      ...(topic.approvedVersion?.tags ?? []),
+    ]),
     sections,
   };
 }
@@ -66,4 +94,43 @@ export function buildTopicNavigation(taxonomy: TaxonomyNode[], topics: Topic[]):
         children: [],
       })),
     }));
+}
+
+/**
+ * Return topics in canonical SCORE order, retaining their top-level context.
+ * Direct category topics come before topics in each ordered subsection.
+ */
+export function flattenTopicNavigation(navigation: TopicNavigationCategory[]): FlattenedTopicNavigationEntry[] {
+  return navigation.flatMap((category) => [
+    ...category.topics.map((topic) => ({
+      topic,
+      categoryLabel: category.label,
+      categoryId: category.id,
+    })),
+    ...category.children.flatMap((subsection) => subsection.topics.map((topic) => ({
+      topic,
+      categoryLabel: category.label,
+      subsectionLabel: subsection.label,
+      categoryId: category.id,
+      subsectionId: subsection.id,
+    }))),
+  ]);
+}
+
+/**
+ * Find the next topic in the current top-level category. Categories are bounded:
+ * the last topic in a category has no next topic rather than wrapping or crossing
+ * into the following curriculum category.
+ */
+export function nextTopicInCategory(
+  navigation: TopicNavigationCategory[],
+  currentSlug: string,
+): { topic: TopicNavigationTopic; categoryLabel: string } | undefined {
+  const ordered = flattenTopicNavigation(navigation);
+  const currentIndex = ordered.findIndex(({ topic }) => topic.slug === currentSlug);
+  if (currentIndex < 0) return undefined;
+  const currentCategoryId = ordered[currentIndex].categoryId;
+  const next = ordered[currentIndex + 1];
+  if (!next || next.categoryId !== currentCategoryId) return undefined;
+  return { topic: next.topic, categoryLabel: next.categoryLabel };
 }

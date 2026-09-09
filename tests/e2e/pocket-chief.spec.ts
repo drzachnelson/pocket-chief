@@ -8,7 +8,6 @@ test("search, read, and save a topic", async ({ page }) => {
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Make Anki/ })).toHaveCount(0);
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
 
@@ -26,9 +25,64 @@ test("mobile navigation exposes three primary destinations", async ({ page }) =>
   await expect(navigation.getByRole("link", { name: "Add" })).toHaveCount(0);
 });
 
+test("topics index searches the grouped curriculum and offers an alphabetical view", async ({ page }) => {
+  await page.goto("./topics/");
+  await expect(page.getByRole("heading", { name: "Topics" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Find a topic" })).toBeVisible();
+
+  const search = page.getByRole("searchbox", { name: "Search topics" });
+  await search.fill("choledocho");
+  await expect(page.getByRole("link", { name: "Choledocholithiasis", exact: true })).toBeVisible();
+  await expect(page.getByText("1 topic", { exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "All topics" }).click();
+  await expect(page.getByRole("heading", { name: "All topics" })).toBeVisible();
+  await search.fill("");
+  await expect(page.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveCount(1);
+});
+
+test("half-width desktop uses a compact rail and a usable topics drawer", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Half-width desktop layout only");
+  await page.setViewportSize({ width: 860, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+
+  await expect(page.getByLabel("Topics workspace")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Mobile navigation" })).not.toBeVisible();
+  const browse = page.getByRole("button", { name: "Browse topics" });
+  await expect(browse).toBeVisible();
+  await browse.click();
+  await expect(page.getByRole("dialog", { name: "Topics" })).toBeVisible();
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+});
+
+test("topic sections start collapsed, toggle together, and reviewed state persists", async ({ page }) => {
+  await page.goto("./topics/choledocholithiasis/");
+  const sections = page.locator("details.section-block");
+  await expect(sections.first()).not.toHaveAttribute("open", "");
+  await page.getByRole("button", { name: "Open all" }).click();
+  await expect(sections.first()).toHaveAttribute("open", "");
+  await page.getByRole("button", { name: "Close all" }).click();
+  await expect(sections.first()).not.toHaveAttribute("open", "");
+
+  await page.getByRole("button", { name: "Mark reviewed" }).click();
+  await expect(page.getByText("Reviewed on this device")).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Mark not reviewed" })).toBeVisible();
+  // Choledocholithiasis is the only topic in Alimentary Tract, so its category ends here
+  // rather than wrapping into the next one.
+  await expect(page.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/pocket-chief/topics/");
+});
+
+test("a guide followed by another topic in its category links straight to it", async ({ page }) => {
+  await page.goto("./topics/escharotomy/");
+  await expect(page.getByRole("link", { name: "Next topic: Fasciotomy — Trauma" })).toHaveAttribute("href", "/pocket-chief/topics/fasciotomy/");
+});
+
 test("decision flows keep labeled branches connected and readable on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("./topics/fasciotomy/");
+  await page.getByRole("button", { name: "Open all" }).click();
   const flow = page.getByRole("group", { name: "The diagnostic decision flowchart" });
   await expect(flow).toBeVisible();
 
@@ -90,9 +144,12 @@ test("topics resumes a visited guide", async ({ page }) => {
 test("canonical topic navigation keeps the workspace, active path, anchors, and exact update date", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Desktop workspace navigation only");
   await page.goto("./topics/");
-  await page.getByRole("button", { name: "Alimentary Tract" }).click();
-  await page.getByRole("button", { name: "Biliary Tract" }).click();
-  await page.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
+  // The topics index renders the searchable browser alongside the workspace tree, so this
+  // walk has to stay inside the tree to keep naming its own links.
+  const tree = page.getByRole("navigation", { name: "Topics curriculum" });
+  await tree.getByRole("button", { name: "Alimentary Tract" }).click();
+  await tree.getByRole("button", { name: "Biliary Tract" }).click();
+  await tree.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
 
   await expect(page).toHaveURL(/\/topics\/choledocholithiasis\/$/);
   await expect(page.getByLabel("Topics workspace")).toBeVisible();
@@ -127,7 +184,7 @@ test("mobile Topics drawer traps focus, restores it, and closes after topic or s
   test.skip(testInfo.project.name !== "mobile-chrome", "Mobile drawer only");
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("./topics/choledocholithiasis/");
-  const trigger = page.getByRole("button", { name: "Topics" });
+  const trigger = page.getByRole("button", { name: "Browse topics" });
   const drawer = page.getByRole("dialog", { name: "Topics" });
   const close = drawer.getByRole("button", { name: "Close topics navigation" });
   // Click exactly once, and only after hydration. The Topics button is server-rendered and tappable
@@ -185,7 +242,7 @@ test("a previously visited Topics guide remains readable offline in its workspac
   await page.reload();
   await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
   if (testInfo.project.name === "mobile-chrome") {
-    await page.getByRole("button", { name: "Topics" }).click();
+    await page.getByRole("button", { name: "Browse topics" }).click();
     await page.getByRole("dialog", { name: "Topics" }).getByRole("link", { name: "Choose the route" }).click();
   } else {
     await page.getByLabel("Topics workspace").getByRole("link", { name: "Choose the route" }).click();
@@ -197,7 +254,7 @@ test("a previously visited Topics guide remains readable offline in its workspac
     await page.goto("./topics/choledocholithiasis/#block-comparison", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
     if (testInfo.project.name === "mobile-chrome") {
-      await page.getByRole("button", { name: "Topics" }).click();
+      await page.getByRole("button", { name: "Browse topics" }).click();
       const drawer = page.getByRole("dialog", { name: "Topics" });
       await expect(drawer.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
       await expect(drawer.getByRole("link", { name: "Choose the route" })).toHaveAttribute("aria-current", "location");

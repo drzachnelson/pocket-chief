@@ -55,8 +55,8 @@ function NavLink({ href, label, icon: Icon, mobile = false }: (typeof primaryNav
   const drawer = useContext(TopicsDrawerContext);
   const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
   const className = `${mobile ? "mobile-nav-link" : "side-nav-link"} ${active ? "active" : ""}`;
-  if (mobile && href === "/topics" && active) {
-    return <button type="button" className={className} aria-label={label} aria-current="page" aria-haspopup="dialog" aria-expanded={drawer?.isOpen ?? false} onClick={(event) => drawer?.open(event.currentTarget)}><Icon size={21} weight="fill" aria-hidden="true" /><span>{label}</span></button>;
+  if (mobile && href === "/topics" && pathname.startsWith("/topics/")) {
+    return <button type="button" className={className} aria-label="Browse topics" aria-current="page" aria-haspopup="dialog" aria-expanded={drawer?.isOpen ?? false} onClick={(event) => drawer?.open(event.currentTarget)}><Icon size={21} weight="fill" aria-hidden="true" /><span>{label}</span></button>;
   }
   return <Link href={href} className={className} aria-current={active ? "page" : undefined} aria-label={label}>
     <Icon size={mobile ? 21 : 18} weight={active ? "fill" : "regular"} aria-hidden="true" />

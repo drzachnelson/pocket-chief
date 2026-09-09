@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CaretDown, CaretLeft, CaretRight, X } from "@phosphor-icons/react";
+import { CaretDown, CaretLeft, CaretRight, Notebook, X } from "@phosphor-icons/react";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { GlobalNavigation, GlobalNavigationFooter, useTopicsDrawer } from "@/components/app-shell";
 import type { TopicNavigationCategory, TopicNavigationSection, TopicNavigationTopic } from "@/lib/topic-navigation";
@@ -133,7 +133,7 @@ function TopicsDrawer({ navigation }: { navigation: TopicNavigationCategory[] })
 }
 
 export function TopicsWorkspace({ navigation, children }: { navigation: TopicNavigationCategory[]; children: React.ReactNode }) {
-  const { setContent } = useTopicsDrawer();
+  const { setContent, open, isOpen } = useTopicsDrawer();
   const pathname = usePathname();
   // The server snapshot keeps hydration stable; React picks up the browser preference after it
   // mounts and also follows changes from this tab or another open Pocket Chief tab.
@@ -148,6 +148,7 @@ export function TopicsWorkspace({ navigation, children }: { navigation: TopicNav
     <aside className={sidebarClass} aria-label="Topics workspace">
       <GlobalNavigation />
       <div className="topics-sidebar-divider" />
+      {pathname !== "/topics" && <button type="button" className="topics-sidebar-browse" aria-label="Browse topics" aria-haspopup="dialog" aria-expanded={isOpen} onClick={(event) => open(event.currentTarget)}><Notebook size={18} weight="fill" aria-hidden="true" /><span>Browse</span></button>}
       <TopicTree key={pathname} navigation={navigation} />
       <button type="button" className="topics-sidebar-toggle" aria-label={label} onClick={() => saveCollapsedSidebar(!collapsed)}>{collapsed ? <CaretRight size={15} /> : <CaretLeft size={15} />}<span>{collapsed ? "Expand" : "Collapse"}</span></button>
       <GlobalNavigationFooter compact />

@@ -1,9 +1,27 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { TopicContent } from "@/components/topic-content";
 import type { Topic, TopicBlock, TopicVersion } from "@/lib/types";
 
-vi.mock("@/lib/offline", () => ({ isTopicSaved: async () => false, recordRecentView: async () => undefined, setTopicSaved: async () => undefined }));
+const offlineMocks = vi.hoisted(() => ({
+  isTopicReviewed: vi.fn(async () => false),
+  isTopicSaved: vi.fn(async () => false),
+  recordRecentView: vi.fn(async () => undefined),
+  setTopicReviewed: vi.fn(async () => undefined),
+  setTopicSaved: vi.fn(async () => undefined),
+}));
+vi.mock("@/lib/offline", () => offlineMocks);
+
+// jsdom has no layout, so it leaves scrollIntoView undefined; the deep-link effect calls it.
+const scrollIntoView = vi.fn();
+Element.prototype.scrollIntoView = scrollIntoView;
+
+beforeEach(() => {
+  offlineMocks.isTopicReviewed.mockReset().mockResolvedValue(false);
+  offlineMocks.setTopicReviewed.mockReset().mockResolvedValue(undefined);
+  scrollIntoView.mockReset();
+  window.history.replaceState({}, "", "/topics/paraesophageal");
+});
 
 const claim = (text: string) => ({ id: `c-${text.slice(0, 8)}`, text, citationIds: ["s1"], status: "cited" as const });
 
@@ -22,7 +40,7 @@ describe("renderer redesign", () => {
     render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
 
     expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Collapse all" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Open all" })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /^Notes$/ })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /Sources/ })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /History/ })).toBeInTheDocument();
@@ -40,7 +58,7 @@ describe("renderer redesign", () => {
     const details = container.querySelectorAll("details.topic-block.section-block");
     expect(details.length).toBe(2);
     expect(details[0].id).toBe("b1");
-    expect((details[0] as HTMLDetailsElement).open).toBe(true);
+    expect((details[0] as HTMLDetailsElement).open).toBe(false);
     expect(details[1].getAttribute("data-level")).toBe("3");
     expect(details[1].querySelector("h3")!.textContent).toBe("Details");
     expect(details[0].querySelector("summary.block-heading .block-disclosure")).not.toBeNull();
@@ -63,16 +81,50 @@ describe("renderer redesign", () => {
   it("collapses and re-expands every section", () => {
     const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
     const details = container.querySelectorAll<HTMLDetailsElement>("details.section-block");
-    fireEvent.click(screen.getByRole("button", { name: "Collapse all" }));
-    expect([...details].every((item) => !item.open)).toBe(true);
-    fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
+    fireEvent.click(screen.getByRole("button", { name: "Open all" }));
     expect([...details].every((item) => item.open)).toBe(true);
-    // A hand-closed section is mirrored into state, so Expand all reopens it.
+    fireEvent.click(screen.getByRole("button", { name: "Close all" }));
+    expect([...details].every((item) => !item.open)).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Open all" }));
+    expect([...details].every((item) => item.open)).toBe(true);
+    // A hand-closed section is mirrored into state, so Open all reopens it.
     details[0].open = false;
     fireEvent(details[0], new Event("toggle"));
-    expect(screen.getByRole("button", { name: "Expand all" })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
+    expect(screen.getByRole("button", { name: "Open all" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Open all" }));
     expect([...details].every((item) => item.open)).toBe(true);
+  });
+
+  it("opens a deep-linked section and records local reviewed state", async () => {
+    window.history.replaceState({}, "", "/topics/paraesophageal#b1");
+    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} nextTopic={{ slug: "next", label: "Next topic", categoryLabel: "Foregut" }} />);
+    const details = container.querySelector<HTMLDetailsElement>("#b1")!;
+    await waitFor(() => expect(details.open).toBe(true));
+
+    const reviewed = screen.getByRole("button", { name: "Mark reviewed" });
+    await waitFor(() => expect(reviewed).not.toBeDisabled());
+    expect(reviewed).toHaveAttribute("aria-pressed", "false");
+    fireEvent.click(reviewed);
+    await waitFor(() => expect(offlineMocks.setTopicReviewed).toHaveBeenCalledWith(topic, true));
+    expect(screen.getByText("Reviewed on this device")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Next topic: Next topic — Foregut" })).toHaveAttribute("href", "/topics/next");
+  });
+
+  it("scrolls a deep-linked section into view once it has been opened", async () => {
+    window.history.replaceState({}, "", "/topics/paraesophageal#b1");
+    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    const details = container.querySelector<HTMLDetailsElement>("#b1")!;
+
+    // The browser makes its own hash jump while the section is still closed, so it lands short.
+    // Opening the section has to be followed by re-aiming at the target.
+    await waitFor(() => expect(details.open).toBe(true));
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalled());
+    expect(scrollIntoView.mock.instances[0]).toBe(details);
+  });
+
+  it("falls back to the topics index at the end of a category", () => {
+    render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    expect(screen.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/topics");
   });
 
   it("renders every supplied decision edge as a connector instead of flattening nodes by depth", () => {

@@ -36,6 +36,14 @@ export const CRITICAL_CARE_FLUID_ACID_BASE_PACKET_SOURCE = "00000000-0000-4000-8
 export const CRITICAL_CARE_HYPOVOLEMIC_SHOCK_PACKET_SOURCE = "00000000-0000-4000-8000-000000001700";
 export const CRITICAL_CARE_RESPIRATORY_FAILURE_PACKET_SOURCE = "00000000-0000-4000-8000-000000001800";
 export const CRITICAL_CARE_CARDIOGENIC_SHOCK_PACKET_SOURCE = "00000000-0000-4000-8000-000000001900";
+export const HEMORRHOIDS_PACKET_SOURCE = "00000000-0000-4000-8000-000000002100";
+export const SCORE_HEMORRHOIDS_SOURCE = "00000000-0000-4000-8000-000000002101";
+export const ASCRS_HEMORRHOIDS_SOURCE = "00000000-0000-4000-8000-000000002102";
+export const FISER_ANORECTAL_SOURCE = "00000000-0000-4000-8000-000000002103";
+export const BREAST_BIOPSY_PACKET_SOURCE = "00000000-0000-4000-8000-000000002200";
+export const SCORE_PERCUTANEOUS_BREAST_BIOPSY_SOURCE = "00000000-0000-4000-8000-000000002201";
+export const FISER_BREAST_SOURCE = "00000000-0000-4000-8000-000000002202";
+export const ACR_BIRADS_SOURCE = "00000000-0000-4000-8000-000000002203";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -431,5 +439,81 @@ export const suppliedSources: SuppliedSource[] = [
       "The packet names its literature throughout: Lüsebrink et al. (Lancet, 2024) and Samsky et al. (JAMA, 2021) on cardiogenic shock definition and its self-perpetuating spiral; van Diepen et al. (AHA, 2017) on expanded shock phenotypes beyond classic \"cold and wet\"; Thompson et al. (ACC/AHA, 2024) on perioperative heart-failure risk; the 2022 SCAI SHOCK staging update; the SHOCK and CULPRIT-SHOCK trials on revascularization strategy; the SOAP II and OPTIMA-CC trials on vasopressor choice; the DOREMI trial comparing milrinone and dobutamine; the IABP-SHOCK II, ECLS-SHOCK, ECMO-CS, and DanGer Shock trials on mechanical circulatory support; and the 2024 AHA/ACC perioperative guideline (drawing on the POISE and POISE-3 trials) on perioperative heart-failure medication management.",
       "These trial results were checked against training-era knowledge during review — SHOCK, CULPRIT-SHOCK, IABP-SHOCK II, ECLS-SHOCK, DanGer Shock, and SOAP II are established landmark trials — and nothing in the packet's framing of them was inconsistent with the published trial reports.",
     ].join(" "),
+  },
+  {
+    id: HEMORRHOIDS_PACKET_SOURCE,
+    title: "Owner-supplied hemorrhoids study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Hemorrhoids Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature in the body rather than in a reference list: the ASCRS clinical practice guideline for hemorrhoids, the ACG clinical guideline on benign anorectal disorders, and the Cochrane review of fiber for symptomatic hemorrhoids (7 RCTs, n=378).",
+      "Verified during review: the ASCRS guideline the packet cites is the May 2024 Clinical Practice Guidelines for the Management of Hemorrhoids in Diseases of the Colon & Rectum (PMID 38294832), and its positions on office procedures, periprocedural anticoagulation, and stapled hemorrhoidopexy match the packet's framing.",
+      "Repeat-banding rate reconciled during review: the packet gives 15%-32% and the SCORE module gives 18% to 32%. The wider bound is carried here as \"roughly a fifth to a third\" rather than pinning a low end the two sources do not agree on.",
+      "Beyond the packet, pending owner sign-off: Fiser's primary/secondary/tertiary/quaternary nomenclature for internal hemorrhoids is carried alongside grades I-IV, because older question stems key on those words.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_HEMORRHOIDS_SOURCE,
+    title: "SCORE curriculum module: Hemorrhoids",
+    kind: "website",
+    citation: "Mack J, Trimble L, Greenwald A. \"Hemorrhoids.\" Surgical Council on Resident Education (SCORE) Portal, Anorectal module, April 27, 2026. Based on modules by Marecik S, Singh J, Dinallo AM, and Paul Olson TJ.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130010",
+    details: "Retrieved August 12, 2026. SCORE's outline splits \"Hemorrhoids\" and \"Procedures for Hemorrhoids\" into separate curriculum entries, but ships one combined module text covering both; that module backs both Pocket Chief topics.",
+  },
+  {
+    id: ASCRS_HEMORRHOIDS_SOURCE,
+    title: "ASCRS clinical practice guidelines for the management of hemorrhoids",
+    kind: "article",
+    citation: "The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Hemorrhoids. Diseases of the Colon & Rectum, May 2024. PMID 38294832.",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    url: "https://pubmed.ncbi.nlm.nih.gov/38294832/",
+    details: "Registered during review of the owner's packet, which cites \"ASCRS\" throughout without a year. Confirmed as the 2024 revision, and used for the recommendations the packet attributes to ASCRS: office procedures preferred over surgery for grade I-II and select grade III, caution with periprocedural anticoagulation, excisional hemorrhoidectomy as the durable option for grade III-IV, and stapled hemorrhoidopexy not routinely recommended first-line.",
+  },
+  {
+    id: FISER_ANORECTAL_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — anal and rectal chapter",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review, 8th edition. Chapter 37, Anal and Rectal, pages 550-552.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    details: "Owner-supplied chapter text. Used for the board-keyed answers the packet flags as classic: the primary through quaternary nomenclature, elliptical excision rather than lancing inside 72 hours, do not band an external hemorrhoid, and three-quadrant resection for tertiary and quaternary disease.",
+  },
+  {
+    id: BREAST_BIOPSY_PACKET_SOURCE,
+    title: "Owner-supplied percutaneous breast biopsy and cyst aspiration study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, August 25, 2026: \"Percutaneous Breast Biopsy and Cyst Aspiration Pocket Chief\".",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: [
+      "The packet names its literature in the body: ACR BI-RADS and the SSO primer on core needle biopsy, an AHRQ/Annals systematic review on stereotactic and ultrasound-guided accuracy, a RadioGraphics 2025 review on complicated versus complex cysts, NCCN 2026 on high-risk lesion excision, and a 60-study meta-analysis of vacuum-assisted versus core needle biopsy.",
+      "Verified during review: the vacuum-assisted biopsy meta-analysis is the European Radiology systematic review and meta-analysis of 60 studies, and its ADH underestimation risk ratio of 0.63 (95% CI 0.55-0.72) and DCIS risk ratio of 0.47 match the packet.",
+      "Corrected during review: the packet attributes selective observation of focal ADH to a \"2026 ASBrS/SBI/CAP guideline\" with five numbered criteria. A guideline under that name and year could not be confirmed - what exists is the ASBrS high-risk-lesions resource guide and the ASBrS/SBI 2025 fibroepithelial-lesion guidelines, with unified high-risk-lesion guidance still in development. The clinical substance is well supported and is carried here, but attributed to current ASBrS guidance and the supporting literature rather than to that named guideline, and the five criteria are presented as the conditions the literature applies rather than as a numbered guideline list. Pending owner sign-off.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_PERCUTANEOUS_BREAST_BIOPSY_SOURCE,
+    title: "SCORE curriculum module: Percutaneous Breast Biopsy and Cyst Aspiration",
+    kind: "website",
+    citation: "Nash A, Rosenberger L. \"Percutaneous Breast Biopsy and Cyst Aspiration.\" Surgical Council on Resident Education (SCORE) Portal, Breast module, March 12, 2025.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000456",
+    details: "Retrieved August 12, 2026. Supplies the keyed procedural steps for ultrasound-guided cyst aspiration and stereotactic core needle biopsy, the aspirate-management branches, and the complication list.",
+  },
+  {
+    id: FISER_BREAST_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — breast chapter",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review, 8th edition. Chapter 24, Breast, pages 292-294.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    details: "Owner-supplied chapter text. Used for the board-keyed answers that diverge from current guidance: the age-40 threshold for adding mammography to a palpable mass workup, ADH upgrade quoted as 15% to DCIS and 3% to invasive disease, and the table of lesions requiring excisional biopsy after core biopsy.",
+  },
+  {
+    id: ACR_BIRADS_SOURCE,
+    title: "ACR BI-RADS Atlas, 5th edition",
+    kind: "book",
+    citation: "American College of Radiology. ACR BI-RADS Atlas: Breast Imaging Reporting and Data System, 5th edition. Reston, VA: American College of Radiology.",
+    suppliedAt: "2026-08-25T00:00:00.000Z",
+    details: "Registered during review as the authority behind the assessment categories the packet tabulates. Where the packet and the SCORE module state the category 4 and 5 boundary differently - the packet uses the atlas convention of greater than 2% to less than 95% for category 4 and 95% or greater for category 5, while SCORE writes 2% to 94% and more than 94% - the atlas convention is carried.",
   },
 ];
