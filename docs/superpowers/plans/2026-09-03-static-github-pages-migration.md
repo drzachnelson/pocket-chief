@@ -1232,7 +1232,17 @@ Expected: PASS.
 node node_modules/typescript/bin/tsc --noEmit && echo TYPES_OK
 ```
 
-`src/lib/anki.ts`, `src/lib/anki-settings.ts` and `src/components/settings-form.tsx` still reference the deleted types at this point — Task 8 rewrites the settings form and Task 9 deletes the two modules. If `tsc` reports errors confined to those three files, that is expected; anything else is not.
+**`tsc` will not be clean after this step, and that is expected.** Removing `ClozeDraft` and `AnkiSettings` breaks every file that still imports them. Measured after implementing this task, `tsc --noEmit` reports 12 errors across exactly these eight files:
+
+```
+src/lib/ai.ts          src/lib/backup.ts              src/lib/repository.ts
+src/lib/anki.ts        src/lib/repositories/demo.ts   src/lib/store.ts
+src/lib/anki-settings.ts   src/lib/repositories/supabase.ts
+```
+
+Every one is on Task 9's deletion list, so the breakage is confined to code that is about to be removed — the card-storage feature (`addCard`, `updateCard`, `listCards`, `buildBackupManifest`) reached further into the repository layer than the type names suggest. Note `settings-form.tsx` does *not* error: it only consumes already-broken exports, so TypeScript does not re-flag it.
+
+Cross-check the list rather than trusting it: any erroring file that is not one Task 9 deletes is a real problem you introduced. Use `eslint` and the test suite as this task's green signals, and treat `tsc` as a scoped check until Task 9 lands.
 
 ```bash
 git add src/components/topic-content.tsx src/components/__tests__/topic-content.test.tsx src/lib/types.ts src/app/globals.css src/lib/__tests__/content-contract.test.ts && git commit -m "refactor(topic): remove Anki export from the reading view
