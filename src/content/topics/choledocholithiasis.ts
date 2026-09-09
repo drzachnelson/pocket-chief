@@ -1,12 +1,16 @@
 import type { Topic, TopicBlock, TopicVersion } from "@/lib/types";
 
 /**
- * DO NOT re-author these blocks through `sourced()`.
+ * These blocks are written out by hand rather than through `sourced()`, unlike every other topic.
  *
- * `ensure_launch_topic` in supabase/migrations/202608130001_release_hardening.sql
- * refuses any launch content whose sha256 over `JSON.stringify(choledoBlocks)`
- * does not match its pinned digest. A reordered key changes the digest and
- * breaks the hosted seed path silently. content-contract.test.ts locks this.
+ * That was once mandatory: `ensure_launch_topic` in the Supabase migrations rejected launch content
+ * whose sha256 over `JSON.stringify(choledoBlocks)` did not match a pinned digest, so key order was
+ * load-bearing. The static migration deleted that SQL, and with it the constraint — this file is now
+ * an ordinary topic that simply has not been converted yet. `supportWarnings()` in the content
+ * contract test guards it exactly as it guards the other forty-five.
+ *
+ * Re-authoring it through `sourced()` is safe and would be an improvement; it is only left alone
+ * because that is a content change rather than part of the migration.
  */
 const cited = (id: string, text: string) => ({ id, text, citationIds: ["00000000-0000-4000-8000-000000000102"], status: "cited" as const });
 const citedUnits = (prefix: string, units: string[]) => units.map((text, index) => cited(`${prefix}-${index + 1}`, text));
