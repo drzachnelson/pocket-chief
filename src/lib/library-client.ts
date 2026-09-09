@@ -1,4 +1,4 @@
-import { cacheApprovedTopic, cacheTaxonomy, getCachedTopics } from "@/lib/offline";
+import { cacheApprovedTopic, cacheTaxonomy, getCachedTaxonomy, getCachedTopics } from "@/lib/offline";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
 export interface Library { topics: Topic[]; taxonomy: TaxonomyNode[] }
@@ -28,6 +28,9 @@ export async function loadLibrary(): Promise<Library> {
       await Promise.all(library.topics.map((topic) => cacheApprovedTopic(topic).catch(() => undefined)));
       return library;
     })
-    .catch(async () => ({ topics: await getCachedTopics().catch(() => [] as Topic[]), taxonomy: [] as TaxonomyNode[] }));
+    .catch(async () => {
+      inFlight = undefined; // don't let one bad attempt poison the rest of the page session — only its own awaiters see the fallback; the next call retries the network
+      return { topics: await getCachedTopics().catch(() => [] as Topic[]), taxonomy: await getCachedTaxonomy().catch(() => [] as TaxonomyNode[]) };
+    });
   return inFlight;
 }

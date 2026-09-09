@@ -4,7 +4,8 @@ import type { TaxonomyNode, Topic } from "@/lib/types";
 const cacheApprovedTopic = vi.fn();
 const cacheTaxonomy = vi.fn();
 const getCachedTopics = vi.fn();
-vi.mock("@/lib/offline", () => ({ cacheApprovedTopic, cacheTaxonomy, getCachedTopics }));
+const getCachedTaxonomy = vi.fn();
+vi.mock("@/lib/offline", () => ({ cacheApprovedTopic, cacheTaxonomy, getCachedTaxonomy, getCachedTopics }));
 
 function topic(id: string): Topic {
   return {
@@ -35,6 +36,7 @@ beforeEach(() => {
   cacheApprovedTopic.mockReset().mockResolvedValue(undefined);
   cacheTaxonomy.mockReset().mockResolvedValue(undefined);
   getCachedTopics.mockReset().mockResolvedValue([]);
+  getCachedTaxonomy.mockReset().mockResolvedValue([]);
 });
 
 afterEach(() => { vi.unstubAllGlobals(); });
@@ -80,5 +82,23 @@ describe("loadLibrary", () => {
     const [first, second] = await Promise.all([loadLibrary(), loadLibrary()]);
     expect(first).toBe(second);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("retries the network on a later call after a failed load, instead of replaying the stale fallback", async () => {
+    const fetchMock = vi.fn()
+      .mockImplementationOnce(async () => { throw new Error("network down"); })
+      .mockImplementationOnce(async () => new Response(JSON.stringify(shippedLibrary), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    const loadLibrary = await freshLoadLibrary();
+    await expect(loadLibrary()).resolves.toEqual({ topics: [], taxonomy: [] });
+    await expect(loadLibrary()).resolves.toEqual(shippedLibrary);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("falls back to cached taxonomy, not an empty list, when the fetch rejects", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => { throw new Error("network down"); }));
+    getCachedTaxonomy.mockResolvedValue(taxonomy);
+    const loadLibrary = await freshLoadLibrary();
+    await expect(loadLibrary()).resolves.toEqual({ topics: [], taxonomy });
   });
 });

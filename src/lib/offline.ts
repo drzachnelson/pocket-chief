@@ -41,6 +41,11 @@ export async function getCachedTopics(): Promise<Topic[]> {
   return database.getAll("topics") as Promise<Topic[]>;
 }
 
+export async function getCachedTaxonomy(): Promise<TaxonomyNode[]> {
+  const database = await db();
+  return database.getAll("taxonomy") as Promise<TaxonomyNode[]>;
+}
+
 export async function setTopicSaved(topic: Topic, saved: boolean) {
   const database = await db();
   if (saved) {
