@@ -48,7 +48,9 @@ The plan that was executed is `docs/superpowers/plans/2026-09-03-static-github-p
 
 ### Two things a future merge could easily lose again
 
-Both came from PR #17 and neither was obvious from the file list. They were found by reading the commit body, not the diff. If you ever redo this merge, check them first.
+Both came from PR #17 and neither appeared in the earlier resolution rule. Check them first if you ever redo this merge.
+
+Item 2 turned up in the diff while resolving `topic-content.tsx`. Item 1 did not: it is a one-line change to a `useState` initialiser that reads as a harmless difference in default, and it was caught only by reading PR #17's commit body, which states the intent outright. That is the lesson worth carrying, a semantic conflict can hide in a line that merges cleanly and looks arbitrary.
 
 1. **Sections start collapsed.** `topic-content.tsx` initialises `collapsed` to `new Set(collapsible)`. The pre-merge branch started them open. Getting this wrong silently inverts the reading experience and breaks item 2.
 2. **`openDeepLinkedBlock`.** Sections start collapsed, so the browser's hash jump runs while the target `<details>` is still closed and lands short of the heading. The fix follows the open with a `scrollIntoView` on the next frame, once React has committed the state and the sections below have reflowed. It only makes sense given item 1.
