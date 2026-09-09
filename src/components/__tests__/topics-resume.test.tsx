@@ -29,32 +29,33 @@ afterEach(() => { vi.clearAllMocks(); });
 describe("TopicsResume", () => {
   it("prefers the most recently viewed approved topic on this device", async () => {
     readRecent.mockResolvedValue([topic("device-recent")]);
-    render(<TopicsResume recentSlug="server-recent" fallbackSlug="fallback" approvedTopics={[{ id: "device-recent", slug: "device-recent" }]} />);
+    render(<TopicsResume fallbackSlug="fallback" approvedTopics={[{ id: "device-recent", slug: "device-recent" }]} />);
 
     expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/device-recent");
   });
 
-  it("uses the server recent slug before the fallback when this device has no recents", async () => {
-    render(<TopicsResume recentSlug="server-recent" fallbackSlug="fallback" approvedTopics={[]} />);
+  it("uses the curriculum fallback when this device has no recents", async () => {
+    render(<TopicsResume fallbackSlug="fallback" approvedTopics={[]} />);
 
-    expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/server-recent");
+    expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/fallback");
   });
 
   it("maps a stale device slug to the current approved topic slug", async () => {
     readRecent.mockResolvedValue([topic("stable-id", "old-slug")]);
-    render(<TopicsResume recentSlug="server-recent" fallbackSlug="fallback" approvedTopics={[{ id: "stable-id", slug: "current-slug" }]} />);
+    render(<TopicsResume fallbackSlug="fallback" approvedTopics={[{ id: "stable-id", slug: "current-slug" }]} />);
 
     expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/current-slug");
   });
 
-  it("ignores a device recent that is no longer approved", async () => {
+  it("ignores a device recent that is no longer in the library", async () => {
     readRecent.mockResolvedValue([topic("removed-id", "removed-slug")]);
-    render(<TopicsResume recentSlug="server-recent" fallbackSlug="fallback" approvedTopics={[{ id: "current-id", slug: "current-slug" }]} />);
+    render(<TopicsResume fallbackSlug="fallback" approvedTopics={[{ id: "current-id", slug: "current-slug" }]} />);
 
-    expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/server-recent");
+    expect(await screen.findByRole("link", { name: /resume topic/i })).toHaveAttribute("href", "/topics/fallback");
   });
 
-  it("renders a compact empty state when no approved topic can be resumed", async () => {
+  it("falls back to the empty state when the device storage read fails and there is no fallback", async () => {
+    readRecent.mockRejectedValue(new Error("blocked"));
     render(<TopicsResume approvedTopics={[]} />);
 
     expect(await screen.findByText("No topic ready to resume.")).toBeInTheDocument();

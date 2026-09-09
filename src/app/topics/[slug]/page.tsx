@@ -2,26 +2,27 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TopicContent } from "@/components/topic-content";
 import { buildLinkIndex } from "@/lib/inline";
-import { getRepository } from "@/lib/repository";
+import { getTopicBySlug, listSources, listTaxonomy, listTopics } from "@/lib/library";
 import { taxonomyAncestry } from "@/lib/taxonomy";
 
-export const dynamic = "force-dynamic";
+/** One prerendered HTML file per authored topic; the export has no server to resolve a slug. */
+export function generateStaticParams() {
+  return listTopics().map((topic) => ({ slug: topic.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const topic = await (await getRepository()).getTopicBySlug(slug);
-  return { title: topic?.title ?? "Topic" };
+  return { title: getTopicBySlug(slug)?.title ?? "Topic" };
 }
 
 export default async function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const repository = await getRepository();
-  const topic = await repository.getTopicBySlug(slug);
+  const topic = getTopicBySlug(slug);
   if (!topic?.approvedVersion) notFound();
   const version = topic.approvedVersion;
-  const suppliedSources = await repository.listSources(version.sourceIds);
-  const linkEntries = buildLinkIndex(await repository.listTopics());
-  const ancestry = taxonomyAncestry(topic.scoreNodeId, await repository.listTaxonomy());
+  const suppliedSources = listSources(version.sourceIds);
+  const linkEntries = buildLinkIndex(listTopics());
+  const ancestry = taxonomyAncestry(topic.scoreNodeId, listTaxonomy());
   const scorePath = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");
   const updatedAt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(topic.updatedAt));
   return (

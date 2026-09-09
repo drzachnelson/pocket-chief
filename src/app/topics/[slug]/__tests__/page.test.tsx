@@ -1,13 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import TopicPage from "@/app/topics/[slug]/page";
-import { getRepository } from "@/lib/repository";
+import { getTopicBySlug, listTaxonomy } from "@/lib/library";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
-vi.mock("@/lib/repository", () => ({ getRepository: vi.fn() }));
+vi.mock("@/lib/library", () => ({ getTopicBySlug: vi.fn(), listSources: vi.fn(() => []), listTaxonomy: vi.fn(), listTopics: vi.fn(() => []) }));
 vi.mock("@/components/topic-content", () => ({ TopicContent: () => <div data-testid="topic-content" /> }));
 
-const readRepository = vi.mocked(getRepository);
+const readTopic = vi.mocked(getTopicBySlug);
+const readTaxonomy = vi.mocked(listTaxonomy);
 
 const taxonomy: TaxonomyNode[] = [
   { id: "score", title: "SCORE Curriculum", slug: "score", order: 0 },
@@ -22,9 +23,8 @@ const topic: Topic = {
 
 describe("TopicPage", () => {
   it("renders one SCORE path and a UTC-stable last-updated label without tag chips or breadcrumbs", async () => {
-    readRepository.mockResolvedValue({
-      getTopicBySlug: vi.fn().mockResolvedValue(topic), listSources: vi.fn().mockResolvedValue([]), listTopics: vi.fn().mockResolvedValue([topic]), listTaxonomy: vi.fn().mockResolvedValue(taxonomy),
-    } as never);
+    readTopic.mockReturnValue(topic);
+    readTaxonomy.mockReturnValue(taxonomy);
 
     render(await TopicPage({ params: Promise.resolve({ slug: topic.slug }) }));
 

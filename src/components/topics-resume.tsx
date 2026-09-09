@@ -5,13 +5,12 @@ import { useEffect, useState } from "react";
 import { getRecentTopics } from "@/lib/offline";
 
 export interface TopicsResumeProps {
-  recentSlug?: string;
   fallbackSlug?: string;
   approvedTopics: Array<{ id: string; slug: string }>;
 }
 
-/** Resolves a resume destination on-device before falling back to server metadata. */
-export function TopicsResume({ recentSlug, fallbackSlug, approvedTopics }: TopicsResumeProps) {
+/** Resolves a resume destination from this device's history, then the curriculum's first topic. */
+export function TopicsResume({ fallbackSlug, approvedTopics }: TopicsResumeProps) {
   const [resumeSlug, setResumeSlug] = useState<string | null>();
 
   useEffect(() => {
@@ -21,13 +20,11 @@ export function TopicsResume({ recentSlug, fallbackSlug, approvedTopics }: Topic
         if (!active) return;
         const currentSlugById = new Map(approvedTopics.map((topic) => [topic.id, topic.slug]));
         const resumeFromDevice = recent.map((topic) => currentSlugById.get(topic.id)).find(Boolean);
-        setResumeSlug(resumeFromDevice ?? recentSlug ?? fallbackSlug ?? null);
+        setResumeSlug(resumeFromDevice ?? fallbackSlug ?? null);
       })
-      .catch(() => {
-        if (active) setResumeSlug(recentSlug ?? fallbackSlug ?? null);
-      });
+      .catch(() => { if (active) setResumeSlug(fallbackSlug ?? null); });
     return () => { active = false; };
-  }, [approvedTopics, fallbackSlug, recentSlug]);
+  }, [approvedTopics, fallbackSlug]);
 
   if (resumeSlug === undefined) return <section className="topics-resume" aria-label="Resume topic" />;
 
