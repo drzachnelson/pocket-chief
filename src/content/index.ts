@@ -55,7 +55,7 @@ export { renalArteryDiseaseTopic } from "@/content/topics/renal-artery-disease";
 export { suppliedSources } from "@/content/sources";
 export { taxonomy } from "@/content/taxonomy";
 
-export const demoTopics: Topic[] = [
+export const libraryTopics: Topic[] = [
   choledocholithiasisTopic,
   fibroadenomaPhyllodesTopic,
   abdominalPainTopic,

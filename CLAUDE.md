@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Pocket Chief is a private, single-user general surgery reference PWA. `README.md` covers the product surface and production setup; `AGENTS.md` carries the workstation identity and editorial rules; `docs/AI-CONTRACT.md` and `docs/SECURITY.md` carry the model and security contracts. This file covers what you can only learn by reading several files at once.
+Pocket Chief is a private, single-user general surgery reference PWA. `README.md` covers the product surface and production setup; `AGENTS.md` carries the workstation identity and editorial rules; `docs/SECURITY.md` carries the security contract. This file covers what you can only learn by reading several files at once.
 
 ## Commands
 
@@ -30,7 +30,7 @@ node node_modules/vitest/vitest.mjs run src/lib/__tests__/content-contract.test.
 node node_modules/vitest/vitest.mjs run -t "keeps flow graphs renderable"
 ```
 
-**Dev server**: use the Browser pane preview (`preview_start` with `{name: "pocket-chief"}`), never Bash. The `.claude/launch.json` entry at the vault root prefers port **3210** and falls back to an assigned port (`autoPort`). Next 16 still refuses a second `next dev` for this directory on *any* port, so if another chat has one running you cannot start your own — and that server keeps serving its cached library. Confirm with `curl -s localhost:3210/api/library` before concluding new content failed to register.
+**Dev server**: use the Browser pane preview (`preview_start` with `{name: "pocket-chief"}`), never Bash. The `.claude/launch.json` entry at the vault root prefers port **3210** and falls back to an assigned port (`autoPort`). Next 16 still refuses a second `next dev` for this directory on *any* port, so if another chat has one running you cannot start your own — and that server keeps serving its cached library. The preview opens at `http://localhost:3210/pocket-chief/`.
 
 **E2E**:
 
@@ -42,17 +42,16 @@ Playwright starts *its own* dev server on port 3000 with `POCKET_CHIEF_DEMO=true
 
 ## Architecture
 
-### Two data modes behind one interface
+### One library, read at build time
 
-`dataMode()` in `src/lib/auth.ts` resolves to `demo`, `supabase`, or `misconfigured` from the environment, and `getRepository()` returns a `DemoRepository` or `SupabaseRepository` implementing the `ContentRepository` interface in `src/lib/repository.ts`. Every route and page goes through that interface — add a capability there and both implementations must satisfy it.
+`src/lib/library.ts` reads the authored content in `src/content/` as pure functions — `listTopics`, `getTopicBySlug`, `listTaxonomy`, `listSources`, `searchLibrary`. There is no repository interface, no database and no request context. Server components call it during `next build`; the browser gets the same data through `out/library.json`, loaded by `src/lib/library-client.ts` and cached in IndexedDB.
 
-Local development runs in demo mode (`POCKET_CHIEF_DEMO=true`, no Supabase or OpenAI credentials in `.env.local`). Consequences worth knowing before you debug something:
+The app builds with `output: "export"` under `basePath: "/pocket-chief"`, in development as well as CI. Consequences worth knowing before you debug something:
 
-- **The demo store caches on `globalThis`** (`src/lib/store.ts`). Seed changes do not appear on HMR — restart the dev server or you will chase a ghost.
-- Drafts, bookmarks, and Anki cards created in demo mode are in-memory and vanish on restart.
-- AI paths are inert without `OPENAI_API_KEY`; library content is added by authoring files, not through the `/add` flow.
-
-`src/proxy.ts` gates everything: demo mode passes through, an incomplete configuration redirects to `/configuration-error` and fails API calls closed, and a configured deployment requires the session email to equal `POCKET_CHIEF_OWNER_EMAIL`.
+- Anything that needs a request at runtime — `searchParams` in a server component, a non-GET route handler, `headers()`, middleware — will fail the build or be silently inert. Search reads `?q=` on the client for exactly this reason.
+- Bookmarks and reading history are per-device, in IndexedDB. Clearing site data clears them, and there is no server copy to restore from.
+- There is no Anki export. Flashcards come from handing a published topic URL to an assistant; do not reintroduce an in-app exporter without asking.
+- New content does not appear on HMR if a stale dev server from another chat is serving. Confirm with `curl -s localhost:3210/library.json` before concluding new content failed to register.
 
 ### The claim-support invariant
 
@@ -60,14 +59,13 @@ This is the core domain rule and the most common way to break content.
 
 Every block renders some set of factual statements. `factualUnits(block)` in `src/lib/editorial.ts` extracts them — bullet items, joined table rows, `title: detail` for sequence steps, node and edge labels for flows. A block is approvable only when `claims[i].text` matches `factualUnits(block)[i]` **exactly, in order**, with at least one citation resolving to a source the owner supplied. `supportWarnings()` enforces it, `approveDraft()` throws on any warning, and `requireOwnerAttestation()` strips citations back to `needs_support` whenever a block is edited.
 
-The same expectations are duplicated in SQL as `topic_block_expected_claims`. **The TypeScript and SQL sides must change together** — this is a known, accepted dual-maintenance risk.
+`supportWarnings()` in `src/lib/editorial.ts` is now the only enforcement. `src/lib/__tests__/content-contract.test.ts` runs it over every authored topic, and a PostToolUse hook runs that test on any edit under `src/content/`.
 
 ### Library content
 
 Content lives in `src/content/`, one file per topic, aggregated by `src/content/index.ts`. `src/lib/seed.ts` is a re-export kept for existing imports.
 
 - **Author blocks through `sourced()`** (`src/content/authoring.ts`). It derives claims from `factualUnits()`, so claim text cannot drift from rendered text. Hand-written `claims` arrays drift.
-- **`src/content/topics/choledocholithiasis.ts` is byte-pinned.** `ensure_launch_topic` in `supabase/migrations/202608130001_release_hardening.sql` rejects launch content whose sha256 over `JSON.stringify(choledoBlocks)` does not match a pinned digest — so key order matters and this one file must not be re-authored through the helper. `content-contract.test.ts` asserts the digest against the migration.
 - `scoreCategory` must equal the taxonomy ancestry joined with " · "; the contract test compares them because that string drives the breadcrumb and search.
 
 `src/lib/__tests__/content-contract.test.ts` validates all of the above plus renderer constraints. A PostToolUse hook (`.claude/hooks/pocket-chief-content.mjs`, wired in the vault's `.claude/settings.local.json`) runs it automatically on edits under `src/content/`.
@@ -89,15 +87,28 @@ Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` sk
 
 ## Conventions
 
-- **Applied migrations are immutable.** Never edit a migration that has run; add a new timestamped file. `202608120001` is frozen; `202608130001` is the catch-up for an earlier in-place edit.
 - `src/lib` and `src/components` are written in a dense single-line style. Match the surrounding density rather than reformatting.
 - Editorial and voice rules for content are in `AGENTS.md` and the vault's `00_Resources/voice-principles.md`. Every factual block cites a supplied source or is visibly marked unsupported; treat AI-authored content as draft until the owner approves it.
 - Record durable product decisions in this workstation's `MEMORY.md`, not in commit messages alone.
 
 ## Environment gotchas
 
-- The vault lives in iCloud-synced Documents. iCloud can evict `node_modules` and `.next` contents (commands hang at 0% CPU) and create `name 2.ext` conflict copies inside `.next` that break `tsc`. Remedy: reinstall `node_modules`, delete the conflict copies.
-- The remote is the private repo `drzachnelson/pocket-chief`, and `main` is the default branch. The licensed corpora under `Pocket Chief Resources/` are deliberately gitignored except for `score-module-outline.md` — never commit the SCORE module texts or Fiser chapters.
+- The vault lives in iCloud-synced Documents, and iCloud evicts `node_modules` wholesale. Evicted
+  files keep their directory entry but carry the `dataless` flag, and reading one blocks forever —
+  the process sits at 0% CPU with no output and no error. `brctl download` does not recover them.
+  Diagnose with `find node_modules -type f -flags +dataless | wc -l` (a healthy tree returns 0) and,
+  for a hung process, `lsof -p <pid>` names the exact file it is stuck on.
+  Recovery is `rm -rf node_modules` — unlink does not materialize, so it is fast — then reinstall.
+  `pnpm` is not on PATH; use `npx --yes pnpm@11.19.0 install`. The pnpm content-addressable store at
+  `~/Library/pnpm/store/v11` lives outside iCloud and stays healthy, so the reinstall needs no
+  network and takes about ten seconds.
+- iCloud also evicts `.git/objects/pack/`, which every worktree shares with the main checkout. That
+  surfaces as `error: ... pack-*.pack is far too short to be a packfile` or `unable to read tree` on
+  an ordinary `git add` or `git commit`. `ls -la` shows the expected size while `du -sh` shows `0B`.
+  This is NOT repository corruption and `git fsck --unpack` is the wrong reflex — run
+  `brctl download <the named pack file>`, which does work here even though it does not for
+  `node_modules`, then retry the git command.
+- The remote is `drzachnelson/pocket-chief`, `main` is the default branch and the deploy branch, and the licensed corpora under `Pocket Chief Resources/` stay gitignored except `score-module-outline.md`.
 - The vault's `.claude/launch.json` must use vault-relative paths for the `pocket-chief` entry. An absolute path pins it to one machine's home directory and the preview dies with `MODULE_NOT_FOUND`.
 - Adding topics has repeatedly exposed assumptions built when the library held one topic — two search-scoring flaws and several hardcoded single-topic UI strings so far. When a test that expected an empty result set starts failing after new content lands, check whether the app was only ever correct for one topic before changing the test.
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { taxonomy } from "@/content/taxonomy";
-import { demoTopics } from "@/lib/seed";
+import { libraryTopics } from "@/lib/seed";
 import { taxonomyDescendantIds, taxonomyParentIsValid, taxonomySections } from "@/lib/taxonomy";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
@@ -18,7 +18,7 @@ describe("taxonomy integrity", () => {
   });
 });
 
-const approved = demoTopics.filter((entry) => entry.approvedVersion);
+const approved = libraryTopics.filter((entry) => entry.approvedVersion);
 
 function topic(id: string, title: string, scoreNodeId: string): Topic {
   return { id, slug: id, title, aliases: [], scoreNodeId, scoreCategory: "", tags: [], approvedVersion: null, versions: [], updatedAt: "2026-01-01T00:00:00.000Z" };

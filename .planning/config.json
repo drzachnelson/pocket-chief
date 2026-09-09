@@ -1,8 +1,0 @@
-{
-  "project": "pocket-chief",
-  "mode": "single-owner-private",
-  "workflow": "test-driven",
-  "deployment": "vercel",
-  "database": "supabase",
-  "ai": "openai-responses"
-}

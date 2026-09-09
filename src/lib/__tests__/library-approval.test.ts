@@ -41,11 +41,11 @@ const fixtures = vi.hoisted(() => {
   return { approvedTopic, draftTopic };
 });
 
-// `demoTopics` is a mixed set here on purpose: one topic with a real `approvedVersion`, one with
+// `libraryTopics` is a mixed set here on purpose: one topic with a real `approvedVersion`, one with
 // `approvedVersion: null`. That makes these tests fail if the approval filter in library.ts is
 // ever weakened or removed. `library.test.ts` deliberately never does this -- it asserts against
 // the real corpus, which happens to be 100% approved today and so can't catch a missing filter.
-vi.mock("@/content", () => ({ demoTopics: [fixtures.approvedTopic, fixtures.draftTopic], suppliedSources: [], taxonomy: [] }));
+vi.mock("@/content", () => ({ libraryTopics: [fixtures.approvedTopic, fixtures.draftTopic], suppliedSources: [], taxonomy: [] }));
 
 describe("library approval filter", () => {
   it("listTopics excludes a topic with no approved version", () => {

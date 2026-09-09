@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { factualUnits, supportWarnings } from "@/lib/editorial";
-import { demoTopics } from "@/lib/seed";
+import { libraryTopics } from "@/lib/seed";
 import type { TopicBlock } from "@/lib/types";
 
 const cited = (text: string, sourceId = "src-1") => ({ id: `claim-${text.slice(0, 12)}`, text, citationIds: [sourceId], status: "cited" as const });
@@ -51,7 +51,7 @@ describe("claim support", () => {
   });
 
   it("keeps every authored topic in the shipped library source-linked", () => {
-    for (const topic of demoTopics) {
+    for (const topic of libraryTopics) {
       const version = topic.approvedVersion!;
       expect(supportWarnings(version.blocks, new Set(version.sourceIds)), topic.slug).toEqual([]);
     }

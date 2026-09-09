@@ -1,17 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { factualUnits, supportWarnings } from "@/lib/editorial";
 import { stripMarkup } from "@/lib/inline";
-import { demoTopics, suppliedSources, taxonomy } from "@/lib/seed";
+import { libraryTopics, suppliedSources, taxonomy } from "@/lib/seed";
 import { taxonomyAncestry } from "@/lib/taxonomy";
 import type { Topic, TopicBlock } from "@/lib/types";
 
 const blocksOf = (topic: Topic) => topic.approvedVersion!.blocks;
-const eachBlock = (): Array<[string, TopicBlock]> => demoTopics.flatMap((topic) => blocksOf(topic).map((block) => [`${topic.slug}/${block.id}`, block] as [string, TopicBlock]));
+const eachBlock = (): Array<[string, TopicBlock]> => libraryTopics.flatMap((topic) => blocksOf(topic).map((block) => [`${topic.slug}/${block.id}`, block] as [string, TopicBlock]));
 const duplicates = (values: string[]) => values.filter((value, index) => values.indexOf(value) !== index);
 
 describe("seeded content contract", () => {
   it("links every rendered unit to a supplied source", () => {
-    for (const topic of demoTopics) {
+    for (const topic of libraryTopics) {
       const version = topic.approvedVersion!;
       expect(supportWarnings(version.blocks, new Set(version.sourceIds)), topic.slug).toEqual([]);
     }
@@ -69,10 +69,10 @@ describe("seeded content contract", () => {
   });
 
   it("keeps identifiers unique across the library", () => {
-    expect(duplicates(demoTopics.map((topic) => topic.id))).toEqual([]);
-    expect(duplicates(demoTopics.map((topic) => topic.slug))).toEqual([]);
-    expect(duplicates(demoTopics.map((topic) => topic.approvedVersion!.id))).toEqual([]);
-    for (const topic of demoTopics) {
+    expect(duplicates(libraryTopics.map((topic) => topic.id))).toEqual([]);
+    expect(duplicates(libraryTopics.map((topic) => topic.slug))).toEqual([]);
+    expect(duplicates(libraryTopics.map((topic) => topic.approvedVersion!.id))).toEqual([]);
+    for (const topic of libraryTopics) {
       expect(duplicates(blocksOf(topic).map((block) => block.id)), topic.slug).toEqual([]);
       expect(duplicates(blocksOf(topic).flatMap((block) => block.claims.map((claim) => claim.id))), topic.slug).toEqual([]);
     }
@@ -84,11 +84,11 @@ describe("seeded content contract", () => {
       for (const claim of block.claims) for (const id of claim.citationIds) expect(known, `${label} citation`).toContain(id);
       if (block.type === "references") for (const id of block.sourceIds) expect(known, `${label} reference`).toContain(id);
     }
-    for (const topic of demoTopics) for (const id of topic.approvedVersion!.sourceIds) expect(known, topic.slug).toContain(id);
+    for (const topic of libraryTopics) for (const id of topic.approvedVersion!.sourceIds) expect(known, topic.slug).toContain(id);
   });
 
   it("matches every topic to a taxonomy node and its printed category", () => {
-    for (const topic of demoTopics) {
+    for (const topic of libraryTopics) {
       const ancestry = taxonomyAncestry(topic.scoreNodeId, taxonomy);
       expect(ancestry.length, `${topic.slug} taxonomy node`).toBeGreaterThan(0);
       const printed = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");

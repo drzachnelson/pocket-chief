@@ -41,12 +41,9 @@ export interface TaxonomySection { node: TaxonomyNode; subsections: TaxonomySubs
 // category → section → topic, and a second disclosure tier would repeat "Diseases &
 // Conditions" at two indents without buying any navigation.
 //
-// The curriculum root is matched by SLUG, never by id. Node ids are readable strings in
-// the demo store but uuids in Supabase — `syncTaxonomy` in library-install.ts reconciles
-// the two by slug — so an id-keyed root matches nothing in production and empties
-// /topics while every demo-mode test still passes. The Settings editor saves a new
-// top-level category with no parent at all, so a parentless non-root node is a category
-// too; the root itself is a container and never a browsable one.
+// The curriculum root is matched by SLUG, never by id, so a renamed or re-keyed root node keeps
+// /topics populated. A parentless node that is not the root is a category in its own right; the
+// root itself is a container and never browsable.
 export const curriculumRootSlug = "score";
 
 export function taxonomySections(nodes: TaxonomyNode[], topics: Topic[]): TaxonomySection[] {

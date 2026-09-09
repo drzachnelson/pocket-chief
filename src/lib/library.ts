@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { demoTopics, suppliedSources, taxonomy } from "@/content";
+import { libraryTopics, suppliedSources, taxonomy } from "@/content";
 import { searchTopics } from "@/lib/search";
 import type { SuppliedSource, TaxonomyNode, Topic } from "@/lib/types";
 
@@ -12,7 +12,7 @@ import type { SuppliedSource, TaxonomyNode, Topic } from "@/lib/types";
 // of re-cloning the ~2.7 MB library per generated route — cache() scopes to one render pass, so the
 // 47 independent page generations stay isolated from each other.
 
-const approved = () => demoTopics.filter((topic) => topic.approvedVersion);
+const approved = () => libraryTopics.filter((topic) => topic.approvedVersion);
 
 export const listTopics = cache((): Topic[] => structuredClone(approved()));
 

@@ -120,7 +120,7 @@ Strip the packet's `[N]` markers out of block text — they become part of the c
 
 ## 6. Write the files
 
-One topic per file at `src/content/topics/<slug>.ts`, shaped like an existing topic. Register it in `src/content/index.ts` (both the import and `demoTopics`), add any new taxonomy nodes to `src/content/taxonomy.ts`, and the sources to `src/content/sources.ts`.
+One topic per file at `src/content/topics/<slug>.ts`, shaped like an existing topic. Register it in `src/content/index.ts` (both the import and `libraryTopics`), add any new taxonomy nodes to `src/content/taxonomy.ts`, and the sources to `src/content/sources.ts`.
 
 `scoreCategory` must equal the taxonomy ancestry joined with " · " — the contract test compares them, because that string drives the breadcrumb and search.
 

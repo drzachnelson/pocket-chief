@@ -1,87 +1,42 @@
 # Pocket Chief
 
-Pocket Chief is a private, installable, search-first general surgery reference. Owner-supplied notes become structured drafts with claim-level source support, then become searchable only after direct approval.
+A private, installable, search-first general surgery reference. Forty-six SCORE-aligned topics, authored as source-linked content files, built into a static site that works offline on a phone.
 
-## Included in V1
+## What it is
 
-- Responsive Clinical Atlas UI with desktop sidebar, mobile tabs, compact topic layout, system light/dark support, loading/empty/error states, and `noindex` metadata.
-- One real launch topic: choledocholithiasis, built only from the supplied note packet. The other four launch slots intentionally remain empty.
-- Editable taxonomy and typed content blocks for summary, prose, bullets, comparison table, flow, sequence, warning, image, and references.
-- Draft, targeted revision, support validation, direct approval, immutable approved versions, restore, bookmarks, and recent-view contracts.
-- Typo-tolerant approved-only search across title, aliases, headings, body, SCORE category, and tags.
-- Owner-only Supabase passwordless auth, private Storage, RLS, signup allowlist, signed media, immutable version, and approval policy migration.
-- Idempotent first-owner bootstrap installs the reviewed choledocholithiasis launch topic in Supabase; Settings supports owner edits and additions to the SCORE hierarchy, and Add accepts searchable personal tags.
-- OpenAI Responses API adapter with schema-constrained topic and cloze outputs, configurable `gpt-5.6-terra`, PHI rejection, route rate limits, and deterministic local fallbacks.
-- AnkiMobile URL export, AnkiConnect detection, automatic UTF-8 TSV fallback, editable cloze review, duplicate hashes, and context-section/decision-flow image.
-- Installable PWA shell, IndexedDB-approved content cache, saved topics, recents, stale-version invalidation, sign-out cache clearing, and portable ZIP backup.
+- A Next.js app exported to static HTML. No server, no database, no accounts, no API keys.
+- The library is `src/content/` — one TypeScript file per topic, each block citing a supplied source.
+- Bookmarks, reading history, and the offline copy of the atlas live in the browser's IndexedDB. They belong to the device, not to an account.
+- Typo-tolerant search over titles, aliases, headings, body text, SCORE categories, and tags, running entirely in the browser.
 
-## Local preview
+For flashcards, hand a topic's URL to an assistant and ask it to write the cards. The app deliberately has no export of its own.
 
-Requirements: Node 20.9 or newer and pnpm 11.
+## Running it locally
+
+Requirements: Node 20.9 or newer, and pnpm 11.
 
 ```bash
-cp .env.example .env.local
 pnpm install
-pnpm dev -- --webpack
+pnpm dev
 ```
 
-The example environment enables a local demo without transmitting notes. Open `http://localhost:3000`.
+Open `http://localhost:3000/pocket-chief/`. The app is mounted under `/pocket-chief` in development as well as production, because that is where GitHub Pages serves it.
 
-## Production configuration
-
-### Supabase
-
-1. Create a Supabase project and run both files in `supabase/migrations/` in timestamp order. The forward hardening migration also upgrades an environment that already applied the foundation migration. The authenticated app installs the cryptographically verified reviewed launch topic on the owner's first request.
-2. Insert the exact lowercase owner email into `public.owner_allowlist` before inviting the user.
-3. In Authentication → Providers → Email, disable public signup and keep passwordless email enabled.
-4. Invite only the owner email.
-5. Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and the server-only `POCKET_CHIEF_OWNER_EMAIL`.
-6. Do not set `POCKET_CHIEF_DEMO` in production. Production fails closed when private auth is incomplete.
-
-The `topic-media` bucket is private. Media must be stored below the owner UUID path; the app returns a 60-second signed URL through `/api/media/:id`.
-
-### OpenAI
-
-Set `OPENAI_API_KEY` only in the server environment. `POCKET_CHIEF_TOPIC_MODEL` defaults to `gpt-5.6-terra`. `POCKET_CHIEF_CLOZE_MODEL` configures the cloze-drafting model independently and falls back to `POCKET_CHIEF_TOPIC_MODEL` when unset. Topic generation uses medium reasoning; cloze generation uses low reasoning. Raw notes are not written to application logs.
-
-### Vercel
-
-Import the private GitHub repository (`drzachnelson/pocket-chief`), add the production environment variables above, deploy `main`, then verify the exact owner login before using private content. Do not deploy with demo mode enabled.
-
-### Installing the library
-
-`ensure_launch_topic` installs only the sha256-pinned choledocholithiasis topic. Every other authored topic in `src/content/` reaches a hosted deployment through one owner-authenticated call, made after the first successful owner sign-in:
+To preview the real static artifact instead of the dev server:
 
 ```bash
-curl -X POST https://<deployment>/api/library/install -H "Cookie: <owner session>"
+pnpm serve
 ```
 
-Easier from the browser devtools console while signed in as the owner:
+## Adding a topic
 
-```js
-await fetch("/api/library/install", { method: "POST" }).then((r) => r.json())
-```
+Authoring is a commit, not an in-app flow. Invoke the `/score-topic` skill rather than reconstructing the steps by hand. Every block goes through `sourced()` in `src/content/authoring.ts`, which derives one cited claim per rendered factual unit — hand-written claim arrays drift from rendered text and the content contract test will reject them.
 
-It replays each topic through the same `createTopicDraft` → `approveDraft` path a hand-authored topic takes, so RLS and the claim-support invariant still apply. It is idempotent — a slug that already carries an approved version is reported as `present` and left alone — so it is safe to re-run after adding topics. The response reports `installed`, `present`, and `failed` counts plus a per-topic list, and returns 207 when any topic failed.
+## Deployment
 
-## Anki setup
+`.github/workflows/deploy.yml` runs typecheck, lint, unit tests, and the static build on every push to `main`, then publishes `out/` to GitHub Pages. Set **Settings → Pages → Source** to **GitHub Actions** once.
 
-- iPhone/iPad: review the cloze, then use **Open in AnkiMobile**.
-- Desktop: keep Anki open with AnkiConnect listening on its standard local port, then use **Send to desktop Anki**.
-- If AnkiConnect is unavailable, Pocket Chief automatically downloads a UTF-8 tab-separated import file.
-- The reviewed cloze wording is saved privately before close or export, so backups contain the edited card rather than the first generated suggestion.
-- Deck, Cloze note type, field mapping, and tag prefix are configurable in Settings.
-
-## Backups
-
-Settings → **Download backup** produces a ZIP with:
-
-- `manifest.json`
-- approved topic Markdown and JSON
-- supplied source metadata
-- personal tags within topic JSON
-- Anki drafts
-- media manifest (and media binaries when configured)
+A Pages site is publicly reachable by URL on Free and Pro accounts, whatever the repository's visibility. `robots.txt` and the `noindex` metadata ask crawlers to stay away; they are not access control.
 
 ## Verification
 
@@ -90,19 +45,11 @@ pnpm test
 pnpm lint
 pnpm typecheck
 pnpm build
+pnpm test:e2e
 ```
 
-The production build uses webpack because Turbopack's local CSS worker requires a restricted ephemeral port in this environment.
+The build uses webpack because Turbopack's local CSS worker requires a restricted ephemeral port in this environment. Stop the dev server before running the e2e suite — Playwright starts its own.
 
-## Remaining launch inputs
+## Content and licensing
 
-Four owner-supplied note packets are still required. For each packet, include:
-
-- topic title and preferred aliases
-- raw original/paraphrased notes
-- source title, edition/chapter/page or URL where available
-- SCORE category
-- any diagrams or images with provenance
-- personal tags
-
-Never include patient information or copied paid question stems/explanations.
+The topics are original prose written from licensed reference material. The source corpora are not in this repository and are not redistributable. See `NOTICE.md`.
