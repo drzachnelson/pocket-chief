@@ -1,6 +1,4 @@
-import type { TopicBlock, TopicDraftInput, TopicVersion } from "@/lib/types";
-
-const clone = <T,>(value: T): T => structuredClone(value);
+import type { TopicBlock } from "@/lib/types";
 
 export function factualUnits(block: TopicBlock): string[] {
   if (block.type === "summary" || block.type === "prose" || block.type === "warning") return [block.text];
@@ -12,19 +10,15 @@ export function factualUnits(block: TopicBlock): string[] {
   return [];
 }
 
-const restrictReferenceSourceIds = (block: TopicBlock, validSourceIds: ReadonlySet<string>) =>
-  block.type === "references" ? { sourceIds: block.sourceIds.filter((id) => validSourceIds.has(id)) } : {};
-
-export function requireOwnerAttestation(blocks: TopicBlock[], validSourceIds: ReadonlySet<string>): TopicBlock[] {
-  return blocks.map((block) => ({
-    ...clone(block),
-    claims: block.claims.map((claim) => ({ ...clone(claim), citationIds: [], status: "needs_support" as const })),
-    ...restrictReferenceSourceIds(block, validSourceIds),
-  })) as TopicBlock[];
-}
-
 const comparable = (value: string) => value.trim().replace(/\s+/g, " ");
 
+/**
+ * The claim-support invariant, and the only thing standing behind it now that the SQL is gone:
+ * a block is supported when `claims[i].text` matches `factualUnits(block)[i]` exactly and in
+ * order, every claim is `cited`, and every citation resolves to a source the topic supplied.
+ * `sourced()` in `src/content/authoring.ts` derives both sides from `factualUnits`, so the
+ * contract test is what catches a hand-edited claim list drifting from rendered text.
+ */
 export function supportWarnings(blocks: TopicBlock[], validSourceIds?: ReadonlySet<string>): string[] {
   const warnings: string[] = [];
   for (const block of blocks) {
@@ -42,79 +36,4 @@ export function supportWarnings(blocks: TopicBlock[], validSourceIds?: ReadonlyS
     for (const claim of block.claims.slice(units.length)) warnings.push(`Needs support: ${claim.text}`);
   }
   return [...new Set(warnings)];
-}
-
-export function normalizeClaimSupport(blocks: TopicBlock[], validSourceIds: ReadonlySet<string>): TopicBlock[] {
-  return blocks.map((block) => ({
-    ...clone(block),
-    claims: block.claims.map((claim) => {
-      const citationIds = [...new Set(claim.citationIds.filter((id) => validSourceIds.has(id)))];
-      return { ...clone(claim), citationIds, status: claim.status === "cited" && citationIds.length > 0 ? "cited" as const : "needs_support" as const };
-    }),
-    ...restrictReferenceSourceIds(block, validSourceIds),
-  })) as TopicBlock[];
-}
-
-export function createDraft(input: TopicDraftInput, basedOn?: TopicVersion): TopicVersion {
-  const versionNumber = (basedOn?.versionNumber ?? 0) + 1;
-  const block: TopicBlock = {
-    id: `draft-summary-${versionNumber}`,
-    type: "summary",
-    heading: "Draft summary",
-    text: input.rawNotes,
-    claims: [{
-      id: `draft-claim-${versionNumber}`,
-      text: input.rawNotes,
-      citationIds: [],
-      status: "needs_support",
-    }],
-  };
-  return {
-    id: `${input.topicId}-v${versionNumber}-draft`,
-    topicId: input.topicId,
-    versionNumber,
-    status: "draft",
-    blocks: [block],
-    sourceIds: [...input.sourceIds],
-    scoreNodeId: input.scoreNodeId,
-    tags: [...input.tags],
-    warnings: supportWarnings([block]),
-    createdAt: new Date().toISOString(),
-    basedOnVersion: basedOn?.versionNumber,
-  };
-}
-
-export function reviseDraftBlock(draft: TopicVersion, blockId: string, replacement: TopicBlock): TopicVersion {
-  if (draft.status !== "draft") throw new Error("Approved versions are immutable.");
-  if (!draft.blocks.some((block) => block.id === blockId)) throw new Error("Block not found.");
-  const blocks = draft.blocks.map((block) => block.id === blockId ? clone(replacement) : clone(block));
-  return { ...clone(draft), blocks, warnings: supportWarnings(blocks) };
-}
-
-export function approveDraft(draft: TopicVersion, ownerEmail: string, validSourceIds = new Set(draft.sourceIds)): TopicVersion {
-  if (draft.status !== "draft") throw new Error("Only drafts can be approved.");
-  const warnings = supportWarnings(draft.blocks, validSourceIds);
-  if (warnings.length > 0) throw new Error("Approval blocked: every factual claim must have source support.");
-  return {
-    ...clone(draft),
-    id: draft.id.replace(/-draft$/, "-approved"),
-    status: "approved",
-    warnings: [],
-    reviewedAt: new Date().toISOString(),
-    reviewedBy: ownerEmail,
-  };
-}
-
-export function restoreVersion(version: TopicVersion, highestVersionNumber = version.versionNumber): TopicVersion {
-  const versionNumber = highestVersionNumber + 1;
-  return {
-    ...clone(version),
-    id: `${version.topicId}-v${versionNumber}-draft`,
-    versionNumber,
-    status: "draft",
-    reviewedAt: undefined,
-    reviewedBy: undefined,
-    createdAt: new Date().toISOString(),
-    basedOnVersion: version.versionNumber,
-  };
 }

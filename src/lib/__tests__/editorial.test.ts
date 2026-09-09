@@ -1,142 +1,59 @@
 import { describe, expect, it } from "vitest";
-import { approveDraft, createDraft, normalizeClaimSupport, requireOwnerAttestation, restoreVersion, reviseDraftBlock, supportWarnings } from "@/lib/editorial";
-import { choledocholithiasisTopic, demoTopics } from "@/lib/seed";
+import { factualUnits, supportWarnings } from "@/lib/editorial";
+import { demoTopics } from "@/lib/seed";
+import type { TopicBlock } from "@/lib/types";
 
-describe("editorial workflow", () => {
-  it("blocks approval while any factual claim needs support", () => {
-    const draft = createDraft({
-      topicId: choledocholithiasisTopic.id,
-      sourceIds: ["source-user-notes"],
-      scoreNodeId: choledocholithiasisTopic.scoreNodeId,
-      tags: ["biliary"],
-      rawNotes: "A new unsupported assertion.",
-      imageIds: [],
-    });
+const cited = (text: string, sourceId = "src-1") => ({ id: `claim-${text.slice(0, 12)}`, text, citationIds: [sourceId], status: "cited" as const });
+const sources = new Set(["src-1"]);
 
-    expect(() => approveDraft(draft, "owner@example.com")).toThrow(/support/i);
+describe("claim support", () => {
+  it("warns when a factual unit has no claim at all", () => {
+    const block: TopicBlock = { id: "b1", type: "prose", text: "Stones under 6 mm may pass.", claims: [] };
+    expect(supportWarnings([block], sources)).toEqual(["Needs support: Stones under 6 mm may pass."]);
   });
 
-  it("keeps every rendered unit in the reviewed launch topic source-linked", () => {
-    expect(supportWarnings(choledocholithiasisTopic.approvedVersion!.blocks, new Set(choledocholithiasisTopic.approvedVersion!.sourceIds))).toEqual([]);
+  it("warns when the claim text has drifted from the rendered text", () => {
+    const block: TopicBlock = { id: "b1", type: "prose", text: "Stones under 6 mm may pass.", claims: [cited("Something else entirely.")] };
+    expect(supportWarnings([block], sources)).toEqual(["Needs support: Stones under 6 mm may pass."]);
   });
 
-  it("keeps every seeded launch topic source-linked", () => {
-    for (const topic of demoTopics) {
-      const approved = topic.approvedVersion!;
-      expect(supportWarnings(approved.blocks, new Set(approved.sourceIds))).toEqual([]);
-    }
+  it("accepts a claim that matches apart from whitespace", () => {
+    const block: TopicBlock = { id: "b1", type: "prose", text: "Stones  under 6 mm\nmay pass.", claims: [cited("Stones under 6 mm may pass.")] };
+    expect(supportWarnings([block], sources)).toEqual([]);
   });
 
-  it("keeps the approved version immutable while a revision is drafted", () => {
-    const draft = createDraft({
-      topicId: choledocholithiasisTopic.id,
-      sourceIds: ["source-user-notes"],
-      scoreNodeId: choledocholithiasisTopic.scoreNodeId,
-      tags: ["biliary"],
-      rawNotes: "Initial note",
-      imageIds: [],
-    });
-    const cited = reviseDraftBlock(draft, draft.blocks[0].id, {
-      ...draft.blocks[0],
-      claims: [{ id: "claim-1", text: "Initial note", citationIds: ["source-user-notes"], status: "cited" }],
-    });
-    const approved = approveDraft(cited, "owner@example.com", new Set(["source-user-notes"]));
-    const next = createDraft({
-      topicId: approved.topicId,
-      sourceIds: approved.sourceIds,
-      scoreNodeId: approved.scoreNodeId,
-      tags: approved.tags,
-      rawNotes: "A later edit",
-      imageIds: [],
-    }, approved);
-
-    expect(next.versionNumber).toBe(approved.versionNumber + 1);
-    expect(approved.status).toBe("approved");
+  it("rejects a citation that is not one of the topic's supplied sources", () => {
+    const block: TopicBlock = { id: "b1", type: "prose", text: "Stones under 6 mm may pass.", claims: [cited("Stones under 6 mm may pass.", "invented")] };
+    expect(supportWarnings([block], sources)).toEqual(["Needs support: Stones under 6 mm may pass."]);
   });
 
-  it("rejects invented citation IDs even when a claim says cited", () => {
-    const block = {
-      id: "summary",
-      type: "summary" as const,
-      text: "A factual assertion.",
-      claims: [{ id: "claim", text: "A factual assertion.", citationIds: ["invented-source"], status: "cited" as const }],
-    };
-
-    expect(supportWarnings([block], new Set(["real-source"]))).toEqual(["Needs support: A factual assertion."]);
-    expect(normalizeClaimSupport([block], new Set(["real-source"]))[0].claims[0]).toMatchObject({ citationIds: [], status: "needs_support" });
-    expect(() => approveDraft({
-      id: "topic-v1-draft",
-      topicId: "topic",
-      versionNumber: 1,
-      status: "draft",
-      blocks: [block],
-      sourceIds: ["real-source"],
-      scoreNodeId: "biliary",
-      tags: [],
-      warnings: [],
-      createdAt: new Date().toISOString(),
-    }, "owner@example.com", new Set(["real-source"]))).toThrow(/support/i);
+  it("rejects a claim marked cited with no citations", () => {
+    const block: TopicBlock = { id: "b1", type: "prose", text: "Stones under 6 mm may pass.", claims: [{ id: "c1", text: "Stones under 6 mm may pass.", citationIds: [], status: "cited" }] };
+    expect(supportWarnings([block], sources)).toEqual(["Needs support: Stones under 6 mm may pass."]);
   });
 
-  it("requires an exact supported claim for every table row and flow node", () => {
-    const table = {
-      id: "table",
-      type: "table" as const,
-      columns: ["Feature", "Choice"],
-      rows: [["Small stone", "Transcystic"], ["Large stone", "Alternative route"]],
-      claims: [{ id: "claim", text: "The table describes stone choices.", citationIds: ["source"], status: "cited" as const }],
-    };
-    const flow = {
-      id: "flow",
-      type: "flow" as const,
-      nodes: [{ id: "one", label: "Stone found" }, { id: "two", label: "Clear the duct" }],
-      edges: [{ from: "one", to: "two" }],
-      claims: [{ id: "one", text: "Stone found", citationIds: ["source"], status: "cited" as const }],
-    };
-
-    expect(supportWarnings([table, flow], new Set(["source"]))).toEqual([
-      "Needs support: Small stone — Transcystic",
-      "Needs support: Large stone — Alternative route",
-      "Needs support: Clear the duct",
-    ]);
+  it("rejects extra claims hidden past the rendered units", () => {
+    const block: TopicBlock = { id: "b1", type: "references", heading: "Sources", sourceIds: ["src-1"], claims: [cited("A claim nothing renders.")] };
+    expect(supportWarnings([block], sources)).toEqual(["Needs support: A claim nothing renders."]);
   });
 
-  it("rejects extraneous claims hidden in non-factual blocks", () => {
-    const references = {
-      id: "references",
-      type: "references" as const,
-      sourceIds: ["source"],
-      claims: [{ id: "hidden", text: "A hidden assertion.", citationIds: ["source"], status: "cited" as const }],
-    };
-    expect(supportWarnings([references], new Set(["source"]))).toEqual(["Needs support: A hidden assertion."]);
-  });
-
-  it("strips a references block's sourceIds that fall outside the version's valid source IDs", () => {
-    const references = {
-      id: "references",
-      type: "references" as const,
-      sourceIds: ["real-source", "forged-source"],
-      claims: [],
-    };
-    expect(normalizeClaimSupport([references], new Set(["real-source"]))[0]).toMatchObject({ sourceIds: ["real-source"] });
-  });
-
-  it("blanks claim support and strips invalid reference sourceIds together", () => {
-    const summary = { id: "s", type: "summary" as const, text: "Fact.", claims: [{ id: "c", text: "Fact.", citationIds: ["real-source"], status: "cited" as const }] };
-    const references = { id: "r", type: "references" as const, sourceIds: ["real-source", "forged-source"], claims: [] };
-    const result = requireOwnerAttestation([summary, references], new Set(["real-source"]));
-    expect(result[0].claims[0]).toMatchObject({ citationIds: [], status: "needs_support" });
-    expect(result[1]).toMatchObject({ sourceIds: ["real-source"] });
+  it("requires one claim per table row and per flow node and edge label", () => {
+    const table: TopicBlock = { id: "t1", type: "table", columns: ["Route", "When"], rows: [["Transcystic", "Small stone"], ["Choledochotomy", "Large stone"]], claims: [cited("Transcystic — Small stone")] };
+    expect(supportWarnings([table], sources)).toEqual(["Needs support: Choledochotomy — Large stone"]);
+    const flow: TopicBlock = { id: "f1", type: "flow", nodes: [{ id: "a", label: "Suspected stone" }, { id: "b", label: "MRCP" }], edges: [{ from: "a", to: "b", label: "intermediate risk" }], claims: [] };
+    expect(supportWarnings([flow], sources)).toEqual(["Needs support: Suspected stone", "Needs support: MRCP", "Needs support: intermediate risk"]);
   });
 
   it("requires support for rendered image alt text and captions", () => {
-    const image = { id: "image", type: "image" as const, mediaId: "media", alt: "Operative anatomy.", caption: "The duct lies medially.", claims: [] };
-    expect(supportWarnings([image], new Set(["source"]))).toEqual(["Needs support: Operative anatomy.", "Needs support: The duct lies medially."]);
+    const block: TopicBlock = { id: "i1", type: "image", mediaId: "m1", alt: "Biliary anatomy", caption: "Cystic duct insertion", claims: [] };
+    expect(factualUnits(block)).toEqual(["Biliary anatomy", "Cystic duct insertion"]);
+    expect(supportWarnings([block], sources)).toHaveLength(2);
   });
 
-  it("allocates a restore after the highest existing version", () => {
-    const restored = restoreVersion(choledocholithiasisTopic.approvedVersion!, 4);
-    expect(restored.versionNumber).toBe(5);
-    expect(restored.id).toContain("v5-draft");
+  it("keeps every authored topic in the shipped library source-linked", () => {
+    for (const topic of demoTopics) {
+      const version = topic.approvedVersion!;
+      expect(supportWarnings(version.blocks, new Set(version.sourceIds)), topic.slug).toEqual([]);
+    }
   });
 });
