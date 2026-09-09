@@ -579,7 +579,7 @@ describe("TopicsPage", () => {
 });
 ```
 
-The `TaxonomyNode` import is still needed by the inline arrays' inferred type; keep it.
+Drop the `TaxonomyNode` import. The old file needed it for a locally-typed `const taxonomy: TaxonomyNode[] = [...]`; this version passes bare array literals straight into `readTaxonomy.mockReturnValue([...])`, whose shape TypeScript infers contextually from `listTaxonomy`'s declared return type. Left in place it is unused, and `eslint --max-warnings=0` fails on it. Keep the `Topic` import — the `topic()` helper uses it.
 
 - [ ] **Step 7: Rewrite the resume test**
 
@@ -666,10 +666,12 @@ node node_modules/typescript/bin/tsc --noEmit && echo TYPES_OK
 ```
 
 ```bash
-git add src/app/topics src/components/topics-resume.tsx && git commit -m "refactor(topics): prerender topic routes from the static library
+git add src/app/topics src/components/topics-resume.tsx src/components/__tests__/topics-resume.test.tsx && git commit -m "refactor(topics): prerender topic routes from the static library
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
+
+The resume test lives under `src/components/__tests__/`, which neither of the other two paths reaches — omit it and Step 7's rewrite is left unstaged.
 
 ---
 
