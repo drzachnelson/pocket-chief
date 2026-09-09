@@ -336,16 +336,13 @@ figcaption { margin-top: var(--space-3); padding-left: var(--space-3); border-le
 .block-heading h2 { font-size: var(--text-lg); line-height: 1.25; letter-spacing: -.02em; }
 /* Level 3 lands at body size; weight and the bracket rule carry the demotion, not size. */
 .block-heading h3, .topic-block[data-level="3"] .block-heading h2 { font-size: var(--text-md); line-height: 1.35; letter-spacing: 0; }
-/* .block-heading > div is the actions group in the reading view but the TITLE group in
-   draft-review, so it must stay shrinkable. Only .block-actions is pinned. */
+/* .block-heading > div is the actions group and must stay shrinkable next to a long heading.
+   Only .block-actions is pinned. */
 .block-heading > div { display: flex; align-items: center; gap: 7px; }
 .block-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 7px; }
 .support-mark { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 4px; color: var(--ink-faint); font-size: var(--text-2xs); }
 .support-mark.supported svg { color: var(--green); }
 .support-mark.unsupported { color: var(--amber); }
-.anki-inline { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 4px var(--space-2); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-faint); font-size: var(--text-2xs); cursor: pointer; }
-.anki-inline::after { content: ""; position: absolute; inset: -11px 0; }
-.anki-inline:hover { background: var(--surface-strong); color: var(--cobalt-dark); }
 
 /* Callouts. One idiom, four tones: hairline box, 3px gutter strip, tinted ground. */
 .summary-block, .warning-block { --callout: var(--cobalt); --callout-soft: var(--cobalt-soft); margin: var(--space-6) 0; padding: var(--space-5) var(--space-5) var(--space-5) var(--space-4); border: 1px solid color-mix(in srgb, var(--callout) 24%, var(--line)); border-left: 3px solid var(--callout); border-radius: var(--radius-md); background: var(--callout-soft); }
@@ -408,14 +405,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 .history-list article { align-items: center; }.history-list .status-dot { color: var(--green); background: var(--green); }
 
 
-.anki-dialog { position: fixed; z-index: var(--z-dialog); inset: auto 10px max(10px, env(safe-area-inset-bottom)); width: min(620px, calc(100% - 20px)); max-height: calc(100vh - 40px); overflow-y: auto; margin: 0 auto; padding: 18px; border: 1px solid var(--line-strong); border-radius: 15px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 90px rgb(0 0 0 / .35); }
-.anki-dialog::backdrop { background: rgb(7 12 24 / .45); backdrop-filter: blur(3px); }
-.dialog-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }.dialog-head h2 { margin: 0; font-size: 18px; }.dialog-head .eyebrow { margin-bottom: 2px; }
-.context-preview { margin: 15px 0; padding: 13px; border-left: 3px solid var(--cobalt); border-radius: 8px; background: var(--cobalt-soft); }.context-preview small, .context-preview strong { display: block; }.context-preview small { color: var(--cobalt-dark); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }.context-preview strong { margin-top: 4px; font-size: 12px; }.context-preview p { margin: 3px 0 0; color: var(--ink-muted); font-size: 11px; }
-.anki-dialog textarea { min-height: 110px; }.dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
-.support-confirm { display: grid; justify-items: start; gap: 9px; margin-top: 13px; padding: 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--cobalt-soft); }
-.support-confirm label { display: flex; align-items: flex-start; gap: 8px; color: var(--ink-muted); font-size: 11px; line-height: 1.45; }
-.support-confirm input { width: 14px; height: 14px; margin-top: 1px; accent-color: var(--cobalt); }
 .taxonomy-card { grid-column: 1 / -1; }
 .taxonomy-editor-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 7px; margin: 14px 0; }
 .taxonomy-editor-list button { display: flex; justify-content: space-between; align-items: center; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-strong); color: var(--ink-muted); font: inherit; font-size: 11px; cursor: pointer; }
@@ -453,14 +442,12 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .flow-node strong { font-size: var(--text-sm); line-height: 1.4; }
   .flow-edge-label { max-width: 124px; padding-inline: 4px; font-size: 8px; letter-spacing: .035em; }
   .support-mark { font-size: 9px; }
-  .anki-inline { font-size: 9px; }
 }
 
 @media (min-width: 760px) {
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .main-content { padding: 38px 32px 80px; }
   .settings-grid { grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); }
-  .anki-dialog { inset: 50% auto auto 50%; transform: translate(-50%, -50%); }
 }
 
 @media (min-width: 980px) {

@@ -124,7 +124,9 @@ describe("seeded content contract", () => {
     }
   });
 
-  it("keeps markup out of the text Anki exports", () => {
+  // decision-flow.tsx builds its accessible edge descriptions from stripped labels, so a marker
+  // that survives stripping is read aloud verbatim.
+  it("strips every inline marker without emptying a factual unit", () => {
     for (const [label, block] of eachBlock()) {
       for (const unit of factualUnits(block)) {
         const stripped = stripMarkup(unit);

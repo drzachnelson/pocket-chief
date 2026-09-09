@@ -120,20 +120,3 @@ export interface TopicDraftInput {
   scoreNodeId: string;
   tags: string[];
 }
-
-export interface ClozeDraft {
-  id: string;
-  clozeText: string;
-  additionalContext: string;
-  sourceBlockIds: string[];
-  contextImageRef: string;
-  tags: string[];
-  duplicateHash: string;
-}
-
-export interface AnkiSettings {
-  deck: string;
-  noteType: string;
-  tagPrefix: string;
-  fieldMap?: { text: string; extra: string };
-}

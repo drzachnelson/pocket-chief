@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from "vitest";
 import { TopicContent } from "@/components/topic-content";
 import type { Topic, TopicBlock, TopicVersion } from "@/lib/types";
 
-vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 vi.mock("@/lib/offline", () => ({ isTopicSaved: async () => false, recordRecentView: async () => undefined, setTopicSaved: async () => undefined }));
 
 const claim = (text: string) => ({ id: `c-${text.slice(0, 8)}`, text, citationIds: ["s1"], status: "cited" as const });
@@ -54,18 +53,11 @@ describe("renderer redesign", () => {
     expect(nested.children.length).toBe(1);
     expect(nested.children[0].getAttribute("data-depth")).toBe("1");
     expect(nested.children[0].querySelector("ul.clinical-list-nested > li")!.getAttribute("data-depth")).toBe("2");
-    expect(screen.getByLabelText("Make Anki card from Deep one")).toBeInTheDocument();
 
     const warning = container.querySelector("section.warning-block")!;
     expect(warning.tagName).toBe("SECTION");
     expect(warning.classList.contains("tone-danger")).toBe(true);
     expect(warning.querySelector(".block-heading .callout-icon")).not.toBeNull();
-
-    // Anki button inside a summary must not toggle the section.
-    const ankiInSummary = details[0].querySelector("button.anki-inline")!;
-    fireEvent.click(ankiInSummary);
-    expect((details[0] as HTMLDetailsElement).open).toBe(true);
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
   it("collapses and re-expands every section", () => {
@@ -117,5 +109,12 @@ describe("renderer redesign", () => {
     expect(diagram!.querySelectorAll(".flow-relationship")).toHaveLength(flow.edges.length);
     expect(diagram).not.toHaveTextContent("Compare the source-linked paths");
     expect(diagram).not.toHaveTextContent("Then");
+  });
+
+  it("offers no flashcard affordance anywhere in the reading view", () => {
+    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    expect(container.querySelector("button.anki-inline")).toBeNull();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.queryByText(/anki/i)).not.toBeInTheDocument();
   });
 });
