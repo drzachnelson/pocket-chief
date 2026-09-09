@@ -2,19 +2,18 @@ import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SearchExperience } from "@/components/search-experience";
 import { loadLibrary } from "@/lib/library-client";
-import { getRecentTopics, getSavedTopics, setTopicSaved } from "@/lib/offline";
+import { getRecentTopics, getSavedTopics } from "@/lib/offline";
 import type { Library } from "@/lib/library-client";
 import type { Topic } from "@/lib/types";
 
 let searchParams = new URLSearchParams();
 vi.mock("next/navigation", () => ({ useSearchParams: () => searchParams }));
 vi.mock("@/lib/library-client", () => ({ loadLibrary: vi.fn() }));
-vi.mock("@/lib/offline", () => ({ getRecentTopics: vi.fn(), getSavedTopics: vi.fn(), setTopicSaved: vi.fn() }));
+vi.mock("@/lib/offline", () => ({ getRecentTopics: vi.fn(), getSavedTopics: vi.fn() }));
 
 const readLibrary = vi.mocked(loadLibrary);
 const readRecent = vi.mocked(getRecentTopics);
 const readSaved = vi.mocked(getSavedTopics);
-const writeSaved = vi.mocked(setTopicSaved);
 
 function topic(id: string, title: string, scoreNodeId: string): Topic {
   return {
@@ -39,7 +38,6 @@ beforeEach(() => {
   readLibrary.mockResolvedValue({ topics: [], taxonomy: [] });
   readRecent.mockResolvedValue([]);
   readSaved.mockResolvedValue([]);
-  writeSaved.mockResolvedValue(undefined);
 });
 
 afterEach(() => { vi.clearAllMocks(); });
