@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import TopicPage from "@/app/topics/[slug]/page";
-import { getTopicBySlug, listTaxonomy } from "@/lib/library";
+import TopicPage, { generateStaticParams } from "@/app/topics/[slug]/page";
+import { getTopicBySlug, listTaxonomy, listTopics } from "@/lib/library";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
 vi.mock("@/lib/library", () => ({ getTopicBySlug: vi.fn(), listSources: vi.fn(() => []), listTaxonomy: vi.fn(), listTopics: vi.fn(() => []) }));
@@ -9,6 +9,7 @@ vi.mock("@/components/topic-content", () => ({ TopicContent: () => <div data-tes
 
 const readTopic = vi.mocked(getTopicBySlug);
 const readTaxonomy = vi.mocked(listTaxonomy);
+const readTopics = vi.mocked(listTopics);
 
 const taxonomy: TaxonomyNode[] = [
   { id: "score", title: "SCORE Curriculum", slug: "score", order: 0 },
@@ -33,5 +34,15 @@ describe("TopicPage", () => {
     expect(screen.getByText("Last updated Aug 20, 2026")).toBeInTheDocument();
     expect(screen.queryByLabelText("Breadcrumb")).not.toBeInTheDocument();
     expect(screen.queryByText("airway")).not.toBeInTheDocument();
+  });
+});
+
+// The static export has no server to resolve a slug, so this list *is* the set of pages that
+// exist. A wrong key or shape here fails at `next build` in Task 11, far from where it was written.
+describe("generateStaticParams", () => {
+  it("returns one param object per topic the library lists", () => {
+    readTopics.mockReturnValue([topic, { ...topic, id: "escharotomy", slug: "escharotomy" }]);
+
+    expect(generateStaticParams()).toEqual([{ slug: "neck-trauma" }, { slug: "escharotomy" }]);
   });
 });

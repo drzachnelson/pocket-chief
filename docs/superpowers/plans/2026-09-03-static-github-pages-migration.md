@@ -36,6 +36,8 @@
 1. **Anki export is gone entirely** — the per-block "Make Anki" buttons, the cloze dialog, the AnkiMobile URL scheme, AnkiConnect, the TSV fallback, and the Settings preferences for deck and field mapping. Flashcards now come from handing the published page URL to an assistant. This is a deliberate product decision, not an oversight; nothing in the plan restores it.
 2. **Response headers are gone.** GitHub Pages cannot set `X-Robots-Tag` or `Referrer-Policy`, and `headers()` is silently inert under `output: "export"`. Task 11 replaces them with `robots.txt` plus the `<meta name="robots">` the root layout already emits. If the repository is made public, treat the content as world-readable — the topics derive from licensed SCORE and Fiser material, and `noindex` is a crawler request, not access control.
 
+3. **"Resume topic" stops syncing across devices.** `SupabaseRepository.listRecentTopics` read a server-side `recent_views` table, so opening the app on a second device resumed the topic you last read on any device. Reading history is now per-device IndexedDB only: a device with an empty cache resumes at the curriculum's first topic instead. Unavoidable without a server, and the fallback is sensible, but it is a real capability loss rather than a pure refactor.
+
 **Explicitly out of scope:** re-authoring `src/content/topics/choledocholithiasis.ts` through the `sourced()` helper. Its byte-pinning constraint disappears with the SQL, but rewriting it is a content change, not a migration change.
 
 ---
@@ -1752,6 +1754,14 @@ Disallow: /
 ```
 
 The `url` must stay the bare origin — a localhost preview URL may not carry a path. Navigate to `/pocket-chief/` once the pane opens.
+
+- [ ] **Step 6b: Memoize the library reads before building**
+
+Measured during Task 4: one build pass over the `/topics` tree calls `listTopics()` and friends **95 times**, each `structuredClone`ing the full ~2.7 MB library — the layout re-runs once per generated route, and each topic page also clones the library again for `buildLinkIndex`. That is ~380 ms of pure duplicate work at 46 topics, and it grows roughly quadratically with the library.
+
+Wrap the reads in React's `cache()` so each static-generation pass shares one clone. In `src/lib/library.ts`, import `cache` from `react` and wrap `listTopics`, `getTopicBySlug`, `listTaxonomy`, and `listSources`. `cache()` is scoped to a single render pass, so the 47 independent page generations stay isolated from each other — no cross-page state leaks.
+
+Run `node node_modules/vitest/vitest.mjs run src/lib/__tests__/library.test.ts src/lib/__tests__/library-approval.test.ts` afterwards; both must still pass, since `cache()` must not change return values.
 
 - [ ] **Step 7: Build the static export**
 
