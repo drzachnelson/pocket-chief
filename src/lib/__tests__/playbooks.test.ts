@@ -45,6 +45,21 @@ describe("playbook library", () => {
     // sentence to the Crohn topic. An auto-link is a clinical claim about relatedness, so new
     // ones fail here until someone looks at them rather than surfacing in the browser.
     const expected: Record<string, string[]> = {
+      // Reviewed and kept: the anatomy and the hostile-neck factor genuinely belong to those
+      // topics. Rejected on review: "a fast one" reached the FAST exam, and "skip lesions"
+      // reached Crohn disease. Both were reworded rather than accepted.
+      "carotid-endarterectomy-bovine-patch": [
+        "common facial vein -> neck-injuries-management",
+        "recurrent laryngeal nerve -> neck-injuries-management",
+        "tracheostomy -> airway-access-intubation-and-surgical-airways",
+      ],
+      "femoropopliteal-bypass": [
+        "Compartment syndrome -> fasciotomy",
+        "Fasciotomy -> fasciotomy",
+        "Rhabdomyolysis -> fasciotomy",
+        "fasciotomy -> fasciotomy",
+        "four-compartment fasciotomy -> fasciotomy",
+      ],
       "temporal-artery-biopsy": [],
     };
     const entries = buildLinkIndex(listTopics());
