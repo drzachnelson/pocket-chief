@@ -74,4 +74,18 @@ describe("playbook library", () => {
       expect([...linked].sort(), playbook.slug).toEqual(expected[playbook.slug] ?? []);
     }
   });
+
+  it("does not match a playbook on anatomy from a different operation", () => {
+    // Search is the cheapest detector of copy-paste between guides. "Control the common carotid
+    // up to the inguinal ligament" survived review in the femoropopliteal draft and only
+    // surfaced because searching "carotid" returned the leg bypass.
+    //
+    // Asserted as absences, not exact result sets: "carotid" legitimately matches the temporal
+    // artery guide, because the superficial temporal artery is a branch of the external carotid.
+    const slugs = (query: string) => searchPlaybookLibrary(query).map((playbook) => playbook.slug);
+    expect(slugs("carotid")).not.toContain("femoropopliteal-bypass");
+    expect(slugs("saphenous")).not.toContain("carotid-endarterectomy-bovine-patch");
+    expect(slugs("saphenous")).not.toContain("temporal-artery-biopsy");
+    expect(slugs("Pitanguy")).toEqual(["temporal-artery-biopsy"]);
+  });
 });
