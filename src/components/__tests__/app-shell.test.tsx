@@ -21,11 +21,12 @@ describe("AppShell", () => {
     expect(screen.queryByRole("link", { name: "Topics" })).not.toBeInTheDocument();
   });
 
-  it("renders three reader destinations without Add", () => {
+  it("renders four reader destinations without Add", () => {
     pathname = "/topics";
     render(<AppShell><p>Content</p></AppShell>);
     expect(screen.getAllByRole("link", { name: /search/i }).length).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "Topics" })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /playbooks/i }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("link", { name: /saved/i }).length).toBeGreaterThan(0);
     expect(screen.queryByRole("link", { name: /add/i })).not.toBeInTheDocument();
     expect(screen.getByText("Content")).toBeInTheDocument();

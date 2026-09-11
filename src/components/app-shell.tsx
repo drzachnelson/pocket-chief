@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, ShieldCheck } from "@phosphor-icons/react";
+import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, ShieldCheck, Steps } from "@phosphor-icons/react";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -15,6 +15,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const primaryNavigation = [
   { href: "/", label: "Search", icon: MagnifyingGlass },
   { href: "/topics", label: "Topics", icon: Notebook },
+  { href: "/playbooks", label: "Playbooks", icon: Steps },
   { href: "/saved", label: "Saved", icon: BookmarkSimple },
 ];
 

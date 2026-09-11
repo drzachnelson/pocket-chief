@@ -15,14 +15,29 @@ test("search, read, and save a topic", async ({ page }) => {
   await expect(page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
 });
 
-test("mobile navigation exposes three primary destinations", async ({ page }) => {
+test("mobile navigation exposes four primary destinations", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("./");
   const navigation = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(navigation.getByRole("link", { name: "Search" })).toBeVisible();
   await expect(navigation.getByRole("link", { name: "Topics" })).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Playbooks" })).toBeVisible();
   await expect(navigation.getByRole("link", { name: "Saved" })).toBeVisible();
   await expect(navigation.getByRole("link", { name: "Add" })).toHaveCount(0);
+});
+
+test("browses to a playbook and reads its steps", async ({ page }) => {
+  await page.goto("./playbooks/");
+  await expect(page.getByRole("heading", { name: "Playbooks", level: 1 })).toBeVisible();
+  await page.getByRole("link", { name: /Temporal Artery Biopsy/ }).click();
+  await expect(page.getByRole("heading", { name: "Temporal Artery Biopsy", level: 1 })).toBeVisible();
+  await expect(page.getByText("Vascular · Open")).toBeVisible();
+  // Sections ship collapsed, so the step titles are only reachable once the reader opens them.
+  await page.getByRole("button", { name: "Open all" }).click();
+  await expect(page.getByText("Ligate and excise")).toBeVisible();
+  // A playbook has no version list and nothing to bookmark yet.
+  await expect(page.getByRole("tab", { name: /History/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Save" })).toHaveCount(0);
 });
 
 test("topics index searches the grouped curriculum and offers an alphabetical view", async ({ page }) => {

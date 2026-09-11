@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { getPlaybookBySlug, listPlaybooks, listTaxonomy, searchPlaybookLibrary } from "@/lib/library";
+import { getPlaybookBySlug, listPlaybooks, listTaxonomy, listTopics, searchPlaybookLibrary } from "@/lib/library";
+import { buildLinkIndex, createLinkScope, parseInline } from "@/lib/inline";
+import { factualUnits } from "@/lib/editorial";
 import { taxonomy } from "@/lib/seed";
 
 describe("playbook library", () => {
@@ -34,5 +36,27 @@ describe("playbook library", () => {
     // of intent behind them.
     expect(listTaxonomy()).toEqual(taxonomy);
     for (const playbook of listPlaybooks()) expect(playbook).not.toHaveProperty("scoreNodeId");
+  });
+
+  it("cross-links only into topics a reviewer has signed off on", () => {
+    // Playbooks render against the topic link index, and topic aliases are domain-specific.
+    // "skip lesions" is a legitimate Crohn alias and means something else entirely in giant
+    // cell arteritis — the first draft of the biopsy guide silently linked a vasculitis
+    // sentence to the Crohn topic. An auto-link is a clinical claim about relatedness, so new
+    // ones fail here until someone looks at them rather than surfacing in the browser.
+    const expected: Record<string, string[]> = {
+      "temporal-artery-biopsy": [],
+    };
+    const entries = buildLinkIndex(listTopics());
+    for (const playbook of listPlaybooks()) {
+      const linked = new Set<string>();
+      for (const block of playbook.blocks) {
+        const scope = createLinkScope(entries, playbook.slug);
+        for (const unit of factualUnits(block)) {
+          for (const piece of parseInline(unit, scope)) if (piece.slug) linked.add(`${piece.text} -> ${piece.slug}`);
+        }
+      }
+      expect([...linked].sort(), playbook.slug).toEqual(expected[playbook.slug] ?? []);
+    }
   });
 });

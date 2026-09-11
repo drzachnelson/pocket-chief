@@ -1,5 +1,5 @@
 import { cacheApprovedTopic, cacheTaxonomy, getCachedTaxonomy, getCachedTopics } from "@/lib/offline";
-import type { TaxonomyNode, Topic } from "@/lib/types";
+import type { Playbook, TaxonomyNode, Topic } from "@/lib/types";
 
 export interface Library { topics: Topic[]; taxonomy: TaxonomyNode[] }
 
@@ -45,3 +45,25 @@ export async function loadLibrary(): Promise<Library> {
     });
   return inFlight;
 }
+
+export interface PlaybookLibrary { playbooks: Playbook[] }
+
+let playbooksInFlight: Promise<PlaybookLibrary> | undefined;
+
+/**
+ * The playbook mirror of `loadLibrary`, memoized and single-flighted the same way. It is loaded
+ * on demand rather than by OfflineHydrator, so a reader who never opens a playbook never pays
+ * for one; the service worker precache is what makes a cold offline start work regardless.
+ */
+export async function loadPlaybooks(): Promise<PlaybookLibrary> {
+  playbooksInFlight ??= (async () => {
+    const response = await fetch(`${basePath}/playbooks.json`);
+    if (!response.ok) throw new Error("The playbooks asset is unavailable.");
+    return await response.json() as PlaybookLibrary;
+  })().catch(() => {
+    playbooksInFlight = undefined; // same reasoning as loadLibrary: only these awaiters see the empty result, the next call retries
+    return { playbooks: [] as Playbook[] };
+  });
+  return playbooksInFlight;
+}
+

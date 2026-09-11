@@ -45,6 +45,14 @@ jobs:
       - name: Fail if the library asset did not export
         run: test -s out/library.json && node -e "const l=require('./out/library.json');if(!l.topics?.length)process.exit(1)"
 
+      - name: Fail if the playbooks asset did not export
+        run: test -s out/playbooks.json && node -e "const p=require('./out/playbooks.json');if(!p.playbooks?.length)process.exit(1)"
+
+      # Every playbook is a prerendered directory. Pages has no server to resolve a slug, so a
+      # missing one is a 404 the dev server would have happily served.
+      - name: Fail if a playbook page did not prerender
+        run: node -e "const {existsSync}=require('fs');const p=require('./out/playbooks.json');const missing=p.playbooks.filter(b=>!existsSync('out/playbooks/'+b.slug+'/index.html'));if(missing.length){console.error('not prerendered:',missing.map(b=>b.slug).join(', '));process.exit(1)}"
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

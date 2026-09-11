@@ -37,10 +37,10 @@ const blocks: TopicBlock[] = [
     heading: "Diagnostic yield",
     items: [
       "Sensitivity is roughly 68 to 77 per cent; specificity approaches 100 per cent.",
-      "Reported false-negative rates range from 9 to 61 per cent, driven by skip lesions, short specimens and prior steroid exposure.",
+      "Reported false-negative rates range from 9 to 61 per cent, driven by skip areas, short specimens and prior steroid exposure.",
       "A negative biopsy does not exclude the disease — biopsy-negative giant cell arteritis is reported in up to about 40 per cent.",
       "Take a single side first; reserve bilateral biopsy for symptoms that do not lateralise, or a negative result with persistent suspicion.",
-      "Harvest more than 1 cm, because the arteritis is focal and segmental; many authors target 2 to 3 cm to offset skip lesions and fixation shrinkage.",
+      "Harvest more than 1 cm, because the arteritis is focal and segmental; many authors target 2 to 3 cm to offset skip areas and fixation shrinkage.",
     ],
   }, SOURCE),
 
