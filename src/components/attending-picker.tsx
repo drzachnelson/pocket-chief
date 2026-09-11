@@ -56,7 +56,7 @@ export function AttendingPicker({ attendings, selectedId, onSelect, onCreate }: 
         <p className="eyebrow">Whose preferences?</p>
         <div className="field">
           <label htmlFor="attending-name">Attending</label>
-          <input id="attending-name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Alvarez" autoComplete="off" />
+          <input id="attending-name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Surname" autoComplete="off" />
         </div>
         <div className="field">
           <label htmlFor="attending-hospital">Hospital</label>
