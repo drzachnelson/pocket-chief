@@ -1,7 +1,7 @@
 import { cache } from "react";
-import { libraryTopics, suppliedSources, taxonomy } from "@/content";
-import { searchTopics } from "@/lib/search";
-import type { SuppliedSource, TaxonomyNode, Topic } from "@/lib/types";
+import { libraryPlaybooks, libraryTopics, suppliedSources, taxonomy } from "@/content";
+import { searchPlaybooks, searchTopics } from "@/lib/search";
+import type { Playbook, SuppliedSource, TaxonomyNode, Topic } from "@/lib/types";
 
 // The library is the content authored in `src/content/`, read straight out of the module graph at
 // build time. There is no database, no request context and no async boundary: a server component,
@@ -23,3 +23,9 @@ export const listTaxonomy = cache((): TaxonomyNode[] => structuredClone(taxonomy
 export const listSources = cache((ids?: string[]): SuppliedSource[] => structuredClone(ids ? suppliedSources.filter((source) => ids.includes(source.id)) : suppliedSources));
 
 export function searchLibrary(query: string): Topic[] { return structuredClone(searchTopics(query, approved())); }
+
+/** Playbooks ship approved-only, so there is no version filter to apply — unlike topics. */
+export const listPlaybooks = cache((): Playbook[] => structuredClone(libraryPlaybooks));
+export const getPlaybookBySlug = cache((slug: string): Playbook | null => structuredClone(libraryPlaybooks.find((playbook) => playbook.slug === slug) ?? null));
+export function searchPlaybookLibrary(query: string): Playbook[] { return structuredClone(searchPlaybooks(query, libraryPlaybooks)); }
+

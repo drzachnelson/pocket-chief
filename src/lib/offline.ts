@@ -9,8 +9,18 @@ export function shouldReplaceCachedTopic(cachedVersion: number | undefined, inco
 
 let databasePromise: Promise<IDBPDatabase> | undefined;
 
-function db() {
-  databasePromise ??= openDB(DB_NAME, 2, {
+/** Long enough for a real upgrade to finish, short enough that a wedged tab is not forever. */
+const OPEN_TIMEOUT_MS = 3000;
+export const STORAGE_BUSY_MESSAGE = "Private storage is busy in another Pocket Chief tab. Close the others and reload.";
+
+let storageBlocked = false;
+/** True once an open has been blocked by another tab. The UI uses it to say which tab to close. */
+export function isStorageBlocked(): boolean { return storageBlocked; }
+
+async function openPrivateDatabase(): Promise<IDBPDatabase> {
+  let handle: IDBPDatabase | undefined;
+  let abandoned = false;
+  const opening = openDB(DB_NAME, 2, {
     upgrade(database) {
       // Keep upgrades additive: existing users may already have data in any of these
       // stores, so never recreate an object store when moving from an older version.
@@ -20,7 +30,31 @@ function db() {
       if (!database.objectStoreNames.contains("recent")) database.createObjectStore("recent", { keyPath: "id" });
       if (!database.objectStoreNames.contains("reviewed")) database.createObjectStore("reviewed", { keyPath: "id" });
     },
-  }).catch((error) => { databasePromise = undefined; throw error; });
+    // Our open is waiting on another tab that still holds an older version.
+    blocked() { storageBlocked = true; },
+    // The mirror image: another tab wants to upgrade and this connection is what stands in its
+    // way. Close so its upgrade can run, and drop the memo so the next call reopens.
+    blocking() { handle?.close(); handle = undefined; databasePromise = undefined; },
+  });
+  // Registered before the race so `handle` is set before anything can call `blocking`, and so a
+  // connection that opens after we have given up gets closed rather than leaked.
+  void opening.then((database) => { if (abandoned) database.close(); else handle = database; }, () => undefined);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    // A blocked open neither resolves nor rejects. Without this every awaiting caller hangs
+    // forever, which is worse than a failure they can retry or report.
+    const database = await Promise.race([opening, new Promise<never>((_, reject) => {
+      timer = setTimeout(() => { abandoned = true; storageBlocked = true; reject(new Error(STORAGE_BUSY_MESSAGE)); }, OPEN_TIMEOUT_MS);
+    })]);
+    storageBlocked = false;
+    return database;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+function db() {
+  databasePromise ??= openPrivateDatabase().catch((error) => { databasePromise = undefined; throw error; });
   return databasePromise;
 }
 

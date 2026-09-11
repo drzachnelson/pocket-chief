@@ -45,6 +45,14 @@ export const SCORE_PERCUTANEOUS_BREAST_BIOPSY_SOURCE = "00000000-0000-4000-8000-
 export const FISER_BREAST_SOURCE = "00000000-0000-4000-8000-000000002202";
 export const ACR_BIRADS_SOURCE = "00000000-0000-4000-8000-000000002203";
 
+// Playbooks. Operative guides, numbered from 3000 so they never collide with topic sources.
+export const TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003000";
+export const CEA_BOVINE_PATCH_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003001";
+export const SVS_CAROTID_2022_SOURCE = "00000000-0000-4000-8000-000000003002";
+export const FEMPOP_BYPASS_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003003";
+export const ACC_AHA_PAD_2024_SOURCE = "00000000-0000-4000-8000-000000003004";
+export const ESC_ESVS_PAD_2024_SOURCE = "00000000-0000-4000-8000-000000003005";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: CHOLEDOCHOLITHIASIS_SOURCE,
@@ -515,5 +523,53 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "American College of Radiology. ACR BI-RADS Atlas: Breast Imaging Reporting and Data System, 5th edition. Reston, VA: American College of Radiology.",
     suppliedAt: "2026-08-25T00:00:00.000Z",
     details: "Registered during review as the authority behind the assessment categories the packet tabulates. Where the packet and the SCORE module state the category 4 and 5 boundary differently - the packet uses the atlas convention of greater than 2% to less than 95% for category 4 and 95% or greater for category 5, while SCORE writes 2% to 94% and more than 94% - the atlas convention is carried.",
+  },
+  {
+    id: TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE,
+    title: "User-supplied temporal artery biopsy attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook supplied to Pocket Chief, September 10, 2026.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "The document names the 2021 ACR/Vasculitis Foundation guideline, the EULAR recommendations, the 2022 ACR/EULAR classification criteria and the GAME study, but supplies no bibliography — its tables cite bracketed numbers with no key. The bracket numbers are dropped here rather than reproduced without a reference list, and the whole guide is cited to the supplied document rather than to works the owner did not supply.",
+  },
+  {
+    id: CEA_BOVINE_PATCH_PLAYBOOK_SOURCE,
+    title: "User-supplied carotid endarterectomy procedure guide",
+    kind: "user_notes",
+    citation: "Procedure guide for carotid endarterectomy with bovine pericardial patch angioplasty, supplied to Pocket Chief, September 10, 2026.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "Carries inline author-year attributions rather than a numbered bibliography. The named societies are registered separately where a block leans on one of them specifically; everything else is cited to this document.",
+  },
+  {
+    id: SVS_CAROTID_2022_SOURCE,
+    title: "Society for Vascular Surgery carotid disease guideline and implementation document",
+    kind: "article",
+    citation: "Society for Vascular Surgery clinical practice guidelines and implementation document on extracranial cerebrovascular disease, 2022.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "Registered during review as the authority the supplied guide attributes its selection thresholds, timing windows and cranial-nerve figures to. Identified from that document rather than supplied directly, so page-level detail was not available.",
+  },
+  {
+    id: FEMPOP_BYPASS_PLAYBOOK_SOURCE,
+    title: "User-supplied femoropopliteal bypass attending playbook",
+    kind: "user_notes",
+    citation: "Attending-level procedure playbook for open femoropopliteal bypass, supplied to Pocket Chief, September 10, 2026.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "The most fully referenced of the three supplied guides, with a closing source list. The two society guidelines it leans on hardest are registered separately; trial-level claims such as BEST-CLI and BASIL-2 are cited to this document, which is what was supplied.",
+  },
+  {
+    id: ACC_AHA_PAD_2024_SOURCE,
+    title: "ACC/AHA lower extremity peripheral artery disease guideline",
+    kind: "article",
+    citation: "Gornik HL, et al. 2024 ACC/AHA guideline for the management of lower extremity peripheral artery disease. Journal of the American College of Cardiology, 2024.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "Registered during review as the authority behind the conduit and revascularization class recommendations the supplied playbook quotes. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: ESC_ESVS_PAD_2024_SOURCE,
+    title: "ESC/ESVS peripheral arterial and aortic disease guideline",
+    kind: "article",
+    citation: "Mazzolai L, et al. 2024 ESC guidelines for the management of peripheral arterial and aortic diseases. European Heart Journal, 2024.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "Registered during review as the European counterpart the supplied playbook cites where it differs from ACC/AHA — notably the endovascular-first position for shorter femoropopliteal occlusions. Identified from that playbook rather than supplied directly.",
   },
 ];

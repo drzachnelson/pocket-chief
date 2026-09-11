@@ -101,4 +101,15 @@ describe("loadLibrary", () => {
     const loadLibrary = await freshLoadLibrary();
     await expect(loadLibrary()).resolves.toEqual({ topics: [], taxonomy });
   });
+
+  it("returns the fetched library even when a cache write never settles", async () => {
+    // The bug this guards: seeding used to be awaited, and a blocked IndexedDB open neither
+    // resolves nor rejects, so `.catch()` could not rescue it. Search stayed empty forever
+    // even though library.json had downloaded fine. Before the fix this test times out.
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify(shippedLibrary), { status: 200 })));
+    cacheTaxonomy.mockReturnValue(new Promise(() => {}));
+    cacheApprovedTopic.mockReturnValue(new Promise(() => {}));
+    const loadLibrary = await freshLoadLibrary();
+    await expect(loadLibrary()).resolves.toEqual(shippedLibrary);
+  });
 });

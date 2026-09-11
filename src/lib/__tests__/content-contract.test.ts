@@ -1,19 +1,26 @@
 import { describe, expect, it } from "vitest";
 import { factualUnits, supportWarnings } from "@/lib/editorial";
 import { stripMarkup } from "@/lib/inline";
-import { libraryTopics, suppliedSources, taxonomy } from "@/lib/seed";
+import { libraryPlaybooks, libraryTopics, suppliedSources, taxonomy } from "@/lib/seed";
 import { taxonomyAncestry } from "@/lib/taxonomy";
 import type { Topic, TopicBlock } from "@/lib/types";
 
 const blocksOf = (topic: Topic) => topic.approvedVersion!.blocks;
-const eachBlock = (): Array<[string, TopicBlock]> => libraryTopics.flatMap((topic) => blocksOf(topic).map((block) => [`${topic.slug}/${block.id}`, block] as [string, TopicBlock]));
+
+// Every invariant below walks both corpora. Playbooks reuse TopicBlock, so the renderer keys,
+// the inline markup rules and the claim-support invariant apply to them identically — the only
+// thing that differs is where the blocks and the source allow-list hang off the entity.
+const authored: Array<{ label: string; blocks: TopicBlock[]; sourceIds: string[] }> = [
+  ...libraryTopics.map((topic) => ({ label: topic.slug, blocks: blocksOf(topic), sourceIds: topic.approvedVersion!.sourceIds })),
+  ...libraryPlaybooks.map((playbook) => ({ label: `playbooks/${playbook.slug}`, blocks: playbook.blocks, sourceIds: playbook.sourceIds })),
+];
+const eachBlock = (): Array<[string, TopicBlock]> => authored.flatMap(({ label, blocks }) => blocks.map((block) => [`${label}/${block.id}`, block] as [string, TopicBlock]));
 const duplicates = (values: string[]) => values.filter((value, index) => values.indexOf(value) !== index);
 
 describe("seeded content contract", () => {
   it("links every rendered unit to a supplied source", () => {
-    for (const topic of libraryTopics) {
-      const version = topic.approvedVersion!;
-      expect(supportWarnings(version.blocks, new Set(version.sourceIds)), topic.slug).toEqual([]);
+    for (const { label, blocks, sourceIds } of authored) {
+      expect(supportWarnings(blocks, new Set(sourceIds)), label).toEqual([]);
     }
   });
 
@@ -72,9 +79,27 @@ describe("seeded content contract", () => {
     expect(duplicates(libraryTopics.map((topic) => topic.id))).toEqual([]);
     expect(duplicates(libraryTopics.map((topic) => topic.slug))).toEqual([]);
     expect(duplicates(libraryTopics.map((topic) => topic.approvedVersion!.id))).toEqual([]);
-    for (const topic of libraryTopics) {
-      expect(duplicates(blocksOf(topic).map((block) => block.id)), topic.slug).toEqual([]);
-      expect(duplicates(blocksOf(topic).flatMap((block) => block.claims.map((claim) => claim.id))), topic.slug).toEqual([]);
+    expect(duplicates(libraryPlaybooks.map((playbook) => playbook.id))).toEqual([]);
+    expect(duplicates(libraryPlaybooks.map((playbook) => playbook.procedureId))).toEqual([]);
+    // Slugs are unique across both corpora, not within each: they share a link index and will
+    // share one ranked result list.
+    expect(duplicates([...libraryTopics.map((topic) => topic.slug), ...libraryPlaybooks.map((playbook) => playbook.slug)])).toEqual([]);
+    for (const { label, blocks } of authored) {
+      expect(duplicates(blocks.map((block) => block.id)), label).toEqual([]);
+      expect(duplicates(blocks.flatMap((block) => block.claims.map((claim) => claim.id))), label).toEqual([]);
+    }
+  });
+
+  it("keeps playbook facets well formed and their related topics resolvable", () => {
+    const slugs = new Set(libraryTopics.map((topic) => topic.slug));
+    const approaches = new Set(["open", "laparoscopic", "robotic", "endovascular"]);
+    for (const playbook of libraryPlaybooks) {
+      // procedureId is the join key attending notes carry, so it has to stay stable and
+      // machine-shaped rather than drift with the title.
+      expect(playbook.procedureId, playbook.slug).toMatch(/^[a-z][a-z0-9_]*$/);
+      expect(approaches, playbook.slug).toContain(playbook.approach);
+      expect(playbook.specialty.length, playbook.slug).toBeGreaterThan(0);
+      for (const related of playbook.relatedTopicSlugs ?? []) expect(slugs, `${playbook.slug} related`).toContain(related);
     }
   });
 
@@ -84,7 +109,7 @@ describe("seeded content contract", () => {
       for (const claim of block.claims) for (const id of claim.citationIds) expect(known, `${label} citation`).toContain(id);
       if (block.type === "references") for (const id of block.sourceIds) expect(known, `${label} reference`).toContain(id);
     }
-    for (const topic of libraryTopics) for (const id of topic.approvedVersion!.sourceIds) expect(known, topic.slug).toContain(id);
+    for (const { label, sourceIds } of authored) for (const id of sourceIds) expect(known, label).toContain(id);
   });
 
   it("matches every topic to a taxonomy node and its printed category", () => {

@@ -1,17 +1,18 @@
 import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SearchExperience } from "@/components/search-experience";
-import { loadLibrary } from "@/lib/library-client";
+import { loadLibrary, loadPlaybooks } from "@/lib/library-client";
 import { getRecentTopics, getSavedTopics } from "@/lib/offline";
 import type { Library } from "@/lib/library-client";
-import type { Topic } from "@/lib/types";
+import type { Playbook, Topic } from "@/lib/types";
 
 let searchParams = new URLSearchParams();
 vi.mock("next/navigation", () => ({ useSearchParams: () => searchParams }));
-vi.mock("@/lib/library-client", () => ({ loadLibrary: vi.fn() }));
+vi.mock("@/lib/library-client", () => ({ loadLibrary: vi.fn(), loadPlaybooks: vi.fn() }));
 vi.mock("@/lib/offline", () => ({ getRecentTopics: vi.fn(), getSavedTopics: vi.fn() }));
 
 const readLibrary = vi.mocked(loadLibrary);
+const readPlaybooks = vi.mocked(loadPlaybooks);
 const readRecent = vi.mocked(getRecentTopics);
 const readSaved = vi.mocked(getSavedTopics);
 
@@ -30,12 +31,18 @@ function topic(id: string, title: string, scoreNodeId: string): Topic {
   };
 }
 
+function playbook(id: string, title: string): Playbook {
+  return { id, slug: id, title, aliases: [], procedureId: id.replace(/-/g, "_"), approach: "open", specialty: "Vascular", tags: [], blocks: [], sourceIds: [], warnings: [], reviewedAt: "2026-09-10T00:00:00.000Z", updatedAt: "2026-09-10T00:00:00.000Z" };
+}
+
+const femPop = playbook("femoropopliteal-bypass", "Femoropopliteal Bypass");
 const choledocholithiasis = topic("choledocholithiasis", "Choledocholithiasis", "biliary");
 const appendicitis = topic("appendicitis", "Appendicitis", "acute-care");
 
 beforeEach(() => {
   searchParams = new URLSearchParams();
   readLibrary.mockResolvedValue({ topics: [], taxonomy: [] });
+  readPlaybooks.mockResolvedValue({ playbooks: [] });
   readRecent.mockResolvedValue([]);
   readSaved.mockResolvedValue([]);
 });
@@ -81,7 +88,46 @@ describe("SearchExperience", () => {
     searchParams = new URLSearchParams("q=zzznotintitle");
     readLibrary.mockResolvedValue({ topics: [choledocholithiasis], taxonomy: [] });
     render(<SearchExperience />);
-    expect(await screen.findByText("No topic matches yet")).toBeInTheDocument();
+    // "No topic matches" would be a lie now that playbooks are searched too.
+    expect(await screen.findByText("No matches yet")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /browse the curriculum/i })).toHaveAttribute("href", "/topics");
+  });
+
+  it("groups playbook hits separately from topic hits", async () => {
+    searchParams = new URLSearchParams("q=femoropopliteal");
+    readLibrary.mockResolvedValue({ topics: [choledocholithiasis], taxonomy: [] });
+    readPlaybooks.mockResolvedValue({ playbooks: [femPop] });
+    render(<SearchExperience />);
+
+    // Scoped to the results list: SearchForm renders quick results from the same mocks, so an
+    // unscoped query sees every hit twice.
+    const results = (await screen.findByText(/results for/)).closest("section")!;
+    expect(within(results).getByRole("link", { name: /Femoropopliteal Bypass/ })).toHaveAttribute("href", "/playbooks/femoropopliteal-bypass");
+    expect(within(results).getByRole("heading", { name: "Playbooks", level: 2 })).toBeInTheDocument();
+    expect(within(results).queryByRole("heading", { name: "Topics", level: 2 })).not.toBeInTheDocument();
+  });
+
+  it("still shows playbook hits when the topic library fails to load", async () => {
+    // Two independent assets. One failing must degrade that half only, not blank the page.
+    searchParams = new URLSearchParams("q=femoropopliteal");
+    readLibrary.mockRejectedValue(new Error("library unavailable"));
+    readPlaybooks.mockResolvedValue({ playbooks: [femPop] });
+    render(<SearchExperience />);
+
+    const results = (await screen.findByText(/results for/)).closest("section")!;
+    expect(within(results).getByRole("link", { name: /Femoropopliteal Bypass/ })).toBeInTheDocument();
+    expect(screen.queryByText("No matches yet")).not.toBeInTheDocument();
+  });
+
+  it("does not announce no matches while one corpus is still loading", async () => {
+    // The playbook load never settles. Announcing an empty result now would be wrong, and the
+    // reader would act on it before the guide they searched for had a chance to arrive.
+    searchParams = new URLSearchParams("q=zzznotintitle");
+    readLibrary.mockResolvedValue({ topics: [choledocholithiasis], taxonomy: [] });
+    readPlaybooks.mockReturnValue(new Promise(() => {}));
+    render(<SearchExperience />);
+
+    expect(await screen.findByText(/results for/)).toBeInTheDocument();
+    expect(screen.queryByText("No matches yet")).not.toBeInTheDocument();
   });
 });

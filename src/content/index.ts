@@ -109,3 +109,5 @@ export const libraryTopics: Topic[] = [
   proceduresForHemorrhoidsTopic,
   percutaneousBreastBiopsyTopic,
 ];
+
+export { libraryPlaybooks } from "@/content/playbooks";

@@ -1,9 +1,9 @@
-// v4 discards every earlier cache. The worker derives its own mount point from its script URL, so
+// v5 discards every earlier cache. The worker derives its own mount point from its script URL, so
 // the same file works at the site root and under a GitHub Pages project path with no build step.
 const BASE = new URL("./", self.location).pathname;
-const SHELL = "pocket-chief-shell-v4";
-const CONTENT = "pocket-chief-content-v4";
-const SHELL_ASSETS = [BASE, `${BASE}topics/`, `${BASE}saved/`, `${BASE}icon.svg`, `${BASE}manifest.webmanifest`, `${BASE}library.json`];
+const SHELL = "pocket-chief-shell-v5";
+const CONTENT = "pocket-chief-content-v5";
+const SHELL_ASSETS = [BASE, `${BASE}topics/`, `${BASE}playbooks/`, `${BASE}saved/`, `${BASE}icon.svg`, `${BASE}manifest.webmanifest`, `${BASE}library.json`, `${BASE}playbooks.json`];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(SHELL).then((cache) => cache.addAll(SHELL_ASSETS)).then(() => self.skipWaiting()));
@@ -21,7 +21,14 @@ self.addEventListener("fetch", (event) => {
     // "Response body is already used". waitUntil keeps the worker alive until the write lands.
     if (response.ok) { const copy = response.clone(); event.waitUntil(caches.open(CONTENT).then((cache) => cache.put(event.request, copy))); }
     return response;
-  }).catch(() => caches.match(event.request).then((cached) => cached || caches.match(BASE))));
+  }).catch(async () => {
+    // Ask CONTENT before SHELL. An unscoped caches.match() picks whichever cache answers first,
+    // which after a redeploy can be the precached SHELL copy of an asset CONTENT has fresher.
+    const content = await caches.open(CONTENT).then((cache) => cache.match(event.request));
+    if (content) return content;
+    const shell = await caches.open(SHELL).then((cache) => cache.match(event.request));
+    return shell || await caches.match(BASE);
+  }));
 });
 
 self.addEventListener("message", (event) => {

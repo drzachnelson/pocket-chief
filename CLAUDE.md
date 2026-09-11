@@ -61,6 +61,22 @@ Every block renders some set of factual statements. `factualUnits(block)` in `sr
 
 `supportWarnings()` in `src/lib/editorial.ts` is now the only enforcement. `src/lib/__tests__/content-contract.test.ts` runs it over every authored topic, and a PostToolUse hook runs that test on any edit under `src/content/`.
 
+### Two corpora, one block model
+
+`Topic` and `Playbook` both render `TopicBlock[]`, so they share `sourced()`, `supportWarnings()`, the renderer and the search scorer. They are separate types on purpose:
+
+- A playbook is organized by `procedureId` + `approach` + `specialty` and **never enters the SCORE taxonomy**. `library.test.ts:29` (one parentless root) and `taxonomy.test.ts:30` (the exact ordered section list) are the tripwire that proves it — do not add a taxonomy node for a playbook.
+- Playbooks ship approved-only, so there is no `TopicVersion` wrapper and no History tab.
+- `PlaybookContent` must never call `recordRecentView` or `setTopicSaved`. Every reader of the `saved`/`recent` stores renders rows through `TopicCard`, which reads `scoreCategory` and links to `/topics/<slug>` — a playbook in there is a broken card pointing at a 404.
+- `sourcedUnits()` cites each factual unit separately. Reach for it when one block genuinely mixes societies; blanket multi-source citation passes `supportWarnings` while quietly claiming both works support both statements.
+- `src/lib/__tests__/playbooks.test.ts` pins the set of auto-links each playbook generates. An auto-link is a claim about clinical relatedness, and the topic link index is global, so a new one fails the test until someone reviews it. Three false positives have already been caught this way: "skip lesions" reaching Crohn disease, "a fast one" reaching the FAST exam, and "peroneal nerve" reaching escharotomy.
+
+### Attending preferences live in a second database
+
+`pocket-chief-attendings`, separate from `pocket-chief-private`, and the separation is the whole point: the previously deployed bundle calls `deleteDB("pocket-chief-private")` unconditionally, and a stale tab keeps running that code. Everything in the old database is rebuildable from the shipped bundle; hand-written preferences are not.
+
+They never enter `src/content/` and never reach the build — `content-privacy.test.ts` asserts both, including a pass over `out/`. Notes are screened by `detectLikelyPHI()` before every write and import.
+
 ### Library content
 
 Content lives in `src/content/`, one file per topic, aggregated by `src/content/index.ts`. `src/lib/seed.ts` is a re-export kept for existing imports.
@@ -70,7 +86,7 @@ Content lives in `src/content/`, one file per topic, aggregated by `src/content/
 
 `src/lib/__tests__/content-contract.test.ts` validates all of the above plus renderer constraints. A PostToolUse hook (`.claude/hooks/pocket-chief-content.mjs`, wired in the vault's `.claude/settings.local.json`) runs it automatically on edits under `src/content/`.
 
-Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` skill rather than reconstructing the steps.
+Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` skill rather than reconstructing the steps. Playbooks follow the same shape but use `buildPlaybook()` and register in `src/content/playbooks/index.ts`.
 
 ### Renderer constraints on content
 
@@ -110,6 +126,7 @@ Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` sk
   `node_modules`, then retry the git command.
 - The remote is `drzachnelson/pocket-chief`, `main` is the default branch and the deploy branch, and the licensed corpora under `Pocket Chief Resources/` stay gitignored except `score-module-outline.md`.
 - The vault's `.claude/launch.json` must use vault-relative paths for the `pocket-chief` entry. An absolute path pins it to one machine's home directory and the preview dies with `MODULE_NOT_FOUND`.
+- The dev server happily serves routes the static export never generated, and Playwright runs `next dev`. Verify a new route against the real artifact (`next build`, then `node scripts/serve-out.mjs`), and note that `.github/workflows/deploy.yml` now gates on `out/playbooks.json` and on every playbook page having prerendered.
 - Adding topics has repeatedly exposed assumptions built when the library held one topic — two search-scoring flaws and several hardcoded single-topic UI strings so far. When a test that expected an empty result set starts failing after new content lands, check whether the app was only ever correct for one topic before changing the test.
 
 ## Agent skills
