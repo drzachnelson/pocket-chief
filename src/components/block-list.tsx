@@ -48,7 +48,16 @@ function BulletList({ nodes, nested }: { nodes: BulletNode[]; nested?: boolean }
   return <ul className={nested ? "clinical-list clinical-list-nested" : "clinical-list"}>{nodes.map((node) => <li key={node.item} data-depth={node.depth}><span><InlineText segments={node.segments} /></span>{node.children.length > 0 && <BulletList nodes={node.children} nested />}</li>)}</ul>;
 }
 
-export function Block({ block, expanded, linkEntries, selfSlug, onToggle }: { block: TopicBlock; expanded: boolean; linkEntries: LinkIndexEntry[]; selfSlug: string; onToggle: (id: string, open: boolean) => void }) {
+/**
+ * Renders whatever belongs beside a block or one of its steps — attending deltas, today.
+ *
+ * Injected *inside* the frame rather than after it. A sibling rendered after a <details> stays
+ * on screen when the reader collapses the section, leaving an attending note floating with no
+ * context about which step it modifies.
+ */
+export type RenderAnnotations = (blockId: string, stepTitle?: string) => ReactNode;
+
+export function Block({ block, expanded, linkEntries, selfSlug, onToggle, annotate }: { block: TopicBlock; expanded: boolean; linkEntries: LinkIndexEntry[]; selfSlug: string; onToggle: (id: string, open: boolean) => void; annotate?: RenderAnnotations }) {
   // Built fresh on every render, never memoized: parseInline records each linked key on the
   // scope so a term fires once per block, which means a reused scope renders the second pass
   // with every link already spent.
@@ -63,17 +72,19 @@ export function Block({ block, expanded, linkEntries, selfSlug, onToggle }: { bl
   const headingNode = title && <Heading><InlineText segments={parseInline(title.text)} /></Heading>;
   const icon = block.type === "warning" ? <CalloutIcon tone={block.tone} /> : null;
   const actions = title && <div className="block-actions"><SupportMark block={block} /></div>;
+  const blockNotes = annotate?.(block.id);
   const frame = (children: ReactNode, extra = "") => {
     const anchors = { id: block.id, "data-block-id": block.id, ...(title?.level === 3 ? { "data-level": "3" } : {}) };
-    if (collapsible) return <details {...anchors} className={`topic-block section-block${extra}`} open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={title!.text}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{children}</details>;
-    return <section {...anchors} className={`topic-block${extra}`}>{title ? <div className="block-heading">{icon}{headingNode}{actions}</div> : icon}{children}</section>;
+    const body = <>{children}{blockNotes}</>;
+    if (collapsible) return <details {...anchors} className={`topic-block section-block${extra}`} open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={title!.text}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{body}</details>;
+    return <section {...anchors} className={`topic-block${extra}`}>{title ? <div className="block-heading">{icon}{headingNode}{actions}</div> : icon}{body}</section>;
   };
   if (block.type === "summary") return frame(<p>{inline(block.text)}</p>, " summary-block");
   if (block.type === "prose") return frame(<p>{inline(block.text)}</p>);
   if (block.type === "warning") return frame(<p>{inline(block.text)}</p>, ` warning-block${block.tone ? ` tone-${block.tone}` : ""}`);
   if (block.type === "bullets") return frame(<BulletList nodes={bulletTree(block.items, (text) => parseInline(text, scope))} />);
   if (block.type === "table") return frame(<div className="table-scroll"><table><thead><tr>{block.columns.map((column) => <th key={column}>{inline(column)}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{inline(cell)}</th> : <td key={`${row[0]}-${cell}`}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>);
-  if (block.type === "sequence") return frame(<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p></div></li>)}</ol>);
+  if (block.type === "sequence") return frame(<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p>{annotate?.(block.id, step.title)}</div></li>)}</ol>);
   if (block.type === "flow") return frame(<DecisionFlow block={block} renderInline={inline} />);
   if (block.type === "image") {
     const media = <><Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
@@ -153,9 +164,9 @@ export function useBlockCollapse(blocks: TopicBlock[]): BlockCollapse {
   return { rootRef, collapsed, collapsibleIds, allOpen, toggleAll, setBlockOpen };
 }
 
-export function BlockList({ blocks, collapse, linkEntries, selfSlug }: { blocks: TopicBlock[]; collapse: BlockCollapse; linkEntries: LinkIndexEntry[]; selfSlug: string }) {
+export function BlockList({ blocks, collapse, linkEntries, selfSlug, annotate }: { blocks: TopicBlock[]; collapse: BlockCollapse; linkEntries: LinkIndexEntry[]; selfSlug: string; annotate?: RenderAnnotations }) {
   // Destructured rather than used as `collapse.rootRef` in the JSX: react-hooks/refs reads a
   // property access in a ref position as reading ref.current during render.
   const { rootRef, collapsed, setBlockOpen } = collapse;
-  return <article className="topic-article" ref={rootRef}>{blocks.map((block) => <Block key={block.id} block={block} expanded={!collapsed.has(block.id)} linkEntries={linkEntries} selfSlug={selfSlug} onToggle={setBlockOpen} />)}</article>;
+  return <article className="topic-article" ref={rootRef}>{blocks.map((block) => <Block key={block.id} block={block} expanded={!collapsed.has(block.id)} linkEntries={linkEntries} selfSlug={selfSlug} onToggle={setBlockOpen} annotate={annotate} />)}</article>;
 }

@@ -23,6 +23,8 @@
   --violet-soft: #f3ebfb;
   --danger: #b42318;
   --danger-soft: #fdebe8;
+  --teal: #0f6f78;
+  --teal-soft: #e6f4f5;
   --shadow: 0 1px 2px rgb(16 24 40 / 0.04), 0 12px 30px rgb(16 24 40 / 0.06);
   --sidebar: 236px;
 
@@ -56,6 +58,8 @@
   --dark-violet-soft: #2f2150;
   --dark-danger: #ff8c84;
   --dark-danger-soft: #3d1a19;
+  --dark-teal: #4fc3cd;
+  --dark-teal-soft: #0d2f33;
   --dark-shadow: 0 16px 38px rgb(0 0 0 / 0.28);
 }
 
@@ -66,7 +70,7 @@
     --line: var(--dark-line); --line-strong: var(--dark-line-strong);
     --cobalt: var(--dark-cobalt); --cobalt-dark: var(--dark-cobalt-dark); --cobalt-soft: var(--dark-cobalt-soft);
     --green: var(--dark-green); --green-soft: var(--dark-green-soft); --amber: var(--dark-amber); --amber-soft: var(--dark-amber-soft);
-    --violet: var(--dark-violet); --violet-soft: var(--dark-violet-soft); --danger: var(--dark-danger); --danger-soft: var(--dark-danger-soft);
+    --violet: var(--dark-violet); --violet-soft: var(--dark-violet-soft); --danger: var(--dark-danger); --danger-soft: var(--dark-danger-soft); --teal: var(--dark-teal); --teal-soft: var(--dark-teal-soft);
     --shadow: var(--dark-shadow);
   }
 }
@@ -78,7 +82,7 @@
   --line: var(--dark-line); --line-strong: var(--dark-line-strong);
   --cobalt: var(--dark-cobalt); --cobalt-dark: var(--dark-cobalt-dark); --cobalt-soft: var(--dark-cobalt-soft);
   --green: var(--dark-green); --green-soft: var(--dark-green-soft); --amber: var(--dark-amber); --amber-soft: var(--dark-amber-soft);
-  --violet: var(--dark-violet); --violet-soft: var(--dark-violet-soft); --danger: var(--dark-danger); --danger-soft: var(--dark-danger-soft);
+  --violet: var(--dark-violet); --violet-soft: var(--dark-violet-soft); --danger: var(--dark-danger); --danger-soft: var(--dark-danger-soft); --teal: var(--dark-teal); --teal-soft: var(--dark-teal-soft);
   --shadow: var(--dark-shadow);
 }
 
@@ -390,7 +394,7 @@ figcaption { margin-top: var(--space-3); padding-left: var(--space-3); border-le
 .support-mark.unsupported { color: var(--amber); }
 
 /* Callouts. One idiom, four tones: hairline box, 3px gutter strip, tinted ground. */
-.summary-block, .warning-block { --callout: var(--cobalt); --callout-soft: var(--cobalt-soft); margin: var(--space-6) 0; padding: var(--space-5) var(--space-5) var(--space-5) var(--space-4); border: 1px solid color-mix(in srgb, var(--callout) 24%, var(--line)); border-left: 3px solid var(--callout); border-radius: var(--radius-md); background: var(--callout-soft); }
+.summary-block, .warning-block, .attending-delta { --callout: var(--cobalt); --callout-soft: var(--cobalt-soft); margin: var(--space-6) 0; padding: var(--space-5) var(--space-5) var(--space-5) var(--space-4); border: 1px solid color-mix(in srgb, var(--callout) 24%, var(--line)); border-left: 3px solid var(--callout); border-radius: var(--radius-md); background: var(--callout-soft); }
 .summary-block { margin-top: var(--space-5); }
 .warning-block { --callout: var(--amber); --callout-soft: var(--amber-soft); }
 /* tone lives on the shared summary/prose/warning interface, so accept it on either callout. */
@@ -400,6 +404,33 @@ figcaption { margin-top: var(--space-3); padding-left: var(--space-3); border-le
 .summary-block .block-heading, .warning-block .block-heading { border: 0; padding: 0; }
 .summary-block .block-heading h2, .warning-block .block-heading h2 { font-size: var(--text-md); font-weight: 720; letter-spacing: -.005em; }
 .summary-block > p, .warning-block > p { color: var(--ink); }
+/* An attending delta is the only content in the app that is deliberately uncited: one surgeon's
+   observed preference, not a literature claim. It borrows the callout geometry so it sits in the
+   flow, and departs in exactly two ways — a sixth accent, and a dashed rule. Dashed already means
+   "nothing settled here yet" in this system; .empty-state uses it for the same reason. */
+.attending-delta { --callout: var(--teal); --callout-soft: var(--teal-soft); border-left-style: dashed; }
+.attending-delta .attending-delta-byline { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-2); color: var(--callout); font-size: var(--text-2xs); font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.attending-delta .attending-delta-byline span { color: var(--ink-faint); font-weight: 600; letter-spacing: .03em; }
+.attending-delta > p { margin: 0; color: var(--ink); font-size: var(--text-md); line-height: 1.55; }
+.attending-delta + .attending-delta { margin-top: calc(var(--space-3) * -1); }
+.attending-picker { margin-bottom: var(--space-5); padding: var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface-muted); }
+.attending-picker .eyebrow { margin-bottom: var(--space-3); }
+.attending-picker-row { display: flex; align-items: center; gap: var(--space-3); }
+.attending-picker-row select { flex: 1 1 auto; min-width: 0; min-height: 40px; padding: 0 var(--space-3); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font-size: var(--text-base); }
+.attending-picker .field + .field { margin-top: var(--space-3); }
+.attending-card > .section-heading { margin-bottom: var(--space-5); }
+.attending-card .topic-block:last-of-type { border-bottom: 0; }
+.attending-note-button { padding: 0; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.attending-note-button:hover { color: var(--cobalt-dark); text-decoration: underline; }
+/* Touch targets stay at 44px: this is reached one-handed, walking, minutes before a case. */
+.attending-picker-row button, .attending-delta-actions button { min-height: 44px; }
+.attending-dialog-backdrop { position: fixed; inset: 0; z-index: var(--z-dialog); display: grid; place-items: center; padding: var(--space-5); background: rgb(16 24 40 / .45); }
+.attending-dialog { width: min(100%, 520px); max-height: 88vh; overflow-y: auto; }
+.attending-dialog h2 { margin: 0 0 var(--space-4); font-size: var(--text-lg); letter-spacing: -.02em; }
+.attending-dialog select, .attending-dialog textarea, .attending-dialog input { width: 100%; padding: var(--space-3); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font: inherit; }
+.attending-dialog .field + .field { margin-top: var(--space-4); }
+.attending-dialog .settings-actions { margin-top: var(--space-5); }
+.attending-delta-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
 .callout-icon { flex: 0 0 auto; display: inline-flex; align-items: center; margin-right: var(--space-2); color: var(--callout, var(--cobalt)); }
 .callout-icon:last-child { margin-right: 0; }
 
@@ -483,7 +514,8 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   figure.topic-block { padding: var(--space-4) 0; }
   .block-heading h2 { font-size: 16px; }
   /* Callouts run to the screen edge so the accent strip lands on the bezel. */
-  .summary-block, .warning-block { margin: var(--space-4) -16px; padding: var(--space-4) 16px var(--space-4) 13px; border: 0; border-left: 3px solid var(--callout); border-bottom: 1px solid var(--line); border-radius: 0; }
+  .summary-block, .warning-block, .attending-delta { margin: var(--space-4) -16px; padding: var(--space-4) 16px var(--space-4) 13px; border: 0; border-left: 3px solid var(--callout); border-bottom: 1px solid var(--line); border-radius: 0; }
+  .attending-delta { border-left-style: dashed; }
   .summary-block { margin-top: var(--space-1); }
   .clinical-list { margin-top: var(--space-2); }
   .clinical-list li { padding-block: var(--space-2); }
