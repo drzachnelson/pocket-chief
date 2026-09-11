@@ -120,3 +120,37 @@ export interface TopicDraftInput {
   scoreNodeId: string;
   tags: string[];
 }
+
+/** How the operation is done. A browse/filter facet; `procedureId` is the join key. */
+export type PlaybookApproach = "open" | "laparoscopic" | "robotic" | "endovascular";
+
+/**
+ * An operative procedure guide. Reuses TopicBlock so it inherits the claim-support invariant,
+ * the renderer and the search scorer, but it is deliberately NOT a Topic:
+ *
+ * - It is organized by procedure and specialty, never placed in the SCORE taxonomy, which is
+ *   what keeps the single-root and ordered-sections assertions in the taxonomy tests honest.
+ * - It ships approved-only, so there is no TopicVersion wrapper and no draft state. Git is the
+ *   version history.
+ */
+export interface Playbook {
+  id: string;
+  slug: string;
+  title: string;
+  aliases: string[];
+  /** Stable lowercase_underscore id, unique per playbook. Attending notes join on this. */
+  procedureId: string;
+  approach: PlaybookApproach;
+  /** Service line, e.g. "Vascular". */
+  specialty: string;
+  tags: string[];
+  blocks: TopicBlock[];
+  /** Every source any block cites — the allow-list `supportWarnings` validates against. */
+  sourceIds: string[];
+  warnings: string[];
+  /** Slugs in `libraryTopics`. Powers a related-reading strip; not load-bearing. */
+  relatedTopicSlugs?: string[];
+  reviewedAt: string;
+  updatedAt: string;
+}
+

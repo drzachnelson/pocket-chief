@@ -1,5 +1,5 @@
 import { factualUnits } from "@/lib/editorial";
-import type { Claim, Topic, TopicBlock, TopicVersion } from "@/lib/types";
+import type { Claim, Playbook, PlaybookApproach, Topic, TopicBlock, TopicVersion } from "@/lib/types";
 
 /**
  * A block written by hand, minus the claim list that every factual unit needs.
@@ -81,3 +81,55 @@ export function buildTopic(input: TopicInput): Topic {
     updatedAt: input.reviewedAt,
   };
 }
+
+/**
+ * Derives claims the same way as `sourced()`, but cites each factual unit separately.
+ *
+ * Needed because an operative guide routinely mixes societies inside one block — an ACC/AHA
+ * class recommendation next to a Cochrane review. Putting the whole source list on every claim
+ * would pass `supportWarnings`, which only checks non-empty and allow-listed, while quietly
+ * telling the reader both works support both statements. Prefer splitting a block so each has
+ * one source; reach for this only when a table or list genuinely mixes them row by row.
+ */
+export function sourcedUnits(block: AuthoredBlock, citationIds: string[][]): TopicBlock {
+  const withoutClaims = { ...block, claims: [] as Claim[] } as TopicBlock;
+  const units = factualUnits(withoutClaims);
+  if (units.length !== citationIds.length) {
+    throw new Error(`${block.id}: ${units.length} factual units but ${citationIds.length} citation lists. They must line up one to one.`);
+  }
+  const claims = units.map((text, index) => {
+    if (citationIds[index].length === 0) throw new Error(`${block.id}: no citation for "${text}".`);
+    return { id: `${block.id}-claim-${index + 1}`, text, citationIds: citationIds[index], status: "cited" as const };
+  });
+  return { ...withoutClaims, claims } as TopicBlock;
+}
+
+export interface PlaybookInput {
+  id: string;
+  slug: string;
+  title: string;
+  aliases: string[];
+  procedureId: string;
+  approach: PlaybookApproach;
+  specialty: string;
+  tags: string[];
+  /** The source every block cites unless it says otherwise. */
+  sourceId: string;
+  /** Further sources this playbook's blocks cite, or `supportWarnings` rejects them. */
+  additionalSourceIds?: string[];
+  relatedTopicSlugs?: string[];
+  blocks: TopicBlock[];
+  reviewedAt: string;
+}
+
+/** Flatter than `buildTopic`: playbooks ship approved-only, so there is no version to wrap. */
+export function buildPlaybook(input: PlaybookInput): Playbook {
+  const { additionalSourceIds, sourceId, ...rest } = input;
+  return {
+    ...rest,
+    sourceIds: [...new Set([sourceId, ...additionalSourceIds ?? []])],
+    warnings: [],
+    updatedAt: input.reviewedAt,
+  };
+}
+

@@ -1,0 +1,38 @@
+import { describe, expect, it } from "vitest";
+import { getPlaybookBySlug, listPlaybooks, listTaxonomy, searchPlaybookLibrary } from "@/lib/library";
+import { taxonomy } from "@/lib/seed";
+
+describe("playbook library", () => {
+  it("lists the authored playbooks", () => {
+    const playbooks = listPlaybooks();
+    expect(playbooks.length).toBeGreaterThan(0);
+    expect(playbooks.map((playbook) => playbook.slug)).toContain("temporal-artery-biopsy");
+  });
+
+  it("resolves a playbook by slug and returns null for an unknown one", () => {
+    expect(getPlaybookBySlug("temporal-artery-biopsy")?.title).toBe("Temporal Artery Biopsy");
+    expect(getPlaybookBySlug("not-a-playbook")).toBeNull();
+  });
+
+  it("finds a playbook by alias, and tolerates a typo", () => {
+    expect(searchPlaybookLibrary("TAB").map((playbook) => playbook.slug)).toContain("temporal-artery-biopsy");
+    expect(searchPlaybookLibrary("temporal artry biopsy").map((playbook) => playbook.slug)).toContain("temporal-artery-biopsy");
+  });
+
+  it("matches on body text, not only on identity", () => {
+    expect(searchPlaybookLibrary("Pitanguy").map((playbook) => playbook.slug)).toContain("temporal-artery-biopsy");
+  });
+
+  it("returns everything for an empty query, unranked", () => {
+    expect(searchPlaybookLibrary("")).toHaveLength(listPlaybooks().length);
+  });
+
+  it("leaves the SCORE taxonomy untouched", () => {
+    // Playbooks are organized by specialty and approach. The moment one acquires a taxonomy node
+    // the single-root assertion in library.test.ts and the ordered-sections list in
+    // taxonomy.test.ts both break — those two tests are the tripwire, and this is the statement
+    // of intent behind them.
+    expect(listTaxonomy()).toEqual(taxonomy);
+    for (const playbook of listPlaybooks()) expect(playbook).not.toHaveProperty("scoreNodeId");
+  });
+});

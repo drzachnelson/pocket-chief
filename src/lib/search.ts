@@ -1,4 +1,4 @@
-import type { Topic, TopicBlock } from "@/lib/types";
+import type { Playbook, Topic, TopicBlock } from "@/lib/types";
 
 function blockText(block: TopicBlock): string {
   if (block.type === "summary" || block.type === "prose" || block.type === "warning") return `${block.heading ?? ""} ${block.text}`;
@@ -102,3 +102,14 @@ export const topicRecord = (topic: Topic): SearchableRecord | null => topic.appr
   : null;
 
 export function searchTopics(query: string, topics: Topic[]): Topic[] { return searchRecords(query, topics, topicRecord); }
+
+/** Playbooks index on how a case is described out loud: the operation, its approach, its service. */
+export const playbookRecord = (playbook: Playbook): SearchableRecord => ({
+  id: playbook.id,
+  title: playbook.title,
+  identity: [playbook.title, ...playbook.aliases, playbook.specialty, playbook.approach, ...playbook.tags],
+  body: playbook.blocks,
+});
+
+export function searchPlaybooks(query: string, playbooks: Playbook[]): Playbook[] { return searchRecords(query, playbooks, playbookRecord); }
+

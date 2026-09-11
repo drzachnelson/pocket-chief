@@ -5,6 +5,7 @@
 export {
   choledoBlocks,
   choledocholithiasisTopic,
+  libraryPlaybooks,
   libraryTopics,
   fibroadenomaPhyllodesTopic,
   suppliedSources,

@@ -45,6 +45,9 @@ export const SCORE_PERCUTANEOUS_BREAST_BIOPSY_SOURCE = "00000000-0000-4000-8000-
 export const FISER_BREAST_SOURCE = "00000000-0000-4000-8000-000000002202";
 export const ACR_BIRADS_SOURCE = "00000000-0000-4000-8000-000000002203";
 
+// Playbooks. Operative guides, numbered from 3000 so they never collide with topic sources.
+export const TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003000";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: CHOLEDOCHOLITHIASIS_SOURCE,
@@ -515,5 +518,13 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "American College of Radiology. ACR BI-RADS Atlas: Breast Imaging Reporting and Data System, 5th edition. Reston, VA: American College of Radiology.",
     suppliedAt: "2026-08-25T00:00:00.000Z",
     details: "Registered during review as the authority behind the assessment categories the packet tabulates. Where the packet and the SCORE module state the category 4 and 5 boundary differently - the packet uses the atlas convention of greater than 2% to less than 95% for category 4 and 95% or greater for category 5, while SCORE writes 2% to 94% and more than 94% - the atlas convention is carried.",
+  },
+  {
+    id: TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE,
+    title: "User-supplied temporal artery biopsy attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook supplied to Pocket Chief, September 10, 2026.",
+    suppliedAt: "2026-09-10T00:00:00.000Z",
+    details: "The document names the 2021 ACR/Vasculitis Foundation guideline, the EULAR recommendations, the 2022 ACR/EULAR classification criteria and the GAME study, but supplies no bibliography — its tables cite bracketed numbers with no key. The bracket numbers are dropped here rather than reproduced without a reference list, and the whole guide is cited to the supplied document rather than to works the owner did not supply.",
   },
 ];
