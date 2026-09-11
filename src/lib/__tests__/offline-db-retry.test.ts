@@ -37,4 +37,21 @@ describe("offline.ts db() retry", () => {
     expect(database.put).toHaveBeenCalledWith("reviewed", expect.objectContaining({ id: topic.id }));
     await expect(isTopicReviewed(topic.id)).resolves.toBe(false);
   });
+
+  it("rejects instead of hanging when the database open never settles", async () => {
+    // A blocked open neither resolves nor rejects, so every caller awaiting db() used to wait
+    // forever. Failing is worse than succeeding but far better than wedging the whole surface.
+    openDBMock.mockReturnValue(new Promise(() => {}));
+    vi.useFakeTimers();
+    try {
+      const { isStorageBlocked, isTopicSaved } = await import("@/lib/offline");
+      const pending = isTopicSaved("topic-1");
+      const settled = expect(pending).rejects.toThrow(/busy in another Pocket Chief tab/);
+      await vi.advanceTimersByTimeAsync(3000);
+      await settled;
+      expect(isStorageBlocked()).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
