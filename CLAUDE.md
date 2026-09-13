@@ -38,7 +38,7 @@ node node_modules/vitest/vitest.mjs run -t "keeps flow graphs renderable"
 node node_modules/@playwright/test/cli.js test
 ```
 
-Playwright starts *its own* dev server on port 3000 with `POCKET_CHIEF_DEMO=true`. **Stop the preview server first** — with one already running, `config.webServer` fails with exit code 1 and the whole run aborts.
+Playwright starts *its own* dev server on port 3000 with `NEXT_PUBLIC_ENABLE_SERVICE_WORKER_TESTS=true`. **Stop the preview server first** — with one already running, `config.webServer` fails with exit code 1 and the whole run aborts. `scripts/serve-out.mjs` also binds port 3000, so it conflicts the same way.
 
 ## Architecture
 
@@ -51,7 +51,7 @@ The app builds with `output: "export"` under `basePath: "/pocket-chief"`, in dev
 - Anything that needs a request at runtime — `searchParams` in a server component, a non-GET route handler, `headers()`, middleware — will fail the build or be silently inert. Search reads `?q=` on the client for exactly this reason.
 - Bookmarks and reading history are per-device, in IndexedDB. Clearing site data clears them, and there is no server copy to restore from.
 - There is no Anki export. Flashcards come from handing a published topic URL to an assistant; do not reintroduce an in-app exporter without asking.
-- New content does not appear on HMR if a stale dev server from another chat is serving. Confirm with `curl -s localhost:3210/library.json` before concluding new content failed to register.
+- New content does not appear on HMR if a stale dev server from another chat is serving. Confirm with `curl -s localhost:3210/pocket-chief/library.json` before concluding new content failed to register. Keep the `basePath` prefix — without it a healthy server 404s and reads as a stale one.
 
 ### The claim-support invariant
 
@@ -86,7 +86,7 @@ Content lives in `src/content/`, one file per topic, aggregated by `src/content/
 
 `src/lib/__tests__/content-contract.test.ts` validates all of the above plus renderer constraints. A PostToolUse hook (`.claude/hooks/pocket-chief-content.mjs`, wired in the vault's `.claude/settings.local.json`) runs it automatically on edits under `src/content/`.
 
-Adding a SCORE section is a repeatable workflow — invoke the `/score-topic` skill rather than reconstructing the steps. Playbooks follow the same shape but use `buildPlaybook()` and register in `src/content/playbooks/index.ts`.
+Adding content is a repeatable workflow — invoke the `/add-topic` skill rather than reconstructing the steps. It covers **both corpora**: steps 2, 6 and 7 fork for playbooks, which use `buildPlaybook()`, register in `src/content/playbooks/index.ts` only, and are documented in that skill's `references/playbooks.md`.
 
 ### Renderer constraints on content
 

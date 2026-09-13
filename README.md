@@ -32,7 +32,7 @@ pnpm serve
 
 ## Adding a topic
 
-Authoring is a commit, not an in-app flow. Invoke the `/score-topic` skill rather than reconstructing the steps by hand. Every block goes through `sourced()` in `src/content/authoring.ts`, which derives one cited claim per rendered factual unit — hand-written claim arrays drift from rendered text and the content contract test will reject them.
+Authoring is a commit, not an in-app flow. Invoke the `/add-topic` skill rather than reconstructing the steps by hand — it covers playbooks as well as topics. Every block goes through `sourced()` in `src/content/authoring.ts`, which derives one cited claim per rendered factual unit — hand-written claim arrays drift from rendered text and the content contract test will reject them.
 
 ## Deployment
 
