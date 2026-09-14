@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import { StrictMode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AppShell } from "@/components/app-shell";
 import { TopicsWorkspace } from "@/components/topics-workspace";
@@ -74,13 +75,39 @@ describe("TopicsWorkspace", () => {
     expect(trigger).toHaveFocus();
   });
 
-  it("clears drawer open state when the workspace unmounts", () => {
+  // The mobile trigger lives in the root layout; the workspace that supplies the drawer's content
+  // lives in the /topics segment layout. React commits those separately, so a tap can land after the
+  // trigger is live but before the drawer exists. StrictMode's effect remount is what made that tap
+  // fatal rather than merely late: its cleanup used to reset the pending open before the drawer
+  // could ever render.
+  it("honours a tap that lands before the workspace registers the drawer", () => {
+    currentPathname = "/topics/neck-trauma";
+    const view = render(<AppShell><p>Topic content</p></AppShell>, { wrapper: StrictMode });
+    const trigger = screen.getAllByRole("button", { name: "Browse topics" })[0];
+    trigger.focus();
+    fireEvent.click(trigger);
+    expect(screen.queryByRole("dialog", { name: "Topics" })).not.toBeInTheDocument();
+
+    view.rerender(<AppShell><TopicsWorkspace navigation={navigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
+
+    expect(screen.getByRole("dialog", { name: "Topics" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Close topics navigation" })).toHaveFocus();
+  });
+
+  // Leaving the Topics route is the real reason the workspace goes away, so the route change is what
+  // has to clear the open state — and it has to stay cleared, or the drawer springs back open by
+  // itself the moment the reader returns to a topic.
+  it("clears drawer open state when the reader leaves the Topics route", () => {
     const view = renderWorkspace();
     fireEvent.click(screen.getAllByRole("button", { name: "Browse topics" })[0]);
     expect(screen.getByRole("dialog", { name: "Topics" })).toBeInTheDocument();
 
+    currentPathname = "/saved";
     view.rerender(<AppShell><p>Other route content</p></AppShell>);
+    expect(screen.queryByRole("dialog", { name: "Topics" })).not.toBeInTheDocument();
 
+    currentPathname = "/topics/neck-trauma";
+    view.rerender(<AppShell><TopicsWorkspace navigation={navigation}><p>Topic content</p></TopicsWorkspace></AppShell>);
     expect(screen.queryByRole("dialog", { name: "Topics" })).not.toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Browse topics" })[0]).toHaveAttribute("aria-expanded", "false");
   });

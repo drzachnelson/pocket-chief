@@ -202,18 +202,21 @@ test("mobile Topics drawer traps focus, restores it, and closes after topic or s
   const trigger = page.getByRole("button", { name: "Browse topics" });
   const drawer = page.getByRole("dialog", { name: "Topics" });
   const close = drawer.getByRole("button", { name: "Close topics navigation" });
-  // Click exactly once, and only after hydration. The Topics button is server-rendered and tappable
-  // before React attaches its handler, and the drawer's content is registered by a TopicsWorkspace
-  // mount effect, so an early tap is silently dropped — milliseconds in production, but far longer
-  // on a cold dev-server compile.
+  // Click exactly once, and only after the shell has hydrated: the Topics button is server-rendered
+  // and tappable before React attaches its handler, so an earlier tap reaches nothing at all.
   //
   // Retrying the tap is NOT a valid workaround: `open()` sets state rather than toggling, so a
   // second click leaves the drawer open while moving focus to the trigger, and the drawer never
   // remounts to re-run its `closeRef.focus()` effect. Nor is waiting on the library.json response —
   // the service worker precaches that same URL from its install handler, so it can land before React
-  // has run anything. Waiting for the worker to control the page is the honest gate: registration
-  // happens in ServiceWorkerRegistration's mount effect, a sibling of the one that registers the
-  // drawer, so a controlling worker proves the whole commit's effects have run.
+  // has run anything.
+  //
+  // A controlling worker is the honest gate for the *trigger*: registration happens in
+  // ServiceWorkerRegistration's mount effect, and that component ships in the same root-layout commit
+  // as the button. It proves nothing about the drawer's content, which TopicsWorkspace registers from
+  // the /topics segment layout — React commits that separately, and under load this gate opens first.
+  // Honouring a tap that lands in that window is TopicsDrawerProvider's job, not this gate's; see
+  // "honours a tap that lands before the workspace registers the drawer" in the unit suite.
   await page.waitForFunction(async () => {
     await navigator.serviceWorker.ready;
     return Boolean(navigator.serviceWorker.controller);
