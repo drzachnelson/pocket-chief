@@ -52,6 +52,20 @@ export const SVS_CAROTID_2022_SOURCE = "00000000-0000-4000-8000-000000003002";
 export const FEMPOP_BYPASS_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003003";
 export const ACC_AHA_PAD_2024_SOURCE = "00000000-0000-4000-8000-000000003004";
 export const ESC_ESVS_PAD_2024_SOURCE = "00000000-0000-4000-8000-000000003005";
+export const RTAPP_INGUINAL_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003006";
+export const HERNIASURGE_2018_SOURCE = "00000000-0000-4000-8000-000000003007";
+export const TOTAL_THYROIDECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003008";
+export const ATA_THYROID_2025_SOURCE = "00000000-0000-4000-8000-000000003009";
+export const MASTECTOMY_SLNB_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003010";
+export const NCCN_BREAST_V6_2026_SOURCE = "00000000-0000-4000-8000-000000003011";
+export const ASCO_ASTRO_AXILLA_2025_SOURCE = "00000000-0000-4000-8000-000000003012";
+export const ROBOTIC_CHOLECYSTECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003013";
+export const SAGES_SAFE_CHOLECYSTECTOMY_SOURCE = "00000000-0000-4000-8000-000000003014";
+export const WSES_ACUTE_CALCULOUS_CHOLECYSTITIS_2020_SOURCE = "00000000-0000-4000-8000-000000003015";
+export const RIGHT_HEMICOLECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003016";
+export const ASCRS_SAGES_ERAS_2023_SOURCE = "00000000-0000-4000-8000-000000003017";
+export const COLOSTOMY_TAKEDOWN_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003018";
+export const ASCRS_OSTOMY_2022_SOURCE = "00000000-0000-4000-8000-000000003019";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -571,5 +585,117 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Mazzolai L, et al. 2024 ESC guidelines for the management of peripheral arterial and aortic diseases. European Heart Journal, 2024.",
     suppliedAt: "2026-09-10T00:00:00.000Z",
     details: "Registered during review as the European counterpart the supplied playbook cites where it differs from ACC/AHA — notably the endovascular-first position for shorter femoropopliteal occlusions. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: RTAPP_INGUINAL_PLAYBOOK_SOURCE,
+    title: "User-supplied robotic TAPP inguinal hernia attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook for robotic transabdominal preperitoneal inguinal hernia repair, supplied to Pocket Chief, September 11, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Carries inline author-year attributions throughout rather than a numbered bibliography. Named among them: Rosenberg (Nature Reviews Disease Primers 2025), the RIVAL randomized trial by way of Rodriguez Valladares (Hernia 2025), de'Angelis (Surgical Endoscopy 2024), Claus (Surgical Endoscopy 2020) for the inverted-Y and five-triangles scheme, Gantner (Surgical Endoscopy 2024), Kudsi (Hernia 2022), Mikhail (Hernia 2024), Croghan (JAMA Surgery 2023) for the RETAINER I retention data, and Montgomery (JAMA 2018). HerniaSurge is registered separately as the guideline several blocks lean on directly; everything else is cited to this document. Added during review and pending sign-off: the mesh-weight block states the divergence between HerniaSurge's lightweight-mesh position for open anterior repair and the newer network-meta position favouring heavier mesh in laparo-endoscopic repair, which the supplied document flattened into a single recommendation.",
+  },
+  {
+    id: HERNIASURGE_2018_SOURCE,
+    title: "HerniaSurge international guidelines for groin hernia management",
+    kind: "article",
+    citation: "HerniaSurge Group. International guidelines for groin hernia management. Hernia, 2018;22(1):1-165.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority the supplied playbook attributes its antibiotic-prophylaxis and mesh positions to. Identified from that playbook rather than supplied directly, so recommendation-level numbering was not available.",
+  },
+  {
+    id: TOTAL_THYROIDECTOMY_PLAYBOOK_SOURCE,
+    title: "User-supplied total thyroidectomy attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook for total thyroidectomy, supplied to Pocket Chief, September 11, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Inline author-year attributions, no bibliography. Named among them: Monfared (Laryngoscope 2002) for the cricothyroid-joint landmark, Fundakowski (AHNS 2018) for the recurrent laryngeal nerve statement, Cernea's external-branch classification by way of Zhang (Surgical Endoscopy 2021), Siu (JAMA Surgery 2019) for energy devices, Cirocchi (Cochrane 2019) and Abdelhamid (British Journal of Surgery 2021) for the neuromonitoring split, Medas (Otolaryngology Head and Neck Surgery 2021) and Squires (Journal of Surgical Research 2024) on prophylaxis, Dixon (World Journal of Surgery 2014) and Shaha (Journal of Surgical Oncology 1994) on bedside hematoma decompression, and an ATA ambulatory-surgery statement dated 2026. The 2025 ATA guideline is registered separately. Everything else is cited to this document.",
+  },
+  {
+    id: ATA_THYROID_2025_SOURCE,
+    title: "American Thyroid Association guideline on differentiated thyroid cancer",
+    kind: "article",
+    citation: "Ringel MD, et al. 2025 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer. Thyroid, 2025.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the extent-of-resection thresholds, the parathyroid-preservation recommendation and the loss-of-signal staging position the supplied playbook quotes by recommendation number. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: MASTECTOMY_SLNB_PLAYBOOK_SOURCE,
+    title: "User-supplied simple mastectomy with sentinel node biopsy attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook for total (simple) mastectomy with sentinel lymph node biopsy, supplied to Pocket Chief, September 11, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Inline author-year attributions, no bibliography. Named among them: Boyle (Society of Surgical Oncology 2025), Jatoi (Lancet Oncology 2016) for the mapping-agent meta-analysis, Stradling (Archives of Surgery 2001) on flap thickness, Cirocchi (World Journal of Surgery Oncology 2024) and Cui (Scientific Reports 2018) on the intercostobrachial nerve, Che Bakri (Annals of Surgery 2023) on lymphedema, and the SOUND and INSEMA trials by way of Gentilini (JAMA Oncology 2023) and Reimer (New England Journal of Medicine 2025). NCCN Breast Cancer v6.2026 and the ASCO/ASTRO axillary guideline are registered separately. Corrected during review and pending sign-off: the document cited Jatoi both for dual tracer lowering the false-negative rate against single agents and for that meta-analysis finding no difference between isotope alone and isotope plus dye. The reconcilable reading — dye alone is inferior, dual against isotope alone is a wash — is what is written, with the disagreement kept in its own block. The document also states it found no breast-specific antibiotic-prophylaxis guideline; that admission is preserved rather than papered over.",
+  },
+  {
+    id: NCCN_BREAST_V6_2026_SOURCE,
+    title: "NCCN clinical practice guidelines in oncology, breast cancer",
+    kind: "article",
+    citation: "National Comprehensive Cancer Network. NCCN clinical practice guidelines in oncology: breast cancer, version 6.2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the staging, axillary-management and clipped-node recommendations the supplied playbook quotes by name. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: ASCO_ASTRO_AXILLA_2025_SOURCE,
+    title: "ASCO/ASTRO guideline on axillary management in early-stage breast cancer",
+    kind: "article",
+    citation: "Park HS, et al. Management of the axilla in early-stage breast cancer: ASCO/ASTRO guideline update, 2025.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the sentinel-node indications, the special-circumstance list and the three-or-more-positive-nodes position the supplied playbook quotes. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: ROBOTIC_CHOLECYSTECTOMY_PLAYBOOK_SOURCE,
+    title: "User-supplied robotic cholecystectomy attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook for multiport and single-port robotic cholecystectomy, supplied to Pocket Chief, September 11, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Inline author-year attributions, no bibliography. The document opens by declaring the bile-duct-injury evidence contested and refusing to resolve it; that framing is preserved. Named among them: Kalata (JAMA Surgery 2023) and Mullens (JAMA Surgery 2026) on the higher-injury signal, Kandil (Journal of the American College of Surgeons 2026) and Abou Assali (Surgical Endoscopy 2025) on the equivalent-or-lower signal, Tang (Medicine 2025), Iskandar (Surgical Endoscopy 2021) on the node of Lund, Villani (JAMA Surgery 2026) on B-SAFE, Papagoras (Surgical Endoscopy 2025) on variant anatomy, and Choi and Celotto (both Surgical Endoscopy 2026) on the single-port platform. The SAGES safe-cholecystectomy statement and the WSES 2020 guideline are registered separately. Corrected during review and pending sign-off: the document lists B-SAFE as four landmarks, collapsing the hepatic artery and the umbilical fissure into one item — all five are written out here. Its acute-cholecystitis timing sentence also mixed two clocks; the WSES formulation is written instead.",
+  },
+  {
+    id: SAGES_SAFE_CHOLECYSTECTOMY_SOURCE,
+    title: "SAGES safe cholecystectomy program and multi-society consensus",
+    kind: "article",
+    citation: "Porter KK, et al. Multi-society consensus and the SAGES safe cholecystectomy framework for the prevention of bile duct injury. Surgical Endoscopy, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the critical view of safety criteria and the six-step safety framework the supplied playbook quotes and returns to throughout. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: WSES_ACUTE_CALCULOUS_CHOLECYSTITIS_2020_SOURCE,
+    title: "WSES guidelines on acute calculous cholecystitis",
+    kind: "article",
+    citation: "Pisano M, de'Angelis N, et al. 2020 World Society of Emergency Surgery updated guidelines for the diagnosis and treatment of acute calculous cholecystitis. World Journal of Emergency Surgery, 2021;16:1.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the graded timing, bailout and at-risk-condition statements the supplied playbook quotes with GRADE levels. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: RIGHT_HEMICOLECTOMY_PLAYBOOK_SOURCE,
+    title: "User-supplied right hemicolectomy attending playbook",
+    kind: "user_notes",
+    citation: "Attending operative playbook for right hemicolectomy, supplied to Pocket Chief, September 11, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Inline author-year attributions, no bibliography. Named among them: Sagorin (Surgical Endoscopy 2026), Strey (Surgical Endoscopy 2018) for the duodenum-from-below critical view, Negoi (Scientific Reports 2018) on the gastrocolic trunk, Al-Taher (Surgical Endoscopy 2022) on approach preference, the RELARC trial and Benz (British Journal of Surgery 2022) against Diaz-Vico (Annals of Surgical Oncology 2021) on central radicality, the Allaix (Annals of Surgery 2019), Bollo (British Journal of Surgery 2020) and Dohrn (Annals of Surgery 2022) trials on anastomotic route, the ICG-COLORAL trial by way of Rinne (JAMA Surgery 2025), and NCCN appendiceal and neuroendocrine guidelines. The ASCRS/SAGES enhanced-recovery guideline is registered separately. Its major-step flow diagram was drawn as ASCII art and flattened to a single line by the extractor; it is rebuilt here as a flow block.",
+  },
+  {
+    id: ASCRS_SAGES_ERAS_2023_SOURCE,
+    title: "ASCRS/SAGES enhanced recovery after colorectal surgery guideline",
+    kind: "article",
+    citation: "Irani JL, et al. Clinical practice guidelines for enhanced recovery after colon and rectal surgery from the American Society of Colon and Rectal Surgeons and the Society of American Gastrointestinal and Endoscopic Surgeons. Surgical Endoscopy, 2023.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the bowel-preparation and prophylaxis recommendations the supplied playbooks quote with strength and quality ratings. Identified from those playbooks rather than supplied directly.",
+  },
+  {
+    id: COLOSTOMY_TAKEDOWN_PLAYBOOK_SOURCE,
+    title: "User-supplied colostomy takedown with parastomal hernia repair attending playbook",
+    kind: "user_notes",
+    citation: "Attending operative playbook for colostomy takedown with parastomal hernia repair, supplied to Pocket Chief, September 11, 2026.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Inline author-year attributions, no bibliography, and a closing section headed as evidence conflicts not to harmonize — that instruction is honoured. Named among them: Chereau (Langenbecks Archives of Surgery 2018), Trepanier (Surgical Endoscopy 2017) on the transanal-assisted rendezvous, Hansson (Annals of Surgery 2012) and Kritharides (2023) on mesh configuration, the Maskal randomized trial (JAMA Surgery 2024), Tabibian (PLoS One 2025), Yalkin (BioMed Research International 2022), Holland (Surgical Endoscopy 2025), and the AGA clinical practice update on ostomies (2023). The ASCRS ostomy guideline is registered separately. Corrected during review and pending sign-off: the eponym is Deloyers, spelled without the final s in the document, and the Toupet attribution on the transmesenteric route is demoted to a parenthetical because it is thinly attached.",
+  },
+  {
+    id: ASCRS_OSTOMY_2022_SOURCE,
+    title: "ASCRS clinical practice guideline for ostomy surgery",
+    kind: "article",
+    citation: "American Society of Colon and Rectal Surgeons clinical practice guidelines for ostomy surgery. Diseases of the Colon and Rectum, 2022.",
+    suppliedAt: "2026-09-11T00:00:00.000Z",
+    details: "Registered during review as the authority behind the purse-string closure recommendation, the suture-only recurrence figure, the reversal leak rates and the mesh-infection rates the supplied playbook quotes with strength and quality ratings. Identified from that playbook rather than supplied directly.",
   },
 ];

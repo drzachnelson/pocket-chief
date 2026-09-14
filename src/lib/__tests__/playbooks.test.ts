@@ -48,10 +48,45 @@ describe("playbook library", () => {
       // Reviewed and kept: the anatomy and the hostile-neck factor genuinely belong to those
       // topics. Rejected on review: "a fast one" reached the FAST exam, and "skip lesions"
       // reached Crohn disease. Both were reworded rather than accepted.
+      //
+      // The six operative playbooks added 2026-09-13 were reviewed the same way. Rejected and
+      // reworded in the playbook: "duodenojejunal junction" and "detorsion" reached the
+      // paediatric malrotation pair from a splenic-flexure takedown and an adult caecal
+      // volvulus, "high ligation" reached paediatric sac ligation from a vascular one,
+      // "mesh repair" and "onlay" reached groin and abdominal-wall repair from a parastomal
+      // and a Lichtenstein one, "midline hernia" reached the primary umbilical/epigastric
+      // topic from a concomitant incisional defect, "ascites" reached the cirrhotic umbilical
+      // hernia from a chylous leak, and "watchful waiting" reached the inguinal hernia trials
+      // from a postoperative-imaging threshold.
+      //
+      // Two were instead narrowed at the source, because the alias was a bare modality rather
+      // than a term belonging to that topic's domain — the pattern that had "damage control"
+      // stolen from trauma laparotomy. "CT angiography" was removed from neck trauma, which
+      // keeps the domain-specific "CTA neck"; "indocyanine green" and "ICG" were removed from
+      // the Ladd procedure, which keeps "bowel viability". Between them they had captured
+      // postoperative-bleeding and perfusion-assessment sentences in four playbooks.
       "carotid-endarterectomy-bovine-patch": [
         "common facial vein -> neck-injuries-management",
         "recurrent laryngeal nerve -> neck-injuries-management",
         "tracheostomy -> airway-access-intubation-and-surgical-airways",
+      ],
+      "colostomy-takedown-with-parastomal-hernia-repair": [
+        "Duodenal injury -> gastrointestinal-tract-injury-repair",
+        "Keyhole mesh -> ventral-and-incisional-hernia",
+        "Mesh infection -> abdominal-wall-reconstruction",
+        "Parastomal hernia -> ventral-and-incisional-hernia",
+        "Retrorectus -> abdominal-wall-reconstruction",
+        "Splenic injury -> splenic-injury",
+        "Sugarbaker -> ventral-and-incisional-hernia",
+        "abdominal wall reconstruction -> abdominal-wall-reconstruction",
+        "incisional hernia -> ventral-and-incisional-hernia",
+        "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
+        "parastomal hernia -> ventral-and-incisional-hernia",
+        "peritonitis -> abdominal-pain",
+        "rectal stump -> ulcerative-colitis",
+        "splenectomy -> splenectomy-and-splenorrhaphy",
+        "sublay mesh -> abdominal-wall-reconstruction",
+        "transversus abdominis release -> abdominal-wall-reconstruction",
       ],
       "femoropopliteal-bypass": [
         "Compartment syndrome -> fasciotomy",
@@ -60,7 +95,48 @@ describe("playbook library", () => {
         "fasciotomy -> fasciotomy",
         "four-compartment fasciotomy -> fasciotomy",
       ],
+      // "volvulus" is kept deliberately: adult caecal volvulus and the malrotation spectrum
+      // share the failure of right-colon peritoneal fixation, so the jump informs the reader.
+      // Its sibling "detorsion" was not, because Ladd's procedure is a different operation.
+      "right-hemicolectomy": [
+        "pancreatic fistula -> splenectomy-and-splenorrhaphy",
+        "peritonitis -> abdominal-pain",
+        "volvulus -> malrotation",
+      ],
+      "robotic-cholecystectomy": [
+        "Bile leak -> hepatic-injury-packing-repair-and-resection",
+        "bile leak -> hepatic-injury-packing-repair-and-resection",
+        "biloma -> hepatic-injury-packing-repair-and-resection",
+        "choledocholithiasis -> choledocholithiasis",
+        "incisional hernia -> ventral-and-incisional-hernia",
+      ],
+      "robotic-tapp-inguinal-hernia-repair": [
+        "Cooper's ligament -> femoral-hernia",
+        "Corona mortis -> groin-hernia-repair",
+        "Femoral hernia -> femoral-hernia",
+        "Lichtenstein -> groin-hernia-repair",
+        "TAPP -> groin-hernia-repair",
+        "Triangle of Doom -> groin-hernia-repair",
+        "Watchful waiting -> inguinal-hernia",
+        "corona mortis -> groin-hernia-repair",
+        "iliopubic tract -> groin-hernia-repair",
+        "inguinal hernia -> inguinal-hernia",
+        "internal ring -> inguinal-hernia",
+        "myopectineal orifice -> groin-hernia-repair",
+        "peritonitis -> abdominal-pain",
+        "triangle of Doom -> groin-hernia-repair",
+        "triangle of Pain -> groin-hernia-repair",
+      ],
+      "simple-mastectomy-with-sentinel-node-biopsy": [
+        "proximal and distal control -> vascular-exposure-principles",
+      ],
       "temporal-artery-biopsy": [],
+      "total-thyroidectomy": [
+        "Recurrent laryngeal nerve -> neck-injuries-management",
+        "cricothyroidotomy -> airway-access-intubation-and-surgical-airways",
+        "recurrent laryngeal nerve -> neck-injuries-management",
+        "tracheostomy -> airway-access-intubation-and-surgical-airways",
+      ],
     };
     const entries = buildLinkIndex(listTopics());
     for (const playbook of listPlaybooks()) {
@@ -87,5 +163,18 @@ describe("playbook library", () => {
     expect(slugs("saphenous")).not.toContain("carotid-endarterectomy-bovine-patch");
     expect(slugs("saphenous")).not.toContain("temporal-artery-biopsy");
     expect(slugs("Pitanguy")).toEqual(["temporal-artery-biopsy"]);
+
+    // Same detector, stated positively, for the six added 2026-09-13. Each of these names a
+    // landmark only one operation works around, so a second slug in any of these results means
+    // a paragraph was carried across from another guide.
+    expect(slugs("myopectineal")).toEqual(["robotic-tapp-inguinal-hernia-repair"]);
+    expect(slugs("corona mortis")).toEqual(["robotic-tapp-inguinal-hernia-repair"]);
+    expect(slugs("Zuckerkandl")).toEqual(["total-thyroidectomy"]);
+    expect(slugs("clavipectoral")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
+    expect(slugs("intercostobrachial")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
+    expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
+    expect(slugs("Toldt")).toEqual(["right-hemicolectomy"]);
+    expect(slugs("Henle")).toEqual(["right-hemicolectomy"]);
+    expect(slugs("Sugarbaker")).toEqual(["colostomy-takedown-with-parastomal-hernia-repair"]);
   });
 });
