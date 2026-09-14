@@ -39,14 +39,20 @@ function TopicsDrawerProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setOpen] = useState(false);
   const [content, setContent] = useState<React.ReactNode | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const pathname = usePathname();
+  const [shownFor, setShownFor] = useState(pathname);
+  // The drawer belongs to a route, so leaving the route is what closes it. Deregistering the content
+  // must NOT: the trigger ships in the root layout while the content comes from the /topics segment
+  // layout, and React commits those separately, so a tap can legitimately arrive before any content
+  // exists. Closing from registerContent discarded that tap — React remounts the registering effect,
+  // and its cleanup landed after the tap but before the drawer had ever rendered. Resetting here
+  // instead keeps that window open while still closing on the navigation that actually ends it.
+  if (shownFor !== pathname) { setShownFor(pathname); setOpen(false); }
   const close = () => {
     setOpen(false);
     triggerRef.current?.focus();
   };
-  const registerContent = useCallback((next: React.ReactNode | null) => {
-    setContent(next);
-    if (!next) { setOpen(false); triggerRef.current = null; }
-  }, []);
+  const registerContent = useCallback((next: React.ReactNode | null) => setContent(next), []);
   const value = { isOpen, close, setContent: registerContent, open: (trigger: HTMLElement) => { triggerRef.current = trigger; setOpen(true); } };
   return <TopicsDrawerContext.Provider value={value}>{children}{isOpen ? content : null}</TopicsDrawerContext.Provider>;
 }
