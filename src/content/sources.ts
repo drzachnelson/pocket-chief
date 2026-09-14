@@ -66,6 +66,10 @@ export const RIGHT_HEMICOLECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-0000
 export const ASCRS_SAGES_ERAS_2023_SOURCE = "00000000-0000-4000-8000-000000003017";
 export const COLOSTOMY_TAKEDOWN_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003018";
 export const ASCRS_OSTOMY_2022_SOURCE = "00000000-0000-4000-8000-000000003019";
+export const ROBOTIC_VENTRAL_HERNIA_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003020";
+export const EHS_AHS_UMBILICAL_2020_SOURCE = "00000000-0000-4000-8000-000000003021";
+export const SAGES_HERNIA_PROPHYLAXIS_2016_SOURCE = "00000000-0000-4000-8000-000000003022";
+export const WSES_EMERGENCY_HERNIA_SOURCE = "00000000-0000-4000-8000-000000003023";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -689,6 +693,38 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Attending operative playbook for colostomy takedown with parastomal hernia repair, supplied to Pocket Chief, September 11, 2026.",
     suppliedAt: "2026-09-11T00:00:00.000Z",
     details: "Inline author-year attributions, no bibliography, and a closing section headed as evidence conflicts not to harmonize — that instruction is honoured. Named among them: Chereau (Langenbecks Archives of Surgery 2018), Trepanier (Surgical Endoscopy 2017) on the transanal-assisted rendezvous, Hansson (Annals of Surgery 2012) and Kritharides (2023) on mesh configuration, the Maskal randomized trial (JAMA Surgery 2024), Tabibian (PLoS One 2025), Yalkin (BioMed Research International 2022), Holland (Surgical Endoscopy 2025), and the AGA clinical practice update on ostomies (2023). The ASCRS ostomy guideline is registered separately. Corrected during review and pending sign-off: the eponym is Deloyers, spelled without the final s in the document, and the Toupet attribution on the transmesenteric route is demoted to a parenthetical because it is thinly attached.",
+  },
+  {
+    id: ROBOTIC_VENTRAL_HERNIA_PLAYBOOK_SOURCE,
+    title: "User-supplied robotic ventral and umbilical hernia repair attending playbook",
+    kind: "user_notes",
+    citation: "Attending procedure playbook for robotic ventral, umbilical, epigastric and incisional hernia repair with mesh, covering the rIPOM+, rTAPP and retromuscular variants, supplied to Pocket Chief, September 13, 2026.",
+    suppliedAt: "2026-09-13T00:00:00.000Z",
+    details: "Inline author-year attributions throughout, no numbered bibliography. Named among them: Albutt and Fagenholz and Clement and Altom (both JOMI 2023) and Liu (JOMI eTEP video 2024) for the operative narrative, Petro (JAMA Surgery 2021) for PROVE-IT, Dhanani (Annals of Surgery 2023), Almiron da R Soares (Journal of the American College of Surgeons 2025) for the 34-trial network meta-analysis, Dhal (Hernia 2026) for the no-single-superior-technique conclusion, de'Angelis (Surgical Endoscopy 2024), Morrell (Hernia 2021) and Pacheco (Hernia 2024) on crossover, Ramana, Arora and Belyansky (Hernia 2021) for the lamppost sign, Gokcal (Surgical Endoscopy 2020) and Grossi (Hernia 2021) on transversus abdominis release, Christoffersen (Surgical Endoscopy 2023), da Silveira (Hernia 2026), Al-Salemi (Hernia 2025), Mikhail (Hernia 2024) on overlap, Love (Surgical Endoscopy 2026) and Zaman (Hernia 2023) on eTEP, Fortelny by way of the International Endohernia Society guidelines (Surgical Endoscopy 2019) on fixation, Arias-Espinosa (Surgical Endoscopy 2024) on robotic endoscopic onlay, Bronswijk (Hernia 2022) on cirrhosis, Ayuso (Langenbecks Archives of Surgery 2023) on imaging, Warren (American Journal of Surgery 2020) and Kao (Plastic and Reconstructive Surgery 2018) on mesh salvage, Woo (Surgical Endoscopy 2025) on venous thromboembolism after component separation, and Al-Mansour, Holland and Rosenberg on preoperative optimization. The EHS/Americas Hernia Society umbilical guideline, the SAGES prophylaxis guideline and the WSES emergency-hernia guidelines are registered separately. Corrected during review and pending sign-off: the document attributes the EHS/Americas Hernia Society umbilical and epigastric guideline to Köckerling (Hernia 2021); the guideline itself is Henriksen (British Journal of Surgery 2020), and it is cited that way here. Its mesh-overlap recommendation was also flattened to a single 3 cm figure, where the guideline suggests 2 cm for the smallest defects and 3 cm for medium ones. The evidence block states the Dhanani two-year recurrence figures, 4 per cent robotic against 13 per cent laparoscopic, which the document reduced to no clear advantage without giving the numbers or the fact that the comparison was underpowered. The mesh-salvage figures are written as the source reports them — 65 per cent overall and 72 per cent for extraperitoneal macroporous polypropylene, against no salvage at all for composite and PTFE — rather than as the single blended range the document gave.",
+  },
+  {
+    id: EHS_AHS_UMBILICAL_2020_SOURCE,
+    title: "European Hernia Society and Americas Hernia Society guidelines for umbilical and epigastric hernias",
+    kind: "article",
+    citation: "Henriksen NA, et al. Guidelines for treatment of umbilical and epigastric hernias from the European Hernia Society and Americas Hernia Society. British Journal of Surgery, 2020;107(3):171-190.",
+    suppliedAt: "2026-09-13T00:00:00.000Z",
+    details: "Registered during review as the authority behind the mesh-for-all position, the defect-size framework and the preperitoneal flat-mesh recommendation the supplied playbook quotes. Identified from that playbook rather than supplied directly, and re-attributed: the playbook credits Köckerling (Hernia 2021) for this guideline.",
+  },
+  {
+    id: SAGES_HERNIA_PROPHYLAXIS_2016_SOURCE,
+    title: "SAGES guidelines for laparoscopic ventral hernia repair",
+    kind: "article",
+    citation: "Earle D, et al. SAGES guidelines for laparoscopic ventral hernia repair. Surgical Endoscopy, 2016;30(8):3163-3183.",
+    suppliedAt: "2026-09-13T00:00:00.000Z",
+    details: "Registered during review as the authority behind the antibiotic-prophylaxis recommendation and the enterotomy-management position the supplied playbook attributes to it. Identified from that playbook rather than supplied directly. The playbook notes that this evidence base derives from open repair, which is preserved.",
+  },
+  {
+    id: WSES_EMERGENCY_HERNIA_SOURCE,
+    title: "WSES guidelines on emergency repair of complicated abdominal wall hernias",
+    kind: "article",
+    citation: "De Simone B, et al. Emergency repair of complicated abdominal wall hernias: WSES guidelines. Hernia, 2020;24(2):359-368; updated as Sermonesi G, et al. Cesena guidelines, World Journal of Emergency Surgery, 2023.",
+    suppliedAt: "2026-09-13T00:00:00.000Z",
+    details: "Registered during review as the authority behind the strangulation-prediction markers and the contaminated-field and incarceration positions the supplied playbook quotes. Identified from that playbook rather than supplied directly; the playbook cites the 2020 guideline and its 2023 Cesena update together, and both are folded into this entry.",
   },
   {
     id: ASCRS_OSTOMY_2022_SOURCE,

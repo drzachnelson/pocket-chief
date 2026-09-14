@@ -127,6 +127,41 @@ describe("playbook library", () => {
         "triangle of Doom -> groin-hernia-repair",
         "triangle of Pain -> groin-hernia-repair",
       ],
+      // The robotic ventral/umbilical guide added 2026-09-13 was reviewed the same way, and it
+      // links more widely than the others because the three abdominal-wall topics genuinely own
+      // its vocabulary. Rejected and reworded in the playbook: "TAPP" reached groin hernia repair
+      // from a ventral port-placement sentence, "mesh repair" reached it again from the cirrhotic
+      // emergency scenario, and "watchful waiting" reached the inguinal hernia trials from a
+      // Dutch umbilical observation cohort — the same false positive caught once before.
+      //
+      // "arcuate line" is kept although it resolves to rectus sheath haematoma rather than to
+      // abdominal wall reconstruction, which lists it too: the sentence states the exact
+      // anatomical fact the haematoma topic turns on, that there is no posterior sheath below
+      // the line. "semilunar line" is kept for the same reason — an iatrogenic lateral hernia
+      // at that border is a Spigelian hernia, which is what the unusual-hernias topic covers.
+      // "onlay" is kept here though it was rejected from the mastectomy-era review: there it was
+      // an anterior inguinal onlay, here it is the mesh position abdominal wall reconstruction
+      // owns.
+      "robotic-ventral-umbilical-hernia-repair": [
+        "Arcuate line -> rectus-sheath-hematoma",
+        "Diastasis recti -> umbilical-and-epigastric-hernia",
+        "Linea alba -> umbilical-and-epigastric-hernia",
+        "Loss of domain -> ventral-and-incisional-hernia",
+        "Retrorectus -> abdominal-wall-reconstruction",
+        "Rives-Stoppa -> abdominal-wall-reconstruction",
+        "ascites -> umbilical-and-epigastric-hernia",
+        "botulinum toxin -> ventral-and-incisional-hernia",
+        "component separation -> abdominal-wall-reconstruction",
+        "loss of domain -> ventral-and-incisional-hernia",
+        "mesh infection -> abdominal-wall-reconstruction",
+        "onlay -> abdominal-wall-reconstruction",
+        "progressive pneumoperitoneum -> ventral-and-incisional-hernia",
+        "retrorectus -> abdominal-wall-reconstruction",
+        "semilunar line -> unusual-hernias",
+        "transversus abdominis release -> abdominal-wall-reconstruction",
+        "umbilical hernia -> umbilical-and-epigastric-hernia",
+        "ventral hernia -> ventral-and-incisional-hernia",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "proximal and distal control -> vascular-exposure-principles",
       ],
@@ -176,5 +211,8 @@ describe("playbook library", () => {
     expect(slugs("Toldt")).toEqual(["right-hemicolectomy"]);
     expect(slugs("Henle")).toEqual(["right-hemicolectomy"]);
     expect(slugs("Sugarbaker")).toEqual(["colostomy-takedown-with-parastomal-hernia-repair"]);
+    expect(slugs("lamppost")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
+    expect(slugs("eTEP")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
+    expect(slugs("linea semilunaris")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
   });
 });

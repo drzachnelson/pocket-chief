@@ -5,6 +5,7 @@ import { femoropoplitealBypassPlaybook } from "@/content/playbooks/femoropoplite
 import { rightHemicolectomyPlaybook } from "@/content/playbooks/right-hemicolectomy";
 import { roboticCholecystectomyPlaybook } from "@/content/playbooks/robotic-cholecystectomy";
 import { roboticTappInguinalHerniaRepairPlaybook } from "@/content/playbooks/robotic-tapp-inguinal-hernia-repair";
+import { roboticVentralUmbilicalHerniaRepairPlaybook } from "@/content/playbooks/robotic-ventral-umbilical-hernia-repair";
 import { simpleMastectomyWithSentinelNodeBiopsyPlaybook } from "@/content/playbooks/simple-mastectomy-with-sentinel-node-biopsy";
 import { temporalArteryBiopsyPlaybook } from "@/content/playbooks/temporal-artery-biopsy";
 import { totalThyroidectomyPlaybook } from "@/content/playbooks/total-thyroidectomy";
@@ -16,6 +17,7 @@ export {
   rightHemicolectomyPlaybook,
   roboticCholecystectomyPlaybook,
   roboticTappInguinalHerniaRepairPlaybook,
+  roboticVentralUmbilicalHerniaRepairPlaybook,
   simpleMastectomyWithSentinelNodeBiopsyPlaybook,
   temporalArteryBiopsyPlaybook,
   totalThyroidectomyPlaybook,
@@ -28,6 +30,7 @@ export const libraryPlaybooks: Playbook[] = [
   rightHemicolectomyPlaybook,
   roboticCholecystectomyPlaybook,
   roboticTappInguinalHerniaRepairPlaybook,
+  roboticVentralUmbilicalHerniaRepairPlaybook,
   simpleMastectomyWithSentinelNodeBiopsyPlaybook,
   temporalArteryBiopsyPlaybook,
   totalThyroidectomyPlaybook,
