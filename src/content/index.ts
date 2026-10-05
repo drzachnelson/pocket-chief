@@ -30,6 +30,7 @@ import { neckTraumaAssessmentTopic } from "@/content/topics/initial-assessment-a
 import { malrotationOperationTopic } from "@/content/topics/malrotation-operation";
 import { neckInjuriesManagementTopic } from "@/content/topics/neck-injuries-management";
 import { malrotationTopic } from "@/content/topics/malrotation";
+import { pancreaticoduodenectomyTopic } from "@/content/topics/pancreaticoduodenectomy";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
 import { percutaneousBreastBiopsyTopic } from "@/content/topics/percutaneous-breast-biopsy-and-cyst-aspiration";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
@@ -108,6 +109,7 @@ export const libraryTopics: Topic[] = [
   hemorrhoidsTopic,
   proceduresForHemorrhoidsTopic,
   percutaneousBreastBiopsyTopic,
+  pancreaticoduodenectomyTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

@@ -131,7 +131,7 @@ export const neckInjuriesManagementTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001228",
   slug: "neck-injuries-management",
   title: "Neck Injuries Management",
-  aliases: ["neck exploration", "neck injury repair", "carotid injury repair", "carotid ligation", "carotid shunt", "common facial vein", "sternocleidomastoid incision", "median sternotomy", "mandibular subluxation", "digastric division", "internal jugular vein injury", "venorrhaphy", "vertebral artery injury", "laryngotracheal repair", "tracheal repair", "protective tracheostomy", "pharyngoesophageal injury", "esophageal repair", "cervical esophagus", "muscle flap buttress", "thoracic duct injury", "recurrent laryngeal nerve", "tracheoinnominate fistula", "Utley maneuver", "spit fistula"],
+  aliases: ["neck exploration", "neck injury repair", "carotid injury repair", "carotid ligation", "carotid shunt", "common facial vein", "sternocleidomastoid incision", "median sternotomy", "mandibular subluxation", "digastric division", "internal jugular vein injury", "vertebral artery injury", "laryngotracheal repair", "tracheal repair", "protective tracheostomy", "pharyngoesophageal injury", "esophageal repair", "cervical esophagus", "muscle flap buttress", "thoracic duct injury", "recurrent laryngeal nerve", "tracheoinnominate fistula", "Utley maneuver", "spit fistula"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
   tags: ["trauma", "neck", "vascular", "operative-technique", "airway", "absite", "score"],

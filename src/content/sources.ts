@@ -44,6 +44,22 @@ export const BREAST_BIOPSY_PACKET_SOURCE = "00000000-0000-4000-8000-000000002200
 export const SCORE_PERCUTANEOUS_BREAST_BIOPSY_SOURCE = "00000000-0000-4000-8000-000000002201";
 export const FISER_BREAST_SOURCE = "00000000-0000-4000-8000-000000002202";
 export const ACR_BIRADS_SOURCE = "00000000-0000-4000-8000-000000002203";
+// Pancreas. One block for the Pancreaticoduodenectomy topic and the open Whipple playbook, because
+// both pages are written from the same two owner-supplied guides and splitting their sources across
+// the topic and playbook ranges would imply a provenance split that does not exist.
+export const PANCREATICODUODENECTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000002300";
+export const WHIPPLE_OPERATIVE_PACKET_SOURCE = "00000000-0000-4000-8000-000000002301";
+export const SCORE_PANCREATICODUODENECTOMY_SOURCE = "00000000-0000-4000-8000-000000002302";
+export const FISER_PANCREAS_SOURCE = "00000000-0000-4000-8000-000000002303";
+export const NCCN_PANCREATIC_V4_2026_SOURCE = "00000000-0000-4000-8000-000000002304";
+export const ISGPS_POPF_2016_SOURCE = "00000000-0000-4000-8000-000000002305";
+export const PRODIGE24_SOURCE = "00000000-0000-4000-8000-000000002306";
+export const PRESTON_PPH_2024_SOURCE = "00000000-0000-4000-8000-000000002307";
+export const PREOPANC1_SOURCE = "00000000-0000-4000-8000-000000002308";
+export const NORPACT1_SOURCE = "00000000-0000-4000-8000-000000002309";
+export const ALLIANCE_A021501_SOURCE = "00000000-0000-4000-8000-000000002310";
+export const COCHRANE_ANTECOLIC_2022_SOURCE = "00000000-0000-4000-8000-000000002311";
+export const LEOPARD2_SOURCE = "00000000-0000-4000-8000-000000002312";
 
 // Playbooks. Operative guides, numbered from 3000 so they never collide with topic sources.
 export const TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003000";
@@ -541,6 +557,125 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "American College of Radiology. ACR BI-RADS Atlas: Breast Imaging Reporting and Data System, 5th edition. Reston, VA: American College of Radiology.",
     suppliedAt: "2026-08-25T00:00:00.000Z",
     details: "Registered during review as the authority behind the assessment categories the packet tabulates. Where the packet and the SCORE module state the category 4 and 5 boundary differently - the packet uses the atlas convention of greater than 2% to less than 95% for category 4 and 95% or greater for category 5, while SCORE writes 2% to 94% and more than 94% - the atlas convention is carried.",
+  },
+  {
+    id: PANCREATICODUODENECTOMY_PACKET_SOURCE,
+    title: "Owner-supplied Whipple procedure study guide (board and evidence emphasis)",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 4, 2026: \"Whipple Procedure (Pancreaticoduodenectomy) — Pocket Chief\", the high-yield SCORE and board study guide.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: [
+      "The first of two Whipple guides supplied together; the second, with operative-step emphasis, is registered separately. Inline author-year attributions, no bibliography.",
+      "Named among them: NCCN Pancreatic Adenocarcinoma v4.2026 (registered separately), Park (JAMA 2021) on volume and vessel-contact terminology, Wu (Cochrane 2025) on morbidity, Al-Hawary (Radiology 2014) for the SAR/APA reporting template, Strobel (Nature Reviews Clinical Oncology 2019) and Stoop (Lancet 2025) on CA 19-9, Hüttner (Cochrane 2016) on pylorus preservation, Hackert (Annals of Surgery 2018) for the PROPP trial, Bassi (Surgery 2017) for the ISGPS fistula definition (registered separately), Zhang (2020) and Pacella (2026) on interventional management of hemorrhage, Preston (JAMA Surgery 2024, registered separately), the ACG biliary stricture guideline (2023) and Scheufele (Surgery 2017) on preoperative drainage, the ASGE/ACG ERCP quality indicators (2026), ASCO (2019), and Conroy (NEJM 2018, JAMA Oncology 2022) for PRODIGE-24 (registered separately).",
+      "The drainage randomized trial the packet summarizes through ACG and Scheufele is van der Gaag (NEJM 2010); its 74% versus 39% serious-complication figures and the 14.6 mg/dL bilirubin exclusion match that trial.",
+      "Corrected during review and pending owner sign-off: the packet attributes its fistula risk factors to a \"Schuh/PARIS trial, 2026\". The PARIS study (Schuh, Heidelberg) is real — a prospective validation of the ISGPS gland-texture and duct-size classification, protocol in BMJ Open 2022 — but a 2026 results publication could not be confirmed, so the factors are written as the four Fistula Risk Score variables, which is how the second guide states them.",
+      "The packet calls pancreatic-protocol CT \"triphasic\" while describing pancreatic and portal-venous phases; the SCORE module lists noncontrast, arterial, and venous phases. Written as multiphase rather than choosing a phase count. The packet's surgeon-volume threshold of more than 20 resections a year is not carried, because it could not be traced; the center threshold of 15 to 20 is.",
+      "Softened during review: the packet lists octreotide to reduce fistula output as management. That matches the SCORE module, but somatostatin analogs have not been shown to speed closure of an established fistula, and the text says so.",
+      "The packet's framing of routine preoperative biliary drainage as a board-versus-current split is not carried as a split, because Fiser already keys the current answer (drainage raises wound infection without improving survival).",
+    ].join(" "),
+  },
+  {
+    id: WHIPPLE_OPERATIVE_PACKET_SOURCE,
+    title: "Owner-supplied Whipple procedure study guide (operative-step emphasis)",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 4, 2026: \"Whipple Procedure (Pancreaticoduodenectomy) Pocket Chief\", the study guide with emphasis on operative steps, pitfalls, and per-step watch-outs.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: [
+      "The second of two Whipple guides supplied together, and the backbone of the open pancreaticoduodenectomy playbook's twelve steps. No bibliography and almost no attributions; it names the QUANUPAD and MAPLE-PD trials and the ISGPS venous-resection classification (Bockhorn, Surgery 2014).",
+      "Verified during review: QUANUPAD is Busquets (Langenbecks Archives of Surgery 2022), which found delayed gastric emptying in 50% after classic Whipple and 62% after pylorus preservation, not significant (p = 0.26). MAPLE-PD is the Japanese randomized trial of the mesenteric (artery-first) against the conventional approach, 354 patients, with no overall-survival difference (hazard ratio 1.02).",
+      "Corrected during review and pending owner sign-off: the guide states an antecolic gastro- or duodenojejunostomy reduces delayed gastric emptying. Meta-analyses of randomized trials, including the 2022 Cochrane review (registered separately), find no clear difference; the playbook writes route as surgeon preference and the topic carries it as a board-versus-current row.",
+      "The guide calls the GDA stump the classic cause of both early and late post-pancreatectomy hemorrhage; the first guide and the SCORE module assign it to late hemorrhage, and that is what is written. The two guides also disagree on overall morbidity (30% to 50% here, 30% to 60% in the first) and on the hepaticojejunostomy distance from the pancreaticojejunostomy (7 to 10 cm here, 5 to 10 cm in the first); the first guide's figures are carried. This guide gives the pylorus-preserving duodenal division as 2 to 3 cm in one section and 2 to 4 cm in another; 2 to 3 cm is written.",
+      "Its margin statement — R0 classically at least 1 mm, NCCN historically more than 0 mm — is written as two coexisting definitions rather than an old one and a new one. Its rule to re-excise for at least 5 mm of clearance when frozen section shows tumor within 5 mm could not be traced to a guideline and is not carried.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_PANCREATICODUODENECTOMY_SOURCE,
+    title: "SCORE curriculum module: Pancreaticoduodenectomy",
+    kind: "website",
+    citation: "Abdel-Misih SR. \"Pancreaticoduodenectomy.\" Surgical Council on Resident Education (SCORE) Portal, Pancreas module, August 2, 2023.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=145049",
+    details: "Retrieved August 12, 2026. Supplies the keyed outline of operative steps, the intraoperative decisions on pylorus preservation and venous resection, preoperative preparation including the bilirubin threshold for chemotherapy and nutritional assessment, and the extraluminal-versus-intraluminal framing of post-pancreatectomy hemorrhage. Its resectability definitions match NCCN's.",
+  },
+  {
+    id: FISER_PANCREAS_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — pancreas chapter",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review, 8th edition. Chapter 33, Pancreas, pages 461-485.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    details: "Owner-supplied chapter text. Used for the board-keyed answers on pancreatic adenocarcinoma (pages 480-481): delayed gastric emptying as the most common complication treated with metoclopramide, marginal ulcer treated with a proton pump inhibitor, biopsy only for a suspicious node outside the field, and two answers that current evidence has moved — neoadjuvant chemotherapy plus radiation for borderline disease, and 20% five-year survival after resection — both written as board-versus-current rows.",
+  },
+  {
+    id: NCCN_PANCREATIC_V4_2026_SOURCE,
+    title: "NCCN clinical practice guidelines in oncology, pancreatic adenocarcinoma",
+    kind: "article",
+    citation: "National Comprehensive Cancer Network. NCCN clinical practice guidelines in oncology: pancreatic adenocarcinoma, version 4.2026.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Registered during review as the authority behind the resectability definitions, the adjuvant regimens, and the surveillance schedule the supplied guide quotes by name and version. Identified from that guide rather than supplied directly. The neoadjuvant indications — borderline disease, and resectable disease with high-risk features — were added during review at the owner's request, beyond both supplied guides, and are pending sign-off.",
+  },
+  {
+    id: ISGPS_POPF_2016_SOURCE,
+    title: "ISGPS 2016 definition and grading of postoperative pancreatic fistula",
+    kind: "article",
+    citation: "Bassi C, Marchegiani G, Dervenis C, et al. The 2016 update of the International Study Group (ISGPS) definition and grading of postoperative pancreatic fistula: 11 years after. Surgery, 2017;161(3):584-591.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Registered during review as the authority behind the fistula definition and grades both supplied guides restate. Identified from the first guide rather than supplied directly.",
+  },
+  {
+    id: PRODIGE24_SOURCE,
+    title: "PRODIGE-24/CCTG PA.6: adjuvant modified FOLFIRINOX versus gemcitabine",
+    kind: "article",
+    citation: "Conroy T, Hammel P, Hebbar M, et al. FOLFIRINOX or gemcitabine as adjuvant therapy for pancreatic cancer. New England Journal of Medicine, 2018;379(25):2395-2406; five-year outcomes in Conroy T, et al. JAMA Oncology, 2022;8(11):1571-1578.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Registered during review as the landmark trial behind the preferred adjuvant regimen. Identified from the first guide, which quotes the five-year update's figures: median overall survival 53.5 against 35.5 months and five-year survival 43.2% against 31.4%.",
+  },
+  {
+    id: PRESTON_PPH_2024_SOURCE,
+    title: "Hemorrhage sites and mitigation strategies after pancreaticoduodenectomy",
+    kind: "article",
+    citation: "Preston et al. Hemorrhage sites and mitigation strategies after pancreaticoduodenectomy. JAMA Surgery, 2024.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Registered during review as the authority behind the first guide's classic-versus-current flag on the GDA stump. Verified during review: a retrospective cohort of more than 3,000 pancreaticoduodenectomies at Memorial Sloan Kettering and Thomas Jefferson, 2011 to 2021, with a 3% hemorrhage rate, in which the GDA was the source in 16.7%; empiric GDA embolization or stenting without a visible source was associated with significant morbidity and rebleeding.",
+  },
+  {
+    id: PREOPANC1_SOURCE,
+    title: "PREOPANC: neoadjuvant chemoradiotherapy versus upfront surgery, long-term results",
+    kind: "article",
+    citation: "Versteijne E, van Dam JL, Suker M, et al. Neoadjuvant chemoradiotherapy versus upfront surgery for resectable and borderline resectable pancreatic cancer: long-term results of the Dutch randomized PREOPANC trial. Journal of Clinical Oncology, 2022;40(11):1220-1230.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Added during review at the owner's request, beyond both supplied guides; pending sign-off. Five-year overall survival 20.5% against 6.5%, hazard ratio 0.73, in 246 resectable and borderline patients.",
+  },
+  {
+    id: NORPACT1_SOURCE,
+    title: "NORPACT-1: neoadjuvant FOLFIRINOX versus upfront surgery for resectable pancreatic head cancer",
+    kind: "article",
+    citation: "Labori KJ, Bratlie SO, Andersson B, et al. Neoadjuvant FOLFIRINOX versus upfront surgery for resectable pancreatic head cancer (NORPACT-1): a multicentre, randomised, phase 2 trial. Lancet Gastroenterology and Hepatology, 2024;9(3):205-217.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Added during review at the owner's request, beyond both supplied guides; pending sign-off. Median overall survival 25.1 months with neoadjuvant FOLFIRINOX against 38.5 months with upfront surgery and adjuvant chemotherapy.",
+  },
+  {
+    id: ALLIANCE_A021501_SOURCE,
+    title: "Alliance A021501: preoperative mFOLFIRINOX with or without hypofractionated radiotherapy",
+    kind: "article",
+    citation: "Katz MHG, Shi Q, Meyers J, et al. Efficacy of preoperative mFOLFIRINOX vs mFOLFIRINOX plus hypofractionated radiotherapy for borderline resectable adenocarcinoma of the pancreas: the A021501 phase 2 randomized clinical trial. JAMA Oncology, 2022;8(9):1263-1270.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Added during review at the owner's request, beyond both supplied guides; pending sign-off. Chemotherapy alone produced favorable survival against the historical benchmark; the arm adding stereotactic or hypofractionated radiation did not.",
+  },
+  {
+    id: COCHRANE_ANTECOLIC_2022_SOURCE,
+    title: "Cochrane review: antecolic versus retrocolic reconstruction after pancreaticoduodenectomy",
+    kind: "article",
+    citation: "Hüttner FJ, Klotz R, Ulrich A, Büchler MW, Probst P, Diener MK. Antecolic versus retrocolic reconstruction after partial pancreaticoduodenectomy. Cochrane Database of Systematic Reviews, 2022, Issue 1, CD011862.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Registered during review to correct the second guide, which states that an antecolic route reduces delayed gastric emptying. Eight randomized trials and 818 participants, with no clear difference in delayed gastric emptying by route. Pending owner sign-off.",
+  },
+  {
+    id: LEOPARD2_SOURCE,
+    title: "LEOPARD-2: laparoscopic versus open pancreatoduodenectomy",
+    kind: "article",
+    citation: "van Hilst J, de Rooij T, Bosscha K, et al. Laparoscopic versus open pancreatoduodenectomy for pancreatic or periampullary tumours (LEOPARD-2): a multicentre, patient-blinded, randomised controlled phase 2/3 trial. Lancet Gastroenterology and Hepatology, 2019;4(3):199-207.",
+    suppliedAt: "2026-10-04T00:00:00.000Z",
+    details: "Added during review beyond both supplied guides, which mention minimally invasive pancreatoduodenectomy only in general terms; pending sign-off. Stopped early for safety after complication-related 90-day mortality of 10% laparoscopic against 2% open.",
   },
   {
     id: TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE,

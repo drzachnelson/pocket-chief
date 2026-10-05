@@ -40,4 +40,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "anorectal", title: "Anorectal", slug: "anorectal", parentId: "score", order: 36 },
   { id: "anorectal-conditions", title: "Diseases & Conditions", slug: "anorectal-diseases-conditions", parentId: "anorectal", order: 37 },
   { id: "anorectal-procedures", title: "Operations & Procedures", slug: "anorectal-operations-procedures", parentId: "anorectal", order: 38 },
+  { id: "pancreas", title: "Pancreas", slug: "pancreas", parentId: "score", order: 39 },
+  { id: "pancreas-conditions", title: "Diseases & Conditions", slug: "pancreas-diseases-conditions", parentId: "pancreas", order: 40 },
+  { id: "pancreas-procedures", title: "Operations & Procedures", slug: "pancreas-operations-procedures", parentId: "pancreas", order: 41 },
 ];
