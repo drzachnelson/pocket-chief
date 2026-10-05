@@ -115,7 +115,7 @@ export const splenectomyAndSplenorrhaphyTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001221",
   slug: "splenectomy-and-splenorrhaphy",
   title: "Splenectomy and Splenorrhaphy",
-  aliases: ["splenectomy", "splenorrhaphy", "splenic salvage", "spleen-preserving surgery", "emergent splenectomy", "trauma splenectomy", "short gastric arteries", "gastrosplenic ligament", "splenic hilum", "splenic artery ligation", "OPSI", "overwhelming postsplenectomy infection", "postsplenectomy vaccination", "pneumococcal vaccine splenectomy", "PCV13 PPSV23", "PCV20", "asplenia", "pancreatic tail injury", "pancreatic fistula", "subphrenic abscess", "postsplenectomy thrombocytosis", "portal vein thrombosis", "splenic mobilization", "make the spleen a midline organ", "double ligation splenic artery", "Capnocytophaga", "purpura fulminans"],
+  aliases: ["splenectomy", "splenorrhaphy", "splenic salvage", "spleen-preserving surgery", "emergent splenectomy", "trauma splenectomy", "short gastric arteries", "gastrosplenic ligament", "splenic hilum", "splenic artery ligation", "OPSI", "overwhelming postsplenectomy infection", "postsplenectomy vaccination", "pneumococcal vaccine splenectomy", "PCV13 PPSV23", "PCV20", "asplenia", "pancreatic tail injury", "subphrenic abscess", "postsplenectomy thrombocytosis", "portal vein thrombosis", "splenic mobilization", "make the spleen a midline organ", "double ligation splenic artery", "Capnocytophaga", "purpura fulminans"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
   tags: ["trauma", "spleen", "operative-technique", "splenectomy", "absite", "score"],

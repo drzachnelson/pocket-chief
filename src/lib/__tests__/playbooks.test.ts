@@ -95,11 +95,32 @@ describe("playbook library", () => {
         "fasciotomy -> fasciotomy",
         "four-compartment fasciotomy -> fasciotomy",
       ],
+      // The open Whipple guide added 2026-10-04 was reviewed the same way. "Kocher maneuver" is kept:
+      // abdominal exploration describes the same manoeuvre. Rejected and reworded in the playbook:
+      // "ligament of Treitz" reached malrotation from a jejunal division, the same false positive as
+      // "duodenojejunal junction" before it, and "bile leak" reached hepatic trauma from a
+      // hepaticojejunostomy leak, which is managed nothing like a liver-injury leak.
+      //
+      // Two aliases were narrowed at the source instead, both bare terms rather than domain ones:
+      // "venorrhaphy" left neck injuries, which keeps "internal jugular vein injury", and
+      // "pancreatic fistula" left splenectomy for the pancreaticoduodenectomy topic, which defines
+      // and grades it. That moves the right hemicolectomy's pancreatic-head row with it.
+      "open-pancreaticoduodenectomy": [
+        "Kocher maneuver -> abdominal-exploration",
+        "MAPLE-PD -> pancreaticoduodenectomy",
+        "Pancreaticojejunostomy -> pancreaticoduodenectomy",
+        "SMA margin -> pancreaticoduodenectomy",
+        "Whipple -> pancreaticoduodenectomy",
+        "pancreatic fistula -> pancreaticoduodenectomy",
+        "pancreaticoduodenectomy -> pancreaticoduodenectomy",
+        "pancreaticojejunostomy -> pancreaticoduodenectomy",
+        "pancreatoduodenectomy -> pancreaticoduodenectomy",
+      ],
       // "volvulus" is kept deliberately: adult caecal volvulus and the malrotation spectrum
       // share the failure of right-colon peritoneal fixation, so the jump informs the reader.
       // Its sibling "detorsion" was not, because Ladd's procedure is a different operation.
       "right-hemicolectomy": [
-        "pancreatic fistula -> splenectomy-and-splenorrhaphy",
+        "pancreatic fistula -> pancreaticoduodenectomy",
         "peritonitis -> abdominal-pain",
         "volvulus -> malrotation",
       ],
@@ -209,10 +230,14 @@ describe("playbook library", () => {
     expect(slugs("intercostobrachial")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
     expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
     expect(slugs("Toldt")).toEqual(["right-hemicolectomy"]);
-    expect(slugs("Henle")).toEqual(["right-hemicolectomy"]);
+    // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior
+    // pancreatic neck in a Whipple, and to reach the middle colic root in a right colectomy.
+    expect(slugs("Henle")).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);
     expect(slugs("Sugarbaker")).toEqual(["colostomy-takedown-with-parastomal-hernia-repair"]);
     expect(slugs("lamppost")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
     expect(slugs("eTEP")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
     expect(slugs("linea semilunaris")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
+    expect(slugs("median arcuate")).toEqual(["open-pancreaticoduodenectomy"]);
+    expect(slugs("Blumgart")).toEqual(["open-pancreaticoduodenectomy"]);
   });
 });
