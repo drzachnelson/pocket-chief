@@ -538,39 +538,40 @@ Transcribed verbatim apart from repairing OCR ligatures (`ﬃ`, `ﬀ`). Duplicat
 
 ## How the current library maps to this outline
 
-The app's 21 topics do not map one-to-one onto the outline, because the first batches were authored from study packets before this outline was supplied.
+As of 2026-10-10: **52 topics and 11 playbooks**. **44 of the 366 outline entries are covered and 12 are partial**. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
 
-**Exact matches** — General Abdomen is complete and uses the outline's own titles: Abdominal Pain, Rectus Sheath Hematoma, Desmoids & Fibromatoses, Peritoneal Neoplasms, Abdominal Exploration, Peritoneal Dialysis Catheter Insertion.
+"Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
-**Finer-grained than the outline** — the Hernia section was split further than SCORE splits it:
+| Module | Entries | Covered | Partial | App topics |
+|---|---|---|---|---|
+| General Abdomen | 6 | 6 | — | All six, under the outline's own titles |
+| Hernia | 8 | 6 | — | Inguinal Hernia and Femoral Hernia (one outline entry), Unusual Hernias, Umbilical & Epigastric Hernia, Ventral & Incisional Hernia, Groin Hernia Repair, Abdominal Wall Reconstruction (Ventral Hernia Repair) |
+| Biliary | 18 | — | 1 | Choledocholithiasis (Benign Biliary Obstruction) |
+| Liver | 8 | — | — | |
+| Pancreas | 11 | 1 | — | Pancreaticoduodenectomy |
+| Spleen | 3 | — | 1 | Splenectomy and Splenorrhaphy, written as a trauma topic |
+| Esophagus | 10 | 1 | — | Paraesophageal Hernia Repair |
+| Stomach | 15 | — | — | |
+| Small Intestine | 13 | — | 1 | Crohn Disease (Procedures for Crohn Disease; the topic is disease-led) |
+| Large Intestine | 15 | — | 1 | Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
+| Anorectal | 17 | 2 | — | Hemorrhoids, Procedures for Hemorrhoids |
+| Endoscopy | 3 | — | — | |
+| Breast | 21 | 2 | — | Fibroadenoma vs Phyllodes Tumor, Percutaneous Breast Biopsy and Cyst Aspiration |
+| Endocrine | 17 | — | — | |
+| Skin and Soft Tissue | 17 | — | — | |
+| Surgical Critical Care | 21 | 7 | 1 | Cardiac Failure and Cardiogenic Shock, Common Cardiac Arrhythmias, Electrolytes and Acid-Base, Hypovolemic Shock, Respiratory Failure (ARDS, PE, Pneumonia), Airway Access, Cardiac Pacing; partial: Acute Liver Failure (Hepatic Failure and Hepatorenal Syndrome — no HRS content) |
+| Trauma | 47 | 13 | 1 | Cardiac Injury, Chest Wall/Pleura/Diaphragm, Neck Trauma Initial Assessment, Splenic Injury, Tracheobronchial and Lung, Vascular Thoracic, Escharotomy, Fasciotomy, FAST, GI Tract Injury Repair, Hepatic Injury Packing/Repair/Resection, Neck Injuries Management, Splenectomy and Splenorrhaphy; partial: Hepatic Injury (only the operative topic exists) |
+| Arterial Disease | 28 | 3 | 3 | Acute Limb Ischemia (Acute Thrombosis and Ischemia), Renal Artery Disease, Abdominal & Aortoiliac Aneurysm Repair; partial: Peripheral Arterial Emboli and Arterial Embolectomy/Thrombectomy (inside Acute Limb Ischemia), Compartment Syndromes (Fasciotomy, trauma-led) |
+| Vascular Venous | 7 | — | 1 | Deep Venous Thrombosis (Venous Thromboembolism — no PE workup or treatment; PE lives in Respiratory Failure) |
+| Vascular Access | 4 | 1 | 1 | Vascular Exposure Principles; partial: Hemodialysis Access Catheter (Vascular Access for Dialysis — catheter half only, no AV access) |
+| Transplantation | 8 | — | — | |
+| Thoracic Surgery | 10 | — | — | |
+| Pediatric Surgery | 39 | 2 | 1 | Malrotation, Malrotation Operation; partial: Groin Hernia in Children (Inguinal Hernia; filed under Hernia) |
+| Plastic Surgery | 2 | — | — | |
+| Genitourinary | 6 | — | — | |
+| Obstetrics & Gynecology | 6 | — | — | |
+| Head and Neck | 6 | — | — | |
 
-| App topic | Outline entry |
-|---|---|
-| Inguinal Hernia, Femoral Hernia | Inguinal & Femoral Hernias (one entry) |
-| Unusual Hernias | Miscellaneous Hernias |
-| Umbilical and Epigastric Hernia | Umbilical & epigastric hernias |
-| Ventral and Incisional Hernia | Ventral hernia |
-| Groin Hernia Repair | Inguinal and Femoral Hernia Repair |
-| Abdominal Wall Reconstruction | Ventral Hernia Repair |
-| Groin Hernia in Children | Pediatric Surgery › Inguinal Hernia (different module) |
+The outline lists Splenectomy/Splenorrhaphy under both Spleen and Trauma, and Biliary Atresia, Choledochal Cyst, Appendicitis, Meckel Diverticulum, Lower GI Bleeding, Mesenteric Ischemia, and Diaphragmatic Hernia Repair under two modules each. Each listing is counted where it appears.
 
-**Not yet covered in Hernia** — Diaphragmatic Hernia Repair, Miscellaneous Hernia Repair.
-
-**Biliary** — only Choledocholithiasis exists, mapping to Benign Biliary Obstruction. The other 17 biliary entries are open.
-
-**Breast** — only Fibroadenoma vs Phyllodes Tumor exists, mapping to Fibroadenoma and Phyllodes Tumors. The other 20 breast entries are open.
-
-**Esophagus** — only Paraesophageal Hernia Repair exists, matching the outline entry exactly. The rest of the module is open.
-
-**Arterial Disease** — Abdominal and Aortoiliac Aneurysm Repair and Renal Artery Disease both match the outline exactly. The rest of the module is open.
-
-**Surgical Critical Care** — two entries, one of them only partial:
-
-| App topic | Outline entry | Status |
-|---|---|---|
-| Cardiac Pacing | Cardiac Pacing | exact |
-| Acute Liver Failure | Hepatic Failure and Hepatorenal Syndrome | **partial** |
-
-Acute Liver Failure covers ALF only. There is no hepatorenal syndrome content — no definition, no AKI-HRS diagnostic criteria, no type 1 versus type 2, no terlipressin/albumin, no TIPS or transplant pathway. The topic was briefly renamed to the outline's title and reverted, because a title promising HRS coverage the blocks do not deliver is worse than a title that is narrower than the outline. **Count this section as half covered.** Adding HRS needs source material and owner sign-off, not a rename.
-
-Leave the existing splits alone. Going forward, prefer the outline's titles and granularity so coverage is countable — but only rename a topic to an outline title when the content actually covers that title's scope. Matching the label without matching the content makes coverage look complete when it is not.
+**Playbooks sit outside the taxonomy** and are not counted above. Seven of the eleven pair with an outline entry that has no topic yet: Carotid Endarterectomy (Carotid Artery Disease), Colostomy Takedown (Colostomy and Colostomy Closure), Femoropopliteal Bypass (Lower Extremity Bypass), Right Hemicolectomy (Partial Colectomy), Robotic Cholecystectomy (Cholecystectomy and Cholangiography), Simple Mastectomy with Sentinel Node Biopsy (Simple, Modified Radical, and Radical Mastectomy), and Total Thyroidectomy (Thyroidectomy). Temporal Artery Biopsy has no outline entry.
