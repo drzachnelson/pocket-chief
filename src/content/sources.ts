@@ -64,6 +64,13 @@ export const HEMODIALYSIS_CATHETER_PACKET_SOURCE = "00000000-0000-4000-8000-0000
 export const SCORE_VASCULAR_ACCESS_DIALYSIS_SOURCE = "00000000-0000-4000-8000-000000002401";
 export const KDOQI_VASCULAR_ACCESS_2019_SOURCE = "00000000-0000-4000-8000-000000002402";
 export const HAKIM_RULE_OF_SIXES_2022_SOURCE = "00000000-0000-4000-8000-000000002403";
+export const DVT_PACKET_SOURCE = "00000000-0000-4000-8000-000000002500";
+export const SCORE_VENOUS_THROMBOEMBOLISM_SOURCE = "00000000-0000-4000-8000-000000002501";
+export const SCORE_VENA_CAVA_FILTER_SOURCE = "00000000-0000-4000-8000-000000002502";
+export const FISER_HEMATOLOGY_SOURCE = "00000000-0000-4000-8000-000000002503";
+export const COBRRA_SOURCE = "00000000-0000-4000-8000-000000002504";
+export const SIR_ILIOFEMORAL_DVT_2023_SOURCE = "00000000-0000-4000-8000-000000002505";
+export const SVS_AVF_EARLY_THROMBUS_REMOVAL_2012_SOURCE = "00000000-0000-4000-8000-000000002506";
 
 // Playbooks. Operative guides, numbered from 3000 so they never collide with topic sources.
 export const TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003000";
@@ -151,6 +158,7 @@ export const suppliedSources: SuppliedSource[] = [
       "Corrected during review, against the chapter as scanned: its surveillance table gives yearly imaging for 3.0 to 3.9 cm, six-month imaging for 4.0 to 4.5 cm, and a three-year interval for aneurysms over 5.0 cm. The last is not survivable advice and reads as a transposition of the three-year interval that belongs to the 3.0 to 3.9 cm band. The topic follows the Society for Vascular Surgery intervals and carries a block explaining the discrepancy.",
       "Several sentences in the scanned chapter are garbled by optical character recognition, including the passages on aortoiliac impotence and straight tube grafts. They were reconstructed from the surrounding sense rather than quoted.",
       "The dialysis access section (page 357) also supplies the hemodialysis catheter topic's board answers: nontunneled internal jugular and subclavian catheters for 3 weeks and femoral for 5 days, a tunneled catheter for 1 year, the right internal jugular as the usual best site, never the side of a planned fistula or graft, the Rule of 6s, a 6-week wait for a graft, and stenting for central venous stenosis. Each that current practice has moved is a board-versus-current row there.",
+      "The venous sections supply the deep venous thrombosis topic's board answers: Paget-Schroetter effort thrombosis treated with catheter-directed thrombolysis then first rib resection at the same admission (page 352); and DVT most common in the calf, the left leg involved twice as often as the right, swelling by level, heparin then warfarin as treatment, phlegmasia cerulea dolens treated with catheter-directed thrombolysis or emergent thrombectomy, and an unneeded central line pulled before heparin (pages 358-359).",
     ].join(" "),
   },
   {
@@ -719,6 +727,70 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Hakim AJ, Brooke BS, Beckstrom JL, Sarfati MR, Kraiss LW. Rules of 6 criteria predict dialysis fistula maturation but not all rules are equal. Journal of Vascular Surgery, 2022.",
     suppliedAt: "2026-10-10T00:00:00.000Z",
     details: "Registered during review as the source the packet cites for retiring the rigid Rule of 6s. Identified from the packet's reference list rather than supplied directly. Carried qualitatively: flow volume and depth predict maturation as well as all three rules together, and vein diameter is the weakest predictor. The packet's figure of about 11% of mature fistulas meeting all three criteria could not be confirmed and is not written.",
+  },
+  {
+    id: DVT_PACKET_SOURCE,
+    title: "Owner-requested deep venous thrombosis study guide (OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study document generated for Pocket Chief, October 10, 2026: \"Deep Venous Thrombosis — Pocket Chief\", an OpenEvidence (Sackett) synthesis of a Gemini study guide drawn from the owner's SCORE notebook sources, requested to cover upper and lower extremity DVT, how anatomic location changes management, and options when anticoagulation is contraindicated.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "The document carries no inline reference markers; its 26-reference list came with the accompanying answer: Kumbhani (2026 ACC scientific statement on direct oral anticoagulants, JACC 2026); Khan (Lancet 2021); Chopard (JAMA 2020); Jackson (JAMA 2022); Zuin (JACC 2024); Creager (2026 AHA/ACC multisociety acute pulmonary embolism guideline, Circulation and JACC 2026); the ACR-SIR-SPR IVC filter practice parameter (2021); Vedantham (SIR iliofemoral DVT position statement, JVIR 2023, registered separately); Meissner (SVS/AVF early thrombus removal guideline, J Vasc Surg 2012, registered separately); Goldhaber (Vascular Medicine 2021); Li (AHA open-vein scientific statement, Circulation 2025); Gauer (American Family Physician 2022); NCCN cancer-associated venous thromboembolic disease (2026); Arachchillage (British Society for Haematology HIT guideline, third edition, 2024); Shen (JAMA 2018); Ageno (Lancet Haematology 2024); the Anticoagulation Forum on cancer-associated VTE (2026); Lyon (2022 ESC cardio-oncology guideline); Palareti (WHITE study, 2022); Fontyn (Scientific Reports 2024); Renner (JACC 2020); Talasaz (JACC 2026); Streiff (Journal of Thrombosis and Thrombolysis 2016); Barnett (Vascular Medicine 2023); and Wang (Cochrane 2023).",
+      "Corrected during review: the packet's location table says serial duplex surveillance of an isolated calf DVT suits a patient with mild symptoms and low bleeding risk, while its own follow-up section says high bleeding risk. The topic follows the follow-up section and CHEST, which favor surveillance when bleeding risk is high.",
+      "The packet attributes the apixaban preference to the 2026 ACC DOAC statement. The statement's existence was confirmed during review but its exact apixaban wording was not, so the preference is cited to COBRRA, registered separately. The ATTRACT and SOX trial results are carried as the packet and guidelines state them; neither trial was returned as a discrete source.",
+      "Added during review beyond the packet, pending sign-off: anticoagulation for at least 3 months for upper extremity DVT, and for as long as a catheter stays in place for catheter-related clot (CHEST); elevation and repeat imaging for an arm clot when anticoagulation is contraindicated; and the statement that an IVC filter cannot protect against arm clot, which follows from Fiser's teaching that PE with a filter in place arises from the SVC.",
+      "The packet's megacava threshold (over 30 mm) was not carried; the topic follows the SCORE filter module, in which most filters fit a cava under 30 mm and a Bird's Nest filter or bilateral iliac filters handle a larger one.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_VENOUS_THROMBOEMBOLISM_SOURCE,
+    title: "SCORE curriculum module: Venous Thromboembolism",
+    kind: "website",
+    citation: "Costanza MJ. \"Venous Thromboembolism.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Venous module, March 20, 2026.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=133538",
+    details: "Retrieved August 12, 2026. Supplies VTE epidemiology (provoked, cancer-associated, and unprovoked shares; the 7-fold cancer risk), Caprini prophylaxis tiers, the ACCP diagnostic sequence, duplex accuracy, HIT, phlegmasia and open venous thrombectomy technique, percutaneous mechanical thrombectomy from popliteal access, and follow-up figures for recurrence, residual occlusion, post-thrombotic syndrome, and the 4 mm recurrence criterion. Its anticoagulant ranking still keys LMWH for cancer-associated VTE, which the topic writes as a board-versus-current row.",
+  },
+  {
+    id: SCORE_VENA_CAVA_FILTER_SOURCE,
+    title: "SCORE curriculum module: Vena Cava Filter Insertion",
+    kind: "website",
+    citation: "Liao JL, Reynolds KB. \"Vena Cava Filter Insertion.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Venous module, March 26, 2024.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=134647",
+    details: "Retrieved August 12, 2026. Supplies filter indications and relative indications, caval anatomy and its variants with their frequencies, suprarenal placement, femoral and jugular access, sizing, retrieval, and complications.",
+  },
+  {
+    id: FISER_HEMATOLOGY_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Hematology",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 2, Hematology, pages 16-19.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    details: "Page-level markdown held in `Pocket Chief Resources/absite-8e/ch02_hematology.md`. Supplies the board answers on HIT (antibody, ELISA then serotonin release assay, argatroban, no platelets), the hypercoagulable states (factor V Leiden as the most common congenital, tobacco as the most common acquired, antithrombin III deficiency and heparin resistance), anticoagulation duration including lifetime therapy for unprovoked proximal DVT, IVC filter indications and infrarenal placement, and the sources of PE with a filter in place.",
+  },
+  {
+    id: COBRRA_SOURCE,
+    title: "COBRRA: bleeding risk with apixaban versus rivaroxaban in acute venous thromboembolism",
+    kind: "article",
+    citation: "Castellucci LA, et al. Bleeding risk with apixaban vs. rivaroxaban in acute venous thromboembolism. New England Journal of Medicine, 2026;394(11):1051-1060. doi:10.1056/NEJMoa2510703.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review as the trial behind the packet's apixaban preference; named in the packet and confirmed against ACC and trial-group reports. 2,760 patients with acute proximal DVT or PE randomized to 3 months of apixaban or rivaroxaban: clinically relevant bleeding 3.3% against 7.1%, with no significant difference in recurrence.",
+  },
+  {
+    id: SIR_ILIOFEMORAL_DVT_2023_SOURCE,
+    title: "Society of Interventional Radiology position statement on the endovascular management of acute iliofemoral DVT",
+    kind: "article",
+    citation: "Vedantham S, Desai KR, Weinberg I, et al. Society of Interventional Radiology position statement on the endovascular management of acute iliofemoral deep vein thrombosis. Journal of Vascular and Interventional Radiology, 2023.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review as the authority for the packet's thrombus-removal block, identified from its reference list rather than supplied directly. Carries the ATTRACT reading — no reduction in overall post-thrombotic syndrome, more bleeding, less moderate to severe disease — and the selection criteria for catheter-directed therapy.",
+  },
+  {
+    id: SVS_AVF_EARLY_THROMBUS_REMOVAL_2012_SOURCE,
+    title: "Early thrombus removal strategies for acute DVT: SVS and AVF clinical practice guidelines",
+    kind: "article",
+    citation: "Meissner MH, Gloviczki P, Comerota AJ, et al. Early thrombus removal strategies for acute deep venous thrombosis: clinical practice guidelines of the Society for Vascular Surgery and the American Venous Forum. Journal of Vascular Surgery, 2012.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review, identified from the packet's reference list rather than supplied directly. Cited for urgent thrombus removal in phlegmasia cerulea dolens, which the packet gives as a Grade 1A recommendation.",
   },
   {
     id: TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE,

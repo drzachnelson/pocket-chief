@@ -92,6 +92,8 @@ describe("playbook library", () => {
         "Compartment syndrome -> fasciotomy",
         "Fasciotomy -> fasciotomy",
         "Rhabdomyolysis -> fasciotomy",
+        // Added with the DVT topic 2026-10-10: late leg swelling after bypass is worked up for exactly this.
+        "deep vein thrombosis -> deep-venous-thrombosis",
         "fasciotomy -> fasciotomy",
         "four-compartment fasciotomy -> fasciotomy",
       ],

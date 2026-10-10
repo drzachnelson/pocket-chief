@@ -242,3 +242,22 @@ Durable decisions:
 Content status: **authored but unreviewed — draft until Zach reads it.**
 
 Verified at 51 topics and 11 playbooks: tsc and eslint clean, vitest 170 passed / 1 skipped (no `out/`), all 16 headed blocks Supported with none unsupported, the flow drawing 7/7 nodes, 6 edges and 4 branch labels, all three tables rendering every row (4, 4, 6), search ranking the topic first for its title and five aliases, no horizontal overflow at desktop width, and Playwright 22 passed / 4 skipped.
+
+
+## Deep venous thrombosis topic (October 10, 2026)
+
+The second Chief-pipeline topic and the first entry in a new **Vascular Venous** section (Diseases & Conditions, with an empty Operations & Procedures node beside it). The library is now **52 topics and 11 playbooks**.
+
+Durable decisions:
+
+- **Narrower title than the outline entry, by the same rule as the dialysis catheter.** The outline names *Venous Thromboembolism*; the packet covers DVT, its location-specific management, filters and HIT, but not PE workup or treatment. Kept the owner's "Deep Venous Thrombosis". Count the outline entry as **partial**; *Vena Cava Filter Insertion* is partly covered by the filter blocks but still deserves its own procedure topic.
+- **No "venous thromboembolism" or "VTE" alias.** Nine playbooks mention venous thromboembolism, mostly for prophylaxis, and the alias pulled them to a DVT page. SCORE has a separate *Prophylaxis of Venous Thromboembolism* module that is the right destination once written. The one playbook link kept and pinned is femoropopliteal bypass's "deep vein thrombosis", for late leg swelling.
+- **Acute limb ischemia's "catheter-directed thrombolysis" alias became "arterial thrombolysis".** The bare phrase was sending venous lysis (Paget-Schroetter, iliofemoral DVT) to an arterial page. "CDT" stays on limb ischemia, and search for the phrase still ranks limb ischemia first.
+- **The location table and the contraindication flow are the spine**, because the request asked how location changes management and what to do when anticoagulation is contraindicated: calf to serial duplex, proximal leg to a retrievable infrarenal filter, phlegmasia to mechanical or open thrombectomy, arm to line removal and re-imaging.
+- **Packet error corrected:** its location table put calf-DVT surveillance with low bleeding risk; its own follow-up section and CHEST favor surveillance when bleeding risk is high.
+- **Six board-versus-current rows**: heparin-then-warfarin against DOACs and apixaban after COBRRA; LMWH (still keyed by the SCORE module) against oral factor Xa inhibitors for cancer; Fiser's lifetime therapy for unprovoked proximal DVT against extended therapy with reassessment; lysis for iliofemoral DVT against ATTRACT; stockings against SOX; liberal against narrow filter use.
+- **Sources** take the `02500` block; the topic is `02520`/`02521`. Fiser's hematology chapter is newly registered (`02503`), and the venous pages were appended to the existing Fiser vascular entry. The apixaban preference is cited to COBRRA, not the 2026 ACC statement, whose exact wording was not confirmed.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**
+
+Verified at 52 topics and 11 playbooks: tsc and eslint clean, vitest 170 passed / 1 skipped, all 25 headed blocks Supported, the flow drawing 11/11 nodes, all five tables rendering every row (8, 5, 7, 5, 6), search ranking the topic first for its title and six aliases, no horizontal overflow at desktop width, and Playwright 22 passed / 4 skipped.

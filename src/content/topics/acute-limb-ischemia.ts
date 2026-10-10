@@ -220,7 +220,7 @@ export const acuteLimbIschemiaTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001420",
   slug: "acute-limb-ischemia",
   title: "Acute Limb Ischemia",
-  aliases: ["ALI", "acute arterial occlusion", "limb ischemia", "embolism vs thrombosis", "6 Ps", "blue toe syndrome", "popliteal entrapment", "cystic adventitial disease", "Buerger disease", "thromboangiitis obliterans", "catheter-directed thrombolysis", "CDT", "Fogarty embolectomy", "open thromboembolectomy", "aortic saddle embolus"],
+  aliases: ["ALI", "acute arterial occlusion", "limb ischemia", "embolism vs thrombosis", "6 Ps", "blue toe syndrome", "popliteal entrapment", "cystic adventitial disease", "Buerger disease", "thromboangiitis obliterans", "arterial thrombolysis", "CDT", "Fogarty embolectomy", "open thromboembolectomy", "aortic saddle embolus"],
   scoreNodeId: "arterial-conditions",
   scoreCategory: "SCORE · Arterial Disease · Diseases & Conditions",
   tags: ["arterial-disease", "vascular", "acute-limb-ischemia", "emergency", "absite", "score"],
