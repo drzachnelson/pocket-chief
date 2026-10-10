@@ -60,6 +60,10 @@ export const NORPACT1_SOURCE = "00000000-0000-4000-8000-000000002309";
 export const ALLIANCE_A021501_SOURCE = "00000000-0000-4000-8000-000000002310";
 export const COCHRANE_ANTECOLIC_2022_SOURCE = "00000000-0000-4000-8000-000000002311";
 export const LEOPARD2_SOURCE = "00000000-0000-4000-8000-000000002312";
+export const HEMODIALYSIS_CATHETER_PACKET_SOURCE = "00000000-0000-4000-8000-000000002400";
+export const SCORE_VASCULAR_ACCESS_DIALYSIS_SOURCE = "00000000-0000-4000-8000-000000002401";
+export const KDOQI_VASCULAR_ACCESS_2019_SOURCE = "00000000-0000-4000-8000-000000002402";
+export const HAKIM_RULE_OF_SIXES_2022_SOURCE = "00000000-0000-4000-8000-000000002403";
 
 // Playbooks. Operative guides, numbered from 3000 so they never collide with topic sources.
 export const TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003000";
@@ -146,6 +150,7 @@ export const suppliedSources: SuppliedSource[] = [
       "Page-level markdown of the chapter, held in `Pocket Chief Resources/absite-8e/ch27_vascular.md`. Supplies the classic keyed numbers: myocardial infarction as the leading early cause of death and renal failure as the leading late cause, graft infection organisms and rates, the inferior mesenteric artery stump pressure threshold, rupture location, supraceliac control through the gastrohepatic ligament, chylous ascites, and the inflammatory and mycotic aneurysm profiles.",
       "Corrected during review, against the chapter as scanned: its surveillance table gives yearly imaging for 3.0 to 3.9 cm, six-month imaging for 4.0 to 4.5 cm, and a three-year interval for aneurysms over 5.0 cm. The last is not survivable advice and reads as a transposition of the three-year interval that belongs to the 3.0 to 3.9 cm band. The topic follows the Society for Vascular Surgery intervals and carries a block explaining the discrepancy.",
       "Several sentences in the scanned chapter are garbled by optical character recognition, including the passages on aortoiliac impotence and straight tube grafts. They were reconstructed from the surrounding sense rather than quoted.",
+      "The dialysis access section (page 357) also supplies the hemodialysis catheter topic's board answers: nontunneled internal jugular and subclavian catheters for 3 weeks and femoral for 5 days, a tunneled catheter for 1 year, the right internal jugular as the usual best site, never the side of a planned fistula or graft, the Rule of 6s, a 6-week wait for a graft, and stenting for central venous stenosis. Each that current practice has moved is a board-versus-current row there.",
     ].join(" "),
   },
   {
@@ -676,6 +681,44 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "van Hilst J, de Rooij T, Bosscha K, et al. Laparoscopic versus open pancreatoduodenectomy for pancreatic or periampullary tumours (LEOPARD-2): a multicentre, patient-blinded, randomised controlled phase 2/3 trial. Lancet Gastroenterology and Hepatology, 2019;4(3):199-207.",
     suppliedAt: "2026-10-04T00:00:00.000Z",
     details: "Added during review beyond both supplied guides, which mention minimally invasive pancreatoduodenectomy only in general terms; pending sign-off. Stopped early for safety after complication-related 90-day mortality of 10% laparoscopic against 2% open.",
+  },
+  {
+    id: HEMODIALYSIS_CATHETER_PACKET_SOURCE,
+    title: "Owner-requested hemodialysis access catheter study guide (OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study document generated for Pocket Chief, October 10, 2026: \"Hemodialysis Access Catheter — Pocket Chief\", an OpenEvidence (Sackett) synthesis of a Gemini study guide drawn from the owner's SCORE notebook sources.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "Inline author-year attributions, with the 19-reference list carried in the accompanying answer: Lok (KDOQI vascular access 2019 update, AJKD 2020, registered separately); Aitken (UK Kidney Association vascular access guideline, BMC Nephrology 2025); KDIGO acute kidney injury guideline (2012); ACR Appropriateness Criteria, dialysis fistula malfunction (JACR 2023); Borgquist (CITES protocol, Trials 2023); Boulet (3SITES target-trial emulation, Critical Care 2025); O'Grady (NEJM 2023) on central-line infection prevention; Hakim (J Vasc Surg 2022, registered separately); the ACR-AIUM-SRU practice parameter for postoperative dialysis access ultrasound (2024); Flythe and Watnick (JAMA 2024); Ge (Frontiers in Cellular and Infection Microbiology 2026) on catheter bloodstream infection; Almeida (Cochrane 2022); the FDA Orange Book entry for taurolidine-heparin; Raskin (International Journal of Cardiovascular Imaging 2025) and Herscu (Annals of Vascular Surgery 2013) on translumbar and transhepatic catheters; Romagnani (Nature Reviews Disease Primers 2017); Agarwal (Seminars in Dialysis 2019); Orso (European Journal of Trauma and Emergency Surgery 2026); and Wang (Journal of International Medical Research 2022) on fibrin sheath and stenosis pathology.",
+      "Verified during review: KDOQI 2019 limits nontunneled internal jugular catheters to under 2 weeks or facility policy, as expert opinion. Taurolidine-heparin lock (DefenCath) was FDA-approved on November 15, 2023, not 2024 as the packet dates its label.",
+      "Not carried, because they could not be verified during review: the packet's 5-year survival of 42.9% on a catheter against 50.0% on a fistula and its 69% patency and 130% severe-infection figures, attributed to Arhuidese through the ACR criteria; only the 51% mortality increase (adjusted hazard ratio 1.51) for starting on a catheter is written. Its claim that about 11% of mature fistulas meet all three Rule-of-6 criteria is also dropped, and the Hakim finding is written qualitatively.",
+      "The packet's AV graft timing (place 3 to 6 weeks before use, needs 2 to 3 weeks to incorporate) is written from the SCORE module, which gives 3 to 6 weeks before dialysis and cannulation as early as 2 weeks.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_VASCULAR_ACCESS_DIALYSIS_SOURCE,
+    title: "SCORE curriculum module: Vascular Access for Dialysis",
+    kind: "website",
+    citation: "Macsata RA. \"Vascular Access for Dialysis.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Access module, March 12, 2025.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=133775",
+    details: "Retrieved August 12, 2026. Supplies the keyed temporary-catheter site choice (internal jugular recommended; femoral limits ambulation and raises infection; subclavian stenosis from intimal hyperplasia as soon as 6 weeks), short-term against long-term catheter types, permanent access at a creatinine clearance under 25 mL/min, prosthetic access 3 to 6 weeks before dialysis, and maturation by 12 weeks for autogenous and as early as 2 weeks for prosthetic access. The module's AV configurations, steal, and high-output failure are outside this catheter topic.",
+  },
+  {
+    id: KDOQI_VASCULAR_ACCESS_2019_SOURCE,
+    title: "KDOQI clinical practice guideline for vascular access: 2019 update",
+    kind: "article",
+    citation: "Lok CE, Huber TS, Lee T, et al. KDOQI clinical practice guideline for vascular access: 2019 update. American Journal of Kidney Diseases, 2020;75(4 Suppl 2):S1-S164.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review as the authority behind the dwell-time row the packet flags as board-classic versus current. Identified from the packet's reference list rather than supplied directly. The limit of nontunneled internal jugular catheters to under 2 weeks, or per facility policy, is expert opinion in the guideline.",
+  },
+  {
+    id: HAKIM_RULE_OF_SIXES_2022_SOURCE,
+    title: "Rules of 6 criteria predict dialysis fistula maturation but not all rules are equal",
+    kind: "article",
+    citation: "Hakim AJ, Brooke BS, Beckstrom JL, Sarfati MR, Kraiss LW. Rules of 6 criteria predict dialysis fistula maturation but not all rules are equal. Journal of Vascular Surgery, 2022.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review as the source the packet cites for retiring the rigid Rule of 6s. Identified from the packet's reference list rather than supplied directly. Carried qualitatively: flow volume and depth predict maturation as well as all three rules together, and vein diameter is the weakest predictor. The packet's figure of about 11% of mature fistulas meeting all three criteria could not be confirmed and is not written.",
   },
   {
     id: TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE,

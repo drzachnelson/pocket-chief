@@ -223,3 +223,22 @@ Verified at 11 playbooks and 50 topics:
 - The title and all 46 aliases rank the topic first in search.
 - Both pages prerender, the playbook is in `out/playbooks.json` and absent from `library.json`, Pancreas appears in the jump rail, and neither page overflows at 375px.
 - Playwright runs 22 passed / 4 skipped.
+
+
+## Hemodialysis access catheter topic (October 10, 2026)
+
+The first topic produced end to end by the Chief pipeline (Gemini on the SCORE notebook, then an OpenEvidence Sackett document, then add-topic), and the first entry in **Vascular Access › Diseases & Conditions**. The library is now **51 topics and 11 playbooks**.
+
+Durable decisions:
+
+- **Narrower than the outline entry, on purpose.** The nearest outline title is *Vascular Access for Dialysis*, but the packet covers that module's catheter half and not its AV configurations, steal, or high-output failure. Kept the owner's title, "Hemodialysis Access Catheter", by the Acute Liver Failure rule: a title promising coverage the blocks do not deliver is worse than a narrow one. Count the outline entry as **partial** until an *Arteriovenous Graft and Fistula* topic lands beside it.
+- **Sources: one packet plus the authorities it leans on.** The OpenEvidence document is the `user_notes` source with its 19 references in `details`; the SCORE module, Fiser's vascular chapter (page 357, appended to the existing `00601` entry), KDOQI 2019, and Hakim 2022 are cited directly. Topic sources take the `02400` block; the topic is `02420`/`02421`.
+- **Six board-versus-current rows**, all Fiser against the SCORE module, KDOQI, or the packet: nontunneled dwell (3 weeks and 5 days against under 2 weeks), tunneled lifespan (1 year against no fixed maximum), the Rule of 6s, fistula and graft wait times, and stent-first against angioplasty-first for central stenosis.
+- **Packet numbers that could not be verified were dropped, not softened**: the Arhuidese five-year survival, patency and infection figures, and "about 11% of mature fistulas meet all three 6s". DefenCath's approval is November 2023, not the packet's 2024.
+- **The subclavian rule is written as dialysis-specific**, with a warning block, because the packet's ICU data (3SITES) make the subclavian the lowest-infection site outside kidney patients.
+- **Pre-existing alias collision, not fixed here:** "pneumothorax" and "hemothorax" are claimed by both the FAST topic and chest wall, pleura and diaphragm injuries, and FAST wins the auto-link. Settle which topic owns them before narrowing either.
+- **`references/verify.md` selectors are stale:** flow nodes render as `.flow-node` (not `.flow-start, .flow-card`), support marks as `.support-mark.supported`, and search lives at `/?q=` rather than `/search`.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**
+
+Verified at 51 topics and 11 playbooks: tsc and eslint clean, vitest 170 passed / 1 skipped (no `out/`), all 16 headed blocks Supported with none unsupported, the flow drawing 7/7 nodes, 6 edges and 4 branch labels, all three tables rendering every row (4, 4, 6), search ranking the topic first for its title and five aliases, no horizontal overflow at desktop width, and Playwright 22 passed / 4 skipped.
