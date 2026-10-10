@@ -43,4 +43,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "pancreas", title: "Pancreas", slug: "pancreas", parentId: "score", order: 39 },
   { id: "pancreas-conditions", title: "Diseases & Conditions", slug: "pancreas-diseases-conditions", parentId: "pancreas", order: 40 },
   { id: "pancreas-procedures", title: "Operations & Procedures", slug: "pancreas-operations-procedures", parentId: "pancreas", order: 41 },
+  { id: "vascular-venous", title: "Vascular Venous", slug: "vascular-venous", parentId: "score", order: 42 },
+  { id: "vascular-venous-conditions", title: "Diseases & Conditions", slug: "vascular-venous-diseases-conditions", parentId: "vascular-venous", order: 43 },
+  { id: "vascular-venous-procedures", title: "Operations & Procedures", slug: "vascular-venous-operations-procedures", parentId: "vascular-venous", order: 44 },
 ];
