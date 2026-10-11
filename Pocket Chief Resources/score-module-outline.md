@@ -538,7 +538,7 @@ Transcribed verbatim apart from repairing OCR ligatures (`ﬃ`, `ﬀ`). Duplicat
 
 ## How the current library maps to this outline
 
-As of 2026-10-10: **52 topics and 11 playbooks**. **44 of the 366 outline entries are covered and 12 are partial**. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
+As of 2026-10-11: **62 topics and 16 playbooks**. **53 of the 366 outline entries are covered and 12 are partial**. The October 10 venous batch did not update this section; its seven covered entries were added here with the two carotid topics. Prophylaxis of Venous Thromboembolism sits in the Preoperative Evaluation and Perioperative Care module, outside this denominator. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
 
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
@@ -561,11 +561,11 @@ As of 2026-10-10: **52 topics and 11 playbooks**. **44 of the 366 outline entrie
 | Skin and Soft Tissue | 17 | — | — | |
 | Surgical Critical Care | 21 | 7 | 1 | Cardiac Failure and Cardiogenic Shock, Common Cardiac Arrhythmias, Electrolytes and Acid-Base, Hypovolemic Shock, Respiratory Failure (ARDS, PE, Pneumonia), Airway Access, Cardiac Pacing; partial: Acute Liver Failure (Hepatic Failure and Hepatorenal Syndrome — no HRS content) |
 | Trauma | 47 | 13 | 1 | Cardiac Injury, Chest Wall/Pleura/Diaphragm, Neck Trauma Initial Assessment, Splenic Injury, Tracheobronchial and Lung, Vascular Thoracic, Escharotomy, Fasciotomy, FAST, GI Tract Injury Repair, Hepatic Injury Packing/Repair/Resection, Neck Injuries Management, Splenectomy and Splenorrhaphy; partial: Hepatic Injury (only the operative topic exists) |
-| Arterial Disease | 28 | 3 | 3 | Acute Limb Ischemia (Acute Thrombosis and Ischemia), Renal Artery Disease, Abdominal & Aortoiliac Aneurysm Repair; partial: Peripheral Arterial Emboli and Arterial Embolectomy/Thrombectomy (inside Acute Limb Ischemia), Compartment Syndromes (Fasciotomy, trauma-led) |
-| Vascular Venous | 7 | — | 1 | Deep Venous Thrombosis (Venous Thromboembolism — no PE workup or treatment; PE lives in Respiratory Failure) |
+| Arterial Disease | 28 | 6 | 3 | Acute Limb Ischemia (Acute Thrombosis and Ischemia), Carotid Artery Disease, Renal Artery Disease, Thoracic Outlet Syndrome, Abdominal & Aortoiliac Aneurysm Repair, Procedures for Carotid Artery Stenosis; partial: Peripheral Arterial Emboli and Arterial Embolectomy/Thrombectomy (inside Acute Limb Ischemia), Compartment Syndromes (Fasciotomy, trauma-led) |
+| Vascular Venous | 7 | 5 | 1 | Evaluation of a Swollen Leg, Thrombophlebitis, Varicose Veins, Venous Stasis and Chronic Venous Insufficiency, Vena Cava Filter Insertion; partial: Deep Venous Thrombosis (Venous Thromboembolism — no PE workup or treatment; PE lives in Respiratory Failure) |
 | Vascular Access | 4 | 1 | 1 | Vascular Exposure Principles; partial: Hemodialysis Access Catheter (Vascular Access for Dialysis — catheter half only, no AV access) |
 | Transplantation | 8 | — | — | |
-| Thoracic Surgery | 10 | — | — | |
+| Thoracic Surgery | 10 | 1 | — | Superior Vena Cava Syndrome |
 | Pediatric Surgery | 39 | 2 | 1 | Malrotation, Malrotation Operation; partial: Groin Hernia in Children (Inguinal Hernia; filed under Hernia) |
 | Plastic Surgery | 2 | — | — | |
 | Genitourinary | 6 | — | — | |
@@ -574,4 +574,4 @@ As of 2026-10-10: **52 topics and 11 playbooks**. **44 of the 366 outline entrie
 
 The outline lists Splenectomy/Splenorrhaphy under both Spleen and Trauma, and Biliary Atresia, Choledochal Cyst, Appendicitis, Meckel Diverticulum, Lower GI Bleeding, Mesenteric Ischemia, and Diaphragmatic Hernia Repair under two modules each. Each listing is counted where it appears.
 
-**Playbooks sit outside the taxonomy** and are not counted above. Seven of the eleven pair with an outline entry that has no topic yet: Carotid Endarterectomy (Carotid Artery Disease), Colostomy Takedown (Colostomy and Colostomy Closure), Femoropopliteal Bypass (Lower Extremity Bypass), Right Hemicolectomy (Partial Colectomy), Robotic Cholecystectomy (Cholecystectomy and Cholangiography), Simple Mastectomy with Sentinel Node Biopsy (Simple, Modified Radical, and Radical Mastectomy), and Total Thyroidectomy (Thyroidectomy). Temporal Artery Biopsy has no outline entry.
+**Playbooks sit outside the taxonomy** and are not counted above. Seven of the sixteen pair with an outline entry that has no topic yet: Endovenous Ablation (Venous Insufficiency and Related Procedures), Colostomy Takedown (Colostomy and Colostomy Closure), Femoropopliteal Bypass (Lower Extremity Bypass), Right Hemicolectomy (Partial Colectomy), Robotic Cholecystectomy (Cholecystectomy and Cholangiography), Simple Mastectomy with Sentinel Node Biopsy (Simple, Modified Radical, and Radical Mastectomy), and Total Thyroidectomy (Thyroidectomy). Carotid Endarterectomy and TCAR now pair with Procedures for Carotid Artery Stenosis. Temporal Artery Biopsy has no outline entry, and Open Venous Thrombectomy falls under the partial Venous Thromboembolism entry.

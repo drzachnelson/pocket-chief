@@ -2,6 +2,7 @@ import { ivcFilterPlacementAndRetrievalPlaybook } from "@/content/playbooks/ivc-
 import { firstRibResectionForVenousThoracicOutletSyndromePlaybook } from "@/content/playbooks/first-rib-resection-for-venous-thoracic-outlet-syndrome";
 import { openVenousThrombectomyPlaybook } from "@/content/playbooks/open-venous-thrombectomy";
 import { endovenousAblationPlaybook } from "@/content/playbooks/endovenous-ablation";
+import { transcarotidArteryRevascularizationPlaybook } from "@/content/playbooks/transcarotid-artery-revascularization";
 import type { Playbook } from "@/lib/types";
 import { carotidEndarterectomyBovinePatchPlaybook } from "@/content/playbooks/carotid-endarterectomy-bovine-patch";
 import { colostomyTakedownWithParastomalHerniaRepairPlaybook } from "@/content/playbooks/colostomy-takedown-with-parastomal-hernia-repair";
@@ -20,6 +21,7 @@ export {
   firstRibResectionForVenousThoracicOutletSyndromePlaybook,
   openVenousThrombectomyPlaybook,
   endovenousAblationPlaybook,
+  transcarotidArteryRevascularizationPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
@@ -39,6 +41,7 @@ export const libraryPlaybooks: Playbook[] = [
   firstRibResectionForVenousThoracicOutletSyndromePlaybook,
   openVenousThrombectomyPlaybook,
   endovenousAblationPlaybook,
+  transcarotidArteryRevascularizationPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,

@@ -129,7 +129,7 @@ Give every source its actual citation string. These packets carry real book, cha
 grep -o '00000000-0000-4000-8000-0000000[0-9a-f]*' src/content/sources.ts | sed 's/.*-0000000//' | sort -u | tr '\n' ' '
 ```
 
-Topics take the next free hundreds block below `03000`. **Playbook sources live in the `03000` block** and are allocated singly, not in hundreds. Never accept an id from a packet.
+Topics take the next free hundreds block from `04000` up; everything below `03000` filled in October 2026. **Playbook sources live in the `03000` block** and are allocated singly, not in hundreds. Never accept an id from a packet.
 
 ### When one block genuinely mixes societies
 

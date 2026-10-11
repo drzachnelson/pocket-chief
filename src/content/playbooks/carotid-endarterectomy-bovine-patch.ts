@@ -208,6 +208,7 @@ export const carotidEndarterectomyBovinePatchPlaybook = buildPlaybook({
   tags: ["vascular", "carotid", "stroke prevention", "head and neck"],
   sourceId: SOURCE,
   additionalSourceIds: [SVS],
+  relatedTopicSlugs: ["procedures-for-carotid-artery-stenosis", "carotid-artery-disease"],
   blocks,
   reviewedAt: "2026-09-10T00:00:00.000Z",
 });
