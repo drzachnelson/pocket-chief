@@ -46,4 +46,8 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "vascular-venous", title: "Vascular Venous", slug: "vascular-venous", parentId: "score", order: 42 },
   { id: "vascular-venous-conditions", title: "Diseases & Conditions", slug: "vascular-venous-diseases-conditions", parentId: "vascular-venous", order: 43 },
   { id: "vascular-venous-procedures", title: "Operations & Procedures", slug: "vascular-venous-operations-procedures", parentId: "vascular-venous", order: 44 },
+  { id: "thoracic", title: "Thoracic Surgery", slug: "thoracic-surgery", parentId: "score", order: 45 },
+  { id: "thoracic-conditions", title: "Diseases & Conditions", slug: "thoracic-diseases-conditions", parentId: "thoracic", order: 46 },
+  { id: "thoracic-procedures", title: "Operations & Procedures", slug: "thoracic-operations-procedures", parentId: "thoracic", order: 47 },
+  { id: "perioperative-care", title: "Preoperative Evaluation and Perioperative Care", slug: "preoperative-evaluation-and-perioperative-care", parentId: "score", order: 48 },
 ];

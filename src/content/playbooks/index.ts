@@ -1,3 +1,7 @@
+import { ivcFilterPlacementAndRetrievalPlaybook } from "@/content/playbooks/ivc-filter-placement-and-retrieval";
+import { firstRibResectionForVenousThoracicOutletSyndromePlaybook } from "@/content/playbooks/first-rib-resection-for-venous-thoracic-outlet-syndrome";
+import { openVenousThrombectomyPlaybook } from "@/content/playbooks/open-venous-thrombectomy";
+import { endovenousAblationPlaybook } from "@/content/playbooks/endovenous-ablation";
 import type { Playbook } from "@/lib/types";
 import { carotidEndarterectomyBovinePatchPlaybook } from "@/content/playbooks/carotid-endarterectomy-bovine-patch";
 import { colostomyTakedownWithParastomalHerniaRepairPlaybook } from "@/content/playbooks/colostomy-takedown-with-parastomal-hernia-repair";
@@ -12,6 +16,11 @@ import { temporalArteryBiopsyPlaybook } from "@/content/playbooks/temporal-arter
 import { totalThyroidectomyPlaybook } from "@/content/playbooks/total-thyroidectomy";
 
 export {
+  ivcFilterPlacementAndRetrievalPlaybook,
+  firstRibResectionForVenousThoracicOutletSyndromePlaybook,
+  openVenousThrombectomyPlaybook,
+  endovenousAblationPlaybook,
+
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
   femoropoplitealBypassPlaybook,
@@ -26,6 +35,11 @@ export {
 };
 
 export const libraryPlaybooks: Playbook[] = [
+  ivcFilterPlacementAndRetrievalPlaybook,
+  firstRibResectionForVenousThoracicOutletSyndromePlaybook,
+  openVenousThrombectomyPlaybook,
+  endovenousAblationPlaybook,
+
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
   femoropoplitealBypassPlaybook,

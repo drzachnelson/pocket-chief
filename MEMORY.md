@@ -261,3 +261,19 @@ Durable decisions:
 Content status: **authored but unreviewed — draft until Zach reads it.**
 
 Verified at 52 topics and 11 playbooks: tsc and eslint clean, vitest 170 passed / 1 skipped, all 25 headed blocks Supported, the flow drawing 11/11 nodes, all five tables rendering every row (8, 5, 7, 5, 6), search ranking the topic first for its title and six aliases, no horizontal overflow at desktop width, and Playwright 22 passed / 4 skipped.
+
+
+## Venous batch completion (October 10, 2026)
+
+Completed Claude’s interrupted branch as one review batch: eight topics and four operative playbooks, bringing the static library to 60 topics and 15 playbooks. All remain clinical drafts pending Zach’s PR review. See `docs/content-reviews/2026-10-10-venous-batch.md` for provenance, corrections and verification limits.
+
+Durable decisions:
+
+- Follow the supplied SCORE module category for VTE prevention: **Preoperative Evaluation and Perioperative Care**, outside the organ-outline coverage denominator. SVC syndrome belongs under Thoracic Surgery; TOS remains under Arterial Disease and covers neurogenic, venous and arterial presentations. Playbooks stay outside the curriculum taxonomy.
+- Dedicated filter, TOS and prophylaxis topics own their specific aliases. The DVT topic keeps its existing slug and bookmarks. General VTE prevention references now reach the prevention module.
+- Reuse saved notebook briefs and evidence audits. Related operative gaps can share one bounded notebook request and one evidence audit, followed by targeted primary-source checks for decision-changing statements. Model agreement is not source verification.
+- Preserve source-access limits in source details and the review note. AVF 2026 UEDVT and ESVS 2022 CVD exact wording was audit-attributed when full text could not be retrieved directly. The venous thrombectomy notebook lacked a dedicated chapter; the operative sequence was checked against a venous surgical series rather than inferred from arterial thrombectomy.
+- Keep selected indications and timing selected: no automatic filter for recurrent VTE, no universal 29–54-day retrieval deadline, no mandatory same-admission rib resection, no blanket ban on superficial ablation in chronic deep venous disease. Device instructions and local procedural protocols remain explicit dependencies.
+- Correct CHEST Caprini bands to 0 and 1–2; four-week cancer-surgery prevention starts at surgery. EHIT/ARTE III uses therapeutic anticoagulation. Do not treat intraluminal catheter alteplase as treatment of surrounding venous thrombosis.
+
+- Resolved three pre-existing alias collisions exposed by this batch: bare pneumothorax/hemothorax belong to the chest-wall/pleural injury topic rather than FAST; sclerotherapy aliases specify hemorrhoidal or vein sclerotherapy; pediatric hernia uses high ligation of the sac. Keep correct medical terms in new topics instead of hiding them to evade a bad link.

@@ -93,7 +93,7 @@ export const groinHerniaInChildrenTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000513",
   slug: "groin-hernia-in-children",
   title: "Groin Hernia in Children",
-  aliases: ["pediatric inguinal hernia", "pediatric hernia", "high ligation", "patent processus vaginalis", "PPV", "communicating hydrocele", "canal of Nuck", "contralateral exploration", "apnea", "post-conceptual age"],
+  aliases: ["pediatric inguinal hernia", "pediatric hernia", "high ligation of the sac", "patent processus vaginalis", "PPV", "communicating hydrocele", "canal of Nuck", "contralateral exploration", "apnea", "post-conceptual age"],
   scoreNodeId: "hernia-conditions",
   scoreCategory: "SCORE · Hernia · Diseases & Conditions",
   tags: ["hernia", "pediatric-surgery", "groin", "absite", "score"],
