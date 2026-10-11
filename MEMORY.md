@@ -271,9 +271,18 @@ Durable decisions:
 
 - Follow the supplied SCORE module category for VTE prevention: **Preoperative Evaluation and Perioperative Care**, outside the organ-outline coverage denominator. SVC syndrome belongs under Thoracic Surgery; TOS remains under Arterial Disease and covers neurogenic, venous and arterial presentations. Playbooks stay outside the curriculum taxonomy.
 - Dedicated filter, TOS and prophylaxis topics own their specific aliases. The DVT topic keeps its existing slug and bookmarks. General VTE prevention references now reach the prevention module.
-- Reuse saved notebook briefs and evidence audits. Related operative gaps can share one bounded notebook request and one evidence audit, followed by targeted primary-source checks for decision-changing statements. Model agreement is not source verification.
+- ~~Related operative gaps can share one bounded notebook request and one evidence audit.~~ Superseded October 11, 2026: every entry gets its own research (see the pipeline section below). Model agreement is still not source verification.
 - Preserve source-access limits in source details and the review note. AVF 2026 UEDVT and ESVS 2022 CVD exact wording was audit-attributed when full text could not be retrieved directly. The venous thrombectomy notebook lacked a dedicated chapter; the operative sequence was checked against a venous surgical series rather than inferred from arterial thrombectomy.
 - Keep selected indications and timing selected: no automatic filter for recurrent VTE, no universal 29–54-day retrieval deadline, no mandatory same-admission rib resection, no blanket ban on superficial ablation in chronic deep venous disease. Device instructions and local procedural protocols remain explicit dependencies.
 - Correct CHEST Caprini bands to 0 and 1–2; four-week cancer-surgery prevention starts at surgery. EHIT/ARTE III uses therapeutic anticoagulation. Do not treat intraluminal catheter alteplase as treatment of surrounding venous thrombosis.
 
 - Resolved three pre-existing alias collisions exposed by this batch: bare pneumothorax/hemothorax belong to the chest-wall/pleural injury topic rather than FAST; sclerotherapy aliases specify hemorrhoidal or vein sclerotherapy; pediatric hernia uses high ligation of the sac. Keep correct medical terms in new topics instead of hiding them to evade a bad link.
+
+## Chief pipeline reverted to the original runbook (October 11, 2026)
+
+On October 10 ChatGPT rewrote the Buzz Chief skill (`~/.claude/skills/pocket-chief-pipeline/`) to use a short Gemini brief plus a 300–600-word OpenEvidence correction audit. Zach reverted it to the original step-by-step runbook and does not want an audit dot phrase. OpenEvidence writes the full document through `.pocketchief` / `.procedureplaybook`.
+
+- Kept from the rewrite: one batch, one branch and one PR for a multi-entry request, with **separate research per entry**; a static build for every request; downloads matched by name and time; no resubmitting a research request that may still be running; decision-changing cutoffs checked against the guideline they name.
+- Why: the first batch run under the rewrite saved no research for four playbooks, cited one OpenEvidence chat for six entries, never wrote its `workflow_version` field, and left duplicate keys in the progress files.
+- Progress files (`state.md`) use one field per line, edited in place.
+- ChatGPT's files sit beside the installed ones as `*.2026-10-11-chatgpt-v2`. Do not reinstall them. `docs/workflows/buzz-pipeline/` and `docs/workflows/buzz-review-2026-10-10.md` in the main checkout are out-of-date history, as is that checkout's own MEMORY note saying the rewrite is installed.
