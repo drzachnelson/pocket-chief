@@ -83,8 +83,27 @@ describe("playbook library", () => {
       // the Ladd procedure, which keeps "bowel viability". Between them they had captured
       // postoperative-bleeding and perfusion-assessment sentences in four playbooks.
       "carotid-endarterectomy-bovine-patch": [
+        // Added with the two carotid topics 2026-10-11: each names the same operation or its complications.
+        "Carotid endarterectomy -> procedures-for-carotid-artery-stenosis",
+        "Cerebral hyperperfusion syndrome -> procedures-for-carotid-artery-stenosis",
+        "Post-endarterectomy hypertension -> procedures-for-carotid-artery-stenosis",
+        "amaurosis fugax -> carotid-artery-disease",
         "common facial vein -> neck-injuries-management",
         "recurrent laryngeal nerve -> neck-injuries-management",
+        "tracheostomy -> airway-access-intubation-and-surgical-airways",
+      ],
+      // Reviewed 2026-10-11. "ROADSTER" was dropped from the procedures topic's aliases instead of
+      // pinned here: that topic never discusses the trial, so the link promised content it lacks.
+      // Rewritten against the OpenEvidence guide 2026-10-11. "heart failure" is kept: it is a physiologic
+      // high-risk criterion and names the same condition. Rejected and reworded: "carotid; duplex" reached
+      // the carotid duplex alias across a semicolon in the redo-neck bullet.
+      "transcarotid-artery-revascularization": [
+        "Hyperperfusion syndrome -> procedures-for-carotid-artery-stenosis",
+        "TCAR -> procedures-for-carotid-artery-stenosis",
+        "carotid stenting -> procedures-for-carotid-artery-stenosis",
+        "flow reversal -> procedures-for-carotid-artery-stenosis",
+        "flow-reversal -> procedures-for-carotid-artery-stenosis",
+        "heart failure -> cardiac-failure-and-cardiogenic-shock",
         "tracheostomy -> airway-access-intubation-and-surgical-airways",
       ],
       "colostomy-takedown-with-parastomal-hernia-repair": [

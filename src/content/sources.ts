@@ -135,6 +135,31 @@ export const SIR_IVC_FILTER_2020_SOURCE = "00000000-0000-4000-8000-000000003029"
 export const ESVS_CVD_2022_SOURCE = "00000000-0000-4000-8000-000000003030";
 export const IVC_FILTER_DECISION_ANALYSIS_SOURCE = "00000000-0000-4000-8000-000000003031";
 
+// Carotid (October 2026): every hundreds block below 03000 is taken, so topics continue at 04000. One block serves
+// both carotid topics and the TCAR playbook, because all three are written from the same modules and trials (the pancreas reasoning).
+export const SCORE_CAROTID_DISEASE_SOURCE = "00000000-0000-4000-8000-000000004000";
+export const SCORE_CAROTID_PROCEDURES_SOURCE = "00000000-0000-4000-8000-000000004001";
+export const ESVS_CAROTID_2023_SOURCE = "00000000-0000-4000-8000-000000004002";
+export const CREST2_SOURCE = "00000000-0000-4000-8000-000000004003";
+export const NASCET_SOURCE = "00000000-0000-4000-8000-000000004004";
+export const ACAS_SOURCE = "00000000-0000-4000-8000-000000004005";
+export const CREST_SOURCE = "00000000-0000-4000-8000-000000004006";
+export const CMS_CAROTID_STENTING_2023_SOURCE = "00000000-0000-4000-8000-000000004007";
+export const ROADSTER_SOURCE = "00000000-0000-4000-8000-000000004008";
+export const ROADSTER2_SOURCE = "00000000-0000-4000-8000-000000004009";
+export const VQI_TCAR_VS_TFCAS_2019_SOURCE = "00000000-0000-4000-8000-000000004010";
+export const ENROUTE_LABELING_SOURCE = "00000000-0000-4000-8000-000000004011";
+export const TCAR_TECHNIQUE_2017_SOURCE = "00000000-0000-4000-8000-000000004012";
+export const DE_BORST_TCAR_2023_SOURCE = "00000000-0000-4000-8000-000000004013";
+export const TCAR_HEMODYNAMICS_2018_SOURCE = "00000000-0000-4000-8000-000000004014";
+export const TCAR_ANESTHESIA_2020_SOURCE = "00000000-0000-4000-8000-000000004015";
+export const CAROTID_DISEASE_OE_SOURCE = "00000000-0000-4000-8000-000000004016";
+export const CAROTID_PROCEDURES_OE_SOURCE = "00000000-0000-4000-8000-000000004017";
+export const TCAR_PLAYBOOK_OE_SOURCE = "00000000-0000-4000-8000-000000004018";
+export const TCAR_VS_CEA_STANDARD_RISK_2023_SOURCE = "00000000-0000-4000-8000-000000004019";
+// 04020/04021 are the Carotid Artery Disease topic's ids, so the block resumes at 04030.
+export const VQI_TCAR_CEA_TFCAS_2022_SOURCE = "00000000-0000-4000-8000-000000004030";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: SCORE_SVC_SOURCE,
@@ -367,6 +392,7 @@ export const suppliedSources: SuppliedSource[] = [
       "Several sentences in the scanned chapter are garbled by optical character recognition, including the passages on aortoiliac impotence and straight tube grafts. They were reconstructed from the surrounding sense rather than quoted.",
       "The dialysis access section (page 357) also supplies the hemodialysis catheter topic's board answers: nontunneled internal jugular and subclavian catheters for 3 weeks and femoral for 5 days, a tunneled catheter for 1 year, the right internal jugular as the usual best site, never the side of a planned fistula or graft, the Rule of 6s, a 6-week wait for a graft, and stenting for central venous stenosis. Each that current practice has moved is a board-versus-current row there.",
       "The venous sections supply the deep venous thrombosis topic's board answers: Paget-Schroetter effort thrombosis treated with catheter-directed thrombolysis then first rib resection at the same admission (page 352); and DVT most common in the calf, the left leg involved twice as often as the right, swelling by level, heparin then warfarin as treatment, phlegmasia cerulea dolens treated with catheter-directed thrombolysis or emergent thrombectomy, and an unneeded central line pulled before heparin (pages 358-359).",
+      "The cerebrovascular section (pages 334-335) supplies the two carotid topics' board answers: the duplex velocity criteria, internal versus external carotid waveforms and first branches, embolism from the internal carotid as the usual cause of a cerebral event, territory symptoms, the repair thresholds, emergent endarterectomy for crescendo TIA or stroke in evolution, 10 to 14 days after an ischemic and 6 to 8 weeks after a hemorrhagic stroke, the tightest or dominant side first, shunting for a back pressure under 50 mm Hg or a tight contralateral side, no repair of an occluded internal carotid, the cranial nerve deficits with vagus as the most common, post-endarterectomy hypertension in 20% treated with nitroprusside, myocardial infarction as the leading non-stroke cause of death, 15% restenosis, stenting for high-risk patients, and TCAR's flow reversal. The top of page 335 is cut off in the scan, mid-way through the clamping order; that line was not quoted.",
     ].join(" "),
   },
   {
@@ -1174,9 +1200,9 @@ export const suppliedSources: SuppliedSource[] = [
     id: SVS_CAROTID_2022_SOURCE,
     title: "Society for Vascular Surgery carotid disease guideline and implementation document",
     kind: "article",
-    citation: "Society for Vascular Surgery clinical practice guidelines and implementation document on extracranial cerebrovascular disease, 2022.",
+    citation: "AbuRahma AF, Avgerinos ED, Chang RW, et al. Society for Vascular Surgery clinical practice guidelines for management of extracranial cerebrovascular disease, and the accompanying implementation document. Journal of Vascular Surgery, 2022;75(1S):4S-22S and 26S-98S.",
     suppliedAt: "2026-09-10T00:00:00.000Z",
-    details: "Registered during review as the authority the supplied guide attributes its selection thresholds, timing windows and cranial-nerve figures to. Identified from that document rather than supplied directly, so page-level detail was not available.",
+    details: "Registered during review as the authority the supplied guide attributes its selection thresholds, timing windows and cranial-nerve figures to. Identified from that document rather than supplied directly, so page-level detail was not available. The full author and journal citation was added on October 11, 2026, when the carotid topics began citing it for CEA as first-line treatment and for TCAR over transfemoral stenting in high-surgical-risk patients; both positions were confirmed from secondary summaries of the guideline, not its full text.",
   },
   {
     id: FEMPOP_BYPASS_PLAYBOOK_SOURCE,
@@ -1345,5 +1371,197 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "American Society of Colon and Rectal Surgeons clinical practice guidelines for ostomy surgery. Diseases of the Colon and Rectum, 2022.",
     suppliedAt: "2026-09-11T00:00:00.000Z",
     details: "Registered during review as the authority behind the purse-string closure recommendation, the suture-only recurrence figure, the reversal leak rates and the mesh-infection rates the supplied playbook quotes with strength and quality ratings. Identified from that playbook rather than supplied directly.",
+  },
+  {
+    id: SCORE_CAROTID_DISEASE_SOURCE,
+    title: "SCORE module: Carotid Artery Disease",
+    kind: "website",
+    citation: "Healy L, Amankwah KS. Carotid Artery Disease. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, April 25, 2024. https://www.surgicalcore.org/modulecontent.aspx?id=149545",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=149545",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: [
+      "The full module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the pathophysiology, risk factors, presentation, the imaging sequence, the symptomatic and asymptomatic stroke figures, the revascularization thresholds, preoperative workup, best medical therapy and surveillance.",
+      "Read against current guidance during review: the module asks a life expectancy over 5 years of symptomatic patients and only over 2 years of asymptomatic ones, which inverts the logic of the trials, since the asymptomatic benefit accrues slowly. The topic carries both figures in its board-versus-current table and follows ESVS 2023 for asymptomatic disease. Its statement that stroke is the third leading cause of US death is out of date and was not carried; Fiser's fifth is used. Its surveillance schedule (every 6 months for 2 years) differs from the companion procedures module, and the procedures topic says so.",
+      "Its stroke-type section is empty in the retrieved text.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_CAROTID_PROCEDURES_SOURCE,
+    title: "SCORE module: Procedures for Carotid Artery Stenosis",
+    kind: "website",
+    citation: "Healy L, Amankwah KS. Procedures for Carotid Artery Stenosis. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, September 14, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=150413",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=150413",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: [
+      "The full module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the indications, preoperative management, operative anatomy and high exposure, cerebral monitoring and shunt triggers, heparin dosing, the ICE clamp order, patch and eversion technique, completion assessment, one-line descriptions of transfemoral stenting and TCAR, the complications and their management, and the surveillance schedule with restenosis timing.",
+      "Corrected during review: the module lists prior endarterectomy, radical neck dissection or irradiation, tracheostomy, a high or inaccessible lesion, contralateral vocal cord paralysis and high surgical risk under the words \"CEA should be considered\". Every one of them is a reason to favor stenting over endarterectomy, as Fiser, the SVS guideline and the module's own TF-CAS and TCAR sentence imply, so the topic writes them as indications for stenting.",
+    ].join(" "),
+  },
+  {
+    id: ESVS_CAROTID_2023_SOURCE,
+    title: "ESVS 2023 guideline: atherosclerotic carotid and vertebral artery disease",
+    kind: "article",
+    citation: "Naylor R, Rantner B, Ancetti S, et al. European Society for Vascular Surgery (ESVS) 2023 Clinical Practice Guidelines on the Management of Atherosclerotic Carotid and Vertebral Artery Disease. European Journal of Vascular and Endovascular Surgery, 2023;65(1):7-111.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review, from web research on October 11, 2026, as the authority for the 14-day target after a neurologic event and for selective intervention in asymptomatic 60 to 99% stenosis with one or more higher-risk features, a life expectancy over 5 years and a 30-day stroke or death risk of 3% or less. The full text was not retrieved; these positions and the examples of higher-risk features (silent infarction, progression, intraplaque hemorrhage, impaired cerebrovascular reserve, spontaneous embolization on transcranial Doppler, contralateral TIA or stroke) come from published summaries and a 2022 multispecialty statement, pending the owner's sign-off.",
+  },
+  {
+    id: CREST2_SOURCE,
+    title: "CREST-2 trial",
+    kind: "article",
+    citation: "Brott TG, Howard G, Lal BK, et al.; CREST-2 Investigators. Medical management and revascularization for asymptomatic carotid stenosis. New England Journal of Medicine, 2026;394(3):219-231 (published online November 21, 2025). doi:10.1056/NEJMoa2508800",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review from web research on October 11, 2026. Two parallel trials in asymptomatic stenosis of 70% or more. Primary outcome: any stroke or death to 44 days, or ipsilateral ischemic stroke to 4 years. Stenting plus intensive medical management 2.8% against 6.0% for intensive medical management alone (P=0.02); endarterectomy 3.7% against 5.3% (P=0.24). Figures confirmed against trial reports, not the full paper.",
+  },
+  {
+    id: NASCET_SOURCE,
+    title: "NASCET",
+    kind: "article",
+    citation: "North American Symptomatic Carotid Endarterectomy Trial Collaborators. Beneficial effect of carotid endarterectomy in symptomatic patients with high-grade carotid stenosis. New England Journal of Medicine, 1991;325:445-453; and Barnett HJM, et al. Benefit of carotid endarterectomy in patients with symptomatic moderate or severe stenosis. New England Journal of Medicine, 1998;339:1415-1425.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review as the trial the SCORE procedures module names for the symptomatic threshold. The figures are the published ones: 2-year ipsilateral stroke 26% medical against 9% surgical for 70 to 99% stenosis, and 5-year 22.2% against 15.7% for 50 to 69%.",
+  },
+  {
+    id: ACAS_SOURCE,
+    title: "ACAS",
+    kind: "article",
+    citation: "Executive Committee for the Asymptomatic Carotid Atherosclerosis Study. Endarterectomy for asymptomatic carotid artery stenosis. JAMA, 1995;273(18):1421-1428.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review as the trial the SCORE procedures module names for the asymptomatic threshold. Projected 5-year ipsilateral stroke or any perioperative stroke or death: 5.1% surgical against 11.0% medical, in stenosis of 60% or more.",
+  },
+  {
+    id: CREST_SOURCE,
+    title: "CREST",
+    kind: "article",
+    citation: "Brott TG, Hobson RW 2nd, Howard G, et al. Stenting versus endarterectomy for treatment of carotid-artery stenosis. New England Journal of Medicine, 2010;363(1):11-23.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review. Composite of periprocedural stroke, myocardial infarction or death and later ipsilateral stroke: 7.2% stenting against 6.8% endarterectomy, not significantly different; periprocedural stroke 4.1% against 2.3%, myocardial infarction 1.1% against 2.3%; outcomes favored stenting below roughly age 70 and endarterectomy above it.",
+  },
+  {
+    id: CMS_CAROTID_STENTING_2023_SOURCE,
+    title: "CMS national coverage decision on carotid artery stenting, 2023",
+    kind: "website",
+    citation: "Centers for Medicare & Medicaid Services. Final decision memo, National Coverage Determination 20.7: percutaneous transluminal angioplasty of the carotid artery concurrent with stenting, October 11, 2023.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review from web research on October 11, 2026. Coverage of carotid stenting for symptomatic stenosis of 50% or more and asymptomatic stenosis of 70% or more, extended to standard-surgical-risk patients, facility certification removed, and formal shared decision-making required before the procedure. Confirmed from society and trade-press summaries of the memo rather than the memo text itself.",
+  },
+  {
+    id: ROADSTER_SOURCE,
+    title: "ROADSTER trial",
+    kind: "article",
+    citation: "Kwolek CJ, Jaff MR, Leal JI, et al. Results of the ROADSTER multicenter trial of transcarotid stenting with dynamic flow reversal. Journal of Vascular Surgery, 2015;62(5):1227-1234.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review. The pivotal single-arm trial of the ENROUTE system in high-surgical-risk patients; 30-day stroke 1.4% in the intention-to-treat population and 0.7% per protocol, as reported in trial summaries.",
+  },
+  {
+    id: ROADSTER2_SOURCE,
+    title: "ROADSTER 2 study",
+    kind: "article",
+    citation: "Kashyap VS, Schneider PA, Foteh M, et al. Early outcomes in the ROADSTER 2 study of transcarotid artery revascularization in patients with significant carotid artery disease. Stroke, 2020;51(9):2620-2629.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review; figures taken from the published abstract. 692 high-risk patients (intention to treat) at 43 sites, 632 per protocol, 81.2% of operators new to TCAR. Intention to treat: stroke 1.9%, death 0.4%, myocardial infarction 0.9%, stroke or death 2.3%, stroke, death or myocardial infarction 3.2%. Per protocol: stroke 0.6%, stroke or death 0.8%, stroke, death or myocardial infarction 1.7%. The authors credit protocol adherence and periprocedural antiplatelet therapy for the better per-protocol results.",
+  },
+  {
+    id: VQI_TCAR_VS_TFCAS_2019_SOURCE,
+    title: "TCAR versus transfemoral stenting in the Vascular Quality Initiative",
+    kind: "article",
+    citation: "Schermerhorn ML, Liang P, Eldrup-Jorgensen J, et al. Association of transcarotid artery revascularization vs transfemoral carotid artery stenting with stroke or death among patients with carotid artery stenosis. JAMA, 2019;322(23):2313-2322.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review. Propensity-matched registry analysis, 3,286 pairs: in-hospital stroke or death 1.6% with TCAR against 3.1% with transfemoral stenting, stroke 1.3% against 2.4%, death 0.4% against 1.0%. Exploratory and observational; the lead author disclosed consulting for the device maker.",
+  },
+  {
+    id: ENROUTE_LABELING_SOURCE,
+    title: "ENROUTE transcarotid neuroprotection and stent system labeling",
+    kind: "website",
+    citation: "Silk Road Medical / Boston Scientific. ENROUTE Transcarotid Neuroprotection System and ENROUTE Transcarotid Stent System: indications, contraindications, warnings and precautions (FDA 510(k) K143072 and successors). https://www.bostonscientific.com/en-US/medical-specialties/vascular-surgery/enroute-transcarotid-neuroprotection-system/indications-enroute-transcarotid-neuroprotection-system.html",
+    url: "https://www.bostonscientific.com/en-US/medical-specialties/vascular-surgery/enroute-transcarotid-neuroprotection-system/indications-enroute-transcarotid-neuroprotection-system.html",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review from the manufacturer's published indications page and 510(k) summaries, not the full instructions for use. Anatomic criteria: common carotid reference diameter of at least 6 mm, bifurcation at least 5 cm above the clavicle, adequate femoral venous access, vessels compatible with 8F sheaths; stent reference diameter 4 to 9 mm. Contraindications: antiplatelet or anticoagulant therapy contraindicated, unresolved bleeding disorder, and (in the NPS PLUS labeling) severe ipsilateral common carotid disease. Precaution: severe contralateral or ipsilateral posterior disease may limit cerebral flow during reversal. Device labeling changes; check the current instructions for use.",
+  },
+  {
+    id: TCAR_TECHNIQUE_2017_SOURCE,
+    title: "Technical aspects of TCAR with the ENROUTE system",
+    kind: "article",
+    citation: "Malas MB, Leal J, Kashyap V, Cambria RP, Kwolek CJ, Criado E. Technical aspects of transcarotid artery revascularization using the ENROUTE transcarotid neuroprotection and stent system. Journal of Vascular Surgery, 2017;65(3):916-920.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review as the technique reference for the TCAR playbook. The publisher blocked full-text retrieval; the abstract was read directly and the step details used (positioning as for endarterectomy, C-arm at the head of the bed for oblique views, radial arterial line, umbilical-tape traction for the puncture, micropuncture wire 2 to 3 cm and sheath 1.5 to 2 cm, the wire kept short of the lesion, the arterial sheath to its 2.5 cm stopper with the tip confirmed in two projections, and aggressive predilation under reversal) were confirmed from a search summary of the article. Pending the owner's sign-off.",
+  },
+  {
+    id: DE_BORST_TCAR_2023_SOURCE,
+    title: "Transcarotid artery revascularization: an evidence appraisal",
+    kind: "article",
+    citation: "de Borst GJ, et al. Transcarotid artery revascularization. British Journal of Surgery, 2023;110:127 (published online 2022). PMC10364484.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review; the full text was read. Supplies FDA approval in 2015 with mandatory registry entry, the 2022 label expansion to standard-risk patients, the absence of any randomized comparison with endarterectomy or transfemoral stenting, registry in-hospital endpoints understating 30-day risk by 20 to 25%, up to a third of patients being anatomically unsuitable, a 2.8-fold odds of in-hospital stroke or death after a recent stroke in the TCAR Surveillance Project, and the guideline position that endarterectomy remains first choice after recent symptoms.",
+  },
+  {
+    id: TCAR_HEMODYNAMICS_2018_SOURCE,
+    title: "Periprocedural hemodynamic management for TCAR",
+    kind: "article",
+    citation: "Jaff MR, Kokkosis AA, Leal JI, Macdonald S. Periprocedural hemodynamic management for transcarotid artery revascularization. Endovascular Today, August 2018 supplement (sponsored by Silk Road Medical).",
+    url: "https://evtoday.com/articles/2018-aug-supplement/periprocedural-hemodynamic-management-for-transcarotid-artery-revascularization",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review; the article was read directly. Supplies the systolic target of 140 to 160 mm Hg during flow reversal, the reasoning that reversal depends on the carotid-to-femoral-vein pressure difference and collateral inflow, hemodynamic instability in up to 55% after endarterectomy and bradycardia or hypotension in up to 76% after stenting lasting 12 to 24 hours, and prophylactic atropine 0.5 mg before balloon inflation. Industry-sponsored; the authors disclose consulting for the device maker.",
+  },
+  {
+    id: TCAR_ANESTHESIA_2020_SOURCE,
+    title: "Anesthetic considerations for TCAR",
+    kind: "article",
+    citation: "Ankam A, Kinthala S, Madabhushi P, et al. Anesthetic considerations for transcarotid artery revascularization: experience and review of forty cases from a single medical center. Cureus, 2020;12(12):e12250.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review; the full text was read. Supplies the description of the flow-reversal circuit (a short common carotid sheath kept proximal to the bifurcation, a filtered shunt to a femoral vein sheath, and clamping of the common carotid proximal to the sheath), the choice of general, regional or monitored anesthesia, and the need to watch the neck and groin for hematoma in a heparinized patient on dual antiplatelet therapy.",
+  },
+  {
+    id: CAROTID_DISEASE_OE_SOURCE,
+    title: "Owner-supplied carotid artery disease study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 11, 2026: \"Carotid Artery Disease — Pocket Chief\", an OpenEvidence synthesis provided as a Word document to check the first draft of this topic.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites: Mac Grory (Circulation Research 2022); AbuRahma (SVS guideline and implementation document 2022, and Journal of Vascular Surgery 2024); Brott (2011 multisociety guideline); Kawahara (Journal of Vascular Surgery 2026, the 2023 IAC duplex criteria); the 2024 ESC guideline; Zierler (Vascular Medicine 2026); Rothwell's pooled NASCET/ECST analysis; Kleindorfer (2021 AHA/ASA secondary prevention guideline); Cui (Stroke 2022); White (JACC 2022); Otite (JAMA Neurology 2018); Furie and Kelly (NEJM 2026); Malas (Journal of Vascular Surgery 2026); Straus (2024); Liang (JAMA Neurology 2023, registered separately); Kamel and Josephson (JAMA Neurology 2026); and, for its trauma section, Saitta, Shields, Wagner and the ACR Appropriateness Criteria.",
+      "Corrected during review: the document says CREST-2 results are awaited; they were published in November 2025 and are carried from the trial paper. Its NASCET figure of 24% against 7% was not used; the topic keeps the trial's published 26% against 9%, which the companion procedures document also gives.",
+      "Not carried: the blunt cerebrovascular injury section, which belongs to the neck trauma topics that already hold Biffl grading; the internal carotid ligation stroke figure the document itself flags as uncorroborated; prevalence by age and sex; and a symptomatic stenting meta-analysis that could not be checked.",
+      "Its share of ischemic strokes from carotid disease (about 10%) differs from the SCORE module's 20% and is written as a board-versus-current row. Additions from this document are pending the owner's sign-off.",
+    ].join(" "),
+  },
+  {
+    id: CAROTID_PROCEDURES_OE_SOURCE,
+    title: "Owner-supplied carotid procedures study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 11, 2026: \"Procedures for Carotid Artery Stenosis — Pocket Chief\", an OpenEvidence synthesis provided as a Word document to check the first draft of this topic.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: [
+      "Carries MLA-style in-text attributions and no numbered reference list. Works it cites: AbuRahma (SVS guideline and implementation document 2022); Mac Grory (Circulation Research 2022); Brott (JACC 2011 and NEJM 2026); Cui (Stroke 2022); Zierler (Vascular Medicine 2026); Mazzolai (2024 ESC guideline); Bonati (Lancet Neurology 2022); Furie and Kelly (NEJM 2026); Chaer (SVS perioperative care guide 2023); Rerkasem (Cochrane 2020); Fereydooni (JAMA Surgery 2019); Diener and Hankey (JACC 2020); Prakash (Interventional Cardiology 2022); Al-Bayati (Neurology 2021); Orrapin (Cochrane 2022); AbuRahma and Darling (2021); Chuatrakoon (Cochrane 2022); Calligaro and Dougherty (2005); Chia (Annals of Vascular Surgery 2020); Müller (Cochrane 2020); Mead (International Journal of Stroke 2023); Schermerhorn (JAMA 2019); Columbo (JAHA 2022) and Liang (JAMA Neurology 2023), both registered separately; Caron (Journal of Vascular Surgery 2026); Kakisis (EJVES 2017); Leary and Varade (2020).",
+      "Corrected during review: the document says CREST-2 enrolled asymptomatic 50 to 99% stenosis; the trial abstract confirms 70% or greater. Its LDL target of \"under 70 mg/dL (1.4 mmol/L or less)\" mixes two targets, since 70 mg/dL is 1.8 mmol/L and 1.4 mmol/L is the ESC target; only 70 mg/dL is carried. The 1-year stroke-or-death figures it attributes to Columbo 2022 (6.4%, 9.7%, 5.2%) are not in that paper's abstract, which reports perioperative 2.0% for TCAR, 1.7% for endarterectomy and 3.7% for transfemoral stenting with no 1-year difference between TCAR and endarterectomy; the abstract's figures are used. Liang 2023's noninferiority is carried together with the 1-year ipsilateral stroke excess (1.6% against 1.1%) the document leaves out.",
+      "Not carried because they could not be traced: CREST patching figures (1.2% against 4% stroke, 3.1% against 10.7% restenosis), a 13-trial meta-analysis's relative risks, and a 20% early recurrence within 72 hours. This document gives hyperperfusion mortality once it bleeds as about 38% and the TCAR playbook document as over 50%; the topic carries the range. Additions are pending the owner's sign-off.",
+    ].join(" "),
+  },
+  {
+    id: TCAR_PLAYBOOK_OE_SOURCE,
+    title: "Owner-supplied TCAR operative guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Operative guide supplied to Pocket Chief, October 11, 2026: \"Transcarotid Artery Revascularization (TCAR) — Pocket Chief Playbook\", an OpenEvidence synthesis provided as a Word document to check the first draft of this playbook.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: [
+      "Carries in-text attributions and no numbered reference list. Works it cites: Malas (Journal of Vascular Surgery 2017, registered separately); AbuRahma (SVS guideline and implementation document 2022); Jim (Annals of Neurology 2026, ROADSTER 3); Liang (JAMA Neurology 2023, registered separately); Kashyap (Stroke 2020); Straus (Annals of Surgery 2024 and Journal of Vascular Surgery 2024); Hamouda (Journal of Vascular Surgery 2025); Paraskevas (Angiology 2025; Progress in Cardiovascular Diseases 2022); Rerkasem (Cochrane 2020); Sanchez-Calderin (Journal of Vascular Surgery 2026); Wu (Journal of Vascular Surgery 2019, 2023 and 2026); Loufopoulos (Angiology 2025); Prakash (2022); Brott (NEJM 2026; JACC 2011); Al-Bayati (Neurology 2021); Bonati (Lancet Neurology 2022); the 2007 ACCF carotid stenting consensus; Pérez-Sánchez (Journal of Endovascular Therapy 2024); Roosendaal (Journal of Endovascular Therapy 2025); Teter (Annals of Vascular Surgery 2022); Kenny (Journal of Vascular Surgery 2025); Hsu (Annals of Vascular Surgery 2023); Leary (2020); Caron (Journal of Vascular Surgery 2026); Columbo (JAHA 2022); Baghbani (Journal of Vascular Surgery 2026).",
+      "Reconciled during review: Malas 2017 keeps the wire short of the lesion and predilates aggressively under reversal; this document prefers engaging the external carotid when it is open, because stopping short roughly doubles common carotid dissection (Wu 2026), and predilates selectively. The playbook follows this document. The device stopper sets 2.5 cm of sheath insertion; the document places the tip 1.5 to 2 cm below the bifurcation; both are kept.",
+      "Carried as attributed in the document and not checked against primary sources, pending the owner's sign-off: the ROADSTER 3 details, the common carotid dissection rate of about 1.2%, the 1-in-8 conversion to general anesthesia, the SVS depth-to-landing-zone ratio, the 3-to-14-day window, the protamine guidance, the high-risk physiologic criteria and the hyperperfusion risk factors. Not carried: the template operative note, and the CREST-2 clopidogrel dose, which reads as 75 mg twice daily and could not be confirmed.",
+    ].join(" "),
+  },
+  {
+    id: TCAR_VS_CEA_STANDARD_RISK_2023_SOURCE,
+    title: "TCAR versus endarterectomy in standard-risk patients",
+    kind: "article",
+    citation: "Liang P, Cronenwett JL, Secemsky EA, et al. Risk of stroke, death, and myocardial infarction following transcarotid artery revascularization vs carotid endarterectomy in patients with standard surgical risk. JAMA Neurology, 2023;80:437-444.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review after the OpenEvidence documents cited it; the abstract was read. Vascular Quality Initiative, 2,962 TCAR patients matched 1:3 with 8,886 endarterectomies: 30-day stroke, death or myocardial infarction or 1-year ipsilateral stroke 3.0% against 2.6% (not significant); 1-year ipsilateral stroke 1.6% against 1.1% (P = .02); no difference in 1-year mortality.",
+  },
+  {
+    id: VQI_TCAR_CEA_TFCAS_2022_SOURCE,
+    title: "TCAR, endarterectomy and transfemoral stenting compared in the Vascular Quality Initiative",
+    kind: "article",
+    citation: "Columbo JA, Martinez-Camblor P, Stone DH, Goodney PP, O'Malley AJ. Procedural safety comparison between transcarotid artery revascularization, carotid endarterectomy, and carotid stenting: perioperative and 1-year rates of stroke or death. Journal of the American Heart Association, 2022;11:e024964.",
+    suppliedAt: "2026-10-11T00:00:00.000Z",
+    details: "Registered during review after the OpenEvidence documents cited it; the abstract was read. 21,234 TCAR, 82,737 endarterectomy and 14,595 transfemoral stenting patients: perioperative stroke or death 2.0%, 1.7% and 3.7%. At 1 year, instrumental-variable analysis found no difference between TCAR and endarterectomy (HR 0.97) and more stroke or death after transfemoral stenting (HR 1.45); symptomatic patients did best with TCAR.",
   },
 ];

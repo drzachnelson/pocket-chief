@@ -189,7 +189,7 @@ export const vascularExposurePrinciplesTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001421",
   slug: "vascular-exposure-principles",
   title: "Vascular Exposure Principles",
-  aliases: ["vascular exposure", "proximal and distal control", "vessel exposure", "CFA exposure", "carotid exposure", "carotid cranial nerve injury", "CREST trial", "EVAR vs open repair", "temporary intraluminal shunt", "Pruitt-Inahara shunt", "percutaneous femoral access", "VQI"],
+  aliases: ["vascular exposure", "proximal and distal control", "vessel exposure", "CFA exposure", "carotid exposure", "carotid cranial nerve injury", "EVAR vs open repair", "temporary intraluminal shunt", "Pruitt-Inahara shunt", "percutaneous femoral access", "VQI"],
   scoreNodeId: "vascular-access-procedures",
   scoreCategory: "SCORE · Vascular Access · Operations & Procedures",
   tags: ["vascular-access", "vascular", "operative-technique", "exposure", "absite", "score"],

@@ -6,6 +6,8 @@ import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploratio
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
 import { acuteLimbIschemiaTopic } from "@/content/topics/acute-limb-ischemia";
+import { carotidArteryDiseaseTopic } from "@/content/topics/carotid-artery-disease";
+import { proceduresForCarotidArteryStenosisTopic } from "@/content/topics/procedures-for-carotid-artery-stenosis";
 import { airwayAccessIntubationAndSurgicalAirwaysTopic } from "@/content/topics/airway-access-intubation-and-surgical-airways";
 import { cardiacFailureAndCardiogenicShockTopic } from "@/content/topics/cardiac-failure-and-cardiogenic-shock";
 import { cardiacInjuryTopic } from "@/content/topics/cardiac-injury";
@@ -130,6 +132,8 @@ export const libraryTopics: Topic[] = [
   thrombophlebitisTopic,
   venousStasisAndChronicVenousInsufficiencyTopic,
   varicoseVeinsTopic,
+  carotidArteryDiseaseTopic,
+  proceduresForCarotidArteryStenosisTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";
