@@ -45,6 +45,23 @@ describe("playbook library", () => {
     // sentence to the Crohn topic. An auto-link is a clinical claim about relatedness, so new
     // ones fail here until someone looks at them rather than surfacing in the browser.
     const expected: Record<string, string[]> = {
+      // Venous batch: reviewed anatomic and clinical destinations. Pleural air/bleeding
+      // was reworded in the rib guide because the bare terms reached the trauma FAST topic.
+      "ivc-filter-placement-and-retrieval": ["cavogram -> vena-cava-filter-insertion"],
+      "first-rib-resection-for-venous-thoracic-outlet-syndrome": [
+        "UEDVT -> deep-venous-thrombosis",
+        "thoracic duct injury -> neck-injuries-management",
+        "upper-extremity DVT -> deep-venous-thrombosis",
+      ],
+      "open-venous-thrombectomy": [
+        "fasciotomy -> fasciotomy",
+        "iliofemoral DVT -> deep-venous-thrombosis",
+      ],
+      "endovenous-ablation": [
+        "proximal DVT -> deep-venous-thrombosis",
+        "superficial thrombophlebitis -> thrombophlebitis",
+        "varicosities -> varicose-veins",
+      ],
       // Reviewed and kept: the anatomy and the hostile-neck factor genuinely belong to those
       // topics. Rejected on review: "a fast one" reached the FAST exam, and "skip lesions"
       // reached Crohn disease. Both were reworded rather than accepted.
@@ -145,6 +162,7 @@ describe("playbook library", () => {
         "iliopubic tract -> groin-hernia-repair",
         "inguinal hernia -> inguinal-hernia",
         "internal ring -> inguinal-hernia",
+        "mechanical prophylaxis -> prophylaxis-of-venous-thromboembolism",
         "myopectineal orifice -> groin-hernia-repair",
         "peritonitis -> abdominal-pain",
         "triangle of Doom -> groin-hernia-repair",
@@ -176,6 +194,7 @@ describe("playbook library", () => {
         "botulinum toxin -> ventral-and-incisional-hernia",
         "component separation -> abdominal-wall-reconstruction",
         "loss of domain -> ventral-and-incisional-hernia",
+        "mechanical prophylaxis -> prophylaxis-of-venous-thromboembolism",
         "mesh infection -> abdominal-wall-reconstruction",
         "onlay -> abdominal-wall-reconstruction",
         "progressive pneumoperitoneum -> ventral-and-incisional-hernia",
@@ -186,6 +205,7 @@ describe("playbook library", () => {
         "ventral hernia -> ventral-and-incisional-hernia",
       ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
+        "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
       ],
       "temporal-artery-biopsy": [],
@@ -229,7 +249,8 @@ describe("playbook library", () => {
     expect(slugs("corona mortis")).toEqual(["robotic-tapp-inguinal-hernia-repair"]);
     expect(slugs("Zuckerkandl")).toEqual(["total-thyroidectomy"]);
     expect(slugs("clavipectoral")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
-    expect(slugs("intercostobrachial")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
+    // The transaxillary rib exposure also protects this nerve in the axilla.
+    expect(slugs("intercostobrachial")).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);
     expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
     expect(slugs("Toldt")).toEqual(["right-hemicolectomy"]);
     // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior

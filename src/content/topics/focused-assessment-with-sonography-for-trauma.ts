@@ -179,7 +179,7 @@ export const fastExamTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001224",
   slug: "focused-assessment-with-sonography-for-trauma",
   title: "Focused Assessment with Sonography for Trauma (FAST)",
-  aliases: ["FAST", "E-FAST", "eFAST", "extended FAST", "focused assessment with sonography for trauma", "trauma ultrasound", "POCUS", "point-of-care ultrasound", "Morison's pouch", "hepatorenal recess", "splenorenal recess", "subxiphoid view", "pericardial window", "lung sliding", "lung point", "B-lines", "seashore sign", "barcode sign", "stratosphere sign", "hemoperitoneum", "hemopericardium", "pneumothorax", "hemothorax", "DPA", "diagnostic peritoneal aspiration", "cardiac tamponade"],
+  aliases: ["FAST", "E-FAST", "eFAST", "extended FAST", "focused assessment with sonography for trauma", "trauma ultrasound", "POCUS", "point-of-care ultrasound", "Morison's pouch", "hepatorenal recess", "splenorenal recess", "subxiphoid view", "pericardial window", "lung sliding", "lung point", "B-lines", "seashore sign", "barcode sign", "stratosphere sign", "hemoperitoneum", "hemopericardium", "DPA", "diagnostic peritoneal aspiration", "cardiac tamponade"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
   tags: ["trauma", "fast", "ultrasound", "point-of-care-ultrasound", "diagnostics", "absite", "score"],

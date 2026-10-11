@@ -71,6 +71,23 @@ export const FISER_HEMATOLOGY_SOURCE = "00000000-0000-4000-8000-000000002503";
 export const COBRRA_SOURCE = "00000000-0000-4000-8000-000000002504";
 export const SIR_ILIOFEMORAL_DVT_2023_SOURCE = "00000000-0000-4000-8000-000000002505";
 export const SVS_AVF_EARLY_THROMBUS_REMOVAL_2012_SOURCE = "00000000-0000-4000-8000-000000002506";
+// Venous cluster (October 2026): eight topics share the four hundreds blocks left below 03000, one 50-id half each.
+export const VENA_CAVA_FILTER_PACKET_SOURCE = "00000000-0000-4000-8000-000000002600";
+export const ACR_SIR_SPR_IVC_FILTER_2021_SOURCE = "00000000-0000-4000-8000-000000002601";
+export const SIR_IVC_FILTER_GUIDELINE_JAMA_2021_SOURCE = "00000000-0000-4000-8000-000000002602";
+export const AHA_ACC_PE_GUIDELINE_2026_SOURCE = "00000000-0000-4000-8000-000000002603";
+export const SWOLLEN_LEG_PACKET_SOURCE = "00000000-0000-4000-8000-000000002650";
+export const SCORE_SWOLLEN_LEG_SOURCE = "00000000-0000-4000-8000-000000002651";
+export const THROMBOPHLEBITIS_PACKET_SOURCE = "00000000-0000-4000-8000-000000002700";
+export const SCORE_THROMBOPHLEBITIS_SOURCE = "00000000-0000-4000-8000-000000002701";
+export const CALISTO_SOURCE = "00000000-0000-4000-8000-000000002702";
+export const SVS_AVF_AVLS_VARICOSE_2023_SOURCE = "00000000-0000-4000-8000-000000002703";
+export const CVI_PACKET_SOURCE = "00000000-0000-4000-8000-000000002750";
+export const SCORE_CVI_SOURCE = "00000000-0000-4000-8000-000000002751";
+export const EVRA_SOURCE = "00000000-0000-4000-8000-000000002752";
+export const VARICOSE_PACKET_SOURCE = "00000000-0000-4000-8000-000000002800";
+export const SCORE_VARICOSE_SOURCE = "00000000-0000-4000-8000-000000002801";
+export const AVF_SVS_EHIT_2021_SOURCE = "00000000-0000-4000-8000-000000002802";
 
 // Playbooks. Operative guides, numbered from 3000 so they never collide with topic sources.
 export const TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003000";
@@ -98,7 +115,198 @@ export const EHS_AHS_UMBILICAL_2020_SOURCE = "00000000-0000-4000-8000-0000000030
 export const SAGES_HERNIA_PROPHYLAXIS_2016_SOURCE = "00000000-0000-4000-8000-000000003022";
 export const WSES_EMERGENCY_HERNIA_SOURCE = "00000000-0000-4000-8000-000000003023";
 
+export const SCORE_SVC_SOURCE = "00000000-0000-4000-8000-000000002850";
+export const SVC_PACKET_SOURCE = "00000000-0000-4000-8000-000000002851";
+export const CIRSE_SVC_SOURCE = "00000000-0000-4000-8000-000000002852";
+export const SCORE_TOS_SOURCE = "00000000-0000-4000-8000-000000002900";
+export const TOS_PACKET_SOURCE = "00000000-0000-4000-8000-000000002901";
+export const ESVS_VTE_2021_SOURCE = "00000000-0000-4000-8000-000000002902";
+export const AVF_UEDVT_2026_SOURCE = "00000000-0000-4000-8000-000000002903";
+export const SCORE_VTE_PROPHYLAXIS_SOURCE = "00000000-0000-4000-8000-000000002950";
+export const VTE_PROPHYLAXIS_PACKET_SOURCE = "00000000-0000-4000-8000-000000002951";
+export const CHEST_SURGICAL_PROPHYLAXIS_2012_SOURCE = "00000000-0000-4000-8000-000000002952";
+export const ASH_SURGICAL_PROPHYLAXIS_2019_SOURCE = "00000000-0000-4000-8000-000000002953";
+export const IVC_FILTER_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003024";
+export const FIRST_RIB_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003025";
+export const OPEN_VENOUS_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003026";
+export const ENDOVENOUS_ABLATION_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003027";
+export const OPEN_VENOUS_THROMBECTOMY_STUDY_SOURCE = "00000000-0000-4000-8000-000000003028";
+export const SIR_IVC_FILTER_2020_SOURCE = "00000000-0000-4000-8000-000000003029";
+export const ESVS_CVD_2022_SOURCE = "00000000-0000-4000-8000-000000003030";
+export const IVC_FILTER_DECISION_ANALYSIS_SOURCE = "00000000-0000-4000-8000-000000003031";
+
 export const suppliedSources: SuppliedSource[] = [
+  {
+    id: SCORE_SVC_SOURCE,
+    title: "SCORE: Superior Vena Cava Syndrome",
+    kind: "website",
+    citation: "Randhawa S, Erkmen CP. Superior Vena Cava Syndrome. SCORE, December 5, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=166342",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Licensed module read locally; no question stems reproduced. Histology, corticosteroid and fibrosing-mediastinitis claims were not copied uncritically.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: SVC_PACKET_SOURCE,
+    title: "SVC syndrome study brief and evidence audit",
+    kind: "user_notes",
+    citation: "Owner-requested Gemini SCORE-notebook brief and OpenEvidence Sackett audit, October 10, 2026.",
+    url: "https://www.openevidence.com/ask/861ca9b8-5023-4efd-a85d-2ede18514164",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. The audit overstates chemosensitive malignancy as an absolute contraindication to stenting; CIRSE calls it relative. Avoided unsupported percentages and automatic device extraction or anticoagulation for nonthrombotic obstruction.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: CIRSE_SVC_SOURCE,
+    title: "CIRSE quality assurance guideline: SVC stenting",
+    kind: "article",
+    citation: "Uberoi R. CIRSE Quality Assurance Guidelines for Superior Vena Cava Stenting in Malignant Disease, revised 2016.",
+    url: "https://eu-csite-storage-prod.s3.amazonaws.com/www-cirse-org/files/files/CIRSE_QA_Guidelines_for_SVC_Stenting_in_Malignant_Disease_Revision_Uberoi_2016.pdf",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Primary guideline opened directly: emergency indications, symptomatic intervention, relative contraindications and rapid relief. Not a claim that every SVC obstruction requires urgent stenting.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: SCORE_TOS_SOURCE,
+    title: "SCORE: Thoracic Outlet Syndrome",
+    kind: "website",
+    citation: "Clemens MS, Propper BW, Freischlag JA. Thoracic Outlet Syndrome. SCORE, March 22, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=165804",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Local module supplies three-subtype anatomy, presentation, evaluation, PT and operative risks.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: TOS_PACKET_SOURCE,
+    title: "Thoracic outlet syndrome brief and focused evidence audit",
+    kind: "user_notes",
+    citation: "Owner-requested Gemini SCORE-notebook brief; focused OpenEvidence Sackett venous-batch audit, October 10, 2026.",
+    url: "https://www.openevidence.com/ask/b08fd69e-0f64-4796-9c8e-493d1506dfb5",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Shared audit verifies current guidance without rewriting correct background. Saved earlier Gemini brief was reused. Acute primary UEDVT and neurogenic/arterial TOS remain distinct pathways.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: ESVS_VTE_2021_SOURCE,
+    title: "ESVS 2021 venous thrombosis guideline",
+    kind: "article",
+    citation: "Kakkos SK, et al. ESVS 2021 Clinical Practice Guidelines on the Management of Venous Thrombosis. Eur J Vasc Endovasc Surg. 2021;61:9–82. doi:10.1016/j.ejvs.2020.09.023.",
+    url: "https://angiolsurgery.org/society/organisations/esvs/guidelines/ESVS-Guidelines-Venous-Thrombosis-2021.pdf",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Primary recommendations 53–56: three-month anticoagulation, selective early thrombus removal, and first rib resection for clear venous TOS. Timing lacks randomized evidence; compare the newer AVF recommendation rather than flattening them.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: AVF_UEDVT_2026_SOURCE,
+    title: "AVF 2026 upper extremity DVT guideline",
+    kind: "article",
+    citation: "Malgor RD, Etkin Y, Mouawad NJ, et al. The American Venous Forum clinical practice guideline on the care of patients with upper extremity deep venous thrombosis. J Vasc Surg Venous Lymphat Disord. 2026;14(4):102461. doi:10.1016/j.jvsv.2026.102461.",
+    url: "https://pubmed.ncbi.nlm.nih.gov/41780672/",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Publication verified directly at PubMed; guideline 6.4 wording on first rib resection was supplied by the OpenEvidence audit. Full text retrieval was blocked; exact recommendation strength is not asserted in the reader-facing content.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: SCORE_VTE_PROPHYLAXIS_SOURCE,
+    title: "SCORE: Prophylaxis of Venous Thromboembolism",
+    kind: "website",
+    citation: "Hatchimonji J, Martin N. Prophylaxis of Venous Thromboembolism. SCORE, August 21, 2024; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=155978",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Placed under the module’s actual SCORE category: Preoperative Evaluation and Perioperative Care. The module’s blanket 28-day discharge statement is narrowed to supported populations.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: VTE_PROPHYLAXIS_PACKET_SOURCE,
+    title: "VTE prophylaxis study brief and focused evidence audit",
+    kind: "user_notes",
+    citation: "Owner-requested Gemini SCORE-notebook brief; OpenEvidence Sackett shared venous-batch audit, October 10, 2026.",
+    url: "https://www.openevidence.com/ask/b08fd69e-0f64-4796-9c8e-493d1506dfb5",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Preserves general-surgery context. Orthopedic aspirin evidence is not generalized. Neuraxial timing is agent-, dose-, renal- and catheter-dependent; no universal 12-hour rule.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: CHEST_SURGICAL_PROPHYLAXIS_2012_SOURCE,
+    title: "CHEST: VTE prevention in nonorthopedic surgical patients",
+    kind: "article",
+    citation: "Gould MK, et al. Prevention of VTE in Nonorthopedic Surgical Patients. CHEST. 2012;141(2 Suppl):e227S–e277S. doi:10.1378/chest.11-2297.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3278061/",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Primary sections 3.6.1–3.6.9 read directly. Corrected Caprini 0 versus 1–2 and four weeks from surgery, not an extra 28 days after discharge, in the related DVT topic.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: ASH_SURGICAL_PROPHYLAXIS_2019_SOURCE,
+    title: "ASH 2019 surgical VTE prevention guideline",
+    kind: "article",
+    citation: "Anderson DR, et al. ASH 2019 guidelines for management of VTE: prevention in surgical hospitalized patients. Blood Adv. 2019;3:3898–3944. doi:10.1182/bloodadvances.2019000975.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963238/",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Major general surgery favors LMWH or UFH; bleeding risk and procedure-specific exceptions matter. Extended prophylaxis recommendations are conditional; not a universal mandate for every high Caprini score.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: IVC_FILTER_PLAYBOOK_SOURCE,
+    title: "IVC filter operative brief from the Rezzy notebook",
+    kind: "user_notes",
+    citation: "Owner-requested Gemini Rezzy-notebook operative brief, IVC Filter Operative Playbook, October 10, 2026.",
+    url: "https://gemini.google.com/app/c6f0d1c0545bcd30",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Notebook excerpts attributed to Operative Dictations in General and Vascular Surgery and vascular review sources. Corrected fixed wire sizes/caval limits, automatic recapture, universal lifelong thrombophilia anticoagulation and 25–54-day claim. Advanced retrieval is referral-level, not a blind-force maneuver.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: FIRST_RIB_PLAYBOOK_SOURCE,
+    title: "First rib resection operative brief from the Rezzy notebook",
+    kind: "user_notes",
+    citation: "Gemini Rezzy notebook, Pocket Chief Operative Briefs, October 10, 2026; first-rib section.",
+    url: "https://gemini.google.com/app/384a26250ce23658",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Notebook attributes exposure to Operative Dictations in General and Vascular Surgery (2017), chapters 271–272, with anatomic material from Fiser and BTK. Actual book chapter was not independently opened. Procedural narrative paraphrased; current selection separately cited. No mandatory same-admission timing or trapdoor sternotomy rule. A subsequent OpenEvidence operative audit in the shared audit conversation checked anatomy, approach selection and the need for a defined postoperative imaging plan.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: OPEN_VENOUS_PLAYBOOK_SOURCE,
+    title: "Open venous thrombectomy research brief and source-gap audit",
+    kind: "user_notes",
+    citation: "Gemini Rezzy notebook, Pocket Chief Operative Briefs, October 10, 2026; open-thrombectomy section.",
+    url: "https://gemini.google.com/app/384a26250ce23658",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Gemini explicitly lacked a dedicated open venous chapter and mixed arterial embolectomy with venous exposure. That synthesis is not used as the authority for venous catheter passage. Added an actual primary venous surgical series for the core technique; no routine distal balloon passage across valves, prophylactic filter or obligatory AV fistula. A subsequent OpenEvidence operative audit in the shared audit conversation checked these distinctions and completion imaging.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: ENDOVENOUS_ABLATION_PLAYBOOK_SOURCE,
+    title: "Endovenous ablation operative brief from the Rezzy notebook",
+    kind: "user_notes",
+    citation: "Gemini Rezzy notebook, Pocket Chief Operative Briefs, October 10, 2026; thermal-ablation section.",
+    url: "https://gemini.google.com/app/384a26250ce23658",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Notebook attributes technique to Operative Dictations (chapter 247), Skandalakis Surgical Anatomy and Technique (2021), and Zollinger’s Atlas. Book excerpts were retrieved through notebook synthesis. Fixed laser settings and mandatory routine surveillance replaced by device-specific instructions and primary society guidance.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: OPEN_VENOUS_THROMBECTOMY_STUDY_SOURCE,
+    title: "Primary surgical iliofemoral venous thrombectomy series",
+    kind: "article",
+    citation: "Surgical thrombectomy for iliofemoral deep vein thrombosis: Patient outcomes at 8.5 years. PLoS One. 2020. PMCID: PMC7302664.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7302664/",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Methods read directly: common femoral venotomy, proximal fluoroscopic thrombectomy, distal manual compression, completion phlebography and selective outflow treatment. Single-center series, not proof of superiority over anticoagulation or a universal protocol. Its fixed PEEP, routine AV fistula and six-month regimen are not generalized.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: SIR_IVC_FILTER_2020_SOURCE,
+    title: "SIR 2020 multisociety IVC filter guideline",
+    kind: "article",
+    citation: "Kaufman JA, et al. Society of Interventional Radiology Clinical Practice Guideline for Inferior Vena Cava Filters in the Treatment of Patients with Venous Thromboembolic Disease. JVIR. 2020;31:1529–1544.",
+    url: "https://www.moffitt.org/contentassets/5f017dd2859540f0a96a78dbc407cdca/ivc-filter-placement-consensus-guidlines-sir-2020.pdf",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Primary guideline read directly: recurrent VTE on anticoagulation generally does not warrant a filter, with limited exceptions after addressing failure; structured follow-up and removal when protection is no longer needed. Newer 2026 PE guidance is retained as a distinct selected recurrent-PE consideration.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: ESVS_CVD_2022_SOURCE,
+    title: "ESVS 2022 chronic venous disease guideline",
+    kind: "article",
+    citation: "De Maeseneer MG, et al. ESVS 2022 Clinical Practice Guidelines on the Management of Chronic Venous Disease of the Lower Limbs. Eur J Vasc Endovasc Surg. 2022;63:184–267. doi:10.1016/j.ejvs.2021.12.024.",
+    url: "https://doi.org/10.1016/j.ejvs.2021.12.024",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Primary guideline indexed recommendations and society listing verified; full PDF requires login. The shared evidence audit supplies the collateral/outflow distinction. Deep reflux and obstruction are different; neither mandates a blanket superficial-first strategy.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
+  {
+    id: IVC_FILTER_DECISION_ANALYSIS_SOURCE,
+    title: "IVC filter retrieval decision analysis",
+    kind: "article",
+    citation: "Morales JP, Li X, Irony TZ, et al. Decision analysis of retrievable inferior vena cava filters in patients without pulmonary embolism. J Vasc Surg Venous Lymphat Disord. 2013;1:376–384. doi:10.1016/j.jvsv.2013.04.005.",
+    url: "https://doi.org/10.1016/j.jvsv.2013.04.005",
+    details: "Added during the October 10, 2026 venous-batch review; paraphrased educational draft pending Zach approval. Primary model read directly. The 29–54-day estimate assumes transient PE risk has passed and is not a universal retrieval deadline or an endorsement of prophylactic filters.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+  },
   {
     id: CHOLEDOCHOLITHIASIS_SOURCE,
     title: "User-supplied choledocholithiasis study packet",
@@ -791,6 +999,160 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Meissner MH, Gloviczki P, Comerota AJ, et al. Early thrombus removal strategies for acute deep venous thrombosis: clinical practice guidelines of the Society for Vascular Surgery and the American Venous Forum. Journal of Vascular Surgery, 2012.",
     suppliedAt: "2026-10-10T00:00:00.000Z",
     details: "Registered during review, identified from the packet's reference list rather than supplied directly. Cited for urgent thrombus removal in phlegmasia cerulea dolens, which the packet gives as a Grade 1A recommendation.",
+  },
+  {
+    id: VENA_CAVA_FILTER_PACKET_SOURCE,
+    title: "Owner-requested vena cava filter insertion study guide (OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study document generated for Pocket Chief, October 10, 2026: \"Vena Cava Filter Insertion — Pocket Chief\", an OpenEvidence (Sackett) synthesis of a Gemini study guide drawn from the owner's SCORE notebook sources, requested as part of the venous-cluster batch.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "The document cites inline by author and year; its 19-reference list came with the accompanying answer: Creager (2026 AHA/ACC multisociety acute PE guideline, Circulation and JACC 2026, registered separately); Ahmed, Cifu and Paul (JAMA 2021 synopsis of the SIR filter guideline, registered separately); Zuin (JACC 2024); Konstantinides (2019 ESC PE guideline); the ACR-SIR-SPR IVC filter practice parameter (2021, registered separately); Weinberg, Kaufman and Jaff (JACC Cardiovascular Interventions 2013); Minocha (ACR Appropriateness Criteria, JACR 2019); Shin (Abdominal Radiology 2019); Spentzouris (Clinical Anatomy 2014); Ozgul (Abdominal Radiology 2021); Karaosmanoglu (2021); Alkhouli (JACC Cardiovascular Interventions 2016); Li (duplicated IVC case series, 2022); Ferro (SAFE-IVC, JAMA 2024); Warren (JAMA Internal Medicine 2023); Goswamy (JAMA Internal Medicine 2017); Kapur and Goyal (2023); and Nicholson (Archives of Internal Medicine 2010).",
+      "The trial figures (PREPIC and PREPIC2; PE reduced about 50%, DVT increased about 70%, no mortality difference) and the FDA 29-to-54-day retrieval window are carried as the packet attributes them to the 2026 AHA/ACC guideline; neither the trials nor the FDA communication were opened directly.",
+      "Not carried: the packet's \"PGG\" mnemonic for suprarenal placement, which is its own invention, and its 28-to-31 mm device range. The topic follows the SCORE module's under-30 mm figure; the Bird's Nest 40 mm limit was confirmed against Cook's instructions for use during review.",
+    ].join(" "),
+  },
+  {
+    id: ACR_SIR_SPR_IVC_FILTER_2021_SOURCE,
+    title: "ACR-SIR-SPR practice parameter for IVC filter placement",
+    kind: "article",
+    citation: "American College of Radiology, Society of Interventional Radiology, Society for Pediatric Radiology. ACR-SIR-SPR Practice Parameter for the Performance of Inferior Vena Cava (IVC) Filter Placement for the Prevention of Pulmonary Embolism. Revised 2021.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review as the authority the packet leans on for indications, the infrarenal landing zone, pre-procedure caval assessment, and suprarenal indications; identified from the packet's reference list rather than supplied directly.",
+  },
+  {
+    id: SIR_IVC_FILTER_GUIDELINE_JAMA_2021_SOURCE,
+    title: "Inferior vena cava filters for venous thromboembolic disease (JAMA synopsis of the SIR guideline)",
+    kind: "article",
+    citation: "Ahmed O, Cifu AS, Paul J. Inferior vena cava filters for the treatment of patients with venous thromboembolic disease. JAMA, 2021.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review, identified from the packet's reference list. Summarizes the 2020 Society of Interventional Radiology clinical practice guideline: no routine filter in patients who can be anticoagulated, and no routine prophylactic filter in trauma or before major surgery.",
+  },
+  {
+    id: AHA_ACC_PE_GUIDELINE_2026_SOURCE,
+    title: "2026 AHA/ACC multisociety guideline for acute pulmonary embolism",
+    kind: "article",
+    citation: "Creager MA, Barnes GD, Giri J, et al. 2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults. Circulation and Journal of the American College of Cardiology, 2026.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review, identified from the vena cava filter packet's reference list. Cited for the filter trade-off (fewer PE, more DVT, no mortality benefit, after PREPIC and PREPIC2), the preference for retrievable devices, and timely retrieval. Its exact wording was not opened directly.",
+  },
+  {
+    id: SWOLLEN_LEG_PACKET_SOURCE,
+    title: "Owner-requested swollen leg study brief and evidence audit (Gemini and OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study materials generated for Pocket Chief, October 10, 2026: a Gemini study guide on the evaluation of a swollen leg drawn from the owner's SCORE notebook sources, and an OpenEvidence (Sackett) focused audit of that guide correcting decision-changing errors.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "The audit's 23 references: Stevens (CHEST VTE guideline, second update, 2021); Piazza (JAMA 2025 superficial vein thrombosis review); Gloviczki (SVS/AVF/AVLS varicose vein guideline part II, 2024); Decousus (CALISTO, NEJM 2010); Gohel (EVRA, NEJM 2018, HTA 2019, JAMA Surgery 2020); Cai (Cochrane 2023); von Keudell (Lancet 2015); the AAOS acute compartment syndrome guideline (2025); Mortensen (JAMA Surgery 2019); Davis (ACS orthopaedic trauma best practices, 2015); Broadhurst (Muscle and Nerve 2020); Wang (Cochrane 2023); Le Gal (JAMA 2026, age-adjusted D-dimer); Jackson (JAMA 2022); Chopard (JAMA 2020); Zuin (JACC 2024); Stevens and Bryant (NEJM 2017, necrotizing soft tissue infection); Chambliss (American Family Physician 2026); Li (AHA open-vein statement, 2025); Vedantham (SIR iliofemoral DVT statement, 2023); and Comerota (Circulation 2019).",
+      "Corrections taken from the audit: the brief sent every swollen leg straight to duplex, and the topic risk-stratifies first; the brief keyed an absolute compartment pressure over 30 mmHg, and the topic follows delta P as the Fasciotomy topic already does; a low LRINEC score does not exclude necrotizing infection.",
+      "Dropped: the brief's claim that open reconstruction of the left common iliac vein requires dividing the right common iliac artery, which the audit could not support. Superficial thrombophlebitis treatment and early ablation for venous ulcers belong to their own topics in this batch.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_SWOLLEN_LEG_SOURCE,
+    title: "SCORE curriculum module: Evaluation of the Swollen Leg",
+    kind: "website",
+    citation: "Mouawad N, Lohr J. \"Evaluation of the Swollen Leg.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Venous module, March 20, 2023.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000531",
+    details: "Retrieved August 12, 2026. Supplies the acute (under 72 hours) versus chronic split, unilateral and bilateral causes, venous versus lymphatic examination findings, primary lymphedema by age of onset, the systemic edema laboratory panel, imaging choices, phlebolymphedema, and pitting edema grades.",
+  },
+  {
+    id: THROMBOPHLEBITIS_PACKET_SOURCE,
+    title: "Owner-requested thrombophlebitis study brief and evidence audit (Gemini and OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study materials generated for Pocket Chief, October 10, 2026: a Gemini brief on thrombophlebitis drawn from the owner's SCORE notebook sources, and an OpenEvidence (Sackett) focused audit of that brief.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "The audit's references: Piazza (superficial vein thrombosis review, JAMA 2025); Stevens (CHEST VTE guideline, second update, 2021); Gloviczki (SVS/AVF/AVLS varicose vein guideline part II, 2024, registered separately); NCCN cancer-associated VTE (2026); Riat (British Society for Haematology DOAC addendum, 2022); Bontinis (network meta-analysis, Thrombosis Research 2024); Rashedi (HI-PRO post hoc, JAMA Cardiology 2026); Rouzaud (2016); Decousus (CALISTO, NEJM 2010, registered separately); Beyer-Westendorf (SURPRISE, Lancet Haematology 2017); Bauman (Surgical Infections 2019); Carrier (SOME, NEJM 2015).",
+      "Corrections taken from the audit: the brief treated 5 cm and 3 cm as ablation-catheter geometry rather than thrombosis treatment thresholds, called NSAIDs first-line for saphenous clot, and gave no anticoagulant regimen. The audit gives about 25% for concomitant DVT; the 6% to 53% range from the SCORE module reflects older, heterogeneous series.",
+      "Carried as a genuine disagreement: therapeutic anticoagulation for clot within 3 cm of the saphenofemoral junction runs at least 6 weeks per SVS 2023 and at least 3 months per NCCN.",
+      "Not confirmed during review and therefore not written as a recommendation: the audit's statement that SVS 2023 recommends against LMWH and NSAIDs for saphenous trunk thrombosis. The topic says only that NSAIDs relieve symptoms without preventing VTE.",
+      "Added during review beyond the packet, pending sign-off: the CDC guidance that adult peripheral catheters need not be replaced more often than every 72 to 96 hours, set against the SCORE module's every-3-days rule.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_THROMBOPHLEBITIS_SOURCE,
+    title: "SCORE curriculum module: Thrombophlebitis",
+    kind: "website",
+    citation: "Aziz F. \"Thrombophlebitis.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Venous module, March 18, 2023.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=143442",
+    details: "Retrieved August 12, 2026. Supplies the risk factors, the 6% to 53% concomitant-DVT range, suppurative organisms and treatment, Mondor and Trousseau, no routine thrombophilia testing, high saphenous ligation near the junction, SURPRISE, and IV-site prevention. Its SURPRISE summary names enoxaparin as the comparator in one sentence and fondaparinux in the one before; the trial compared rivaroxaban with fondaparinux, and the topic writes it that way.",
+  },
+  {
+    id: CALISTO_SOURCE,
+    title: "CALISTO: fondaparinux for superficial-vein thrombosis in the legs",
+    kind: "article",
+    citation: "Decousus H, Prandoni P, Mismetti P, et al. Fondaparinux for the treatment of superficial-vein thrombosis in the legs. New England Journal of Medicine, 2010;363:1222-1232.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review, named in the thrombophlebitis audit. Patients with superficial thrombosis at least 5 cm long, excluding clot within 3 cm of the saphenofemoral junction, randomized to fondaparinux 2.5 mg daily or placebo for 45 days: symptomatic VTE, extension to the junction, or recurrence in 0.9% against 5.9%.",
+  },
+  {
+    id: SVS_AVF_AVLS_VARICOSE_2023_SOURCE,
+    title: "2023 SVS/AVF/AVLS clinical practice guidelines for varicose veins of the lower extremities",
+    kind: "article",
+    citation: "Gloviczki P, Lawrence PF, Wasan SM, et al. The 2023 Society for Vascular Surgery, American Venous Forum, and American Vein and Lymphatic Society clinical practice guidelines for the management of varicose veins of the lower extremities. Part I (duplex scanning and treatment of superficial truncal reflux), J Vasc Surg Venous Lymphat Disord 2023; Part II, J Vasc Surg Venous Lymphat Disord 2024.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review from the batch's OpenEvidence audits, which cite it by section. Thrombophlebitis uses Part II section 12.1 (anticoagulation by clot length and distance from the junction). Primary Part II sections 11–12 opened directly during batch completion; updated ARTE treatment and surveillance rules are reflected in the drafts.",
+  },
+  {
+    id: CVI_PACKET_SOURCE,
+    title: "Owner-requested venous stasis and chronic venous insufficiency study brief and evidence audit (Gemini and OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study materials generated for Pocket Chief, October 10, 2026: a Gemini brief on venous stasis and chronic venous insufficiency drawn from the owner's SCORE notebook sources, and an OpenEvidence (Sackett) focused audit of that brief.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "The audit's 16 references: Goodman (JAMA 2025 guideline synopsis); Fukaya and Kolluri (NEJM 2024); Gloviczki (SVS/AVF/AVLS varicose vein guideline parts I and II, 2023 and 2024, registered separately); Cai (Cochrane 2023); Kabnick (AVF/SVS EHIT guideline, 2021); Kahn (AHA post-thrombotic syndrome statement, 2014); Khan (Lancet 2021); Meng (Thrombosis Research 2023); Duan (Frontiers in Medicine 2026); Whing (Cochrane 2021); Singer, Tassiopoulos and Kirsner (NEJM 2017); Bontinis (Journal of Endovascular Therapy 2025); Chi and Raffetto (Vascular Medicine 2015); Liu (Scientific Reports 2019); Appelen (Cochrane 2017).",
+      "Corrections taken from the audit: no compression trial is required before ablating symptomatic axial reflux; early ablation with compression heals ulcers faster (EVRA, registered separately); 30 to 40 mmHg is the ulcer-healing pressure, 20 to 30 mmHg is for symptoms; ablation and stripping show no significant difference in 5-year recurrence, so the brief's 14.3% against 20.9% was not carried.",
+      "Carried as contested rather than settled: whether stockings prevent post-thrombotic syndrome, with SOX negative and later meta-analyses showing a modest reduction in mild disease. The audit could not corroborate Fiser's 90% Unna boot healing figure, so the topic labels it as the board number.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_CVI_SOURCE,
+    title: "SCORE curriculum module: Venous Stasis and Chronic Venous Insufficiency",
+    kind: "website",
+    citation: "Raffetto JD. \"Venous Stasis and Chronic Venous Insufficiency.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Venous module, November 2, 2023.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=143500",
+    details: "Retrieved August 12, 2026. Supplies valve closure times (500 ms superficial, profunda, tibial and perforator; 1000 ms femoral and popliteal), acute versus chronic DVT on duplex, recanalization in about half by 6 to 9 months, CEAP and VCSS, treating superficial disease first in multilevel disease, iliac stenting under IVUS for outflow obstruction, and compression as the mainstay for ulcers.",
+  },
+  {
+    id: EVRA_SOURCE,
+    title: "EVRA: early versus deferred endovenous ablation for venous ulceration",
+    kind: "article",
+    citation: "Gohel MS, Heatley F, Liu X, et al. A randomized trial of early endovenous ablation in venous ulceration. New England Journal of Medicine, 2018;378:2105-2114.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review, named in the audit. 450 patients with venous leg ulcers and superficial reflux: ablation within 2 weeks plus compression healed ulcers faster than compression with ablation deferred until healing, with a median of 56 against 82 days.",
+  },
+  {
+    id: VARICOSE_PACKET_SOURCE,
+    title: "Owner-requested varicose veins study brief and evidence audit (Gemini and OpenEvidence, from the SCORE notebook)",
+    kind: "user_notes",
+    citation: "Study materials generated for Pocket Chief, October 10, 2026: a Gemini brief on varicose veins drawn from the owner's SCORE notebook sources, and an OpenEvidence (Sackett) focused audit of that brief.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: [
+      "The audit's 17 references: Goodman (JAMA 2025); Gloviczki (SVS/AVF/AVLS varicose vein guideline parts I and II, registered separately); Kabnick (AVF/SVS EHIT guideline, 2021, registered separately); Cai (Cochrane 2023); Gohel (EVRA, HTA 2019 and JAMA Surgery 2020); Sayarer (Scientific Reports 2026); Tort and Cosmi (Cochrane Clinical Answers 2021); Whing (Cochrane 2021); Fukaya and Kolluri (NEJM 2024); Huang (Lasers in Medical Science 2023); Bellmunt-Montoya (Cochrane 2021, CHIVA); Paravastu (Cochrane 2016); Appelen (Cochrane 2017); Ginsberg (Archives of Internal Medicine 2001).",
+      "Corrections taken from the audit: no compression trial before ablating symptomatic axial reflux; EHIT management by class rather than anticoagulation for any extension; and the recurrence figures. The SCORE module's 14.3% after ablation and 20.9% after stripping is kept as the board number, set against pooled trials showing no clear difference and a single 10-year series favoring surgery at the groin.",
+      "The audit's class III EHIT entry reads antiplatelet or anticoagulation; the topic writes it that way without choosing, pending sign-off.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_VARICOSE_SOURCE,
+    title: "SCORE curriculum module: Varicose Veins",
+    kind: "website",
+    citation: "Gasparis AP, Kokkosis AA. \"Varicose Veins.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Venous module, March 20, 2023.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=143575",
+    details: "Retrieved August 12, 2026. Supplies superficial, perforating and deep anatomy and variants, the three mechanisms of venous disease, the history and examination, CEAP, compression types, treatment by vein type, complications of stripping, ablation, phlebectomy and sclerotherapy, and the 20.9% against 14.3% recurrence comparison. Its line that valvular insufficiency accounts for 85% of \"cardiovascular disease\" means chronic venous disease.",
+  },
+  {
+    id: AVF_SVS_EHIT_2021_SOURCE,
+    title: "Classification and treatment of endothermal heat-induced thrombosis (AVF and SVS)",
+    kind: "article",
+    citation: "Kabnick LS, Sadek M, Bjarnason H, et al. Classification and treatment of endothermal heat-induced thrombosis: recommendations from the American Venous Forum and the Society for Vascular Surgery. Journal of Vascular Surgery: Venous and Lymphatic Disorders and Phlebology, 2021.",
+    suppliedAt: "2026-10-10T00:00:00.000Z",
+    details: "Registered during review from the batch's OpenEvidence audits, which cite it for the four EHIT classes and their class-dependent treatment. Older EHIT tier definitions were checked against the newer Part II recommendations; class III requires therapeutic anticoagulation.",
   },
   {
     id: TEMPORAL_ARTERY_BIOPSY_PLAYBOOK_SOURCE,

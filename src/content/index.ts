@@ -1,3 +1,6 @@
+import { superiorVenaCavaSyndromeTopic } from "@/content/topics/superior-vena-cava-syndrome";
+import { thoracicOutletSyndromeTopic } from "@/content/topics/thoracic-outlet-syndrome";
+import { prophylaxisOfVenousThromboembolismTopic } from "@/content/topics/prophylaxis-of-venous-thromboembolism";
 import { abdominalAndAortoiliacAneurysmRepairTopic } from "@/content/topics/abdominal-and-aortoiliac-aneurysm-repair";
 import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploration";
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
@@ -33,6 +36,11 @@ import { malrotationTopic } from "@/content/topics/malrotation";
 import { pancreaticoduodenectomyTopic } from "@/content/topics/pancreaticoduodenectomy";
 import { hemodialysisAccessCatheterTopic } from "@/content/topics/hemodialysis-access-catheter";
 import { deepVenousThrombosisTopic } from "@/content/topics/deep-venous-thrombosis";
+import { venaCavaFilterInsertionTopic } from "@/content/topics/vena-cava-filter-insertion";
+import { evaluationOfASwollenLegTopic } from "@/content/topics/evaluation-of-a-swollen-leg";
+import { thrombophlebitisTopic } from "@/content/topics/thrombophlebitis";
+import { venousStasisAndChronicVenousInsufficiencyTopic } from "@/content/topics/venous-stasis-and-chronic-venous-insufficiency";
+import { varicoseVeinsTopic } from "@/content/topics/varicose-veins";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
 import { percutaneousBreastBiopsyTopic } from "@/content/topics/percutaneous-breast-biopsy-and-cyst-aspiration";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
@@ -62,6 +70,9 @@ export { suppliedSources } from "@/content/sources";
 export { taxonomy } from "@/content/taxonomy";
 
 export const libraryTopics: Topic[] = [
+  superiorVenaCavaSyndromeTopic,
+  thoracicOutletSyndromeTopic,
+  prophylaxisOfVenousThromboembolismTopic,
   choledocholithiasisTopic,
   fibroadenomaPhyllodesTopic,
   abdominalPainTopic,
@@ -114,6 +125,11 @@ export const libraryTopics: Topic[] = [
   pancreaticoduodenectomyTopic,
   hemodialysisAccessCatheterTopic,
   deepVenousThrombosisTopic,
+  venaCavaFilterInsertionTopic,
+  evaluationOfASwollenLegTopic,
+  thrombophlebitisTopic,
+  venousStasisAndChronicVenousInsufficiencyTopic,
+  varicoseVeinsTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";
