@@ -306,3 +306,16 @@ Durable decisions:
 Content status: **authored but unreviewed — draft until Zach reads it.**
 
 Verified at 62 topics and 16 playbooks: tsc and eslint clean; vitest 170 passed / 1 skipped without `out/` and 171/171 with it; all 13, 12 and 9 headed blocks Supported with none unsupported; the decision flow draws 9/9 nodes; every table renders every row; search ranks the right entry first for each title and the aliases tried; no horizontal overflow at 375px; `next build` prerenders all three pages, the playbook is in `out/playbooks.json` and absent from `library.json`; Playwright 22 passed / 4 skipped.
+
+### Checked against OpenEvidence (October 11, 2026, same day)
+
+Zach supplied three OpenEvidence Word documents, one per entry, and asked for the drafts to be checked against them. Each is registered as its own `user_notes` source (`04016`-`04018`), and Liang 2023 and Columbo 2022 were registered after their abstracts were read (`04019`, `04030`; `04020`/`04021` are the disease topic's ids).
+
+- **The documents were right where the first draft was thin:** SVS asks 3 to 5 years of life expectancy for asymptomatic intervention (the draft had only ESVS's 5), symptomatic means within 6 months, the TCAR technique (purse-string, ECA-engaging wire, ACT 250 to 300, selective predilation, 1 to 2 minutes of reversal after the last balloon, protamine), near-occlusion as its own category, the NASCET measurement method, Horner and spinal accessory injuries, and modern restenosis timing (after 2 to 3 years, not SCORE's decade).
+- **The documents were wrong in four places, checked against primary abstracts:** CREST-2 "awaited" (it reported in November 2025), CREST-2 enrolling "50 to 99%" (it was 70% or more), a 1-year Columbo 2022 table that is not in that paper, and an LDL target pairing 70 mg/dL with 1.4 mmol/L. Liang 2023's noninferiority was carried with the 1-year ipsilateral stroke excess the document left out.
+- **Where Malas 2017 and the TCAR document differ, the playbook follows the document** (engage the external carotid when open; predilate selectively) and both positions are in the source `details`.
+- **Most-common cranial nerve, superseding the earlier flag:** this is not a library conflict after all. The OpenEvidence procedures document also calls the hypoglossal the classic textbook answer while the meta-analysis and Fiser give the vagus, so Vascular Exposure Principles and the procedures topic are consistent. The topic now carries both in a short prose block.
+- **Not carried:** the BCVI section (the neck trauma topics own Biffl grading), the template operative note, and figures that could not be traced (CREST patching, a 13-trial meta-analysis, a 72-hour recurrence rate). A carotid body tumor block was added to the disease topic; it has no outline entry of its own.
+- Playbook links: "heart failure" to the cardiogenic shock topic is kept as the same condition; "carotid; duplex" across a semicolon was reworded.
+
+Verified after the update: vitest 171/171, all 15, 13 and 14 headed blocks Supported, every table row present, no overflow at 375px, `next build` prerenders all three pages, Playwright 22 passed / 4 skipped.
