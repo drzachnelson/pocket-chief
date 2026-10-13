@@ -8,6 +8,12 @@ import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wal
 import { acuteLimbIschemiaTopic } from "@/content/topics/acute-limb-ischemia";
 import { carotidArteryDiseaseTopic } from "@/content/topics/carotid-artery-disease";
 import { proceduresForCarotidArteryStenosisTopic } from "@/content/topics/procedures-for-carotid-artery-stenosis";
+import { renalFailureTopic } from "@/content/topics/renal-failure";
+import { vascularAccessForDialysisTopic } from "@/content/topics/vascular-access-for-dialysis";
+import { arteriovenousGraftAndFistulaTopic } from "@/content/topics/arteriovenous-graft-and-fistula";
+import { vascularAccessTopic } from "@/content/topics/vascular-access";
+import { ultrasoundForIntravascularAccessTopic } from "@/content/topics/ultrasound-for-intravascular-access";
+import { venousAccessDevicesInsertionTopic } from "@/content/topics/venous-access-devices-insertion";
 import { airwayAccessIntubationAndSurgicalAirwaysTopic } from "@/content/topics/airway-access-intubation-and-surgical-airways";
 import { cardiacFailureAndCardiogenicShockTopic } from "@/content/topics/cardiac-failure-and-cardiogenic-shock";
 import { cardiacInjuryTopic } from "@/content/topics/cardiac-injury";
@@ -134,6 +140,12 @@ export const libraryTopics: Topic[] = [
   varicoseVeinsTopic,
   carotidArteryDiseaseTopic,
   proceduresForCarotidArteryStenosisTopic,
+  renalFailureTopic,
+  vascularAccessForDialysisTopic,
+  arteriovenousGraftAndFistulaTopic,
+  vascularAccessTopic,
+  ultrasoundForIntravascularAccessTopic,
+  venousAccessDevicesInsertionTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

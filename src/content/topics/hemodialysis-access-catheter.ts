@@ -208,7 +208,7 @@ export const hemodialysisAccessCatheterTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000002421",
   slug: "hemodialysis-access-catheter",
   title: "Hemodialysis Access Catheter",
-  aliases: ["hemodialysis catheter", "dialysis catheter", "tunneled dialysis catheter", "tunneled cuffed catheter", "nontunneled dialysis catheter", "temporary dialysis catheter", "Quinton catheter", "Vas-Cath", "Permcath", "Permacath", "Tesio catheter", "Palindrome catheter", "HD catheter", "TDC", "central venous stenosis", "fibrin sheath", "catheter-related bloodstream infection", "CRBSI", "catheter lock", "taurolidine", "DefenCath", "translumbar catheter", "transhepatic catheter", "Rule of 6s", "rule of sixes", "AEIOU", "KDOQI"],
+  aliases: ["hemodialysis catheter", "dialysis catheter", "tunneled dialysis catheter", "tunneled cuffed catheter", "nontunneled dialysis catheter", "temporary dialysis catheter", "Quinton catheter", "Vas-Cath", "Permcath", "Permacath", "Tesio catheter", "Palindrome catheter", "HD catheter", "TDC", "central venous stenosis", "fibrin sheath", "catheter-related bloodstream infection", "CRBSI", "catheter lock", "taurolidine", "DefenCath", "translumbar catheter", "transhepatic catheter"],
   scoreNodeId: "vascular-access-conditions",
   scoreCategory: "SCORE · Vascular Access · Diseases & Conditions",
   tags: ["vascular-access", "dialysis-access", "esrd", "absite", "score"],

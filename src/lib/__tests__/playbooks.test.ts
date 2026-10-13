@@ -96,10 +96,12 @@ describe("playbook library", () => {
       // pinned here: that topic never discusses the trial, so the link promised content it lacks.
       // Rewritten against the OpenEvidence guide 2026-10-11. "heart failure" is kept: it is a physiologic
       // high-risk criterion and names the same condition. Rejected and reworded: "carotid; duplex" reached
-      // the carotid duplex alias across a semicolon in the redo-neck bullet.
+      // the carotid duplex alias across a semicolon in the redo-neck bullet. Accepted October 12: "arterial line"
+      // for the radial monitoring line. Reworded: "clamp the arterial line" meant the circuit's arterial limb.
       "transcarotid-artery-revascularization": [
         "Hyperperfusion syndrome -> procedures-for-carotid-artery-stenosis",
         "TCAR -> procedures-for-carotid-artery-stenosis",
+        "arterial line -> vascular-access",
         "carotid stenting -> procedures-for-carotid-artery-stenosis",
         "flow reversal -> procedures-for-carotid-artery-stenosis",
         "flow-reversal -> procedures-for-carotid-artery-stenosis",

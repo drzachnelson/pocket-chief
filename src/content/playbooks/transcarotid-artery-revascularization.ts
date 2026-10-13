@@ -162,7 +162,7 @@ const blocks: TopicBlock[] = [
     heading: "↳ Bailout",
     items: [
       "Dissection of the common carotid is the most feared access complication, about 1.2%, and usually happens during sheath insertion: stent across the entry, tamponade it with a prolonged low-pressure balloon, or convert to an open repair. Never force a wire or sheath.",
-      "Air in the circuit: clamp the arterial line at once, and do not release the common carotid until the sheath has been aspirated clear.",
+      "Air in the circuit: clamp the arterial limb of the circuit at once, and do not release the common carotid until the sheath has been aspirated clear.",
       "Sheath and stent: keep the sheath tip at least about 1.5 cm below the bifurcation, and land the stent's proximal end outside it.",
       "Irradiated or redo neck: the planes are scarred, so stay on the anterior common carotid, and expect a longer landing zone on duplex than on straight-line CTA.",
     ],

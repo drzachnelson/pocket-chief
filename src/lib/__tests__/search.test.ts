@@ -21,6 +21,12 @@ describe("topic search", () => {
     expect(searchTopics("asparagus toboggan", libraryTopics)).toEqual([]);
   });
 
+  // Every vascular access topic carries the "vascular-access" tag, which normalizes to the same string as
+  // the Vascular Access title; on a tie the alphabetical tiebreak put Arteriovenous Graft and Fistula first.
+  it("ranks an exact title match above a tag or alias that spells the same words", () => {
+    expect(searchTopics("Vascular Access", libraryTopics)[0]?.slug).toBe("vascular-access");
+  });
+
   it("still ranks the right topic when a body word is a genuine prefix", () => {
     expect(searchTopics("phyllodes", libraryTopics)[0]?.slug).toBe("fibroadenoma-vs-phyllodes-tumor");
   });
