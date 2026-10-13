@@ -319,3 +319,24 @@ Zach supplied three OpenEvidence Word documents, one per entry, and asked for th
 - Playbook links: "heart failure" to the cardiogenic shock topic is kept as the same condition; "carotid; duplex" across a semicolon was reworded.
 
 Verified after the update: vitest 171/171, all 15, 13 and 14 headed blocks Supported, every table row present, no overflow at 375px, `next build` prerenders all three pages, Playwright 22 passed / 4 skipped.
+
+## Vascular access batch (October 13, 2026)
+
+Six SCORE topics under the outline's own titles: **Renal Failure**, **Vascular Access for Dialysis**, **Arteriovenous Graft and Fistula**, **Vascular Access**, **Ultrasound for Intravascular Access**, and **Venous Access Devices Insertion**. Zach ran the Gemini-to-OpenEvidence step himself and supplied one OpenEvidence Word document per topic; each is its own `user_notes` source beside the SCORE module and Fiser chapter. This closes the Vascular Access module (4/4) and Surgical Critical Care operations (4/4). The library is now **68 topics and 16 playbooks**.
+
+Durable decisions:
+
+- **Ids:** sources `04100`-`04116`, topics `04120/04121` through `04170/04171`. The next free block is `04200`.
+- **Vascular Access for Dialysis is a new topic beside Hemodialysis Access Catheter**, which keeps its id and slug. The catheter topic gave up four aliases: "Rule of 6s" and "rule of sixes" to the AV topic, "AEIOU" to Renal Failure, and "KDOQI" to the dialysis topic. No block changed there, so its `reviewedAt` stays.
+- **Aliases left off on purpose:** bare "AV fistula", "arteriovenous fistula", "AVF", "AVG" (trauma, DVT, American Venous Forum), bare "steal syndrome" (subclavian steal), bare "port" and "port placement" (robotic trocars — the cholecystectomy playbook caught it), "vein mapping" (the fem-pop playbook maps saphenous vein), "primary patency"/"secondary patency" (bypass and renal artery topics), bare "air embolism" (cardiac injury's systemic air embolism), and "point-of-care ultrasound" (FAST owns it).
+- **Over-broad alias narrowed at its source:** Groin Hernia in Children's bare "apnea" became "apnea monitoring" and "postoperative apnea". Its "PPV" (patent processus vaginalis) is still an alias and would capture pulse pressure variation; the new topics spell it out. Narrow it if a critical care topic ever needs the abbreviation.
+- **Search fix:** an exact title match now scores above any tag or alias. The `vascular-access` tag on every access topic tied with the Vascular Access title, and the alphabetical tiebreak put Arteriovenous Graft and Fistula first. Pinned in `search.test.ts`. This is the third search flaw that only showed up as the library grew.
+- **Renal Failure follows the SCORE module, not the OpenEvidence document's scope.** About half the document covered burns, abdominal compartment syndrome, neurogenic shock, rhabdomyolysis targets and succinylcholine, which other topics own. Staging stays KDIGO 2012: the March 2026 KDIGO update the module cites was still a public-review draft as of October 2026. The RIFLE table and KDIGO protein tiers were added from general knowledge, pending Zach's sign-off.
+- **Source errors written as splits:** SCORE Renal Failure's "replace losses with hypotonic fluids"; SCORE Vascular Access's IVC collapse "with ventilated respirations" and a pulse pressure variation "normal range" of 65 to 70% (the SvO2 range, misplaced); the dialysis document's expansion of RUDI as "revascularization" (it is revision using distal inflow).
+- **Not attributed:** the vascular access document says AHA 2025 and UHMS dropped head-down positioning for air embolism. A search found no AHA document saying that, so the topic writes the positioning debate without the attribution.
+- **Two supplied documents disagreeing, carried as splits rather than resolved:** fistula maturation (forearm 3 to 4 months and upper-arm sooner, against 3 to 6 months overall), routine duplex mapping (first-line in one, selective under KDOQI in the other), and the lowest-infection central line site (subclavian per 3SITES, against the 2024 meta-analysis showing overlapping rates).
+- **Playbook link pinned:** "arterial line" in TCAR goes to Vascular Access. "Clamp the arterial line" in TCAR's complications meant the circuit's arterial limb, so it was reworded.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**
+
+Verified at 68 topics and 16 playbooks: tsc and eslint clean; vitest 171 passed / 1 skipped without `out/` and 172/172 with it; every block Supported on all six pages (19, 17, 18, 17, 17, 19); flows draw 8, 8 and 10 of 8, 8 and 10 nodes; every table row renders; search ranks each title and the moved aliases first; no horizontal overflow at 375px; `next build` prerenders all six; Playwright 22 passed / 4 skipped.

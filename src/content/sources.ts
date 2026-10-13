@@ -160,6 +160,25 @@ export const TCAR_VS_CEA_STANDARD_RISK_2023_SOURCE = "00000000-0000-4000-8000-00
 // 04020/04021 are the Carotid Artery Disease topic's ids, so the block resumes at 04030.
 export const VQI_TCAR_CEA_TFCAS_2022_SOURCE = "00000000-0000-4000-8000-000000004030";
 
+// Vascular access batch (October 2026): sources 04100-04119, topics 04120/04121 through 04170/04171.
+export const SCORE_VASCULAR_ACCESS_SOURCE = "00000000-0000-4000-8000-000000004100";
+export const SCORE_US_VASCULAR_ACCESS_SOURCE = "00000000-0000-4000-8000-000000004101";
+export const SCORE_AV_GRAFT_FISTULA_SOURCE = "00000000-0000-4000-8000-000000004102";
+export const SCORE_VENOUS_ACCESS_DEVICES_SOURCE = "00000000-0000-4000-8000-000000004103";
+export const SCORE_RENAL_FAILURE_SOURCE = "00000000-0000-4000-8000-000000004104";
+export const FISER_CRITICAL_CARE_SOURCE = "00000000-0000-4000-8000-000000004105";
+export const FISER_FLUIDS_ELECTROLYTES_SOURCE = "00000000-0000-4000-8000-000000004106";
+export const RENAL_FAILURE_OE_SOURCE = "00000000-0000-4000-8000-000000004107";
+export const DIALYSIS_ACCESS_OE_SOURCE = "00000000-0000-4000-8000-000000004108";
+export const AV_ACCESS_OE_SOURCE = "00000000-0000-4000-8000-000000004109";
+export const VASCULAR_ACCESS_OE_SOURCE = "00000000-0000-4000-8000-000000004110";
+export const US_VASCULAR_ACCESS_OE_SOURCE = "00000000-0000-4000-8000-000000004111";
+export const VENOUS_ACCESS_DEVICES_OE_SOURCE = "00000000-0000-4000-8000-000000004112";
+export const STARRT_AKI_2020_SOURCE = "00000000-0000-4000-8000-000000004113";
+export const SHEA_CLABSI_2022_SOURCE = "00000000-0000-4000-8000-000000004114";
+export const MAGIC_2015_SOURCE = "00000000-0000-4000-8000-000000004115";
+export const ASA_CENTRAL_VENOUS_ACCESS_2020_SOURCE = "00000000-0000-4000-8000-000000004116";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: SCORE_SVC_SOURCE,
@@ -1563,5 +1582,163 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Columbo JA, Martinez-Camblor P, Stone DH, Goodney PP, O'Malley AJ. Procedural safety comparison between transcarotid artery revascularization, carotid endarterectomy, and carotid stenting: perioperative and 1-year rates of stroke or death. Journal of the American Heart Association, 2022;11:e024964.",
     suppliedAt: "2026-10-11T00:00:00.000Z",
     details: "Registered during review after the OpenEvidence documents cited it; the abstract was read. 21,234 TCAR, 82,737 endarterectomy and 14,595 transfemoral stenting patients: perioperative stroke or death 2.0%, 1.7% and 3.7%. At 1 year, instrumental-variable analysis found no difference between TCAR and endarterectomy (HR 0.97) and more stroke or death after transfemoral stenting (HR 1.45); symptomatic patients did best with TCAR.",
+  },
+  {
+    id: SCORE_VASCULAR_ACCESS_SOURCE,
+    title: "SCORE curriculum module: Vascular Access",
+    kind: "website",
+    citation: "Noorbakhsh MR, Cragun BN. \"Vascular Access.\" Surgical Council on Resident Education (SCORE) Portal, Surgical Critical Care module, March 12, 2025.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000512",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies CVC and arterial-line indications, the keyed site rules (subclavian for cervical collar, tracheostomy or prolonged dwell; internal jugular when the clavicle is fractured), ScvO2 under 65% as malperfusion, the Allen test, and PA catheter waveforms. Three statements are carried as source errors in the topic's split block rather than as fact: IVC collapse over 50% \"with ventilated respirations\" (collapsibility applies to spontaneous breathing), a pulse pressure variation \"normal range\" of 65 to 70% (the SvO2 range, apparently misplaced under PPV), and iatrogenic pneumothorax managed with tube thoracostomy and arterial cannulation corrected by catheter removal with direct pressure, both stated without the size and bore qualifications current practice applies.",
+  },
+  {
+    id: SCORE_US_VASCULAR_ACCESS_SOURCE,
+    title: "SCORE curriculum module: Ultrasound Use for Intravascular Access",
+    kind: "website",
+    citation: "Rinderknecht T, Salcedo E. \"Ultrasound Use for Intravascular Access.\" Surgical Council on Resident Education (SCORE) Portal, Surgical Critical Care module, March 12, 2025.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=163873",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the benefits and limits of ultrasound guidance, pre-scan preparation, Trendelenburg to distend the vein, and troubleshooting. Most of the topic's numbers come from the OpenEvidence document.",
+  },
+  {
+    id: SCORE_AV_GRAFT_FISTULA_SOURCE,
+    title: "SCORE curriculum module: Arteriovenous Graft and Fistula",
+    kind: "website",
+    citation: "Silva M, Soden P. \"Arteriovenous Graft and Fistula.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Access module, December 10, 2025. Based on a previous module by Tanya R. Flohr.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=133899",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the keyed numbers: fistula 6 months and graft 3 to 6 weeks before dialysis, vein over 2.5 mm and artery over 2 mm, depth within 6 mm, fistula ready at 6 to 12 weeks and graft at 2 to 3 weeks, the rule of sixes, saphenous vein over 3 mm, Dacron not suggested because ePTFE tolerates repeated puncture better, and the two steal strategies (flow reduction by banding or RUDI, digital flow augmentation by DRIL or proximalization of arterial inflow).",
+  },
+  {
+    id: SCORE_VENOUS_ACCESS_DEVICES_SOURCE,
+    title: "SCORE curriculum module: Venous Access Devices Insertion",
+    kind: "website",
+    citation: "Schmidt L, Karhadkar SS. \"Venous Access Devices Insertion.\" Surgical Council on Resident Education (SCORE) Portal, Vascular Access module, March 12, 2025.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=163653",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the keyed intraoperative rules: a wire that tracks up the internal jugular, ultrasound or the ipsilateral internal jugular after a failed subclavian pass, and a chest radiograph before any contralateral attempt. Its statement that chemotherapy ports most commonly go in the subclavian vein is carried as the board answer in the split block; current series favor the internal jugular.",
+  },
+  {
+    id: SCORE_RENAL_FAILURE_SOURCE,
+    title: "SCORE curriculum module: Renal Failure",
+    kind: "website",
+    citation: "Chandhrasekhar D, Kanneganti S. \"Renal Failure.\" Surgical Council on Resident Education (SCORE) Portal, Surgical Critical Care module, July 7, 2026. Based on a previous module by Glen A. Franklin and Nicholas A. Nash.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=140716",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies nephron physiology, GFR, creatinine clearance and cystatin C, prerenal, intrinsic and postrenal AKI, history and examination, urine studies (FENa under 1% or FEUrea under 35% prerenal; FENa over 2% or FEUrea over 50% intrinsic), imaging, supportive care, AEIOU, HD against CRRT, contrast risk by eGFR, and mortality (2.5 to 64% overall, up to 50% with dialysis, 26% non-oliguric against 50% oliguric, RIFLE relative risks 2.4, 4.15 and 6.37). The module's KDIGO and RIFLE tables did not survive the local scrape; the topic's staging tables follow KDIGO 2012 and the original RIFLE criteria, added from general knowledge and pending Zach's sign-off. The module cites a March 2026 KDIGO update; as of October 2026 that is a public-review draft, and the 2012 staging stands. Its line \"for hypovolemia, replace losses with hypotonic fluids\" is carried as a source error in the split block; KDIGO recommends isotonic crystalloid. The split block also sets the module's protein advice (1 to 2 g/kg/day, unrestricted) beside the KDIGO 2012 tiers (0.8 to 1.0 g/kg/day without dialysis, 1.0 to 1.5 on intermittent dialysis, up to 1.7 on CRRT or when hypercatabolic), added from general knowledge and pending Zach's sign-off.",
+  },
+  {
+    id: FISER_CRITICAL_CARE_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Critical Care",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 16, Critical Care, pages 188-207.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Page-level markdown of the chapter, held in `Pocket Chief Resources/absite-8e/ch16_critical-care.md`. Supplies the keyed numbers: SvO2 75 ± 5%, wedge 11 ± 4 mm Hg, zone III placement, wedge readings at end-expiration, catheter distances to wedge (right subclavian 45 cm, right internal jugular 50 cm, left subclavian 55 cm, left internal jugular 60 cm), hemoptysis after flushing treated with more PEEP, a chest radiograph for desaturation after a central line, and air embolism treated head down and rolled to the left with aspiration through the line.",
+  },
+  {
+    id: FISER_FLUIDS_ELECTROLYTES_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Fluids and Electrolytes",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 9, Fluids and Electrolytes, pages 77-95.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Page-level markdown of the chapter, held in `Pocket Chief Resources/absite-8e/ch09_fluids-and-electrolytes.md`. Supplies the acute renal failure keys: FENa as the best test for azotemia, prerenal FENa under 1%, urine sodium under 20, BUN to creatinine over 20 and urine osmolality over 500, 70% of renal mass lost before creatinine and BUN rise, and the older contrast and myoglobin advice (bicarbonate and N-acetylcysteine; alkalinize the urine), which the topic carries as board answers overtaken by trial evidence.",
+  },
+  {
+    id: RENAL_FAILURE_OE_SOURCE,
+    title: "Owner-supplied renal failure study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 12, 2026: \"Renal Failure Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include Ostermann (Lancet 2025), Hoste (Nature Reviews Nephrology 2018), Singri (JAMA 2003), Miller (Annals of Internal Medicine 1978), Abdelhafez (CJASN 2022), Renaghan and Rosner (2022), the ACR Manual on Contrast Media (2025), Mehran (NEJM 2019), PRESERVE, Kellum (Nature Reviews Disease Primers 2021), Jentzer (JACC 2020), the STARRT-AKI, AKIKI, AKIKI-2, IDEAL-ICU and ELAIN trials, Gaudry and Palevsky (NEJM 2022), and Wald (Intensive Care Medicine 2023).",
+      "Not carried: about half the document covers trauma and burn material owned by other topics — the lethal triad, burn resuscitation formulas, abdominal compartment syndrome grading and management, neurogenic shock, rhabdomyolysis urine targets, and succinylcholine timing. The topic links to those topics instead. The SCORE Renal Failure module covers none of it.",
+    ].join(" "),
+  },
+  {
+    id: DIALYSIS_ACCESS_OE_SOURCE,
+    title: "Owner-supplied vascular access for dialysis study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 12, 2026: \"Vascular Access for Dialysis Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include the 2019 KDOQI update, Sidawy (SVS guideline, Journal of Vascular Surgery 2008), Lok (JAMA 2024), Hurwitz (JAMA Surgery 2026), Aitken (UK guideline, BMC Nephrology 2025), Flythe and Watnick (JAMA 2024), Ravani (JASN 2013), Allon (CJASN 2026), Leake (Journal of Vascular Surgery 2015), Basile and Lomonte (Seminars in Dialysis 2018), Arhuidese (Journal of Vascular Surgery 2018), the ACR-AIUM-SRU vessel-mapping parameter (2021), and the Haskal stent-graft trial.",
+      "Corrected during review: the document expands RUDI as \"revascularization using distal inflow\"; it is revision using distal inflow (Minion 2005, and the SCORE module).",
+    ].join(" "),
+  },
+  {
+    id: AV_ACCESS_OE_SOURCE,
+    title: "Owner-supplied AV graft and fistula study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 12, 2026: \"AV Graft and Fistula Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include the 2019 KDOQI update, Lok (JAMA 2024), Smith (Vascular Medicine 2026), the UK Kidney Association guideline (2025), Hakim (Journal of Vascular Surgery 2022), Leake (Journal of Vascular Surgery 2015), Hurwitz (JAMA Surgery 2026), Pflederer (2008), Kakisis (Journal of Vascular Surgery 2017), Al Shakarchi (EJVES 2015), Kim (Journal of Vascular Surgery 2025), and Mehta (Annals of Vascular Surgery 2026).",
+      "Two documents disagree on fistula timing: this one gives mean maturation of 3 to 4 months for forearm and 4 to 6 weeks for upper-arm fistulas and defines non-maturation at 6 months despite intervention, while the companion dialysis document gives 3 to 6 months overall and assesses failure to mature at about 3 months. The topics carry both as ranges rather than pick one.",
+      "Its claim that Dacron is not singled out in current literature is softened: the SCORE module does say Dacron is not suggested because ePTFE tolerates repeated puncture better. The topics say ePTFE is the prosthetic of choice and Dacron is not used, without calling it absolutely contraindicated.",
+    ].join(" "),
+  },
+  {
+    id: VASCULAR_ACCESS_OE_SOURCE,
+    title: "Owner-supplied vascular access and hemodynamic monitoring study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 12, 2026: \"Vascular Access & Hemodynamic Monitoring — Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include Buetti (SHEA/IDSA 2022), O'Grady (NEJM 2023 and CDC 2011), Boulet (3SITES target-trial emulation, Critical Care 2025), Teja (JAMA Internal Medicine 2024), Mason (AHA transradial statement 2018), Saugel (Critical Care 2020), Chaves (Critical Care 2024), Marik (Critical Care Medicine 2009), Martin (AAST 2019), Monnet (Intensive Care Medicine 2016), Meco (Anesthesia & Analgesia 2026), the PRISM meta-analysis (NEJM 2017), Rajaram (Cochrane 2013), Kadosh (JACC Heart Failure 2023), Rooke (ACC/AHA 2013), Kearney and Shabot (Chest 1995), and Kalra (Catheterization and Cardiovascular Interventions 2013).",
+      "Not verified during review: the document says the 2025 AHA guidelines and the Undersea and Hyperbaric Medical Society no longer recommend head-down positioning for venous air embolism (citing Cao, AHA 2025). A search found no AHA document saying so. The topic writes the positioning debate without that attribution: left lateral decubitus relocates air on echocardiography but has not been shown to improve hemodynamics, and head-down positioning may worsen cerebral edema in arterial gas embolism.",
+      "Its femoral pseudoaneurysm thresholds and thrombin injection detail were not carried; the topic keeps only the access-related part.",
+    ].join(" "),
+  },
+  {
+    id: US_VASCULAR_ACCESS_OE_SOURCE,
+    title: "Owner-supplied ultrasound for vascular access study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 12, 2026: \"Ultrasound for Vascular Access — Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include the ASE guidelines (2011 and 2025), SCCM (2015), SHM (2019), ASA (2020), Brass (Cochrane 2015), Zawadka (Critical Care Medicine 2023), Teja (JAMA Internal Medicine 2024), d'Entremont (Circulation Cardiovascular Interventions 2024), FAUST (Seto, JACC Cardiovascular Interventions 2010), UNIVERSAL (Jolly, JAMA Cardiology 2022), Strauss (Cochrane 2025), Boulet (Critical Care 2024 and 2025), and Beshara (Critical Care 2024).",
+      "The document could not verify the American College of Surgeons recommendation the draft credited, and neither could this review; the topic cites ASA, SCCM, SHM and ASE instead.",
+    ].join(" "),
+  },
+  {
+    id: VENOUS_ACCESS_DEVICES_OE_SOURCE,
+    title: "Owner-supplied venous access devices study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 12, 2026: \"Venous Access Devices — Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Ends in a 26-entry MLA reference list, folded in here rather than registered one by one: O'Grady (NEJM 2023; CDC 2011), Buetti (SHEA/IDSA 2022), Teja (JAMA Internal Medicine 2024), Cosme (Intensive Care Medicine 2024), Boulet (Critical Care 2025), Arvaniti (Critical Care Medicine 2017), NCCN cancer-associated VTE v1.2026, Malgor (American Venous Forum upper-extremity DVT guideline 2026), King (Journal of Thrombosis and Thrombolysis 2025), Böll (Annals of Hematology 2021), Lok (KDOQI 2020; JAMA 2024), Tong (JAMA 2025), Norris (IDSA OPAT 2019), Chopra (MAGIC 2015; JAMA 2025), Baskin (Lancet 2009), Rashedi (JACC 2025), Mirza (American Surgeon 2004), Verhage (Seminars in Dialysis 2008), Bartolini and Burger (Neurology 2015), Worthington (ASPEN 2017), Nguyen (Journal of Intensive Care Medicine 2025), Mo (World Journal of Surgery 2020), and Vegas (ASE 2025).",
+  },
+  {
+    id: STARRT_AKI_2020_SOURCE,
+    title: "STARRT-AKI: timing of renal-replacement therapy in acute kidney injury",
+    kind: "article",
+    citation: "STARRT-AKI Investigators. Timing of initiation of renal-replacement therapy in acute kidney injury. New England Journal of Medicine, 2020;383:240-251.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Registered during review as the authority behind the RRT-timing row, identified from the OpenEvidence document rather than supplied directly. 3,019 critically ill patients with severe AKI: 90-day mortality 43.9% accelerated against 43.7% standard; 38% of the standard arm never received RRT; more 90-day RRT dependence after accelerated initiation (10.4% against 6.0%).",
+  },
+  {
+    id: SHEA_CLABSI_2022_SOURCE,
+    title: "SHEA/IDSA/APIC strategies to prevent CLABSI: 2022 update",
+    kind: "article",
+    citation: "Buetti N, Marschall J, Drees M, et al. Strategies to prevent central line-associated bloodstream infections in acute-care hospitals: 2022 Update. Infection Control & Hospital Epidemiology, 2022;43:553-569.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Registered during review as the authority behind the insertion bundle and the chlorhexidine row, identified from the OpenEvidence documents rather than supplied directly. Essential practices: hand hygiene, maximal sterile barriers, alcoholic chlorhexidine skin antisepsis (over 0.5% in the CDC 2011 guideline; the OpenEvidence documents give at least 2% in alcohol, the usual commercial preparation), avoiding the femoral site in adults when insertion is planned, ultrasound guidance, and no routine replacement on a schedule.",
+  },
+  {
+    id: MAGIC_2015_SOURCE,
+    title: "Michigan Appropriateness Guide for Intravenous Catheters (MAGIC)",
+    kind: "article",
+    citation: "Chopra V, Flanders SA, Saint S, et al. The Michigan Appropriateness Guide for Intravenous Catheters (MAGIC): results from a multispecialty panel using the RAND/UCLA appropriateness method. Annals of Internal Medicine, 2015;163(6 Suppl):S1-S40.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Registered during review as the authority behind the kidney-disease PICC rule, identified from the OpenEvidence document rather than supplied directly. Rates PICCs inappropriate in chronic kidney disease stage 3b or worse (eGFR under 45 mL/min); a small-bore tunneled jugular catheter is the preferred alternative when central access is needed.",
+  },
+  {
+    id: ASA_CENTRAL_VENOUS_ACCESS_2020_SOURCE,
+    title: "ASA practice guidelines for central venous access 2020",
+    kind: "article",
+    citation: "American Society of Anesthesiologists Task Force on Central Venous Access. Practice guidelines for central venous access 2020. Anesthesiology, 2020;132:8-43.",
+    suppliedAt: "2026-10-12T00:00:00.000Z",
+    details: "Registered during review as the authority behind the guideline row on ultrasound by site, identified from the OpenEvidence document rather than supplied directly: real-time ultrasound recommended for internal jugular access and suggested when feasible for subclavian and femoral access, static ultrasound for pre-puncture localization, and confirmation of venous placement before dilation.",
   },
 ];

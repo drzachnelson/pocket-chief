@@ -52,6 +52,8 @@ export interface SearchableRecord {
 function scoreRecord(record: SearchableRecord, needle: string, needleWords: string[]): number {
   // Identity is what a user types from memory; body is everything the entry renders.
   const identity = record.identity.map(normalize);
+  // A tag or alias can equal another entry's title ("vascular-access" against "Vascular Access"); the title must still win.
+  if (normalize(record.title) === needle) return 120;
   const fields = [...identity, ...record.body.map(blockText).map(normalize)];
   let score = 0;
   for (const field of fields) {

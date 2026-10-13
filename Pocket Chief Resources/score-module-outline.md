@@ -538,7 +538,7 @@ Transcribed verbatim apart from repairing OCR ligatures (`ﬃ`, `ﬀ`). Duplicat
 
 ## How the current library maps to this outline
 
-As of 2026-10-11: **62 topics and 16 playbooks**. **53 of the 366 outline entries are covered and 12 are partial**. The October 10 venous batch did not update this section; its seven covered entries were added here with the two carotid topics. Prophylaxis of Venous Thromboembolism sits in the Preoperative Evaluation and Perioperative Care module, outside this denominator. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
+As of 2026-10-13: **68 topics and 16 playbooks**. **59 of the 366 outline entries are covered and 11 are partial**. The vascular access batch closed the Vascular Access module and Surgical Critical Care operations; Vascular Access for Dialysis moved from partial to covered. Prophylaxis of Venous Thromboembolism sits in the Preoperative Evaluation and Perioperative Care module, outside this denominator. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
 
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
@@ -559,11 +559,11 @@ As of 2026-10-11: **62 topics and 16 playbooks**. **53 of the 366 outline entrie
 | Breast | 21 | 2 | — | Fibroadenoma vs Phyllodes Tumor, Percutaneous Breast Biopsy and Cyst Aspiration |
 | Endocrine | 17 | — | — | |
 | Skin and Soft Tissue | 17 | — | — | |
-| Surgical Critical Care | 21 | 7 | 1 | Cardiac Failure and Cardiogenic Shock, Common Cardiac Arrhythmias, Electrolytes and Acid-Base, Hypovolemic Shock, Respiratory Failure (ARDS, PE, Pneumonia), Airway Access, Cardiac Pacing; partial: Acute Liver Failure (Hepatic Failure and Hepatorenal Syndrome — no HRS content) |
+| Surgical Critical Care | 21 | 10 | 1 | Cardiac Failure and Cardiogenic Shock, Common Cardiac Arrhythmias, Electrolytes and Acid-Base, Hypovolemic Shock, Renal Failure, Respiratory Failure (ARDS, PE, Pneumonia), Airway Access, Cardiac Pacing, Ultrasound for Intravascular Access, Vascular Access; partial: Acute Liver Failure (Hepatic Failure and Hepatorenal Syndrome — no HRS content) |
 | Trauma | 47 | 13 | 1 | Cardiac Injury, Chest Wall/Pleura/Diaphragm, Neck Trauma Initial Assessment, Splenic Injury, Tracheobronchial and Lung, Vascular Thoracic, Escharotomy, Fasciotomy, FAST, GI Tract Injury Repair, Hepatic Injury Packing/Repair/Resection, Neck Injuries Management, Splenectomy and Splenorrhaphy; partial: Hepatic Injury (only the operative topic exists) |
 | Arterial Disease | 28 | 6 | 3 | Acute Limb Ischemia (Acute Thrombosis and Ischemia), Carotid Artery Disease, Renal Artery Disease, Thoracic Outlet Syndrome, Abdominal & Aortoiliac Aneurysm Repair, Procedures for Carotid Artery Stenosis; partial: Peripheral Arterial Emboli and Arterial Embolectomy/Thrombectomy (inside Acute Limb Ischemia), Compartment Syndromes (Fasciotomy, trauma-led) |
 | Vascular Venous | 7 | 5 | 1 | Evaluation of a Swollen Leg, Thrombophlebitis, Varicose Veins, Venous Stasis and Chronic Venous Insufficiency, Vena Cava Filter Insertion; partial: Deep Venous Thrombosis (Venous Thromboembolism — no PE workup or treatment; PE lives in Respiratory Failure) |
-| Vascular Access | 4 | 1 | 1 | Vascular Exposure Principles; partial: Hemodialysis Access Catheter (Vascular Access for Dialysis — catheter half only, no AV access) |
+| Vascular Access | 4 | 4 | — | Vascular Access for Dialysis (with Hemodialysis Access Catheter beside it for the catheter half), Arteriovenous Graft and Fistula, Vascular Exposure Principles, Venous Access Devices Insertion |
 | Transplantation | 8 | — | — | |
 | Thoracic Surgery | 10 | 1 | — | Superior Vena Cava Syndrome |
 | Pediatric Surgery | 39 | 2 | 1 | Malrotation, Malrotation Operation; partial: Groin Hernia in Children (Inguinal Hernia; filed under Hernia) |
