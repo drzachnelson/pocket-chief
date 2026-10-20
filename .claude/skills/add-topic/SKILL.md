@@ -75,6 +75,8 @@ Three outcomes, and the call is yours to make and state:
 
 Then settle splits and merges. One comparison topic beats two thin ones when the value is the side-by-side (`fibroadenoma-vs-phyllodes-tumor`); separate topics win when they are separately testable. When the SCORE outline names a disease and its operation as separate entries, that is the answer — write two. `malrotation` and `malrotation-operation` are the worked example: the disease is tested on diagnosis, the operation on technique, and merging buries one inside the other.
 
+Check what the question bank has tested on the topic: `grep -in "Target topic:.*<topic>" "/Users/dada/Documents/Cowork OS/Pocket Chief/Pocket Chief Resources/qbank-notes/"*.md`. Every `Pending` entry that matches must be emphasized in the topic, with traps as `warning` blocks, and then flipped to `Emphasized in <slug>`. The `qbank-notes` skill covers the format and how to cite the bank.
+
 Confirm taxonomy placement against `Pocket Chief Resources/score-module-outline.md` before writing. Match the outline's titles and granularity for anything new; the app's earliest sections were split finer than SCORE splits them. If the topic is absent from the outline or its placement is genuinely ambiguous, ask rather than inventing a branch.
 
 ### Playbook path
