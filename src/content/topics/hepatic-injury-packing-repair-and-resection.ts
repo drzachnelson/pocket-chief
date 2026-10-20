@@ -201,7 +201,7 @@ export const hepaticInjuryTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001222",
   slug: "hepatic-injury-packing-repair-and-resection",
   title: "Hepatic Injury: Packing, Repair, and Resection",
-  aliases: ["liver trauma", "hepatic trauma", "liver injury", "traumatic liver injury", "perihepatic packing", "liver packing", "Pringle maneuver", "Pringle", "hepatotomy", "finger fracture", "hepatorrhaphy", "resectional debridement", "hepatic lobectomy", "atriocaval shunt", "Schrock shunt", "juxtahepatic venous injury", "retrohepatic IVC", "damage control laparotomy", "angioembolization", "bile leak", "biloma", "hemobilia", "AAST liver injury scale", "omental packing", "Pearls of the liver"],
+  aliases: ["liver trauma", "hepatic trauma", "liver injury", "traumatic liver injury", "perihepatic packing", "liver packing", "Pringle maneuver", "Pringle", "hepatotomy", "finger fracture", "hepatorrhaphy", "resectional debridement", "atriocaval shunt", "Schrock shunt", "juxtahepatic venous injury", "retrohepatic IVC", "damage control laparotomy", "angioembolization", "bile leak", "biloma", "hemobilia", "AAST liver injury scale", "omental packing", "Pearls of the liver"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
   tags: ["trauma", "liver", "hepatic-injury", "operative-technique", "damage-control", "absite", "score"],

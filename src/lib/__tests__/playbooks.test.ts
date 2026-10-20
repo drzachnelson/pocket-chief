@@ -157,6 +157,10 @@ describe("playbook library", () => {
         "pancreaticoduodenectomy -> pancreaticoduodenectomy",
         "pancreaticojejunostomy -> pancreaticoduodenectomy",
         "pancreatoduodenectomy -> pancreaticoduodenectomy",
+        // Kept: the replaced hepatic arteries are dissected in the hepatoduodenal ligament here, and
+        // Hepatic Resection is where their anatomy and frequency live.
+        "replaced left hepatic artery -> hepatic-resection",
+        "replaced right hepatic artery -> hepatic-resection",
       ],
       // "volvulus" is kept deliberately: adult caecal volvulus and the malrotation spectrum
       // share the failure of right-colon peritoneal fixation, so the jump informs the reader.
@@ -168,10 +172,13 @@ describe("playbook library", () => {
       ],
       "robotic-cholecystectomy": [
         "Bile leak -> hepatic-injury-packing-repair-and-resection",
+        // Kept: cirrhosis with portal hypertension is a listed reason the dissection turns hard.
+        "Cirrhosis -> cirrhosis-and-portal-hypertension",
         "bile leak -> hepatic-injury-packing-repair-and-resection",
         "biloma -> hepatic-injury-packing-repair-and-resection",
         "choledocholithiasis -> choledocholithiasis",
         "incisional hernia -> ventral-and-incisional-hernia",
+        "portal hypertension -> cirrhosis-and-portal-hypertension",
       ],
       "robotic-tapp-inguinal-hernia-repair": [
         "Cooper's ligament -> femoral-hernia",
@@ -208,6 +215,8 @@ describe("playbook library", () => {
       // owns.
       "robotic-ventral-umbilical-hernia-repair": [
         "Arcuate line -> rectus-sheath-hematoma",
+        // Kept: the cirrhotic patient with ascites is exactly who Cirrhosis and Portal Hypertension covers.
+        "Cirrhosis -> cirrhosis-and-portal-hypertension",
         "Diastasis recti -> umbilical-and-epigastric-hernia",
         "Linea alba -> umbilical-and-epigastric-hernia",
         "Loss of domain -> ventral-and-incisional-hernia",
@@ -215,7 +224,8 @@ describe("playbook library", () => {
         "Rives-Stoppa -> abdominal-wall-reconstruction",
         // "ascites" left umbilical-and-epigastric-hernia (October 2026): the bare alias sent ascites in
         // abscess drainage, FAST and aneurysm topics to hernia repair. Cirrhosis and portal hypertension
-        // should claim it next.
+        // claimed it in liver batch 2, where controlling ascites before repair is taught.
+        "ascites -> cirrhosis-and-portal-hypertension",
         "botulinum toxin -> ventral-and-incisional-hernia",
         "component separation -> abdominal-wall-reconstruction",
         "loss of domain -> ventral-and-incisional-hernia",

@@ -1,0 +1,193 @@
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import {
+  FISER_LIVER_SOURCE as FISER,
+  INTRAOPERATIVE_HEPATIC_ULTRASOUND_OE_SOURCE as OE,
+  SCORE_INTRAOPERATIVE_HEPATIC_ULTRASOUND_SOURCE as SCORE,
+  TRUELEARN_LIVER_SOURCE as TL,
+} from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-ious-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Intraoperative ultrasound (IOUS) images the liver from its surface during open, laparoscopic, or robotic surgery. It does three jobs: finds lesions the preoperative scans missed, maps each lesion against the hepatic veins, portal pedicles, and bile ducts so the transection is safe, and guides needles for biopsy and ablation. Do it early, systematically, and before any transection. Combined with exploration it is the reference standard for finding liver metastases at operation, and it changes the plan often enough to matter. The operation it serves is [[Hepatic Resection]].",
+  }, OE),
+  sourcedUnits({
+    id: "block-ious-roles",
+    type: "bullets",
+    heading: "What it is for",
+    items: [
+      "Identify lesions of interest and decide resectability by which segments are involved; find occult synchronous metastases when resecting a colorectal or neuroendocrine primary.",
+      "Determine and mark the resection margin, and place needles for biopsy or ablation under direct vision.",
+      "Find lesions not seen beforehand that change the plan. IOUS finds additional lesions in about **11 to 27%** of patients, and contrast-enhanced IOUS changed the operation in about **34 to 35%** of recent prospective series.",
+      "Identify vascular and biliary variants, including inflow, venous drainage, and biliary drainage.",
+      "Contrast-enhanced IOUS has pooled sensitivity of about 94% and specificity about 83%, and still adds value after gadoxetate MRI.",
+    ],
+  }, [[SCORE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-probes",
+    type: "table",
+    heading: "Equipment",
+    columns: ["Setting", "Probe", "Practical point"],
+    rows: [
+      ["Open", "T-shaped linear or curvilinear probe", "Side-fire linear sweeps the anterior surface; an end-fire curvilinear probe reaches intercostal and deep windows"],
+      ["Laparoscopic", "Flexible linear array with two- to four-way tip angulation", "Needs a port of at least 10 mm; articulation keeps the probe flat on the liver"],
+      ["Robotic", "Drop-in transducer held by wristed instruments", "Through a 10 to 12 mm port, with the image shown picture-in-picture at the console (TilePro)"],
+    ],
+  }, [[SCORE, OE], [SCORE, OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-physics",
+    type: "bullets",
+    heading: "↳ Frequency, modes, and coupling",
+    items: [
+      "**High frequency** (about 10 to 14 MHz) gives fine resolution for superficial lesions but limited depth. **Low frequency** (about 5 MHz) reaches deep parenchyma and vessels at lower resolution.",
+      "IOUS resolves lesions of about 3 to 5 mm and, unlike CT and MRI, stays accurate for lesions under 5 mm.",
+      "**B-mode** shows parenchyma, margins, and architecture; **color Doppler** shows flow.",
+      "**Contact scanning** puts the probe straight on the capsule with irrigation, since air degrades the image.",
+      "**Stand-off scanning** floods the surface with warm saline and images through it, resolving subcapsular lesions hidden by near-field reverberation.",
+      "Microbubble contrast agents injected intravenously enhance detection and characterization.",
+      "The probe is sterilized or placed in a sterile sheath.",
+    ],
+  }, [[SCORE, OE], [OE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [SCORE]]),
+  sourcedUnits({
+    id: "block-ious-sequence",
+    type: "sequence",
+    heading: "A systematic scan",
+    steps: [
+      { title: "1. Explore and mobilize", detail: "Explore for extrahepatic disease first. Take down the falciform to see the hepatic vein confluence, and divide the triangular ligaments when posterior and superior segments need reaching." },
+      { title: "2. Look and feel", detail: "Inspect, and palpate when open or hand-assisted, for surface lesions before the probe goes on." },
+      { title: "3. Hepatic vein confluence", detail: "Start where the right, middle, and left hepatic veins enter the IVC; the middle and left often join first." },
+      { title: "4. Trace the veins", detail: "Follow each vein peripherally to set the sectors. The middle hepatic vein runs along Cantlie's line to the gallbladder, separating the right and left hemilivers." },
+      { title: "5. Portal bifurcation", detail: "Find the main portal bifurcation and trace the right and left portal veins to their sectoral and segmental branches." },
+      { title: "6. Gallbladder and ducts", detail: "If the gallbladder is in, scan it for stones or lesions; check the common hepatic and common bile ducts and look for a replaced hepatic artery." },
+      { title: "7. Lawn-mow the parenchyma", detail: "Sweep the whole liver cranial to caudal in overlapping passes across all eight segments, recording each lesion's number, segment, and relation to vessels and ducts." },
+      { title: "8. Plan and mark", detail: "Measure lesions in three planes, mark the planned margin on Glisson's capsule with cautery under real-time imaging, and confirm needle position for biopsy or ablation." },
+    ],
+  }, [[OE, SCORE], [SCORE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [SCORE, OE]]),
+  sourcedUnits({
+    id: "block-ious-planes",
+    type: "table",
+    heading: "Landmarks that map the segments",
+    columns: ["Landmark", "What it marks"],
+    rows: [
+      ["Right hepatic vein", "Right anterior sector (V, VIII) from right posterior sector (VI, VII)"],
+      ["Middle hepatic vein", "Right liver (V to VIII) from left liver (II to IV), along Cantlie's line"],
+      ["Umbilical fissure", "Segment IV from segments II and III; the left hepatic vein drains II and III"],
+      ["Portal bifurcation", "Superior segments (II, IVa, VII, VIII) from inferior segments (III, IVb, V, VI)"],
+      ["Short hepatic veins", "Segment I, which drains straight into the IVC independent of the three main veins"],
+    ],
+  }, [[OE, TL], [OE, SCORE], [OE, FISER], [OE], [OE, FISER]]),
+  sourcedUnits({
+    id: "block-ious-variants",
+    type: "bullets",
+    heading: "↳ Variants to flag",
+    items: [
+      "The middle and left hepatic veins share a common trunk in about **60 to 85%**, most series near 60 to 70%.",
+      "An accessory inferior right hepatic vein is present in roughly 20% and may cross a planned transection plane.",
+      "**Replaced right hepatic artery** from the SMA runs posterior to the portal vein and posterolateral to the bile duct.",
+      "**Replaced left hepatic artery** from the left gastric runs in the gastrohepatic ligament toward segment IV and the left liver.",
+    ],
+  }, [[OE], [OE], [OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-doppler",
+    type: "table",
+    heading: "Telling vessels from ducts",
+    columns: ["Structure", "Doppler", "Direction"],
+    rows: [
+      ["Bile duct", "No flow; dilated ducts beside portal branches give a double-barrel sign", "None"],
+      ["Hepatic artery", "High-resistance pulsatile flow", "Hepatopetal, into the liver"],
+      ["Portal vein", "Continuous low-velocity flow", "Hepatopetal, into the liver as well"],
+      ["Hepatic vein", "Triphasic flow", "Hepatofugal, away from the liver"],
+    ],
+  }, [[OE], [OE, SCORE], [OE, SCORE], [OE, SCORE]]),
+  sourcedUnits({
+    id: "block-ious-lesions",
+    type: "table",
+    heading: "What lesions look like",
+    columns: ["Lesion", "Echogenicity", "Distinguishing feature"],
+    rows: [
+      ["Simple cyst", "Anechoic", "Thin wall, posterior acoustic enhancement, no Doppler flow"],
+      ["Hemangioma", "Hyperechoic", "Well circumscribed and homogeneous, no shadowing, sparse slow flow"],
+      ["Focal nodular hyperplasia", "Isoechoic or mildly hyperechoic", "Central stellate scar with spoke-wheel radial flow"],
+      ["Hepatic adenoma", "Variable", "Heterogeneous from hemorrhage, necrosis, or fat"],
+      ["Metastasis or HCC", "Hypoechoic, or a target (bull's-eye) lesion", "Peripheral hypoechoic halo, sometimes central necrosis"],
+    ],
+  }, [[OE], [OE], [OE], [OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-oncology",
+    type: "bullets",
+    heading: "Oncologic uses",
+    items: [
+      "IOUS finds lesions CT and MRI missed because they are under 5 mm, isoattenuating, or hidden in steatosis. For a **disappearing metastasis** after chemotherapy, use contrast-enhanced IOUS to relocate it.",
+      "Confirm the **future liver remnant** keeps portal inflow, hepatic venous outflow, and biliary drainage: at least 20% in a normal liver, 30% after chemotherapy, 40% with cirrhosis or fibrosis.",
+      "Score the lesion-plus-margin boundary on the capsule with cautery under real-time imaging before transection.",
+      "Guide RFA or microwave probes in real time, avoiding major ducts and vascular trunks.",
+      "**Heat sink**: flow in an adjacent vessel of **3 mm or more** carries heat away, leaving tumor and causing local recurrence. Microwave ablation is less susceptible than RFA.",
+      "For lesions of 3 cm or less, thermal ablation can match resection and may be prioritized.",
+    ],
+  }, [[OE], [OE], [OE, SCORE], [OE, SCORE], [OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-biliary",
+    type: "bullets",
+    heading: "Biliary assessment",
+    items: [
+      "A stone is a hyperechoic intraluminal focus with distal acoustic shadowing.",
+      "Normal common bile duct is up to **6 mm**; the SAGES cutoff for suspected choledocholithiasis is over **8 mm**; after cholecystectomy, 10 to 12 mm can be normal.",
+      "A duct over 10 mm carries about a 39% rate of stones against 14% under 9.9 mm, so diameter alone is not enough; pair it with liver tests.",
+      "In gallbladder cancer, IOUS assesses invasion of the liver bed (T1b against T2), guides the segment IVb and V resection, and examines the hepatoduodenal nodes.",
+    ],
+  }, [[OE], [OE], [OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-mis",
+    type: "bullets",
+    heading: "Laparoscopic and robotic IOUS",
+    items: [
+      "Laparoscopic ultrasound finds additional lesions (median about 5.5 mm) in about **11%** and changes strategy in about **13%**, even after gadoxetate MRI.",
+      "Keep pneumoperitoneum low, about 7 to 12 mmHg, while scanning, so the thin-walled hepatic veins and superficial liver are not compressed.",
+      "Adding **ICG fluorescence** to IOUS raised detection of cancerous liver lesions from about 87% to over 99%; IOUS can miss superficial lesions that ICG shows, so the two complement each other.",
+    ],
+  }, [[OE], [OE], [OE]]),
+  sourcedUnits({
+    id: "block-ious-splits",
+    type: "table",
+    heading: "Board answer versus current practice",
+    columns: ["Question", "Board answer", "Current practice"],
+    rows: [
+      ["Middle and left hepatic vein trunk", "80% (Fiser)", "About 60 to 85% across series, most near 60 to 70%"],
+      ["Resection margin", "Aim for 1 cm", "R0 is a margin of 1 mm or more; the widest feasible margin still gives the best survival, but not at the cost of remnant"],
+      ["Is IOUS indispensable?", "Mandatory in every liver resection", "Gadoxetate MRI and modern CT have narrowed its added yield; contrast-enhanced IOUS still adds value, especially after chemotherapy"],
+      ["Heat-sink vessel size", "1 cm or more (TrueLearn)", "About 3 mm or more, depending on flow and probe-to-vessel distance, and less for microwave"],
+    ],
+  }, [[FISER, OE], [OE], [OE], [TL, OE]]),
+  sourcedUnits({
+    id: "block-ious-pearls",
+    type: "bullets",
+    heading: "Board pearls",
+    items: [
+      "High frequency for superficial resolution; low frequency for depth.",
+      "Start at the hepatic vein confluence, follow the middle hepatic vein along Cantlie's line, then the portal bifurcation, then lawn-mow cranial to caudal.",
+      "No Doppler flow means bile duct. Portal and arterial flow run into the liver; hepatic venous flow runs out.",
+      "Stand-off scanning through saline shows subcapsular lesions.",
+      "Spoke-wheel flow around a central scar is FNH; a target lesion is metastasis or HCC.",
+      "A Pringle maneuver controls portal and arterial inflow, not hepatic vein or retrohepatic IVC bleeding.",
+    ],
+  }, [[SCORE, OE], [SCORE, OE], [OE, SCORE], [SCORE, OE], [OE], [OE, FISER]]),
+  references("block-ious-references", [SCORE, OE, FISER, TL]),
+];
+
+export const intraoperativeHepaticUltrasoundTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000004310",
+  versionId: "00000000-0000-4000-8000-000000004311",
+  slug: "intraoperative-hepatic-ultrasound",
+  title: "Intraoperative Hepatic Ultrasound",
+  aliases: ["IOUS", "intraoperative liver ultrasound", "liver IOUS", "laparoscopic liver ultrasound", "contrast-enhanced intraoperative ultrasound", "CE-IOUS", "stand-off scanning", "lawn-mowing technique", "hepatic vein confluence", "spoke-wheel flow", "hepatopetal flow", "hepatofugal flow", "ICG fluorescence liver"],
+  scoreNodeId: "liver-procedures",
+  scoreCategory: "SCORE · Liver · Operations & Procedures",
+  tags: ["liver", "ultrasound", "procedures", "oncology", "absite", "score"],
+  sourceId: SCORE,
+  additionalSourceIds: [OE, FISER, TL],
+  blocks,
+  reviewedAt: "2026-10-19T00:00:00.000Z",
+});
