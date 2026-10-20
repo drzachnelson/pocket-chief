@@ -151,6 +151,8 @@ describe("playbook library", () => {
         "Pancreaticojejunostomy -> pancreaticoduodenectomy",
         "SMA margin -> pancreaticoduodenectomy",
         "Whipple -> pancreaticoduodenectomy",
+        // Kept: hepatic artery injury and a biliary-enteric anastomosis are listed postoperative causes there.
+        "liver abscess -> hepatic-abscess",
         "pancreatic fistula -> pancreaticoduodenectomy",
         "pancreaticoduodenectomy -> pancreaticoduodenectomy",
         "pancreaticojejunostomy -> pancreaticoduodenectomy",
@@ -211,7 +213,9 @@ describe("playbook library", () => {
         "Loss of domain -> ventral-and-incisional-hernia",
         "Retrorectus -> abdominal-wall-reconstruction",
         "Rives-Stoppa -> abdominal-wall-reconstruction",
-        "ascites -> umbilical-and-epigastric-hernia",
+        // "ascites" left umbilical-and-epigastric-hernia (October 2026): the bare alias sent ascites in
+        // abscess drainage, FAST and aneurysm topics to hernia repair. Cirrhosis and portal hypertension
+        // should claim it next.
         "botulinum toxin -> ventral-and-incisional-hernia",
         "component separation -> abdominal-wall-reconstruction",
         "loss of domain -> ventral-and-incisional-hernia",

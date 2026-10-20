@@ -547,7 +547,7 @@ As of 2026-10-13: **68 topics and 16 playbooks**. **59 of the 366 outline entrie
 | General Abdomen | 6 | 6 | — | All six, under the outline's own titles |
 | Hernia | 8 | 6 | — | Inguinal Hernia and Femoral Hernia (one outline entry), Unusual Hernias, Umbilical & Epigastric Hernia, Ventral & Incisional Hernia, Groin Hernia Repair, Abdominal Wall Reconstruction (Ventral Hernia Repair) |
 | Biliary | 18 | — | 1 | Choledocholithiasis (Benign Biliary Obstruction) |
-| Liver | 8 | — | — | |
+| Liver | 8 | 4 | — | Hepatic Abscess, Hepatic Abscess Drainage, Primary Hepatic Neoplasms, Metastatic Hepatic Neoplasms (October 2026, batch 1 of 2) |
 | Pancreas | 11 | 1 | — | Pancreaticoduodenectomy |
 | Spleen | 3 | — | 1 | Splenectomy and Splenorrhaphy, written as a trauma topic |
 | Esophagus | 10 | 1 | — | Paraesophageal Hernia Repair |

@@ -340,3 +340,16 @@ Durable decisions:
 Content status: **authored but unreviewed — draft until Zach reads it.**
 
 Verified at 68 topics and 16 playbooks: tsc and eslint clean; vitest 171 passed / 1 skipped without `out/` and 172/172 with it; every block Supported on all six pages (19, 17, 18, 17, 17, 19); flows draw 8, 8 and 10 of 8, 8 and 10 nodes; every table row renders; search ranks each title and the moved aliases first; no horizontal overflow at 375px; `next build` prerenders all six; Playwright 22 passed / 4 skipped.
+
+## Liver batch 1 (October 19, 2026)
+
+Four SCORE topics under the outline's own titles: **Hepatic Abscess**, **Hepatic Abscess Drainage**, **Primary Hepatic Neoplasms**, and **Metastatic Hepatic Neoplasms**, in a new Liver section (`liver`, `liver-conditions`, `liver-procedures`). Each cites its SCORE module, its OpenEvidence guide, Fiser chapter 31, and a TrueLearn source. Batch 2 (Hepatic Resection, Intraoperative Hepatic Ultrasound, Liver Biopsy, Cirrhosis and Portal Hypertension) reuses the Fiser and TrueLearn entries.
+
+- **Question-bank notes are a source now.** Zach's TrueLearn liver questions are logged, paraphrased, in the gitignored `Pocket Chief Resources/qbank-notes/liver.md`, and the new `qbank-notes` skill plus an add-topic step make every tested point land in its topic. Zach set the rule: TrueLearn is citable, a point only the bank states is kept and cited to it, and where the bank disagrees with SCORE or a guideline the topic writes a split. Paraphrase only; no stems or explanation text, which is why one warning was reworded away from the stem's details.
+- **Splits written from the bank:** fungal liver abscess (TrueLearn keys drainage plus an echinocandin; the OpenEvidence guide treats diffuse microabscesses medically), E. multilocularis named as the cause of venous obstruction and cholangitis, microwave ablation "not affected" by heat sink, and resection over ablation for small metastases against NCCN's post-COLLISION stance.
+- **Source conflicts written as splits:** Fiser describes hepatic adenoma as arterial enhancement with rapid washout and resects from 4 cm; SCORE and TrueLearn give early enhancement then isoattenuation, and SCORE and ACG resect over 5 cm. SCORE still calls sorafenib first line for advanced HCC. The two OpenEvidence abscess guides disagree on when an amebic abscess has failed (48 to 72 hours against 5 to 7 days); the later figure is written.
+- **Aliases narrowed at the source:** bare "ascites" left Umbilical and Epigastric Hernia (it sent ascites in abscess, FAST and aneurysm topics to hernia repair; the hernia playbook's pinned link was dropped, and Cirrhosis and Portal Hypertension should claim it in batch 2), and bare "simple cyst" left the breast biopsy topic for "simple breast cyst".
+- **Playbook link pinned:** "liver abscess" in the open pancreaticoduodenectomy playbook goes to Hepatic Abscess; hepatic artery injury and biliary-enteric strictures are listed causes there.
+- **Preview from a worktree when the session started in the main checkout:** `preview_start` read the main checkout's `launch.json` and ran its evicted `node_modules`. A temporary second entry passing the worktree path to `next dev` worked and was removed afterward.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**

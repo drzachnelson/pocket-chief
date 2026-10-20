@@ -179,6 +179,19 @@ export const SHEA_CLABSI_2022_SOURCE = "00000000-0000-4000-8000-000000004114";
 export const MAGIC_2015_SOURCE = "00000000-0000-4000-8000-000000004115";
 export const ASA_CENTRAL_VENOUS_ACCESS_2020_SOURCE = "00000000-0000-4000-8000-000000004116";
 
+// Liver batches (October 2026): sources 04200-04219, topics 04220/04221 through 04250/04251.
+// Batch 2 (resection, ultrasound, biopsy, cirrhosis) reuses the Fiser and TrueLearn entries.
+export const SCORE_HEPATIC_ABSCESS_SOURCE = "00000000-0000-4000-8000-000000004200";
+export const SCORE_HEPATIC_ABSCESS_DRAINAGE_SOURCE = "00000000-0000-4000-8000-000000004201";
+export const SCORE_PRIMARY_HEPATIC_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000004202";
+export const SCORE_METASTATIC_HEPATIC_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000004203";
+export const FISER_LIVER_SOURCE = "00000000-0000-4000-8000-000000004204";
+export const HEPATIC_ABSCESS_OE_SOURCE = "00000000-0000-4000-8000-000000004205";
+export const HEPATIC_ABSCESS_DRAINAGE_OE_SOURCE = "00000000-0000-4000-8000-000000004206";
+export const PRIMARY_HEPATIC_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000004207";
+export const METASTATIC_HEPATIC_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000004208";
+export const TRUELEARN_LIVER_SOURCE = "00000000-0000-4000-8000-000000004209";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: SCORE_SVC_SOURCE,
@@ -1740,5 +1753,104 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "American Society of Anesthesiologists Task Force on Central Venous Access. Practice guidelines for central venous access 2020. Anesthesiology, 2020;132:8-43.",
     suppliedAt: "2026-10-12T00:00:00.000Z",
     details: "Registered during review as the authority behind the guideline row on ultrasound by site, identified from the OpenEvidence document rather than supplied directly: real-time ultrasound recommended for internal jugular access and suggested when feasible for subclavian and femoral access, static ultrasound for pre-puncture localization, and confirmation of venous placement before dilation.",
+  },
+  {
+    id: SCORE_HEPATIC_ABSCESS_SOURCE,
+    title: "SCORE curriculum module: Hepatic Abscess",
+    kind: "website",
+    citation: "Ayala CI, Brubaker A, Dua M. \"Hepatic Abscess.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, March 19, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=135320",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the five bacterial routes (biliary, portal, arterial, traumatic or procedural, adjacent extension) plus cryptogenic, the comorbidities that raise risk, monomicrobial organisms (E. coli, K. pneumoniae, S. anginosus), blood cultures positive in about 50%, ultrasound as screen and contrast CT as gold standard, gas in about 20%, multiple bacterial or fungal lesions against a single subdiaphragmatic amebic one, antibiotic choices and the 2 to 6 week course, antibiotics alone under 3 cm, aspiration under 5 cm with about 50% re-aspiration, metronidazole or tinidazole then a luminal agent, fungal superinfection of pyogenic abscess, albendazole alone for a simple cyst under 5 cm, periprocedural albendazole from 4 hours before PAIR to at least 28 days after, and pyogenic mortality of 2 to 12%.",
+  },
+  {
+    id: SCORE_HEPATIC_ABSCESS_DRAINAGE_SOURCE,
+    title: "SCORE curriculum module: Hepatic Abscess Drainage",
+    kind: "website",
+    citation: "Cho EE, Jeyarajah R. \"Hepatic Abscess Drainage.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, October 30, 2023.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=144743",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies indications and contraindications for percutaneous drainage (ascites, proximity to the diaphragm, viscous pus and thick loculations), catheter over needle as first line with aspiration reserved for simple unilocular abscesses under 5 cm, primary and secondary indications for surgical drainage, laparoscopic port placement and open incisions, preprocedure preparation, the 8 to 14 Fr pigtail technique, the maneuvers that cause bacteremia, amebic aspiration indications (secondary infection in about 15%) and the advantage of catheter drainage over 10 cm, catheter blockage and migration as the commonest complications, and repeat imaging at 1 to 2 weeks.",
+  },
+  {
+    id: SCORE_PRIMARY_HEPATIC_NEOPLASMS_SOURCE,
+    title: "SCORE curriculum module: Primary Hepatic Neoplasms",
+    kind: "website",
+    citation: "Ngongoni RF, Ayala CI, Dua MM. \"Primary Hepatic Neoplasms.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, February 10, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000493",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the benign lesion epidemiology and imaging (hemangioma peripheral nodular then centripetal; FNH homogeneous arterial with a central scar; adenoma early arterial enhancement then isoattenuation in portal and delayed phases; cystadenoma), adenoma management (stop hormones, resect when symptomatic, over 5 cm, in men, or in pregnancy), HCC as 75% of primary malignancy, risk factors, AASLD surveillance with ultrasound and AFP every 6 months and multiphase imaging for nodules of 1 cm or more, biopsy reserved for equivocal imaging, Milan criteria, portal vein embolization at 4 to 6 weeks, ablation under 3 cm, TACE and Y-90, BILCAP capecitabine, and outcomes. Its line that sorafenib is first-line for advanced HCC is carried as a board answer overtaken by IMbrave150.",
+  },
+  {
+    id: SCORE_METASTATIC_HEPATIC_NEOPLASMS_SOURCE,
+    title: "SCORE curriculum module: Metastatic Hepatic Neoplasms",
+    kind: "website",
+    citation: "Murickan T, Singla S. \"Metastatic Hepatic Neoplasms.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, June 16, 2023.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=144441",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies Cantlie's line as the right-left division, 75% portal and 25% arterial inflow, caudate drainage straight into the IVC, the three metastasis groups, metachronous disease as less aggressive, FLR thresholds (over 20 to 25% chemotherapy-naive, 30 to 35% after chemotherapy, over 40% cirrhotic), colorectal epidemiology (synchronous 15 to 25%, only 5 to 10% resectable upfront and up to 20% after chemotherapy, about 75% recurrence), NET epidemiology, imaging, biopsy only when the primary is unknown, the named resections, synchronous sequencing, HAI rationale, outcomes (about 50% alive at 3 years, 20% at 10 years, about 33% at 5 years with four or more metastases), and the adverse prognostic factors. Its NET metastatic range of 40 to 95% is set beside the OpenEvidence guide's ASCO figure of 40 to 45%.",
+  },
+  {
+    id: FISER_LIVER_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Liver",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 31, Liver, pages 414-437.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Page-level markdown of the chapter, held in `Pocket Chief Resources/absite-8e/ch31_liver.md`. Supplies the board keys for this batch: pyogenic abscess as 80% of liver abscesses with E. coli first and Klebsiella tied to colorectal cancer, colonoscopy for an occult abscess, amebic serology and the sterile center, the hydatid rules (do not aspirate, preoperative ERCP when the biliary tree may communicate, two weeks of albendazole), benign tumor management, HCC risk factors and resectability, FLR of 25% without cirrhosis and 40% with Child A, a 30% five-year survival after HCC resection and 35% after colorectal metastasectomy, and ablation under 5 cm against TACE over 5 cm for palliation. Two keys conflict with the SCORE module and are written as splits: hepatic adenoma described as arterial enhancement with rapid washout, and adenoma resection from 4 cm.",
+  },
+  {
+    id: HEPATIC_ABSCESS_OE_SOURCE,
+    title: "Owner-supplied hepatic abscess study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Hepatic Abscess Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include Durand and Chapman (NEJM 2026), the ACG clinical guideline on focal liver lesions (Frenette et al., 2024), the IDSA/ASM microbiology utilization guideline (2024), Zhang (BMC Infect Dis 2026), Qian (Sci Rep 2016), Srivastava (Abdom Radiol 2026), the ACS Gastrointestinal Surgical Emergencies text (2021), the PCD against needle aspiration meta-analyses (Lin, BMJ Open 2023; Li and Pan, Medicine 2025; Xu and Zeng, Eur J Gastroenterol Hepatol 2026) and the opposing cohort (Zhang, PLoS One 2024), the FDA metronidazole label (2024), Stanley (Lancet 2003), Das (Abdom Radiol 2025), Kuehn (Cochrane 2024), and the colorectal cancer after cryptogenic abscess literature (Mohan 2019; Suzuki, JAMA Netw Open 2023; Liao 2026).",
+      "Its amebic drainage trigger of no response at 48 to 72 hours conflicts with the drainage guide, which corrects it to 5 to 7 days; the topic writes the later figure and records the earlier one in the split block. Not carried: a Pringle maneuver pearl that belongs to the trauma and resection topics.",
+    ].join(" "),
+  },
+  {
+    id: HEPATIC_ABSCESS_DRAINAGE_OE_SOURCE,
+    title: "Owner-supplied hepatic abscess drainage study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Hepatic Abscess Drainage Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include Srivastava (Abdom Radiol 2026), Kumar (World J Hepatol 2024), Priya (Sci Rep 2024), Khot (Abdom Radiol 2025), the ACR Appropriateness Criteria (Weiss 2020), the ACS Gastrointestinal Surgical Emergencies text (2021), Chavez-Tapia (Cochrane 2009), Chapman (NEJM 2026), Le Goff (Crit Care 2025), the PCD against needle aspiration meta-analyses, Zhang (PLoS One 2024), Heller (Liver Ultrasound 2023), STOP-IT (Sawyer, NEJM 2015), the Surgical Infection Society guidelines (Mazuski 2017; Huston 2024), Wendt (Sci Rep 2024), Haque (NEJM 2003), Akhan (Curr Opin Infect Dis 2023), Das (Abdom Radiol 2025), the ACG focal liver lesion guideline (2024), the WSES liver trauma guidelines (Coccolini 2020), and Schellenberg (J Trauma Acute Care Surg 2022).",
+      "Not carried: damage-control triggers, the Pringle maneuver and FAST limitations, which belong to the trauma topics. Its claim that Klebsiella pneumoniae has replaced E. coli as the commonest organism worldwide is set beside Fiser's and TrueLearn's E. coli in the split block, since the two are counting different populations.",
+    ].join(" "),
+  },
+  {
+    id: PRIMARY_HEPATIC_NEOPLASMS_OE_SOURCE,
+    title: "Owner-supplied primary hepatic neoplasms study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Primary Hepatic Neoplasms — Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include NCCN Hepatocellular Carcinoma (v2.2026) and Biliary Tract Cancers (v2.2026), the ACG focal liver lesion guideline (Frenette 2024), AASLD (2023), the AGA HCC surveillance update (Rich 2026), Park (JAMA 2024), Singal (Gastroenterology 2025), Reig (BCLC 2025 update, J Hepatol), IMbrave150, HIMALAYA, CheckMate-9DW, BILCAP, TOPAZ-1, KEYNOTE-966, Nault (Nat Rev Gastroenterol Hepatol 2022), Bowlus (AASLD 2023), Brindley (Nat Rev Dis Primers 2021), Llovet (Cell 2026), Tse (Radiographics 2023), and Pio (Nat Rev Dis Primers 2025).",
+      "The guide notes that its source draft was almost entirely hepatic trauma material and was rewritten; none of that trauma content was carried.",
+    ].join(" "),
+  },
+  {
+    id: METASTATIC_HEPATIC_NEOPLASMS_OE_SOURCE,
+    title: "Owner-supplied metastatic hepatic neoplasms study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Metastatic Hepatic Neoplasms Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries a 30-item reference list. The works blocks lean on are NCCN Colon, Rectal, and Neuroendocrine and Adrenal Tumors (v1 to v2.2026), the ASCO GEP-NET guideline (Perez 2026), the SSO/AHPBA/SSAT selection consensus (Adams 2013), Chun (Lancet Oncol 2009) on chemotherapy-associated liver injury, Newhook and Vauthey (2022), the parenchymal-sparing meta-analysis (Wang 2023), Hounschell (Cancers 2026) on R1 vascular margins, Kataoka (JAMA Surg 2025) and Papakonstantinou (2025) on disappearing metastases, JCOG0603 long-term results (Kanemitsu, JCO 2026), Ecker (Lancet Oncol 2022), Liu (Ann Surg Oncol 2026), Gudmundsdottir (Ann Surg Oncol 2023), the HAI landmark series (Outmani 2025), Folkerts (Cancer 2025), and Saadat (Ann Surg 2025).",
+      "Its surgical anatomy section (Couinaud, Cantlie's line, Pringle maneuver) is left to the Hepatic Resection topic.",
+    ].join(" "),
+  },
+  {
+    id: TRUELEARN_LIVER_SOURCE,
+    title: "TrueLearn question review: Liver",
+    kind: "user_notes",
+    citation: "TrueLearn SCORE/ABSITE question bank, Liver questions and explanations reviewed by the owner on October 19, 2026. Paraphrased; no question stems or explanation text reproduced.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Ten keyed questions logged in the owner's local question-bank notes (LIV-01 to LIV-10). This batch carries the six on abscess and tumors: the fungal abscess treated with catheter drainage plus an echinocandin, hydatid life cycle, sites and cyst wall, the biliary route behind an E. coli abscess with a table of pyogenic causes, amebic serology with drainage over 10 cm or after 5 to 7 days, biliary disease as the strongest risk factor even with Klebsiella bacteremia and diabetes, the multiphase imaging of HCC against adenoma, cholangiocarcinoma, metastasis and hemangioma, and resection of a solitary colorectal metastasis beside the right hepatic vein with a table of non-resection options.",
+      "The bank's explanations cite Greenfield's Surgery 6th edition chapter 57 (Shulick and Nydam) and Roediger R, Lisker-Melman M, Pyogenic and amebic infections of the liver, Gastroenterol Clin North Am 2020;49(2):361-377. Where the bank is the only source for a statement, the topic cites it alone; where it disagrees with the SCORE module or a current guideline, the topic writes a split.",
+    ].join(" "),
   },
 ];
