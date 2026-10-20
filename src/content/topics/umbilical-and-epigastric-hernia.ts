@@ -89,7 +89,7 @@ export const umbilicalAndEpigastricHerniaTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000514",
   slug: "umbilical-and-epigastric-hernia",
   title: "Umbilical & Epigastric Hernia",
-  aliases: ["umbilical hernia", "epigastric hernia", "diastasis recti", "linea alba", "midline hernia", "cirrhosis hernia", "ascites", "VP shunt", "Arroyo"],
+  aliases: ["umbilical hernia", "epigastric hernia", "diastasis recti", "linea alba", "midline hernia", "cirrhosis hernia", "umbilical hernia with ascites", "VP shunt", "Arroyo"],
   scoreNodeId: "hernia-conditions",
   scoreCategory: "SCORE · Hernia · Diseases & Conditions",
   tags: ["hernia", "abdominal-wall", "cirrhosis", "absite", "score"],

@@ -13,6 +13,10 @@ import { vascularAccessForDialysisTopic } from "@/content/topics/vascular-access
 import { arteriovenousGraftAndFistulaTopic } from "@/content/topics/arteriovenous-graft-and-fistula";
 import { vascularAccessTopic } from "@/content/topics/vascular-access";
 import { ultrasoundForIntravascularAccessTopic } from "@/content/topics/ultrasound-for-intravascular-access";
+import { hepaticAbscessTopic } from "@/content/topics/hepatic-abscess";
+import { hepaticAbscessDrainageTopic } from "@/content/topics/hepatic-abscess-drainage";
+import { primaryHepaticNeoplasmsTopic } from "@/content/topics/primary-hepatic-neoplasms";
+import { metastaticHepaticNeoplasmsTopic } from "@/content/topics/metastatic-hepatic-neoplasms";
 import { venousAccessDevicesInsertionTopic } from "@/content/topics/venous-access-devices-insertion";
 import { airwayAccessIntubationAndSurgicalAirwaysTopic } from "@/content/topics/airway-access-intubation-and-surgical-airways";
 import { cardiacFailureAndCardiogenicShockTopic } from "@/content/topics/cardiac-failure-and-cardiogenic-shock";
@@ -146,6 +150,10 @@ export const libraryTopics: Topic[] = [
   vascularAccessTopic,
   ultrasoundForIntravascularAccessTopic,
   venousAccessDevicesInsertionTopic,
+  hepaticAbscessTopic,
+  hepaticAbscessDrainageTopic,
+  primaryHepaticNeoplasmsTopic,
+  metastaticHepaticNeoplasmsTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

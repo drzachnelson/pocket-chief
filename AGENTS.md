@@ -11,6 +11,7 @@ All paths are relative to `Pocket Chief Resources/`.
 | `score-module-outline.md` | Placing any topic in the taxonomy, or deciding what to build next. The SCORE curriculum outline by module; also records how the existing library maps onto it. |
 | `score-modules/` | Authoring a topic. 433 SCORE module texts as markdown, named `SCORE_<Topic_Name>_<hash>.md`, each with its source URL and retrieval date in front matter. |
 | `absite-8e/` | Cross-checking a topic against the board answer. Fiser *ABSITE Review* 8th edition, one file per chapter. OCR of scans, so verify anything that looks transposed. |
+| `qbank-notes/` | Authoring or revising a topic: what board questions have tested on it, keyed answers, distractors and traps. Paraphrased, one file per SCORE section. See the `qbank-notes` skill. |
 | `notebooklm/packet-contract.md` | Ingesting a packet that begins with `# PACKET:`. |
 
 # Workflow

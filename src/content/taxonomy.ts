@@ -50,4 +50,7 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "thoracic-conditions", title: "Diseases & Conditions", slug: "thoracic-diseases-conditions", parentId: "thoracic", order: 46 },
   { id: "thoracic-procedures", title: "Operations & Procedures", slug: "thoracic-operations-procedures", parentId: "thoracic", order: 47 },
   { id: "perioperative-care", title: "Preoperative Evaluation and Perioperative Care", slug: "preoperative-evaluation-and-perioperative-care", parentId: "score", order: 48 },
+  { id: "liver", title: "Liver", slug: "liver", parentId: "score", order: 49 },
+  { id: "liver-conditions", title: "Diseases & Conditions", slug: "liver-diseases-conditions", parentId: "liver", order: 50 },
+  { id: "liver-procedures", title: "Operations & Procedures", slug: "liver-operations-procedures", parentId: "liver", order: 51 },
 ];
