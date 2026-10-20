@@ -208,7 +208,7 @@ export const metastaticHepaticNeoplasmsTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000004251",
   slug: "metastatic-hepatic-neoplasms",
   title: "Metastatic Hepatic Neoplasms",
-  aliases: ["liver metastases", "hepatic metastases", "colorectal liver metastases", "CRLM", "neuroendocrine liver metastases", "metastasectomy", "future liver remnant", "portal vein embolization", "ALPPS", "hepatic arterial infusion", "HAI pump", "radiofrequency ablation", "microwave ablation", "heat sink effect", "Y-90 radioembolization", "TARE", "disappearing liver metastases", "Fong clinical risk score", "COLLISION trial", "JCOG0603"],
+  aliases: ["liver metastases", "hepatic metastases", "colorectal liver metastases", "CRLM", "neuroendocrine liver metastases", "metastasectomy", "hepatic arterial infusion", "HAI pump", "radiofrequency ablation", "microwave ablation", "heat sink effect", "Y-90 radioembolization", "TARE", "disappearing liver metastases", "Fong clinical risk score", "COLLISION trial", "JCOG0603"],
   scoreNodeId: "liver-conditions",
   scoreCategory: "SCORE · Liver · Diseases & Conditions",
   tags: ["liver", "oncology", "colorectal", "absite", "score"],

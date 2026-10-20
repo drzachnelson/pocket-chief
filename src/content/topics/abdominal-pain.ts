@@ -103,7 +103,7 @@ export const abdominalPainTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000411",
   slug: "abdominal-pain",
   title: "Abdominal Pain",
-  aliases: ["acute abdomen", "surgical abdomen", "peritonitis", "visceral pain", "somatic pain", "spontaneous bacterial peritonitis", "SBP"],
+  aliases: ["acute abdomen", "surgical abdomen", "peritonitis", "visceral pain", "somatic pain"],
   scoreNodeId: "abdomen-conditions",
   scoreCategory: "SCORE · General Abdomen · Diseases & Conditions",
   tags: ["general-abdomen", "acute-abdomen", "peritonitis", "absite", "score"],

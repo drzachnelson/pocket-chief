@@ -17,6 +17,10 @@ import { hepaticAbscessTopic } from "@/content/topics/hepatic-abscess";
 import { hepaticAbscessDrainageTopic } from "@/content/topics/hepatic-abscess-drainage";
 import { primaryHepaticNeoplasmsTopic } from "@/content/topics/primary-hepatic-neoplasms";
 import { metastaticHepaticNeoplasmsTopic } from "@/content/topics/metastatic-hepatic-neoplasms";
+import { hepaticResectionTopic } from "@/content/topics/hepatic-resection";
+import { intraoperativeHepaticUltrasoundTopic } from "@/content/topics/intraoperative-hepatic-ultrasound";
+import { liverBiopsyTopic } from "@/content/topics/liver-biopsy";
+import { cirrhosisAndPortalHypertensionTopic } from "@/content/topics/cirrhosis-and-portal-hypertension";
 import { venousAccessDevicesInsertionTopic } from "@/content/topics/venous-access-devices-insertion";
 import { airwayAccessIntubationAndSurgicalAirwaysTopic } from "@/content/topics/airway-access-intubation-and-surgical-airways";
 import { cardiacFailureAndCardiogenicShockTopic } from "@/content/topics/cardiac-failure-and-cardiogenic-shock";
@@ -154,6 +158,10 @@ export const libraryTopics: Topic[] = [
   hepaticAbscessDrainageTopic,
   primaryHepaticNeoplasmsTopic,
   metastaticHepaticNeoplasmsTopic,
+  hepaticResectionTopic,
+  intraoperativeHepaticUltrasoundTopic,
+  liverBiopsyTopic,
+  cirrhosisAndPortalHypertensionTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

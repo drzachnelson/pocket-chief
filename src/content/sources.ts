@@ -179,8 +179,8 @@ export const SHEA_CLABSI_2022_SOURCE = "00000000-0000-4000-8000-000000004114";
 export const MAGIC_2015_SOURCE = "00000000-0000-4000-8000-000000004115";
 export const ASA_CENTRAL_VENOUS_ACCESS_2020_SOURCE = "00000000-0000-4000-8000-000000004116";
 
-// Liver batches (October 2026): sources 04200-04219, topics 04220/04221 through 04250/04251.
-// Batch 2 (resection, ultrasound, biopsy, cirrhosis) reuses the Fiser and TrueLearn entries.
+// Liver batches (October 2026): sources 04200-04219. Batch 1 topics 04220/04221 through 04250/04251;
+// batch 2 topics 04300/04301 through 04330/04331. Batch 2 reuses the Fiser and TrueLearn entries.
 export const SCORE_HEPATIC_ABSCESS_SOURCE = "00000000-0000-4000-8000-000000004200";
 export const SCORE_HEPATIC_ABSCESS_DRAINAGE_SOURCE = "00000000-0000-4000-8000-000000004201";
 export const SCORE_PRIMARY_HEPATIC_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000004202";
@@ -191,6 +191,16 @@ export const HEPATIC_ABSCESS_DRAINAGE_OE_SOURCE = "00000000-0000-4000-8000-00000
 export const PRIMARY_HEPATIC_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000004207";
 export const METASTATIC_HEPATIC_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000004208";
 export const TRUELEARN_LIVER_SOURCE = "00000000-0000-4000-8000-000000004209";
+export const SCORE_INTRAOPERATIVE_HEPATIC_ULTRASOUND_SOURCE = "00000000-0000-4000-8000-000000004210";
+export const SCORE_HEPATIC_BIOPSY_SOURCE = "00000000-0000-4000-8000-000000004211";
+export const SCORE_CHRONIC_LIVER_DISEASE_SOURCE = "00000000-0000-4000-8000-000000004212";
+export const HEPATIC_RESECTION_OE_SOURCE = "00000000-0000-4000-8000-000000004213";
+export const INTRAOPERATIVE_HEPATIC_ULTRASOUND_OE_SOURCE = "00000000-0000-4000-8000-000000004214";
+export const LIVER_BIOPSY_OE_SOURCE = "00000000-0000-4000-8000-000000004215";
+export const CIRRHOSIS_PORTAL_HYPERTENSION_OE_SOURCE = "00000000-0000-4000-8000-000000004216";
+export const HIATT_HEPATIC_ARTERIES_1994_SOURCE = "00000000-0000-4000-8000-000000004217";
+export const AASLD_PORTAL_HYPERTENSION_2024_SOURCE = "00000000-0000-4000-8000-000000004218";
+export const AASLD_ASCITES_2021_SOURCE = "00000000-0000-4000-8000-000000004219";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -1849,8 +1859,101 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "TrueLearn SCORE/ABSITE question bank, Liver questions and explanations reviewed by the owner on October 19, 2026. Paraphrased; no question stems or explanation text reproduced.",
     suppliedAt: "2026-10-19T00:00:00.000Z",
     details: [
-      "Ten keyed questions logged in the owner's local question-bank notes (LIV-01 to LIV-10). This batch carries the six on abscess and tumors: the fungal abscess treated with catheter drainage plus an echinocandin, hydatid life cycle, sites and cyst wall, the biliary route behind an E. coli abscess with a table of pyogenic causes, amebic serology with drainage over 10 cm or after 5 to 7 days, biliary disease as the strongest risk factor even with Klebsiella bacteremia and diabetes, the multiphase imaging of HCC against adenoma, cholangiocarcinoma, metastasis and hemangioma, and resection of a solitary colorectal metastasis beside the right hepatic vein with a table of non-resection options.",
+      "Ten keyed questions logged in the owner's local question-bank notes (LIV-01 to LIV-10). Batch 1 carries the six on abscess and tumors: the fungal abscess treated with catheter drainage plus an echinocandin, hydatid life cycle, sites and cyst wall, the biliary route behind an E. coli abscess with a table of pyogenic causes, amebic serology with drainage over 10 cm or after 5 to 7 days, biliary disease as the strongest risk factor even with Klebsiella bacteremia and diabetes, the multiphase imaging of HCC against adenoma, cholangiocarcinoma, metastasis and hemangioma, and resection of a solitary colorectal metastasis beside the right hepatic vein with a table of non-resection options.",
       "The bank's explanations cite Greenfield's Surgery 6th edition chapter 57 (Shulick and Nydam) and Roediger R, Lisker-Melman M, Pyogenic and amebic infections of the liver, Gastroenterol Clin North Am 2020;49(2):361-377. Where the bank is the only source for a statement, the topic cites it alone; where it disagrees with the SCORE module or a current guideline, the topic writes a split.",
+      "Batch 2 carries the four on anatomy into Hepatic Resection: pulsatile bleeding in the pars flaccida as a replaced left hepatic artery off the left gastric (bank frequency 4 to 10%, against 10 to 20% for a replaced right hepatic artery off the SMA, written as a split against Fiser's 20% each), the normal course of the common hepatic artery, segments II and III as the left lateral section with VI and VII right posterior, Cantlie's line rather than the falciform as the right-left division with the falciform only subdividing the left liver, the right hepatic vein splitting anterior from posterior sectors, segments built on artery, portal vein, hepatic vein and bile duct, and the solitary colorectal metastasis cross-linked from Metastatic Hepatic Neoplasms. A paraesophageal hernia repair bullet carries the pars flaccida trap as well.",
     ].join(" "),
+  },
+  {
+    id: SCORE_INTRAOPERATIVE_HEPATIC_ULTRASOUND_SOURCE,
+    title: "SCORE curriculum module: Intraoperative Hepatic Ultrasound",
+    kind: "website",
+    citation: "Mitsakos A, House MG, Parikh AA. \"Intraoperative Hepatic Ultrasound.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, April 3, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=144703",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the probe types (T-shaped linear or curvilinear, flexible laparoscopic with two- to four-way angulation), the 5 to 14 MHz range with low frequency for depth and high for resolution, B-mode and color Doppler, the four roles (lesions and resectability, margins and needle guidance, occult lesions that change the plan, anatomic variants), scanning early in the case after taking down the falciform, inspection and palpation first, contact against stand-off scanning, microbubble contrast, the cranial-to-caudal sequence from the hepatic vein confluence along the middle hepatic vein to the portal bifurcation and then the whole parenchyma, marking margins, and hepatopetal portal and arterial flow against hepatofugal hepatic venous flow.",
+  },
+  {
+    id: SCORE_HEPATIC_BIOPSY_SOURCE,
+    title: "SCORE curriculum module: Hepatic Biopsy",
+    kind: "website",
+    citation: "Grova M, Kim HJ, Meyers M. \"Hepatic Biopsy.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, March 17, 2023.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=127428",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026. Supplies the anterior and posterior surface segments, the falciform dividing the left hemiliver and the middle hepatic vein (Cantlie's line) dividing right from left, the risks of percutaneous (pain, bleeding, bile leak more common with extrahepatic obstruction, transient bacteremia, pneumothorax as the commonest organ injury), laparoscopic (including inaccessible dome, caudate and perivascular lesions) and open biopsy, the percutaneous, laparoscopic and open techniques, which lesions found at a GI cancer operation to biopsy, hemorrhage control from cautery to packing with a Pringle maneuver through a Rummel tourniquet, and the signs and management of postoperative bleeding and bile leak.",
+  },
+  {
+    id: SCORE_CHRONIC_LIVER_DISEASE_SOURCE,
+    title: "SCORE curriculum module: Chronic Liver Disease",
+    kind: "website",
+    citation: "Bethel F, Huckeby R, Douglas M, Colosimo C. \"Chronic Liver Disease.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, February 10, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=144569",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Local module retrieved August 12, 2026, and used for the outline entry Cirrhosis and Portal Hypertension. Supplies the causes, HVPG over 5, 10 and 16 mm Hg, noninvasive surrogates including elastography over 21 kPa, CTP classes and elective surgery, MELD and its rationale, ascites mechanism, SAAG and ascitic protein, albumin 6 to 8 g/L with paracentesis, chylous ascites, SBP (500 leukocytes or 250 neutrophils, cefotaxime, 48-hour failure prompting a search for a source, prophylaxis criteria and outcomes), encephalopathy grades and treatment, varices sites, beta-blockers and banding, surgical shunts and devascularization limited to CTP A and B, the bleeding protocol with Sengstaken-Blakemore and Minnesota tube technique, BRTO, vasoactive drugs for 2 to 5 days, ceftriaxone, PPI for 10 days, TIPS, and hepatorenal syndrome. Two statements are set beside current guidance as splits: MELD-Na as the current UNOS score (MELD 3.0 replaced it in 2023) and a transfusion target of 7 to 9 g/dL.",
+  },
+  {
+    id: HEPATIC_RESECTION_OE_SOURCE,
+    title: "Owner-supplied hepatic resection study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Hepatic Resection Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries a 36-item reference list. The works blocks lean on are NCCN Hepatocellular Carcinoma (v2.2026) and Colon Cancer (2026), the AASLD HCC guidance (Singal 2023), Hiatt (Ann Surg 1994) and Mathew and Venkatesh (Abdom Radiol 2018) on arterial variants, Entezari (RadioGraphics 2022), Narula and Aloia (2017), Steinharter (J Am Coll Surg 2026) and Reese (EJSO 2024) on remnant volume, Bozkurt (HPB 2024), Eshmuminov (Br J Surg 2016) and Fotiadou (HPB 2026) on PVE, LVD and ALPPS, Huang (Surgery 2022), Huntington (2014) and Luo (2026) on the Pringle maneuver, the PRESSURE trial (Teoule, Ann Surg 2025) and Deng (2026) on low CVP, Patel (2024) on infrahepatic IVC clamping, Nishio (2023) and Calthorpe (Ann Surg 2023) on liver failure, Vienet (2025) and Sliwinski (2023) on bile leak, Sadot (Ann Surg 2015), Margonis (Ann Surg 2018), Perrin (Ann Surg 2026) and Ferrari (2026) on margins, Kawaguchi (JNCCN 2020) on surveillance, and the ACR Appropriateness Criteria (2025).",
+      "Its board-classic flags (adenoma over 4 cm, a 1 cm margin, low CVP in minimally invasive resection, FLR thresholds) are written as splits. Its portal vein share of oxygen corrects the draft and is set beside Fiser's two thirds of flow. There is no SCORE module for Hepatic Resection on disk, so this guide and Fiser carry the topic.",
+    ].join(" "),
+  },
+  {
+    id: INTRAOPERATIVE_HEPATIC_ULTRASOUND_OE_SOURCE,
+    title: "Owner-supplied intraoperative hepatic ultrasound study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Intraoperative Hepatic Ultrasound — Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and a selected source list. Works it cites include the SSAT/SSO/AHPBA consensus (Adams 2013), Bitterer (Ultraschall Med 2025), Stavrou (J Gastrointest Surg 2021), the ACR Appropriateness Criteria (Kaur 2017), Liu (Ann Surg Oncol 2021), Leen (Ann Surg 2006), Arita (Ann Surg 2015), Fang (World J Surg 2012), Mathew and Venkatesh (Abdom Radiol 2018), Sureka (Br J Radiol 2019), Loi (Med Oncol 2020) on heat sink, Margonis (2018), Sadot (2015) and Dhir (2011) on margins, Chandra (Ann Surg Oncol 2026), Nicolescu (Cancers 2026), Narula (SAGES, Surg Endosc 2020), Pisano (WSES 2020), Russolillo (Surg Endosc 2021), Goldhawk-White (Surgery 2026) on ICG, and Filoni (Oncol Rev 2023).",
+      "Its heat-sink line describes a large vessel over 3 cm within 1 cm; that reads as a slip for 3 mm and only the 3 mm vessel threshold is carried. Not carried: FAST, Parkland and burn pearls the guide itself removed as off-topic.",
+    ].join(" "),
+  },
+  {
+    id: LIVER_BIOPSY_OE_SOURCE,
+    title: "Owner-supplied liver biopsy study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Liver Biopsy Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Carries inline author-year attributions and no numbered reference list. Works it cites include the AASLD liver biopsy guideline (Rockey 2009) and its 2026 update (AASLD EXPO, Hepatology), Huttman (Cochrane 2024), McAfee (Hepatology 1992) on transjugular biopsy, NCCN Hepatocellular Carcinoma (2026), the ACG/AGA acute liver failure guideline (Shingina 2023), the AGA (O'Shea 2021) and AASLD (Northup 2021) coagulation guidance, Rautou (Clin Gastroenterol Hepatol 2023) on society thresholds, the SIR quality standards (Sheth 2020), Govindarajan (Yamada's Textbook 2022), Al Knawy and Shiffman (Liver Int 2007), Giri (2023) and Zeydanli (2026) on tract embolization, Lee (JAMA 2021), Kaplan (AASLD portal hypertension 2024), Singal (AASLD HCC 2023), Thomaides-Brears (Dig Dis Sci 2022), Bravo (NEJM 2001), Colapietro (Liver Int 2025), Lester (Br J Haematol 2024), Nie (Am J Gastroenterol 2025) and Schaffler-Schaden (2020) on seeding, and Kitchin (Abdom Radiol 2018).",
+  },
+  {
+    id: CIRRHOSIS_PORTAL_HYPERTENSION_OE_SOURCE,
+    title: "Owner-supplied cirrhosis and portal hypertension study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 19, 2026: \"Cirrhosis and Portal Hypertension Pocket Chief\", an OpenEvidence correction of a SCORE notebook draft provided as a Word document.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered reference list. Works it cites include the AASLD portal hypertension (Kaplan 2024), ascites (Biggins 2021), TIPS (2024), ACLF (2024) and HCC (Singal 2023) guidance, Baveno VII, the AGA ascites (2025), gastric varices (Henry 2021) and vasoactive and albumin (2024) updates, the AASLD/AST transplant candidate guideline (2026), the ACG hepatic encephalopathy guideline (2026), Kim (Gastroenterology 2021) and Kwong (Hepatology 2023) on MELD 3.0, Mazumder and Fontana (Annu Rev Med 2024), Tapper and Parikh (JAMA 2023), Jachs (Clin Gastroenterol Hepatol 2023), Costa (Nat Rev Gastroenterol Hepatol 2025), Vranic (Cochrane 2026), Reiberger and Simbrunner (2025), Tripathi (CALIBRE, 2025), Nicoara-Farcau (Hepatology 2024), Nadim and Garcia-Tsao (NEJM 2023), Rockey (Liver Int 2025), Pose (Gastroenterology 2024), King (Clin Gastroenterol Hepatol 2026), Silic (2025), Velez (JASN 2026), and the rifaximin label.",
+      "Its classic-against-current flags (MASLD as the leading cause, CTP against MELD for surgical risk, carvedilol first, early TIPS survival, the albumin dose, HRS nomenclature, terlipressin) are written as splits beside Fiser's and SCORE's keys.",
+    ].join(" "),
+  },
+  {
+    id: HIATT_HEPATIC_ARTERIES_1994_SOURCE,
+    title: "Hiatt, Surgical anatomy of the hepatic arteries in 1000 cases (1994)",
+    kind: "article",
+    citation: "Hiatt JR, Gabbay J, Busuttil RW. Surgical anatomy of the hepatic arteries in 1000 cases. Ann Surg. 1994;220(1):50-52.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Registered during review as the authority behind the variant-frequency split, identified from the hepatic resection guide's reference list rather than supplied directly. Donor and recipient series: a replaced or accessory left hepatic artery from the left gastric in about 10% and a replaced or accessory right hepatic artery from the SMA in about 11%. Pending Zach's sign-off.",
+  },
+  {
+    id: AASLD_PORTAL_HYPERTENSION_2024_SOURCE,
+    title: "AASLD practice guidance on portal hypertension (2024)",
+    kind: "article",
+    citation: "Kaplan DE, Ripoll C, Thiele M, et al. AASLD Practice Guidance on risk stratification and management of portal hypertension and varices in cirrhosis. Hepatology. 2024;79(5):1180-1211.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Registered during review as the authority behind the HVPG thresholds, carvedilol as the preferred beta-blocker, the restrictive transfusion target and the early TIPS criteria, identified from the cirrhosis guide and the SCORE module rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: AASLD_ASCITES_2021_SOURCE,
+    title: "AASLD practice guidance on ascites, SBP and hepatorenal syndrome (2021)",
+    kind: "article",
+    citation: "Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, evaluation, and management of ascites, spontaneous bacterial peritonitis and hepatorenal syndrome: 2021 practice guidance by the American Association for the Study of Liver Diseases. Hepatology. 2021;74(2):1014-1048.",
+    suppliedAt: "2026-10-19T00:00:00.000Z",
+    details: "Registered during review as the authority behind sodium restriction, the diuretic ratio, albumin with large-volume paracentesis, SBP diagnosis and treatment, and HRS-AKI, identified from the cirrhosis guide and the SCORE module rather than supplied directly. Pending Zach's sign-off.",
   },
 ];

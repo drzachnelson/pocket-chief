@@ -1,5 +1,5 @@
-import { buildTopic, references, sourced } from "@/content/authoring";
-import { PARAESOPHAGEAL_HERNIA_SOURCE as SOURCE } from "@/content/sources";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { PARAESOPHAGEAL_HERNIA_SOURCE as SOURCE, TRUELEARN_LIVER_SOURCE as TL } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
 const blocks: TopicBlock[] = [
@@ -120,7 +120,7 @@ const blocks: TopicBlock[] = [
     ],
   }, SOURCE),
 
-  sourced({
+  sourcedUnits({
     id: "block-peh-operative-anatomy",
     type: "bullets",
     heading: "Key operative anatomy & neurovascular landmarks",
@@ -131,9 +131,10 @@ const blocks: TopicBlock[] = [
       "**Posterior (right) vagus nerve**: traverses the posterior esophageal surface, giving off the celiac branch and the criminal nerve of Grassi to the posterior gastric fundus.",
       "**Vascular landmarks**",
       "- **Replaced left hepatic artery**: arises from the left gastric artery and traverses the pars flaccida of the gastrohepatic ligament; must be preserved during exposure",
+      "-- **Pulsatile bleeding** while opening the pars flaccida is a replaced or accessory left hepatic artery until proven otherwise (4 to 10% in TrueLearn's figure); look and palpate before dividing. More in [[Hepatic Resection]].",
       "- **Short gastric vessels**: run within the gastrosplenic ligament; divided superiorly to mobilize the gastric fundus completely for an untwisted, floppy wrap",
     ],
-  }, SOURCE),
+  }, [[SOURCE], [SOURCE], [SOURCE], [SOURCE], [SOURCE], [SOURCE], [TL], [SOURCE]]),
 
   sourced({
     id: "block-peh-laparoscopic-sequence",
@@ -205,7 +206,7 @@ const blocks: TopicBlock[] = [
     ],
   }, SOURCE),
 
-  references("block-peh-references", [SOURCE]),
+  references("block-peh-references", [SOURCE, TL]),
 ];
 
 export const paraesophagealHerniaRepairTopic = buildTopic({
@@ -229,6 +230,7 @@ export const paraesophagealHerniaRepairTopic = buildTopic({
   scoreCategory: "SCORE · Esophagus · Operations & Procedures",
   tags: ["esophagus", "hernia", "foregut", "score", "absite", "procedures", "antireflux"],
   sourceId: SOURCE,
+  additionalSourceIds: [TL],
   blocks,
-  reviewedAt: "2026-08-16T00:00:00.000Z",
+  reviewedAt: "2026-10-19T00:00:00.000Z",
 });

@@ -538,7 +538,7 @@ Transcribed verbatim apart from repairing OCR ligatures (`ﬃ`, `ﬀ`). Duplicat
 
 ## How the current library maps to this outline
 
-As of 2026-10-13: **68 topics and 16 playbooks**. **59 of the 366 outline entries are covered and 11 are partial**. The vascular access batch closed the Vascular Access module and Surgical Critical Care operations; Vascular Access for Dialysis moved from partial to covered. Prophylaxis of Venous Thromboembolism sits in the Preoperative Evaluation and Perioperative Care module, outside this denominator. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
+As of 2026-10-19: **76 topics and 16 playbooks**. **67 of the 366 outline entries are covered and 11 are partial**. The two liver batches closed the Liver module, all eight entries under the outline's own titles. Prophylaxis of Venous Thromboembolism sits in the Preoperative Evaluation and Perioperative Care module, outside this denominator. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
 
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
@@ -547,7 +547,7 @@ As of 2026-10-13: **68 topics and 16 playbooks**. **59 of the 366 outline entrie
 | General Abdomen | 6 | 6 | — | All six, under the outline's own titles |
 | Hernia | 8 | 6 | — | Inguinal Hernia and Femoral Hernia (one outline entry), Unusual Hernias, Umbilical & Epigastric Hernia, Ventral & Incisional Hernia, Groin Hernia Repair, Abdominal Wall Reconstruction (Ventral Hernia Repair) |
 | Biliary | 18 | — | 1 | Choledocholithiasis (Benign Biliary Obstruction) |
-| Liver | 8 | 4 | — | Hepatic Abscess, Hepatic Abscess Drainage, Primary Hepatic Neoplasms, Metastatic Hepatic Neoplasms (October 2026, batch 1 of 2) |
+| Liver | 8 | 8 | — | Hepatic Abscess, Hepatic Abscess Drainage, Primary Hepatic Neoplasms, Metastatic Hepatic Neoplasms (batch 1); Hepatic Resection, Intraoperative Hepatic Ultrasound, Liver Biopsy, Cirrhosis and Portal Hypertension (batch 2), October 2026 |
 | Pancreas | 11 | 1 | — | Pancreaticoduodenectomy |
 | Spleen | 3 | — | 1 | Splenectomy and Splenorrhaphy, written as a trauma topic |
 | Esophagus | 10 | 1 | — | Paraesophageal Hernia Repair |
