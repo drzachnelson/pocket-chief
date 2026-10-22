@@ -246,6 +246,26 @@ export const AASLD_PSC_SOURCE = "00000000-0000-4000-8000-000000003111";
 export const STRASBERG_CLASSIFICATION_SOURCE = "00000000-0000-4000-8000-000000003112";
 export const BILE_DUCT_REPAIR_TIMING_SOURCE = "00000000-0000-4000-8000-000000003114";
 
+// Upper GI study-guide batch (source IDs 4600–4618; existing pancreas source reused).
+export const SCORE_PEPTIC_ULCER_SOURCE = "00000000-0000-4000-8000-000000004600";
+export const FISER_STOMACH_SOURCE = "00000000-0000-4000-8000-000000004601";
+export const SCORE_GASTRODUODENAL_PERFORATION_SOURCE = "00000000-0000-4000-8000-000000004602";
+export const SCORE_VAGOTOMY_SOURCE = "00000000-0000-4000-8000-000000004603";
+export const SCORE_UPPER_GI_BLEEDING_SOURCE = "00000000-0000-4000-8000-000000004604";
+export const SCORE_STRESS_GASTRITIS_SOURCE = "00000000-0000-4000-8000-000000004605";
+export const SCORE_EGD_SOURCE = "00000000-0000-4000-8000-000000004606";
+export const ACG_H_PYLORI_2024_SOURCE = "00000000-0000-4000-8000-000000004607";
+export const ESGE_ULCER_BLEEDING_2026_SOURCE = "00000000-0000-4000-8000-000000004608";
+export const WSES_PEPTIC_ULCER_2020_SOURCE = "00000000-0000-4000-8000-000000004609";
+export const SCCM_ASHP_STRESS_PROPHYLAXIS_2024_SOURCE = "00000000-0000-4000-8000-000000004610";
+export const ACG_UGIB_2021_SOURCE = "00000000-0000-4000-8000-000000004611";
+export const ACG_CAG_ANTITHROMBOTICS_2022_SOURCE = "00000000-0000-4000-8000-000000004612";
+export const MULTISOCIETY_GLP1_2024_SOURCE = "00000000-0000-4000-8000-000000004613";
+export const FISER_ESOPHAGUS_SOURCE = "00000000-0000-4000-8000-000000004615";
+export const FISER_GI_HORMONES_SOURCE = "00000000-0000-4000-8000-000000004616";
+export const BAVENO_VARICEAL_CONSENSUS_SOURCE = "00000000-0000-4000-8000-000000004617";
+export const NASOGASTRIC_ASPIRATE_2004_SOURCE = "00000000-0000-4000-8000-000000004618";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: SCORE_SVC_SOURCE,
@@ -2410,5 +2430,164 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Manivasagam SS, Chandra JN, Khera D, Aradhya PS, Hiremath AM. Optimal timing of surgical repair after bile duct injury: a systematic review and meta-analysis. Cureus. 2024;16(2):e53507. doi:10.7759/cureus.53507",
     suppliedAt: "2026-10-22T00:00:00.000Z",
     details: "Added beyond the supplied sources during review and pending the owner's sign-off, to set the board teaching on repair timing against the current evidence. Twenty observational studies and 3,421 patients; early repair under 14 days and delayed repair after 6 weeks both had lower morbidity than repair between 2 and 6 weeks, delayed repair had the lowest stricture rate, and timing was not associated with mortality. Observational, and a 2022 analysis of about 3,800 patients found early and delayed repair comparable.",
+  },
+  {
+      "id": SCORE_PEPTIC_ULCER_SOURCE,
+      "title": "SCORE | Peptic Ulcer Disease",
+      "kind": "website",
+      "citation": "SCORE | Peptic Ulcer Disease. September 18, 2025. Learning Objectives §§1–8; numbered §5.1–5.2 and §6.1–6.2; source conflicts retained in review flags.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Learning Objectives §§1–8; numbered §5.1–5.2 and §6.1–6.2; source conflicts retained in review flags. Complete extracted Markdown read; source images/videos not inspected. Private supplied corpus: Pocket Chief Resources/score-modules/SCORE_Peptic_Ulcer_Disease_b4ec1a7ca2.md. Source text and media are not redistributed. Module date: September 18, 2025. Retrieved: 2026-08-12T16:29:44.661142+00:00. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes.",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000204"
+  },
+  {
+      "id": FISER_STOMACH_SOURCE,
+      "title": "Fiser, The ABSITE Review, 8th edition — Chapter 30 — Stomach",
+      "kind": "book",
+      "citation": "Fiser, The ABSITE Review, 8th edition — Chapter 30 — Stomach. Not supplied in extracted chapter; edition identified as 8th.. pp.391–392 anatomy/physiology; 394–395 vagotomy/pyloroplasty; 396–397 UGIB; 398–400 duodenal ulcers; 401 gastric ulcers; 402 stress gastritis; 412–413 postgastrectomy complications.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "pp.391–392 anatomy/physiology; 394–395 vagotomy/pyloroplasty; 396–397 UGIB; 398–400 duodenal ulcers; 401 gastric ulcers; 402 stress gastritis; 412–413 postgastrectomy complications. Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected. Private supplied corpus: Pocket Chief Resources/absite-8e/ch30_stomach.md. Source text and media are not redistributed. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes."
+  },
+  {
+      "id": SCORE_GASTRODUODENAL_PERFORATION_SOURCE,
+      "title": "SCORE | Gastroduodenal Perforation Repair",
+      "kind": "website",
+      "citation": "SCORE | Gastroduodenal Perforation Repair. June 27, 2025. Learning Objectives §§1–8: anatomy, etiology, presentation, nonoperative selection, gastric and duodenal operations, postoperative care, complications.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Learning Objectives §§1–8: anatomy, etiology, presentation, nonoperative selection, gastric and duodenal operations, postoperative care, complications. Complete extracted Markdown read; source images/videos not inspected. Private supplied corpus: Pocket Chief Resources/score-modules/SCORE_Gastroduodenal_Perforation_Repair_dfeaa79343.md. Source text and media are not redistributed. Module date: June 27, 2025. Retrieved: 2026-08-12T16:46:02.692613+00:00. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes.",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=146350"
+  },
+  {
+      "id": SCORE_VAGOTOMY_SOURCE,
+      "title": "SCORE | Vagotomy and Drainage",
+      "kind": "website",
+      "citation": "SCORE | Vagotomy and Drainage. August 21, 2025. Learning Objectives §§1–5; §2.1 physiology, §2.2 anatomy; §3.1 considerations, §3.2 vagotomy, §3.3 drainage; §4.1 injuries/rescue, §4.2 postoperative syndromes.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Learning Objectives §§1–5; §2.1 physiology, §2.2 anatomy; §3.1 considerations, §3.2 vagotomy, §3.3 drainage; §4.1 injuries/rescue, §4.2 postoperative syndromes. Complete extracted Markdown read; source images/videos not inspected. Private supplied corpus: Pocket Chief Resources/score-modules/SCORE_Vagotomy_and_Drainage_d5dfc8cf69.md. Source text and media are not redistributed. Module date: August 21, 2025. Retrieved: 2026-08-12T16:46:08.766093+00:00. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes.",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=146408"
+  },
+  {
+      "id": SCORE_UPPER_GI_BLEEDING_SOURCE,
+      "title": "SCORE | Upper Gastrointestinal Bleeding",
+      "kind": "website",
+      "citation": "SCORE | Upper Gastrointestinal Bleeding. September 19, 2025. Learning Objectives §§1–7; §4.1 history, §4.2 imaging; §5.1 appearance, §5.2 Forrest; §7.1 procedural, §7.2 pharmacologic treatment.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Learning Objectives §§1–7; §4.1 history, §4.2 imaging; §5.1 appearance, §5.2 Forrest; §7.1 procedural, §7.2 pharmacologic treatment. Complete extracted Markdown read; source images/videos not inspected. Private supplied corpus: Pocket Chief Resources/score-modules/SCORE_Upper_Gastrointestinal_Bleeding_367bdff096.md. Source text and media are not redistributed. Module date: September 19, 2025. Retrieved: 2026-08-12T16:31:46.587696+00:00. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes.",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000490"
+  },
+  {
+      "id": SCORE_STRESS_GASTRITIS_SOURCE,
+      "title": "SCORE | Stress Gastritis",
+      "kind": "website",
+      "citation": "SCORE | Stress Gastritis. April 24, 2026. Learning Objectives §§1–6; §1.1 general risks, §1.2 clinical risks; §3.1 symptoms, §3.2 endoscopy, §3.3 biopsy.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Learning Objectives §§1–6; §1.1 general risks, §1.2 clinical risks; §3.1 symptoms, §3.2 endoscopy, §3.3 biopsy. Complete extracted Markdown read; source images/videos not inspected. Private supplied corpus: Pocket Chief Resources/score-modules/SCORE_Stress_Gastritis_0cc3baf409.md. Source text and media are not redistributed. Module date: April 24, 2026. Retrieved: 2026-08-12T16:42:26.091186+00:00. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes.",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=136471"
+  },
+  {
+      "id": SCORE_EGD_SOURCE,
+      "title": "SCORE | Esophagogastroduodenoscopy",
+      "kind": "website",
+      "citation": "SCORE | Esophagogastroduodenoscopy. February 10, 2026. Learning Objectives §§1–7: overview, indications/contraindications, anatomy, preparation, steps, intraoperative decisions, complications.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Learning Objectives §§1–7: overview, indications/contraindications, anatomy, preparation, steps, intraoperative decisions, complications. Complete extracted Markdown read; source images/videos not inspected. Private supplied corpus: Pocket Chief Resources/score-modules/SCORE_Esophagogastroduodenoscopy_88428dc12e.md. Source text and media are not redistributed. Module date: February 10, 2026. Retrieved: 2026-08-12T16:40:47.359243+00:00. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes.",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=130707"
+  },
+  {
+      "id": ACG_H_PYLORI_2024_SOURCE,
+      "title": "Chey et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection (2024), author-reviewed ACG Guideline Highlights",
+      "kind": "article",
+      "citation": "Chey et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection (2024), author-reviewed ACG Guideline Highlights. Guideline September 2024; highlights hosted January 2025. Single-page highlights: When to Test, Regimens, Treatment Pearls. Duration corroborated by guideline abstract, PMID 39626064. DOI 10.14309/ajg.0000000000002968.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Single-page highlights: When to Test, Regimens, Treatment Pearls. Duration corroborated by guideline abstract, PMID 39626064. DOI 10.14309/ajg.0000000000002968. Official one-page highlights read, including regimen doses/test-of-cure; 14-day preference verified in original guideline abstract. Publisher full-text route failed; no full-guideline review claimed. Additional primary access: https://pubmed.ncbi.nlm.nih.gov/39626064/ Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://gi.org/wp-content/uploads/2025/01/ACG-Hpylori-Guidelines-Highlights-2024-FINAL.pdf.pdf"
+  },
+  {
+      "id": ESGE_ULCER_BLEEDING_2026_SOURCE,
+      "title": "Gralnek et al. ESGE Guideline — Endoscopic diagnosis and management of peptic ulcer bleeding, Update 2026",
+      "kind": "article",
+      "citation": "Gralnek et al. ESGE Guideline — Endoscopic diagnosis and management of peptic ulcer bleeding, Update 2026. Published online May 13, 2026; Endoscopy 58:899–924. Table 1 pp.902–909; airway/NG p.904, timing/clot p.905, low-risk stigmata/OTS p.906, topical/rescue p.907; full discussion pp.913–918. DOI 10.1055/a-2863-8314.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Table 1 pp.902–909; airway/NG p.904, timing/clot p.905, low-risk stigmata/OTS p.906, topical/rescue p.907; full discussion pp.913–918. DOI 10.1055/a-2863-8314. Official PDF accessed; relevant recommendations read through extracted text. File includes supplement (140 PDF pages); book-style printed page numbers are used here. Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://www.esge.com/assets/downloads/pdfs/guidelines/2026_a-2863-8314.pdf"
+  },
+  {
+      "id": WSES_PEPTIC_ULCER_2020_SOURCE,
+      "title": "Tarasconi et al. Perforated and bleeding peptic ulcer: WSES guidelines",
+      "kind": "article",
+      "citation": "Tarasconi et al. Perforated and bleeding peptic ulcer: WSES guidelines. January 7, 2020. Perforated peptic ulcer: Diagnosis, Non-operative management, Surgical treatment (small/large perforations, damage control), Antimicrobial therapy. DOI 10.1186/s13017-019-0283-9.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Perforated peptic ulcer: Diagnosis, Non-operative management, Surgical treatment (small/large perforations, damage control), Antimicrobial therapy. DOI 10.1186/s13017-019-0283-9. Publisher article and primary PDF/indexed passages accessed for the indicated recommendations. A newer ulcer-endoscopy guideline is separately cited; WSES is not labeled a 2026 publication. Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://link.springer.com/article/10.1186/s13017-019-0283-9"
+  },
+  {
+      "id": SCCM_ASHP_STRESS_PROPHYLAXIS_2024_SOURCE,
+      "title": "MacLaren et al. SCCM/ASHP Guideline for Prevention of Stress-Related Gastrointestinal Bleeding in Critically Ill Adults",
+      "kind": "article",
+      "citation": "MacLaren et al. SCCM/ASHP Guideline for Prevention of Stress-Related Gastrointestinal Bleeding in Critically Ill Adults. July 15, 2024; Crit Care Med 52:e421–e430. Society recommendations: risk factors, neurocritical care, enteral nutrition, first-line agents, route, dosing, cessation. DOI 10.1097/CCM.0000000000006330.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Society recommendations: risk factors, neurocritical care, enteral nutrition, first-line agents, route, dosing, cessation. DOI 10.1097/CCM.0000000000006330. Official SCCM recommendation page read, including low-dose and cessation details; full publisher article not claimed as completely reviewed. Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://sccm.org/clinical-resources/guidelines/guidelines/sccm-ashp-guideline-prevention-of-ugib"
+  },
+  {
+      "id": ACG_UGIB_2021_SOURCE,
+      "title": "Laine et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding",
+      "kind": "article",
+      "citation": "Laine et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. May 2021; Am J Gastroenterol 116:899–917. Risk assessment; transfusion; pre-endoscopic erythromycin; timing; ulcer hemostasis/adherent clot; modalities; postendoscopic PPI; recurrent/failed endoscopic hemostasis. DOI 10.14309/ajg.0000000000001245.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Risk assessment; transfusion; pre-endoscopic erythromycin; timing; ulcer hemostasis/adherent clot; modalities; postendoscopic PPI; recurrent/failed endoscopic hemostasis. DOI 10.14309/ajg.0000000000001245. Original abstract and indexed primary guideline/recommendation-table passages reviewed; publisher open failed. Not a claim of unrestricted full-text access. ESGE 2026 updates explicitly distinguished. Additional primary access: https://doi.org/10.14309/ajg.0000000000001245 Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33929377/"
+  },
+  {
+      "id": ACG_CAG_ANTITHROMBOTICS_2022_SOURCE,
+      "title": "Abraham et al. ACG-CAG Clinical Practice Guideline: Anticoagulants and Antiplatelets During Acute GI Bleeding and the Periendoscopic Period",
+      "kind": "article",
+      "citation": "Abraham et al. ACG-CAG Clinical Practice Guideline: Anticoagulants and Antiplatelets During Acute GI Bleeding and the Periendoscopic Period. March/April 2022. Table 1 acute GI bleeding; Table 2 elective endoscopy (recommendations 11–18); aspirin secondary prevention and uncertain resumption timing.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Table 1 acute GI bleeding; Table 2 elective endoscopy (recommendations 11–18); aspirin secondary prevention and uncertain resumption timing. Official ACG PDF accessed and relevant recommendation tables read; no universal reversal or medication-hold protocol inferred. Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://gi.org/wp-content/uploads/2022/03/ACG-CAG-Guideline.pdf"
+  },
+  {
+      "id": MULTISOCIETY_GLP1_2024_SOURCE,
+      "title": "AGA/ASA/ASMBS/ISPCOP/SAGES multisociety GLP-1 perioperative guidance — official society summary",
+      "kind": "article",
+      "citation": "AGA/ASA/ASMBS/ISPCOP/SAGES multisociety GLP-1 perioperative guidance — official society summary. October 30, 2024. Society summary: continued treatment for most elective procedures; higher-risk GI/emptying cases, 24-hour liquid diet and adjusted anesthesia assessment.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Society summary: continued treatment for most elective procedures; higher-risk GI/emptying cases, 24-hour liquid diet and adjusted anesthesia assessment. Primary participating-society release reviewed via indexed passage; full implementation protocol not reviewed or reproduced. Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://gastro.org/press-releases/most-patients-can-continue-glp-1-anti-obesity-drugs-before-surgery-2/"
+  },
+  {
+      "id": FISER_ESOPHAGUS_SOURCE,
+      "title": "Fiser, The ABSITE Review, 8th edition — Chapter 29 — Esophagus",
+      "kind": "book",
+      "citation": "Fiser, The ABSITE Review, 8th edition — Chapter 29 — Esophagus. Not supplied in extracted chapter; edition identified as 8th.. pp.364–367 anatomy, vagus, narrowing sites and endoscopic distances; p.388 Mallory–Weiss; p.389 iatrogenic perforation. p.364 Grassi wording conflicts with p.394 stomach chapter and is flagged.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "pp.364–367 anatomy, vagus, narrowing sites and endoscopic distances; p.388 Mallory–Weiss; p.389 iatrogenic perforation. p.364 Grassi wording conflicts with p.394 stomach chapter and is flagged. Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected. Private supplied corpus: Pocket Chief Resources/absite-8e/ch29_esophagus.md. Source text and media are not redistributed. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes."
+  },
+  {
+      "id": FISER_GI_HORMONES_SOURCE,
+      "title": "Fiser, The ABSITE Review, 8th edition — Chapter 28 — Gastrointestinal Hormones",
+      "kind": "book",
+      "citation": "Fiser, The ABSITE Review, 8th edition — Chapter 28 — Gastrointestinal Hormones. Not supplied in extracted chapter; edition identified as 8th.. p.361 gastrin, somatostatin and parietal acid inhibition; hormone arrows/symbols in OCR not used to invent quantities.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "p.361 gastrin, somatostatin and parietal acid inhibition; hormone arrows/symbols in OCR not used to invent quantities. Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected. Private supplied corpus: Pocket Chief Resources/absite-8e/ch28_gastrointestinal-hormones.md. Source text and media are not redistributed. Pending Zach's clinical review. Supplied-source teaching is paraphrased; source disagreements and OCR problems remain in the review notes."
+  },
+  {
+      "id": BAVENO_VARICEAL_CONSENSUS_SOURCE,
+      "title": "de Franchis et al. Baveno VII — Renewing consensus in portal hypertension; checked against indexed Baveno VIII 2026 update",
+      "kind": "article",
+      "citation": "de Franchis et al. Baveno VII — Renewing consensus in portal hypertension; checked against indexed Baveno VIII 2026 update. Baveno VII 2022; Baveno VIII 2026. Baveno VII §6 Acute variceal bleeding (vasoactive treatment, antibiotics, timing, endoscopic/TIPS principles). Baveno VIII indexed acute-variceal paragraphs only.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Baveno VII §6 Acute variceal bleeding (vasoactive treatment, antibiotics, timing, endoscopic/TIPS principles). Baveno VIII indexed acute-variceal paragraphs only. Baveno VII primary passages and Baveno VIII indexed primary recommendations reviewed. Baveno VIII full-text open failed; detailed updated TIPS/gastric-varix criteria not inferred. Additional primary access: https://www.journal-of-hepatology.eu/article/S0168-8278%2826%2902778-9/fulltext Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/11090185/"
+  },
+  {
+      "id": NASOGASTRIC_ASPIRATE_2004_SOURCE,
+      "title": "Aljebreen et al. Nasogastric aspirate predicts high-risk endoscopic lesions in patients with acute upper-GI bleeding",
+      "kind": "article",
+      "citation": "Aljebreen et al. Nasogastric aspirate predicts high-risk endoscopic lesions in patients with acute upper-GI bleeding. 2004. Results: imperfect negative predictive value of aspirate for high-risk lesions; clear/bile-stained subgroup also described in the ACG original guideline discussion.",
+      "suppliedAt": "2026-10-22T00:00:00.000Z",
+      "details": "Results: imperfect negative predictive value of aspirate for high-risk lesions; clear/bile-stained subgroup also described in the ACG original guideline discussion. Original-study abstract and ACG primary discussion indexed passages reviewed. Used only to reject a negative-aspirate exclusion rule, not to recommend routine lavage. Additional primary access: https://gi.org/guideline/management-of-patients-with-ulcer-bleeding/ Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14745388/"
   },
 ];

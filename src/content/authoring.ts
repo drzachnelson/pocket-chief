@@ -133,3 +133,35 @@ export function buildPlaybook(input: PlaybookInput): Playbook {
   };
 }
 
+export interface DraftTopicInput extends Omit<TopicInput, "reviewedAt"> {
+  createdAt: string;
+  warnings: string[];
+}
+
+/** Stores reviewable authored content without creating approval metadata or a published version. */
+export function buildDraftTopic(input: DraftTopicInput): Topic {
+  const version: TopicVersion = {
+    id: input.versionId,
+    topicId: input.id,
+    versionNumber: 1,
+    status: "draft",
+    blocks: input.blocks,
+    sourceIds: [...new Set([input.sourceId, ...input.additionalSourceIds ?? []])],
+    scoreNodeId: input.scoreNodeId,
+    tags: input.tags,
+    warnings: input.warnings,
+    createdAt: input.createdAt,
+  };
+  return {
+    id: input.id,
+    slug: input.slug,
+    title: input.title,
+    aliases: input.aliases,
+    scoreNodeId: input.scoreNodeId,
+    scoreCategory: input.scoreCategory,
+    tags: input.tags,
+    approvedVersion: null,
+    versions: [version],
+    updatedAt: input.createdAt,
+  };
+}

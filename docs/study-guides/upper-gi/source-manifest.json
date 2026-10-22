@@ -1,0 +1,267 @@
+{
+  "prepared": "2026-10-22",
+  "status": "Draft \u2014 pending Zach's clinical review",
+  "sources": {
+    "S1": {
+      "title": "SCORE | Peptic Ulcer Disease",
+      "kind": "supplied_score_module",
+      "local_path": "Pocket Chief Resources/score-modules/SCORE_Peptic_Ulcer_Disease_b4ec1a7ca2.md",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000204",
+      "module_date": "September 18, 2025",
+      "retrieved": "2026-08-12T16:29:44.661142+00:00",
+      "locators": "Learning Objectives \u00a7\u00a71\u20138; numbered \u00a75.1\u20135.2 and \u00a76.1\u20136.2; source conflicts retained in review flags.",
+      "sha256": "65fa150efd04df36156fec5f810810ac7afa85f1dbc41154788aa92a7fce13b1",
+      "access": "Complete extracted Markdown read; source images/videos not inspected."
+    },
+    "S2": {
+      "title": "Fiser, The ABSITE Review, 8th edition \u2014 Chapter 30 \u2014 Stomach",
+      "kind": "supplied_textbook_ocr",
+      "local_path": "Pocket Chief Resources/absite-8e/ch30_stomach.md",
+      "url": null,
+      "publication_date": "Not supplied in extracted chapter; edition identified as 8th.",
+      "retrieved": "Not supplied in extracted chapter.",
+      "locators": "pp.391\u2013392 anatomy/physiology; 394\u2013395 vagotomy/pyloroplasty; 396\u2013397 UGIB; 398\u2013400 duodenal ulcers; 401 gastric ulcers; 402 stress gastritis; 412\u2013413 postgastrectomy complications.",
+      "sha256": "9b52771924141d7fa48fd07dbf0985f549d1b48a4dc9853b9113495fc25a9b95",
+      "access": "Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected."
+    },
+    "S3": {
+      "title": "SCORE | Gastroduodenal Perforation Repair",
+      "kind": "supplied_score_module",
+      "local_path": "Pocket Chief Resources/score-modules/SCORE_Gastroduodenal_Perforation_Repair_dfeaa79343.md",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=146350",
+      "module_date": "June 27, 2025",
+      "retrieved": "2026-08-12T16:46:02.692613+00:00",
+      "locators": "Learning Objectives \u00a7\u00a71\u20138: anatomy, etiology, presentation, nonoperative selection, gastric and duodenal operations, postoperative care, complications.",
+      "sha256": "4b9d2523a3a402c807a8d90bed80908d1fbc4bc3edb137830f4658c1d8b17e3d",
+      "access": "Complete extracted Markdown read; source images/videos not inspected."
+    },
+    "S4": {
+      "title": "SCORE | Vagotomy and Drainage",
+      "kind": "supplied_score_module",
+      "local_path": "Pocket Chief Resources/score-modules/SCORE_Vagotomy_and_Drainage_d5dfc8cf69.md",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=146408",
+      "module_date": "August 21, 2025",
+      "retrieved": "2026-08-12T16:46:08.766093+00:00",
+      "locators": "Learning Objectives \u00a7\u00a71\u20135; \u00a72.1 physiology, \u00a72.2 anatomy; \u00a73.1 considerations, \u00a73.2 vagotomy, \u00a73.3 drainage; \u00a74.1 injuries/rescue, \u00a74.2 postoperative syndromes.",
+      "sha256": "ce360fabcf1cfe8dc712cded0020ec44a32740c79950c9316512896575aa43de",
+      "access": "Complete extracted Markdown read; source images/videos not inspected."
+    },
+    "S5": {
+      "title": "SCORE | Upper Gastrointestinal Bleeding",
+      "kind": "supplied_score_module",
+      "local_path": "Pocket Chief Resources/score-modules/SCORE_Upper_Gastrointestinal_Bleeding_367bdff096.md",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000490",
+      "module_date": "September 19, 2025",
+      "retrieved": "2026-08-12T16:31:46.587696+00:00",
+      "locators": "Learning Objectives \u00a7\u00a71\u20137; \u00a74.1 history, \u00a74.2 imaging; \u00a75.1 appearance, \u00a75.2 Forrest; \u00a77.1 procedural, \u00a77.2 pharmacologic treatment.",
+      "sha256": "1c76efe274b8a2739ff618cd9bee984bc7c4c27a830059818975a17dc9c28226",
+      "access": "Complete extracted Markdown read; source images/videos not inspected."
+    },
+    "S6": {
+      "title": "SCORE | Stress Gastritis",
+      "kind": "supplied_score_module",
+      "local_path": "Pocket Chief Resources/score-modules/SCORE_Stress_Gastritis_0cc3baf409.md",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=136471",
+      "module_date": "April 24, 2026",
+      "retrieved": "2026-08-12T16:42:26.091186+00:00",
+      "locators": "Learning Objectives \u00a7\u00a71\u20136; \u00a71.1 general risks, \u00a71.2 clinical risks; \u00a73.1 symptoms, \u00a73.2 endoscopy, \u00a73.3 biopsy.",
+      "sha256": "8cd38df5cb2b5c320c0df048a79703142e2552c5f49f4a10228cacd80255247b",
+      "access": "Complete extracted Markdown read; source images/videos not inspected."
+    },
+    "S7": {
+      "title": "SCORE | Esophagogastroduodenoscopy",
+      "kind": "supplied_score_module",
+      "local_path": "Pocket Chief Resources/score-modules/SCORE_Esophagogastroduodenoscopy_88428dc12e.md",
+      "url": "https://www.surgicalcore.org/modulecontent.aspx?id=130707",
+      "module_date": "February 10, 2026",
+      "retrieved": "2026-08-12T16:40:47.359243+00:00",
+      "locators": "Learning Objectives \u00a7\u00a71\u20137: overview, indications/contraindications, anatomy, preparation, steps, intraoperative decisions, complications.",
+      "sha256": "dd0abb35813295557cd98d72372f742796f44ff9258469c4768ea251553635ca",
+      "access": "Complete extracted Markdown read; source images/videos not inspected."
+    },
+    "S8": {
+      "title": "Chey et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection (2024), author-reviewed ACG Guideline Highlights",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://gi.org/wp-content/uploads/2025/01/ACG-Hpylori-Guidelines-Highlights-2024-FINAL.pdf.pdf",
+      "publication_date": "Guideline September 2024; highlights hosted January 2025",
+      "retrieved": "2026-10-22",
+      "locators": "Single-page highlights: When to Test, Regimens, Treatment Pearls. Duration corroborated by guideline abstract, PMID 39626064. DOI 10.14309/ajg.0000000000002968.",
+      "access": "Official one-page highlights read, including regimen doses/test-of-cure; 14-day preference verified in original guideline abstract. Publisher full-text route failed; no full-guideline review claimed.",
+      "additional_url": "https://pubmed.ncbi.nlm.nih.gov/39626064/"
+    },
+    "S9": {
+      "title": "Gralnek et al. ESGE Guideline \u2014 Endoscopic diagnosis and management of peptic ulcer bleeding, Update 2026",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://www.esge.com/assets/downloads/pdfs/guidelines/2026_a-2863-8314.pdf",
+      "publication_date": "Published online May 13, 2026; Endoscopy 58:899\u2013924",
+      "retrieved": "2026-10-22",
+      "locators": "Table 1 pp.902\u2013909; airway/NG p.904, timing/clot p.905, low-risk stigmata/OTS p.906, topical/rescue p.907; full discussion pp.913\u2013918. DOI 10.1055/a-2863-8314.",
+      "access": "Official PDF accessed; relevant recommendations read through extracted text. File includes supplement (140 PDF pages); book-style printed page numbers are used here."
+    },
+    "S10": {
+      "title": "Tarasconi et al. Perforated and bleeding peptic ulcer: WSES guidelines",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://link.springer.com/article/10.1186/s13017-019-0283-9",
+      "publication_date": "January 7, 2020",
+      "retrieved": "2026-10-22",
+      "locators": "Perforated peptic ulcer: Diagnosis, Non-operative management, Surgical treatment (small/large perforations, damage control), Antimicrobial therapy. DOI 10.1186/s13017-019-0283-9.",
+      "access": "Publisher article and primary PDF/indexed passages accessed for the indicated recommendations. A newer ulcer-endoscopy guideline is separately cited; WSES is not labeled a 2026 publication."
+    },
+    "S11": {
+      "title": "MacLaren et al. SCCM/ASHP Guideline for Prevention of Stress-Related Gastrointestinal Bleeding in Critically Ill Adults",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://sccm.org/clinical-resources/guidelines/guidelines/sccm-ashp-guideline-prevention-of-ugib",
+      "publication_date": "July 15, 2024; Crit Care Med 52:e421\u2013e430",
+      "retrieved": "2026-10-22",
+      "locators": "Society recommendations: risk factors, neurocritical care, enteral nutrition, first-line agents, route, dosing, cessation. DOI 10.1097/CCM.0000000000006330.",
+      "access": "Official SCCM recommendation page read, including low-dose and cessation details; full publisher article not claimed as completely reviewed."
+    },
+    "S12": {
+      "title": "Laine et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33929377/",
+      "publication_date": "May 2021; Am J Gastroenterol 116:899\u2013917",
+      "retrieved": "2026-10-22",
+      "locators": "Risk assessment; transfusion; pre-endoscopic erythromycin; timing; ulcer hemostasis/adherent clot; modalities; postendoscopic PPI; recurrent/failed endoscopic hemostasis. DOI 10.14309/ajg.0000000000001245.",
+      "access": "Original abstract and indexed primary guideline/recommendation-table passages reviewed; publisher open failed. Not a claim of unrestricted full-text access. ESGE 2026 updates explicitly distinguished.",
+      "additional_url": "https://doi.org/10.14309/ajg.0000000000001245"
+    },
+    "S13": {
+      "title": "Abraham et al. ACG-CAG Clinical Practice Guideline: Anticoagulants and Antiplatelets During Acute GI Bleeding and the Periendoscopic Period",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://gi.org/wp-content/uploads/2022/03/ACG-CAG-Guideline.pdf",
+      "publication_date": "March/April 2022",
+      "retrieved": "2026-10-22",
+      "locators": "Table 1 acute GI bleeding; Table 2 elective endoscopy (recommendations 11\u201318); aspirin secondary prevention and uncertain resumption timing.",
+      "access": "Official ACG PDF accessed and relevant recommendation tables read; no universal reversal or medication-hold protocol inferred."
+    },
+    "S14": {
+      "title": "AGA/ASA/ASMBS/ISPCOP/SAGES multisociety GLP-1 perioperative guidance \u2014 official society summary",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://gastro.org/press-releases/most-patients-can-continue-glp-1-anti-obesity-drugs-before-surgery-2/",
+      "publication_date": "October 30, 2024",
+      "retrieved": "2026-10-22",
+      "locators": "Society summary: continued treatment for most elective procedures; higher-risk GI/emptying cases, 24-hour liquid diet and adjusted anesthesia assessment.",
+      "access": "Primary participating-society release reviewed via indexed passage; full implementation protocol not reviewed or reproduced."
+    },
+    "S15": {
+      "title": "Fiser, The ABSITE Review, 8th edition \u2014 Chapter 33 \u2014 Pancreas",
+      "kind": "supplied_textbook_ocr",
+      "local_path": "Pocket Chief Resources/absite-8e/ch33_pancreas.md",
+      "url": null,
+      "publication_date": "Not supplied in extracted chapter; edition identified as 8th.",
+      "retrieved": "Not supplied in extracted chapter.",
+      "locators": "pp.483\u2013484 Gastrinoma/Zollinger\u2013Ellison and Sporadic Gastrinoma: refractory/distal ulcer clues, gastrin units, acid context. Older exact endocrine cutoffs/localization claims not generalized.",
+      "sha256": "031a6912ab1fa98a23fde84c81c1abd5d521f0eebeb3f3a4c1a2d3c2fea4ce11",
+      "access": "Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected."
+    },
+    "S16": {
+      "title": "Fiser, The ABSITE Review, 8th edition \u2014 Chapter 29 \u2014 Esophagus",
+      "kind": "supplied_textbook_ocr",
+      "local_path": "Pocket Chief Resources/absite-8e/ch29_esophagus.md",
+      "url": null,
+      "publication_date": "Not supplied in extracted chapter; edition identified as 8th.",
+      "retrieved": "Not supplied in extracted chapter.",
+      "locators": "pp.364\u2013367 anatomy, vagus, narrowing sites and endoscopic distances; p.388 Mallory\u2013Weiss; p.389 iatrogenic perforation. p.364 Grassi wording conflicts with p.394 stomach chapter and is flagged.",
+      "sha256": "274d54d413a954b6b950cff718f798946b0edac03c32b35b0671510910888c45",
+      "access": "Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected."
+    },
+    "S17": {
+      "title": "Fiser, The ABSITE Review, 8th edition \u2014 Chapter 28 \u2014 Gastrointestinal Hormones",
+      "kind": "supplied_textbook_ocr",
+      "local_path": "Pocket Chief Resources/absite-8e/ch28_gastrointestinal-hormones.md",
+      "url": null,
+      "publication_date": "Not supplied in extracted chapter; edition identified as 8th.",
+      "retrieved": "Not supplied in extracted chapter.",
+      "locators": "p.361 gastrin, somatostatin and parietal acid inhibition; hormone arrows/symbols in OCR not used to invent quantities.",
+      "sha256": "13adcb15a98782ded3409444a13288d16079d28f45e7ed3d8d13ec7915ae884a",
+      "access": "Relevant textual sections read; page markers refer to book pages. OCR and image descriptions require restraint; original scans not inspected."
+    },
+    "S18": {
+      "title": "de Franchis et al. Baveno VII \u2014 Renewing consensus in portal hypertension; checked against indexed Baveno VIII 2026 update",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/11090185/",
+      "publication_date": "Baveno VII 2022; Baveno VIII 2026",
+      "retrieved": "2026-10-22",
+      "locators": "Baveno VII \u00a76 Acute variceal bleeding (vasoactive treatment, antibiotics, timing, endoscopic/TIPS principles). Baveno VIII indexed acute-variceal paragraphs only.",
+      "access": "Baveno VII primary passages and Baveno VIII indexed primary recommendations reviewed. Baveno VIII full-text open failed; detailed updated TIPS/gastric-varix criteria not inferred.",
+      "additional_url": "https://www.journal-of-hepatology.eu/article/S0168-8278%2826%2902778-9/fulltext"
+    },
+    "S19": {
+      "title": "Aljebreen et al. Nasogastric aspirate predicts high-risk endoscopic lesions in patients with acute upper-GI bleeding",
+      "kind": "external_primary_guidance_or_study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14745388/",
+      "publication_date": "2004",
+      "retrieved": "2026-10-22",
+      "locators": "Results: imperfect negative predictive value of aspirate for high-risk lesions; clear/bile-stained subgroup also described in the ACG original guideline discussion.",
+      "access": "Original-study abstract and ACG primary discussion indexed passages reviewed. Used only to reject a negative-aspirate exclusion rule, not to recommend routine lavage.",
+      "additional_url": "https://gi.org/guideline/management-of-patients-with-ulcer-bleeding/"
+    }
+  },
+  "resource_inventory": {
+    "score_modules": 433,
+    "fiser_chapters_and_appendix": 45,
+    "archives_match_extracted_corpora": true,
+    "qbank_files": [
+      "liver.md"
+    ],
+    "matching_stomach_or_endoscopy_qbank_notes": 0,
+    "unreviewed_media": "SCORE figures/images/videos and original Fiser scans"
+  },
+  "git_context": {
+    "local_head": "40dfe85fd19938b6e15cd85f19939cfae4810b17",
+    "origin_main": "5037ca0c000971bee39f50b22be3aca73e0c002b",
+    "note": "Local checkout behind origin/main; current origin/main topic inventory inspected. None of the six exact topics exists in either inventory. Existing user changes preserved; no fetch/push/checkout."
+  },
+  "integration": {
+    "status": "draft",
+    "registered_sources": 18,
+    "reused_source": "FISER_PANCREAS_SOURCE",
+    "topic_count": 6,
+    "runtime_registry": "upperGiDraftTopics",
+    "published_library": "Excluded until explicit clinical approval",
+    "authoring_helpers": [
+      "buildDraftTopic",
+      "sourced",
+      "sourcedUnits"
+    ],
+    "stats": [
+      {
+        "slug": "peptic-ulcer-disease",
+        "blocks": 27,
+        "factual_units": 57,
+        "metadata_paragraphs_retained_as_warnings": 0
+      },
+      {
+        "slug": "gastroduodenal-perforation-repair",
+        "blocks": 29,
+        "factual_units": 61,
+        "metadata_paragraphs_retained_as_warnings": 0
+      },
+      {
+        "slug": "vagotomy-and-drainage",
+        "blocks": 24,
+        "factual_units": 60,
+        "metadata_paragraphs_retained_as_warnings": 1
+      },
+      {
+        "slug": "upper-gastrointestinal-bleeding",
+        "blocks": 29,
+        "factual_units": 64,
+        "metadata_paragraphs_retained_as_warnings": 0
+      },
+      {
+        "slug": "stress-gastritis",
+        "blocks": 21,
+        "factual_units": 46,
+        "metadata_paragraphs_retained_as_warnings": 0
+      },
+      {
+        "slug": "esophagogastroduodenoscopy",
+        "blocks": 32,
+        "factual_units": 59,
+        "metadata_paragraphs_retained_as_warnings": 0
+      }
+    ]
+  }
+}

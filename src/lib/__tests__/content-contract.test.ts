@@ -1,3 +1,4 @@
+import { upperGiDraftTopics } from "@/content/drafts/upper-gi";
 import { describe, expect, it } from "vitest";
 import { factualUnits, supportWarnings } from "@/lib/editorial";
 import { stripMarkup } from "@/lib/inline";
@@ -5,13 +6,15 @@ import { libraryPlaybooks, libraryTopics, suppliedSources, taxonomy } from "@/li
 import { taxonomyAncestry } from "@/lib/taxonomy";
 import type { Topic, TopicBlock } from "@/lib/types";
 
-const blocksOf = (topic: Topic) => topic.approvedVersion!.blocks;
+const authoredTopics = [...libraryTopics, ...upperGiDraftTopics];
+const versionOf = (topic: Topic) => topic.approvedVersion ?? topic.versions[0];
+const blocksOf = (topic: Topic) => versionOf(topic).blocks;
 
 // Every invariant below walks both corpora. Playbooks reuse TopicBlock, so the renderer keys,
 // the inline markup rules and the claim-support invariant apply to them identically — the only
 // thing that differs is where the blocks and the source allow-list hang off the entity.
 const authored: Array<{ label: string; blocks: TopicBlock[]; sourceIds: string[] }> = [
-  ...libraryTopics.map((topic) => ({ label: topic.slug, blocks: blocksOf(topic), sourceIds: topic.approvedVersion!.sourceIds })),
+  ...authoredTopics.map((topic) => ({ label: topic.slug, blocks: blocksOf(topic), sourceIds: versionOf(topic).sourceIds })),
   ...libraryPlaybooks.map((playbook) => ({ label: `playbooks/${playbook.slug}`, blocks: playbook.blocks, sourceIds: playbook.sourceIds })),
 ];
 const eachBlock = (): Array<[string, TopicBlock]> => authored.flatMap(({ label, blocks }) => blocks.map((block) => [`${label}/${block.id}`, block] as [string, TopicBlock]));
@@ -76,14 +79,14 @@ describe("seeded content contract", () => {
   });
 
   it("keeps identifiers unique across the library", () => {
-    expect(duplicates(libraryTopics.map((topic) => topic.id))).toEqual([]);
-    expect(duplicates(libraryTopics.map((topic) => topic.slug))).toEqual([]);
-    expect(duplicates(libraryTopics.map((topic) => topic.approvedVersion!.id))).toEqual([]);
+    expect(duplicates(authoredTopics.map((topic) => topic.id))).toEqual([]);
+    expect(duplicates(authoredTopics.map((topic) => topic.slug))).toEqual([]);
+    expect(duplicates(authoredTopics.map((topic) => versionOf(topic).id))).toEqual([]);
     expect(duplicates(libraryPlaybooks.map((playbook) => playbook.id))).toEqual([]);
     expect(duplicates(libraryPlaybooks.map((playbook) => playbook.procedureId))).toEqual([]);
     // Slugs are unique across both corpora, not within each: they share a link index and will
     // share one ranked result list.
-    expect(duplicates([...libraryTopics.map((topic) => topic.slug), ...libraryPlaybooks.map((playbook) => playbook.slug)])).toEqual([]);
+    expect(duplicates([...authoredTopics.map((topic) => topic.slug), ...libraryPlaybooks.map((playbook) => playbook.slug)])).toEqual([]);
     for (const { label, blocks } of authored) {
       expect(duplicates(blocks.map((block) => block.id)), label).toEqual([]);
       expect(duplicates(blocks.flatMap((block) => block.claims.map((claim) => claim.id))), label).toEqual([]);
@@ -113,12 +116,12 @@ describe("seeded content contract", () => {
   });
 
   it("matches every topic to a taxonomy node and its printed category", () => {
-    for (const topic of libraryTopics) {
+    for (const topic of authoredTopics) {
       const ancestry = taxonomyAncestry(topic.scoreNodeId, taxonomy);
       expect(ancestry.length, `${topic.slug} taxonomy node`).toBeGreaterThan(0);
       const printed = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");
       expect(topic.scoreCategory, `${topic.slug} category`).toBe(printed);
-      expect(topic.tags, `${topic.slug} tags`).toEqual(topic.approvedVersion!.tags);
+      expect(topic.tags, `${topic.slug} tags`).toEqual(versionOf(topic).tags);
     }
   });
 
