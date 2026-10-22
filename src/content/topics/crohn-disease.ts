@@ -315,7 +315,7 @@ export const crohnDiseaseTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001320",
   slug: "crohn-disease",
   title: "Crohn Disease",
-  aliases: ["crohn disease", "crohn's disease", "crohns", "CD", "regional enteritis", "terminal ileitis", "ileocolic crohn", "ileocecal resection", "inflammatory bowel disease", "IBD", "creeping fat", "skip lesions", "cobblestoning", "noncaseating granuloma", "stricturoplasty", "strictureplasty", "Heineke-Mikulicz", "Finney", "Michelassi", "Kono-S", "Rutgeerts score", "enterocutaneous fistula", "perianal fistula", "seton", "NOD2", "CARD15", "ASCA", "Montreal classification", "CDAI", "LIR!C", "PROFILE trial", "top-down therapy", "infliximab", "postoperative recurrence"],
+  aliases: ["crohn disease", "crohn's disease", "crohns", "CD", "regional enteritis", "terminal ileitis", "ileocolic crohn", "inflammatory bowel disease", "IBD", "creeping fat", "skip lesions", "cobblestoning", "noncaseating granuloma", "Rutgeerts score", "perianal fistula", "seton", "NOD2", "CARD15", "ASCA", "Montreal classification", "CDAI", "LIR!C", "PROFILE trial", "top-down therapy", "infliximab", "postoperative recurrence"],
   scoreNodeId: "small-intestine-conditions",
   scoreCategory: "SCORE · Small Intestine · Diseases & Conditions",
   tags: ["small-intestine", "crohn-disease", "inflammatory-bowel-disease", "colorectal", "stricturoplasty", "absite", "score"],

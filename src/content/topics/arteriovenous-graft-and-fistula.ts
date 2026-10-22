@@ -245,7 +245,7 @@ export const arteriovenousGraftAndFistulaTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000004141",
   slug: "arteriovenous-graft-and-fistula",
   title: "Arteriovenous Graft and Fistula",
-  aliases: ["dialysis fistula", "hemodialysis fistula", "Brescia-Cimino fistula", "Cimino fistula", "radiocephalic fistula", "brachiocephalic fistula", "brachiobasilic fistula", "basilic vein transposition", "AV graft", "arteriovenous graft", "forearm loop graft", "HeRO graft", "early-cannulation graft", "DRIL", "distal revascularization and interval ligation", "RUDI", "revision using distal inflow", "proximalization of arterial inflow", "fistulogram", "balloon-assisted maturation", "Rule of 6s", "rule of sixes"],
+  aliases: ["dialysis fistula", "hemodialysis fistula", "Brescia-Cimino fistula", "Cimino fistula", "radiocephalic fistula", "brachiocephalic fistula", "brachiobasilic fistula", "basilic vein transposition", "AV graft", "arteriovenous graft", "forearm loop graft", "HeRO graft", "early-cannulation graft", "DRIL", "distal revascularization and interval ligation", "RUDI", "revision using distal inflow", "proximalization of arterial inflow", "dialysis fistulogram", "balloon-assisted maturation", "Rule of 6s", "rule of sixes"],
   scoreNodeId: "vascular-access-procedures",
   scoreCategory: "SCORE · Vascular Access · Operations & Procedures",
   tags: ["vascular-access", "dialysis-access", "esrd", "operative-technique", "absite", "score"],
