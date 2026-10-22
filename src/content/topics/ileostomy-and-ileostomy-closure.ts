@@ -1,0 +1,171 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import {
+  ASCRS_OSTOMY_2022_SOURCE as ASCRS,
+  BOWEL_BOARDS_PACKET_SOURCE as PACKET,
+  FISER_SMALL_BOWEL_SOURCE as FISER,
+  SCORE_COLOSTOMY_SOURCE as SCORE_COLOSTOMY,
+  SCORE_ILEOSTOMY_SOURCE as SCORE,
+} from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-ileo-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Choose the configuration from the distal anatomy and whether the diversion is meant to be temporary. Build a perfused, untwisted, tension-free stoma with enough **spout** for reliable pouching. After that, the decisions are whether a complication threatens bowel below the fascia, whether intestinal losses are depleting the patient, and whether the distal bowel and the patient are ready for an elective reconstruction. A technically reversible stoma is not a promise that reversal will be appropriate.",
+  }, SCORE),
+  sourced({
+    id: "block-ileo-configuration",
+    type: "table",
+    heading: "End versus loop: start with the next operation",
+    columns: ["Configuration", "Setting", "What reversal involves"],
+    rows: [
+      ["End ileostomy", "Little useful distal bowel, or an anastomosis made unsafe by sepsis, malnutrition, or an emergency", "A laparotomy to find and rejoin the remaining colon or rectum"],
+      ["Loop ileostomy", "Temporary diversion of a distal anastomosis or another nonobstructive distal problem", "Usually a local takedown and small-bowel anastomosis through the stoma site"],
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-ileo-obstruction",
+    type: "warning",
+    heading: "An ileostomy cannot decompress a closed-loop colon",
+    text: "With a **competent ileocecal valve**, an ileostomy will not decompress a distally obstructed colon — the colon becomes a closed loop and can perforate at the cecum. Distal large-bowel obstruction needs a diversion that actually drains the obstructed colon, and a prior ileocolic resection changes the anatomy. Do not choose a loop ileostomy just because it is familiar and easy to close. For temporary diversion without obstruction, ASCRS considers loop ileostomy and loop colostomy both effective.",
+  }, PACKET),
+  sourced({
+    id: "block-ileo-siting",
+    type: "bullets",
+    heading: "Site selection is part of the operation",
+    items: [
+      "Mark before surgery with the patient lying, sitting, and standing, and assess a wheelchair user in the chair.",
+      "Choose a flat surface the patient can see and reach, away from skin creases, scars, and the belt line.",
+      "Reassess in an obese abdomen rather than trusting the usual quadrant; an upper-abdominal site may be the only visible one.",
+      "Bring the stoma **through the rectus muscle**.",
+      "Use a wound and ostomy nurse before and after surgery when available, for marking, teaching, and securing supplies.",
+      "Raise the possibility that the stoma becomes permanent while describing it, and revisit it as health and distal disease evolve.",
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-ileo-creation",
+    type: "sequence",
+    heading: "Creating a Brooke ileostomy",
+    steps: [
+      { title: "Choose and orient the segment", detail: "Use the most distal ileum that reaches, preserving absorptive bowel, and mark which limb is proximal before exteriorizing." },
+      { title: "Make the trephine", detail: "Excise a skin disk of about **2 to 3 cm**, matched to the ileum, and incise the subcutaneous fat and anterior rectus sheath." },
+      { title: "Split the rectus", detail: "Separate the muscle along its fibers and open the posterior sheath and peritoneum while protecting the viscera." },
+      { title: "Deliver the bowel", detail: "Guide it through from inside rather than pulling from the skin, then check for twist, tension, and a constricting passage." },
+      { title: "Exteriorize enough length", detail: "Bring roughly **4 to 5 cm** above skin so eversion can produce a spout of several centimeters." },
+      { title: "Evert and mature", detail: "Place a full-thickness bite at the cut edge, a seromuscular bite at skin level, and a dermal bite, skipping the serosal bite at the mesentery." },
+      { title: "For a loop", detail: "Open toward the distal side so the **proximal limb** is everted as the functioning spout, and mature the efferent limb flush." },
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-ileo-rod",
+    type: "prose",
+    heading: "↳ Support rods",
+    text: "Routine support rods are unnecessary for a loop ileostomy in nonobese patients. That evidence does not extend to every body habitus or to loop colostomy, and a rod never corrects ischemia, twist, or inadequate mobilization.",
+  }, ASCRS),
+  sourced({
+    id: "block-ileo-complications",
+    type: "table",
+    heading: "Early and late stoma complications",
+    columns: ["Problem", "Decision and response"],
+    rows: [
+      ["Dusky or necrotic stoma", "Determine depth with a lubricated clear tube and light; **necrosis below the fascia needs urgent reoperation**, superficial necrosis with viable deeper bowel can be watched"],
+      ["Mucocutaneous separation", "Usually local wound care, checking that the bowel is viable and well positioned"],
+      ["Retraction above the fascia", "Often managed with convex pouching and local care, depending on function and cause"],
+      ["Retraction below the fascia", "Urgent reintervention, because of contamination risk"],
+      ["Stenosis after ischemia or retraction", "Dilation in selected cases, operative revision when it recurs or obstructs"],
+      ["Viable prolapse", "Nonemergency management and elective revision"],
+      ["Ischemic prolapse", "Urgent surgical assessment and revision"],
+      ["Parastomal hernia", "Symptoms and pouching failure guide elective repair; obstruction or strangulation makes it urgent"],
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-ileo-complications-note",
+    type: "prose",
+    heading: "↳ Prolapse versus hernia",
+    text: "Prolapse is excess bowel telescoping through the stoma; a parastomal hernia is abdominal content passing through the fascial defect beside it. A leaking appliance over a retracted or stenotic stoma is a structural problem, not a skin problem. CT clarifies a suspected hernia when obesity or an equivocal examination hides the defect, and restoring continuity, when the patient is a candidate, removes both the stoma and its hernia or prolapse.",
+  }, SCORE),
+  sourced({
+    id: "block-ileo-output",
+    type: "bullets",
+    heading: "Output and fluid losses",
+    items: [
+      "Typical ileostomy output is about **800 to 1200 mL a day**, and higher losses risk volume and electrolyte depletion.",
+      "The problem to recognize is output the patient cannot replace and maintain, judged against volume status and electrolytes rather than one number.",
+      "Treat persistent high output stepwise: diet and lifestyle, then fiber, antidiarrheals, and antisecretory agents.",
+      "**Drinking large volumes of hypotonic fluid worsens hyponatremia**, because plain water does not replace intestinal salt losses.",
+      "Teach patients to record output, recognize a change from their usual pattern, and report persistent losses after discharge.",
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-ileo-physiology",
+    type: "bullets",
+    heading: "Long-term physiology",
+    items: [
+      "An ileostomy changes the route of intestinal contents; a resection changes the absorptive anatomy — keep the two separate.",
+      "Terminal-ileal resection with bile-salt loss promotes gallstones.",
+      "Ileostomies are associated with **uric acid stones**, from bicarbonate and water loss producing a concentrated acidic urine.",
+      "A loop ileostomy does not by itself cause short bowel syndrome; review what bowel remains before predicting nutritional failure.",
+    ],
+  }, FISER),
+  sourced({
+    id: "block-ileo-readiness",
+    type: "prose",
+    heading: "Reversal readiness is a clinical assessment",
+    text: "Before closure, confirm that the original indication has resolved, that the distal bowel is suitable, and that the patient is fit for an elective operation — a healed anastomosis, controlled Crohn disease, or a relieved obstruction. Read the original operative report to know exactly what bowel and anastomoses remain. SCORE's early-versus-late timing ranges describe different contexts, including contaminated emergencies and hostile abdomens, and do not replace an assessment of healing and operative risk.",
+  }, SCORE),
+  sourced({
+    id: "block-ileo-contrast",
+    type: "prose",
+    heading: "↳ Contrast studies and early closure",
+    text: "ASCRS allows routine contrast enema to be omitted before closure when dehiscence or stricture is not suspected, and selected low-risk patients without clinical evidence of leak can have **early closure** of a protective ileostomy after colorectal anastomosis.",
+  }, ASCRS),
+  sourced({
+    id: "block-ileo-loop-closure",
+    type: "sequence",
+    heading: "Loop ileostomy closure",
+    steps: [
+      { title: "Position", detail: "Supine for a loop takedown, or for an end ileostomy joining right or transverse colon; lithotomy when left-sided or rectal reconstruction is planned." },
+      { title: "Free the loop", detail: "Incise around the stoma and mobilize the bowel from skin, fascia, and peritoneal attachments into the abdomen." },
+      { title: "Undo the eversion", detail: "Reverse the Brooke configuration and assess the opening and lumen." },
+      { title: "Reconstruct", detail: "Stapled side-to-side anastomosis accommodates a caliber mismatch; a hand-sewn closure of the original opening is also acceptable." },
+      { title: "Close the wall and skin", detail: "Close the fascia, and approximate the skin loosely or with a purse-string leaving a central opening to drain." },
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-ileo-end-closure",
+    type: "warning",
+    heading: "End ileostomy reversal: know when to stop",
+    text: "Reversing an end ileostomy is a laparotomy: adhesiolysis, identification of the distal bowel, and an ileocolic or ileorectal anastomosis depending on what remains. Plan from the operative report, not an old discharge summary. A short rectal stump can be impossible to find safely, and SCORE explicitly allows **abandoning the reconstruction** and revising a poorly functioning stoma instead — a hazardous pelvic dissection is not justified by the word temporary.",
+  }, SCORE),
+  sourced({
+    id: "block-ileo-pearls",
+    type: "bullets",
+    heading: "Board pearls",
+    items: [
+      "Loop versus end predicts the reversal: a local small-bowel closure versus finding and joining a separate distal segment.",
+      "**A competent ileocecal valve makes an ileostomy useless for distal colonic obstruction.**",
+      "The urgency of a dark stoma depends on its depth relative to the fascia.",
+      "Mature the ileostomy as a spout; flush liquid effluent destroys skin.",
+      "Normal output 800 to 1200 mL a day, and hypotonic replacement worsens hyponatremia.",
+      "Ileostomy patients form uric acid stones; terminal-ileal resection adds gallstones.",
+    ],
+  }, PACKET),
+  references("block-ileo-references", [SCORE, SCORE_COLOSTOMY, FISER, ASCRS, PACKET]),
+];
+
+export const ileostomyAndIleostomyClosureTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000004553",
+  versionId: "00000000-0000-4000-8000-000000004563",
+  slug: "ileostomy-and-ileostomy-closure",
+  title: "Ileostomy and Ileostomy Closure",
+  aliases: ["ileostomy", "loop ileostomy", "end ileostomy", "diverting ileostomy", "Brooke ileostomy", "ileostomy reversal", "ileostomy takedown", "ileostomy closure", "high-output ileostomy", "high output stoma", "stoma site marking", "stoma necrosis", "stoma prolapse", "stomal retraction"],
+  scoreNodeId: "small-intestine-procedures",
+  scoreCategory: "SCORE · Small Intestine · Operations & Procedures",
+  tags: ["small-intestine", "ostomy", "ileostomy", "colorectal", "absite", "score"],
+  sourceId: SCORE,
+  additionalSourceIds: [SCORE_COLOSTOMY, FISER, ASCRS, PACKET],
+  blocks,
+  reviewedAt: "2026-10-21T00:00:00.000Z",
+});

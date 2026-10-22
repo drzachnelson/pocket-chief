@@ -1,5 +1,5 @@
 import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
-import { PARAESOPHAGEAL_HERNIA_SOURCE as SOURCE, TRUELEARN_LIVER_SOURCE as TL } from "@/content/sources";
+import { HIATAL_HERNIA_PACKET_SOURCE as HH, PARAESOPHAGEAL_HERNIA_SOURCE as SOURCE, TRUELEARN_LIVER_SOURCE as TL } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
 const blocks: TopicBlock[] = [
@@ -206,7 +206,48 @@ const blocks: TopicBlock[] = [
     ],
   }, SOURCE),
 
-  references("block-peh-references", [SOURCE, TL]),
+  sourced({
+    id: "block-peh-fundoplication-choice",
+    type: "bullets",
+    heading: "Fundoplication, gastropexy, and Collis",
+    items: [
+      "Elective repair: **fundoplication over gastropexy** (EAES 2023); patients undergoing Type II to IV repair may benefit from a fundoplication over none (SAGES 2024).",
+      "Emergency repair in a **cardiopulmonary-unstable** patient: **gastropexy over fundoplication**.",
+      "**Collis gastroplasty** is for a genuine short esophagus — under 2.5 to 3 cm of tension-free intra-abdominal esophagus despite maximal mobilization, found in roughly 1 to 20% of repairs — performed as a wedge gastroplasty over a large bougie, commonly 48 to 60 Fr.",
+      "Reserve Collis: a 2026 meta-analysis found no lower recurrence (13.5% versus 13.2%) but more complications, leaks, and surgical site infections, though selection bias confounds it.",
+    ],
+  }, HH),
+
+  sourced({
+    id: "block-peh-splits",
+    type: "table",
+    heading: "Board answer versus current practice",
+    columns: ["Question", "Board answer", "Current practice"],
+    rows: [
+      ["Mesh at the hiatus", "Mesh lowers early recurrence in large hernias; avoid permanent synthetic mesh (SAGES 2013 era)", "Equivocal: SAGES 2024 makes no recommendation, EAES 2023 conditionally suggests mesh for fewer reoperations, and meta-analyses find no recurrence difference; use it when the crura will not close, knowing erosion occurs essentially only with synthetic mesh"],
+      ["Wrap tailored to manometry", "Nissen for normal peristalsis; Toupet or Dor for ineffective motility", "Tailoring is not supported (ACG 2022, Padova consensus 2025) and does not change long-term dysphagia; do not reflexively withhold a 360° wrap, though many surgeons still use a partial wrap for severe ineffective motility"],
+      ["Permanent synthetic mesh", "Contraindicated", "Relatively avoided and used selectively for its erosion risk, not absolutely contraindicated"],
+    ],
+  }, HH),
+
+  sourced({
+    id: "block-peh-source-splits",
+    type: "table",
+    heading: "↳ Where the supplied sources disagree",
+    columns: ["Question", "Original repair packet (this topic)", "Hiatal hernia and antireflux packets"],
+    rows: [
+      ["Crural closure", "Leave about 1.5 cm of space, loosely fitting a 56 to 60 Fr bougie", "Snug enough to pass only an instrument alongside the bougie-filled esophagus, without over-tightening"],
+      ["When persistent dysphagia earns a workup", "Beyond 1 week: barium esophagram and serial dilation", "Under 2 weeks is edema; work up and dilate after 6 weeks"],
+    ],
+  }, HH),
+
+  sourced({
+    id: "block-peh-source-splits-note",
+    type: "prose",
+    text: "Both packets describe the same goal — a closure and wrap that do not obstruct — and the difference is mostly in the measuring stick. For timing, an exam question about dysphagia in the first week or two wants **expectant management**, and one about dysphagia persisting past 6 weeks wants **barium, EGD, and dilation if the anatomy is intact**.",
+  }, HH),
+
+  references("block-peh-references", [SOURCE, TL, HH]),
 ];
 
 export const paraesophagealHerniaRepairTopic = buildTopic({
@@ -218,19 +259,15 @@ export const paraesophagealHerniaRepairTopic = buildTopic({
     "paraesophageal hernia",
     "PEH repair",
     "hiatal hernia repair",
-    "hiatal hernia",
-    "Nissen fundoplication",
-    "Toupet fundoplication",
-    "Borchardt triad",
-    "gastric volvulus",
-    "Cameron ulcers",
-    "Collis gastroplasty",
+    "giant hiatal hernia repair",
+    "hiatal mesh",
+    "gastropexy",
   ],
   scoreNodeId: "esophagus-procedures",
   scoreCategory: "SCORE · Esophagus · Operations & Procedures",
   tags: ["esophagus", "hernia", "foregut", "score", "absite", "procedures", "antireflux"],
   sourceId: SOURCE,
-  additionalSourceIds: [TL],
+  additionalSourceIds: [TL, HH],
   blocks,
-  reviewedAt: "2026-10-19T00:00:00.000Z",
+  reviewedAt: "2026-10-21T00:00:00.000Z",
 });

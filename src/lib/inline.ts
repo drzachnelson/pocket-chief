@@ -64,22 +64,26 @@ export function createLinkScope(entries: LinkIndexEntry[], selfSlug: string): Li
 function autoLink(text: string, bold: boolean | undefined, scope: LinkScope): InlineSegment[] {
   const claimed: Array<{ start: number; end: number; slug: string }> = [];
   for (const entry of scope.entries) {
-    if (entry.key.length < MIN_KEY_LENGTH || entry.slug === scope.selfSlug || scope.used.has(entry.key)) continue;
+    const self = entry.slug === scope.selfSlug;
+    if (entry.key.length < MIN_KEY_LENGTH || scope.used.has(entry.key)) continue;
     for (const match of text.matchAll(pattern(entry.key))) {
       const start = match.index + match[1].length;
       const end = start + match[2].length;
       // Entries arrive longest-first, so an overlap always means a longer key already owns the span.
       if (claimed.some((claim) => start < claim.end && claim.start < end)) continue;
       claimed.push({ start, end, slug: entry.slug });
+      // A topic's own terms never link, but they mask every shorter key inside them, so
+      // "organoaxial volvulus" on its own page cannot leak "volvulus" to another topic.
+      if (self) continue;
       scope.used.add(entry.key);
       break;
     }
   }
-  if (claimed.length === 0) return [segment(text, bold)];
-  claimed.sort((a, b) => a.start - b.start);
+  const links = claimed.filter((claim) => claim.slug !== scope.selfSlug).sort((a, b) => a.start - b.start);
+  if (links.length === 0) return [segment(text, bold)];
   const segments: InlineSegment[] = [];
   let cursor = 0;
-  for (const claim of claimed) {
+  for (const claim of links) {
     if (claim.start > cursor) segments.push(segment(text.slice(cursor, claim.start), bold));
     segments.push(segment(text.slice(claim.start, claim.end), bold, claim.slug));
     cursor = claim.end;

@@ -201,6 +201,36 @@ export const CIRRHOSIS_PORTAL_HYPERTENSION_OE_SOURCE = "00000000-0000-4000-8000-
 export const HIATT_HEPATIC_ARTERIES_1994_SOURCE = "00000000-0000-4000-8000-000000004217";
 export const AASLD_PORTAL_HYPERTENSION_2024_SOURCE = "00000000-0000-4000-8000-000000004218";
 export const AASLD_ASCITES_2021_SOURCE = "00000000-0000-4000-8000-000000004219";
+export const BOWEL_BOARDS_PACKET_SOURCE = "00000000-0000-4000-8000-000000004500";
+export const SCORE_CROHN_SOURCE = "00000000-0000-4000-8000-000000004501";
+export const SCORE_ULCERATIVE_COLITIS_SOURCE = "00000000-0000-4000-8000-000000004502";
+export const SCORE_TOTAL_SUBTOTAL_COLECTOMY_SOURCE = "00000000-0000-4000-8000-000000004503";
+export const SCORE_ILEOSTOMY_SOURCE = "00000000-0000-4000-8000-000000004504";
+export const SCORE_COLOSTOMY_SOURCE = "00000000-0000-4000-8000-000000004505";
+export const SCORE_C_DIFFICILE_SOURCE = "00000000-0000-4000-8000-000000004506";
+export const SCORE_ENTEROCUTANEOUS_FISTULA_SOURCE = "00000000-0000-4000-8000-000000004507";
+export const SCORE_SMALL_INTESTINAL_RESECTION_SOURCE = "00000000-0000-4000-8000-000000004508";
+export const SCORE_NUTRITIONAL_SUPPORT_SOURCE = "00000000-0000-4000-8000-000000004509";
+export const FISER_SMALL_BOWEL_SOURCE = "00000000-0000-4000-8000-000000004510";
+export const FISER_COLORECTAL_SOURCE = "00000000-0000-4000-8000-000000004511";
+export const ASCRS_CROHN_2020_SOURCE = "00000000-0000-4000-8000-000000004512";
+export const ECCO_CROHN_SURGERY_2024_SOURCE = "00000000-0000-4000-8000-000000004513";
+export const ASCRS_ULCERATIVE_COLITIS_2026_SOURCE = "00000000-0000-4000-8000-000000004514";
+export const ECCO_ULCERATIVE_COLITIS_SURGERY_2026_SOURCE = "00000000-0000-4000-8000-000000004515";
+export const EHS_PARASTOMAL_HERNIA_2023_SOURCE = "00000000-0000-4000-8000-000000004517";
+export const IDSA_SHEA_CDI_2017_SOURCE = "00000000-0000-4000-8000-000000004518";
+export const IDSA_SHEA_CDI_2021_SOURCE = "00000000-0000-4000-8000-000000004519";
+export const ESPEN_INTESTINAL_FAILURE_2023_SOURCE = "00000000-0000-4000-8000-000000004520";
+export const DIAPHRAGMATIC_HERNIA_PACKET_SOURCE = "00000000-0000-4000-8000-000000004400";
+export const HIATAL_HERNIA_PACKET_SOURCE = "00000000-0000-4000-8000-000000004401";
+export const GERD_BARRETT_PACKET_SOURCE = "00000000-0000-4000-8000-000000004402";
+export const ANTIREFLUX_PROCEDURES_PACKET_SOURCE = "00000000-0000-4000-8000-000000004403";
+export const LYON_CONSENSUS_2_SOURCE = "00000000-0000-4000-8000-000000004404";
+export const ACG_BARRETT_2022_SOURCE = "00000000-0000-4000-8000-000000004405";
+export const ACG_GERD_2022_SOURCE = "00000000-0000-4000-8000-000000004406";
+export const SAGES_GERD_2021_SOURCE = "00000000-0000-4000-8000-000000004407";
+export const STYLOPOULOS_PEH_2002_SOURCE = "00000000-0000-4000-8000-000000004408";
+export const CDH_EURO_2015_SOURCE = "00000000-0000-4000-8000-000000004409";
 export const SCORE_BENIGN_BILIARY_OBSTRUCTION_SOURCE = "00000000-0000-4000-8000-000000003100";
 export const SCORE_BILE_DUCT_INJURY_SOURCE = "00000000-0000-4000-8000-000000003101";
 export const SCORE_BILE_DUCT_INJURY_REPAIR_SOURCE = "00000000-0000-4000-8000-000000003102";
@@ -1426,7 +1456,7 @@ export const suppliedSources: SuppliedSource[] = [
     kind: "article",
     citation: "American Society of Colon and Rectal Surgeons clinical practice guidelines for ostomy surgery. Diseases of the Colon and Rectum, 2022.",
     suppliedAt: "2026-09-11T00:00:00.000Z",
-    details: "Registered during review as the authority behind the purse-string closure recommendation, the suture-only recurrence figure, the reversal leak rates and the mesh-infection rates the supplied playbook quotes with strength and quality ratings. Identified from that playbook rather than supplied directly.",
+    details: "Registered during review as the authority behind the purse-string closure recommendation, the suture-only recurrence figure, the reversal leak rates and the mesh-infection rates the supplied playbook quotes with strength and quality ratings. Identified from that playbook rather than supplied directly. Also cited by the bowel ostomy topics (October 21, 2026) for loop ileostomy and loop colostomy both being effective diversion, no routine support rods in nonobese loop ileostomy, mesh for parastomal hernia repair and against routine prophylactic mesh, selective omission of contrast enema before closure, and early closure in selected patients (Davis BR et al., Dis Colon Rectum 2022;65(10):1173–1190, recommendations 5, 7, 8, 11, 12, 16).",
   },
   {
     id: SCORE_CAROTID_DISEASE_SOURCE,
@@ -1969,6 +1999,283 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, evaluation, and management of ascites, spontaneous bacterial peritonitis and hepatorenal syndrome: 2021 practice guidance by the American Association for the Study of Liver Diseases. Hepatology. 2021;74(2):1014-1048.",
     suppliedAt: "2026-10-19T00:00:00.000Z",
     details: "Registered during review as the authority behind sodium restriction, the diuretic ratio, albumin with large-volume paracentesis, SBP diagnosis and treatment, and HRS-AKI, identified from the cirrhosis guide and the SCORE module rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: BOWEL_BOARDS_PACKET_SOURCE,
+    title: "Owner-supplied bowel boards study guides",
+    kind: "user_notes",
+    citation: "Personal study guides supplied to Pocket Chief, October 21, 2026: seven source-linked drafts under `output/study-guides/bowel-boards/` — Procedures for Crohn Disease, Procedures for Ulcerative Colitis, Ileostomy and Ileostomy Closure, Total and Subtotal Colectomy, Colostomy and Colostomy Closure, C. difficile Colitis, and Enterocutaneous Fistula.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "Each guide cites section-level locators into the supplied SCORE modules and Fiser chapters 35 and 36, and checks consequential points against current primary guidance (ASCRS Crohn 2020, ECCO Crohn surgery 2024, ASCRS UC 2026, ECCO UC surgery 2026, ASCRS ostomy 2022, EHS parastomal hernia prevention 2023, IDSA/SHEA CDI 2017 and its 2021 focused update, CDC C. difficile clinical and testing guidance, FDA labeling for Rebyota and Vowst, SCORE Nutritional Requirements for refeeding, and ESPEN chronic intestinal failure 2023). The authorities that blocks lean on are registered as their own sources; this entry is cited where a block synthesizes across them.",
+      "Corrections the guides carry, kept in the topics: SCORE C. difficile lists nonsevere disease as WBC greater than 15,000/µL, duplicating its severe criterion — the 2021 IDSA/SHEA table reads WBC ≤15,000/µL and creatinine <1.5 mg/dL; SCORE UC perioperative stress-dose hydrocortisone schedules are superseded by ASCRS 2026, which finds no support for routine stress dosing; emergency UC colectomy is not automatically open under ASCRS 2026; SCORE Total and Subtotal Colectomy gives two different post-IPAA stool frequencies (8–10 and 6–8 daily) and neither is quoted; Fiser p.519 labels the sigmoid retroperitoneal and SCORE correctly calls it intraperitoneal.",
+      "Independently checked during authoring (October 21, 2026): the ASCRS UC 2026 guideline (Lightner et al., DCR 2026;69(8):2012–2039, PubMed 42165399) and the ECCO UC surgical guideline 2026 (Adamina et al., JCC 2026;20(6):jjag072) both exist as cited; the EHS 2023 rapid guideline makes a conditional recommendation for prophylactic mesh with an end colostomy and fair life expectancy, and a strong one for patients at high risk of parastomal hernia; randomized data on Kono-S and extended mesenteric excision (SPICY, KoCoRICCO, North American interim data) mostly show no benefit on endoscopic recurrence, consistent with the guides calling neither an established requirement.",
+      "Added beyond the packet during authoring, pending owner sign-off: the Finney and isoperistaltic stricturoplasty construction descriptions; Fiser's stricturoplasty biopsy requirement and ~10% leak, abscess, or fistula rate (p.508, which the packet did not carry); the closed-loop cecal-perforation rationale for an ileostomy behind a competent ileocecal valve; uric acid stone mechanism wording; convex pouching for retraction; the arc of Riolan description and the Griffith and Sudeck watershed definitions; the reading of why ASCRS and EHS diverge on prophylactic mesh; soap-and-water handwashing because spores resist alcohol; oral metronidazole 500 mg three times daily and extended-pulsed fidaxomicin from IDSA/SHEA 2021; the vancomycin-then-rifaximin recurrence option; octreotide not increasing ECF closure; the FRIENDSS action column; the rationale that a hostile early peritoneum is why ECF reconstruction waits 6 to 12 months; and abdominal-wall closure as part of ECF reconstruction.",
+      "Gaps the guides name and the topics leave open, pending owner review: no bowel-specific question-bank notes existed (only liver.md); SCORE and Fiser polyposis surveillance intervals and Fiser's prophylactic-age rule were not verified against current polyposis guidance and are not quoted; no high-output ileostomy drug doses, oral rehydration formula, or octreotide regimen is given; operative videos and source figures were not reviewed.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_CROHN_SOURCE,
+    title: "SCORE module: Crohn Disease",
+    kind: "website",
+    citation: "Sandilos G, Giugliano DN. Crohn Disease. SCORE Curriculum, Surgical Council on Resident Education, October 10, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=1000524",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000524",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Crohn_Disease_24e82b11ec.md`. No separate Procedures for Crohn Disease module exists; this disease module carries the operative objectives — indications, stricturing and penetrating disease, abscess timing, segmental resection margins, colonic and perianal surgery, and follow-up.",
+  },
+  {
+    id: SCORE_ULCERATIVE_COLITIS_SOURCE,
+    title: "SCORE module: Ulcerative Colitis",
+    kind: "website",
+    citation: "Shaw RD, Goldwag JL, Ivatury SJ. Ulcerative Colitis. SCORE Curriculum, Surgical Council on Resident Education, October 10, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=129440",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=129440",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Ulcerative_Colitis_f95ff806d0.md`. Supplies the operative objectives: indications and severity, preparation, the urgent colectomy sequence and its protective anatomy, staging, stapled versus handsewn IPAA, stump complications, and IPAA candidacy. Its perioperative stress-dose steroid schedules are not reproduced, because ASCRS 2026 supersedes them.",
+  },
+  {
+    id: SCORE_TOTAL_SUBTOTAL_COLECTOMY_SOURCE,
+    title: "SCORE module: Total and Subtotal Colectomy",
+    kind: "website",
+    citation: "Lyu HGH, Irani JL. Total and Subtotal Colectomy. SCORE Curriculum, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=1000583",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000583",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Total_and_Subtotal_Colectomy_4b9d74d5a8.md`. Supplies the operative extents, indications for TAC/IRA and TPC, operative anatomy, preparation, pouch reach, complications, and follow-up. Its two post-IPAA stool-frequency ranges conflict, its prednisone threshold prints uncertainly, and its calendar-based postoperative-obstruction rule is not adopted.",
+  },
+  {
+    id: SCORE_ILEOSTOMY_SOURCE,
+    title: "SCORE module: Ileostomy and Ileostomy Closure",
+    kind: "website",
+    citation: "Wright JP. Ileostomy and Ileostomy Closure. SCORE Curriculum, Surgical Council on Resident Education, August 10, 2026. https://www.surgicalcore.org/modulecontent.aspx?id=1000526",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000526",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Ileostomy_and_Ileostomy_Closure_47e6ca83e4.md`. Supplies loop versus end configuration, site marking, Brooke construction, necrosis and retraction depth, prolapse and hernia, output and hypotonic-fluid teaching, and loop and end closure.",
+  },
+  {
+    id: SCORE_COLOSTOMY_SOURCE,
+    title: "SCORE module: Colostomy and Colostomy Closure",
+    kind: "website",
+    citation: "Thornton LB, Hunter JD. Colostomy and Colostomy Closure. SCORE Curriculum, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=1000457",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000457",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Colostomy_and_Colostomy_Closure_6325fe87bc.md`. Supplies diversion purposes, end, loop and end-loop anatomy, blood supply and watersheds, structures at risk, construction, complications, Hartmann reversal and lengthening maneuvers. Its absolute claim about diversion and leak frequency, historical supply costs, and blanket exercise restrictions are not reproduced.",
+  },
+  {
+    id: SCORE_C_DIFFICILE_SOURCE,
+    title: "SCORE module: C. difficile Colitis",
+    kind: "website",
+    citation: "Faber DA, Hechenbleikner EM. C. difficile Colitis. SCORE Curriculum, Surgical Council on Resident Education, March 19, 2026. https://www.surgicalcore.org/modulecontent.aspx?id=136870",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=136870",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_C_difficile_Colitis_f57207e8d4.md`. Supplies transmission, risk factors, presentation, testing and test-of-cure teaching, imaging thresholds, operative indications, total abdominal colectomy and loop ileostomy with lavage, and outcomes. Its nonsevere definition prints WBC greater than 15,000/µL, an inequality error corrected from the 2021 IDSA/SHEA table.",
+  },
+  {
+    id: SCORE_ENTEROCUTANEOUS_FISTULA_SOURCE,
+    title: "SCORE module: Enterocutaneous Fistula",
+    kind: "website",
+    citation: "Turgeon M, Haack C. Enterocutaneous Fistula. SCORE Curriculum, Surgical Council on Resident Education, February 10, 2026. https://www.surgicalcore.org/modulecontent.aspx?id=167674",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=167674",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Enterocutaneous_Fistula_cf3c960e7f.md`. Supplies etiology, output classification, favorable closure features, imaging, the nonoperative bundle, and the 6-to-8-week operative-consideration point.",
+  },
+  {
+    id: SCORE_SMALL_INTESTINAL_RESECTION_SOURCE,
+    title: "SCORE module: Small Intestinal Resection",
+    kind: "website",
+    citation: "Ewing J, Schlegel CE. Small Intestinal Resection. SCORE Curriculum, Surgical Council on Resident Education, May 19, 2026. https://www.surgicalcore.org/modulecontent.aspx?id=128394",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128394",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Small_Intestinal_Resection_a67ae24bb9.md`. Supplementary source for planning, optimization, stoma counseling, safe entry, anastomotic principles, and early leak, ileus, and obstruction.",
+  },
+  {
+    id: SCORE_NUTRITIONAL_SUPPORT_SOURCE,
+    title: "SCORE module: Nutritional Support",
+    kind: "website",
+    citation: "Busch RA. Nutritional Support. SCORE Curriculum, Surgical Council on Resident Education, undated in the supplied text. https://www.surgicalcore.org/modulecontent.aspx?id=168169",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=168169",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/SCORE_Nutritional_Support_4b95dee175.md`. Supplementary source for PN indications, enteral routes distal or proximal to a fistula, timing by nutritional risk, and PN complications. Its glucose-administration units are suspect OCR and are not used.",
+  },
+  {
+    id: FISER_SMALL_BOWEL_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Small Bowel",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 35, Small Bowel, pages 499–513.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Page-level OCR markdown held in `Pocket Chief Resources/absite-8e/ch35_small-bowel.md`. Supplies the board answers used here: FRIENDSS and nonhealing-fistula management (p.502), Crohn disease, stricturoplasty under 10 cm and the 2-cm gross margin (pp.507–508), terminal-ileal resection consequences (pp.499, 508), short gut (p.500), and stoma complications and diversion colitis (p.513).",
+  },
+  {
+    id: FISER_COLORECTAL_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Colorectal",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 36, Colorectal, pages 519–546.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Page-level OCR markdown held in `Pocket Chief Resources/absite-8e/ch36_colorectal.md`. Supplies colonic vascular anatomy (pp.519–521), UC and toxic megacolon indications and IPAA complications (pp.533–534), and C. difficile (p.546). Its p.519 label of the sigmoid as retroperitoneal is an error SCORE corrects, and its FAP prophylactic-age rule is not quoted.",
+  },
+  {
+    id: ASCRS_CROHN_2020_SOURCE,
+    title: "ASCRS Clinical Practice Guidelines for the Surgical Management of Crohn's Disease (2020)",
+    kind: "article",
+    citation: "Lightner AL, Vogel JD, Carmichael JC, et al. The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Surgical Management of Crohn's Disease. Dis Colon Rectum. 2020;63(8):1028–1052.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://pubmed.ncbi.nlm.nih.gov/32692069/",
+    details: "Cited for the stricture recommendations: balloon dilation for strictures under 5 cm without abscess or fistula, stricturoplasty contraindications, and the Heineke-Mikulicz, Finney, and isoperistaltic length framework.",
+  },
+  {
+    id: ECCO_CROHN_SURGERY_2024_SOURCE,
+    title: "ECCO Guidelines on Therapeutics in Crohn's Disease: Surgical Treatment (2024)",
+    kind: "article",
+    citation: "Adamina M, Minozzi S, Warusavitarne J, et al. ECCO Guidelines on Therapeutics in Crohn's Disease: Surgical Treatment. J Crohns Colitis. 2024;18(10):1556–1582. doi:10.1093/ecco-jcc/jjae089",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://doi.org/10.1093/ecco-jcc/jjae089",
+    details: "Cited for statements 4.5 and 4.9–4.10 (abscess interval, no routine biologic washout), 4.14–4.15 (Kono-S and mesenteric excision not established), and 4.22–4.23 (endoscopy within 6–12 months, prophylaxis for high-risk patients).",
+  },
+  {
+    id: ASCRS_ULCERATIVE_COLITIS_2026_SOURCE,
+    title: "ASCRS Clinical Practice Guideline for the Surgical Management of Ulcerative Colitis (2026)",
+    kind: "article",
+    citation: "Lightner AL, et al. Clinical Practice Guideline for the Surgical Management of Ulcerative Colitis. Dis Colon Rectum. 2026;69(8):2012–2039. doi:10.1097/DCR.0000000000004290",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://doi.org/10.1097/DCR.0000000000004290",
+    details: "Updates the 2021 ASCRS guideline. Cited for emergent colectomy indications, minimally invasive surgery when safe, no routine stress-dose steroids, no washout delay for biologics, and endoscopic management of resectable visible dysplasia. Existence and publication details confirmed against PubMed 42165399 on October 21, 2026.",
+  },
+  {
+    id: ECCO_ULCERATIVE_COLITIS_SURGERY_2026_SOURCE,
+    title: "ECCO Guidelines on Therapeutics in Ulcerative Colitis: Surgical Treatment (2026)",
+    kind: "article",
+    citation: "Adamina M, et al. ECCO Guidelines on Therapeutics in Ulcerative Colitis: Surgical Treatment. J Crohns Colitis. 2026;20(6):jjag072. doi:10.1093/ecco-jcc/jjag072",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://doi.org/10.1093/ecco-jcc/jjag072",
+    details: "Cited for the Figure 1 staging definitions (one-stage, conventional and modified two-stage, three-stage), the absence of a universally superior staging strategy, and the J-pouch and cuff dimensions.",
+  },
+
+  {
+    id: EHS_PARASTOMAL_HERNIA_2023_SOURCE,
+    title: "EHS Rapid Guideline on Parastomal Hernia Prevention (2023)",
+    kind: "article",
+    citation: "Stabilini C, et al. EHS Rapid Guideline: Evidence-Informed European Recommendations on Parastomal Hernia Prevention—With ESCP and EAES Participation. J Abdom Wall Surg. 2023;2:11549. doi:10.3389/jaws.2023.11549",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10831651/",
+    details: "Cited for the conditional recommendation for prophylactic permanent synthetic mesh with an end colostomy and fair life expectancy, and the strong recommendation in patients at high risk of parastomal hernia — the genuine disagreement with ASCRS 2022.",
+  },
+  {
+    id: IDSA_SHEA_CDI_2017_SOURCE,
+    title: "IDSA/SHEA Clinical Practice Guidelines for Clostridium difficile Infection (2017 update)",
+    kind: "article",
+    citation: "McDonald LC, Gerding DN, Johnson S, et al. Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by the IDSA and SHEA. Clin Infect Dis. 2018;66(7):e1–e48.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.idsociety.org/practice-guideline/clostridium-difficile/",
+    details: "Cited for the three-unformed-stools testing population and the fulminant pathway not replaced in 2021: vancomycin 500 mg enterally four times daily, IV metronidazole, rectal vancomycin with ileus, colectomy preserving the rectum, loop ileostomy with lavage as an alternative, and WBC near 25,000/µL or lactate near 5 mmol/L as markers favoring earlier surgery.",
+  },
+  {
+    id: IDSA_SHEA_CDI_2021_SOURCE,
+    title: "IDSA/SHEA Focused Update on Clostridioides difficile Infection (2021)",
+    kind: "article",
+    citation: "Johnson S, Lavergne V, Skinner AM, et al. Clinical Practice Guideline by IDSA and SHEA: 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clin Infect Dis. 2021;73(5):e1029–e1044.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/",
+    details: "Cited for fidaxomicin preferred over vancomycin for initial and recurrent nonfulminant episodes, and the Table 1 severity definitions, including nonsevere as WBC ≤15,000/µL and creatinine <1.5 mg/dL.",
+  },
+  {
+    id: ESPEN_INTESTINAL_FAILURE_2023_SOURCE,
+    title: "ESPEN Guideline on Chronic Intestinal Failure in Adults — Update 2023",
+    kind: "article",
+    citation: "Pironi L, Cuerda C, Jeppesen PB, et al. ESPEN guideline on chronic intestinal failure in adults — Update 2023. Clin Nutr. 2023;42(10):1940–2021.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    url: "https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline_on_chronic_intestinal_failure_in_adults.pdf",
+    details: "Cited from chapter 8, recommendations 98–102 and commentary (pp.1983–1984): reconstruction in specialist units after inflammation resolves and nutrition improves, often six to twelve months; no closure benefit from withholding enteral nutrition.",
+  },
+  {
+    id: DIAPHRAGMATIC_HERNIA_PACKET_SOURCE,
+    title: "Owner-supplied diaphragmatic hernia repair study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"Diaphragmatic Hernia Repair Pocket Chief\" (SCORE / General Surgery Board Review Study Guide).",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Chen et al. (JAMA, 2024) on CDH incidence, Bochdalek and Morgagni shares and mortality; Larson et al. (NeoReviews, 2026) and Abman et al. (AHA/ATS pediatric pulmonary hypertension guideline, 2015) on stabilization and repair timing; Lin et al. (Pediatric Surgery International, 2025) on early repair on ECMO; Wild et al. (J Intensive Care Medicine, 2024) on ECMO indications and contraindications; Coccolini et al. (WSES-AAST thoracic trauma guidelines, 2025) on traumatic repair, mesh, chest tube and outcomes; Reitano et al. (Injury, 2022) on CT accuracy; Bergin et al. (AJR, 2001) on the dependent viscera sign; Elbanna et al. (Abdominal Radiology, 2018) on chronic traumatic hernia; Meyer et al. (JLAST, 2023) on mesh thresholds; Safari et al. (JLAST, 2025) on laparoscopic Morgagni repair; Laghi et al. (BMC Pulm Med, 2021), Heng et al. (J Pediatr Surg, 2025) and Beshay et al. (J Clin Med, 2023) on eventration and plication; Kirby and Keijzer (Pediatr Surg Int, 2020) on CDH follow-up.",
+      "Review changes, pending Zach's sign-off: the packet equated the foramen of Morgagni with the space of Larrey; both are parts of the sternocostal trigone, Morgagni on the right and Larrey on the left, and the topic says so. The packet's ECMO criterion of post-ductal PaO2 above 30 mmHg was replaced with the CDH EURO criterion of post-ductal saturation above 70% (registered separately). The packet's correction note giving blunt left-sided predominance as about 65 to 75% conflicts with the trauma topic's roughly 80%; both are recorded in a split block. The packet's CT sensitivity of about 0.80 for blunt injury conflicts with the trauma packet's statement that CT misses nearly half of blunt injuries; also recorded in a split block. The AAST grade thresholds, and the explanation of what the two packets were probably counting, were added by the reviewer from training-era knowledge.",
+    ].join(" "),
+  },
+  {
+    id: HIATAL_HERNIA_PACKET_SOURCE,
+    title: "Owner-supplied hiatal hernia study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"Hiatal Hernia Pocket Chief\" (SCORE / ABSITE Study Guide — Hiatal Hernia and Paraesophageal Hernia Repair).",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Aaron et al. (ACS Gastrointestinal Surgical Emergencies, 2021) and Siegal et al. (Langenbecks Arch Surg, 2017) on definition, mechanism and classification; Giuffrida et al. (WSES, 2023); D'Urbano et al. (JLAST, 2023) on giant hernia definitions; Ghassemi and Jensen (Yamada's, 2022) on Cameron lesions; Gonda and Krikhely (Yamada's, 2022) and Bonney et al. (Abdom Radiol, 2021) on gastric volvulus; Katz et al. (ACG GERD guideline, 2022) on manometry; Stylopoulos et al. (Ann Surg, 2002) and DeMeester et al. (Ann Surg, 2024) Markov analyses; the EAES rapid guideline (Surg Endosc, 2023) and SAGES hiatal hernia guideline (Daly et al., Surg Endosc, 2024); Wong et al. (Ann Thorac Surg, 2023, STS database) and Crnkovic et al. (JACS, 2026) on elective versus emergency mortality; Angeramo and Schlottmann (Ann Surg, 2022), Kitsou et al. (JGS, 2026), Temperley et al. (Dis Esophagus, 2023), Rajkomar et al. (Hernia, 2023), Salehi et al. (Surg Endosc, 2024) and Schlottmann et al. (JAMA Surg, 2025) on mesh; Salvador et al. (Padova HRM consensus, Ann Surg, 2025) and Addo et al. (Surg Endosc, 2021) on wrap tailoring; Montcusi et al. (JACS, 2023) and Trinh et al. (J Clin Med, 2026) on Collis gastroplasty; Amundson et al. (Surg Endosc, 2023) on recurrence.",
+      "Review notes, pending Zach's sign-off: the crural closure instruction and the dysphagia timeline in this packet conflict with the existing Paraesophageal Hernia Repair topic (1.5 cm crural space, dilation after one week); both are recorded in that topic's split block.",
+    ].join(" "),
+  },
+  {
+    id: GERD_BARRETT_PACKET_SOURCE,
+    title: "Owner-supplied GERD and Barrett esophagus study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"GERD and Barrett Esophagus — Pocket Chief\".",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Sharma (JAMA, 2022) and Fitzgerald (NEJM, 2026) on Barrett definition and the failure of antireflux surgery to prevent cancer; Shaheen et al. (ACG Barrett guideline, 2022) on prevalence, progression, screening and surveillance; Gyawali et al. (Lyon Consensus 2.0, Gut, 2024) and Amundson et al. (Surg Endosc, 2023) on pH thresholds; Slater et al. (SAGES GERD guideline) on surgical indications; Analatos et al. (JAMA Surg, 2022), McKinley et al. (Surg Endosc, 2021) and Varin et al. (Arch Surg, 2009) on Nissen versus Toupet; Memon et al. (Surg Endosc, 2024), Wunker et al. (Surg Endosc, 2025) and Ayazi et al. (Ann Surg, 2026) on GERD with obesity; Kolb and Wani (Dig Dis Sci, 2022), Ge and Muthusamy (JLAST, 2017) and Nguyen et al. (Surg Endosc, 2024) on dysplasia management and post-ablation surveillance.",
+      "Review changes, pending Zach's sign-off: the packet's screening rule of chronic GERD plus two or more risk factors was corrected to three or more, per the 2022 ACG guideline (registered separately). The packet's surveillance interval for low-grade dysplasia (6 to 12 months) is kept as written; the guideline's primary recommendation of eradication over surveillance was confirmed.",
+    ].join(" "),
+  },
+  {
+    id: ANTIREFLUX_PROCEDURES_PACKET_SOURCE,
+    title: "Owner-supplied antireflux procedures study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"Antireflux Procedures Pocket Chief\" (SCORE / General Surgery Board Review Study Guide).",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Katz et al. (ACG GERD guideline, 2022) on indications, MSA, TIF and Stretta; Fass (NEJM, 2022) on preoperative workup; Gyawali et al. (Lyon Consensus 2.0, Gut, 2024) and Krause and Yadlapati (Aliment Pharmacol Ther, 2024) on pH metrics; Yadlapati et al. (Aliment Pharmacol Ther, 2022) on wireless monitoring; Thrumurthy et al. (JAMA, 2026) on contraindications, recurrence and gas-bloat; DeMeester and DeMeester (The Esophagus, 2021) on wrap types; Gyawali et al. (Neurogastroenterol Motil, 2019), Addo et al. (Surg Endosc, 2021), Wong et al. (JGS, 2022), Kamboj et al. (Neurogastroenterol Motil, 2024) and Du et al. (BMC Gastroenterol, 2016) on wraps in ineffective motility; Furay et al. and Patel and Gyawali (Dis Esophagus, 2023) on MSA candidacy; Slater et al. (SAGES GERD guideline) and Lee et al. (Surg Endosc, 2023) on partial versus complete wraps; Baiu and Lau (JAMA, 2019), Angeramo and Schlottmann (Ann Surg, 2022), Schlottmann et al. (JAMA Surg, 2025) and Delcarro et al. (JLAST, 2026) on paraesophageal repair and mesh.",
+      "Review changes, pending Zach's sign-off: the packet stated the SAGES guideline suggests partial over complete fundoplication for most patients; the guideline in fact leaves partial or complete wrap to shared decision-making, and the topic says so (registered separately). The packet's figure that only about 21% of PPI-refractory heartburn is reflux-related, its 0.05% surgical-utilization figure, and its pyloric stenosis pearl were left out as unverified or off-topic. The packet's crural closure target of about 5 mm beside the esophagus was rendered as admitting a 5-mm instrument beside the bougie-filled esophagus.",
+    ].join(" "),
+  },
+  {
+    id: LYON_CONSENSUS_2_SOURCE,
+    title: "Lyon Consensus 2.0 on the modern diagnosis of GERD",
+    kind: "article",
+    citation: "Gyawali CP, Yadlapati R, Fass R, et al. Updates to the modern diagnosis of GERD: Lyon consensus 2.0. Gut. 2024;73(2):361-371.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the authority behind the acid exposure time cutoffs and LA grade B as conclusive GERD, named in the GERD and antireflux packets rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: ACG_BARRETT_2022_SOURCE,
+    title: "ACG clinical guideline: Barrett esophagus (2022)",
+    kind: "article",
+    citation: "Shaheen NJ, Falk GW, Iyer PG, et al. Diagnosis and Management of Barrett's Esophagus: An Updated ACG Guideline. Am J Gastroenterol. 2022;117(4):559-587.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the authority behind Barrett screening (chronic GERD plus three or more risk factors, which corrects the packet's two or more), surveillance intervals, dysplasia confirmation and post-eradication surveillance. Named in the GERD packet rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: ACG_GERD_2022_SOURCE,
+    title: "ACG clinical guideline: gastroesophageal reflux disease (2022)",
+    kind: "article",
+    citation: "Katz PO, Dunbar KB, Schnoll-Sussman FH, et al. ACG Clinical Guideline for the Diagnosis and Management of Gastroesophageal Reflux Disease. Am J Gastroenterol. 2022;117(1):27-56.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the authority behind magnetic sphincter augmentation candidacy, the 1.5 T MRI limit, device erosion and off-PPI rates, TIF selection and the recommendation against Stretta. Named in the antireflux and hiatal hernia packets rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: SAGES_GERD_2021_SOURCE,
+    title: "SAGES guideline: surgical treatment of GERD (2021)",
+    kind: "article",
+    citation: "Slater BJ, Dirks RC, McKinley SK, et al. SAGES guidelines for the surgical treatment of gastroesophageal reflux (GERD). Surg Endosc. 2021;35(9):4903-4917.",
+    url: "https://www.sages.org/publications/guidelines/guidelines-for-the-surgical-treatment-of-gastroesophageal-reflux-gerd/",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review to correct the antireflux packet: the guideline suggests surgery over medical management for chronic or refractory GERD, and leaves partial versus complete fundoplication, and division of the short gastrics, to shared decision-making rather than favoring partial wraps. The packets cite it as Slater et al. 2023. Pending Zach's sign-off.",
+  },
+  {
+    id: STYLOPOULOS_PEH_2002_SOURCE,
+    title: "Stylopoulos et al.: paraesophageal hernias, operation or observation (2002)",
+    kind: "article",
+    citation: "Stylopoulos N, Gazelle GS, Rattner DW. Paraesophageal hernias: operation or observation? Ann Surg. 2002;236(4):492-500.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the Markov analysis behind the board-classic watchful-waiting answer for asymptomatic paraesophageal hernia, named in the hiatal hernia packet. Pending Zach's sign-off.",
+  },
+  {
+    id: CDH_EURO_2015_SOURCE,
+    title: "CDH EURO Consortium consensus, 2015 update",
+    kind: "article",
+    citation: "Snoek KG, Reiss IK, Greenough A, et al. Standardized Postnatal Management of Infants with Congenital Diaphragmatic Hernia in Europe: The CDH EURO Consortium Consensus — 2015 Update. Neonatology. 2016;110(1):66-74.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review to correct the diaphragmatic hernia packet's ECMO criteria: inability to keep preductal saturation above 85% or postductal saturation above 70%, oxygenation index of 40 or more for at least 3 hours, and pH below 7.15 with rising PaCO2 despite optimal ventilation. Not supplied directly. Pending Zach's sign-off.",
   },
   {
     id: SCORE_BENIGN_BILIARY_OBSTRUCTION_SOURCE,

@@ -64,6 +64,10 @@ import { thrombophlebitisTopic } from "@/content/topics/thrombophlebitis";
 import { venousStasisAndChronicVenousInsufficiencyTopic } from "@/content/topics/venous-stasis-and-chronic-venous-insufficiency";
 import { varicoseVeinsTopic } from "@/content/topics/varicose-veins";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
+import { diaphragmaticHerniaRepairTopic } from "@/content/topics/diaphragmatic-hernia-repair";
+import { hiatalHerniasTopic } from "@/content/topics/hiatal-hernias";
+import { gastroesophagealRefluxAndBarrettEsophagusTopic } from "@/content/topics/gastroesophageal-reflux-and-barrett-esophagus";
+import { antirefluxProceduresTopic } from "@/content/topics/antireflux-procedures";
 import { percutaneousBreastBiopsyTopic } from "@/content/topics/percutaneous-breast-biopsy-and-cyst-aspiration";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
 import { peritonealNeoplasmsTopic } from "@/content/topics/peritoneal-neoplasms";
@@ -80,6 +84,13 @@ import { ulcerativeColitisTopic } from "@/content/topics/ulcerative-colitis";
 import { vascularExposurePrinciplesTopic } from "@/content/topics/vascular-exposure-principles";
 import { vascularThoracicInjuryTopic } from "@/content/topics/vascular-thoracic-injury";
 import { ventralAndIncisionalHerniaTopic } from "@/content/topics/ventral-and-incisional-hernia";
+import { cDifficileColitisTopic } from "@/content/topics/c-difficile-colitis";
+import { colostomyAndColostomyClosureTopic } from "@/content/topics/colostomy-and-colostomy-closure";
+import { enterocutaneousFistulaTopic } from "@/content/topics/enterocutaneous-fistula";
+import { ileostomyAndIleostomyClosureTopic } from "@/content/topics/ileostomy-and-ileostomy-closure";
+import { proceduresForCrohnDiseaseTopic } from "@/content/topics/procedures-for-crohn-disease";
+import { proceduresForUlcerativeColitisTopic } from "@/content/topics/procedures-for-ulcerative-colitis";
+import { totalAndSubtotalColectomyTopic } from "@/content/topics/total-and-subtotal-colectomy";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -117,6 +128,10 @@ export const libraryTopics: Topic[] = [
   acuteLiverFailureTopic,
   cardiacPacingTopic,
   paraesophagealHerniaRepairTopic,
+  diaphragmaticHerniaRepairTopic,
+  hiatalHerniasTopic,
+  gastroesophagealRefluxAndBarrettEsophagusTopic,
+  antirefluxProceduresTopic,
   renalArteryDiseaseTopic,
   malrotationTopic,
   malrotationOperationTopic,
@@ -131,6 +146,13 @@ export const libraryTopics: Topic[] = [
   neckInjuriesManagementTopic,
   crohnDiseaseTopic,
   ulcerativeColitisTopic,
+  proceduresForCrohnDiseaseTopic,
+  proceduresForUlcerativeColitisTopic,
+  totalAndSubtotalColectomyTopic,
+  ileostomyAndIleostomyClosureTopic,
+  colostomyAndColostomyClosureTopic,
+  cDifficileColitisTopic,
+  enterocutaneousFistulaTopic,
   chestWallPleuraAndDiaphragmInjuriesTopic,
   vascularThoracicInjuryTopic,
   tracheobronchialAndLungInjuryTopic,

@@ -143,7 +143,7 @@ export const gastrointestinalTractInjuryRepairTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001223",
   slug: "gastrointestinal-tract-injury-repair",
   title: "Gastrointestinal Tract Injury Repair",
-  aliases: ["GI tract injury", "gastrointestinal trauma", "bowel injury repair", "damage control laparotomy", "staple and leave", "duodenal injury", "AAST duodenal grade", "pyloric exclusion", "trauma pancreaticoduodenectomy", "colon injury repair", "destructive colon injury", "primary anastomosis in trauma", "Hartmann procedure", "extraperitoneal rectal injury", "presacral drainage", "rectal washout", "STOP-IT trial", "stapled versus hand-sewn anastomosis", "gastric injury repair", "small bowel injury repair", "WSES bowel injury guidelines", "hollow viscus injury", "Whipple for trauma", "duodenoduodenostomy", "Roux-en-Y duodenojejunostomy"],
+  aliases: ["GI tract injury", "gastrointestinal trauma", "bowel injury repair", "damage control laparotomy", "staple and leave", "duodenal injury", "AAST duodenal grade", "pyloric exclusion", "trauma pancreaticoduodenectomy", "colon injury repair", "destructive colon injury", "primary anastomosis in trauma", "extraperitoneal rectal injury", "presacral drainage", "rectal washout", "STOP-IT trial", "stapled versus hand-sewn anastomosis", "gastric injury repair", "small bowel injury repair", "WSES bowel injury guidelines", "hollow viscus injury", "Whipple for trauma", "duodenoduodenostomy", "Roux-en-Y duodenojejunostomy"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
   tags: ["trauma", "bowel-injury", "operative-technique", "damage-control", "absite", "score"],
