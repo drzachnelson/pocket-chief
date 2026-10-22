@@ -91,6 +91,13 @@ import { ileostomyAndIleostomyClosureTopic } from "@/content/topics/ileostomy-an
 import { proceduresForCrohnDiseaseTopic } from "@/content/topics/procedures-for-crohn-disease";
 import { proceduresForUlcerativeColitisTopic } from "@/content/topics/procedures-for-ulcerative-colitis";
 import { totalAndSubtotalColectomyTopic } from "@/content/topics/total-and-subtotal-colectomy";
+import { analDysplasiaAndStdsTopic } from "@/content/topics/anal-dysplasia-and-stds";
+import { analFissureTopic } from "@/content/topics/anal-fissure";
+import { analSphincterotomyTopic } from "@/content/topics/anal-sphincterotomy";
+import { anorectalAbscessAndFistulaeTopic } from "@/content/topics/anorectal-abscess-and-fistulae";
+import { anorectalAbscessDrainageTopic } from "@/content/topics/anorectal-abscess-drainage";
+import { anorectalFistulaRepairTopic } from "@/content/topics/anorectal-fistula-repair";
+import { perianalCondylomasExcisionTopic } from "@/content/topics/perianal-condylomas-excision";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -165,6 +172,13 @@ export const libraryTopics: Topic[] = [
   cardiacFailureAndCardiogenicShockTopic,
   hemorrhoidsTopic,
   proceduresForHemorrhoidsTopic,
+  analFissureTopic,
+  analSphincterotomyTopic,
+  anorectalAbscessAndFistulaeTopic,
+  anorectalAbscessDrainageTopic,
+  anorectalFistulaRepairTopic,
+  analDysplasiaAndStdsTopic,
+  perianalCondylomasExcisionTopic,
   percutaneousBreastBiopsyTopic,
   pancreaticoduodenectomyTopic,
   hemodialysisAccessCatheterTopic,

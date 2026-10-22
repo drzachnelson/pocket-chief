@@ -245,6 +245,24 @@ export const ASGE_CHOLEDOCHOLITHIASIS_SOURCE = "00000000-0000-4000-8000-00000000
 export const AASLD_PSC_SOURCE = "00000000-0000-4000-8000-000000003111";
 export const STRASBERG_CLASSIFICATION_SOURCE = "00000000-0000-4000-8000-000000003112";
 export const BILE_DUCT_REPAIR_TIMING_SOURCE = "00000000-0000-4000-8000-000000003114";
+// Anorectal batch: fissure, sphincterotomy, abscess and fistula disease, drainage, fistula repair,
+// condyloma excision, and anal dysplasia with STDs, written from one seven-guide owner packet.
+export const ANORECTAL_PACKET_SOURCE = "00000000-0000-4000-8000-000000004600";
+export const SCORE_ANAL_FISSURE_SOURCE = "00000000-0000-4000-8000-000000004601";
+export const SCORE_ANAL_SPHINCTEROTOMY_SOURCE = "00000000-0000-4000-8000-000000004602";
+export const SCORE_ANORECTAL_ABSCESS_FISTULAE_SOURCE = "00000000-0000-4000-8000-000000004603";
+export const SCORE_ANORECTAL_ABSCESS_DRAINAGE_SOURCE = "00000000-0000-4000-8000-000000004604";
+export const SCORE_ANORECTAL_FISTULA_REPAIR_SOURCE = "00000000-0000-4000-8000-000000004605";
+export const SCORE_PERIANAL_CONDYLOMAS_SOURCE = "00000000-0000-4000-8000-000000004606";
+export const SCORE_ANAL_DYSPLASIA_STDS_SOURCE = "00000000-0000-4000-8000-000000004607";
+export const FISER_BENIGN_ANORECTAL_SOURCE = "00000000-0000-4000-8000-000000004608";
+export const ASCRS_ANAL_FISSURE_SOURCE = "00000000-0000-4000-8000-000000004609";
+export const ASCRS_ABSCESS_FISTULA_SOURCE = "00000000-0000-4000-8000-000000004610";
+export const CDC_STI_2021_SOURCE = "00000000-0000-4000-8000-000000004611";
+export const NIH_HIV_HPV_SOURCE = "00000000-0000-4000-8000-000000004612";
+export const NYSDOH_ANAL_DYSPLASIA_SOURCE = "00000000-0000-4000-8000-000000004613";
+export const ANCHOR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000004614";
+export const CDC_HPV_VACCINE_SOURCE = "00000000-0000-4000-8000-000000004615";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -2410,5 +2428,153 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Manivasagam SS, Chandra JN, Khera D, Aradhya PS, Hiremath AM. Optimal timing of surgical repair after bile duct injury: a systematic review and meta-analysis. Cureus. 2024;16(2):e53507. doi:10.7759/cureus.53507",
     suppliedAt: "2026-10-22T00:00:00.000Z",
     details: "Added beyond the supplied sources during review and pending the owner's sign-off, to set the board teaching on repair timing against the current evidence. Twenty observational studies and 3,421 patients; early repair under 14 days and delayed repair after 6 weeks both had lower morbidity than repair between 2 and 6 weeks, delayed repair had the lowest stricture rate, and timing was not associated with mortality. Observational, and a 2022 analysis of about 3,800 patients found early and delayed repair comparable.",
+  },
+  {
+    id: ANORECTAL_PACKET_SOURCE,
+    title: "Owner-supplied anorectal study guides",
+    kind: "user_notes",
+    citation: "Personal study guides supplied to Pocket Chief, October 22, 2026: \"Pocket Chief — remaining anorectal topics\", seven guides (Anal Fissure, Anal Sphincterotomy, Anorectal Abscess and Fistulae, Anorectal Abscess Drainage, Anorectal Fistula Repair, Perianal Condylomas Excision, Anal Dysplasia and STDs) with a validation report.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Each guide is written from its own SCORE module read in full, cross-checked against Fiser chapter 37 pages 554-562, and updated against the ASCRS anal fissure guideline (2023), the ASCRS abscess and fistula guideline (2022), the CDC 2021 STI treatment guidelines, NIH and NYSDOH guidance on anal dysplasia in adults with HIV, and the ANCHOR trial.",
+      "The guides also cite the ASCRS anal squamous cell cancer guideline (revised 2018) for LSIL/HSIL nomenclature and anal transition-zone anatomy, and the ASCRS patient page \"Anal Fissure Expanded Information\" for reassessment of a nonhealing fissure; neither is registered separately because no block leans on it as the authority.",
+      "Source disagreements the guides located and the topics carry as split blocks: posterior fissure frequency (about 90% in SCORE and Fiser, 73% in ASCRS); SCORE's mandatory medical-then-botulinum-then-LIS ladder against ASCRS permitting selected primary LIS; flap healing inferior in SCORE and Fiser but comparable in ASCRS; Fiser's lower-quarter fistulotomy threshold against SCORE's one-third and ASCRS's under 30%; Fiser's external drainage of intersphincteric abscesses and universal transanal supralevator drainage against origin-dependent drainage; and SCORE fistula repair's blanket Crohn contraindication to fistulotomy against its own section 5.3 and ASCRS recommendation 22.",
+      "Deliberately left out pending verification, as the guides flag: the condyloma perianal block landmarks (SCORE alternates between ischial spine and tuberosity), cardiac prophylaxis indications, topical and botulinum dosing, and any persistent-incontinence rescue algorithm.",
+      "Beyond the packet, pending owner sign-off: the Buschke-Lowenstein tumor (giant condyloma, verrucous carcinoma) as a board item treated by wide local excision; condylomata lata described as the flat moist plaques of secondary syphilis; HPV plume as an occupational exposure; anterior fissures being relatively more common in women; the bedside signs of Fournier gangrene (crepitus, dusky or necrotic skin, pain beyond the visible margin) and diabetes blunting them; diverticulitis, appendicitis, and Crohn disease as the pelvic sources of a descending supralevator abscess; intersphincteric as the most common Parks type; mushroom or Malecot catheters as the named drainage catheters; simultaneous fistulotomy of a simple tract lowering recurrence; the Hanley incision placed between coccyx and anus; endorectal flap composition (mucosa, submucosa, and some internal sphincter) with excision of the flap tip; a definition of marsupialization; and converting a closed sphincterotomy to open when the plane cannot be identified.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_ANAL_FISSURE_SOURCE,
+    title: "SCORE module: Anal Fissure",
+    kind: "website",
+    citation: "Grossman R, Bayasi M. Anal Fissure. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=130103",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130103",
+    details: "Retrieved August 12, 2026. Seven numbered learning objectives, read in full by the owner's guide; the chemodenervation video and images were not reviewed.",
+  },
+  {
+    id: SCORE_ANAL_SPHINCTEROTOMY_SOURCE,
+    title: "SCORE module: Anal Sphincterotomy",
+    kind: "website",
+    citation: "Grossman R, Bayasi M. Anal Sphincterotomy. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=130512",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130512",
+    details: "Retrieved August 12, 2026. Five numbered objectives with subobjectives 1.1 and 1.2. The module quotes incontinence after LIS as 8% to 30% over follow-up to six years and some historical series at 30% to 40%; the disease module quotes 4% to 30%. The topic distinguishes transient flatus and seepage from persistent solid-stool incontinence rather than quoting one rate.",
+  },
+  {
+    id: SCORE_ANORECTAL_ABSCESS_FISTULAE_SOURCE,
+    title: "SCORE module: Anorectal Abscess and Fistulae",
+    kind: "website",
+    citation: "Wilson S, Phatak U. Anorectal Abscess and Fistulae. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=130173",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130173",
+    details: "Retrieved August 12, 2026. Twelve objectives and twelve subobjectives. Not carried: the 8% to 50% incontinence range, which covers all anorectal surgery rather than simple drainage; the \"up to 80%\" Crohn abscess figure; and the blanket preincision cardiac prophylaxis statement, which was not verified against current indications. Its Goodsall accuracy claim (better for posterior openings) conflicts with ASCRS 2022 (better for anterior), so no accuracy figure is taught.",
+  },
+  {
+    id: SCORE_ANORECTAL_ABSCESS_DRAINAGE_SOURCE,
+    title: "SCORE module: Anorectal Abscess Drainage",
+    kind: "website",
+    citation: "Jeganathan NA, Scow JS. Anorectal Abscess Drainage. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=130568",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130568",
+    details: "Retrieved August 12, 2026. Seven numbered objectives. Recurrence is quoted as up to 40% within a year in preparation and 4% to 31% under complications; ASCRS cites up to 44%. The ranges reflect different cohorts and are not combined.",
+  },
+  {
+    id: SCORE_ANORECTAL_FISTULA_REPAIR_SOURCE,
+    title: "SCORE module: Anorectal Fistulae Repair",
+    kind: "website",
+    citation: "Nweze N, DeLeon M. Anorectal Fistulae Repair. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=130637",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130637",
+    details: "Retrieved August 12, 2026. The SCORE outline names this entry \"Anorectal Fistula Repair\"; the module itself is titled \"Anorectal Fistulae Repair\". Its section 2 describes the suprasphincteric tract descending through the external sphincter; the topic uses the ASCRS 2022 Table 1 anatomy instead, descending through the levator after passing over puborectalis.",
+  },
+  {
+    id: SCORE_PERIANAL_CONDYLOMAS_SOURCE,
+    title: "SCORE module: Perianal Condylomas Excision",
+    kind: "website",
+    citation: "Lu P, Henry AJ, Irani JL. Perianal Condylomas Excision. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, March 12, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=167855",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=167855",
+    details: "Retrieved August 12, 2026. Clearance of 89% to 100%, recurrence up to about one third, roughly four weeks of pain, and the two-week review visit are the module's own estimates. Its perianal block description is not carried, because it alternates between ischial spine and ischial tuberosity landmarks.",
+  },
+  {
+    id: SCORE_ANAL_DYSPLASIA_STDS_SOURCE,
+    title: "SCORE module: Anal Dysplasia and STDs",
+    kind: "website",
+    citation: "Choi S, Lipman J. Anal Dysplasia and STDs. SCORE Curriculum, Anorectal module, Surgical Council on Resident Education, April 13, 2021. https://www.surgicalcore.org/modulecontent.aspx?id=1000459",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000459",
+    details: "Retrieved August 12, 2026. The module predates the ANCHOR trial and current HIV anal screening guidance; its uniform 16-week topical course and podophyllin recommendation are superseded by the CDC 2021 STI guidelines.",
+  },
+  {
+    id: FISER_BENIGN_ANORECTAL_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — anal and rectal chapter, benign anorectal disease",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review, 8th edition. Chapter 37, Anal and Rectal, pages 554-562: condylomata acuminata, anal fissure and lateral internal sphincterotomy technique, anorectal abscess, fistula-in-ano, and anorectal HIV disease.",
+    suppliedAt: "2026-08-12T00:00:00.000Z",
+    details: "Owner-supplied chapter text, an OCR extraction. Malformed strings on page 555 (\"stool baths\", \"5/5—headaches\") and page 554 (\"Nlx: laser surgery\") are not used as facts. Carried as the board answer where it differs from current guidance: drainage routes on page 556, the lower-quarter fistulotomy threshold and avoiding plugs and glue on page 557, and division to the dentate line in the page 555 sphincterotomy caption.",
+  },
+  {
+    id: ASCRS_ANAL_FISSURE_SOURCE,
+    title: "ASCRS clinical practice guideline for the management of anal fissures",
+    kind: "article",
+    citation: "Davids JS, Hawkins AT, Bhama AR, et al. The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Anal Fissures. Dis Colon Rectum. 2023;66(2):190-199. doi:10.1097/DCR.0000000000002664",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://doi.org/10.1097/DCR.0000000000002664",
+    details: "Read in full by the owner's guide through recommendations 1 to 11, October 21, 2026, and confirmed as the current listed fissure guideline on the ASCRS index. Used for selected primary LIS without prior pharmacologic therapy (recommendation 5), tailored division to the fissure apex (8), limited evidence for repeat LIS (9), and the advancement flap as comparable with weaker evidence (10).",
+  },
+  {
+    id: ASCRS_ABSCESS_FISTULA_SOURCE,
+    title: "ASCRS clinical practice guideline for anorectal abscess, fistula-in-ano, and rectovaginal fistula",
+    kind: "article",
+    citation: "Gaertner WB, Burgess PL, Davids JS, et al. The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Anorectal Abscess, Fistula-in-Ano, and Rectovaginal Fistula. Dis Colon Rectum. 2022;65(8):964-985. doi:10.1097/DCR.0000000000002473",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://doi.org/10.1097/DCR.0000000000002473",
+    details: "Read by the owner's guide October 21, 2026; still the listed guideline on the ASCRS index October 22, 2026. Used for selective imaging (recommendation 2), origin-dependent drainage and the modified Hanley approach (3), simultaneous fistulotomy only for simple fistulas (4), selective antibiotics for cellulitis, systemic infection, or immunosuppression (5), LIFT and flap technique (7 and 8), and selected fistulotomy for simple low Crohn fistulas (22). Its literature search closed November 5, 2021.",
+  },
+  {
+    id: CDC_STI_2021_SOURCE,
+    title: "CDC Sexually Transmitted Infections Treatment Guidelines, 2021",
+    kind: "website",
+    citation: "Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187. Chapters used: Anogenital Warts; Proctitis, Proctocolitis, and Enteritis; Genital Herpes; Primary and Secondary Syphilis. https://www.cdc.gov/std/treatment-guidelines/",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://www.cdc.gov/std/treatment-guidelines/",
+    details: "Chapters checked by the owner's guide October 21, 2026. Adult regimens carried exactly as displayed: ceftriaxone 500 mg IM once (1 g at 150 kg or more) plus doxycycline 100 mg twice daily for 7 days for acute proctitis, extended to 21 days for suspected LGV; valacyclovir 1 g twice daily for 7 to 10 days for a first HSV episode; benzathine penicillin G 2.4 million units IM once for primary and secondary syphilis. Also used for biopsy indications in anogenital warts, intra-anal wart treatment, and the pregnancy and immunocompromise restrictions on wart agents.",
+  },
+  {
+    id: NIH_HIV_HPV_SOURCE,
+    title: "NIH adult and adolescent opportunistic infection guidelines: human papillomavirus disease",
+    kind: "website",
+    citation: "Panel on Guidelines for the Prevention and Treatment of Opportunistic Infections in Adults and Adolescents With HIV. Human Papillomavirus Disease. Updated July 9, 2024; reviewed March 16, 2026. https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/human",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/human",
+    details: "Accessed October 21, 2026. Used for anal cancer screening in people with HIV: annual symptom review, screening from age 35 in men who have sex with men and transgender women and from 45 in other people with HIV, and linking cytology to available high-resolution anoscopy.",
+  },
+  {
+    id: NYSDOH_ANAL_DYSPLASIA_SOURCE,
+    title: "NYSDOH AIDS Institute guideline: screening for anal dysplasia and cancer in adults with HIV",
+    kind: "website",
+    citation: "New York State Department of Health AIDS Institute. Screening for Anal Dysplasia and Cancer in Adults With HIV. Web publication February 25, 2025. https://www.hivguidelines.org/guideline/hiv-anal-cancer/",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://www.hivguidelines.org/guideline/hiv-anal-cancer/",
+    details: "Checked October 21, 2026. Used for treatment of biopsy-confirmed HSIL in adults with HIV and repeat high-resolution anoscopy six months after successful treatment, with ongoing surveillance thereafter.",
+  },
+  {
+    id: ANCHOR_TRIAL_SOURCE,
+    title: "ANCHOR trial: treating anal HSIL to prevent anal cancer",
+    kind: "article",
+    citation: "Palefsky JM, Lee JY, Jay N, et al. Treatment of Anal High-Grade Squamous Intraepithelial Lesions to Prevent Anal Cancer. N Engl J Med. 2022;386(24):2273-2282. doi:10.1056/NEJMoa2201048",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://doi.org/10.1056/NEJMoa2201048",
+    details: "Result verified by the owner's guide through the indexed abstract and the NCI report of June 15, 2022; the full article returned 403. Adults with HIV aged 35 or older with biopsy-proven HSIL; treatment reduced progression to anal cancer by 57% against active monitoring.",
+  },
+  {
+    id: CDC_HPV_VACCINE_SOURCE,
+    title: "CDC HPV vaccine recommendations",
+    kind: "website",
+    citation: "Centers for Disease Control and Prevention. HPV Vaccine Recommendations. July 9, 2024. https://www.cdc.gov/hpv/hcp/vaccination-considerations/index.html",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    url: "https://www.cdc.gov/hpv/hcp/vaccination-considerations/index.html",
+    details: "Checked October 21, 2026. Routine vaccination at 11 to 12 (from 9), catch-up through 26, shared decision-making at 27 to 45; two doses 6 to 12 months apart when started before 15, three doses for those starting at 15 or older and for immunocompromised people.",
   },
 ];

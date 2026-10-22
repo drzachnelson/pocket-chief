@@ -252,7 +252,7 @@ export const proceduresForCrohnDiseaseTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000004560",
   slug: "procedures-for-crohn-disease",
   title: "Procedures for Crohn Disease",
-  aliases: ["Crohn disease surgery", "Crohn surgery", "operations for Crohn disease", "stricturoplasty", "strictureplasty", "Heineke-Mikulicz", "Heineke-Mikulicz stricturoplasty", "Finney stricturoplasty", "Michelassi", "isoperistaltic stricturoplasty", "Kono-S", "ileocolic resection", "ileocecal resection", "endoscopic balloon dilation", "noncutting seton", "terminal ileal resection", "Crohn abscess"],
+  aliases: ["Crohn disease surgery", "Crohn surgery", "operations for Crohn disease", "stricturoplasty", "strictureplasty", "Heineke-Mikulicz", "Heineke-Mikulicz stricturoplasty", "Finney stricturoplasty", "Michelassi", "isoperistaltic stricturoplasty", "Kono-S", "ileocolic resection", "ileocecal resection", "endoscopic balloon dilation", "Crohn seton drainage", "terminal ileal resection", "Crohn abscess"],
   scoreNodeId: "small-intestine-procedures",
   scoreCategory: "SCORE · Small Intestine · Operations & Procedures",
   tags: ["small-intestine", "crohn-disease", "inflammatory-bowel-disease", "stricturoplasty", "absite", "score"],
