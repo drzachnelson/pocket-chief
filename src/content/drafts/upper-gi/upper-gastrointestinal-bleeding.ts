@@ -414,8 +414,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const upperGastrointestinalBleedingDraft = buildDraftTopic({
-  "id": "00000000-0000-4000-8000-000000004623",
-  "versionId": "00000000-0000-4000-8000-000000004633",
+  "id": "00000000-0000-4000-8000-000000004723",
+  "versionId": "00000000-0000-4000-8000-000000004733",
   "slug": "upper-gastrointestinal-bleeding",
   "title": "Upper Gastrointestinal Bleeding",
   "aliases": [

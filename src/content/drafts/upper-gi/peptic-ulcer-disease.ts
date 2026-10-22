@@ -360,8 +360,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const pepticUlcerDiseaseDraft = buildDraftTopic({
-  "id": "00000000-0000-4000-8000-000000004620",
-  "versionId": "00000000-0000-4000-8000-000000004630",
+  "id": "00000000-0000-4000-8000-000000004720",
+  "versionId": "00000000-0000-4000-8000-000000004730",
   "slug": "peptic-ulcer-disease",
   "title": "Peptic Ulcer Disease",
   "aliases": [

@@ -302,8 +302,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const stressGastritisDraft = buildDraftTopic({
-  "id": "00000000-0000-4000-8000-000000004624",
-  "versionId": "00000000-0000-4000-8000-000000004634",
+  "id": "00000000-0000-4000-8000-000000004724",
+  "versionId": "00000000-0000-4000-8000-000000004734",
   "slug": "stress-gastritis",
   "title": "Stress Gastritis",
   "aliases": [

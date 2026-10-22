@@ -347,8 +347,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const esophagogastroduodenoscopyDraft = buildDraftTopic({
-  "id": "00000000-0000-4000-8000-000000004625",
-  "versionId": "00000000-0000-4000-8000-000000004635",
+  "id": "00000000-0000-4000-8000-000000004725",
+  "versionId": "00000000-0000-4000-8000-000000004735",
   "slug": "esophagogastroduodenoscopy",
   "title": "Esophagogastroduodenoscopy",
   "aliases": [

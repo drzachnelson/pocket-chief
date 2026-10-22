@@ -384,8 +384,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const gastroduodenalPerforationRepairDraft = buildDraftTopic({
-  "id": "00000000-0000-4000-8000-000000004621",
-  "versionId": "00000000-0000-4000-8000-000000004631",
+  "id": "00000000-0000-4000-8000-000000004721",
+  "versionId": "00000000-0000-4000-8000-000000004731",
   "slug": "gastroduodenal-perforation-repair",
   "title": "Gastroduodenal Perforation Repair",
   "aliases": [

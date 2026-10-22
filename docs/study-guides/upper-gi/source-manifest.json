@@ -262,6 +262,10 @@
         "factual_units": 59,
         "metadata_paragraphs_retained_as_warnings": 0
       }
-    ]
+    ],
+    "merged_main": "3ac78a8675e6db97fb31bf86e7c32b6d00924b50",
+    "source_namespace": "4700\u20134718 (pancreas source 2303 reused)",
+    "topic_namespace": "4720\u20134725",
+    "version_namespace": "4730\u20134735"
   }
 }

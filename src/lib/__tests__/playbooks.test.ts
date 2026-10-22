@@ -241,12 +241,14 @@ describe("playbook library", () => {
         // abscess drainage, FAST and aneurysm topics to hernia repair. Cirrhosis and portal hypertension
         // claimed it in liver batch 2, where controlling ascites before repair is taught.
         "ascites -> cirrhosis-and-portal-hypertension",
-        "botulinum toxin -> ventral-and-incisional-hernia",
         "component separation -> abdominal-wall-reconstruction",
         "loss of domain -> ventral-and-incisional-hernia",
         "mechanical prophylaxis -> prophylaxis-of-venous-thromboembolism",
         "mesh infection -> abdominal-wall-reconstruction",
         "onlay -> abdominal-wall-reconstruction",
+        // Bare "botulinum toxin" narrowed on ventral-and-incisional-hernia (October 2026): it sent every
+        // fissure and sphincterotomy mention of chemodenervation to hernia repair.
+        "preoperative botulinum toxin -> ventral-and-incisional-hernia",
         "progressive pneumoperitoneum -> ventral-and-incisional-hernia",
         "retrorectus -> abdominal-wall-reconstruction",
         "semilunar line -> unusual-hernias",

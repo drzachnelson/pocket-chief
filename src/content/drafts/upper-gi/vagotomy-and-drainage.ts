@@ -380,8 +380,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const vagotomyAndDrainageDraft = buildDraftTopic({
-  "id": "00000000-0000-4000-8000-000000004622",
-  "versionId": "00000000-0000-4000-8000-000000004632",
+  "id": "00000000-0000-4000-8000-000000004722",
+  "versionId": "00000000-0000-4000-8000-000000004732",
   "slug": "vagotomy-and-drainage",
   "title": "Vagotomy and Drainage",
   "aliases": [
