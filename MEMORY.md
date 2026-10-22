@@ -366,3 +366,15 @@ Four SCORE topics close the Liver module (8 of 8): **Hepatic Resection**, **Intr
 - **Known leftover:** bare "angioembolization" on Splenic Injury captures hepatic contexts. The new topics say "transcatheter embolization" instead; narrowing it touches every trauma topic and was left for its own change.
 
 Content status: **authored but unreviewed — draft until Zach reads it.**
+
+## Foregut and diaphragm batch (October 21, 2026)
+
+Four topics from owner-supplied Muse packets: **Diaphragmatic Hernia Repair** (Hernia · Operations), **Hiatal Hernias** and **Gastroesophageal Reflux and Barrett Esophagus** (Esophagus · Diseases), and **Antireflux Procedures** (Esophagus · Operations). Paraesophageal Hernia Repair was revised in place. Sources and topic ids take the 044xx block.
+
+- **Split, not merged:** Hiatal Hernias is the disease (types, Cameron, volvulus, workup, who gets repaired) and Paraesophageal Hernia Repair stays the operation, matching the outline's two entries. Disease aliases (hiatal hernia, Borchardt triad, gastric volvulus, Cameron ulcers) moved from the repair topic to Hiatal Hernias; Nissen, Toupet, and Collis moved to Antireflux Procedures.
+- **CDH stays inside Diaphragmatic Hernia Repair for now.** The packet's neonatal stabilization and ECMO content lives there, with "CDH" and "congenital diaphragmatic hernia" as aliases. The Pediatric Surgery entries for Congenital Diaphragmatic Hernia and its repair are still open; when they are written, move that content and those aliases.
+- **Packet errors corrected against guidelines:** Barrett screening is chronic GERD plus **three** or more risk factors (ACG 2022), not two. The SAGES GERD guideline leaves partial versus complete wrap to shared decision-making; it does not favor partial wraps. The CDH EURO criterion for ECMO is a postductal saturation above 70%, not a PaO2 above 30. The foramen of Morgagni and the space of Larrey are the right and left sides of the sternocostal trigone, not synonyms.
+- **Splits written:** Lyon 2.0 over DeMeester; LA grade B as conclusive; endoscopic eradication over esophagectomy for HGD; tailored wraps not supported; mesh at the hiatus equivocal; asymptomatic PEH (Stylopoulos watch versus current repair-the-fit); acute-abdomen and chronic-chest traumatic repair versus minimally invasive. Two source disagreements are recorded as their own tables: left-sided share and CT sensitivity for blunt diaphragm injury (versus the trauma packet), and crural closure size and the dysphagia workup timeline (versus the original PEH packet).
+- **Auto-linker fix:** a topic's own title and aliases now mask shorter keys inside them without linking, so "organoaxial volvulus" on Hiatal Hernias no longer leaks "volvulus" to Malrotation. Bare "volvulus" and "watchful waiting" were deliberately kept on Malrotation and Inguinal Hernia (the playbook tests pin those links), so the new content says "gastric volvulus" and "observation" instead.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**

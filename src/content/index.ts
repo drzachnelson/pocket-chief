@@ -58,6 +58,10 @@ import { thrombophlebitisTopic } from "@/content/topics/thrombophlebitis";
 import { venousStasisAndChronicVenousInsufficiencyTopic } from "@/content/topics/venous-stasis-and-chronic-venous-insufficiency";
 import { varicoseVeinsTopic } from "@/content/topics/varicose-veins";
 import { paraesophagealHerniaRepairTopic } from "@/content/topics/paraesophageal-hernia-repair";
+import { diaphragmaticHerniaRepairTopic } from "@/content/topics/diaphragmatic-hernia-repair";
+import { hiatalHerniasTopic } from "@/content/topics/hiatal-hernias";
+import { gastroesophagealRefluxAndBarrettEsophagusTopic } from "@/content/topics/gastroesophageal-reflux-and-barrett-esophagus";
+import { antirefluxProceduresTopic } from "@/content/topics/antireflux-procedures";
 import { percutaneousBreastBiopsyTopic } from "@/content/topics/percutaneous-breast-biopsy-and-cyst-aspiration";
 import { peritonealDialysisCatheterTopic } from "@/content/topics/peritoneal-dialysis-catheter";
 import { peritonealNeoplasmsTopic } from "@/content/topics/peritoneal-neoplasms";
@@ -111,6 +115,10 @@ export const libraryTopics: Topic[] = [
   acuteLiverFailureTopic,
   cardiacPacingTopic,
   paraesophagealHerniaRepairTopic,
+  diaphragmaticHerniaRepairTopic,
+  hiatalHerniasTopic,
+  gastroesophagealRefluxAndBarrettEsophagusTopic,
+  antirefluxProceduresTopic,
   renalArteryDiseaseTopic,
   malrotationTopic,
   malrotationOperationTopic,

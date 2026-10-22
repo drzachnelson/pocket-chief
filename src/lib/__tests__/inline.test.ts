@@ -57,6 +57,17 @@ describe("inline markup", () => {
     ]);
   });
 
+  it("does not leak a shorter key out of a topic's own term", () => {
+    expect(text("Acute cholangitis needs drainage", "acute-cholangitis")).toEqual([
+      { text: "Acute cholangitis needs drainage" },
+    ]);
+    expect(text("Acute cholangitis, then cholangitis again", "acute-cholangitis")).toEqual([
+      { text: "Acute cholangitis, then " },
+      { text: "cholangitis", slug: "cholangitis-drainage" },
+      { text: " again" },
+    ]);
+  });
+
   it("links a term at most once per scope, across every segment of the block", () => {
     const scope = scopeFor("unrelated-topic");
     expect(parseInline("**Choledocholithiasis** is confirmed", scope)).toEqual([
