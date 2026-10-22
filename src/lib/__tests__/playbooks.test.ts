@@ -150,11 +150,14 @@ describe("playbook library", () => {
       // "pancreatic fistula" left splenectomy for the pancreaticoduodenectomy topic, which defines
       // and grades it. That moves the right hemicolectomy's pancreatic-head row with it.
       "open-pancreaticoduodenectomy": [
+        // Kept: the biliary limb of the reconstruction is a hepaticojejunostomy, and its technique lives there.
+        "Hepaticojejunostomy -> choledochoenteric-anastomosis",
         "Kocher maneuver -> abdominal-exploration",
         "MAPLE-PD -> pancreaticoduodenectomy",
         "Pancreaticojejunostomy -> pancreaticoduodenectomy",
         "SMA margin -> pancreaticoduodenectomy",
         "Whipple -> pancreaticoduodenectomy",
+        "hepaticojejunostomy -> choledochoenteric-anastomosis",
         // Kept: hepatic artery injury and a biliary-enteric anastomosis are listed postoperative causes there.
         "liver abscess -> hepatic-abscess",
         "pancreatic fistula -> pancreaticoduodenectomy",
@@ -175,12 +178,20 @@ describe("playbook library", () => {
         "volvulus -> malrotation",
       ],
       "robotic-cholecystectomy": [
-        "Bile leak -> hepatic-injury-packing-repair-and-resection",
+        // Biliary batch 2026-10-22: injury, critical view, and repair terms reach the bile duct
+        // injury pair and the anastomosis topic. "bile leak" and "biloma" used to reach liver
+        // trauma; those aliases were narrowed to "post-traumatic" at the source.
+        "Bile duct injury -> iatrogenic-bile-duct-injury",
         // Kept: cirrhosis with portal hypertension is a listed reason the dissection turns hard.
         "Cirrhosis -> cirrhosis-and-portal-hypertension",
-        "bile leak -> hepatic-injury-packing-repair-and-resection",
-        "biloma -> hepatic-injury-packing-repair-and-resection",
+        "Mirizzi syndrome -> benign-biliary-obstruction",
+        "Roux-en-Y hepaticojejunostomy -> choledochoenteric-anastomosis",
+        "bile duct injury -> iatrogenic-bile-duct-injury",
         "choledocholithiasis -> choledocholithiasis",
+        "critical view of safety -> iatrogenic-bile-duct-injury",
+        "duct of Luschka -> iatrogenic-bile-duct-injury",
+        "hepaticojejunostomy -> choledochoenteric-anastomosis",
+        "hepatocystic triangle -> iatrogenic-bile-duct-injury",
         "incisional hernia -> ventral-and-incisional-hernia",
         "portal hypertension -> cirrhosis-and-portal-hypertension",
       ],

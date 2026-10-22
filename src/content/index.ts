@@ -27,7 +27,13 @@ import { cardiacFailureAndCardiogenicShockTopic } from "@/content/topics/cardiac
 import { cardiacInjuryTopic } from "@/content/topics/cardiac-injury";
 import { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
 import { chestWallPleuraAndDiaphragmInjuriesTopic } from "@/content/topics/chest-wall-pleura-and-diaphragm-injuries";
+import { benignBiliaryObstructionTopic } from "@/content/topics/benign-biliary-obstruction";
+import { choledochalCystTopic } from "@/content/topics/choledochal-cyst";
+import { choledochoentericAnastomosisTopic } from "@/content/topics/choledochoenteric-anastomosis";
 import { choledocholithiasisTopic } from "@/content/topics/choledocholithiasis";
+import { iatrogenicBileDuctInjuryTopic } from "@/content/topics/iatrogenic-bile-duct-injury";
+import { iatrogenicBileDuctInjuryRepairTopic } from "@/content/topics/iatrogenic-bile-duct-injury-repair";
+import { primarySclerosingCholangitisTopic } from "@/content/topics/primary-sclerosing-cholangitis";
 import { commonCardiacArrhythmiasTopic } from "@/content/topics/common-cardiac-arrhythmias";
 import { crohnDiseaseTopic } from "@/content/topics/crohn-disease";
 import { derangementsOfElectrolytesAndAcidBaseBalanceTopic } from "@/content/topics/derangements-of-electrolytes-and-acid-base-balance";
@@ -184,6 +190,12 @@ export const libraryTopics: Topic[] = [
   intraoperativeHepaticUltrasoundTopic,
   liverBiopsyTopic,
   cirrhosisAndPortalHypertensionTopic,
+  benignBiliaryObstructionTopic,
+  iatrogenicBileDuctInjuryTopic,
+  iatrogenicBileDuctInjuryRepairTopic,
+  choledochoentericAnastomosisTopic,
+  choledochalCystTopic,
+  primarySclerosingCholangitisTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

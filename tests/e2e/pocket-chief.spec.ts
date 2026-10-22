@@ -46,7 +46,8 @@ test("topics index searches the grouped curriculum and offers an alphabetical vi
   await expect(page.getByRole("heading", { name: "Find a topic" })).toBeVisible();
 
   const search = page.getByRole("searchbox", { name: "Search topics" });
-  await search.fill("choledocho");
+  // "choledocho" alone now also matches Choledochal Cyst and Choledochoenteric Anastomosis.
+  await search.fill("choledocholith");
   await expect(page.getByRole("link", { name: "Choledocholithiasis", exact: true })).toBeVisible();
   await expect(page.getByText("1 topic", { exact: true })).toBeVisible();
 
@@ -84,9 +85,8 @@ test("topic sections start collapsed, toggle together, and reviewed state persis
   await expect(page.getByText("Reviewed on this device")).toBeVisible();
   await page.reload();
   await expect(page.getByRole("button", { name: "Mark not reviewed" })).toBeVisible();
-  // Choledocholithiasis is the only topic in Alimentary Tract, so its category ends here
-  // rather than wrapping into the next one.
-  await expect(page.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/pocket-chief/topics/");
+  // Choledocholithiasis is no longer alone in Alimentary Tract; the next biliary topic follows it.
+  await expect(page.getByRole("link", { name: "Next topic: Iatrogenic Bile Duct Injury — Alimentary Tract" })).toHaveAttribute("href", "/pocket-chief/topics/iatrogenic-bile-duct-injury/");
 });
 
 test("a guide followed by another topic in its category links straight to it", async ({ page }) => {
