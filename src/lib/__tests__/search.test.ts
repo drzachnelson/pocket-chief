@@ -8,7 +8,7 @@ describe("topic search", () => {
   });
 
   it("matches multi-word searches when one token is mistyped", () => {
-    expect(searchTopics("common bile dcut", libraryTopics)[0]?.slug).toBe("choledocholithiasis");
+    expect(searchTopics("comon bile duct stones", libraryTopics)[0]?.slug).toBe("choledocholithiasis");
   });
 
   // The probe has to be words no topic contains: the guard under test is the

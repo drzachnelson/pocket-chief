@@ -366,3 +366,18 @@ Four SCORE topics close the Liver module (8 of 8): **Hepatic Resection**, **Intr
 - **Known leftover:** bare "angioembolization" on Splenic Injury captures hepatic contexts. The new topics say "transcatheter embolization" instead; narrowing it touches every trauma topic and was left for its own change.
 
 Content status: **authored but unreviewed — draft until Zach reads it.**
+
+## Biliary batch 1 (October 22, 2026)
+
+Six SCORE biliary topics from the on-disk corpora: Benign Biliary Obstruction, Iatrogenic Bile Duct Injury, Iatrogenic Bile Duct Injury Repair, Choledochoenteric Anastomosis, Choledochal Cyst, Primary Sclerosing Cholangitis.
+
+- **Benign Biliary Obstruction is a new topic beside Choledocholithiasis, not a revision of it.** Choledocholithiasis is sha256-pinned and is really a duct-clearance (CBD exploration) topic; the outline's "half covered" status for Benign Biliary Obstruction meant the cholangitis, Mirizzi, stricture, and choledochoduodenostomy content was missing, not that the pinned topic should grow.
+- **All six sit at the existing `biliary` node** ("SCORE · Alimentary Tract · Biliary Tract"), like Choledocholithiasis. No conditions/procedures children were added: `taxonomySections` rolls grandchildren into the "Biliary Tract" subsection anyway, so the split would be invisible, and moving `biliary` out from under `alimentary` touches the slugs `ensure_default_taxonomy` already seeded.
+- **One Choledochal Cyst topic covers both the Biliary and the Pediatric outline entries.** The two SCORE modules describe the same disease; the pediatric one adds prenatal diagnosis, the distinction from cystic biliary atresia, and the reconstruction comparison. The Pediatric › Choledochal Cysts outline entry can be counted as covered by it.
+- **Aliases narrowed at the source:** Ulcerative Colitis dropped "primary sclerosing cholangitis" and "PSC" (they now reach the PSC topic); Hepatic Injury's bare "bile leak" and "biloma" became "post-traumatic bile leak" and "post-traumatic biloma", so cholecystectomy leaks stop linking to liver trauma. The new topics deliberately claim no bare "ERCP", "MRCP", "obstructive jaundice", "biliary obstruction", "hilar plate", or "cholestyramine" — each would capture malignant or unrelated contexts (Whipple, liver resection, PEH repair).
+- **Sources reused, not duplicated:** the existing SAGES safe-cholecystectomy source (3014). New sources take the 3100 block, because 2100 was already taken on main.
+- **Splits written:** Tokyo 2018 early drainage for grade II over SCORE's 12–24 hour observation for grades I–II; ASGE 2019 risk strata over Fiser's ERCP lab thresholds; repair timing (Fiser and SCORE 6–8 weeks versus the 2–6 week window to avoid); Fiser's "never to the duodenum" versus SCORE's choledochoduodenostomy for distal injuries; choledochal cyst type I share (85 vs 90–95 percent) and HJ versus hepaticoduodenostomy; AASLD 2022 UDCA 13–23 mg/kg/day over SCORE's "not recommended" and Fiser's symptom benefit; MRCP over ERCP as the PSC diagnostic test; PSC surveillance intervals.
+- **Left out pending Zach:** the Choledochoenteric Anastomosis module's 30 percent long-term stricture rate after hepaticojejunostomy, which sits beside its own "more than 90 percent free of jaundice and cholangitis" without a stated population.
+- **Not re-verified in this session:** AASLD's 8 mm gallbladder-polyp cholecystectomy threshold in PSC, serum IgG4 at diagnosis, and MRCP-first; written from training knowledge and marked in the source details.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**

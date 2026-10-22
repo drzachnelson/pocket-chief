@@ -201,6 +201,20 @@ export const CIRRHOSIS_PORTAL_HYPERTENSION_OE_SOURCE = "00000000-0000-4000-8000-
 export const HIATT_HEPATIC_ARTERIES_1994_SOURCE = "00000000-0000-4000-8000-000000004217";
 export const AASLD_PORTAL_HYPERTENSION_2024_SOURCE = "00000000-0000-4000-8000-000000004218";
 export const AASLD_ASCITES_2021_SOURCE = "00000000-0000-4000-8000-000000004219";
+export const SCORE_BENIGN_BILIARY_OBSTRUCTION_SOURCE = "00000000-0000-4000-8000-000000003100";
+export const SCORE_BILE_DUCT_INJURY_SOURCE = "00000000-0000-4000-8000-000000003101";
+export const SCORE_BILE_DUCT_INJURY_REPAIR_SOURCE = "00000000-0000-4000-8000-000000003102";
+export const SCORE_CHOLEDOCHOENTERIC_ANASTOMOSIS_SOURCE = "00000000-0000-4000-8000-000000003103";
+export const SCORE_CHOLEDOCHAL_CYST_SOURCE = "00000000-0000-4000-8000-000000003104";
+export const SCORE_CHOLEDOCHAL_CYST_PEDIATRIC_SOURCE = "00000000-0000-4000-8000-000000003105";
+export const SCORE_PSC_SOURCE = "00000000-0000-4000-8000-000000003106";
+export const FISER_BILIARY_SOURCE = "00000000-0000-4000-8000-000000003107";
+export const FISER_CHOLEDOCHAL_CYST_SOURCE = "00000000-0000-4000-8000-000000003108";
+export const TOKYO_2018_CHOLANGITIS_SOURCE = "00000000-0000-4000-8000-000000003109";
+export const ASGE_CHOLEDOCHOLITHIASIS_SOURCE = "00000000-0000-4000-8000-000000003110";
+export const AASLD_PSC_SOURCE = "00000000-0000-4000-8000-000000003111";
+export const STRASBERG_CLASSIFICATION_SOURCE = "00000000-0000-4000-8000-000000003112";
+export const BILE_DUCT_REPAIR_TIMING_SOURCE = "00000000-0000-4000-8000-000000003114";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -1955,5 +1969,139 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, evaluation, and management of ascites, spontaneous bacterial peritonitis and hepatorenal syndrome: 2021 practice guidance by the American Association for the Study of Liver Diseases. Hepatology. 2021;74(2):1014-1048.",
     suppliedAt: "2026-10-19T00:00:00.000Z",
     details: "Registered during review as the authority behind sodium restriction, the diuretic ratio, albumin with large-volume paracentesis, SBP diagnosis and treatment, and HRS-AKI, identified from the cirrhosis guide and the SCORE module rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_BENIGN_BILIARY_OBSTRUCTION_SOURCE,
+    title: "SCORE module: Benign Biliary Obstruction",
+    kind: "website",
+    citation: "Baird E, Peterson W. Benign Biliary Obstruction. SCORE Curriculum, Biliary module, Surgical Council on Resident Education, May 22, 2024. https://www.surgicalcore.org/modulecontent.aspx?id=1000519",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the biliary anatomy and blood supply, the causes of benign obstruction and cholangitis, presentation, laboratory and imaging workup, the medical and drainage pathway for cholangitis, the indications and steps of choledochoduodenostomy, and the evidence on cholecystectomy timing after cholangitis.",
+      "Corrected during review: the module lists increased triglyceride intake, sedentary lifestyle, obesity, and rapid weight loss as the most common risk factors under cholangitis pathophysiology; those are cholesterol gallstone risk factors and were not carried into the topic as cholangitis risk factors. The Tokyo diagnostic and severity tables exist in the module only as images and are cited to the Tokyo Guidelines source instead.",
+      "Added beyond the module during review and pending the owner's sign-off: sump syndrome after side-to-side choledochoduodenostomy, carried in the choledochoduodenostomy indications block.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_BILE_DUCT_INJURY_SOURCE,
+    title: "SCORE module: Iatrogenic Bile Duct Injury",
+    kind: "website",
+    citation: "James A, Klingensmith ME. Iatrogenic Bile Duct Injury. SCORE Curriculum, Biliary module, Surgical Council on Resident Education, March 4, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=127142",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the critical view of safety, the injury physiology, incidence and risk factors, prevention adjuncts, technical pitfalls, presentation by timing, imaging, repair techniques, nonoperative management, and outcomes.",
+      "Not carried into the topic: the module defines Calot's triangle as the cystic duct, cystic artery, and edge of segment V, which matches neither the original Calot description nor the hepatocystic triangle; the companion repair module's definitions are used instead. The Bismuth-Strasberg classification appears in the module only as an image and is cited to Strasberg's paper.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_BILE_DUCT_INJURY_REPAIR_SOURCE,
+    title: "SCORE module: Iatrogenic Bile Duct Injury Repair",
+    kind: "website",
+    citation: "He J, Choti MA. Iatrogenic Bile Duct Injury Repair. SCORE Curriculum, Biliary module, Surgical Council on Resident Education, June 16, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=161417",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the repair algorithm for injuries recognized at the index operation and later, management by Strasberg class, the critical view of safety and both definitions of the triangle, the intraoperative cholangiogram technique, the hepaticojejunostomy steps, the workup of a postoperative leak, outcomes, and follow-up. Its incidence and intraoperative-recognition figures differ from the companion injury module, and the topics say so rather than choosing one.",
+  },
+  {
+    id: SCORE_CHOLEDOCHOENTERIC_ANASTOMOSIS_SOURCE,
+    title: "SCORE module: Choledochoenteric Anastomosis",
+    kind: "website",
+    citation: "Stahl CC, Minter RM. Choledochoenteric Anastomosis. SCORE Curriculum, Biliary module, Surgical Council on Resident Education, October 16, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=144249",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the indications, the referral outcomes, biliary variants and blood supply, preoperative preparation after delayed recognition, the choice among primary repair, duct-to-duct repair, choledochoduodenostomy, and Roux-en-Y reconstruction, the hepaticojejunostomy steps including the Hepp-Couinaud extension, complication rates for ERCP, PTC, and the anastomosis, and outcomes.",
+      "Not carried into the topic pending the owner's decision: the module gives a 30 percent risk of long-term stricture after hepaticojejunostomy in the same section that reports more than 90 percent of patients free of jaundice and cholangitis. The two are hard to reconcile without knowing the population behind the 30 percent figure.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_CHOLEDOCHAL_CYST_SOURCE,
+    title: "SCORE module: Choledochal Cyst",
+    kind: "website",
+    citation: "Bonds M, Rocha FG. Choledochal Cyst. SCORE Curriculum, Biliary module, Surgical Council on Resident Education, October 16, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=143945",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. The adult-oriented module: Todani types, the anomalous pancreaticobiliary junction, malignancy as a field defect, adult presentation, the imaging algorithm, treatment by type, timing, and long-term complications.",
+  },
+  {
+    id: SCORE_CHOLEDOCHAL_CYST_PEDIATRIC_SOURCE,
+    title: "SCORE module: Choledochal Cysts (Pediatric)",
+    kind: "website",
+    citation: "Grubbs H, McGaha P. Choledochal Cysts (Pediatric). SCORE Curriculum, Pediatric module, Surgical Council on Resident Education, August 19, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=162963",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies the Todani subtypes, pancreaticobiliary maljunction, epidemiology, prenatal diagnosis and its differential, the distinction from cystic biliary atresia, treatment by type, the hepaticoduodenostomy versus Roux-en-Y comparison, the mucosectomy fallback when the cyst is adherent to the portal vein, and surveillance after excision. Its 90 to 95 percent share for type I differs from Fiser's 85 percent; the topic prints both.",
+  },
+  {
+    id: SCORE_PSC_SOURCE,
+    title: "SCORE module: Primary Sclerosing Cholangitis",
+    kind: "website",
+    citation: "Butler JR, Zyromski NJ. Primary Sclerosing Cholangitis. SCORE Curriculum, Biliary module, Surgical Council on Resident Education, March 23, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=263722",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "The full SCORE module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Supplies epidemiology, presentation, diagnostic modalities, endoscopic, reconstructive, and transplant options with their outcome figures, medical therapy, post-transplant outcomes, and surveillance. Its statements that ERCP is the test of choice and that ursodeoxycholic acid is not recommended predate the 2022 AASLD guidance, and the topic writes both splits.",
+  },
+  {
+    id: FISER_BILIARY_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Biliary System",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 32, Biliary System, pages 438–460.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Page-level markdown of the chapter, held in `Pocket Chief Resources/absite-8e/ch32_biliary-system.md`. Supplies the keyed board answers on duct size, sphincter pharmacology, choledocholithiasis laboratory tests, primary and secondary duct stones, preoperative ERCP thresholds, the bile duct injury pathway and repair timing, strictures, Mirizzi syndrome, cholangitis, choledochal cysts, and primary sclerosing cholangitis.",
+      "The chapter is optical character recognition of scanned pages. Reconstructed from sense rather than quoted: the early-repair window printed as `57 days`, read as seven days or fewer; and the threshold for cholangiovenous reflux printed as `>200 mm Hg`, which is physiologically implausible and is read as roughly 20 to 25 cm H2O, the classically taught figure.",
+      "Added beyond the chapter during review and pending the owner's sign-off: the Csendes classification of Mirizzi syndrome and its stage-based management, carried in the Mirizzi block.",
+      "One disagreement with the SCORE modules is carried in the topics rather than silently resolved: Fiser says a duct injured at cholecystectomy should not be attached to the duodenum because it will not reach, where SCORE allows choledochoduodenostomy for distal injuries when a Kocher maneuver gives a tension-free repair.",
+    ].join(" "),
+  },
+  {
+    id: FISER_CHOLEDOCHAL_CYST_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Pediatric Surgery, choledochal cyst",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 43, Pediatric Surgery, page 643.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Page-level markdown held in `Pocket Chief Resources/absite-8e/ch43_pediatric-surgery.md`. Supplies the keyed Todani frequencies and treatments, the reasons excision is mandatory, the low malignant risk of type III, and the association of Caroli disease with congenital hepatic fibrosis and medullary sponge kidney.",
+      "Added beyond the page during review and pending the owner's sign-off: the explicit statement that internal drainage of a cyst without excision is obsolete because it leaves the epithelium in place, carried in the excision warning.",
+    ].join(" "),
+  },
+  {
+    id: TOKYO_2018_CHOLANGITIS_SOURCE,
+    title: "Tokyo Guidelines 2018: acute cholangitis",
+    kind: "article",
+    citation: "Kiriyama S, Kozaka K, Takada T, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholangitis (with videos). J Hepatobiliary Pancreat Sci. 2018;25(1):17-30. Miura F, Okamoto K, Takada T, et al. Tokyo Guidelines 2018: initial management of acute biliary infection and flowchart for acute cholangitis. J Hepatobiliary Pancreat Sci. 2018;25(1):31-40.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Both papers are named by the SCORE Benign Biliary Obstruction module as the source of its diagnostic and severity tables, which reach the module only as images. Registered so the criteria can be cited to their authority. The criteria and grading thresholds were written from the published guideline during review and are pending the owner's sign-off; the recommendation for early drainage in grade II and its observational basis were confirmed against the guideline on October 22, 2026.",
+  },
+  {
+    id: ASGE_CHOLEDOCHOLITHIASIS_SOURCE,
+    title: "ASGE guideline: endoscopy in choledocholithiasis",
+    kind: "article",
+    citation: "Buxbaum JL, Abbas Fehmi SM, Sultan S, et al. ASGE guideline on the role of endoscopy in the evaluation and management of choledocholithiasis. Gastrointest Endosc. 2019;89(6):1075-1105.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Added beyond the supplied sources during review and pending the owner's sign-off. Neither SCORE nor Fiser carries the current risk stratification for suspected duct stones, and Fiser's preoperative ERCP thresholds predate it.",
+  },
+  {
+    id: AASLD_PSC_SOURCE,
+    title: "AASLD practice guidance: primary sclerosing cholangitis and cholangiocarcinoma",
+    kind: "article",
+    citation: "Bowlus CL, Arrivé L, Bergquist A, et al. AASLD practice guidance on primary sclerosing cholangitis and cholangiocarcinoma. Hepatology. 2023;77(2):659-702. doi:10.1002/hep.32771",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Added beyond the supplied sources during review and pending the owner's sign-off, because the SCORE module predates it on ursodeoxycholic acid and diagnostic imaging.",
+      "Confirmed against the guidance on October 22, 2026: ursodeoxycholic acid at 13 to 23 mg/kg/day may be considered, continued only with a meaningful fall in alkaline phosphatase or symptom relief at 12 months, and high-dose ursodeoxycholic acid at 28 to 30 mg/kg/day should not be prescribed; and surveillance colonoscopy in PSC with IBD every 1 to 2 years.",
+      "Written from training knowledge and not re-verified during review: MRCP as the first diagnostic test, serum IgG4 at diagnosis to exclude IgG4-related cholangitis, imaging surveillance for cholangiocarcinoma every 6 to 12 months, and cholecystectomy for gallbladder polyps of 8 mm or more.",
+    ].join(" "),
+  },
+  {
+    id: STRASBERG_CLASSIFICATION_SOURCE,
+    title: "Strasberg classification of bile duct injury",
+    kind: "article",
+    citation: "Strasberg SM, Hertl M, Soper NJ. An analysis of the problem of biliary injury during laparoscopic cholecystectomy. J Am Coll Surg. 1995;180(1):101-125.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Both SCORE bile duct injury modules use this classification but carry it only as an image. Registered so the class definitions can be cited to their authority; the definitions were written from the published classification during review and are pending the owner's sign-off.",
+  },
+  {
+    id: BILE_DUCT_REPAIR_TIMING_SOURCE,
+    title: "Meta-analysis: timing of bile duct injury repair",
+    kind: "article",
+    citation: "Manivasagam SS, Chandra JN, Khera D, Aradhya PS, Hiremath AM. Optimal timing of surgical repair after bile duct injury: a systematic review and meta-analysis. Cureus. 2024;16(2):e53507. doi:10.7759/cureus.53507",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Added beyond the supplied sources during review and pending the owner's sign-off, to set the board teaching on repair timing against the current evidence. Twenty observational studies and 3,421 patients; early repair under 14 days and delayed repair after 6 weeks both had lower morbidity than repair between 2 and 6 weeks, delayed repair had the lowest stricture rate, and timing was not associated with mortality. Observational, and a 2022 analysis of about 3,800 patients found early and delayed repair comparable.",
   },
 ];
