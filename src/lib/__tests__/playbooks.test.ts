@@ -130,9 +130,35 @@ describe("playbook library", () => {
         "sublay mesh -> abdominal-wall-reconstruction",
         "transversus abdominis release -> abdominal-wall-reconstruction",
       ],
+      // The aortic cluster's playbooks, reviewed 2026-10-22. Every destination is the topic a reader of that line would
+      // want; "arterial line" follows the October 12 acceptance. Reworded instead: "Prone positioning" reached ARDS.
+      "open-popliteal-aneurysm-repair": [
+        "Compartment syndrome -> fasciotomy",
+        "Fasciotomy -> fasciotomy",
+        "Rutherford -> fasciotomy",
+        "abdominal aortic aneurysm -> aortic-aneurysms",
+        "acute limb ischemia -> acute-limb-ischemia",
+        "arterial line -> vascular-access",
+        "atrial fibrillation -> common-cardiac-arrhythmias",
+        "compartment pressure -> fasciotomy",
+        "deep vein thrombosis -> deep-venous-thrombosis",
+        "delta pressure -> fasciotomy",
+        "fasciotomy -> fasciotomy",
+        "four-compartment fasciotomy -> fasciotomy",
+        "hyperkalemia -> derangements-of-electrolytes-and-acid-base-balance",
+        "metabolic acidosis -> derangements-of-electrolytes-and-acid-base-balance",
+        "popliteal aneurysm -> arterial-peripheral-aneurysms",
+        "renal failure -> renal-failure",
+        "reperfusion injury -> fasciotomy",
+        "rhabdomyolysis -> fasciotomy",
+        "thrombosed popliteal aneurysm -> peripheral-aneurysms-repair",
+      ],
       "femoropopliteal-bypass": [
         "Compartment syndrome -> fasciotomy",
         "Fasciotomy -> fasciotomy",
+        // Added with the aortic aneurysm cluster 2026-10-22: the bullet names popliteal aneurysm as the pathology
+        // being bypassed, and the disease topic is where its thresholds and approach choice live.
+        "Popliteal aneurysm -> arterial-peripheral-aneurysms",
         "Rhabdomyolysis -> fasciotomy",
         // Added with the DVT topic 2026-10-10: late leg swelling after bypass is worked up for exactly this.
         "deep vein thrombosis -> deep-venous-thrombosis",
@@ -255,6 +281,16 @@ describe("playbook library", () => {
         "transversus abdominis release -> abdominal-wall-reconstruction",
         "umbilical hernia -> umbilical-and-epigastric-hernia",
         "ventral hernia -> ventral-and-incisional-hernia",
+      ],
+      // Reviewed 2026-10-22 with the aortic cluster. Reworded instead: "find the vein fast" reached the FAST exam,
+      // the same false positive as "a fast one" before it.
+      "saphenous-vein-harvest": [
+        "VTE prophylaxis -> prophylaxis-of-venous-thromboembolism",
+        "arterial line -> vascular-access",
+        "lymphedema -> evaluation-of-a-swollen-leg",
+        "proximal and distal control -> vascular-exposure-principles",
+        "thrombophlebitis -> thrombophlebitis",
+        "varicosities -> varicose-veins",
       ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",

@@ -2,6 +2,10 @@ import { superiorVenaCavaSyndromeTopic } from "@/content/topics/superior-vena-ca
 import { thoracicOutletSyndromeTopic } from "@/content/topics/thoracic-outlet-syndrome";
 import { prophylaxisOfVenousThromboembolismTopic } from "@/content/topics/prophylaxis-of-venous-thromboembolism";
 import { abdominalAndAortoiliacAneurysmRepairTopic } from "@/content/topics/abdominal-and-aortoiliac-aneurysm-repair";
+import { aorticAneurysmsTopic } from "@/content/topics/aortic-aneurysms";
+import { acuteAorticDissectionTopic } from "@/content/topics/acute-aortic-dissection";
+import { arterialPeripheralAneurysmsTopic } from "@/content/topics/arterial-peripheral-aneurysms";
+import { peripheralAneurysmsRepairTopic } from "@/content/topics/peripheral-aneurysms-repair";
 import { abdominalExplorationTopic } from "@/content/topics/abdominal-exploration";
 import { abdominalPainTopic } from "@/content/topics/abdominal-pain";
 import { abdominalWallReconstructionTopic } from "@/content/topics/abdominal-wall-reconstruction";
@@ -130,6 +134,10 @@ export const libraryTopics: Topic[] = [
   groinHerniaRepairTopic,
   abdominalWallReconstructionTopic,
   abdominalAndAortoiliacAneurysmRepairTopic,
+  aorticAneurysmsTopic,
+  acuteAorticDissectionTopic,
+  arterialPeripheralAneurysmsTopic,
+  peripheralAneurysmsRepairTopic,
   acuteLimbIschemiaTopic,
   vascularExposurePrinciplesTopic,
   acuteLiverFailureTopic,

@@ -289,7 +289,7 @@ export const abdominalAndAortoiliacAneurysmRepairTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000613",
   slug: "abdominal-and-aortoiliac-aneurysm-repair",
   title: "Abdominal & Aortoiliac Aneurysm Repair",
-  aliases: ["AAA", "abdominal aortic aneurysm", "AAA repair", "EVAR", "endovascular aneurysm repair", "open aortic repair", "aortoiliac aneurysm", "iliac artery aneurysm", "endoleak", "ischemic colitis after AAA", "IMA reimplantation", "inferior mesenteric artery", "aortoenteric fistula", "inflammatory aneurysm", "mycotic aneurysm", "aortic neck", "permissive hypotension", "ruptured AAA", "retroperitoneal approach", "Carrel patch", "endotension", "AAA screening"],
+  aliases: ["AAA repair", "abdominal aortic aneurysm repair", "EVAR", "endovascular aneurysm repair", "open aortic repair", "aortoiliac aneurysm", "iliac artery aneurysm", "endoleak", "ischemic colitis after AAA", "IMA reimplantation", "inferior mesenteric artery", "aortoenteric fistula", "inflammatory aneurysm", "mycotic aneurysm", "aortic neck", "permissive hypotension", "ruptured AAA", "retroperitoneal approach", "Carrel patch", "endotension"],
   scoreNodeId: "arterial-procedures",
   scoreCategory: "SCORE · Arterial Disease · Operations & Procedures",
   tags: ["arterial-disease", "vascular", "aneurysm", "operative-technique", "endovascular", "absite", "score"],
