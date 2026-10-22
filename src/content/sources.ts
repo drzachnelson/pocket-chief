@@ -284,6 +284,25 @@ export const FISER_GI_HORMONES_SOURCE = "00000000-0000-4000-8000-000000004716";
 export const BAVENO_VARICEAL_CONSENSUS_SOURCE = "00000000-0000-4000-8000-000000004717";
 export const NASOGASTRIC_ASPIRATE_2004_SOURCE = "00000000-0000-4000-8000-000000004718";
 
+// Aortic aneurysm cluster (October 2026): one hundreds block per topic, sources from the block start and the topic
+// at +20/+21. Aortic Aneurysms 04800, Acute Aortic Dissection 04900, Arterial Peripheral Aneurysms 05000,
+// Peripheral Aneurysms Repair 05100. The repair topic reuses 05000 and 05002, and both aortic topics reuse 04803.
+// The existing SCORE repair module (00600), Fiser chapter 27 (00601) and USPSTF (00602) entries are reused.
+export const SCORE_AAA_DISEASE_SOURCE = "00000000-0000-4000-8000-000000004800";
+export const AORTIC_ANEURYSMS_OE_SOURCE = "00000000-0000-4000-8000-000000004801";
+export const SVS_AAA_2018_SOURCE = "00000000-0000-4000-8000-000000004802";
+export const ACC_AHA_AORTIC_2022_SOURCE = "00000000-0000-4000-8000-000000004803";
+export const SCORE_AORTIC_DISSECTION_SOURCE = "00000000-0000-4000-8000-000000004900";
+export const AORTIC_DISSECTION_OE_SOURCE = "00000000-0000-4000-8000-000000004901";
+export const SCORE_PERIPHERAL_ARTERIAL_ANEURYSMS_SOURCE = "00000000-0000-4000-8000-000000005000";
+export const PERIPHERAL_ARTERIAL_ANEURYSMS_OE_SOURCE = "00000000-0000-4000-8000-000000005001";
+export const SVS_POPLITEAL_ANEURYSM_2022_SOURCE = "00000000-0000-4000-8000-000000005002";
+export const SCORE_PERIPHERAL_ANEURYSMS_REPAIR_SOURCE = "00000000-0000-4000-8000-000000005100";
+export const PERIPHERAL_ANEURYSMS_REPAIR_OE_SOURCE = "00000000-0000-4000-8000-000000005101";
+// The cluster's two playbooks take the next single ids in the 03000 playbook block.
+export const OPEN_PAA_REPAIR_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003032";
+export const SAPHENOUS_VEIN_HARVEST_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003033";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: SCORE_SVC_SOURCE,
@@ -517,6 +536,7 @@ export const suppliedSources: SuppliedSource[] = [
       "The dialysis access section (page 357) also supplies the hemodialysis catheter topic's board answers: nontunneled internal jugular and subclavian catheters for 3 weeks and femoral for 5 days, a tunneled catheter for 1 year, the right internal jugular as the usual best site, never the side of a planned fistula or graft, the Rule of 6s, a 6-week wait for a graft, and stenting for central venous stenosis. Each that current practice has moved is a board-versus-current row there.",
       "The venous sections supply the deep venous thrombosis topic's board answers: Paget-Schroetter effort thrombosis treated with catheter-directed thrombolysis then first rib resection at the same admission (page 352); and DVT most common in the calf, the left leg involved twice as often as the right, swelling by level, heparin then warfarin as treatment, phlegmasia cerulea dolens treated with catheter-directed thrombolysis or emergent thrombectomy, and an unneeded central line pulled before heparin (pages 358-359).",
       "The cerebrovascular section (pages 334-335) supplies the two carotid topics' board answers: the duplex velocity criteria, internal versus external carotid waveforms and first branches, embolism from the internal carotid as the usual cause of a cerebral event, territory symptoms, the repair thresholds, emergent endarterectomy for crescendo TIA or stroke in evolution, 10 to 14 days after an ischemic and 6 to 8 weeks after a hemorrhagic stroke, the tightest or dominant side first, shunting for a back pressure under 50 mm Hg or a tight contralateral side, no repair of an occluded internal carotid, the cranial nerve deficits with vagus as the most common, post-endarterectomy hypertension in 20% treated with nitroprusside, myocardial infarction as the leading non-stroke cause of death, 15% restenosis, stenting for high-risk patients, and TCAR's flow reversal. The top of page 335 is cut off in the scan, mid-way through the clamping order; that line was not quoted.",
+      "The aortic dissection section (pages 338-339), the AAA section (pages 340-341) and the visceral and peripheral aneurysm section (page 355) supply the October 2026 aortic cluster's board answers: Stanford and DeBakey classes, tearing pain, unequal arm pressures, 95% severe hypertension, a usually normal chest film, chest CT as the test, the medial plane, 70% aortic insufficiency, esmolol with nitroprusside, operating on every ascending dissection and on descending dissections only for ischemia or contained rupture, lifetime MRI with 30% later aneurysm; permissive hypotension at a systolic of 80 to 100; rupture above the inguinal ligament against embolism below it; femoral repair over 3.5 cm; popliteal repair for symptoms, over 2 cm or infection by vein exclusion bypass, half bilateral, half with another aneurysm, 25% amputation-level complications untreated, and no covered stent unless open surgery is impossible; and ultrasound-guided compression with thrombin injection for pseudoaneurysm. The acute arterial thrombosis rule on page 350 (a threatened limb goes to the operating room for thrombectomy after heparin, a non-threatened limb to angiography for thrombolysis) is the one the repair packet applies to the thrombosed popliteal aneurysm.",
     ].join(" "),
   },
   {
@@ -2757,4 +2777,152 @@ export const suppliedSources: SuppliedSource[] = [
         "details": "Results: imperfect negative predictive value of aspirate for high-risk lesions; clear/bile-stained subgroup also described in the ACG original guideline discussion. Original-study abstract and ACG primary discussion indexed passages reviewed. Used only to reject a negative-aspirate exclusion rule, not to recommend routine lavage. Additional primary access: https://gi.org/guideline/management-of-patients-with-ulcer-bleeding/ Pending Zach's clinical review. Primary guidance/study added beyond the supplied SCORE/Fiser texts during guide preparation; pending owner sign-off.",
         "url": "https://pubmed.ncbi.nlm.nih.gov/14745388/"
     },
+  {
+    id: SCORE_AAA_DISEASE_SOURCE,
+    title: "SCORE module: Abdominal Aortic Aneurysms",
+    kind: "website",
+    citation: "Olmstead A, Rossi MJ. Abdominal Aortic Aneurysms. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, December 8, 2025. https://www.surgicalcore.org/modulecontent.aspx?id=149875",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=149875",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Source S1 of the aortic aneurysm packet (October 22, 2026): definitions, etiology, risk factors, associated aneurysms, rupture risk by diameter, physical examination sensitivity, imaging, the Society for Vascular Surgery screening recommendation and surveillance intervals, and the indications for intervention.",
+      "Read against the packet during review: every S1 statement was found in the module. The module's statement that patients with a popliteal aneurysm have a 62% chance of an associated AAA disagrees with Fiser (half have another aneurysm somewhere) and the 2022 SVS popliteal guideline meta-analysis (about one-third); the peripheral aneurysm topic carries the disagreement.",
+    ].join(" "),
+  },
+  {
+    id: AORTIC_ANEURYSMS_OE_SOURCE,
+    title: "Owner-supplied abdominal aortic aneurysm study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Abdominal Aortic Aneurysm — Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/8fa88083-6963-464a-9882-1e7154ae5343) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and a short reference table. Works it cites: Isselbacher (2022 ACC/AHA aortic disease guideline, registered separately); Chaikof (2018 SVS AAA guideline, registered separately); Mazzolai (2024 ESC peripheral arterial and aortic guideline); Hensley and Upchurch (JACC 2022); Sakalihasan (Nature Reviews Disease Primers 2018); Wengerter (2018) and Abdul Jabbar (2020) on EVAR neck anatomy; Czerny (2024 EACTS/STS) and Wilson (2016 AHA) on infected aneurysms.",
+      "Used during review for the board-versus-current table: the ACC/AHA surveillance intervals that differ for women, the SVS permissive hypotension target of 70 to 90 mm Hg, the earlier convergence of EVAR and open survival, diabetes as an inverse association, and the trials showing no benefit from early repair of 4.0 to 5.4 cm aneurysms. Each is added beyond the packet's SCORE and Fiser sources and is pending Zach's sign-off.",
+      "Not carried: EVAR neck and access minimums that duplicate or refine the repair topic's SCORE table, the endoleak table (the repair topic holds it), and the special scenarios already in the repair topic.",
+    ].join(" "),
+  },
+  {
+    id: SVS_AAA_2018_SOURCE,
+    title: "SVS practice guidelines on the care of patients with an abdominal aortic aneurysm (2018)",
+    kind: "article",
+    citation: "Chaikof EL, Dalman RL, Eskandari MK, et al. The Society for Vascular Surgery practice guidelines on the care of patients with an abdominal aortic aneurysm. J Vasc Surg. 2018;67(1):2-77.e2.",
+    url: "https://pubmed.ncbi.nlm.nih.gov/29268916/",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Registered during the October 22, 2026 aortic cluster review from the OpenEvidence document, which attributes the permissive hypotension target of a systolic pressure of 70 to 90 mm Hg in a conscious patient to it. The publication was identified at PubMed; the full text was not opened, so the exact recommendation wording and grade are carried as the OpenEvidence document gives them. Added beyond the packet; pending Zach's sign-off.",
+  },
+  {
+    id: ACC_AHA_AORTIC_2022_SOURCE,
+    title: "2022 ACC/AHA guideline for the diagnosis and management of aortic disease",
+    kind: "article",
+    citation: "Isselbacher EM, Preventza O, Hamilton Black J 3rd, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482; J Am Coll Cardiol. 2022;80(24):e223-e393.",
+    url: "https://www.acc.org/latest-in-cardiology/ten-points-to-remember/2022/11/01/12/21/2022-guideline-on-aortic-disease-2-gl-ad",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Registered during the October 22, 2026 aortic cluster review. Checked directly against the ACC's published key-perspectives summary: medical therapy for acute aortic syndromes targets a systolic pressure under 120 mm Hg (or the lowest that maintains end-organ perfusion) and a heart rate of 60 to 80, with intravenous beta-blockade first and vasodilators added only if pressure stays high; medical therapy is the initial management of uncomplicated type B dissection and endovascular repair is preferred over open repair for rupture with suitable anatomy; AAA repair at 5.5 cm in men and 5.0 cm in women; surveillance every 3 years at 3.0 to 3.9 cm, annually at 4.0 to 4.9 cm in men or 4.0 to 4.4 cm in women, and every 6 months at 5.0 cm or more in men or 4.5 cm or more in women. Added beyond the packets; pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_AORTIC_DISSECTION_SOURCE,
+    title: "SCORE module: Acute Aortic Dissection",
+    kind: "website",
+    citation: "Clark RM, Curci JA. Acute Aortic Dissection. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, March 18, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=1000130",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000130",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Source S1 of the acute aortic dissection packet: physiology, risk factors, presentation and complications, CT angiography and true- versus false-lumen anatomy, the DeBakey and Stanford systems, impulse control, malperfusion monitoring, operative indications, and follow-up imaging.",
+      "The module's impulse-control target is a systolic pressure of 100 to 120 mm Hg and a heart rate near 60; it lists diltiazem alongside nicardipine and nitroprusside as afterload agents. The packet frames diltiazem as the rate-control substitute when beta-blockers are contraindicated, which the module's learning objective asks for and the ACC/AHA guideline supports.",
+    ].join(" "),
+  },
+  {
+    id: AORTIC_DISSECTION_OE_SOURCE,
+    title: "Owner-supplied acute aortic dissection study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Acute Aortic Dissection: Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/86b623e6-327b-4ea7-bbc5-d2305df15c64) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: Isselbacher (2022 ACC/AHA, registered separately); MacGillivray (2022 STS/AATS); Czerny (2024 EACTS/STS); Mazzolai (2024 ESC); Hameed (JAMA 2023); Nienaber (Nature Reviews Disease Primers 2016); Vilacosta (JACC 2021); Kulkarni (Journal of Human Hypertension 2023); Mussa and Kougias (NEJM 2025); Hiratzka (2010 guideline); and the INSTEAD and INSTEAD-XL trials.",
+      "Supports the statements the packet flagged as beyond its sources: the acute, subacute and chronic timing categories (EACTS/STS 2024), analgesia as part of impulse control, hypotension signalling tamponade or rupture, and pre-emptive subacute TEVAR for selected high-risk uncomplicated type B dissections. Each is pending Zach's sign-off.",
+      "Not carried: the zone-based SVS/STS classification, non-A-non-B dissection, the Aortic Dissection Detection Risk Score, the TEVAR-versus-open meta-analysis figures, and the pericardiocentesis caution, which go beyond the topic's SCORE scope; they remain available for a later revision.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_PERIPHERAL_ARTERIAL_ANEURYSMS_SOURCE,
+    title: "SCORE module: Peripheral Arterial Aneurysms",
+    kind: "website",
+    citation: "Costanza M. Peripheral Arterial Aneurysms. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, October 3, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=149943",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=149943",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Source S1 of the arterial peripheral aneurysms packet and S2 of the peripheral aneurysms repair packet: histology, pathophysiology and sites, the AAA association, presentation, imaging and mimics, observation thresholds, pseudoaneurysm treatment, operative concepts, and follow-up.",
+      "Read against the packets during review: every statement attributed to the module was found in it. The module's observation thresholds (under 2.5 cm femoral, under 2.0 cm popliteal) and its description of thrombin injection without compression disagree with Fiser; both topics carry the disagreement.",
+    ].join(" "),
+  },
+  {
+    id: PERIPHERAL_ARTERIAL_ANEURYSMS_OE_SOURCE,
+    title: "Owner-supplied peripheral arterial aneurysms study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Peripheral Arterial Aneurysms: Board-Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/35db7a7f-5500-4551-b8ff-d55801e6cd84) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Built around the 2022 SVS popliteal aneurysm guideline (registered separately) and marks classic-versus-current splits itself. Other works it cites: Gujja (Interventional Cardiology 2022); Kim and Bellomo (Vascular Medicine 2024); Lawrence (Journal of Vascular Surgery 2014, femoral aneurysm natural history); Phair (Journal of Vascular Surgery 2016, posterior approach meta-analysis); Ahmed (Cochrane 2014); Hellwig (2020) and Spinella (2019, 2026) on stent-graft anatomy; the 2024 ACC/AHA multisociety PAD guideline and the 2024 ESC guideline.",
+      "Supplies the 1.5-times-adjacent-diameter definition the packet flagged as beyond its sources, the association figures, the SVS repair thresholds and annual surveillance, the Lawrence femoral threshold, and the Rutherford-based approach to a thrombosed popliteal aneurysm. Each is pending Zach's sign-off.",
+      "Not carried: visceral aneurysms (a separate SCORE topic not yet in the library), upper-extremity aneurysms, and the Cutler-Darling classification, which neither SCORE nor Fiser names.",
+    ].join(" "),
+  },
+  {
+    id: SVS_POPLITEAL_ANEURYSM_2022_SOURCE,
+    title: "SVS clinical practice guidelines on popliteal artery aneurysms (2022)",
+    kind: "article",
+    citation: "Farber A, Angle N, Avgerinos E, et al. The Society for Vascular Surgery clinical practice guidelines on popliteal artery aneurysms. J Vasc Surg. 2022;75(1S):109S-120S. doi:10.1016/j.jvs.2021.04.040",
+    url: "https://profiles.wustl.edu/en/publications/the-society-for-vascular-surgery-clinical-practice-guidelines-on-/",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: "Registered during the October 22, 2026 aortic cluster review from the two peripheral aneurysm OpenEvidence documents, which both cite it as the main guideline. The citation was verified against the publication record (PMID 34023430). The full text was not opened: the recommendation wording and grades carried here (screening every 5 years, repair at 20 mm or more, deferral to 30 mm in selected high-risk patients without thrombus, repair under 20 mm with thrombus or poor runoff, open repair with vein for life expectancy of 5 years or more, Rutherford-based management of the thrombosed aneurysm, and post-repair surveillance at 3, 6 and 12 months) are as the two documents give them, and they agree. Added beyond the packets; pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_PERIPHERAL_ANEURYSMS_REPAIR_SOURCE,
+    title: "SCORE module: Peripheral Aneurysms Repair",
+    kind: "website",
+    citation: "Alfawaz A, Akbari C. Peripheral Aneurysms Repair. SCORE Curriculum, Arterial Disease module, Surgical Council on Resident Education, October 3, 2023. https://www.surgicalcore.org/modulecontent.aspx?id=1000538",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000538",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "The full module text, retrieved August 12, 2026 and held in `Pocket Chief Resources/score-modules/`. Source S1 of the peripheral aneurysms repair packet: indications, femoral triangle and popliteal fossa anatomy, preoperative preparation, the key steps of femoral, popliteal and pseudoaneurysm repair, intraoperative decisions, and complications.",
+      "The module states that the posterior approach is limited to aneurysms confined to the popliteal fossa with compressive symptoms; contemporary observational data in the OpenEvidence document favor it more broadly for exclusion and patency, and the topic carries both.",
+    ].join(" "),
+  },
+  {
+    id: PERIPHERAL_ANEURYSMS_REPAIR_OE_SOURCE,
+    title: "Owner-supplied peripheral aneurysm repair study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Peripheral Aneurysm Repair: Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/7e80b5fe-46de-41c4-a804-d637f042a36e) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Corroborated against the 2022 SVS popliteal aneurysm guideline (registered separately). Other works it cites: Bellomo (Vascular Medicine 2024); Rahgozar (Journal of Vascular Surgery 2026, VQI vein-first data); Naazie (Journal of Surgical Research 2023); Troisi and Baccellieri (Journal of Vascular Surgery 2025, 2022, posterior approach conduits); Phair (2016) and Mazzaccaro (2015) on the posterior approach; Lu (Annals of Vascular Surgery 2021) on sac expansion; Spinella, Zaghloul, Ning and van Walraven on stent-graft anatomy and outcomes; Dragas (EJVES 2020) on adjunctive lysis; Lawrence (2014) on femoral aneurysms; and the STILE and TOPAS trials.",
+      "Supplies the Rutherford-based branches added to the thrombosed popliteal aneurysm pathway, the sac-expansion risk after medial ligation, the posterior-approach comparison, the conduit evidence, and post-repair surveillance at 3, 6 and 12 months. Each is added beyond the packet and pending Zach's sign-off.",
+      "Not carried: medial and posterior exposure detail and positioning, which belong to the Open Popliteal Artery Aneurysm Repair playbook rather than the SCORE topic.",
+    ].join(" "),
+  },
+  {
+    id: OPEN_PAA_REPAIR_PLAYBOOK_SOURCE,
+    title: "User-supplied open popliteal artery aneurysm repair (acute limb ischemia) attending playbook",
+    kind: "user_notes",
+    citation: "Attending quick-reference for open repair of a thrombosed popliteal artery aneurysm presenting with acute limb ischemia (medial approach, reversed great saphenous vein bypass with proximal and distal ligation; posterior approach as a variant), supplied to Pocket Chief as a Word document, October 22, 2026.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered list. Works it cites: the 2022 SVS popliteal aneurysm guideline (registered separately); the 2024 ACC/AHA PAD guideline and the 2024 ESC peripheral arterial and aortic guideline (both registered separately); Gujja (Interventional Cardiology 2022); Beuschel (Journal of Vascular Surgery 2022); Jungi (EJVES 2019); Cook (Journal of Vascular Surgery 2026); Chen (Annals of Vascular Surgery 2025); de Donato (Annals of Vascular Surgery 2023); Ahmed (Cochrane 2014); Joshi (Cochrane 2019); Lu (Annals of Vascular Surgery 2021); Rahgozar (Journal of Vascular Surgery 2026, VQI); Al-Falahi (EJVES 2026); Costa (Annals of Vascular Surgery 2026); Bellomo (Surgery 2026); Bérczi (PLoS One 2022); Roosendaal (Journal of Endovascular Therapy 2025); Bratzler (Surgical Infections 2013); the 2016 AHA vascular graft infection statement; Shafique (Journal of Surgical Research 2025); Correia (Cochrane 2025); the heparin sodium label; the 2012 ACCP antithrombotic guideline; Natour (Annals of Vascular Surgery 2023); the 2025 AAOS compartment syndrome guideline; Bonaca (JACC 2024); Weissler (JACC Cardiovascular Interventions 2021, paraphrasing ESC/ESVS 2017); Kumbhani (JACC 2026); and Behind the Knife popliteal and fasciotomy chapters.",
+      "Its evidence conflicts are kept rather than harmonized: vein against prosthetic and endovascular conduit (registry and meta-analytic data favor vein; a 2026 single-center series found limb events comparable), and medial against posterior approach (sac perfusion after medial ligation against fewer reported posterior cases).",
+      "Carried as the document attributes them and not checked against primary sources, pending Zach's sign-off: the 15% untreated amputation rate (the topics carry Fiser's 25%), the 4 to 6 hour ischemic tolerance, the 3 to 4 French Fogarty size for popliteal and tibial vessels (the Acute Limb Ischemia topic gives 4 French popliteal and 2 to 3 French tibial), the ACT-guided heparin regimen, the 20% six-month graft thrombosis figure, and the VOYAGER PAD regimen.",
+      "Not carried: the heparin label's weight-based ranges beyond the common bolus and ACT regimen, and the femoral-vein lactate correlation with fasciotomy.",
+    ].join(" "),
+  },
+  {
+    id: SAPHENOUS_VEIN_HARVEST_PLAYBOOK_SOURCE,
+    title: "User-supplied great saphenous vein harvest attending playbook",
+    kind: "user_notes",
+    citation: "Attending quick-reference for great saphenous vein harvest (open conventional default, with no-touch and endoscopic variants; CABG as the primary use, leg bypass where the evidence diverges), supplied to Pocket Chief as a Word document, October 22, 2026.",
+    suppliedAt: "2026-10-22T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered list. Works it cites: Verma and Mazer (NEJM 2019); Sohn (PLoS One 2024); Maris (Journal of Vascular Surgery 2026); Lawton (2021 ACC/AHA/SCAI coronary revascularization guideline); Dalén (JAMA Cardiology 2026); Caliskan (Nature Reviews Cardiology 2020); Georgoff (Behind the Knife, saphenous vein harvest); Hakim and Narouze (Pain Practice 2015); Beerkens (Nature Reviews Cardiology 2022); Zenati (NEJM 2019, REGROUP); Lazar (2016 AATS sternal wound infection guideline); Engelman (JAMA Surgery 2019, ERAS Cardiac); Seidelman (JAMA 2023); Wang (Vascular Medicine 2015); Gloviczki (2011 SVS/AVF venous guideline); Caggiati (American Venous Forum 2024); Prabhu (F1000Research 2026); Wilmot and Evans (Clinical Anatomy 2013); Kopjar and Dashwood (Angiology 2016); Rajakumar (Journal of Cardiac Surgery 2026); Yan (Cardiovascular Drugs and Therapy 2026); Harskamp (JAMA Surgery 2014, PREVENT IV storage); Toto (Journal of Clinical Medicine 2022); Lian (Scientific Reports 2024); Teixeira (Journal of Vascular Surgery 2015); Zhang (BMC Cardiovascular Disorders 2020); Lopes (NEJM 2009, PREVENT IV); Chahrour (Journal of Vascular Surgery 2025); Kronick (Journal of Vascular Surgery 2019); Vuong (Coronary Artery Disease 2022); Morrison and Dalsing (Journal of Vascular Surgery 2003); De Laurentis (Journal of Thrombosis and Thrombolysis 2026).",
+      "Its evidence conflicts are kept rather than harmonized: storage solution (saline, heparinized blood, buffered saline, DuraGraft), and open against endoscopic harvest, which splits by operation (no MACE difference in CABG with expert harvesters but better patency after open harvest in PREVENT IV and VEST III; fewer wound complications but lower primary patency with endoscopic harvest for leg bypass).",
+      "Pending Zach's sign-off: the document places systemic heparin before dividing the vein in the open sequence, which is a common vascular-surgery order but not routine in CABG, where heparin usually follows harvest; the playbook keeps the document's order. Instruments and suture sizes without a guideline, trial or label behind them are common practice or preference, as the document itself says. Carried as attributed and not checked against primary sources: the saphenous nerve anatomy percentages, the 15% chronic neuralgia rate and the vein-graft patency ranges.",
+    ].join(" "),
+  },
 ];
