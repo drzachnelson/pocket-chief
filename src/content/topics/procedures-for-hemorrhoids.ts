@@ -175,7 +175,7 @@ export const proceduresForHemorrhoidsTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000002121",
   slug: "procedures-for-hemorrhoids",
   title: "Procedures for Hemorrhoids",
-  aliases: ["hemorrhoidectomy", "excisional hemorrhoidectomy", "rubber band ligation", "hemorrhoid banding", "hemorrhoidal sclerotherapy", "infrared coagulation", "Milligan-Morgan", "Ferguson hemorrhoidectomy", "stapled hemorrhoidopexy", "procedure for prolapse and hemorrhoids", "hemorrhoidal artery ligation", "mucopexy", "hemorrhoid surgery", "anoplasty", "house flap", "anal stenosis", "pelvic sepsis", "thrombosed hemorrhoid excision", "slotted anoscope", "prone jackknife"],
+  aliases: ["hemorrhoidectomy", "excisional hemorrhoidectomy", "rubber band ligation", "hemorrhoid banding", "hemorrhoidal sclerotherapy", "infrared coagulation", "Milligan-Morgan", "Ferguson hemorrhoidectomy", "stapled hemorrhoidopexy", "procedure for prolapse and hemorrhoids", "hemorrhoidal artery ligation", "mucopexy", "hemorrhoid surgery", "anoplasty", "house flap", "anal stenosis", "pelvic sepsis after hemorrhoidectomy", "thrombosed hemorrhoid excision", "slotted anoscope", "prone jackknife"],
   scoreNodeId: "anorectal-procedures",
   scoreCategory: "SCORE · Anorectal · Operations & Procedures",
   tags: ["anorectal", "hemorrhoids", "colorectal", "operative-technique", "absite", "score"],

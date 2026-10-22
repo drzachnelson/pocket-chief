@@ -235,7 +235,7 @@ export const ulcerativeColitisTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001321",
   slug: "ulcerative-colitis",
   title: "Ulcerative Colitis",
-  aliases: ["ulcerative colitis", "UC", "acute severe ulcerative colitis", "ASUC", "inflammatory bowel disease", "IBD", "toxic megacolon", "toxic colitis", "Truelove and Witts", "Truelove Witts", "Oxford criteria", "Travis criteria", "Mayo endoscopic score", "UCEIS", "Montreal classification", "pancolitis", "proctitis", "backwash ileitis", "crypt abscess", "pseudopolyps", "IPAA", "ileal pouch anal anastomosis", "J-pouch", "restorative proctocolectomy", "total abdominal colectomy", "TAC", "total proctocolectomy", "TPC", "pouchitis", "cuffitis", "mucosectomy", "anal transition zone", "rectal stump", "primary sclerosing cholangitis", "PSC", "cyclosporine", "infliximab", "EARNEST", "dysplasia surveillance"],
+  aliases: ["ulcerative colitis", "UC", "acute severe ulcerative colitis", "ASUC", "inflammatory bowel disease", "IBD", "toxic megacolon", "toxic colitis", "Truelove and Witts", "Truelove Witts", "Oxford criteria", "Travis criteria", "Mayo endoscopic score", "UCEIS", "Montreal classification", "pancolitis", "proctitis", "backwash ileitis", "crypt abscess", "pseudopolyps", "primary sclerosing cholangitis", "PSC", "cyclosporine", "infliximab", "EARNEST", "dysplasia surveillance"],
   scoreNodeId: "large-intestine-conditions",
   scoreCategory: "SCORE · Large Intestine · Diseases & Conditions",
   tags: ["large-intestine", "ulcerative-colitis", "inflammatory-bowel-disease", "colorectal", "ileal-pouch", "absite", "score"],

@@ -74,6 +74,13 @@ import { ulcerativeColitisTopic } from "@/content/topics/ulcerative-colitis";
 import { vascularExposurePrinciplesTopic } from "@/content/topics/vascular-exposure-principles";
 import { vascularThoracicInjuryTopic } from "@/content/topics/vascular-thoracic-injury";
 import { ventralAndIncisionalHerniaTopic } from "@/content/topics/ventral-and-incisional-hernia";
+import { cDifficileColitisTopic } from "@/content/topics/c-difficile-colitis";
+import { colostomyAndColostomyClosureTopic } from "@/content/topics/colostomy-and-colostomy-closure";
+import { enterocutaneousFistulaTopic } from "@/content/topics/enterocutaneous-fistula";
+import { ileostomyAndIleostomyClosureTopic } from "@/content/topics/ileostomy-and-ileostomy-closure";
+import { proceduresForCrohnDiseaseTopic } from "@/content/topics/procedures-for-crohn-disease";
+import { proceduresForUlcerativeColitisTopic } from "@/content/topics/procedures-for-ulcerative-colitis";
+import { totalAndSubtotalColectomyTopic } from "@/content/topics/total-and-subtotal-colectomy";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -125,6 +132,13 @@ export const libraryTopics: Topic[] = [
   neckInjuriesManagementTopic,
   crohnDiseaseTopic,
   ulcerativeColitisTopic,
+  proceduresForCrohnDiseaseTopic,
+  proceduresForUlcerativeColitisTopic,
+  totalAndSubtotalColectomyTopic,
+  ileostomyAndIleostomyClosureTopic,
+  colostomyAndColostomyClosureTopic,
+  cDifficileColitisTopic,
+  enterocutaneousFistulaTopic,
   chestWallPleuraAndDiaphragmInjuriesTopic,
   vascularThoracicInjuryTopic,
   tracheobronchialAndLungInjuryTopic,

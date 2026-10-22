@@ -366,3 +366,17 @@ Four SCORE topics close the Liver module (8 of 8): **Hepatic Resection**, **Intr
 - **Known leftover:** bare "angioembolization" on Splenic Injury captures hepatic contexts. The new topics say "transcatheter embolization" instead; narrowing it touches every trauma topic and was left for its own change.
 
 Content status: **authored but unreviewed — draft until Zach reads it.**
+
+## Bowel boards batch (October 21, 2026)
+
+Seven SCORE entries from the bowel-boards study guides (`output/study-guides/bowel-boards/` in the vault checkout): **Procedures for Crohn Disease**, **Ileostomy and Ileostomy Closure** and **Enterocutaneous Fistula** under Small Intestine; **Procedures for Ulcerative Colitis**, **Total and Subtotal Colectomy**, **Colostomy and Colostomy Closure** and **C. difficile Colitis** under Large Intestine. Ids moved to the 044 block. The guides were authored against the stale navigation-redesign checkout first and ported here once its MEMORY note about authoring on fetched main was noticed — check the branch before authoring, not after.
+
+- **Procedure topics sit beside the disease topics, not inside them.** SCORE lists Crohn Disease and Procedures for Crohn Disease (and UC likewise) as separate entries, so each procedure topic is new and the disease topics were left intact.
+- **Alias ownership:** stricturoplasty names, Kono-S and ileocecal resection moved from Crohn Disease to Procedures for Crohn Disease; "enterocutaneous fistula" left Crohn Disease for its own topic; IPAA, J-pouch, pouchitis, cuffitis, mucosectomy and anal transition zone moved from Ulcerative Colitis to Procedures for Ulcerative Colitis; TAC, TPC and rectal stump moved to Total and Subtotal Colectomy.
+- **Aliases narrowed at the source:** bare "Hartmann procedure" left GI Tract Injury Repair (it now links to the colostomy topic); "short bowel syndrome" left both malrotation topics, ahead of SCORE's own Short Bowel Syndrome entry; AV Graft and Fistula's "fistulogram" became "dialysis fistulogram"; Procedures for Hemorrhoids' "pelvic sepsis" became "pelvic sepsis after hemorrhoidectomy". "Fulminant colitis" was kept off C. difficile because UC uses the phrase too.
+- **Splits written:** stress-dose steroids, biologic washout and emergency-open approach (SCORE UC versus ASCRS 2026); abscess interval 4–6 weeks (SCORE) versus 2–4 weeks (ECCO 2024); fidaxomicin preferred (IDSA/SHEA 2021) over SCORE's vancomycin-first and Fiser's salvage-only framing; ECF 6–8 weeks for spontaneous closure (SCORE) versus 6–12 months before reconstruction (ESPEN 2023); prophylactic parastomal mesh (ASCRS 2022 against routine use, EHS 2023 for it).
+- **Source error corrected:** SCORE C. difficile prints nonsevere as WBC >15,000; the IDSA/SHEA 2021 table reads ≤15,000.
+- **Open conflict, not resolved:** Crohn Disease's stricturoplasty table keys a "board-classic" 5 cm / 5–10 cm / >10 cm scheme, but Fiser p.508 — the board source on disk — gives under 10 cm for Heineke-Mikulicz, matching ASCRS. Left for Zach to decide whether the older scheme stays.
+- **Known leftover:** "inferior mesenteric artery" links to aneurysm repair and "superior rectal artery" to hemorrhoids from colectomy and colostomy text; both are defensible destinations and were left.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**
