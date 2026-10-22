@@ -83,7 +83,7 @@ export const ventralAndIncisionalHerniaTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000515",
   slug: "ventral-and-incisional-hernia",
   title: "Ventral & Incisional Hernia",
-  aliases: ["incisional hernia", "ventral hernia", "parastomal hernia", "Sugarbaker", "keyhole mesh", "STITCH trial", "small bites", "Israelsson", "loss of domain", "botulinum toxin", "progressive pneumoperitoneum", "VHWG"],
+  aliases: ["incisional hernia", "ventral hernia", "parastomal hernia", "Sugarbaker", "keyhole mesh", "STITCH trial", "small bites", "Israelsson", "loss of domain", "preoperative botulinum toxin", "progressive pneumoperitoneum", "VHWG"],
   scoreNodeId: "hernia-conditions",
   scoreCategory: "SCORE · Hernia · Diseases & Conditions",
   tags: ["hernia", "abdominal-wall", "stoma", "absite", "score"],

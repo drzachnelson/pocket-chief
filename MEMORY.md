@@ -402,3 +402,16 @@ Six SCORE biliary topics from the on-disk corpora: Benign Biliary Obstruction, I
 - **Not re-verified in this session:** AASLD's 8 mm gallbladder-polyp cholecystectomy threshold in PSC, serum IgG4 at diagnosis, and MRCP-first; written from training knowledge and marked in the source details.
 
 Content status: **authored but unreviewed — draft until Zach reads it.**
+
+## Anorectal batch (October 22, 2026)
+
+Seven SCORE anorectal topics from the owner's seven-guide packet (`output/study-guides/anorectal/`): Anal Fissure, Anal Sphincterotomy, Anorectal Abscess and Fistulae, Anorectal Abscess Drainage, Anorectal Fistula Repair, Perianal Condylomas Excision, Anal Dysplasia and STDs. With Hemorrhoids and Procedures for Hemorrhoids this leaves Anal Cancer, Rectal Cancer, Fecal Incontinence, Rectal Prolapse, and their operations as the open anorectal entries.
+
+- **Split as SCORE splits them:** every disease and its operation are separate topics, cross-linked with `[[...]]` in each summary. No new taxonomy nodes; `anorectal-conditions` and `anorectal-procedures` already existed.
+- **Sources take the 4600 block** (first block free on every branch). One `user_notes` packet source plus seven SCORE modules, a separate Fiser entry for chapter 37 pages 554–562 (the existing Fiser anorectal source stays scoped to hemorrhoids), ASCRS fissure 2023, ASCRS abscess/fistula 2022, CDC STI 2021 as one source for its four chapters, NIH and NYSDOH HIV anal-dysplasia guidance, ANCHOR, and CDC HPV vaccine recommendations.
+- **Splits written:** SCORE's medical→botulinum→LIS ladder versus selected primary LIS; flap healing inferior (SCORE/Fiser) versus comparable (ASCRS); LIS to the dentate line (Fiser caption) versus to the fissure apex; Fiser's external drainage of intersphincteric abscesses and universal transanal supralevator drainage versus origin-dependent drainage; fistulotomy threshold lower quarter (Fiser) versus one third (SCORE) versus 30% (ASCRS); blanket Crohn fistulotomy contraindication versus ASCRS recommendation 22; flap fistulectomy versus curettage; Fiser's HSIL observation versus post-ANCHOR treatment.
+- **Crohn wording left in place:** `crohn-disease.ts` still says avoid fistulotomy in Crohn disease, which is the board answer; the selected simple-low-no-proctitis exception lives in the fistula repair split block instead of re-citing a Crohn-source claim to ASCRS.
+- **Aliases narrowed at source:** `crohn-disease` lost bare "perianal fistula" and "seton", `procedures-for-crohn-disease` lost "noncutting seton", `ventral-and-incisional-hernia` "botulinum toxin" became "preoperative botulinum toxin", and `ulcerative-colitis` "proctitis" became "ulcerative proctitis" — each was capturing anorectal links. Bare "fibrin glue" and "skin bridges" were kept off the new topics for the same reason.
+- **Left out pending Zach, as the packet flagged:** condyloma perianal-block landmarks, cardiac prophylaxis indications, topical and botulinum dosing, and any persistent-incontinence rescue algorithm. Additions beyond the packet are listed in the packet source's `details`.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**

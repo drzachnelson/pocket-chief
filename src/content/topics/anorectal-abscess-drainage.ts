@@ -1,0 +1,165 @@
+import { buildTopic, references, sourced } from "@/content/authoring";
+import { ANORECTAL_PACKET_SOURCE as PACKET, ASCRS_ABSCESS_FISTULA_SOURCE as ASCRS, FISER_BENIGN_ANORECTAL_SOURCE as FISER, SCORE_ANORECTAL_ABSCESS_DRAINAGE_SOURCE as SCORE } from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-absdrain-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Drain an acute anorectal abscess **promptly and completely** while preserving the sphincter complex. A superficial collection can be drained under local anesthesia at the bedside; deep, recurrent, bilateral, intersphincteric, supralevator, or horseshoe disease goes to the operating room for an anatomy-specific route. The three errors are **inadequate drainage**, an incision across sphincter or levator that was not involved, and an **unnecessary fistulotomy** through a tract nobody has defined. The disease itself is in **[[Anorectal Abscess and Fistulae]]**.",
+  }, PACKET),
+  sourced({
+    id: "block-absdrain-setting",
+    type: "table",
+    heading: "Where to drain it",
+    columns: ["Finding", "Setting"],
+    rows: [
+      ["Localized **perianal** or simple **ischioanal** collection, tolerable examination", "**Bedside or office** drainage under local anesthesia"],
+      ["Large collection, pain preventing examination, recurrence, bilateral disease, failed prior drainage", "**Examination under anesthesia** and drainage"],
+      ["**Intersphincteric**, **supralevator**, or **horseshoe** anatomy", "Operating room, with the involved spaces and origin defined first"],
+      ["**Cellulitis**, systemic infection, or immunosuppression", "Drain the focus and add antibiotics"],
+      ["**Severe neutropenia** with little fluctuance", "Individualize imaging, antibiotics, and timing with the oncology team"],
+      ["**Crepitus**, necrotic skin, or spreading sepsis", "Emergency debridement — this is necrotizing infection, not a routine abscess"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-absdrain-prep",
+    type: "bullets",
+    heading: "Preparation",
+    items: [
+      "Record prior abscesses and operations and **baseline continence** before any sphincter is touched.",
+      "Consent for what the operation does and does not do: it treats today's sepsis, and **a fistula or another abscess can still follow**.",
+      "Position **lithotomy**, **prone jackknife**, or **lateral**, chosen for exposure of the suspected space.",
+      "Image with ultrasound, CT, or MRI when disease is **occult, complex, recurrent, or Crohn-related**; for a supralevator abscess the scan must answer where it came from. An obvious superficial abscess needs no scan.",
+      "Correct coagulopathy and manage comorbidity while arranging drainage — antibiotics alone rarely treat a drainable abscess.",
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-absdrain-anatomy",
+    type: "table",
+    heading: "Protective anatomy",
+    columns: ["Structure", "Landmark", "Consequence for drainage"],
+    rows: [
+      ["**Internal sphincter**", "Medial wall of the intersphincteric plane", "Divided over an intersphincteric abscess to drain it internally"],
+      ["**External sphincter**", "Medial wall of the ischioanal fossa", "Preserved during lateral skin drainage — never a wall to cut through to reach an uncertain cavity"],
+      ["**Levator ani**", "Roof of the ischioanal fossa, floor of the supralevator space", "Lying above it does not by itself decide the route"],
+      ["**Ischioanal fossa**", "Between external sphincter and pelvic sidewall, below the levator", "Skin drainage treats it; check the contralateral side"],
+      ["**Deep postanal space**", "Posterior, between the anococcygeal ligament and the levator, connecting both ischioanal fossae", "The source of a horseshoe abscess"],
+      ["**Supralevator space**", "Extraperitoneal, above the levator beside the rectum", "Trace the infection to intersphincteric, ischioanal, or pelvic origin"],
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-absdrain-steps",
+    type: "sequence",
+    heading: "Key steps — perianal or simple ischioanal abscess",
+    steps: [
+      { title: "Confirm the target", detail: "Inspect, palpate, and examine as tolerated; go to EUA when the examination is inadequate. Reconcile any imaging with the cavity you expect to enter." },
+      { title: "Anesthetize properly", detail: "Infiltrate the skin around the collection before injecting the most tender point. Anesthesia that does not allow complete drainage is a reason to change the setting." },
+      { title: "Incise close to the verge", detail: "Over maximal fluctuance, **as near the anal verge as safely possible** — this keeps any later fistula short — without tunneling from a remote site." },
+      { title: "Make the opening last", detail: "A **cruciate or elliptical** opening with limited skin-edge excision stops the skin sealing before the cavity drains. Break up loculations without injuring sphincter." },
+      { title: "Look for a fistula — do not make one", detail: "Acute edema distorts anatomy. Gentle assessment is fine; **forceful probing creates false passages**." },
+      { title: "Decide the fistula separately", detail: "A clearly superficial, simple tract in a suitable patient may be laid open. Meaningful sphincter involvement, uncertain anatomy, or poor function means a **loose seton** through an established tract and a staged repair." },
+      { title: "Keep it draining", detail: "A mushroom or Malecot **catheter** suits selected deep cavities. Routine packing is not required — unpacked wounds hurt less and heal satisfactorily." },
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-absdrain-intersphincteric",
+    type: "prose",
+    heading: "Intersphincteric abscess",
+    text: "Drain it **internally**: through the anal canal, dividing the internal sphincter over the length of the cavity, or through the intersphincteric groove as ASCRS describes. The aim is to decompress the intersphincteric plane while leaving the external sphincter whole. A lateral skin incision across intact external sphincter is the wrong operation, however obvious it looks.",
+  }, ASCRS),
+  sourced({
+    id: "block-absdrain-supralevator",
+    type: "table",
+    heading: "Supralevator abscess — the route follows the origin",
+    columns: ["Origin on imaging or EUA", "Route", "What it avoids"],
+    rows: [
+      ["**Upward from the intersphincteric space**", "**Internal** drainage into the rectum", "A new extrasphincteric tract through levator and sphincter to the skin"],
+      ["**Upward from the ischioanal space**", "**External** drainage through the ischioanal fossa", "An unnecessary communication into the rectum"],
+      ["**Down from a pelvic or abdominal source**", "Treat the source, with percutaneous, transabdominal, or transrectal drainage as anatomy allows", "Draining the collection and leaving the cause"],
+    ],
+  }, ASCRS),
+  sourced({
+    id: "block-absdrain-horseshoe",
+    type: "prose",
+    heading: "Horseshoe abscess",
+    text: "The source is the **deep postanal space**. The **Hanley** approach opens it through a posterior midline incision between the coccyx and the anus, with **counterincisions** over each involved ischioanal fossa and a seton through the internal opening. The **modified Hanley** of the ASCRS guideline may include a **partial posterior midline internal sphincterotomy**, whereas SCORE describes a sphincter-sparing posterior approach — do not assume every Hanley variant leaves the sphincter untouched. Draining only the most fluctuant buttock leaves the center and the other side behind, and a primary lay-open of the whole horseshoe divides too much muscle.",
+  }, PACKET),
+  sourced({
+    id: "block-absdrain-fistula",
+    type: "bullets",
+    heading: "The fistula decision at drainage",
+    items: [
+      "Before dividing anything, answer three questions: **is the tract real and clearly defined, how much sphincter would it cost, and what is this patient's continence?**",
+      "A **simple low fistula** may be laid open at drainage in a selected patient; it lowers recurrence.",
+      "A high tract, an **anterior fistula in a woman**, Crohn disease, poor continence, or uncertain anatomy all favor **drainage first**.",
+      "A **loose seton** keeps the outlet open and allows staged planning; LIFT and advancement flap come later, after sepsis control — see **[[Anorectal Fistula Repair]]**.",
+    ],
+  }, ASCRS),
+  sourced({
+    id: "block-absdrain-postop",
+    type: "bullets",
+    heading: "Antibiotics, cultures, and aftercare",
+    items: [
+      "**Antibiotics** after drainage only for **cellulitis, systemic infection, or immunosuppression**; healthy patients with an uncomplicated drained abscess do not benefit.",
+      "**Cultures** have low yield in uncomplicated disease; send them for recurrence, a nonhealing wound, atypical infection, or immunosuppression.",
+      "**Sitz baths** and a consistent fiber regimen support wound care.",
+      "At follow-up check healing, drainage, and continence, and tell the patient that cycles of swelling and discharge mean a **fistula** to be looked for.",
+    ],
+  }, ASCRS),
+  sourced({
+    id: "block-absdrain-rescue",
+    type: "table",
+    heading: "Complications and rescue",
+    columns: ["Problem", "Likely cause", "Response"],
+    rows: [
+      ["**Persistent or worsening pain, swelling, or fever**", "Incomplete drainage, a missed loculation, or skin closing early", "Re-examine and return to EUA or imaging; **more antibiotics do not drain pus**"],
+      ["**Bilateral or recurrent posterior infection**", "An undrained horseshoe in the deep postanal space", "Reassess the center and the opposite side"],
+      ["**Wound never heals**, or swelling and drainage recur", "An unrecognized fistula", "EUA and selective tract imaging, then definitive repair after mapping"],
+      ["**Atypical or repeated collections**", "Crohn disease, HIV, a foreign body, or perforating cancer", "Endoscopy, biopsy, and cultures chosen by the findings"],
+      ["**Urinary retention**", "A recognized early complication, made worse by perioperative fluid", "Catheterize and review fluid exposure"],
+      ["**New fecal incontinence**", "Sphincter injury, or poor baseline function unmasked", "Assess the sphincter, avoid further division, and plan with a specialist"],
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-absdrain-split",
+    type: "table",
+    heading: "Board answer versus current practice",
+    columns: ["Question", "Board answer", "Current practice"],
+    rows: [
+      ["Intersphincteric abscess", "Lumped with abscesses drained **through the skin** (Fiser)", "Drained **internally**, through the anal canal or the intersphincteric groove"],
+      ["Supralevator abscess", "Drain **transanally**", "Intersphincteric origin drains internally; **ischioanal origin drains externally**"],
+    ],
+  }, PACKET),
+  sourced({
+    id: "block-absdrain-pearls",
+    type: "bullets",
+    heading: "Board pearls",
+    items: [
+      "**An adequate opening and a completely drained cavity** matter more than the dressing on top.",
+      "**Incise close to the verge** — a short incision-to-anus distance means a short fistula if one forms.",
+      "**Intersphincteric drains internally.**",
+      "**Supralevator: intersphincteric origin → into the rectum; ischioanal origin → through the skin.**",
+      "**Horseshoe: open the deep postanal space** and counterdrain both sides.",
+      "**Drainage now does not require fistulotomy now.**",
+      "**Antibiotics are for cellulitis, sepsis, or immunosuppression** — not a substitute for the knife.",
+    ],
+  }, PACKET),
+  references("block-absdrain-references", [PACKET, SCORE, ASCRS, FISER]),
+];
+
+export const anorectalAbscessDrainageTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000004650",
+  versionId: "00000000-0000-4000-8000-000000004651",
+  slug: "anorectal-abscess-drainage",
+  title: "Anorectal Abscess Drainage",
+  aliases: ["incision and drainage of perianal abscess", "perianal abscess drainage", "perirectal abscess drainage", "ischiorectal abscess drainage", "internal drainage of intersphincteric abscess", "supralevator abscess drainage", "horseshoe abscess drainage", "Hanley procedure", "modified Hanley", "counterincision", "Malecot catheter drainage", "mushroom catheter drainage"],
+  scoreNodeId: "anorectal-procedures",
+  scoreCategory: "SCORE · Anorectal · Operations & Procedures",
+  tags: ["anorectal", "abscess", "colorectal", "operative-technique", "absite", "score"],
+  sourceId: PACKET,
+  additionalSourceIds: [SCORE, ASCRS, FISER],
+  blocks,
+  reviewedAt: "2026-10-22T00:00:00.000Z",
+});
