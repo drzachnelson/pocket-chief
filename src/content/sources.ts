@@ -201,6 +201,16 @@ export const CIRRHOSIS_PORTAL_HYPERTENSION_OE_SOURCE = "00000000-0000-4000-8000-
 export const HIATT_HEPATIC_ARTERIES_1994_SOURCE = "00000000-0000-4000-8000-000000004217";
 export const AASLD_PORTAL_HYPERTENSION_2024_SOURCE = "00000000-0000-4000-8000-000000004218";
 export const AASLD_ASCITES_2021_SOURCE = "00000000-0000-4000-8000-000000004219";
+export const DIAPHRAGMATIC_HERNIA_PACKET_SOURCE = "00000000-0000-4000-8000-000000004400";
+export const HIATAL_HERNIA_PACKET_SOURCE = "00000000-0000-4000-8000-000000004401";
+export const GERD_BARRETT_PACKET_SOURCE = "00000000-0000-4000-8000-000000004402";
+export const ANTIREFLUX_PROCEDURES_PACKET_SOURCE = "00000000-0000-4000-8000-000000004403";
+export const LYON_CONSENSUS_2_SOURCE = "00000000-0000-4000-8000-000000004404";
+export const ACG_BARRETT_2022_SOURCE = "00000000-0000-4000-8000-000000004405";
+export const ACG_GERD_2022_SOURCE = "00000000-0000-4000-8000-000000004406";
+export const SAGES_GERD_2021_SOURCE = "00000000-0000-4000-8000-000000004407";
+export const STYLOPOULOS_PEH_2002_SOURCE = "00000000-0000-4000-8000-000000004408";
+export const CDH_EURO_2015_SOURCE = "00000000-0000-4000-8000-000000004409";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -1955,5 +1965,98 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, evaluation, and management of ascites, spontaneous bacterial peritonitis and hepatorenal syndrome: 2021 practice guidance by the American Association for the Study of Liver Diseases. Hepatology. 2021;74(2):1014-1048.",
     suppliedAt: "2026-10-19T00:00:00.000Z",
     details: "Registered during review as the authority behind sodium restriction, the diuretic ratio, albumin with large-volume paracentesis, SBP diagnosis and treatment, and HRS-AKI, identified from the cirrhosis guide and the SCORE module rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: DIAPHRAGMATIC_HERNIA_PACKET_SOURCE,
+    title: "Owner-supplied diaphragmatic hernia repair study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"Diaphragmatic Hernia Repair Pocket Chief\" (SCORE / General Surgery Board Review Study Guide).",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Chen et al. (JAMA, 2024) on CDH incidence, Bochdalek and Morgagni shares and mortality; Larson et al. (NeoReviews, 2026) and Abman et al. (AHA/ATS pediatric pulmonary hypertension guideline, 2015) on stabilization and repair timing; Lin et al. (Pediatric Surgery International, 2025) on early repair on ECMO; Wild et al. (J Intensive Care Medicine, 2024) on ECMO indications and contraindications; Coccolini et al. (WSES-AAST thoracic trauma guidelines, 2025) on traumatic repair, mesh, chest tube and outcomes; Reitano et al. (Injury, 2022) on CT accuracy; Bergin et al. (AJR, 2001) on the dependent viscera sign; Elbanna et al. (Abdominal Radiology, 2018) on chronic traumatic hernia; Meyer et al. (JLAST, 2023) on mesh thresholds; Safari et al. (JLAST, 2025) on laparoscopic Morgagni repair; Laghi et al. (BMC Pulm Med, 2021), Heng et al. (J Pediatr Surg, 2025) and Beshay et al. (J Clin Med, 2023) on eventration and plication; Kirby and Keijzer (Pediatr Surg Int, 2020) on CDH follow-up.",
+      "Review changes, pending Zach's sign-off: the packet equated the foramen of Morgagni with the space of Larrey; both are parts of the sternocostal trigone, Morgagni on the right and Larrey on the left, and the topic says so. The packet's ECMO criterion of post-ductal PaO2 above 30 mmHg was replaced with the CDH EURO criterion of post-ductal saturation above 70% (registered separately). The packet's correction note giving blunt left-sided predominance as about 65 to 75% conflicts with the trauma topic's roughly 80%; both are recorded in a split block. The packet's CT sensitivity of about 0.80 for blunt injury conflicts with the trauma packet's statement that CT misses nearly half of blunt injuries; also recorded in a split block. The AAST grade thresholds, and the explanation of what the two packets were probably counting, were added by the reviewer from training-era knowledge.",
+    ].join(" "),
+  },
+  {
+    id: HIATAL_HERNIA_PACKET_SOURCE,
+    title: "Owner-supplied hiatal hernia study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"Hiatal Hernia Pocket Chief\" (SCORE / ABSITE Study Guide — Hiatal Hernia and Paraesophageal Hernia Repair).",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Aaron et al. (ACS Gastrointestinal Surgical Emergencies, 2021) and Siegal et al. (Langenbecks Arch Surg, 2017) on definition, mechanism and classification; Giuffrida et al. (WSES, 2023); D'Urbano et al. (JLAST, 2023) on giant hernia definitions; Ghassemi and Jensen (Yamada's, 2022) on Cameron lesions; Gonda and Krikhely (Yamada's, 2022) and Bonney et al. (Abdom Radiol, 2021) on gastric volvulus; Katz et al. (ACG GERD guideline, 2022) on manometry; Stylopoulos et al. (Ann Surg, 2002) and DeMeester et al. (Ann Surg, 2024) Markov analyses; the EAES rapid guideline (Surg Endosc, 2023) and SAGES hiatal hernia guideline (Daly et al., Surg Endosc, 2024); Wong et al. (Ann Thorac Surg, 2023, STS database) and Crnkovic et al. (JACS, 2026) on elective versus emergency mortality; Angeramo and Schlottmann (Ann Surg, 2022), Kitsou et al. (JGS, 2026), Temperley et al. (Dis Esophagus, 2023), Rajkomar et al. (Hernia, 2023), Salehi et al. (Surg Endosc, 2024) and Schlottmann et al. (JAMA Surg, 2025) on mesh; Salvador et al. (Padova HRM consensus, Ann Surg, 2025) and Addo et al. (Surg Endosc, 2021) on wrap tailoring; Montcusi et al. (JACS, 2023) and Trinh et al. (J Clin Med, 2026) on Collis gastroplasty; Amundson et al. (Surg Endosc, 2023) on recurrence.",
+      "Review notes, pending Zach's sign-off: the crural closure instruction and the dysphagia timeline in this packet conflict with the existing Paraesophageal Hernia Repair topic (1.5 cm crural space, dilation after one week); both are recorded in that topic's split block.",
+    ].join(" "),
+  },
+  {
+    id: GERD_BARRETT_PACKET_SOURCE,
+    title: "Owner-supplied GERD and Barrett esophagus study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"GERD and Barrett Esophagus — Pocket Chief\".",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Sharma (JAMA, 2022) and Fitzgerald (NEJM, 2026) on Barrett definition and the failure of antireflux surgery to prevent cancer; Shaheen et al. (ACG Barrett guideline, 2022) on prevalence, progression, screening and surveillance; Gyawali et al. (Lyon Consensus 2.0, Gut, 2024) and Amundson et al. (Surg Endosc, 2023) on pH thresholds; Slater et al. (SAGES GERD guideline) on surgical indications; Analatos et al. (JAMA Surg, 2022), McKinley et al. (Surg Endosc, 2021) and Varin et al. (Arch Surg, 2009) on Nissen versus Toupet; Memon et al. (Surg Endosc, 2024), Wunker et al. (Surg Endosc, 2025) and Ayazi et al. (Ann Surg, 2026) on GERD with obesity; Kolb and Wani (Dig Dis Sci, 2022), Ge and Muthusamy (JLAST, 2017) and Nguyen et al. (Surg Endosc, 2024) on dysplasia management and post-ablation surveillance.",
+      "Review changes, pending Zach's sign-off: the packet's screening rule of chronic GERD plus two or more risk factors was corrected to three or more, per the 2022 ACG guideline (registered separately). The packet's surveillance interval for low-grade dysplasia (6 to 12 months) is kept as written; the guideline's primary recommendation of eradication over surveillance was confirmed.",
+    ].join(" "),
+  },
+  {
+    id: ANTIREFLUX_PROCEDURES_PACKET_SOURCE,
+    title: "Owner-supplied antireflux procedures study packet",
+    kind: "user_notes",
+    citation: "Personal study document supplied to Pocket Chief, October 21, 2026: \"Antireflux Procedures Pocket Chief\" (SCORE / General Surgery Board Review Study Guide).",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: [
+      "A SCORE-notebook draft corrected against current literature, citing inline: Katz et al. (ACG GERD guideline, 2022) on indications, MSA, TIF and Stretta; Fass (NEJM, 2022) on preoperative workup; Gyawali et al. (Lyon Consensus 2.0, Gut, 2024) and Krause and Yadlapati (Aliment Pharmacol Ther, 2024) on pH metrics; Yadlapati et al. (Aliment Pharmacol Ther, 2022) on wireless monitoring; Thrumurthy et al. (JAMA, 2026) on contraindications, recurrence and gas-bloat; DeMeester and DeMeester (The Esophagus, 2021) on wrap types; Gyawali et al. (Neurogastroenterol Motil, 2019), Addo et al. (Surg Endosc, 2021), Wong et al. (JGS, 2022), Kamboj et al. (Neurogastroenterol Motil, 2024) and Du et al. (BMC Gastroenterol, 2016) on wraps in ineffective motility; Furay et al. and Patel and Gyawali (Dis Esophagus, 2023) on MSA candidacy; Slater et al. (SAGES GERD guideline) and Lee et al. (Surg Endosc, 2023) on partial versus complete wraps; Baiu and Lau (JAMA, 2019), Angeramo and Schlottmann (Ann Surg, 2022), Schlottmann et al. (JAMA Surg, 2025) and Delcarro et al. (JLAST, 2026) on paraesophageal repair and mesh.",
+      "Review changes, pending Zach's sign-off: the packet stated the SAGES guideline suggests partial over complete fundoplication for most patients; the guideline in fact leaves partial or complete wrap to shared decision-making, and the topic says so (registered separately). The packet's figure that only about 21% of PPI-refractory heartburn is reflux-related, its 0.05% surgical-utilization figure, and its pyloric stenosis pearl were left out as unverified or off-topic. The packet's crural closure target of about 5 mm beside the esophagus was rendered as admitting a 5-mm instrument beside the bougie-filled esophagus.",
+    ].join(" "),
+  },
+  {
+    id: LYON_CONSENSUS_2_SOURCE,
+    title: "Lyon Consensus 2.0 on the modern diagnosis of GERD",
+    kind: "article",
+    citation: "Gyawali CP, Yadlapati R, Fass R, et al. Updates to the modern diagnosis of GERD: Lyon consensus 2.0. Gut. 2024;73(2):361-371.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the authority behind the acid exposure time cutoffs and LA grade B as conclusive GERD, named in the GERD and antireflux packets rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: ACG_BARRETT_2022_SOURCE,
+    title: "ACG clinical guideline: Barrett esophagus (2022)",
+    kind: "article",
+    citation: "Shaheen NJ, Falk GW, Iyer PG, et al. Diagnosis and Management of Barrett's Esophagus: An Updated ACG Guideline. Am J Gastroenterol. 2022;117(4):559-587.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the authority behind Barrett screening (chronic GERD plus three or more risk factors, which corrects the packet's two or more), surveillance intervals, dysplasia confirmation and post-eradication surveillance. Named in the GERD packet rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: ACG_GERD_2022_SOURCE,
+    title: "ACG clinical guideline: gastroesophageal reflux disease (2022)",
+    kind: "article",
+    citation: "Katz PO, Dunbar KB, Schnoll-Sussman FH, et al. ACG Clinical Guideline for the Diagnosis and Management of Gastroesophageal Reflux Disease. Am J Gastroenterol. 2022;117(1):27-56.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the authority behind magnetic sphincter augmentation candidacy, the 1.5 T MRI limit, device erosion and off-PPI rates, TIF selection and the recommendation against Stretta. Named in the antireflux and hiatal hernia packets rather than supplied directly. Pending Zach's sign-off.",
+  },
+  {
+    id: SAGES_GERD_2021_SOURCE,
+    title: "SAGES guideline: surgical treatment of GERD (2021)",
+    kind: "article",
+    citation: "Slater BJ, Dirks RC, McKinley SK, et al. SAGES guidelines for the surgical treatment of gastroesophageal reflux (GERD). Surg Endosc. 2021;35(9):4903-4917.",
+    url: "https://www.sages.org/publications/guidelines/guidelines-for-the-surgical-treatment-of-gastroesophageal-reflux-gerd/",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review to correct the antireflux packet: the guideline suggests surgery over medical management for chronic or refractory GERD, and leaves partial versus complete fundoplication, and division of the short gastrics, to shared decision-making rather than favoring partial wraps. The packets cite it as Slater et al. 2023. Pending Zach's sign-off.",
+  },
+  {
+    id: STYLOPOULOS_PEH_2002_SOURCE,
+    title: "Stylopoulos et al.: paraesophageal hernias, operation or observation (2002)",
+    kind: "article",
+    citation: "Stylopoulos N, Gazelle GS, Rattner DW. Paraesophageal hernias: operation or observation? Ann Surg. 2002;236(4):492-500.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review as the Markov analysis behind the board-classic watchful-waiting answer for asymptomatic paraesophageal hernia, named in the hiatal hernia packet. Pending Zach's sign-off.",
+  },
+  {
+    id: CDH_EURO_2015_SOURCE,
+    title: "CDH EURO Consortium consensus, 2015 update",
+    kind: "article",
+    citation: "Snoek KG, Reiss IK, Greenough A, et al. Standardized Postnatal Management of Infants with Congenital Diaphragmatic Hernia in Europe: The CDH EURO Consortium Consensus — 2015 Update. Neonatology. 2016;110(1):66-74.",
+    suppliedAt: "2026-10-21T00:00:00.000Z",
+    details: "Registered during review to correct the diaphragmatic hernia packet's ECMO criteria: inability to keep preductal saturation above 85% or postductal saturation above 70%, oxygenation index of 40 or more for at least 3 hours, and pH below 7.15 with rising PaCO2 despite optimal ventilation. Not supplied directly. Pending Zach's sign-off.",
   },
 ];
