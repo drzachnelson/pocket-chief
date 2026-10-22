@@ -193,8 +193,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const totalAndSubtotalColectomyTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004452",
-  versionId: "00000000-0000-4000-8000-000000004462",
+  id: "00000000-0000-4000-8000-000000004552",
+  versionId: "00000000-0000-4000-8000-000000004562",
   slug: "total-and-subtotal-colectomy",
   title: "Total and Subtotal Colectomy",
   aliases: ["total colectomy", "subtotal colectomy", "total abdominal colectomy", "TAC", "total proctocolectomy", "TPC", "ileorectal anastomosis", "IRA", "colectomy with ileorectal anastomosis", "rectal stump", "colonic inertia", "slow-transit constipation", "FAP colectomy", "prophylactic colectomy"],

@@ -248,8 +248,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const proceduresForCrohnDiseaseTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004450",
-  versionId: "00000000-0000-4000-8000-000000004460",
+  id: "00000000-0000-4000-8000-000000004550",
+  versionId: "00000000-0000-4000-8000-000000004560",
   slug: "procedures-for-crohn-disease",
   title: "Procedures for Crohn Disease",
   aliases: ["Crohn disease surgery", "Crohn surgery", "operations for Crohn disease", "stricturoplasty", "strictureplasty", "Heineke-Mikulicz", "Heineke-Mikulicz stricturoplasty", "Finney stricturoplasty", "Michelassi", "isoperistaltic stricturoplasty", "Kono-S", "ileocolic resection", "ileocecal resection", "endoscopic balloon dilation", "noncutting seton", "terminal ileal resection", "Crohn abscess"],

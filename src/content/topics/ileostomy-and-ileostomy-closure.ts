@@ -156,8 +156,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const ileostomyAndIleostomyClosureTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004453",
-  versionId: "00000000-0000-4000-8000-000000004463",
+  id: "00000000-0000-4000-8000-000000004553",
+  versionId: "00000000-0000-4000-8000-000000004563",
   slug: "ileostomy-and-ileostomy-closure",
   title: "Ileostomy and Ileostomy Closure",
   aliases: ["ileostomy", "loop ileostomy", "end ileostomy", "diverting ileostomy", "Brooke ileostomy", "ileostomy reversal", "ileostomy takedown", "ileostomy closure", "high-output ileostomy", "high output stoma", "stoma site marking", "stoma necrosis", "stoma prolapse", "stomal retraction"],

@@ -234,8 +234,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const colostomyAndColostomyClosureTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004454",
-  versionId: "00000000-0000-4000-8000-000000004464",
+  id: "00000000-0000-4000-8000-000000004554",
+  versionId: "00000000-0000-4000-8000-000000004564",
   slug: "colostomy-and-colostomy-closure",
   title: "Colostomy and Colostomy Closure",
   aliases: ["colostomy", "end colostomy", "loop colostomy", "end-loop colostomy", "divided colostomy", "transverse loop colostomy", "colostomy reversal", "colostomy closure", "colostomy takedown", "Hartmann procedure", "Hartmann reversal", "Hartmann's reversal", "parastomal hernia", "prophylactic mesh", "Griffith point", "Sudeck point", "marginal artery of Drummond", "arc of Riolan", "diversion colitis", "peristomal varices"],

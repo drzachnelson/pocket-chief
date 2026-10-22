@@ -206,8 +206,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const proceduresForUlcerativeColitisTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004451",
-  versionId: "00000000-0000-4000-8000-000000004461",
+  id: "00000000-0000-4000-8000-000000004551",
+  versionId: "00000000-0000-4000-8000-000000004561",
   slug: "procedures-for-ulcerative-colitis",
   title: "Procedures for Ulcerative Colitis",
   aliases: ["ulcerative colitis surgery", "UC surgery", "operations for ulcerative colitis", "IPAA", "ileal pouch anal anastomosis", "ileal pouch-anal anastomosis", "J-pouch", "restorative proctocolectomy", "completion proctectomy", "pouchitis", "cuffitis", "mucosectomy", "anal transition zone", "modified two-stage IPAA", "three-stage IPAA", "stump blowout", "mucous fistula"],

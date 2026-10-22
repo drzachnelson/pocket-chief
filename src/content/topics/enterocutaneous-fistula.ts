@@ -170,8 +170,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const enterocutaneousFistulaTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004456",
-  versionId: "00000000-0000-4000-8000-000000004466",
+  id: "00000000-0000-4000-8000-000000004556",
+  versionId: "00000000-0000-4000-8000-000000004566",
   slug: "enterocutaneous-fistula",
   title: "Enterocutaneous Fistula",
   aliases: ["ECF", "enterocutaneous fistulae", "intestinal fistula", "high-output fistula", "FRIENDSS", "fistulogram", "fistula output", "octreotide for fistula", "fistula takedown"],

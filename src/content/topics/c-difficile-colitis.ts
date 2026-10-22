@@ -230,8 +230,8 @@ const blocks: TopicBlock[] = [
 ];
 
 export const cDifficileColitisTopic = buildTopic({
-  id: "00000000-0000-4000-8000-000000004455",
-  versionId: "00000000-0000-4000-8000-000000004465",
+  id: "00000000-0000-4000-8000-000000004555",
+  versionId: "00000000-0000-4000-8000-000000004565",
   slug: "c-difficile-colitis",
   title: "C. difficile Colitis",
   aliases: ["Clostridioides difficile", "Clostridium difficile", "C diff", "C. diff", "CDI", "C difficile infection", "pseudomembranous colitis", "fulminant C difficile", "fidaxomicin", "oral vancomycin", "rectal vancomycin", "loop ileostomy and colonic lavage", "fecal microbiota transplantation", "FMT", "Rebyota", "Vowst", "toxin A", "toxin B", "GDH"],
