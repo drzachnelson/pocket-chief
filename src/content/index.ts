@@ -213,3 +213,6 @@ export const libraryTopics: Topic[] = [
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";
+
+// App-ready study-guide drafts remain outside the approved library and static search payload.
+export { upperGiDraftTopics } from "@/content/drafts/upper-gi";

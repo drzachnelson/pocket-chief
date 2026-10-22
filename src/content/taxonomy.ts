@@ -53,4 +53,9 @@ export const taxonomy: TaxonomyNode[] = [
   { id: "liver", title: "Liver", slug: "liver", parentId: "score", order: 49 },
   { id: "liver-conditions", title: "Diseases & Conditions", slug: "liver-diseases-conditions", parentId: "liver", order: 50 },
   { id: "liver-procedures", title: "Operations & Procedures", slug: "liver-operations-procedures", parentId: "liver", order: 51 },
+  {"id": "stomach", "title": "Stomach", "slug": "stomach", "parentId": "score", "order": 52},
+  {"id": "stomach-conditions", "title": "Diseases & Conditions", "slug": "stomach-diseases-conditions", "parentId": "stomach", "order": 53},
+  {"id": "stomach-procedures", "title": "Operations & Procedures", "slug": "stomach-operations-procedures", "parentId": "stomach", "order": 54},
+  {"id": "endoscopy", "title": "Endoscopy", "slug": "endoscopy", "parentId": "score", "order": 55},
+  {"id": "endoscopy-procedures", "title": "Operations & Procedures", "slug": "endoscopy-operations-procedures", "parentId": "endoscopy", "order": 56},
 ];

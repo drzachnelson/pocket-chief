@@ -1,0 +1,4118 @@
+{
+  "peptic-ulcer-disease": [
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-01",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-01-claim-1",
+          "editorialLocators": [
+            "S1 §§2–7; S2 pp.398–401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-02",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-02-claim-1",
+          "editorialLocators": [
+            "S1 §§1–2; S2 pp.391–392"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-02-claim-2",
+          "editorialLocators": [
+            "S1 §§1–2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-02-claim-3",
+          "editorialLocators": [
+            "S1 §1; S4 §3.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-02-claim-4",
+          "editorialLocators": [
+            "S1 §§1–2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004716"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-02-claim-5",
+          "editorialLocators": [
+            "S1 §§1–2; S17 p.361"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-02-claim-6",
+          "editorialLocators": [
+            "S1 §§1–3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-03",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-03-claim-1",
+          "editorialLocators": [
+            "S1 §6; S4 §§2–3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-04",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-04-claim-1",
+          "editorialLocators": [
+            "S1 §3; S2 pp.398–401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-05",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-05-claim-1",
+          "editorialLocators": [
+            "S1 §3; S3 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-06",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-06-claim-1",
+          "editorialLocators": [
+            "S1 §§2,5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-07",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-07-claim-1",
+          "editorialLocators": [
+            "S1 §2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-08",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-08-claim-1",
+          "editorialLocators": [
+            "S1 §4; S2 p.401"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-08-claim-2",
+          "editorialLocators": [
+            "S2 p.401; S4 §3.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-08-claim-3",
+          "editorialLocators": [
+            "S1 §4; S4 §3.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-08-claim-4",
+          "editorialLocators": [
+            "S1 §4; S2 p.401"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-08-claim-5",
+          "editorialLocators": [
+            "S1 §4; S2 p.401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-09",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-09-claim-1",
+          "editorialLocators": [
+            "S1 §4; S2 p.401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-10",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-10-claim-1",
+          "editorialLocators": [
+            "S1 §5.1; S2 pp.398,401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-11",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-11-claim-1",
+          "editorialLocators": [
+            "S1 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-11-claim-2",
+          "editorialLocators": [
+            "S1 §7; S3 §§3–6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-11-claim-3",
+          "editorialLocators": [
+            "S1 §7; S2 p.399"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-11-claim-4",
+          "editorialLocators": [
+            "S1 §§5.2,6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-12",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-12-claim-1",
+          "editorialLocators": [
+            "S1 §§5.2,6.1; S7 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-13",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004707"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-13-claim-1",
+          "editorialLocators": [
+            "S1 §5.2; S8 Treatment Pearls"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-14",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004707"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-14-claim-1",
+          "editorialLocators": [
+            "S8 Regimens; Treatment Pearls"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-15",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004707"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-15-claim-1",
+          "editorialLocators": [
+            "S1 §6.1; S2 pp.398,401; S8 Regimens"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-16",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004712"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-16-claim-1",
+          "editorialLocators": [
+            "S1 §6.1; S13 Acute GI bleeding recommendations"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-17",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-17-claim-1",
+          "editorialLocators": [
+            "S4 §1; S2 p.400"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-18",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-18-claim-1",
+          "editorialLocators": [
+            "S1 §7; S2 p.399"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-18-claim-2",
+          "editorialLocators": [
+            "S1 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-18-claim-3",
+          "editorialLocators": [
+            "S1 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-18-claim-4",
+          "editorialLocators": [
+            "S1 §7; S4 §3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-19",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-19-claim-1",
+          "editorialLocators": [
+            "S4 §3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-20",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-20-claim-1",
+          "editorialLocators": [
+            "S1 §§6.2–7; S3 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-21",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-21-claim-1",
+          "editorialLocators": [
+            "S1 §6.2; S4 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-21-claim-2",
+          "editorialLocators": [
+            "S4 §§3,5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-21-claim-3",
+          "editorialLocators": [
+            "S4 §§3.2,5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-21-claim-4",
+          "editorialLocators": [
+            "S1 §6.2; S3 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-22",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-22-claim-1",
+          "editorialLocators": [
+            "S1 §6.2; S2 pp.398–400; S3 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-23",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000002303"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-23-claim-1",
+          "editorialLocators": [
+            "S1 §5.2; S15 pp.483–484; S3 §8"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-24",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-1",
+          "editorialLocators": [
+            "S1 §8; S2 p.412"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-2",
+          "editorialLocators": [
+            "S1 §8"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-3",
+          "editorialLocators": [
+            "S1 §8; S2 p.412"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-4",
+          "editorialLocators": [
+            "S1 §8; S2 pp.412–413"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-5",
+          "editorialLocators": [
+            "S1 §8"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-6",
+          "editorialLocators": [
+            "S1 §8; S2 p.413"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-7",
+          "editorialLocators": [
+            "S1 §8"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-24-claim-8",
+          "editorialLocators": [
+            "S1 §8; S4 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-25",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-25-claim-1",
+          "editorialLocators": [
+            "S2 pp.398–399"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-25-claim-2",
+          "editorialLocators": [
+            "S2 p.401; S4 §3.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-25-claim-3",
+          "editorialLocators": [
+            "S1 §§5–7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-25-claim-4",
+          "editorialLocators": [
+            "S1 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-25-claim-5",
+          "editorialLocators": [
+            "S4 §§2.2,3.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-25-claim-6",
+          "editorialLocators": [
+            "S1 §§5–6; S4 §1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-peptic-ulcer-disease-26",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004707"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-26-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000002303"
+          ],
+          "claimId": "upper-gi-peptic-ulcer-disease-26-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ]
+    }
+  ],
+  "gastroduodenal-perforation-repair": [
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-01",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-01-claim-1",
+          "editorialLocators": [
+            "S3 §§1,4–6; S2 pp.399–401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-02",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-02-claim-1",
+          "editorialLocators": [
+            "S3 §1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-02-claim-2",
+          "editorialLocators": [
+            "S3 §1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-02-claim-3",
+          "editorialLocators": [
+            "S3 §1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-02-claim-4",
+          "editorialLocators": [
+            "S3 §6; S2 pp.398–399"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-02-claim-5",
+          "editorialLocators": [
+            "S3 §1; S4 §2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-03",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-03-claim-1",
+          "editorialLocators": [
+            "S3 §§1,3; S2 p.398"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-04",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-04-claim-1",
+          "editorialLocators": [
+            "S3 §§2,8"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-05",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-05-claim-1",
+          "editorialLocators": [
+            "S3 §3; S1 §7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-06",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-06-claim-1",
+          "editorialLocators": [
+            "S3 §3; S10 Perforated peptic ulcer—Diagnosis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-07",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-07-claim-1",
+          "editorialLocators": [
+            "S3 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-08",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-08-claim-1",
+          "editorialLocators": [
+            "S3 §4"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-08-claim-2",
+          "editorialLocators": [
+            "S3 §§4,7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-08-claim-3",
+          "editorialLocators": [
+            "S3 §§5–7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-08-claim-4",
+          "editorialLocators": [
+            "S3 §4; S10 Antimicrobial therapy"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-09",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-09-claim-1",
+          "editorialLocators": [
+            "S10 Antimicrobial therapy"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-10",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-10-claim-1",
+          "editorialLocators": [
+            "S3 §4; S1 §7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-11",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-11-claim-1",
+          "editorialLocators": [
+            "S3 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-12",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-12-claim-1",
+          "editorialLocators": [
+            "S3 §6; S10 Surgical treatment—small perforations"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-12-claim-2",
+          "editorialLocators": [
+            "S3 §6; S10 Surgical treatment—large perforations"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-12-claim-3",
+          "editorialLocators": [
+            "S3 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-12-claim-4",
+          "editorialLocators": [
+            "S3 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-12-claim-5",
+          "editorialLocators": [
+            "S3 §5; S4 §1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-13",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-13-claim-1",
+          "editorialLocators": [
+            "S3 §6; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-14",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-14-claim-1",
+          "editorialLocators": [
+            "S3 §§5–6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-14-claim-2",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-14-claim-3",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-14-claim-4",
+          "editorialLocators": [
+            "S3 §§5–7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-14-claim-5",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-15",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-15-claim-1",
+          "editorialLocators": [
+            "S1 §7; S3 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-16",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-16-claim-1",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-17",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-17-claim-1",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-17-claim-2",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-17-claim-3",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-17-claim-4",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-18",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-18-claim-1",
+          "editorialLocators": [
+            "S3 §5; S10 Damage control surgery"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-19",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-19-claim-1",
+          "editorialLocators": [
+            "S3 §§5,7; S1 §§5–7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-20",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-20-claim-1",
+          "editorialLocators": [
+            "S3 §5; S1 §6.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-21",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-21-claim-1",
+          "editorialLocators": [
+            "S3 §§5,7; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-22",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-22-claim-1",
+          "editorialLocators": [
+            "S3 §7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-23",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-23-claim-1",
+          "editorialLocators": [
+            "S3 §§7–8; S7 §7; review limit"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-24",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-24-claim-1",
+          "editorialLocators": [
+            "S3 §§7–8"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-25",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-25-claim-1",
+          "editorialLocators": [
+            "S3 §8; S1 §8"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-26",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-26-claim-1",
+          "editorialLocators": [
+            "S3 §3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-26-claim-2",
+          "editorialLocators": [
+            "S3 §4"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-26-claim-3",
+          "editorialLocators": [
+            "S3 §§5–6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-26-claim-4",
+          "editorialLocators": [
+            "S1 §7; S3 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-26-claim-5",
+          "editorialLocators": [
+            "S2 pp.399–400 versus S3 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-26-claim-6",
+          "editorialLocators": [
+            "S3 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-27",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004709"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-27-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-27-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-gastroduodenal-perforation-repair-28",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-3",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-4",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-5",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-6",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-7",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-8",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-9",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-gastroduodenal-perforation-repair-28-claim-10",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ],
+      "locatorNote": "Editorial decision-flow synthesis of the cited guide sections; node and conditional edge units are cited in order."
+    }
+  ],
+  "vagotomy-and-drainage": [
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-01",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-01-claim-1",
+          "editorialLocators": [
+            "S4 §§2–3,5; S1 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-02",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-02-claim-1",
+          "editorialLocators": [
+            "S4 §1; S3 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-03",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-03-claim-1",
+          "editorialLocators": [
+            "S4 §1; S2 p.400; S1 §5.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-04",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-04-claim-1",
+          "editorialLocators": [
+            "S4 §3.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-04-claim-2",
+          "editorialLocators": [
+            "S4 §§1,3.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-04-claim-3",
+          "editorialLocators": [
+            "S3 §5; S1 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-04-claim-4",
+          "editorialLocators": [
+            "S4 §3.1; S1 §5.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-04-claim-5",
+          "editorialLocators": [
+            "S4 §3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-05",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-05-claim-1",
+          "editorialLocators": [
+            "S4 §§2.1,3.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-06",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-06-claim-1",
+          "editorialLocators": [
+            "S4 §2.1; S2 p.394"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-07",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-07-claim-1",
+          "editorialLocators": [
+            "S4 §2.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-07-claim-2",
+          "editorialLocators": [
+            "S4 §2.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-07-claim-3",
+          "editorialLocators": [
+            "S4 §§2.2,3.2; S2 p.394"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-07-claim-4",
+          "editorialLocators": [
+            "S4 §2.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-07-claim-5",
+          "editorialLocators": [
+            "S4 §§2.2,3.2; operative synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-08",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-08-claim-1",
+          "editorialLocators": [
+            "S3 §1; S4 §4.1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-09",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-09-claim-1",
+          "editorialLocators": [
+            "S4 §3.2",
+            "S2 p.394"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-09-claim-2",
+          "editorialLocators": [
+            "S4 §3.2",
+            "S4 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-09-claim-3",
+          "editorialLocators": [
+            "S4 §3.2",
+            "S4 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-09-claim-4",
+          "editorialLocators": [
+            "S4 §3.1",
+            "S4 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-10",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-10-claim-1",
+          "editorialLocators": [
+            "S2 p.398; S1 §6.2; S4 §§3,5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-11",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-11-claim-1",
+          "editorialLocators": [
+            "S4 §3.1–2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-11-claim-2",
+          "editorialLocators": [
+            "S4 §§3.2,4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-11-claim-3",
+          "editorialLocators": [
+            "S4 §§2.2,3.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-11-claim-4",
+          "editorialLocators": [
+            "S4 §3.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-11-claim-5",
+          "editorialLocators": [
+            "S4 §3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-12",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-12-claim-1",
+          "editorialLocators": [
+            "S4 §3.3; S2 p.395"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-12-claim-2",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-12-claim-3",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-12-claim-4",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-13",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-13-claim-1",
+          "editorialLocators": [
+            "S4 §3.3; operative synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-14",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-14-claim-1",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-14-claim-2",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-14-claim-3",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-14-claim-4",
+          "editorialLocators": [
+            "S4 §§3.2–3.3,4.1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-15",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-15-claim-1",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-16",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-16-claim-1",
+          "editorialLocators": [
+            "S4 §3.3; operative synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-17",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-17-claim-1",
+          "editorialLocators": [
+            "S1 §6.2; S3 §5; S4 §3.1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-18",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-18-claim-1",
+          "editorialLocators": [
+            "S4 §3.1; S1 §§5.2,8"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-19",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-19-claim-1",
+          "editorialLocators": [
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-19-claim-2",
+          "editorialLocators": [
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-19-claim-3",
+          "editorialLocators": [
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-19-claim-4",
+          "editorialLocators": [
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-19-claim-5",
+          "editorialLocators": [
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-19-claim-6",
+          "editorialLocators": [
+            "S4 §4.1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-20",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-20-claim-1",
+          "editorialLocators": [
+            "S1 §8",
+            "S4 §4.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-20-claim-2",
+          "editorialLocators": [
+            "S2 pp.394,413",
+            "S2 p.413"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-20-claim-3",
+          "editorialLocators": [
+            "S4 §4",
+            "S4 §4"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-20-claim-4",
+          "editorialLocators": [
+            "S1 §8",
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-20-claim-5",
+          "editorialLocators": [
+            "S1 §§5,8; S4 §4.1",
+            "S4 §4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-20-claim-6",
+          "editorialLocators": [
+            "S3 §8",
+            "S3 §8"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-21",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-21-claim-1",
+          "editorialLocators": [
+            "S4 §§3.2,4.2; S1 §8; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-22",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-22-claim-1",
+          "editorialLocators": [
+            "S4 §3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-22-claim-2",
+          "editorialLocators": [
+            "S4 §2.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-22-claim-3",
+          "editorialLocators": [
+            "S4 §3.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-22-claim-4",
+          "editorialLocators": [
+            "S2 p.395"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-22-claim-5",
+          "editorialLocators": [
+            "S4 §3.3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-22-claim-6",
+          "editorialLocators": [
+            "S4 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-vagotomy-and-drainage-23",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004715",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004703"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-23-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004703",
+            "00000000-0000-4000-8000-000000004700"
+          ],
+          "claimId": "upper-gi-vagotomy-and-drainage-23-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ]
+    }
+  ],
+  "upper-gastrointestinal-bleeding": [
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-01",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-01-claim-1",
+          "editorialLocators": [
+            "S5 §§2–7; S2 pp.396–399; S12 Transfusion"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-02",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-02-claim-1",
+          "editorialLocators": [
+            "S2 p.396; S5 §§1,5.1; S7 §5"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-03",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-03-claim-1",
+          "editorialLocators": [
+            "S1 §7; S2 pp.398–401; S3 §1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-04",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-1",
+          "editorialLocators": [
+            "S5 §§2,4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-2",
+          "editorialLocators": [
+            "S16 p.388"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-3",
+          "editorialLocators": [
+            "S5 §§2,4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-4",
+          "editorialLocators": [
+            "S5 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-5",
+          "editorialLocators": [
+            "S5 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-6",
+          "editorialLocators": [
+            "S5 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-7",
+          "editorialLocators": [
+            "S5 §§2,4.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-8",
+          "editorialLocators": [
+            "S5 §2; S1 §5.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-04-claim-9",
+          "editorialLocators": [
+            "S6 §§1–3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-05",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-05-claim-1",
+          "editorialLocators": [
+            "S5 §§2,4.1; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-06",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-06-claim-1",
+          "editorialLocators": [
+            "S5 §§3,7.1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-06-claim-2",
+          "editorialLocators": [
+            "S5 §§3,4.1; S2 p.396"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-06-claim-3",
+          "editorialLocators": [
+            "S12 Transfusion"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004712"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-06-claim-4",
+          "editorialLocators": [
+            "S5 §4.1; S13 Acute GI bleeding"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-07",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004708",
+            "00000000-0000-4000-8000-000000004718"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-07-claim-1",
+          "editorialLocators": [
+            "S9 Table 1, pp.904–905; S19 Results; source correction to S5 §3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-08",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-08-claim-1",
+          "editorialLocators": [
+            "S5 §6",
+            "S12 Risk assessment"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-08-claim-2",
+          "editorialLocators": [
+            "S5 §6",
+            "S5 §6; editorial qualification"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-08-claim-3",
+          "editorialLocators": [
+            "S5 §6",
+            "S5 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-08-claim-4",
+          "editorialLocators": [
+            "S5 §6",
+            "S5 §6; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-09",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-09-claim-1",
+          "editorialLocators": [
+            "S12 Risk assessment; S5 §7; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-10",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004708",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-10-claim-1",
+          "editorialLocators": [
+            "S5 §4.2; S12 Timing; S9 Table 1 p.905"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-11",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-11-claim-1",
+          "editorialLocators": [
+            "S5 §4.2; S2 p.396"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-12",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-12-claim-1",
+          "editorialLocators": [
+            "S5 §4.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-13",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-13-claim-1",
+          "editorialLocators": [
+            "S5 §5.2; S12 Endoscopic treatment"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-13-claim-2",
+          "editorialLocators": [
+            "S5 §5.2; S12 Endoscopic treatment"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-13-claim-3",
+          "editorialLocators": [
+            "S5 §5.2; S12 Endoscopic treatment"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004708",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-13-claim-4",
+          "editorialLocators": [
+            "S9 Table 1 p.905; S12 Adherent clot"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-13-claim-5",
+          "editorialLocators": [
+            "S9 Table 1 p.906"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-13-claim-6",
+          "editorialLocators": [
+            "S9 Table 1 p.906"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-14",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-14-claim-1",
+          "editorialLocators": [
+            "S5 §5.2; S2 p.396"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-15",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-15-claim-1",
+          "editorialLocators": [
+            "S5 §7.1; S12 Hemostatic modalities"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-16",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-16-claim-1",
+          "editorialLocators": [
+            "S12 Postendoscopic PPI; Pre-endoscopic erythromycin"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-17",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-17-claim-1",
+          "editorialLocators": [
+            "S9 Table 1 pp.906–907"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-18",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-18-claim-1",
+          "editorialLocators": [
+            "S5 §7; S2 p.396"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-18-claim-2",
+          "editorialLocators": [
+            "S2 p.396; S12 Recurrent bleeding"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-18-claim-3",
+          "editorialLocators": [
+            "S5 §7.1; S12 Failed endoscopic treatment"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-18-claim-4",
+          "editorialLocators": [
+            "S5 §7.1; S9 Table 1 p.907"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-19",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-19-claim-1",
+          "editorialLocators": [
+            "S1 §7; S2 pp.396,398; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-20",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-20-claim-1",
+          "editorialLocators": [
+            "S1 §7; S2 pp.398–399"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-21",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004702"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-21-claim-1",
+          "editorialLocators": [
+            "S1 §7; S3 §5; S2 p.401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-22",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004717"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-22-claim-1",
+          "editorialLocators": [
+            "S5 §7; S18 Acute variceal bleeding"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-23",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004717"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-23-claim-1",
+          "editorialLocators": [
+            "S18 access note; S5 §§2,7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-24",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-24-claim-1",
+          "editorialLocators": [
+            "S1 §§5–7; S2 p.397"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-25",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004712"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-25-claim-1",
+          "editorialLocators": [
+            "S13 Acute GI bleeding; Periendoscopic period"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-26",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-26-claim-1",
+          "editorialLocators": [
+            "S2 p.396"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-26-claim-2",
+          "editorialLocators": [
+            "S2 pp.398–399"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-26-claim-3",
+          "editorialLocators": [
+            "S12 Endoscopic treatment"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-26-claim-4",
+          "editorialLocators": [
+            "S2 p.396; S12 Recurrent bleeding"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-26-claim-5",
+          "editorialLocators": [
+            "S5 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004717"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-26-claim-6",
+          "editorialLocators": [
+            "S5 §7; S18 Acute variceal bleeding"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-27",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004708",
+            "00000000-0000-4000-8000-000000004718"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-27-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004711",
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-27-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-upper-gastrointestinal-bleeding-28",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-3",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-4",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-5",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-6",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-7",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-8",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-upper-gastrointestinal-bleeding-28-claim-9",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ],
+      "locatorNote": "Editorial decision-flow synthesis of the cited guide sections; node and conditional edge units are cited in order."
+    }
+  ],
+  "stress-gastritis": [
+    {
+      "blockId": "upper-gi-stress-gastritis-01",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-01-claim-1",
+          "editorialLocators": [
+            "S6 §§1–3,5–6; S2 p.402"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-02",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-02-claim-1",
+          "editorialLocators": [
+            "S6 §§1–2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-03",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-03-claim-1",
+          "editorialLocators": [
+            "S2 p.401; S6 §1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-04",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-04-claim-1",
+          "editorialLocators": [
+            "S6 §§1–2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-04-claim-2",
+          "editorialLocators": [
+            "S6 §1.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-04-claim-3",
+          "editorialLocators": [
+            "S6 §1.2; S11 Risk factors"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-04-claim-4",
+          "editorialLocators": [
+            "S11 SUP in neurocritical care"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-04-claim-5",
+          "editorialLocators": [
+            "S6 §1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-04-claim-6",
+          "editorialLocators": [
+            "S6 §1.1; S1 §3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-05",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-05-claim-1",
+          "editorialLocators": [
+            "S6 §1; S11 Abstract/definitions"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-06",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-06-claim-1",
+          "editorialLocators": [
+            "S11 Recommendations: risk factors, SUP, EN, first-line agents, route, cessation"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-07",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-07-claim-1",
+          "editorialLocators": [
+            "S11 Cessation; editorial workflow synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-08",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-08-claim-1",
+          "editorialLocators": [
+            "S6 §5",
+            "S6 §§5–6; editorial synthesis"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-stress-gastritis-08-claim-2",
+          "editorialLocators": [
+            "S6 §5",
+            "S11 Dosing; S12 Postendoscopic PPI"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-08-claim-3",
+          "editorialLocators": [
+            "S6 §5",
+            "S11 First-line agents"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-08-claim-4",
+          "editorialLocators": [
+            "S6 §5",
+            "S11 First-line agents"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-08-claim-5",
+          "editorialLocators": [
+            "S6 §5",
+            "S6 §§5–6; editorial synthesis"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-08-claim-6",
+          "editorialLocators": [
+            "S6 §5",
+            "S6 §5; S11 First-line agents"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-09",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-09-claim-1",
+          "editorialLocators": [
+            "S11 Dosing Regimen"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-10",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-10-claim-1",
+          "editorialLocators": [
+            "S6 §3.1; S5 §§2–4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-11",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-11-claim-1",
+          "editorialLocators": [
+            "S5 §§2–4,7; S6 §§3,6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-12",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-12-claim-1",
+          "editorialLocators": [
+            "S6 §3.2; S2 p.402"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-13",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-stress-gastritis-13-claim-1",
+          "editorialLocators": [
+            "S6 §3; S7 §6; editorial qualification"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-14",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-14-claim-1",
+          "editorialLocators": [
+            "S6 §4; S1 §4; S2 p.401"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-15",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-15-claim-1",
+          "editorialLocators": [
+            "S6 §6; S2 p.402; S5 §7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-16",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004702",
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-16-claim-1",
+          "editorialLocators": [
+            "S6 §6; S5 §7; S3 §§4–6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-17",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-17-claim-1",
+          "editorialLocators": [
+            "S6 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-18",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-18-claim-1",
+          "editorialLocators": [
+            "S6 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-stress-gastritis-18-claim-2",
+          "editorialLocators": [
+            "S2 p.401"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-18-claim-3",
+          "editorialLocators": [
+            "S6 §1.2; S11 Risk factors"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-18-claim-4",
+          "editorialLocators": [
+            "S6 §§5–6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004705"
+          ],
+          "claimId": "upper-gi-stress-gastritis-18-claim-5",
+          "editorialLocators": [
+            "S6 §4; S1 §4"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-18-claim-6",
+          "editorialLocators": [
+            "S11 Cessation"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-19",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-19-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004705",
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-19-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-stress-gastritis-20",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-3",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-4",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-5",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-6",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-7",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-8",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-9",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-10",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004710"
+          ],
+          "claimId": "upper-gi-stress-gastritis-20-claim-11",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ],
+      "locatorNote": "Editorial decision-flow synthesis of the cited guide sections; node and conditional edge units are cited in order."
+    }
+  ],
+  "esophagogastroduodenoscopy": [
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-01",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-01-claim-1",
+          "editorialLocators": [
+            "S7 §§1,4–7; S5 §3"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-02",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-1",
+          "editorialLocators": [
+            "S7 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-2",
+          "editorialLocators": [
+            "S7 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-3",
+          "editorialLocators": [
+            "S7 §§2,6; S1 §5.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-4",
+          "editorialLocators": [
+            "S7 §§2–3; S16 p.367"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-5",
+          "editorialLocators": [
+            "S7 §2; S5 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-6",
+          "editorialLocators": [
+            "S7 §2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-02-claim-7",
+          "editorialLocators": [
+            "S7 §2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-03",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-03-claim-1",
+          "editorialLocators": [
+            "S7 §2; review limit"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-04",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-04-claim-1",
+          "editorialLocators": [
+            "S7 §§2,4,7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-05",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-05-claim-1",
+          "editorialLocators": [
+            "S7 §2; S9 Table 1 p.905"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-06",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-1",
+          "editorialLocators": [
+            "S7 §§3,5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-2",
+          "editorialLocators": [
+            "S7 §§3,5; S16 p.365"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-3",
+          "editorialLocators": [
+            "S7 §3"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-4",
+          "editorialLocators": [
+            "S7 §5; S2 p.391"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-5",
+          "editorialLocators": [
+            "S2 p.391; S7 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-6",
+          "editorialLocators": [
+            "S7 §§3,5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-06-claim-7",
+          "editorialLocators": [
+            "S7 §§3,5; S5 §5.1"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-07",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-07-claim-1",
+          "editorialLocators": [
+            "S7 §§3,5; S16 pp.365–366; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-08",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-08-claim-1",
+          "editorialLocators": [
+            "S7 §3; S16 p.365"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-09",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-09-claim-1",
+          "editorialLocators": [
+            "S7 §§2,4,6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-10",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-10-claim-1",
+          "editorialLocators": [
+            "S7 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-11",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-11-claim-1",
+          "editorialLocators": [
+            "S7 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-12",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-12-claim-1",
+          "editorialLocators": [
+            "S7 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-13",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004713"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-13-claim-1",
+          "editorialLocators": [
+            "S14 Guidance summary"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-14",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-14-claim-1",
+          "editorialLocators": [
+            "S7 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-15",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004712"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-15-claim-1",
+          "editorialLocators": [
+            "S13 Periendoscopic period; S7 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-16",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-16-claim-1",
+          "editorialLocators": [
+            "S7 §4"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-17",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-17-claim-1",
+          "editorialLocators": [
+            "S7 §4; review limit"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-18",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-1",
+          "editorialLocators": [
+            "S7 §§4–5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-2",
+          "editorialLocators": [
+            "S7 §§3,5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-3",
+          "editorialLocators": [
+            "S7 §§3,5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-4",
+          "editorialLocators": [
+            "S7 §§5–6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-5",
+          "editorialLocators": [
+            "S7 §5; S5 §1"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-6",
+          "editorialLocators": [
+            "S7 §§3,5; editorial scope qualification"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-18-claim-7",
+          "editorialLocators": [
+            "S7 §§5–6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-19",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-19-claim-1",
+          "editorialLocators": [
+            "S7 §§4–6; editorial safety synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-20",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-20-claim-1",
+          "editorialLocators": [
+            "S7 §6; S1 §5.2"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-21",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-21-claim-1",
+          "editorialLocators": [
+            "S12 Endoscopic hemostasis"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-21-claim-2",
+          "editorialLocators": [
+            "S9 Table 1 p.905"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004704"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-21-claim-3",
+          "editorialLocators": [
+            "S5 §7"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-21-claim-4",
+          "editorialLocators": [
+            "S7 §6; S1 §5.2"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-21-claim-5",
+          "editorialLocators": [
+            "S7 §§2,6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-22",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-22-claim-1",
+          "editorialLocators": [
+            "S7 §6; editorial qualification"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-23",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-23-claim-1",
+          "editorialLocators": [
+            "S7 §6"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-24",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-24-claim-1",
+          "editorialLocators": [
+            "S7 §§5–6; procedural synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-25",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-25-claim-1",
+          "editorialLocators": [
+            "S7 §§1,7; S16 p.389"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-26",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-26-claim-1",
+          "editorialLocators": [
+            "S7 §7"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-27",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-27-claim-1",
+          "editorialLocators": [
+            "S7 §§4,7; editorial handoff synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-28",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-28-claim-1",
+          "editorialLocators": [
+            "S7 §§4–7; editorial synthesis"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-29",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004700",
+            "00000000-0000-4000-8000-000000004711"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-29-claim-1",
+          "editorialLocators": [
+            "S1 §§5–7; S12 Postendoscopic management"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-30",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004701",
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-30-claim-1",
+          "editorialLocators": [
+            "S7 §5; S2 p.391"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-30-claim-2",
+          "editorialLocators": [
+            "S7 §5"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-30-claim-3",
+          "editorialLocators": [
+            "S7 §4"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-30-claim-4",
+          "editorialLocators": [
+            "S9 Table 1 p.904"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-30-claim-5",
+          "editorialLocators": [
+            "S7 §6"
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004715"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-30-claim-6",
+          "editorialLocators": [
+            "S7 §7; S16 p.389"
+          ]
+        }
+      ]
+    },
+    {
+      "blockId": "upper-gi-esophagogastroduodenoscopy-31",
+      "units": [
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004708"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-31-claim-1",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        },
+        {
+          "sourceIds": [
+            "00000000-0000-4000-8000-000000004706",
+            "00000000-0000-4000-8000-000000004701"
+          ],
+          "claimId": "upper-gi-esophagogastroduodenoscopy-31-claim-2",
+          "editorialLocators": [
+            "Editorial comparison/flow synthesis; use source-specific locators in source-manifest.json and the corresponding guide heading."
+          ]
+        }
+      ]
+    }
+  ]
+}
