@@ -126,6 +126,7 @@ describe("playbook library", () => {
         "parastomal hernia -> ventral-and-incisional-hernia",
         "peritonitis -> abdominal-pain",
         "rectal stump -> total-and-subtotal-colectomy",
+        "small bowel obstruction -> small-intestinal-obstruction",
         "splenectomy -> splenectomy-and-splenorrhaphy",
         "sublay mesh -> abdominal-wall-reconstruction",
         "transversus abdominis release -> abdominal-wall-reconstruction",
@@ -199,26 +200,29 @@ describe("playbook library", () => {
       // share the failure of right-colon peritoneal fixation, so the jump informs the reader.
       // Its sibling "detorsion" was not, because Ladd's procedure is a different operation.
       "right-hemicolectomy": [
+        "appendicitis -> appendicitis",
         "pancreatic fistula -> pancreaticoduodenectomy",
         "peritonitis -> abdominal-pain",
+        "small bowel obstruction -> small-intestinal-obstruction",
         "volvulus -> malrotation",
       ],
       "robotic-cholecystectomy": [
-        // Biliary batch 2026-10-22: injury, critical view, and repair terms reach the bile duct
-        // injury pair and the anastomosis topic. "bile leak" and "biloma" used to reach liver
-        // trauma; those aliases were narrowed to "post-traumatic" at the source.
+        "Acute cholecystitis -> symptomatic-gallstones-and-cholecystitis",
         "Bile duct injury -> iatrogenic-bile-duct-injury",
-        // Kept: cirrhosis with portal hypertension is a listed reason the dissection turns hard.
         "Cirrhosis -> cirrhosis-and-portal-hypertension",
         "Mirizzi syndrome -> benign-biliary-obstruction",
         "Roux-en-Y hepaticojejunostomy -> choledochoenteric-anastomosis",
+        "acute cholecystitis -> symptomatic-gallstones-and-cholecystitis",
         "bile duct injury -> iatrogenic-bile-duct-injury",
+        "biliary colic -> symptomatic-gallstones-and-cholecystitis",
         "choledocholithiasis -> choledocholithiasis",
+        "cholelithiasis -> symptomatic-gallstones-and-cholecystitis",
         "critical view of safety -> iatrogenic-bile-duct-injury",
         "duct of Luschka -> iatrogenic-bile-duct-injury",
         "hepaticojejunostomy -> choledochoenteric-anastomosis",
         "hepatocystic triangle -> iatrogenic-bile-duct-injury",
         "incisional hernia -> ventral-and-incisional-hernia",
+        "laparoscopic cholecystectomy -> symptomatic-gallstones-and-cholecystitis",
         "portal hypertension -> cirrhosis-and-portal-hypertension",
       ],
       "robotic-tapp-inguinal-hernia-repair": [
@@ -256,28 +260,23 @@ describe("playbook library", () => {
       // owns.
       "robotic-ventral-umbilical-hernia-repair": [
         "Arcuate line -> rectus-sheath-hematoma",
-        // Kept: the cirrhotic patient with ascites is exactly who Cirrhosis and Portal Hypertension covers.
         "Cirrhosis -> cirrhosis-and-portal-hypertension",
         "Diastasis recti -> umbilical-and-epigastric-hernia",
         "Linea alba -> umbilical-and-epigastric-hernia",
         "Loss of domain -> ventral-and-incisional-hernia",
         "Retrorectus -> abdominal-wall-reconstruction",
         "Rives-Stoppa -> abdominal-wall-reconstruction",
-        // "ascites" left umbilical-and-epigastric-hernia (October 2026): the bare alias sent ascites in
-        // abscess drainage, FAST and aneurysm topics to hernia repair. Cirrhosis and portal hypertension
-        // claimed it in liver batch 2, where controlling ascites before repair is taught.
         "ascites -> cirrhosis-and-portal-hypertension",
         "component separation -> abdominal-wall-reconstruction",
         "loss of domain -> ventral-and-incisional-hernia",
         "mechanical prophylaxis -> prophylaxis-of-venous-thromboembolism",
         "mesh infection -> abdominal-wall-reconstruction",
         "onlay -> abdominal-wall-reconstruction",
-        // Bare "botulinum toxin" narrowed on ventral-and-incisional-hernia (October 2026): it sent every
-        // fissure and sphincterotomy mention of chemodenervation to hernia repair.
         "preoperative botulinum toxin -> ventral-and-incisional-hernia",
         "progressive pneumoperitoneum -> ventral-and-incisional-hernia",
         "retrorectus -> abdominal-wall-reconstruction",
         "semilunar line -> unusual-hernias",
+        "small bowel obstruction -> small-intestinal-obstruction",
         "transversus abdominis release -> abdominal-wall-reconstruction",
         "umbilical hernia -> umbilical-and-epigastric-hernia",
         "ventral hernia -> ventral-and-incisional-hernia",
