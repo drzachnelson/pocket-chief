@@ -169,7 +169,7 @@ export const hemorrhoidsTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000002111",
   slug: "hemorrhoids",
   title: "Hemorrhoids",
-  aliases: ["hemorrhoid", "haemorrhoids", "hemorrhoidal disease", "internal hemorrhoids", "external hemorrhoids", "anal cushions", "anal cushion", "piles", "thrombosed external hemorrhoid", "dentate line", "pectinate line", "anoderm", "bright red blood per rectum", "BRBPR", "hematochezia", "rectal bleeding", "Treitz's muscle", "superior rectal artery", "inferior rectal artery", "middle rectal artery", "rectal varices", "hemorrhoid grading", "grade IV hemorrhoids", "strangulated hemorrhoids"],
+  aliases: ["hemorrhoid", "haemorrhoids", "hemorrhoidal disease", "internal hemorrhoids", "external hemorrhoids", "anal cushions", "anal cushion", "piles", "thrombosed external hemorrhoid", "dentate line", "pectinate line", "anoderm", "bright red blood per rectum", "BRBPR", "rectal bleeding", "Treitz's muscle", "superior rectal artery", "inferior rectal artery", "middle rectal artery", "rectal varices", "hemorrhoid grading", "grade IV hemorrhoids", "strangulated hemorrhoids"],
   scoreNodeId: "anorectal-conditions",
   scoreCategory: "SCORE · Anorectal · Diseases & Conditions",
   tags: ["anorectal", "hemorrhoids", "colorectal", "anatomy", "absite", "score"],

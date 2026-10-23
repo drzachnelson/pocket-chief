@@ -108,6 +108,9 @@ import { anorectalAbscessAndFistulaeTopic } from "@/content/topics/anorectal-abs
 import { anorectalAbscessDrainageTopic } from "@/content/topics/anorectal-abscess-drainage";
 import { anorectalFistulaRepairTopic } from "@/content/topics/anorectal-fistula-repair";
 import { perianalCondylomasExcisionTopic } from "@/content/topics/perianal-condylomas-excision";
+import { acutePancreatitisTopic } from "@/content/topics/acute-pancreatitis";
+import { colonicVolvulusAndObstructionTopic } from "@/content/topics/colonic-volvulus-and-obstruction";
+import { lowerGastrointestinalBleedingTopic } from "@/content/topics/lower-gastrointestinal-bleeding";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -230,6 +233,9 @@ export const libraryTopics: Topic[] = [
   upperGastrointestinalBleedingTopic,
   stressGastritisTopic,
   esophagogastroduodenoscopyTopic,
+  acutePancreatitisTopic,
+  colonicVolvulusAndObstructionTopic,
+  lowerGastrointestinalBleedingTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

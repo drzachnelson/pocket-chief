@@ -195,13 +195,13 @@ describe("playbook library", () => {
         "replaced left hepatic artery -> hepatic-resection",
         "replaced right hepatic artery -> hepatic-resection",
       ],
-      // "volvulus" is kept deliberately: adult caecal volvulus and the malrotation spectrum
-      // share the failure of right-colon peritoneal fixation, so the jump informs the reader.
-      // Its sibling "detorsion" was not, because Ladd's procedure is a different operation.
+      // Call Problems I (2026-10-23): bare "volvulus" no longer reaches Malrotation. That alias was
+      // narrowed to "midgut volvulus" once Colonic Volvulus and Obstruction arrived, because it was also
+      // catching gastric and sigmoid volvulus. "detorsion" stays unlinked: Ladd's procedure is a different operation.
       "right-hemicolectomy": [
+        "Pancreatitis -> acute-pancreatitis",
         "pancreatic fistula -> pancreaticoduodenectomy",
         "peritonitis -> abdominal-pain",
-        "volvulus -> malrotation",
       ],
       "robotic-cholecystectomy": [
         // Biliary batch 2026-10-22: injury, critical view, and repair terms reach the bile duct
@@ -210,6 +210,7 @@ describe("playbook library", () => {
         "Bile duct injury -> iatrogenic-bile-duct-injury",
         // Kept: cirrhosis with portal hypertension is a listed reason the dissection turns hard.
         "Cirrhosis -> cirrhosis-and-portal-hypertension",
+        "Gallstone pancreatitis -> acute-pancreatitis",
         "Mirizzi syndrome -> benign-biliary-obstruction",
         "Roux-en-Y hepaticojejunostomy -> choledochoenteric-anastomosis",
         "bile duct injury -> iatrogenic-bile-duct-injury",
@@ -219,6 +220,7 @@ describe("playbook library", () => {
         "hepaticojejunostomy -> choledochoenteric-anastomosis",
         "hepatocystic triangle -> iatrogenic-bile-duct-injury",
         "incisional hernia -> ventral-and-incisional-hernia",
+        "pancreatitis -> acute-pancreatitis",
         "portal hypertension -> cirrhosis-and-portal-hypertension",
       ],
       "robotic-tapp-inguinal-hernia-repair": [
