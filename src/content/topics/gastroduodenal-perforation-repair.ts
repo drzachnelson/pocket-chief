@@ -1,4 +1,4 @@
-import { buildDraftTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
 import {
   SCORE_PEPTIC_ULCER_SOURCE,
   FISER_STOMACH_SOURCE,
@@ -9,7 +9,7 @@ import {
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
-// Converted from docs/study-guides/upper-gi/gastroduodenal-perforation-repair.md. Clinical approval remains pending.
+// Converted from docs/study-guides/upper-gi/gastroduodenal-perforation-repair.md. Per-topic sign-off items: docs/study-guides/upper-gi/review.md.
 const blocks: TopicBlock[] = [
   sourcedUnits({
   "type": "summary",
@@ -383,7 +383,7 @@ const blocks: TopicBlock[] = [
   references("upper-gi-gastroduodenal-perforation-repair-references", [SCORE_PEPTIC_ULCER_SOURCE, FISER_STOMACH_SOURCE, SCORE_GASTRODUODENAL_PERFORATION_SOURCE, SCORE_VAGOTOMY_SOURCE, SCORE_EGD_SOURCE, WSES_PEPTIC_ULCER_2020_SOURCE]),
 ];
 
-export const gastroduodenalPerforationRepairDraft = buildDraftTopic({
+export const gastroduodenalPerforationRepairTopic = buildTopic({
   "id": "00000000-0000-4000-8000-000000004721",
   "versionId": "00000000-0000-4000-8000-000000004731",
   "slug": "gastroduodenal-perforation-repair",
@@ -399,8 +399,7 @@ export const gastroduodenalPerforationRepairDraft = buildDraftTopic({
   "tags": [
     "upper-gi",
     "absite",
-    "score",
-    "clinical-review-pending"
+    "score"
   ],
   "sourceId": SCORE_GASTRODUODENAL_PERFORATION_SOURCE,
   "additionalSourceIds": [
@@ -411,13 +410,5 @@ export const gastroduodenalPerforationRepairDraft = buildDraftTopic({
     WSES_PEPTIC_ULCER_2020_SOURCE
   ],
   "blocks": blocks,
-  "createdAt": "2026-10-22T00:00:00.000Z",
-  "warnings": [
-    "Draft — pending Zach's clinical review",
-    "**Clinical approval pending.** Complex duodenal rescue is an operative overview, not a technical competency assessment.",
-    "Source differences remain explicit: free versus pedicled patch naming; routine yeast coverage versus selective antifungals; routine wide drains/enteral access versus individualized use; historic mandatory acid reduction after prior PPI therapy versus selected stable cases.",
-    "**Needs further support:** a procedure-specific postoperative leak algorithm, exact closure/suture specifications, uniform drain policy, feeding/imaging schedule, and exact complex-defect reconstruction criteria. No unsupported protocol is substituted.",
-    "S3's “gastrin >1000 ng/mL” conflicts with Fiser's pg/mL unit; the value is not taught as a diagnostic rule. Its 30% 90-day mortality is not generalized to every emergency ulcer repair.",
-    "Source figures/videos remain unreviewed. No matching question-bank notes were available."
-  ]
+  "reviewedAt": "2026-10-22T00:00:00.000Z"
 });

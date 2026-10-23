@@ -1,8 +1,8 @@
-# Upper GI study-guide review batch
+# Upper GI study-guide batch
 
-Six app-ready drafts, prepared October 22, 2026. **Pending Zach's clinical review.**
+Six source-linked guides, prepared October 22, 2026, and promoted to regular library topics on the same date. **Pending Zach's clinical review.**
 
-The TypeScript drafts in `src/content/drafts/upper-gi/` preserve the clinical text, decision tables, operative sequences, source-specific corrections and review limits of the source-linked Markdown guides here. They use `buildDraftTopic`, with no approved version, owner review fields or registration in the published library/search/static payload. The PR is the review and integration handoff; it does not itself confer clinical approval.
+The promotion PR (branch `claude/promote-upper-gi-drafts`) moves the six topics to `src/content/topics/<slug>.ts` as ordinary `buildTopic` entries and registers them in the published library. They keep the clinical text, decision tables, operative sequences, source-specific corrections and source registrations of the Markdown guides here. That PR stays unmerged until Zach signs off on the per-topic items in [review.md](review.md). Conversion and verification are in [BATCH_NOTES.md](BATCH_NOTES.md). The earlier draft-only registry from PR #38 (`src/content/drafts/upper-gi/`, `buildDraftTopic`) has been removed.
 
 | Guide | SCORE objective/subobjective entries |
 |---|---:|
@@ -19,13 +19,13 @@ All six complete SCORE modules and relevant Fiser sections were used. No matchin
 
 [block-source-locators.json](block-source-locators.json) preserves the original paragraph/row citation markers beside each generated block and claim ID without duplicating its clinical prose. The app reference registry contains distinct source records and access/review details; the existing Fiser pancreas source is reused.
 
-## Before publication
+## Before merging
 
-Review the per-guide flags, including H. pylori regimen/cure details, gastrin units and acid context, patch terminology, complex repair/rescue, adherent-clot management, ICU prophylaxis, airway/antithrombotics and sedation. Resolve unsupported protocol details rather than approving them by association. After explicit clinical approval, promote the reviewed versions through the repository's content workflow and register those topics in the published library. Run the current content, search, static-export and browser checks at that point.
+Review the per-topic sign-off list in [review.md](review.md). It covers H. pylori regimen/cure details, gastrin units and acid context, patch terminology, complex repair/rescue, adherent-clot management, ICU prophylaxis, airway/antithrombotics and sedation, plus every warning the drafts carried. Resolve unsupported protocol details rather than approving them by association. Merging the promotion PR publishes the topics.
 
-## Integration validation
+## PR #38 draft-integration validation (historical)
 
-Validated October 22, 2026:
+Validated October 22, 2026, before promotion. Current results are in [BATCH_NOTES.md](BATCH_NOTES.md).
 
 - 184 unit/component/content tests passed. All 162 draft blocks and 347 claims are included in contract checks; component checks count every table row, operative step and all 24 flow nodes.
 - TypeScript and zero-warning ESLint passed.

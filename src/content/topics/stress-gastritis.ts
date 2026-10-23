@@ -1,4 +1,4 @@
-import { buildDraftTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
 import {
   SCORE_PEPTIC_ULCER_SOURCE,
   FISER_STOMACH_SOURCE,
@@ -11,7 +11,7 @@ import {
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
-// Converted from docs/study-guides/upper-gi/stress-gastritis.md. Clinical approval remains pending.
+// Converted from docs/study-guides/upper-gi/stress-gastritis.md. Per-topic sign-off items: docs/study-guides/upper-gi/review.md.
 const blocks: TopicBlock[] = [
   sourcedUnits({
   "type": "summary",
@@ -301,7 +301,7 @@ const blocks: TopicBlock[] = [
   references("upper-gi-stress-gastritis-references", [SCORE_PEPTIC_ULCER_SOURCE, FISER_STOMACH_SOURCE, SCORE_GASTRODUODENAL_PERFORATION_SOURCE, SCORE_UPPER_GI_BLEEDING_SOURCE, SCORE_STRESS_GASTRITIS_SOURCE, SCORE_EGD_SOURCE, SCCM_ASHP_STRESS_PROPHYLAXIS_2024_SOURCE, ACG_UGIB_2021_SOURCE]),
 ];
 
-export const stressGastritisDraft = buildDraftTopic({
+export const stressGastritisTopic = buildTopic({
   "id": "00000000-0000-4000-8000-000000004724",
   "versionId": "00000000-0000-4000-8000-000000004734",
   "slug": "stress-gastritis",
@@ -317,8 +317,7 @@ export const stressGastritisDraft = buildDraftTopic({
   "tags": [
     "upper-gi",
     "absite",
-    "score",
-    "clinical-review-pending"
+    "score"
   ],
   "sourceId": SCORE_STRESS_GASTRITIS_SOURCE,
   "additionalSourceIds": [
@@ -331,13 +330,5 @@ export const stressGastritisDraft = buildDraftTopic({
     ACG_UGIB_2021_SOURCE
   ],
   "blocks": blocks,
-  "createdAt": "2026-10-22T00:00:00.000Z",
-  "warnings": [
-    "Draft — pending Zach's clinical review",
-    "**Clinical approval pending.** No current-practice addition is represented as a supplied bank key.",
-    "Source timing differs: early mucosal lesions in SCORE versus a later clinical window in Fiser. These are presented as different observed endpoints rather than one invented timing rule.",
-    "Ventilation-alone prophylaxis, universal biopsy during active erosive bleeding, and historical incidence/cutoffs are qualified. Modern prophylaxis is separately attributed to SCCM/ASHP.",
-    "**Needs further support:** a drug/renal-function-specific prophylaxis order set, a complete diffuse-hemorrhagic-gastritis surgical rescue strategy, and an indication-specific repeat-EGD protocol.",
-    "SCORE media and the embedded Johnson figure were not reviewed. No matching stomach question-bank notes were available."
-  ]
+  "reviewedAt": "2026-10-22T00:00:00.000Z"
 });

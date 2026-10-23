@@ -38,6 +38,12 @@ import { choledocholithiasisTopic } from "@/content/topics/choledocholithiasis";
 import { iatrogenicBileDuctInjuryTopic } from "@/content/topics/iatrogenic-bile-duct-injury";
 import { iatrogenicBileDuctInjuryRepairTopic } from "@/content/topics/iatrogenic-bile-duct-injury-repair";
 import { primarySclerosingCholangitisTopic } from "@/content/topics/primary-sclerosing-cholangitis";
+import { pepticUlcerDiseaseTopic } from "@/content/topics/peptic-ulcer-disease";
+import { gastroduodenalPerforationRepairTopic } from "@/content/topics/gastroduodenal-perforation-repair";
+import { vagotomyAndDrainageTopic } from "@/content/topics/vagotomy-and-drainage";
+import { upperGastrointestinalBleedingTopic } from "@/content/topics/upper-gastrointestinal-bleeding";
+import { stressGastritisTopic } from "@/content/topics/stress-gastritis";
+import { esophagogastroduodenoscopyTopic } from "@/content/topics/esophagogastroduodenoscopy";
 import { commonCardiacArrhythmiasTopic } from "@/content/topics/common-cardiac-arrhythmias";
 import { crohnDiseaseTopic } from "@/content/topics/crohn-disease";
 import { derangementsOfElectrolytesAndAcidBaseBalanceTopic } from "@/content/topics/derangements-of-electrolytes-and-acid-base-balance";
@@ -218,9 +224,12 @@ export const libraryTopics: Topic[] = [
   choledochoentericAnastomosisTopic,
   choledochalCystTopic,
   primarySclerosingCholangitisTopic,
+  pepticUlcerDiseaseTopic,
+  gastroduodenalPerforationRepairTopic,
+  vagotomyAndDrainageTopic,
+  upperGastrointestinalBleedingTopic,
+  stressGastritisTopic,
+  esophagogastroduodenoscopyTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";
-
-// App-ready study-guide drafts remain outside the approved library and static search payload.
-export { upperGiDraftTopics } from "@/content/drafts/upper-gi";

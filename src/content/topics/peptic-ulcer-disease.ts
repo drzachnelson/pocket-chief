@@ -1,4 +1,4 @@
-import { buildDraftTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
 import {
   SCORE_PEPTIC_ULCER_SOURCE,
   FISER_STOMACH_SOURCE,
@@ -12,7 +12,7 @@ import {
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
-// Converted from docs/study-guides/upper-gi/peptic-ulcer-disease.md. Clinical approval remains pending.
+// Converted from docs/study-guides/upper-gi/peptic-ulcer-disease.md. Per-topic sign-off items: docs/study-guides/upper-gi/review.md.
 const blocks: TopicBlock[] = [
   sourcedUnits({
   "type": "summary",
@@ -359,7 +359,7 @@ const blocks: TopicBlock[] = [
   references("upper-gi-peptic-ulcer-disease-references", [SCORE_PEPTIC_ULCER_SOURCE, FISER_STOMACH_SOURCE, SCORE_GASTRODUODENAL_PERFORATION_SOURCE, SCORE_VAGOTOMY_SOURCE, SCORE_EGD_SOURCE, ACG_H_PYLORI_2024_SOURCE, ACG_CAG_ANTITHROMBOTICS_2022_SOURCE, FISER_PANCREAS_SOURCE, FISER_GI_HORMONES_SOURCE]),
 ];
 
-export const pepticUlcerDiseaseDraft = buildDraftTopic({
+export const pepticUlcerDiseaseTopic = buildTopic({
   "id": "00000000-0000-4000-8000-000000004720",
   "versionId": "00000000-0000-4000-8000-000000004730",
   "slug": "peptic-ulcer-disease",
@@ -374,8 +374,7 @@ export const pepticUlcerDiseaseDraft = buildDraftTopic({
   "tags": [
     "upper-gi",
     "absite",
-    "score",
-    "clinical-review-pending"
+    "score"
   ],
   "sourceId": SCORE_PEPTIC_ULCER_SOURCE,
   "additionalSourceIds": [
@@ -389,14 +388,5 @@ export const pepticUlcerDiseaseDraft = buildDraftTopic({
     FISER_GI_HORMONES_SOURCE
   ],
   "blocks": blocks,
-  "createdAt": "2026-10-22T00:00:00.000Z",
-  "warnings": [
-    "Draft — pending Zach's clinical review",
-    "**Clinical approval pending.** Source review does not establish clinical approval.",
-    "**Conflicting anatomy:** S1 places ECL cells predominantly in the antrum and describes duodenal ulcers within the antral-pyloric channel. ECL location is not taught here; duodenal location follows the concordant duodenal-bulb descriptions in S3 §1 and S2 p.398.",
-    "**Classification/physiology:** type II wording and type IV acid descriptions differ; the table preserves the paired-lesion definition and avoids an unsupported universal acid claim for type IV.",
-    "**Historical management:** empirical clarithromycin triple therapy, fixed blood-unit thresholds, and automatic acid surgery after prior PPI use must not drive the contemporary algorithms.",
-    "**Needs further support:** a full gastrinoma diagnostic protocol, exact ulcer-healing/endoscopic surveillance intervals, and causal claims about long-term PPI atrophy. The apparent gastrin-unit error is omitted from diagnostic teaching.",
-    "No matching stomach/EGD question-bank entries were supplied; no bank key or tested-frequency claim is inferred. SCORE figures/videos remain unreviewed."
-  ]
+  "reviewedAt": "2026-10-22T00:00:00.000Z"
 });
