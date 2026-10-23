@@ -303,6 +303,21 @@ export const PERIPHERAL_ANEURYSMS_REPAIR_OE_SOURCE = "00000000-0000-4000-8000-00
 export const OPEN_PAA_REPAIR_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003032";
 export const SAPHENOUS_VEIN_HARVEST_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003033";
 
+// High-Frequency Call Problems I, Run 1 (October 2026): one hundreds block per topic, sources from the block start
+// and the topic at +20/+21. Appendicitis 05200, Diverticulitis 05300, Small Intestinal Obstruction 05400,
+// Symptomatic Gallstones and Cholecystitis 05500. Fiser chapters 35 (04510), 36 (04511) and 32 (03107) and the
+// SAGES safe cholecystectomy entry (03014) are reused.
+export const SCORE_APPENDICITIS_SOURCE = "00000000-0000-4000-8000-000000005200";
+export const SCORE_APPENDECTOMY_SOURCE = "00000000-0000-4000-8000-000000005201";
+export const APPENDICITIS_OE_SOURCE = "00000000-0000-4000-8000-000000005202";
+export const SCORE_DIVERTICULITIS_SOURCE = "00000000-0000-4000-8000-000000005300";
+export const DIVERTICULITIS_OE_SOURCE = "00000000-0000-4000-8000-000000005301";
+export const SCORE_SMALL_INTESTINAL_OBSTRUCTION_SOURCE = "00000000-0000-4000-8000-000000005400";
+export const SMALL_INTESTINAL_OBSTRUCTION_OE_SOURCE = "00000000-0000-4000-8000-000000005401";
+export const SCORE_SYMPTOMATIC_GALLSTONES_SOURCE = "00000000-0000-4000-8000-000000005500";
+export const SCORE_CHOLECYSTECTOMY_CHOLANGIOGRAPHY_SOURCE = "00000000-0000-4000-8000-000000005501";
+export const GALLSTONES_CHOLECYSTITIS_OE_SOURCE = "00000000-0000-4000-8000-000000005502";
+
 export const suppliedSources: SuppliedSource[] = [
   {
     id: SCORE_SVC_SOURCE,
@@ -2923,6 +2938,108 @@ export const suppliedSources: SuppliedSource[] = [
       "Carries inline author-year attributions and no numbered list. Works it cites: Verma and Mazer (NEJM 2019); Sohn (PLoS One 2024); Maris (Journal of Vascular Surgery 2026); Lawton (2021 ACC/AHA/SCAI coronary revascularization guideline); Dalén (JAMA Cardiology 2026); Caliskan (Nature Reviews Cardiology 2020); Georgoff (Behind the Knife, saphenous vein harvest); Hakim and Narouze (Pain Practice 2015); Beerkens (Nature Reviews Cardiology 2022); Zenati (NEJM 2019, REGROUP); Lazar (2016 AATS sternal wound infection guideline); Engelman (JAMA Surgery 2019, ERAS Cardiac); Seidelman (JAMA 2023); Wang (Vascular Medicine 2015); Gloviczki (2011 SVS/AVF venous guideline); Caggiati (American Venous Forum 2024); Prabhu (F1000Research 2026); Wilmot and Evans (Clinical Anatomy 2013); Kopjar and Dashwood (Angiology 2016); Rajakumar (Journal of Cardiac Surgery 2026); Yan (Cardiovascular Drugs and Therapy 2026); Harskamp (JAMA Surgery 2014, PREVENT IV storage); Toto (Journal of Clinical Medicine 2022); Lian (Scientific Reports 2024); Teixeira (Journal of Vascular Surgery 2015); Zhang (BMC Cardiovascular Disorders 2020); Lopes (NEJM 2009, PREVENT IV); Chahrour (Journal of Vascular Surgery 2025); Kronick (Journal of Vascular Surgery 2019); Vuong (Coronary Artery Disease 2022); Morrison and Dalsing (Journal of Vascular Surgery 2003); De Laurentis (Journal of Thrombosis and Thrombolysis 2026).",
       "Its evidence conflicts are kept rather than harmonized: storage solution (saline, heparinized blood, buffered saline, DuraGraft), and open against endoscopic harvest, which splits by operation (no MACE difference in CABG with expert harvesters but better patency after open harvest in PREVENT IV and VEST III; fewer wound complications but lower primary patency with endoscopic harvest for leg bypass).",
       "Pending Zach's sign-off: the document places systemic heparin before dividing the vein in the open sequence, which is a common vascular-surgery order but not routine in CABG, where heparin usually follows harvest; the playbook keeps the document's order. Instruments and suture sizes without a guideline, trial or label behind them are common practice or preference, as the document itself says. Carried as attributed and not checked against primary sources: the saphenous nerve anatomy percentages, the 15% chronic neuralgia rate and the vein-graft patency ranges.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_APPENDICITIS_SOURCE,
+    title: "SCORE: Appendicitis",
+    kind: "website",
+    citation: "Scola WH, Force L. Appendicitis. SCORE, May 5, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128926",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (anatomy, epidemiology, presentation, workup, Alvarado bands, CODA trial, complicated disease); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: SCORE_APPENDECTOMY_SOURCE,
+    title: "SCORE: Appendectomy",
+    kind: "website",
+    citation: "Scola WH, Force L. Appendectomy. SCORE, May 5, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=129510",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S2 (laparoscopic and open technique, postoperative care and complication rates); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: APPENDICITIS_OE_SOURCE,
+    title: "Owner-supplied appendicitis study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Appendicitis — Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/1237fc27-1e0f-4302-8619-5a7e0b7394b4) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: Di Saverio (2020 WSES Jerusalem guideline) and Podda (2025 WSES update, JAMA Surgery); Gorter (2016 EAES consensus); Moris (JAMA 2021); Talan and Di Saverio (NEJM 2021, CODA appendicolith subgroup); Charles (JAMA 2026, CODA and APPAC follow-up); Salminen (Nature Reviews Disease Primers 2025); Rud (Cochrane 2019); Munoz-Abraham (Pediatric Surgery International 2022); Rodriguez Pinero (Surgical Endoscopy 2025); Vijayvergia (Gastroenterology 2026), Nesti (Lancet Oncology 2023) and the NCCN appendiceal neoplasm guideline.",
+      "Used for the board-versus-current table (the 6 mm and 13 mm CT thresholds, the EAES Alvarado bands, the WSES 2025 age-stratified abscess rule with neoplasm risk up to 14.3%, and ultrasound then MRI in pregnancy and children) and for the appendiceal neoplasm block (the 1 cm and 2 cm neuroendocrine tumor rule and the adenocarcinoma and mucinous neoplasm rules). Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: the CRP and white-count AUCs, the APPAC 10-year figures and the MISA postoperative abscess size algorithm.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_DIVERTICULITIS_SOURCE,
+    title: "SCORE: Diverticulitis",
+    kind: "website",
+    citation: "Ribieras AJ, Force L. Diverticulitis. SCORE, March 12, 2025 (based on the module by Mou D and Irani J); local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=129030",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (pathophysiology, CT diagnosis, Hinchey staging, nonoperative and operative management, colonoscopy, recurrence); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: DIVERTICULITIS_OE_SOURCE,
+    title: "Owner-supplied diverticulitis study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Diverticulitis: Surgery Board-Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/6c1525c1-9770-4c0b-a1da-1f1fd46c98e5) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: the 2020 ASCRS diverticulitis guideline; the 2022 ACP guideline; the 2021 AGA clinical practice update; the 2026 ACG guideline; the 2026 EAES-SAGES consensus; Brown (JAMA 2025); Lambrichts (DIVA/LADIES trial); Horesh (Annals of Surgery 2023); the AVOD and DIABOLO trials; and the ACR appropriateness criteria (2023).",
+      "Used for the board-versus-current table: antibiotic omission for selected immunocompetent outpatients with uncomplicated disease, primary anastomosis over Hartmann in stable patients (DIVA/LADIES 12-month stoma-free survival 94.6% against 71.7%), elective resection at 6 to 12 weeks without an episode count, and the inflammatory rather than obstructive model of pathogenesis. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: the fistula symptom percentages and the poppy seed test, the elective and emergency mortality figures and the post-resection pain rates.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_SMALL_INTESTINAL_OBSTRUCTION_SOURCE,
+    title: "SCORE: Small Intestinal Obstruction",
+    kind: "website",
+    citation: "Alobuia WM, Forrester JD. Small Intestinal Obstruction. SCORE, March 12, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000525",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (physiology and electrolytes, etiology, plain film and CT diagnosis, closed loop, Gastrografin challenge, gallstone ileus, intussusception); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: SMALL_INTESTINAL_OBSTRUCTION_OE_SOURCE,
+    title: "Owner-supplied small bowel obstruction study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Small Bowel Obstruction: Board-Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/1340e5fb-4a1d-4bc3-96da-5c5a8291a65a) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: the 2012 EAST practice management guideline; the WSES Bologna guideline; the ACR appropriateness criteria; the ACS textbook; and the 2019 Toronto protocol.",
+      "Used for the board-versus-current table: clinical signs detect ischemia in only 40% to 50% (CT raises it), CT before plain films, a monitored trial even for complete obstruction without ischemia, the 24-hour contrast-transit failure endpoint, the 72-hour WSES trial and 5-day EAST limit, a monitored trial in the virgin abdomen when CT shows no lesion, and operation for obstruction after Roux-en-Y gastric bypass. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "This document was captured as page text on October 22, 2026 rather than the formatted guide, and is content-verified as the small bowel obstruction guide. Not carried: the pediatric intussusception reduction rates.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_SYMPTOMATIC_GALLSTONES_SOURCE,
+    title: "SCORE: Symptomatic Gallstones and Cholecystitis",
+    kind: "website",
+    citation: "Higgins R. Symptomatic Gallstones and Cholecystitis. SCORE, March 4, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000520",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (anatomy, stone epidemiology, colic versus cholecystitis, prophylaxis, diagnosis, complications, timing, cholecystostomy); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: SCORE_CHOLECYSTECTOMY_CHOLANGIOGRAPHY_SOURCE,
+    title: "SCORE: Cholecystectomy and Cholangiography",
+    kind: "website",
+    citation: "Higgins R. Cholecystectomy and Cholangiography. SCORE, March 4, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=127238",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S2 (critical view of safety, operative steps, cholangiography, bile duct injury, bile leak, conversion); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: GALLSTONES_CHOLECYSTITIS_OE_SOURCE,
+    title: "Owner-supplied gallstones and cholecystitis study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Symptomatic Gallstones & Cholecystitis — Surgery Board Review\", an OpenEvidence synthesis (https://www.openevidence.com/ask/70637a31-2e6e-4136-a749-86a0d027d8d9) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: Yokoe (Tokyo Guidelines 2018, acute cholecystitis); the TG18 acute cholangitis guideline; Gallaher and Charles (JAMA 2022); Coccolini (Surgical Laparoscopy Endoscopy and Percutaneous Techniques 2022); Altieri (Surgical Endoscopy 2020); Khan (Surgical Endoscopy 2026); Kovacs (Surgical Endoscopy 2022); Brunt (SAGES safe cholecystectomy 2020); Abou-Saif and Al-Kawas (American Journal of Gastroenterology 2002); and Clemente (Canadian Journal of Gastroenterology and Hepatology 2018).",
+      "Supplies the Tokyo (TG18) diagnostic criteria and severity grades, which the packet deliberately omits because SCORE's grading table was an image in the extracted module text. Also used for the board-versus-current table: early cholecystectomy within 72 hours of the index admission, selective rather than routine cholangiography, subtotal cholecystectomy as the bail-out, and drainage before surgery in grade III disease. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: the Mirizzi and gallstone ileus triage lines, which the packet already covers from SCORE.",
     ].join(" "),
   },
 ];
