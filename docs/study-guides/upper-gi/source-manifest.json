@@ -214,14 +214,14 @@
     "note": "Local checkout behind origin/main; current origin/main topic inventory inspected. None of the six exact topics exists in either inventory. Existing user changes preserved; no fetch/push/checkout."
   },
   "integration": {
-    "status": "draft",
+    "status": "promoted, pending clinical sign-off (unmerged promotion PR; see review.md)",
     "registered_sources": 18,
     "reused_source": "FISER_PANCREAS_SOURCE",
     "topic_count": 6,
-    "runtime_registry": "upperGiDraftTopics",
-    "published_library": "Excluded until explicit clinical approval",
+    "runtime_registry": "libraryTopics",
+    "published_library": "Registered on branch claude/promote-upper-gi-drafts; published only when that PR is merged",
     "authoring_helpers": [
-      "buildDraftTopic",
+      "buildTopic",
       "sourced",
       "sourcedUnits"
     ],

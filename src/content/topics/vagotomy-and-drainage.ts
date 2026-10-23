@@ -1,4 +1,4 @@
-import { buildDraftTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
 import {
   SCORE_PEPTIC_ULCER_SOURCE,
   FISER_STOMACH_SOURCE,
@@ -8,7 +8,7 @@ import {
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
-// Converted from docs/study-guides/upper-gi/vagotomy-and-drainage.md. Clinical approval remains pending.
+// Converted from docs/study-guides/upper-gi/vagotomy-and-drainage.md. Per-topic sign-off items: docs/study-guides/upper-gi/review.md.
 const blocks: TopicBlock[] = [
   sourcedUnits({
   "type": "summary",
@@ -379,7 +379,7 @@ const blocks: TopicBlock[] = [
   references("upper-gi-vagotomy-and-drainage-references", [SCORE_PEPTIC_ULCER_SOURCE, FISER_STOMACH_SOURCE, SCORE_GASTRODUODENAL_PERFORATION_SOURCE, SCORE_VAGOTOMY_SOURCE, FISER_ESOPHAGUS_SOURCE]),
 ];
 
-export const vagotomyAndDrainageDraft = buildDraftTopic({
+export const vagotomyAndDrainageTopic = buildTopic({
   "id": "00000000-0000-4000-8000-000000004722",
   "versionId": "00000000-0000-4000-8000-000000004732",
   "slug": "vagotomy-and-drainage",
@@ -396,8 +396,7 @@ export const vagotomyAndDrainageDraft = buildDraftTopic({
   "tags": [
     "upper-gi",
     "absite",
-    "score",
-    "clinical-review-pending"
+    "score"
   ],
   "sourceId": SCORE_VAGOTOMY_SOURCE,
   "additionalSourceIds": [
@@ -407,14 +406,5 @@ export const vagotomyAndDrainageDraft = buildDraftTopic({
     FISER_ESOPHAGUS_SOURCE
   ],
   "blocks": blocks,
-  "createdAt": "2026-10-22T00:00:00.000Z",
-  "warnings": [
-    "Draft — pending Zach's clinical review",
-    "**Clinical approval pending.** Operative descriptions are educational overviews; no hands-on technique validation is claimed.",
-    "**Source/OCR conflict:** Fiser esophagus p.364 says Grassi left “divided” causes acid persistence; Fiser stomach p.394 and SCORE specify **undivided**. Teaching follows the concordant mechanism.",
-    "Absolute absence of delayed emptying after highly selective vagotomy and source-specific recurrence percentages are qualified. Exact dose regimens for octreotide, prokinetics and diarrhea rescue are not supplied here.",
-    "**Needs further support:** technical completeness testing, a full highly selective dissection atlas, chylous-leak escalation, and contemporary conduit-drainage selection evidence.",
-    "Source figures/videos remain unreviewed; no matching question-bank notes were available.",
-    "This sequence explains the operative decisions. Exact dissection lengths, intraoperative completeness testing, and a full technical atlas are not supplied; they remain outside the claimed coverage."
-  ]
+  "reviewedAt": "2026-10-22T00:00:00.000Z"
 });

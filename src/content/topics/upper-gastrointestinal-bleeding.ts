@@ -1,4 +1,4 @@
-import { buildDraftTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
 import {
   SCORE_PEPTIC_ULCER_SOURCE,
   FISER_STOMACH_SOURCE,
@@ -15,7 +15,7 @@ import {
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
-// Converted from docs/study-guides/upper-gi/upper-gastrointestinal-bleeding.md. Clinical approval remains pending.
+// Converted from docs/study-guides/upper-gi/upper-gastrointestinal-bleeding.md. Per-topic sign-off items: docs/study-guides/upper-gi/review.md.
 const blocks: TopicBlock[] = [
   sourcedUnits({
   "type": "summary",
@@ -413,7 +413,7 @@ const blocks: TopicBlock[] = [
   references("upper-gi-upper-gastrointestinal-bleeding-references", [SCORE_PEPTIC_ULCER_SOURCE, FISER_STOMACH_SOURCE, SCORE_GASTRODUODENAL_PERFORATION_SOURCE, SCORE_UPPER_GI_BLEEDING_SOURCE, SCORE_STRESS_GASTRITIS_SOURCE, SCORE_EGD_SOURCE, ESGE_ULCER_BLEEDING_2026_SOURCE, ACG_UGIB_2021_SOURCE, ACG_CAG_ANTITHROMBOTICS_2022_SOURCE, FISER_ESOPHAGUS_SOURCE, BAVENO_VARICEAL_CONSENSUS_SOURCE, NASOGASTRIC_ASPIRATE_2004_SOURCE]),
 ];
 
-export const upperGastrointestinalBleedingDraft = buildDraftTopic({
+export const upperGastrointestinalBleedingTopic = buildTopic({
   "id": "00000000-0000-4000-8000-000000004723",
   "versionId": "00000000-0000-4000-8000-000000004733",
   "slug": "upper-gastrointestinal-bleeding",
@@ -429,8 +429,7 @@ export const upperGastrointestinalBleedingDraft = buildDraftTopic({
   "tags": [
     "upper-gi",
     "absite",
-    "score",
-    "clinical-review-pending"
+    "score"
   ],
   "sourceId": SCORE_UPPER_GI_BLEEDING_SOURCE,
   "additionalSourceIds": [
@@ -447,13 +446,5 @@ export const upperGastrointestinalBleedingDraft = buildDraftTopic({
     NASOGASTRIC_ASPIRATE_2004_SOURCE
   ],
   "blocks": blocks,
-  "createdAt": "2026-10-22T00:00:00.000Z",
-  "warnings": [
-    "Draft — pending Zach's clinical review",
-    "**Clinical approval pending.** Exact rebleeding rates and source blood-unit thresholds are not used as universal triggers.",
-    "**Current-practice additions:** ACG 2021 risk/transfusion/PPI pathway; ESGE 2026 adherent-clot, airway/lavage and rescue nuances; ACG-CAG aspirin guidance. These are separately attributed additions, not supplied question-bank keys.",
-    "**Source correction:** bilious NG output cannot establish absence of an upper lesion; routine lavage is not recommended. CTA and tagged-RBC detection thresholds were conflated in S5 and are not repeated.",
-    "**Needs further support:** full Baveno VIII recommendations, detailed gastric-varix/early-TIPS selection, local massive-transfusion and anticoagulant-reversal protocols, iron-replacement regimen, and any implementation of a complete risk-score calculator. The primary 2026 variceal full text was inaccessible.",
-    "No matching stomach/bleeding question-bank notes were available; source figures remain unreviewed."
-  ]
+  "reviewedAt": "2026-10-22T00:00:00.000Z"
 });

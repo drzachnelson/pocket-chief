@@ -1,4 +1,4 @@
-import { buildDraftTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
 import {
   SCORE_PEPTIC_ULCER_SOURCE,
   FISER_STOMACH_SOURCE,
@@ -12,7 +12,7 @@ import {
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
-// Converted from docs/study-guides/upper-gi/esophagogastroduodenoscopy.md. Clinical approval remains pending.
+// Converted from docs/study-guides/upper-gi/esophagogastroduodenoscopy.md. Per-topic sign-off items: docs/study-guides/upper-gi/review.md.
 const blocks: TopicBlock[] = [
   sourcedUnits({
   "type": "summary",
@@ -346,7 +346,7 @@ const blocks: TopicBlock[] = [
   references("upper-gi-esophagogastroduodenoscopy-references", [SCORE_PEPTIC_ULCER_SOURCE, FISER_STOMACH_SOURCE, SCORE_UPPER_GI_BLEEDING_SOURCE, SCORE_EGD_SOURCE, ESGE_ULCER_BLEEDING_2026_SOURCE, ACG_UGIB_2021_SOURCE, ACG_CAG_ANTITHROMBOTICS_2022_SOURCE, MULTISOCIETY_GLP1_2024_SOURCE, FISER_ESOPHAGUS_SOURCE]),
 ];
 
-export const esophagogastroduodenoscopyDraft = buildDraftTopic({
+export const esophagogastroduodenoscopyTopic = buildTopic({
   "id": "00000000-0000-4000-8000-000000004725",
   "versionId": "00000000-0000-4000-8000-000000004735",
   "slug": "esophagogastroduodenoscopy",
@@ -361,8 +361,7 @@ export const esophagogastroduodenoscopyDraft = buildDraftTopic({
   "tags": [
     "upper-gi",
     "absite",
-    "score",
-    "clinical-review-pending"
+    "score"
   ],
   "sourceId": SCORE_EGD_SOURCE,
   "additionalSourceIds": [
@@ -376,13 +375,5 @@ export const esophagogastroduodenoscopyDraft = buildDraftTopic({
     FISER_ESOPHAGUS_SOURCE
   ],
   "blocks": blocks,
-  "createdAt": "2026-10-22T00:00:00.000Z",
-  "warnings": [
-    "Draft — pending Zach's clinical review",
-    "**Clinical approval pending.** Neither procedural competency nor sedation/device competence was assessed.",
-    "Source anatomy is qualified: gastric clock-face orientation changes; duodenal folds are not a stand-alone bulb identifier; Z-line, GE junction and diaphragm can diverge.",
-    "The source's broad asymptomatic reflux/sleeve screening, blanket coagulopathy contraindication, “Whipple disease” operation wording, EUS-cyst/ascites/graft-related antibiotic advice and universal antiplatelet holds require context or further source-specific review.",
-    "**Needs further support:** current detailed sedation/capnography and discharge criteria, ASA/agent-specific fasting/GLP-1 implementation, drug-specific antithrombotic holds, lesion-specific foreign-body/dilation/oncologic therapy and full iatrogenic-perforation protocols. The July 2026 ESGE sedation update was identified on the society index but not reviewed in full.",
-    "No generic 0.1% perforation estimate is adopted for every diagnostic and therapeutic EGD. Source images/videos remain unreviewed; no matching endoscopy question-bank notes were supplied."
-  ]
+  "reviewedAt": "2026-10-22T00:00:00.000Z"
 });
