@@ -540,20 +540,22 @@ Transcribed verbatim apart from repairing OCR ligatures (`ﬃ`, `ﬀ`). Duplicat
 
 As of 2026-10-19: **76 topics and 16 playbooks**. **67 of the 366 outline entries are covered and 11 are partial**. The two liver batches closed the Liver module, all eight entries under the outline's own titles. Prophylaxis of Venous Thromboembolism sits in the Preoperative Evaluation and Perioperative Care module, outside this denominator. **Update this section in every content PR**: move the entry, adjust the counts, and record any partial match with what it lacks.
 
+2026-10-23, High-Frequency Call Problems I Run 1: Appendicitis, Diverticulitis, Small Intestinal Obstruction and Symptomatic Gallstones and Cholecystitis added under the outline's own titles (the module rows below are updated; the headline counts above predate several batches and were not recounted).
+
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
 | Module | Entries | Covered | Partial | App topics |
 |---|---|---|---|---|
 | General Abdomen | 6 | 6 | — | All six, under the outline's own titles |
 | Hernia | 8 | 6 | — | Inguinal Hernia and Femoral Hernia (one outline entry), Unusual Hernias, Umbilical & Epigastric Hernia, Ventral & Incisional Hernia, Groin Hernia Repair, Abdominal Wall Reconstruction (Ventral Hernia Repair) |
-| Biliary | 18 | — | 1 | Choledocholithiasis (Benign Biliary Obstruction; deepened in place October 2026 with cholangitis management and duct exploration — the outline has no Choledocholithiasis entry of its own) |
+| Biliary | 18 | 1 | 1 | Symptomatic Gallstones and Cholecystitis (Call Problems I, October 2026); partial: Choledocholithiasis (Benign Biliary Obstruction; deepened in place October 2026 with cholangitis management and duct exploration — the outline has no Choledocholithiasis entry of its own) |
 | Liver | 8 | 8 | — | Hepatic Abscess, Hepatic Abscess Drainage, Primary Hepatic Neoplasms, Metastatic Hepatic Neoplasms (batch 1); Hepatic Resection, Intraoperative Hepatic Ultrasound, Liver Biopsy, Cirrhosis and Portal Hypertension (batch 2), October 2026 |
 | Pancreas | 11 | 2 | — | Pancreaticoduodenectomy, Acute Pancreatitis (Call Problems I, October 2026) |
 | Spleen | 3 | — | 1 | Splenectomy and Splenorrhaphy, written as a trauma topic |
 | Esophagus | 10 | 1 | — | Paraesophageal Hernia Repair |
 | Stomach | 15 | — | — | |
-| Small Intestine | 13 | — | 1 | Crohn Disease (Procedures for Crohn Disease; the topic is disease-led) |
-| Large Intestine | 15 | 2 | 1 | Colonic Volvulus and Obstruction, Lower Gastrointestinal Bleeding (Call Problems I, October 2026); partial: Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
+| Small Intestine | 13 | 1 | 1 | Small Intestinal Obstruction (Call Problems I, October 2026); partial: Crohn Disease (Procedures for Crohn Disease; the topic is disease-led) |
+| Large Intestine | 15 | 4 | 1 | Appendicitis, Diverticulitis, Colonic Volvulus and Obstruction, Lower Gastrointestinal Bleeding (Call Problems I, October 2026); partial: Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
 | Anorectal | 17 | 2 | — | Hemorrhoids, Procedures for Hemorrhoids |
 | Endoscopy | 3 | — | — | |
 | Breast | 21 | 2 | — | Fibroadenoma vs Phyllodes Tumor, Percutaneous Breast Biopsy and Cyst Aspiration |
