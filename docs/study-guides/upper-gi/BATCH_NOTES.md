@@ -1,6 +1,6 @@
 # Upper GI promotion — batch notes
 
-Promotion of the six PR #38 drafts into regular library topics on 2026-10-22. The branch is `claude/promote-upper-gi-drafts`, cut from main `cbd2126`. **Not merged or deployed.** Clinical sign-off items are in [review.md](review.md).
+[PR #40](https://github.com/drzachnelson/pocket-chief/pull/40): promotion of the six PR #38 drafts into regular library topics on 2026-10-22. The branch is `claude/promote-upper-gi-drafts`, cut from main `cbd2126`. **Not merged or deployed.** Clinical sign-off items are in [review.md](review.md).
 
 ## Conversion
 

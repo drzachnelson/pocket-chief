@@ -2,7 +2,7 @@
 
 Six source-linked guides, prepared October 22, 2026, and promoted to regular library topics on the same date. **Pending Zach's clinical review.**
 
-The promotion PR (branch `claude/promote-upper-gi-drafts`) moves the six topics to `src/content/topics/<slug>.ts` as ordinary `buildTopic` entries and registers them in the published library. They keep the clinical text, decision tables, operative sequences, source-specific corrections and source registrations of the Markdown guides here. That PR stays unmerged until Zach signs off on the per-topic items in [review.md](review.md). Conversion and verification are in [BATCH_NOTES.md](BATCH_NOTES.md). The earlier draft-only registry from PR #38 (`src/content/drafts/upper-gi/`, `buildDraftTopic`) has been removed.
+The [promotion PR #40](https://github.com/drzachnelson/pocket-chief/pull/40) (branch `claude/promote-upper-gi-drafts`) moves the six topics to `src/content/topics/<slug>.ts` as ordinary `buildTopic` entries and registers them in the published library. They keep the clinical text, decision tables, operative sequences, source-specific corrections and source registrations of the Markdown guides here. That PR stays unmerged until Zach signs off on the per-topic items in [review.md](review.md). Conversion and verification are in [BATCH_NOTES.md](BATCH_NOTES.md). The earlier draft-only registry from PR #38 (`src/content/drafts/upper-gi/`, `buildDraftTopic`) has been removed.
 
 | Guide | SCORE objective/subobjective entries |
 |---|---:|

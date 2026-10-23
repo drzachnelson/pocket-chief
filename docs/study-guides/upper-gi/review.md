@@ -1,6 +1,6 @@
 # Upper GI promotion — Needs sign-off
 
-The six upper-GI topics are promoted from the PR #38 drafts into regular library entries in the PR on `claude/promote-upper-gi-drafts`. **That PR stays unmerged until Zach signs off.** Passing the content contract, build and browser checks shows structure, citation coverage and rendering. It does not mean the content is clinically approved.
+The six upper-GI topics are promoted from the PR #38 drafts into regular library entries in [PR #40](https://github.com/drzachnelson/pocket-chief/pull/40). **That PR stays unmerged until Zach signs off.** Passing the content contract, build and browser checks shows structure, citation coverage and rendering. It does not mean the content is clinically approved.
 
 `buildTopic` has no `warnings` field, so the conversion dropped each draft's `warnings` array. Every entry is copied below verbatim, one checkbox per warning (38 in total). None was resolved or reworded in the conversion. The clinical text, tables, sequences, flows and source registrations are unchanged from PR #38.
 
