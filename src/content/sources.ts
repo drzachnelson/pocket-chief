@@ -284,6 +284,20 @@ export const FISER_GI_HORMONES_SOURCE = "00000000-0000-4000-8000-000000004716";
 export const BAVENO_VARICEAL_CONSENSUS_SOURCE = "00000000-0000-4000-8000-000000004717";
 export const NASOGASTRIC_ASPIRATE_2004_SOURCE = "00000000-0000-4000-8000-000000004718";
 
+// High-Frequency Call Problems I, Run 2 (October 2026): one hundreds block per topic, sources from the block start
+// and new topics at +20/+21. Acute Pancreatitis 05600, Colonic Volvulus and Obstruction 05700, Lower GI Bleeding
+// 05800, and 05900 for the in-place revision of Choledocholithiasis (which keeps its original ids 00101/00103).
+// Reused: Fiser chapters 33 (02303), 36 (04511) and 32 (03107), SCORE Benign Biliary Obstruction (03100), TG18
+// cholangitis (03109), ASGE 2019 (03110) and the original choledocholithiasis packet (00102).
+export const SCORE_ACUTE_PANCREATITIS_SOURCE = "00000000-0000-4000-8000-000000005600";
+export const ACUTE_PANCREATITIS_OE_SOURCE = "00000000-0000-4000-8000-000000005601";
+export const SCORE_COLONIC_VOLVULUS_SOURCE = "00000000-0000-4000-8000-000000005700";
+export const COLONIC_VOLVULUS_OE_SOURCE = "00000000-0000-4000-8000-000000005701";
+export const SCORE_LOWER_GI_BLEEDING_SOURCE = "00000000-0000-4000-8000-000000005800";
+export const LOWER_GI_BLEEDING_OE_SOURCE = "00000000-0000-4000-8000-000000005801";
+export const SCORE_CBD_EXPLORATION_SOURCE = "00000000-0000-4000-8000-000000005900";
+export const CHOLEDOCHOLITHIASIS_CHOLANGITIS_OE_SOURCE = "00000000-0000-4000-8000-000000005901";
+
 // Aortic aneurysm cluster (October 2026): one hundreds block per topic, sources from the block start and the topic
 // at +20/+21. Aortic Aneurysms 04800, Acute Aortic Dissection 04900, Arterial Peripheral Aneurysms 05000,
 // Peripheral Aneurysms Repair 05100. The repair topic reuses 05000 and 05002, and both aortic topics reuse 04803.
@@ -2814,6 +2828,90 @@ export const suppliedSources: SuppliedSource[] = [
       "Carries inline author-year attributions and a short reference table. Works it cites: Isselbacher (2022 ACC/AHA aortic disease guideline, registered separately); Chaikof (2018 SVS AAA guideline, registered separately); Mazzolai (2024 ESC peripheral arterial and aortic guideline); Hensley and Upchurch (JACC 2022); Sakalihasan (Nature Reviews Disease Primers 2018); Wengerter (2018) and Abdul Jabbar (2020) on EVAR neck anatomy; Czerny (2024 EACTS/STS) and Wilson (2016 AHA) on infected aneurysms.",
       "Used during review for the board-versus-current table: the ACC/AHA surveillance intervals that differ for women, the SVS permissive hypotension target of 70 to 90 mm Hg, the earlier convergence of EVAR and open survival, diabetes as an inverse association, and the trials showing no benefit from early repair of 4.0 to 5.4 cm aneurysms. Each is added beyond the packet's SCORE and Fiser sources and is pending Zach's sign-off.",
       "Not carried: EVAR neck and access minimums that duplicate or refine the repair topic's SCORE table, the endoleak table (the repair topic holds it), and the special scenarios already in the repair topic.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_ACUTE_PANCREATITIS_SOURCE,
+    title: "SCORE: Acute Pancreatitis",
+    kind: "website",
+    citation: "Merani S. Acute Pancreatitis. SCORE, February 10, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000913",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (etiology, Atlanta severity, Ranson and APACHE II, collections and necrosis, antibiotics, ERCP, step-up approach, gallstone pancreatitis, pseudocysts); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: ACUTE_PANCREATITIS_OE_SOURCE,
+    title: "Owner-supplied acute pancreatitis study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Acute Pancreatitis: Board-Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/b25b34df-48fa-41b5-9922-8eef14049899) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: Tenner (2024 ACG acute pancreatitis guideline); Crockett (2018 AGA guideline); Baron (2020 AGA necrosis update); McDermott (JAMA Surgery 2024); Gardner (NEJM 2022, WATERFALL); Boxhoorn (Lancet 2020); Schepers (APEC trial); Zhu (PLoS One 2023); Song and Lee (Journal of Clinical Medicine 2024); and Abu-Elfatth (Scientific Reports 2026) for BISAP.",
+      "Used for the board-versus-current table: BISAP (BUN over 25, impaired mental status, SIRS, age over 60, pleural effusion; 3 or more predicts severe disease), which neither SCORE nor Fiser presents; goal-directed moderate fluids at 5 to 10 mL/kg/h (WATERFALL); early oral or enteral feeding; contrast CT at 72 to 96 hours rather than for diagnosis; no routine early ERCP in predicted-severe biliary pancreatitis without cholangitis (APEC); and delayed cholecystectomy in necrotizing disease. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: the recurrence-without-cholecystectomy figures beyond SCORE's 25% at 3 months, and the pancreatic enzyme and imaging test characteristics.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_COLONIC_VOLVULUS_SOURCE,
+    title: "SCORE: Colonic Volvulus and Obstruction",
+    kind: "website",
+    citation: "Rosen DR, Wise PE, Kin C. Colonic Volvulus and Obstruction. SCORE, March 12, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000567",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (blood supply, law of Laplace and the ileocecal valve, causes of large bowel obstruction, imaging, endoscopic decompression and same-admission resection, cecal volvulus, surgical options); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: COLONIC_VOLVULUS_OE_SOURCE,
+    title: "Owner-supplied colonic volvulus and large bowel obstruction study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Colonic Volvulus & Large Bowel Obstruction: Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/02ff017c-dbcf-4023-b49d-a771cee2d555) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: the 2021 ASCRS large bowel obstruction and volvulus guideline; the 2020 ASGE guideline on acute colonic pseudo-obstruction and volvulus; the ACS textbook (2021); and expert commentary (2026) on Hartmann reversal rates.",
+      "Used for the board-versus-current table: CT before contrast enema; decompression success of 60% to 95% (ASCRS) and recurrence of 43% to 75% without resection; resection preferred over cecopexy even with viable cecum; a mechanical-obstruction cecal perforation threshold of over 9 cm (ACS), kept separate from the 12 cm pseudo-obstruction threshold as the packet requires; neostigmine after 48 to 72 hours of failed supportive care; and individualized one-stage options for a left-sided obstructing cancer. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: oncologic margin and node-count rules and the Ogilvie risk-factor list.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_LOWER_GI_BLEEDING_SOURCE,
+    title: "SCORE: Lower Gastrointestinal Bleeding",
+    kind: "website",
+    citation: "Vasquez CR, Pascual JL. Lower Gastrointestinal Bleeding. SCORE, March 12, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128753",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S1 (definition, diverticular and angiodysplasia bleeding, resuscitation, excluding upper and anorectal sources, colonoscopy, CT angiography, scintigraphy, angiography, operation and intraoperative localization, rebleeding); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: LOWER_GI_BLEEDING_OE_SOURCE,
+    title: "Owner-supplied lower gastrointestinal bleeding study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Lower Gastrointestinal Bleeding — Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/11ab4807-9012-4893-977c-eab81533d91b) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: Sengupta (2023 ACG lower GI bleeding guideline); Imran (JAMA 2024) on the Oakland score; Alali (Alimentary Pharmacology and Therapeutics 2024); and Gong (BMC Gastroenterology) on nasogastric lavage.",
+      "Used for the board-versus-current table: the Oakland score (8 or less and stable identifies a candidate for discharge with outpatient colonoscopy), which neither SCORE nor Fiser teaches; no routine nasogastric lavage; urgent colonoscopy within 24 hours not improving outcomes over 24 to 96 hours; CT angiography largely supplanting tagged red cell scintigraphy; segmental over subtotal colectomy once localized; and the ACG definition restricting lower GI bleeding to a colorectal source. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: the shock-index triage pathway and the endoscopic clip-versus-coagulation details.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_CBD_EXPLORATION_SOURCE,
+    title: "SCORE: Common Bile Duct Exploration and Choledochoscopy",
+    kind: "website",
+    citation: "Biesboer EA, Murphy P. Common Bile Duct Exploration and Choledochoscopy. SCORE, June 30, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000522",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: "Added for the October 23, 2026 Call Problems I batch from the packet's S2 (ASGE-SAGES risk stratification, preoperative versus intraoperative clearance, transcystic and transcholedochal exploration, T-tube and completion cholangiography, retained stones); paraphrased educational draft pending Zach's approval. Licensed module read locally; no question stems reproduced.",
+  },
+  {
+    id: CHOLEDOCHOLITHIASIS_CHOLANGITIS_OE_SOURCE,
+    title: "Owner-supplied choledocholithiasis and cholangitis study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 22, 2026: \"Choledocholithiasis & Acute Cholangitis — Board Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/37546f1f-c110-4fa1-8f7f-917152ecc41d) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-23T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites: Miura (Tokyo Guidelines 2018, acute cholangitis); Markotic (Cochrane 2020); Martinez Marquez (Abdominal Radiology 2026); Buxbaum (2019 ASGE choledocholithiasis guideline, registered separately); Mohamed (Digestive Diseases and Sciences 2023); Buckman and Mazuski (2019); Lai (Surgery 2025); and Volkovetskii (2025).",
+      "Supplies the TG18 grade-to-drainage rules (grade III urgent drainage after resuscitation, grade II early drainage, grade I antibiotics with drainage if no improvement in 24 hours), which match the TG18 tables already in the Benign Biliary Obstruction topic. Also used for the board-versus-current table: the Charcot triad in only 15% to 70%, the ASGE 2019 bilirubin over 4 mg/dL with a dilated duct against the older 1.7 mg/dL risk factor, single-stage cholecystectomy with duct exploration as at least equivalent to ERCP then cholecystectomy, short antibiotic courses after drainage, and EUS-guided drainage as third line. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
+      "Not carried: the TG18 antibiotic regimens by grade and the transaminase-spike pearl.",
     ].join(" "),
   },
   {

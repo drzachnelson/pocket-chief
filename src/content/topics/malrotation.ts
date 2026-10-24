@@ -210,7 +210,7 @@ export const malrotationTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001114",
   slug: "malrotation",
   title: "Malrotation",
-  aliases: ["malrotation", "intestinal malrotation", "midgut volvulus", "volvulus", "IRA", "intestinal rotational abnormality", "rotational anomaly", "Ladd bands", "bilious emesis", "bilious vomiting", "corkscrew sign", "bird's beak", "whirlpool sign", "nonrotation", "reverse rotation", "narrow mesenteric base", "SMA SMV inversion", "duodenojejunal junction", "ligament of Treitz", "neonatal bowel obstruction", "heterotaxy", "double bubble"],
+  aliases: ["malrotation", "intestinal malrotation", "midgut volvulus", "IRA", "intestinal rotational abnormality", "rotational anomaly", "Ladd bands", "bilious emesis", "bilious vomiting", "corkscrew sign", "bird's beak", "whirlpool sign", "nonrotation", "reverse rotation", "narrow mesenteric base", "SMA SMV inversion", "duodenojejunal junction", "ligament of Treitz", "neonatal bowel obstruction", "heterotaxy", "double bubble"],
   scoreNodeId: "pediatric-conditions",
   scoreCategory: "SCORE · Pediatric Surgery · Diseases & Conditions",
   tags: ["pediatric-surgery", "malrotation", "volvulus", "neonatal", "emergency", "absite", "score"],

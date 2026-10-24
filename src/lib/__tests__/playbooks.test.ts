@@ -196,20 +196,21 @@ describe("playbook library", () => {
         "replaced left hepatic artery -> hepatic-resection",
         "replaced right hepatic artery -> hepatic-resection",
       ],
-      // "volvulus" is kept deliberately: adult caecal volvulus and the malrotation spectrum
-      // share the failure of right-colon peritoneal fixation, so the jump informs the reader.
-      // Its sibling "detorsion" was not, because Ladd's procedure is a different operation.
+      // Call Problems I (2026-10-23): bare "volvulus" no longer reaches Malrotation. That alias was
+      // narrowed to "midgut volvulus" once Colonic Volvulus and Obstruction arrived, because it was also
+      // catching gastric and sigmoid volvulus. "detorsion" stays unlinked: Ladd's procedure is a different operation.
       "right-hemicolectomy": [
+        "Pancreatitis -> acute-pancreatitis",
         "appendicitis -> appendicitis",
         "pancreatic fistula -> pancreaticoduodenectomy",
         "peritonitis -> abdominal-pain",
         "small bowel obstruction -> small-intestinal-obstruction",
-        "volvulus -> malrotation",
       ],
       "robotic-cholecystectomy": [
         "Acute cholecystitis -> symptomatic-gallstones-and-cholecystitis",
         "Bile duct injury -> iatrogenic-bile-duct-injury",
         "Cirrhosis -> cirrhosis-and-portal-hypertension",
+        "Gallstone pancreatitis -> acute-pancreatitis",
         "Mirizzi syndrome -> benign-biliary-obstruction",
         "Roux-en-Y hepaticojejunostomy -> choledochoenteric-anastomosis",
         "acute cholecystitis -> symptomatic-gallstones-and-cholecystitis",
@@ -223,6 +224,7 @@ describe("playbook library", () => {
         "hepatocystic triangle -> iatrogenic-bile-duct-injury",
         "incisional hernia -> ventral-and-incisional-hernia",
         "laparoscopic cholecystectomy -> symptomatic-gallstones-and-cholecystitis",
+        "pancreatitis -> acute-pancreatitis",
         "portal hypertension -> cirrhosis-and-portal-hypertension",
       ],
       "robotic-tapp-inguinal-hernia-repair": [

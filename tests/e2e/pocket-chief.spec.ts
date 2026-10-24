@@ -136,8 +136,10 @@ test("decision flows keep labeled branches connected and readable on mobile", as
 
 test("topics resumes a visited guide", async ({ page }) => {
   await page.goto("./topics/choledocholithiasis/");
-  await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
-  await page.waitForFunction(async () => {
+  await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
+  // Not waitForFunction: it treats an async predicate's Promise as truthy and returns at once, so
+  // the goto below raced the guide's recent write and lost it to the navigation.
+  await expect.poll(() => page.evaluate(async () => {
     if (!(await indexedDB.databases()).some((database) => database.name === "pocket-chief-private")) return false;
     return new Promise<boolean>((resolve, reject) => {
       const request = indexedDB.open("pocket-chief-private");
@@ -150,7 +152,7 @@ test("topics resumes a visited guide", async ({ page }) => {
         recent.onsuccess = () => { database.close(); resolve(recent.result?.slug === "choledocholithiasis"); };
       };
     });
-  });
+  })).toBe(true);
   await page.goto("./topics/");
   await expect(page.getByRole("link", { name: "Resume topic" })).toHaveAttribute("href", "/pocket-chief/topics/choledocholithiasis/");
   await expect(page.getByText("Reviewed", { exact: true })).toHaveCount(0);
@@ -171,7 +173,7 @@ test("canonical topic navigation keeps the workspace, active path, anchors, and 
   const curriculum = page.getByRole("navigation", { name: "Topics curriculum" });
   await expect(curriculum.getByRole("button", { name: "Alimentary Tract" })).toHaveAttribute("aria-expanded", "true");
   await expect(curriculum.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
-  await expect(page.getByText("Last updated Aug 12, 2026", { exact: true })).toBeVisible();
+  await expect(page.getByText("Last updated Oct 23, 2026", { exact: true })).toBeVisible();
 
   await curriculum.getByRole("link", { name: "Choose the route" }).click();
   await expect(page).toHaveURL(/#block-comparison$/);
@@ -183,7 +185,7 @@ test("desktop rail collapse persists after reload and captures both desktop stat
   test.skip(testInfo.project.name !== "desktop-chrome", "Desktop rail only");
   await page.setViewportSize({ width: 1440, height: 960 });
   await page.goto("./topics/choledocholithiasis/");
-  await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
   const rail = page.getByLabel("Topics workspace");
   await expect(rail).not.toHaveClass(/is-collapsed/);
   await page.screenshot({ path: "output/playwright/topics-desktop-expanded.png", fullPage: true });
@@ -258,7 +260,7 @@ test("a previously visited Topics guide remains readable offline in its workspac
   });
   // Reload under worker control so the dynamic guide and its persistent workspace are cached.
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
   if (testInfo.project.name === "mobile-chrome") {
     await page.getByRole("button", { name: "Browse topics" }).click();
     await page.getByRole("dialog", { name: "Topics" }).getByRole("link", { name: "Choose the route" }).click();
@@ -270,7 +272,7 @@ test("a previously visited Topics guide remains readable offline in its workspac
   await page.context().setOffline(true);
   try {
     await page.goto("./topics/choledocholithiasis/#block-comparison", { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("heading", { name: "Choledocholithiasis" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
     if (testInfo.project.name === "mobile-chrome") {
       await page.getByRole("button", { name: "Browse topics" }).click();
       const drawer = page.getByRole("dialog", { name: "Topics" });
