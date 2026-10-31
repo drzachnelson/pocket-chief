@@ -542,6 +542,8 @@ As of 2026-10-19: **76 topics and 16 playbooks**. **67 of the 366 outline entrie
 
 2026-10-23, High-Frequency Call Problems I Run 1: Appendicitis, Diverticulitis, Small Intestinal Obstruction and Symptomatic Gallstones and Cholecystitis added under the outline's own titles (the module rows below are updated; the headline counts above predate several batches and were not recounted).
 
+2026-10-30, pancreatic tail cluster: Pancreatic Tail Mass added at Pancreas › Diseases & Conditions as a partial match for four Pancreas entries (see the Pancreas row), with the Robotic Distal Pancreatectomy playbook outside the outline. Headline counts not recounted.
+
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
 | Module | Entries | Covered | Partial | App topics |
@@ -550,7 +552,7 @@ As of 2026-10-19: **76 topics and 16 playbooks**. **67 of the 366 outline entrie
 | Hernia | 8 | 6 | — | Inguinal Hernia and Femoral Hernia (one outline entry), Unusual Hernias, Umbilical & Epigastric Hernia, Ventral & Incisional Hernia, Groin Hernia Repair, Abdominal Wall Reconstruction (Ventral Hernia Repair) |
 | Biliary | 18 | 1 | 1 | Symptomatic Gallstones and Cholecystitis (Call Problems I, October 2026); partial: Choledocholithiasis (Benign Biliary Obstruction; deepened in place October 2026 with cholangitis management and duct exploration — the outline has no Choledocholithiasis entry of its own) |
 | Liver | 8 | 8 | — | Hepatic Abscess, Hepatic Abscess Drainage, Primary Hepatic Neoplasms, Metastatic Hepatic Neoplasms (batch 1); Hepatic Resection, Intraoperative Hepatic Ultrasound, Liver Biopsy, Cirrhosis and Portal Hypertension (batch 2), October 2026 |
-| Pancreas | 11 | 2 | — | Pancreaticoduodenectomy, Acute Pancreatitis (Call Problems I, October 2026) |
+| Pancreas | 11 | 2 | 4 | Pancreaticoduodenectomy, Acute Pancreatitis (Call Problems I, October 2026); partial, all through Pancreatic Tail Mass (October 30, 2026), a location-led topic that is not an outline title: Exocrine Pancreatic Neoplasms (body and tail adenocarcinoma only; head disease sits in Pancreaticoduodenectomy, and no palliation or AJCC staging), Pancreatic Cystic Neoplasms (all four cyst types and IPMN surveillance, framed as a tail differential), Endocrine Pancreatic Neoplasms (nonfunctional PNET, insulinoma and glucagonoma; no gastrinoma, VIPoma or somatostatinoma management), Distal Pancreatectomy (principles only; the operation is the robotic distal pancreatectomy playbook, and there is no open-technique topic) |
 | Spleen | 3 | — | 1 | Splenectomy and Splenorrhaphy, written as a trauma topic |
 | Esophagus | 10 | 1 | — | Paraesophageal Hernia Repair |
 | Stomach | 15 | — | — | |
