@@ -115,6 +115,7 @@ import { perianalCondylomasExcisionTopic } from "@/content/topics/perianal-condy
 import { acutePancreatitisTopic } from "@/content/topics/acute-pancreatitis";
 import { colonicVolvulusAndObstructionTopic } from "@/content/topics/colonic-volvulus-and-obstruction";
 import { lowerGastrointestinalBleedingTopic } from "@/content/topics/lower-gastrointestinal-bleeding";
+import { pancreaticTailMassTopic } from "@/content/topics/pancreatic-tail-mass";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -244,6 +245,7 @@ export const libraryTopics: Topic[] = [
   acutePancreatitisTopic,
   colonicVolvulusAndObstructionTopic,
   lowerGastrointestinalBleedingTopic,
+  pancreaticTailMassTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

@@ -331,6 +331,15 @@ export const SMALL_INTESTINAL_OBSTRUCTION_OE_SOURCE = "00000000-0000-4000-8000-0
 export const SCORE_SYMPTOMATIC_GALLSTONES_SOURCE = "00000000-0000-4000-8000-000000005500";
 export const SCORE_CHOLECYSTECTOMY_CHOLANGIOGRAPHY_SOURCE = "00000000-0000-4000-8000-000000005501";
 export const GALLSTONES_CHOLECYSTITIS_OE_SOURCE = "00000000-0000-4000-8000-000000005502";
+export const SCORE_EXOCRINE_PANCREATIC_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000006000";
+export const SCORE_PANCREATIC_CYSTIC_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000006001";
+export const SCORE_ENDOCRINE_PANCREATIC_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000006002";
+export const SCORE_DISTAL_PANCREATECTOMY_SOURCE = "00000000-0000-4000-8000-000000006003";
+export const PANCREATIC_TAIL_MASS_OE_SOURCE = "00000000-0000-4000-8000-000000006004";
+export const FUKUOKA_IPMN_2017_SOURCE = "00000000-0000-4000-8000-000000006005";
+export const DIPLOMA_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006006";
+export const ROBOTIC_DISTAL_PANCREATECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003034";
+export const ROBOTIC_DISTAL_PANCREATECTOMY_OE_SOURCE = "00000000-0000-4000-8000-000000003035";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -1023,7 +1032,7 @@ export const suppliedSources: SuppliedSource[] = [
     kind: "book",
     citation: "Fiser SM. The ABSITE Review, 8th edition. Chapter 33, Pancreas, pages 461-485.",
     suppliedAt: "2026-08-12T00:00:00.000Z",
-    details: "Owner-supplied chapter text. Used for the board-keyed answers on pancreatic adenocarcinoma (pages 480-481): delayed gastric emptying as the most common complication treated with metoclopramide, marginal ulcer treated with a proton pump inhibitor, biopsy only for a suspicious node outside the field, and two answers that current evidence has moved — neoadjuvant chemotherapy plus radiation for borderline disease, and 20% five-year survival after resection — both written as board-versus-current rows.",
+    details: "Owner-supplied chapter text. Used for the board-keyed answers on pancreatic adenocarcinoma (pages 480-481): delayed gastric emptying as the most common complication treated with metoclopramide, marginal ulcer treated with a proton pump inhibitor, biopsy only for a suspicious node outside the field, and two answers that current evidence has moved — neoadjuvant chemotherapy plus radiation for borderline disease, and 20% five-year survival after resection — both written as board-versus-current rows. Extended for the October 30, 2026 pancreatic tail mass topic (pages 479-485): distal pancreatectomy with splenectomy for resectable distal tumors, the 192 ng/mL CEA cut point, branch-duct IPMN's 5% transformation over 5 years, postoperative FOLFIRINOX for all, 10% overall survival, nonfunctional PNET as the most common PNET (35%, 75% malignant), insulinoma as the most common functional PNET with enucleation at 2 cm or less, and glucagonoma and VIPoma in the distal pancreas. The board-keyed items that current sources have moved are written as board-versus-current rows.",
   },
   {
     id: NCCN_PANCREATIC_V4_2026_SOURCE,
@@ -3138,6 +3147,97 @@ export const suppliedSources: SuppliedSource[] = [
       "Carries inline author-year attributions. Works it cites: Yokoe (Tokyo Guidelines 2018, acute cholecystitis); the TG18 acute cholangitis guideline; Gallaher and Charles (JAMA 2022); Coccolini (Surgical Laparoscopy Endoscopy and Percutaneous Techniques 2022); Altieri (Surgical Endoscopy 2020); Khan (Surgical Endoscopy 2026); Kovacs (Surgical Endoscopy 2022); Brunt (SAGES safe cholecystectomy 2020); Abou-Saif and Al-Kawas (American Journal of Gastroenterology 2002); and Clemente (Canadian Journal of Gastroenterology and Hepatology 2018).",
       "Supplies the Tokyo (TG18) diagnostic criteria and severity grades, which the packet deliberately omits because SCORE's grading table was an image in the extracted module text. Also used for the board-versus-current table: early cholecystectomy within 72 hours of the index admission, selective rather than routine cholangiography, subtotal cholecystectomy as the bail-out, and drainage before surgery in grade III disease. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary source being opened, and pending Zach's sign-off.",
       "Not carried: the Mirizzi and gallstone ileus triage lines, which the packet already covers from SCORE.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_EXOCRINE_PANCREATIC_NEOPLASMS_SOURCE,
+    title: "SCORE: Exocrine Pancreatic Neoplasms",
+    kind: "website",
+    citation: "Archie WH, Squires MH. Exocrine Pancreatic Neoplasms. SCORE, March 20, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=144855",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: "Added for the October 30, 2026 pancreatic tail cluster from the packet's S1: presentation by tumor location, the less common exocrine tumors, CA 19-9, staging and staging laparoscopy, the NCCN resectability categories as SCORE restates them, systemic therapy by performance status, and SEER survival. Read against the packet during review; every S1 statement was found in the module. Licensed module read locally; paraphrased, no question stems reproduced.",
+  },
+  {
+    id: SCORE_PANCREATIC_CYSTIC_NEOPLASMS_SOURCE,
+    title: "SCORE: Pancreatic Cystic Neoplasms",
+    kind: "website",
+    citation: "Abdel-Misih SR. Pancreatic Cystic Neoplasms. SCORE, May 23, 2024; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000921",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: "Added for the October 30, 2026 pancreatic tail cluster from the packet's S2: serous cystadenoma, mucinous cystic neoplasm, IPMN subtypes and malignancy risk, pseudocyst, cyst fluid profiles, the module's IPMN high-risk and worrisome feature lists, and size-based branch-duct surveillance. The module's feature lists (main duct over 1 cm, an enhancing solid component, nonenhancing mural nodules) predate the 2017 Fukuoka wording the OpenEvidence document uses; the topic keeps both. Licensed module read locally.",
+  },
+  {
+    id: SCORE_ENDOCRINE_PANCREATIC_NEOPLASMS_SOURCE,
+    title: "SCORE: Endocrine Pancreatic Neoplasms",
+    kind: "website",
+    citation: "Dream S, Chen H. Endocrine Pancreatic Neoplasms. SCORE, August 1, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=144977",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: "Added for the October 30, 2026 pancreatic tail cluster from the packet's S3: the insulinoma workup, arterial-phase enhancement separating PNET from adenocarcinoma, MEN 1, and the enucleation rule (more than 2 mm from the main duct, most apt for insulinoma). Corrected during review: the packet credited S3 with the 35% and 75% nonfunctional PNET figures, insulinoma as the most common functional tumor, and the distal location of glucagonoma and VIPoma. Those are Fiser chapter 33's, not this module's, and are cited to Fiser. Licensed module read locally.",
+  },
+  {
+    id: SCORE_DISTAL_PANCREATECTOMY_SOURCE,
+    title: "SCORE: Distal Pancreatectomy",
+    kind: "website",
+    citation: "Abdel-Misih SR. Distal Pancreatectomy. SCORE, August 3, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=145130",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: [
+      "Added for the October 30, 2026 pancreatic tail cluster: S4 of the topic packet and the backbone of the robotic distal pancreatectomy playbook source. Indications and relative contraindications, operative anatomy, preoperative workup and vaccination timing, the key steps, spleen preservation (Kimura and Warshaw), complications including thrombosis recanalization rates and postpancreatectomy diabetes, and follow-up. Licensed module read locally.",
+      "Two module statements are written as splits rather than repeated: it defines a fistula as drain amylase over three times the serum amylase level, while the 2016 ISGPS update it links to uses three times the upper limit of institutional normal serum amylase; and it lets the splenic artery, vein and pancreas be divided in any order, where the OpenEvidence playbook document keeps the classic artery-before-vein rule.",
+    ].join(" "),
+  },
+  {
+    id: PANCREATIC_TAIL_MASS_OE_SOURCE,
+    title: "Owner-supplied pancreatic tail mass study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, October 30, 2026: \"Pancreatic Tail Mass — Chief Resident ABSITE/SCORE Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/c63405c8-933e-489b-aeca-2f343bf70925) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered list. Works it cites: NCCN Pancreatic Adenocarcinoma and Neuroendocrine and Adrenal Tumors (2026; the adenocarcinoma guideline is registered separately); Bassi (Surgery 2017, registered separately); Smith (American Journal of Gastroenterology 2022) and McCarty (Gastrointestinal Endoscopy 2021) on cyst fluid glucose; Gonda (NEJM 2024), Gardner (Gastroenterology 2024), Chatterjee (Digestive Diseases and Sciences 2025) and van Huijgevoort (Nature Reviews Gastroenterology and Hepatology 2019) on cyst fluid and molecular markers; Mukewar (Gut 2017), Zelga (JACS 2022), Levine (Annals of Surgical Oncology 2026), Aziz (JAMA Surgery 2022) and Fong and Fernández-del Castillo (2021) on IPMN risk and the Fukuoka and Kyoto criteria; Korrel (Annals of Surgery 2023), Arya (Annals of Surgery 2025), Hang (International Journal of Surgery 2022), Granieri (HPB 2023) and Watanabe (Surgical Endoscopy 2025) on Kimura against Warshaw; de Rooij (Annals of Surgery 2019, LEOPARD); Bruna (JAMA Surgery 2025, DIPLOMA long-term, registered with the trial); Bolm (Annals of Surgery 2022) and Vijayvergia (Gastroenterology 2026) on PNET surveillance; Zhou (Surgery 2026), Wang (Frontiers in Oncology 2026), Kwon (Cancers 2024) and Takahashi (HPB 2023) on RAMPS; Pulvirenti (Annals of Surgery 2018) on the fistula reclassification; Stoop (Lancet 2025) and Park (JAMA 2021) for the adjuvant trial table; and Roth (Nature Reviews Disease Primers 2026).",
+      "Used during review to correct the packet: the 2016 ISGPS fistula definition (three times the institutional upper limit of normal, and a biochemical leak is not a fistula), the qualifier that a cyst CEA above 192 ng/mL is specific but not sensitive, cyst fluid glucose as the more accurate mucinous marker, the 2017 Fukuoka feature lists, celiac contact of 180 degrees or less as borderline resectable for body and tail tumors, NCCN's size thresholds for observing small nonfunctional PNETs, and Kimura against Warshaw outcomes. Each is added beyond the packet's SCORE and Fiser sources, carried as the document attributes it without the primary paper being opened unless registered separately, and pending Zach's sign-off.",
+      "Not carried: the molecular marker panel beyond KRAS, GNAS and VHL, the adjuvant trial-by-trial table (the Pancreaticoduodenectomy topic carries PRODIGE-24), RAMPS cohort figures beyond the meta-analytic summary, the Kyoto 2024 AUC comparison, and the operative pearls that belong to the robotic distal pancreatectomy playbook.",
+    ].join(" "),
+  },
+  {
+    id: FUKUOKA_IPMN_2017_SOURCE,
+    title: "International consensus Fukuoka guidelines for IPMN, 2017 revision",
+    kind: "article",
+    citation: "Tanaka M, Fernández-del Castillo C, Kamisawa T, et al. Revisions of international consensus Fukuoka guidelines for the management of IPMN of the pancreas. Pancreatology, 2017;17(5):738-753.",
+    url: "https://www.sciencedirect.com/science/article/pii/S1424390317305161",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: "Registered during review as the authority behind the high-risk stigmata and worrisome features the OpenEvidence document lists, and the guideline the SCORE cystic module links for its size-based surveillance. Identified from those two supplied documents rather than supplied directly; the feature lists are written as the document gives them and were not re-read against the paper, pending Zach's sign-off. The 2024 Kyoto revision the document also cites (positive cytology as a high-risk stigma, growth of 2.5 mm a year as a worrisome feature) is carried through the document only.",
+  },
+  {
+    id: DIPLOMA_TRIAL_SOURCE,
+    title: "DIPLOMA: minimally invasive versus open distal pancreatectomy for pancreatic cancer",
+    kind: "article",
+    citation: "Korrel M, Jones LR, van Hilst J, et al. Minimally invasive versus open distal pancreatectomy for resectable pancreatic cancer (DIPLOMA): an international randomised non-inferiority trial. Lancet Regional Health Europe, 2023;31:100673; long-term outcomes in Bruna CL, et al. JAMA Surgery, 2025.",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: "Registered during review as the landmark trial behind minimally invasive distal pancreatectomy for adenocarcinoma, which both OpenEvidence documents in the pancreatic tail cluster quote: 258 patients randomized, R0 resection 73% against 69% (noninferior), lymph node yield 22 against 23, intraperitoneal recurrence 41% against 38%, overall survival hazard ratio 0.99, and 1.02 at long-term follow-up. About 27% of the minimally invasive arm was robotic. Figures are carried as the documents give them and the papers were not opened, pending Zach's sign-off.",
+  },
+  {
+    id: ROBOTIC_DISTAL_PANCREATECTOMY_PLAYBOOK_SOURCE,
+    title: "Owner-supplied robotic distal pancreatectomy playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for robotic distal pancreatectomy (pancreatic tail resection), written October 30, 2026 for the pancreatic tail cluster from the SCORE Distal Pancreatectomy module and Fiser chapter 33, with robotic platform specifics marked as beyond those sources; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: [
+      "Supplies the indications, relative contraindications, workup, the ten operative steps, the spleen-preservation decision points, pitfalls and postoperative care, nearly all traceable to the SCORE Distal Pancreatectomy module (registered separately). Its positioning, port and docking section is marked in the document as beyond SCORE and Fiser.",
+      "Corrected during review against SCORE and the OpenEvidence playbook document, pending Zach's sign-off: the document tilts the patient right side up, where SCORE's lazy right lateral decubitus and the OpenEvidence guide both put the left side up (right side down) so the bowel falls away from the tail; its fistula definition is the 2005 ISGPF one and is replaced with the 2016 ISGPS definition; and its port map (camera at the umbilicus, 12 mm assistant port in the right lower quadrant) is given as an alternative to the published four-port transverse line the OpenEvidence guide cites, whose assistant port sits below and between the camera and the left flank port.",
+    ].join(" "),
+  },
+  {
+    id: ROBOTIC_DISTAL_PANCREATECTOMY_OE_SOURCE,
+    title: "Owner-supplied robotic distal pancreatectomy procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, October 30, 2026: \"Robotic Distal Pancreatectomy: Chief Resident Procedure Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/66a48212-9994-4895-aff0-36e7512e20ae) provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-10-30T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions and no numbered list, and labels technical defaults that no trial tests as common practice. Works it cites: Lof (British Journal of Surgery 2021) on robotic against laparoscopic distal pancreatectomy; the DIPLOMA trial (registered separately); the Miami guidelines on minimally invasive pancreatectomy; NCCN Pancreatic Adenocarcinoma (2026, registered separately); De Pastena (Surgical Endoscopy 2025) for the port configuration; Tomioka (Surgery Today 2026), Watanabe (Surgical Endoscopy 2025), Granieri (HPB 2023), Arya (Annals of Surgery 2025), Ding (Cancers 2023), van Ramshorst (Surgical Endoscopy 2023) and Paiella (EJSO 2019) on spleen preservation; Zhou (Surgery 2026), Ricci (Surgery 2025) and Wu (Annals of Surgical Oncology 2026) on RAMPS; Probst (Cochrane 2025), Bonsdorff (JACS 2026), Merdrignac (Annals of Surgery 2022, REPLAY), Wennerblom (British Journal of Surgery 2021), Oweira (World Journal of Surgery 2022), Tieftrunk (PLoS One 2018), Furuya (HPB 2026) and Del Angel-Millán (Journal of Clinical Medicine 2026) on stump closure; Bassi (Surgery 2017, registered separately); Gurusamy (Cochrane 2013) on somatostatin analogues; Waili (International Journal of Surgery 2025), Imamura (JCEM 2024), Battistella (Surgery 2025), Hamad (JACS 2022), Lu (American Journal of Surgery 2025), Ishido (Pancreas 2025), Kang (World Journal of Surgery 2016) and De Bruijn and van Eijck (Annals of Surgery 2015) on new-onset diabetes; Malpica (American Journal of Hematology 2019), Casciani (JAMA Surgery 2020), Ladhani (British Journal of Haematology 2024) and Rubin and Schaffner (NEJM 2014) on vaccination; and Roth (Nature Reviews Disease Primers 2026).",
+      "Used for the robotic setup, port map, artery-first vessel control, stapler technique and the evidence behind it, the Kimura-to-Warshaw bailout, frozen section and extraction, drain amylase timing, and the outcomes beyond the playbook source. Every figure is carried as the document attributes it, without the primary paper being opened unless registered separately, and is pending Zach's sign-off; items it calls common practice are labeled that way in the playbook.",
+      "Not carried: the emergency undocking time target, the falciform and mattress stump techniques, cartridge colors, and the detailed vaccine-by-vaccine schedule (the Splenectomy and Splenorrhaphy topic carries it).",
     ].join(" "),
   },
 ];

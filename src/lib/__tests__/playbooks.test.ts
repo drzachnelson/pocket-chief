@@ -293,6 +293,24 @@ describe("playbook library", () => {
         "thrombophlebitis -> thrombophlebitis",
         "varicosities -> varicose-veins",
       ],
+      // Reviewed 2026-10-30 with the pancreatic tail cluster. Reworded instead: "chronic pancreatitis" reached Acute
+      // Pancreatitis. "left-sided portal hypertension" is claimed by the tail mass topic so it stops reaching cirrhosis.
+      "robotic-distal-pancreatectomy": [
+        "IPMN -> pancreatic-tail-mass",
+        "ISGPS -> pancreaticoduodenectomy",
+        "RAMPS -> pancreatic-tail-mass",
+        "biochemical leak -> pancreaticoduodenectomy",
+        "branch-duct IPMN -> pancreatic-tail-mass",
+        "cyst fluid CEA -> pancreatic-tail-mass",
+        "left-sided portal hypertension -> pancreatic-tail-mass",
+        "main-duct IPMN -> pancreatic-tail-mass",
+        "mucinous cystic neoplasm -> pancreatic-tail-mass",
+        "pancreatoduodenectomy -> pancreaticoduodenectomy",
+        "serous cystadenoma -> pancreatic-tail-mass",
+        "splenectomy -> splenectomy-and-splenorrhaphy",
+        "splenic mobilization -> splenectomy-and-splenorrhaphy",
+        "worrisome features -> pancreatic-tail-mass",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
