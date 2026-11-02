@@ -359,6 +359,15 @@ export const ASCO_2023_MCRC_SOURCE = "00000000-0000-4000-8000-000000006112";
 export const CAIRO6_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006113";
 export const HIPECT4_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006114";
 export const PCI_CC_SCORE_SOURCE = "00000000-0000-4000-8000-000000006115";
+export const SCORE_GI_NET_SOURCE = "00000000-0000-4000-8000-000000006200";
+export const APPENDECTOMY_OE_SOURCE = "00000000-0000-4000-8000-000000006201";
+export const GONZALEZ_MORENO_2004_SOURCE = "00000000-0000-4000-8000-000000006202";
+export const LAKMAL_2024_LAMN_SOURCE = "00000000-0000-4000-8000-000000006203";
+export const GONZALEZ_MORENO_1998_SOURCE = "00000000-0000-4000-8000-000000006204";
+export const YILMAZ_2026_MUCOCELE_SOURCE = "00000000-0000-4000-8000-000000006205";
+export const NESTI_2023_NET_SOURCE = "00000000-0000-4000-8000-000000006206";
+export const WSES_APPENDICITIS_2020_SOURCE = "00000000-0000-4000-8000-000000006207";
+export const PERIAPPAC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006208";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3410,5 +3419,88 @@ export const suppliedSources: SuppliedSource[] = [
     url: "https://doi.org/10.1007/978-1-4613-1247-5_23",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch. The PubMed abstract confirms 13 abdominopelvic regions (0 to 12) each scored 0 to 3 by lesion size, for a maximum of 39. UNVERIFIED and flagged where printed: the centimeter cutoffs for each lesion-size score and the CC-2 and CC-3 thresholds, which are in the full text only and are stated from the SCORE module and secondary teaching. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_GI_NET_SOURCE,
+    title: "SCORE: Gastrointestinal Stromal and Neuroendocrine Tumors and Lymphomas",
+    kind: "website",
+    citation: "Gastrointestinal Stromal and Neuroendocrine Tumors and Lymphomas. SCORE, February 10, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=136240",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S3 of the Appendectomy packet, for its appendiceal neuroendocrine tumor passage only: most are under 1 cm and cured by appendectomy, and right hemicolectomy with lymphadenectomy is recommended over 2 cm or with mesoappendiceal or lymphovascular invasion, a high mitotic index, or goblet cell histology. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: APPENDECTOMY_OE_SOURCE,
+    title: "Owner-supplied appendectomy study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: \"Appendectomy: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions, chiefly WSES 2020 and 2025, SAGES, Moris (JAMA 2021), Nesti (Lancet Oncology 2023), ENETS 2023, Park (Surgical Endoscopy 2015), Kim (2018), Massoumi and King (JAMA 2020), and an NCCN appendiceal guideline whose existence the batch could not confirm.",
+      "Used for the intraoperative mass and mucocele steps (handle only the mesoappendix, retrieve in a bag, partial cecectomy or ileocecal resection for a broad base, explore and record the extent, sample free mucin for cytology and biopsy an implant, then stop and refer) and the stump technique. The cytology and stop-and-refer steps are attributed in the document to that NCCN guideline and are printed as UNVERIFIED.",
+      "Corrected against primary sources on November 1, 2026 and not carried as the document gives them: the APPAC II results it credits to Talan, the WSES 2025 age-35 and 14.3% neoplasm figures for interval appendectomy (not in the abstract; printed as UNVERIFIED), three different durations for postoperative antibiotics, a nodal positivity table by NET size that could not be found, and Nesti's metastasis wording.",
+    ].join(" "),
+  },
+  {
+    id: GONZALEZ_MORENO_2004_SOURCE,
+    title: "González-Moreno 2004: right hemicolectomy in mucinous appendiceal tumors with peritoneal seeding",
+    kind: "article",
+    citation: "González-Moreno S, Sugarbaker PH. British Journal of Surgery, 2004;91:304-311. PMID 14991630.",
+    url: "https://doi.org/10.1002/bjs.4393",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: nodes were positive in 4.2% of mucinous against 66.7% of intestinal-type tumors, and right hemicolectomy gave no survival benefit on multivariate analysis. Pending Zach's sign-off.",
+  },
+  {
+    id: LAKMAL_2024_LAMN_SOURCE,
+    title: "Lakmal 2024: outcomes of pTis and pT3 LAMN after complete excision",
+    kind: "article",
+    citation: "Lakmal C, et al. European Journal of Surgical Oncology, 2024;50:108600. PMID 39167862.",
+    url: "https://doi.org/10.1016/j.ejso.2024.108600",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 193 specialist-center patients with pTis or pT3 LAMN; none of the 185 followed (median 6.45 years) developed pseudomyxoma, so a correctly staged, completely excised lesion needs no further surgery and only low-intensity surveillance. Pending Zach's sign-off.",
+  },
+  {
+    id: GONZALEZ_MORENO_1998_SOURCE,
+    title: "González Moreno 1998: dissemination after laparoscopic removal of an appendiceal mucocele",
+    kind: "article",
+    citation: "González Moreno S, et al. Surgical Endoscopy, 1998;12:1177-1179. PMID 9716778.",
+    url: "https://doi.org/10.1007/s004649900811",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a case report of dissemination nine months after laparoscopic removal of a mucocele, with the authors advising conversion to open. The origin of the convert-to-open board answer. Pending Zach's sign-off.",
+  },
+  {
+    id: YILMAZ_2026_MUCOCELE_SOURCE,
+    title: "Yılmaz 2026: laparoscopic versus open resection of appendiceal mucinous lesions",
+    kind: "article",
+    citation: "Yılmaz M, et al. JSLS, 2026;30. PMID 42516431.",
+    url: "https://doi.org/10.4293/JSLS.2026.00051",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a retrospective series of 53 patients (20 laparoscopic, 33 open) with no difference in rupture or margins and faster recovery after laparoscopy. Low-level support for careful laparoscopic removal. Pending Zach's sign-off.",
+  },
+  {
+    id: NESTI_2023_NET_SOURCE,
+    title: "Nesti 2023: hemicolectomy versus appendectomy for 1 to 2 cm appendiceal neuroendocrine tumors",
+    kind: "article",
+    citation: "Nesti C, et al. Lancet Oncology, 2023. PMID 36640790.",
+    url: "https://doi.org/10.1016/S1470-2045(22)00750-1",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: 278 patients with 1 to 2 cm tumors followed a median of 13 years; peritoneal metastases in about 1% and liver metastases in about 1%, all synchronous, with no tumor-related deaths; right hemicolectomy gave no survival benefit over appendectomy (HR 0.88). Pending Zach's sign-off.",
+  },
+  {
+    id: WSES_APPENDICITIS_2020_SOURCE,
+    title: "WSES Jerusalem guidelines on acute appendicitis, 2020 update",
+    kind: "article",
+    citation: "Di Saverio S, et al. World Journal of Emergency Surgery, 2020. PMID 32295644. Open full text PMC7386163.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from the open full text, read November 1, 2026 in the Appendectomy entry's outside research: against routine interval appendectomy under 40 after successful nonoperative care (6.3); neoplasm in 3% to 17% of patients 40 and older, with colonoscopy and interval CT suggested (6.4); suction alone rather than irrigation (4.8); no drains after complicated appendectomy in adults (4.12); and a single preoperative antibiotic dose with no postoperative antibiotics for uncomplicated disease (7.1). Pending Zach's sign-off.",
+  },
+  {
+    id: PERIAPPAC_TRIAL_SOURCE,
+    title: "PeriAPPAC: interval appendectomy versus follow-up after periappendicular abscess",
+    kind: "article",
+    citation: "Mällinen J, et al. 2019. PMID 30484824.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: neoplasm in 20% (12 of 60) of patients after a periappendicular abscess, all over age 40; the trial stopped early. Pending Zach's sign-off.",
   },
 ];

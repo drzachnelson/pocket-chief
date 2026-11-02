@@ -1,0 +1,212 @@
+import { buildTopic, references, sourced, sourcedUnits } from "@/content/authoring";
+import {
+  APPENDECTOMY_OE_SOURCE as OE,
+  FISER_SMALL_BOWEL_SOURCE as FISER,
+  GONZALEZ_MORENO_1998_SOURCE as GM_1998,
+  GONZALEZ_MORENO_2004_SOURCE as GM_2004,
+  LAKMAL_2024_LAMN_SOURCE as LAKMAL,
+  NESTI_2023_NET_SOURCE as NESTI,
+  PERIAPPAC_TRIAL_SOURCE as PERIAPPAC,
+  SCORE_APPENDECTOMY_SOURCE as SCORE,
+  SCORE_APPENDICEAL_TUMORS_SOURCE as SCORE_APPX,
+  SCORE_GI_NET_SOURCE as SCORE_NET,
+  WSES_APPENDICITIS_2020_SOURCE as WSES_2020,
+  YILMAZ_2026_MUCOCELE_SOURCE as YILMAZ,
+} from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+// Packet: ~/Desktop/Pocket Chief/Inbox/2026-11-01-appendectomy/1-packet.md (S1 SCORE Appendectomy, S2 SCORE
+// Appendiceal Tumors, S3 SCORE GIST/NET, S4 Fiser chapter 35, S5 PubMed abstracts), checked against the folder's
+// OpenEvidence document and 4-claude-research.md. The operation lives here; Appendicitis keeps the disease and the
+// pathology report, Peritoneal Neoplasms the mucinous disease. The 2 cm size rule is deliberately NET-only.
+const UNVERIFIED = "(**UNVERIFIED**: secondary sources only, not checked against the primary text)";
+
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-appy-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "Appendectomy is usually a short laparoscopic operation, and the parts that test judgment come when the field is not what the CT promised: a friable base, a mass, or a mucin-filled appendix. Find the base by following the taeniae, divide the mesoappendix and then the base, and let the **histology**, not the size of a lesion seen in the operating room, decide whether a right hemicolectomy follows.",
+  }, SCORE),
+  sourcedUnits({
+    id: "block-appy-landmarks",
+    type: "bullets",
+    heading: "Landmarks, approach, and preoperative care",
+    items: [
+      "The **taeniae coli** of the cecum converge at the appendiceal base, which makes them the most reliable landmark on entering the abdomen.",
+      "The ileocecal fold, or **ligament of Treves**, is a fatty appendage at the ileocecal junction that also helps with orientation.",
+      "The mesoappendix carries the appendiceal artery, the main blood supply to the appendix.",
+      "A laparoscopic approach is preferred in most patients because it causes less pain, a shorter stay, and faster recovery.",
+      "Heart failure or COPD may preclude laparoscopy because of the hemodynamic effects of insufflation, as may multiple prior lower abdominal operations or radiation to the field.",
+      "Fluid resuscitation and early broad-spectrum intravenous antibiotics come first in both complicated and uncomplicated appendicitis.",
+      "Review the imaging before the operation to locate the cecum, appendix, and nearby vessels.",
+      "Consent covers surgical site infection and conversion to open, which happens in about 1.2% of laparoscopic appendectomies.",
+      "Appendiceal tumors turn up incidentally in 0.8% to 1.4% of appendectomy specimens, so every specimen goes to pathology.",
+    ],
+  }, [[SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE_APPX]]),
+  sourced({
+    id: "block-appy-laparoscopic",
+    type: "sequence",
+    heading: "Laparoscopic appendectomy",
+    steps: [
+      { title: "Equipment check", detail: "Confirm a 5 or 10 mm 30-degree scope, suction irrigator, endoscopic stapler or Endoloops, an energy device, and open instruments in the room." },
+      { title: "Positioning", detail: "Place the patient supine with arms tucked, empty the bladder by voiding or a Foley catheter, prep the whole abdomen for conversion, and hold a time-out." },
+      { title: "Access", detail: "Enter the peritoneum with a Veress needle, direct trocar, or cut-down chosen for the patient's history, with the camera port at the umbilicus." },
+      { title: "Working ports", detail: "Place two working ports, such as left lower quadrant and suprapubic, so the surgeon works two-handed without relying on the assistant." },
+      { title: "Survey", detail: "Inspect the entire peritoneum to confirm the diagnosis and exclude other pathology before committing to appendectomy." },
+      { title: "Exposure", detail: "Tilt Trendelenburg with the right side up, follow the taeniae to the base, and elevate the appendix with atraumatic graspers." },
+      { title: "Mesoappendix division", detail: "Divide the mesoappendix with an endoscopic stapler or ultrasonic energy device." },
+      { title: "Base transection", detail: "Transect the base just above its junction with the cecum using a stapler, ultrasonic energy, or Endoloops." },
+      { title: "Extraction", detail: "Place the appendix in a retrieval bag and remove it through the umbilical incision." },
+      { title: "Closure", detail: "Check the transection line for bleeding, irrigate and suction the right lower quadrant and pelvis, remove the trocars, and close the incisions." },
+    ],
+  }, SCORE),
+  sourcedUnits({
+    id: "block-appy-technique-pearls",
+    type: "bullets",
+    heading: "↳ Stump and field technique",
+    items: [
+      "Divide the base flush with the cecum, leaving a stump under 0.5 cm so stump appendicitis cannot follow.",
+      "Use a stapler with a small cuff of cecum when the base is inflamed or necrotic, because Endoloops are unsafe on a perforated base or an inflamed cecum.",
+      "Inverting the stump adds nothing.",
+      "Suction alone is preferred over irrigation, and adults get no drain after a complicated appendectomy.",
+      "After uncomplicated appendicitis, a single preoperative antibiotic dose is enough and no postoperative antibiotics are given.",
+    ],
+  }, [[OE], [OE], [OE], [WSES_2020], [WSES_2020]]),
+  sourced({
+    id: "block-appy-open",
+    type: "sequence",
+    heading: "Open appendectomy",
+    steps: [
+      { title: "Incision choice", detail: "Use an oblique muscle-splitting McArthur-McBurney incision, a transverse Rockey-Davis incision centered on McBurney point, or a lower midline incision for free perforation needing washout." },
+      { title: "Delivery", detail: "Identify the cecum and deliver it into the wound, extending the incision medially or laterally if the appendix is hard to find." },
+      { title: "Division", detail: "Divide the mesoappendix, clamp and ligate the base with absorbable suture, divide it, and cauterize or suture-ligate the stump." },
+      { title: "Fascial closure", detail: "Irrigate, then close the transversus abdominis and internal oblique together and the external oblique separately." },
+      { title: "Skin management", detail: "Close the skin primarily when there was no perforation or spillage, and leave it loosely approximated or open after perforation." },
+    ],
+  }, SCORE),
+  sourcedUnits({
+    id: "block-appy-findings",
+    type: "table",
+    heading: "Findings during the case",
+    columns: ["Finding", "Move", "Why"],
+    rows: [
+      ["Normal appendix", "Inspect the terminal ileum for Crohn disease, the small bowel for a Meckel diverticulum, and the adnexa in women, and still remove the appendix", "Removing it prevents a confounding diagnosis later"],
+      ["Dense inflammation or adhesions", "Dissect bluntly with graspers or the suction tip, never grasp inflamed bowel, avoid energy devices, and work top-down from the cecum if needed", "Friable bowel tears, and thermal spread injures adherent structures"],
+      ["Base too friable to close", "Transect a cuff of cecum while preserving the ileocecal valve and terminal ileum", "A secure closure on healthy tissue prevents a stump leak"],
+      ["Uncontrolled bleeding or unsafe visualization", "Convert to open", "Conversion is the safe choice, not a failure"],
+      ["Possible ileocecal valve compromise after transection", "Inspect the specimen, milk ileal contents into the cecum, and convert to inspect the colon directly if concern remains", "An unrecognized valve injury causes obstruction or leak"],
+      ["Solid neoplasm at the base or a perforated cecal mass", "Right hemicolectomy with oncologic resection of the ileocolic mesentery", "Base involvement means the appendix alone cannot give a clear margin"],
+      ["Mucinous lesion with a broad base", "Partial cecectomy with a linear stapler, or ileocecal resection if it invades the cecum or ileum", "The aim is an intact specimen with a negative margin; histology decides on hemicolectomy later"],
+    ],
+  }, [[FISER], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [OE]]),
+  sourced({
+    id: "block-appy-mucocele-flow",
+    type: "flow",
+    heading: "Mass or mucocele found during the case",
+    nodes: [
+      { id: "found", label: "Appendiceal mass or mucin-filled appendix found during the case" },
+      { id: "contained", label: "Lesion intact, with no mucin or implants outside the appendix", tone: "good" },
+      { id: "spilled", label: "Free mucin, rupture, or peritoneal implants already present", tone: "caution" },
+      { id: "remove", label: "Atraumatic appendectomy without rupture, removed whole in a retrieval bag", tone: "good" },
+      { id: "pathology", label: "Final histology decides any further operation, with no unplanned hemicolectomy for a mucinous lesion", tone: "good" },
+      { id: "refer", label: "Record the extent of disease, take no further resection, and refer to a peritoneal surface malignancy center", tone: "caution" },
+    ],
+    edges: [
+      { from: "found", to: "contained", label: "confined to the appendix" },
+      { from: "found", to: "spilled", label: "disease beyond the appendix" },
+      { from: "contained", to: "remove" },
+      { from: "remove", to: "pathology" },
+      { from: "spilled", to: "refer" },
+    ],
+  }, SCORE_APPX),
+  sourced({
+    id: "block-appy-mucocele-steps",
+    type: "sequence",
+    heading: "↳ Mucocele steps in the operating room",
+    steps: [
+      { title: "Hands off the lesion", detail: "Do not grasp or puncture it; handle the appendix only by the mesoappendix, because rupture risks pseudomyxoma peritonei." },
+      { title: "Approach", detail: "Laparoscopy is acceptable in experienced hands; convert if spill is a concern, the tumor cannot be removed safely, or mucin is already in the abdomen." },
+      { title: "Remove it whole", detail: "Staple at the cecal base, or take a partial cecectomy for a broad base, and retrieve the specimen in an impermeable bag." },
+      { title: "Explore and record", detail: "Survey the diaphragms, liver, omentum, pelvis and adnexa, and small bowel, and record where the mucin is, whether it is perforated, and the estimated disease burden." },
+      { title: "Sample, do not debulk", detail: `Send free fluid or mucin for cytology and biopsy the most solid implant ${UNVERIFIED}.` },
+      { title: "Stop and refer", detail: `No unplanned right hemicolectomy, omentectomy, or debulking; refer to a peritoneal surface malignancy center, and do any hemicolectomy at a second operation once histology is final ${UNVERIFIED}.` },
+    ],
+  }, OE),
+  sourcedUnits({
+    id: "block-appy-two-cm",
+    type: "warning",
+    tone: "danger",
+    heading: "The 2 cm rule is a neuroendocrine rule",
+    text: "The SCORE Appendectomy module lets the appendectomy continue for a neoplasm at the tip under 2 cm, but that size rule comes from **neuroendocrine** tumors. For every other appendiceal tumor, histology drives management more than size: LAMN and HAMN are treated by an appendectomy without spill, and localized adenocarcinoma of any size most often gets a right hemicolectomy. Do not turn a mucinous lesion into an unplanned hemicolectomy in the operating room; remove it intact and let the pathology decide.",
+  }, [[SCORE, SCORE_APPX]]),
+  sourcedUnits({
+    id: "block-appy-pathology",
+    type: "table",
+    heading: "When the pathology report adds an operation",
+    columns: ["Final pathology", "Next step", "Basis"],
+    rows: [
+      ["Neuroendocrine tumor under 1 cm with negative margins", "Appendectomy alone", "Most appendiceal neuroendocrine tumors are this size and are cured by appendectomy"],
+      ["Neuroendocrine tumor of 1 to 2 cm", "Risk-stratify, and add right hemicolectomy if any high-risk feature is present", "Size alone does not settle this group"],
+      ["Neuroendocrine tumor over 2 cm or with high-risk features", "Completion right hemicolectomy with lymphadenectomy", "High-risk features are mesoappendiceal invasion, positive or unclear margins, base involvement, high grade, lymphovascular or perineural invasion, and goblet cell histology"],
+      ["LAMN or HAMN, completely excised", "No further operation; HAMN is debated", "In mucinous tumors with peritoneal seeding, nodes were positive in 4.2% against 66.7% of intestinal-type tumors, and hemicolectomy gave no survival benefit"],
+      ["pTis or pT3 LAMN", "Low-intensity surveillance", "No pseudomyxoma in 185 patients followed a median of 6.45 years"],
+      ["Appendiceal adenocarcinoma", "Right hemicolectomy with at least 12 nodes for T2 or greater, lymphovascular invasion, positive margins, or moderate to poor differentiation", "Nodal positivity runs 20% to 30% and decides adjuvant therapy"],
+    ],
+  }, [[SCORE_NET], [SCORE_APPX], [SCORE_APPX, SCORE_NET], [GM_2004], [LAKMAL], [SCORE_APPX]]),
+  sourcedUnits({
+    id: "block-appy-postop",
+    type: "bullets",
+    heading: "Postoperative care and follow-up",
+    items: [
+      "After uncomplicated appendicitis, give no postoperative antibiotics, start an oral diet immediately, and expect discharge within 24 to 48 hours.",
+      "After complicated appendicitis, continue broad-spectrum antibiotics for a total of 4 to 7 days and hold the diet until flatus, because ileus is more likely.",
+      "Fever, leukocytosis, and slow return of bowel function suggest a postoperative abscess, which forms in 10% to 20% after perforation and is drained percutaneously.",
+      "Surgical site infection is the most common complication, at 1.7% after laparoscopic and 5.2% after open appendectomy.",
+      "Place a drain only into a demarcated abscess cavity, because drains do not prevent later abscess formation.",
+      "See every patient in clinic within 2 to 4 weeks to review the final pathology and any complications.",
+      "After an appendiceal neuroendocrine tumor, palpate the rest of the bowel, because 20% to 25% of patients have multifocal disease.",
+    ],
+  }, [[SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE], [SCORE_APPX]]),
+  sourcedUnits({
+    id: "block-appy-interval",
+    type: "bullets",
+    heading: "Interval appendectomy",
+    items: [
+      "A walled-off abscess on CT after perforation is drained percutaneously, followed by interval appendectomy once symptoms improve and a colon study to exclude a perforated cecal cancer.",
+      "WSES 2020 recommends against routine interval appendectomy under age 40 after successful nonoperative care, and suggests colonoscopy and interval CT at 40 or older, where neoplasm turns up in 3% to 17%.",
+      "In the PeriAPPAC trial, 20% of patients had a neoplasm after a periappendicular abscess, all of them over 40, and the trial stopped early.",
+      `The 2025 WSES update reportedly lowers the threshold to age 35, with interval appendectomy at 6 to 12 weeks for a neoplasm risk up to 14.3% ${UNVERIFIED}.`,
+    ],
+  }, [[FISER], [WSES_2020], [PERIAPPAC], [OE]]),
+  sourcedUnits({
+    id: "block-appy-splits",
+    type: "table",
+    heading: "Board answer versus current practice",
+    columns: ["Question", "Board answer", "Current practice"],
+    rows: [
+      ["Mucocele seen at laparoscopy", "Fiser: open these; the convert-to-open answer traces to a 1998 report of dissemination after laparoscopic removal", "Atraumatic laparoscopic removal in a bag, ready to convert, on low-level data (53 patients, no difference in rupture or margins)"],
+      ["Malignant mucinous appendiceal tumor", "Fiser: right hemicolectomy whenever it is malignant", "Hemicolectomy only for positive nodes or an inadequate margin; completely excised pTis or pT3 LAMN needs nothing more"],
+      ["Neoplasm at the tip under 2 cm", "SCORE Appendectomy: continue the appendectomy for any neoplasm", "SCORE Appendiceal Tumors: the size rule is for neuroendocrine tumors; other tumors go by histology"],
+      ["Neuroendocrine tumor of 1 to 2 cm", "Right hemicolectomy for any high-risk feature", "In 278 patients followed 13 years, hemicolectomy gave no survival benefit, and metastases (about 1% peritoneal, 1% liver) were all synchronous"],
+      ["Mucinous lesion at the base", "SCORE Appendectomy: a neoplasm at the base gets right hemicolectomy", "Partial cecectomy or ileocecal resection to clear the margin, with hemicolectomy only after histology"],
+      ["Interval appendectomy after an abscess", "Drain, then interval appendectomy for everyone", "Age-stratified: WSES 2020 uses 40, and the 2025 update reportedly 35"],
+    ],
+  }, [[FISER, GM_1998, YILMAZ], [FISER, GM_2004, LAKMAL], [SCORE, SCORE_APPX], [SCORE_APPX, NESTI], [SCORE, OE], [FISER, WSES_2020, OE]]),
+  references("block-appy-references", [SCORE, SCORE_APPX, SCORE_NET, FISER, OE, GM_2004, LAKMAL, GM_1998, YILMAZ, NESTI, WSES_2020, PERIAPPAC]),
+];
+
+export const appendectomyTopic = buildTopic({
+  id: "00000000-0000-4000-8000-000000006220",
+  versionId: "00000000-0000-4000-8000-000000006221",
+  slug: "appendectomy",
+  title: "Appendectomy",
+  aliases: ["appendectomy", "laparoscopic appendectomy", "interval appendectomy", "open appendectomy", "lap appy", "McArthur-McBurney incision", "Rockey-Davis incision", "appendiceal stump", "mesoappendix", "ligament of Treves", "top-down appendectomy", "appendiceal mass at surgery"],
+  scoreNodeId: "large-intestine-procedures",
+  scoreCategory: "SCORE · Large Intestine · Operations & Procedures",
+  tags: ["large-intestine", "appendix", "operations-and-procedures", "laparoscopy", "absite", "score"],
+  sourceId: SCORE,
+  additionalSourceIds: [SCORE_APPX, SCORE_NET, FISER, OE, GM_2004, LAKMAL, GM_1998, YILMAZ, NESTI, WSES_2020, PERIAPPAC],
+  blocks,
+  reviewedAt: "2026-11-01T00:00:00.000Z",
+});
