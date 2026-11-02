@@ -368,6 +368,17 @@ export const YILMAZ_2026_MUCOCELE_SOURCE = "00000000-0000-4000-8000-000000006205
 export const NESTI_2023_NET_SOURCE = "00000000-0000-4000-8000-000000006206";
 export const WSES_APPENDICITIS_2020_SOURCE = "00000000-0000-4000-8000-000000006207";
 export const PERIAPPAC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006208";
+export const SCORE_GASTRIC_ADENOCARCINOMA_SOURCE = "00000000-0000-4000-8000-000000006300";
+export const GASTRIC_ADENOCARCINOMA_OE_SOURCE = "00000000-0000-4000-8000-000000006301";
+export const YANG_2011_GASTRIC_HIPEC_SOURCE = "00000000-0000-4000-8000-000000006302";
+export const CYTO_CHIP_SOURCE = "00000000-0000-4000-8000-000000006303";
+export const GASTRIPEC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006304";
+export const PERISCOPE2_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006305";
+export const FLOT4_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006306";
+export const DUTCH_D1D2_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006307";
+export const MATTERHORN_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006308";
+export const REGATTA_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006309";
+export const FISER_GASTRIC_CANCER_SOURCE = "00000000-0000-4000-8000-000000006310";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3502,5 +3513,104 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Mällinen J, et al. 2019. PMID 30484824.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: neoplasm in 20% (12 of 60) of patients after a periappendicular abscess, all over age 40; the trial stopped early. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_GASTRIC_ADENOCARCINOMA_SOURCE,
+    title: "SCORE: Gastric Adenocarcinoma",
+    kind: "website",
+    citation: "Gastric Adenocarcinoma. SCORE, April 30, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128003",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the Gastric Adenocarcinoma packet: burden, epidemiology and hereditary syndromes, presentation, diagnostic tests, Lauren and Siewert classification, staging, treatment by stage, operative management, surveillance, and palliation. Its line that GAPPS accounts for 90% of gastric cancers looks like a capture error and is not carried. Licensed module read locally; paraphrased, no question stems reproduced.",
+  },
+  {
+    id: GASTRIC_ADENOCARCINOMA_OE_SOURCE,
+    title: "Owner-supplied gastric adenocarcinoma study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: a gastric adenocarcinoma board-review study guide, an OpenEvidence synthesis provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Carries inline attributions, chiefly NCCN Gastric version 4.2026, JGCA, ESMO, FLOT4, MAGIC, the Dutch D1D2 and Italian trials, JCOG 9501, CLASSIC, INT-0116, ToGA, REGATTA, MATTERHORN, KEYNOTE-811, GASTRIPEC-I, PERISCOPE II, and RENAISSANCE.",
+      "Used for the endoscopic resection criteria, the non-curative resection rule, the NCCN re-staging pathway for cytology-positive disease, and the JGCA conversion position. Its account of NCCN listing gastrectomy with cytoreduction and HIPEC for a peritoneal cancer index of 10 or less conflicts with a secondary report that NCCN restricts HIPEC to trials; neither was checked against NCCN text, so both print as UNVERIFIED.",
+      "Not carried after the primary-source check on November 1, 2026: MATTERHORN final survival and subgroup figures, the RENAISSANCE subgroup, KEYNOTE-811 survival, the Dutch trial's no-pancreaticosplenectomy subgroup, the laparoscopy yield and washing volumes, and the vitamin B12 figures, none of which an abstract confirmed.",
+    ].join(" "),
+  },
+  {
+    id: YANG_2011_GASTRIC_HIPEC_SOURCE,
+    title: "Yang 2011: cytoreduction with HIPEC for gastric peritoneal carcinomatosis",
+    kind: "article",
+    citation: "Yang XJ, et al. Annals of Surgical Oncology, 2011;18:1575-1581. PMID 21431408.",
+    url: "https://doi.org/10.1245/s10434-011-1631-5",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a single-center phase 3 trial in China, 68 patients; cytoreduction with mitomycin C and cisplatin HIPEC against cytoreduction alone; median survival 11.0 against 6.5 months (p=0.046). Pending Zach's sign-off.",
+  },
+  {
+    id: CYTO_CHIP_SOURCE,
+    title: "CYTO-CHIP: HIPEC after complete cytoreduction for gastric peritoneal metastases",
+    kind: "article",
+    citation: "Bonnot PE, et al. Journal of Clinical Oncology, 2019;37:2028-2040. PMID 31084544.",
+    url: "https://doi.org/10.1200/JCO.18.01688",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a French propensity-weighted cohort of 277 patients after complete cytoreduction; median survival 18.8 against 12.1 months and 5-year survival 19.9% against 6.4% (HR 0.60) with HIPEC, with no added morbidity. Observational. Pending Zach's sign-off.",
+  },
+  {
+    id: GASTRIPEC_TRIAL_SOURCE,
+    title: "GASTRIPEC-I: cytoreduction with or without HIPEC for gastric peritoneal metastases",
+    kind: "article",
+    citation: "Rau B, et al. Journal of Clinical Oncology, 2024;42:146-156. PMID 37906724.",
+    url: "https://doi.org/10.1200/JCO.22.02867",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 105 patients given perioperative chemotherapy and cytoreduction with or without mitomycin C 15 mg/m² and cisplatin 75 mg/m² at 42 °C for 60 minutes; median survival 14.9 months in both arms; progression-free survival 7.1 against 3.5 months; 55 patients never reached cytoreduction; stopped early for slow accrual; grade 3 or worse events similar. Pending Zach's sign-off.",
+  },
+  {
+    id: PERISCOPE2_TRIAL_SOURCE,
+    title: "PERISCOPE II: gastrectomy with cytoreduction and HIPEC for limited gastric peritoneal disease",
+    kind: "article",
+    citation: "Quik JSE, et al. Lancet Oncology, 2026;27:1031-1042. PMID 42419336.",
+    url: "https://doi.org/10.1016/S1470-2045(26)00144-0",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 102 patients with cT3 to cT4a tumors, a peritoneal cancer index under 7 and/or positive cytology, and no progression after at least three cycles; gastrectomy with cytoreduction and HIPEC (oxaliplatin 460 mg/m² at 41 °C, then docetaxel 50 mg/m² at 37 °C) against continued systemic therapy; median survival 15.7 against 16.6 months (HR 1.10, p=0.70); grade 3 or worse events 42% against 20%, serious events 44% against 6%, three treatment deaths, all in the surgery arm; closed for futility. Pending Zach's sign-off.",
+  },
+  {
+    id: FLOT4_TRIAL_SOURCE,
+    title: "FLOT4: perioperative FLOT against ECF or ECX for resectable gastric or junctional adenocarcinoma",
+    kind: "article",
+    citation: "Al-Batran SE, et al. Lancet, 2019. PMID 30982686.",
+    url: "https://doi.org/10.1016/S0140-6736(18)32557-1",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: 716 patients with cT2 or deeper and/or node-positive, M0 disease; docetaxel 50, oxaliplatin 85, leucovorin 200 and fluorouracil 2600 mg/m² by 24-hour infusion every 2 weeks, four cycles before and four after surgery; median survival 50 against 35 months (HR 0.77). Pending Zach's sign-off.",
+  },
+  {
+    id: DUTCH_D1D2_TRIAL_SOURCE,
+    title: "Dutch D1D2 trial, 15-year follow-up",
+    kind: "article",
+    citation: "Songun I, et al. Lancet Oncology, 2010. PMID 20409751.",
+    url: "https://doi.org/10.1016/S1470-2045(10)70070-X",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: 711 curatively treated patients; 15-year survival 21% for D1 against 29% for D2 (p=0.34); gastric cancer death 48% against 37%, local recurrence 22% against 12%; postoperative mortality 4% against 10% and complications 25% against 43%. The authors recommend D2 because spleen-preserving D2 is now safer. Pending Zach's sign-off.",
+  },
+  {
+    id: MATTERHORN_TRIAL_SOURCE,
+    title: "MATTERHORN: perioperative durvalumab with FLOT for resectable gastric or junctional adenocarcinoma",
+    kind: "article",
+    citation: "Janjigian YY, et al. New England Journal of Medicine, 2025. PMID 40454643.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: durvalumab 1500 mg every 4 weeks with FLOT for two four-week cycles before and two after surgery, then durvalumab alone for ten more; 2-year event-free survival 67.4% against 58.5% (HR 0.71); pathologic complete response 19.2% against 7.2%. Overall survival at that analysis had not crossed its significance threshold, so no survival benefit is stated. Pending Zach's sign-off.",
+  },
+  {
+    id: REGATTA_TRIAL_SOURCE,
+    title: "REGATTA: gastrectomy plus chemotherapy against chemotherapy alone for gastric cancer with a single non-curable factor",
+    kind: "article",
+    citation: "Fujitani K, et al. Lancet Oncology, 2016. PMID 26822397.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: median survival 16.6 months with chemotherapy alone against 14.3 months with gastrectomy first; stopped for futility. Palliative gastrectomy for a single non-curable factor does not extend survival. Pending Zach's sign-off.",
+  },
+  {
+    id: FISER_GASTRIC_CANCER_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Stomach, gastric adenocarcinoma",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 30, Stomach, gastric adenocarcinoma section, page 404.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the Gastric Adenocarcinoma packet; the existing chapter 30 entry covers only the benign pages. Fiser's board answers differ from current SCORE teaching on the staging laparoscopy threshold (T2 or deeper), nodal extent (D1 with at least 15 nodes), neoadjuvant chemoradiation, 5-FU-based chemotherapy, and treating tumors within 5 cm of the junction as esophageal; the topic carries each as a split. OCR of a scan, read locally.",
   },
 ];
