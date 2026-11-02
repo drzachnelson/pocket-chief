@@ -379,6 +379,15 @@ export const DUTCH_D1D2_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006307";
 export const MATTERHORN_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006308";
 export const REGATTA_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006309";
 export const FISER_GASTRIC_CANCER_SOURCE = "00000000-0000-4000-8000-000000006310";
+export const SCORE_GYNECOLOGIC_MALIGNANT_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000006400";
+export const GYNECOLOGIC_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000006401";
+export const OVHIPEC1_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006402";
+export const KOV_HIPEC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006403";
+export const CHIPOR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006404";
+export const FISER_GYNECOLOGY_SOURCE = "00000000-0000-4000-8000-000000006405";
+export const ASCO_2025_OVARIAN_SOURCE = "00000000-0000-4000-8000-000000006406";
+export const OVHIPEC2_PROTOCOL_SOURCE = "00000000-0000-4000-8000-000000006407";
+export const LION_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006408";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3492,7 +3501,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: NESTI_2023_NET_SOURCE,
     title: "Nesti 2023: hemicolectomy versus appendectomy for 1 to 2 cm appendiceal neuroendocrine tumors",
     kind: "article",
-    citation: "Nesti C, et al. Lancet Oncology, 2023. PMID 36640790.",
+    citation: "Nesti, et al. Lancet Oncology, 2023. PMID 36640790.",
     url: "https://doi.org/10.1016/S1470-2045(22)00750-1",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: 278 patients with 1 to 2 cm tumors followed a median of 13 years; peritoneal metastases in about 1% and liver metastases in about 1%, all synchronous, with no tumor-related deaths; right hemicolectomy gave no survival benefit over appendectomy (HR 0.88). Pending Zach's sign-off.",
@@ -3501,7 +3510,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: WSES_APPENDICITIS_2020_SOURCE,
     title: "WSES Jerusalem guidelines on acute appendicitis, 2020 update",
     kind: "article",
-    citation: "Di Saverio S, et al. World Journal of Emergency Surgery, 2020. PMID 32295644. Open full text PMC7386163.",
+    citation: "Di Saverio, et al. World Journal of Emergency Surgery, 2020. PMID 32295644. Open full text PMC7386163.",
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from the open full text, read November 1, 2026 in the Appendectomy entry's outside research: against routine interval appendectomy under 40 after successful nonoperative care (6.3); neoplasm in 3% to 17% of patients 40 and older, with colonoscopy and interval CT suggested (6.4); suction alone rather than irrigation (4.8); no drains after complicated appendectomy in adults (4.12); and a single preoperative antibiotic dose with no postoperative antibiotics for uncomplicated disease (7.1). Pending Zach's sign-off.",
@@ -3510,7 +3519,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: PERIAPPAC_TRIAL_SOURCE,
     title: "PeriAPPAC: interval appendectomy versus follow-up after periappendicular abscess",
     kind: "article",
-    citation: "Mällinen J, et al. 2019. PMID 30484824.",
+    citation: "Mällinen, et al. 2019. PMID 30484824.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: neoplasm in 20% (12 of 60) of patients after a periappendicular abscess, all over age 40; the trial stopped early. Pending Zach's sign-off.",
   },
@@ -3575,7 +3584,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: FLOT4_TRIAL_SOURCE,
     title: "FLOT4: perioperative FLOT against ECF or ECX for resectable gastric or junctional adenocarcinoma",
     kind: "article",
-    citation: "Al-Batran SE, et al. Lancet, 2019. PMID 30982686.",
+    citation: "Al-Batran, et al. Lancet, 2019. PMID 30982686.",
     url: "https://doi.org/10.1016/S0140-6736(18)32557-1",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: 716 patients with cT2 or deeper and/or node-positive, M0 disease; docetaxel 50, oxaliplatin 85, leucovorin 200 and fluorouracil 2600 mg/m² by 24-hour infusion every 2 weeks, four cycles before and four after surgery; median survival 50 against 35 months (HR 0.77). Pending Zach's sign-off.",
@@ -3584,7 +3593,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: DUTCH_D1D2_TRIAL_SOURCE,
     title: "Dutch D1D2 trial, 15-year follow-up",
     kind: "article",
-    citation: "Songun I, et al. Lancet Oncology, 2010. PMID 20409751.",
+    citation: "Songun, et al. Lancet Oncology, 2010. PMID 20409751.",
     url: "https://doi.org/10.1016/S1470-2045(10)70070-X",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: 711 curatively treated patients; 15-year survival 21% for D1 against 29% for D2 (p=0.34); gastric cancer death 48% against 37%, local recurrence 22% against 12%; postoperative mortality 4% against 10% and complications 25% against 43%. The authors recommend D2 because spleen-preserving D2 is now safer. Pending Zach's sign-off.",
@@ -3593,7 +3602,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: MATTERHORN_TRIAL_SOURCE,
     title: "MATTERHORN: perioperative durvalumab with FLOT for resectable gastric or junctional adenocarcinoma",
     kind: "article",
-    citation: "Janjigian YY, et al. New England Journal of Medicine, 2025. PMID 40454643.",
+    citation: "Janjigian, et al. New England Journal of Medicine, 2025. PMID 40454643.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: durvalumab 1500 mg every 4 weeks with FLOT for two four-week cycles before and two after surgery, then durvalumab alone for ten more; 2-year event-free survival 67.4% against 58.5% (HR 0.71); pathologic complete response 19.2% against 7.2%. Overall survival at that analysis had not crossed its significance threshold, so no survival benefit is stated. Pending Zach's sign-off.",
   },
@@ -3601,7 +3610,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: REGATTA_TRIAL_SOURCE,
     title: "REGATTA: gastrectomy plus chemotherapy against chemotherapy alone for gastric cancer with a single non-curable factor",
     kind: "article",
-    citation: "Fujitani K, et al. Lancet Oncology, 2016. PMID 26822397.",
+    citation: "Fujitani, et al. Lancet Oncology, 2016. PMID 26822397.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: median survival 16.6 months with chemotherapy alone against 14.3 months with gastrectomy first; stopped for futility. Palliative gastrectomy for a single non-curable factor does not extend survival. Pending Zach's sign-off.",
   },
@@ -3612,5 +3621,86 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 30, Stomach, gastric adenocarcinoma section, page 404.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the Gastric Adenocarcinoma packet; the existing chapter 30 entry covers only the benign pages. Fiser's board answers differ from current SCORE teaching on the staging laparoscopy threshold (T2 or deeper), nodal extent (D1 with at least 15 nodes), neoadjuvant chemoradiation, 5-FU-based chemotherapy, and treating tumors within 5 cm of the junction as esophageal; the topic carries each as a split. OCR of a scan, read locally.",
+  },
+  {
+    id: SCORE_GYNECOLOGIC_MALIGNANT_NEOPLASMS_SOURCE,
+    title: "SCORE: Gynecologic Malignant Neoplasms",
+    kind: "website",
+    citation: "Katz C, Krill L. Gynecologic Malignant Neoplasms. SCORE, September 19, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000558",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the Gynecologic Neoplasms packet: endometrial, ovarian, cervical, and vulvar cancer epidemiology, prevention, diagnosis, staging, operative treatment, and follow-up, and hysterectomy anatomy. It states the HIPEC benefit at interval cytoreduction in one sentence without naming trials. The outline calls the topic Gynecologic Neoplasms; the module title is kept as an alias. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: GYNECOLOGIC_NEOPLASMS_OE_SOURCE,
+    title: "Owner-supplied gynecologic neoplasms study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: \"Gynecologic Neoplasms: Board-Review Study Guide\", an OpenEvidence synthesis resubmitted by hand after a timed-out run, provided as a full Markdown copy with per-claim citations and a condensed copy.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "The condensed copy was checked against PubMed abstracts on November 1, 2026; the full copy was not reviewed line by line. Works it cites include NCCN Ovarian, Cervical and Vulvar, ACR O-RADS, OVHIPEC-1, KOV-HIPEC-01, CHIPOR, ASCO 2025, LION, LACC, SHAPE, KEYNOTE-A18, GROINSS-V, DESKTOP III, Meagher (2019), and Secchi (European Journal of Cancer 2026).",
+      "Used for the intraoperative adnexal mass steps, the mucinous ovarian tumor rule, primary against interval cytoreduction, and the NCCN HIPEC listing, which prints as UNVERIFIED with no evidence category.",
+      "Not carried because a primary source contradicted or could not confirm it: radiotherapy as an alternative to lymphadenectomy for sentinel node metastases over 2 mm (contradicted by GROINSS-V II), SATB2 as the best single marker of lower GI origin (CK7 was, in the test cohort), the FIGO 2018 cervical IB boundaries, the 50% ovarian spread of appendiceal mucinous neoplasms (a case report), the ASCO creatinine exclusions, the NCCN stage IV category, and a 2026 meta-analysis of HIPEC at recurrence.",
+    ].join(" "),
+  },
+  {
+    id: OVHIPEC1_TRIAL_SOURCE,
+    title: "OVHIPEC-1: interval cytoreduction with or without HIPEC for stage III ovarian cancer",
+    kind: "article",
+    citation: "van Driel WJ, et al. New England Journal of Medicine, 2018;378:230-240. PMID 29342393. Final analysis: Aronson SL, et al. Lancet Oncology, 2023;24:1109-1118. PMID 37708912.",
+    url: "https://doi.org/10.1056/NEJMoa1708618",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstracts: 245 patients with stage III epithelial ovarian cancer after neoadjuvant chemotherapy; interval cytoreduction with or without cisplatin 100 mg/m² HIPEC; recurrence-free survival 14.2 against 10.7 months (HR 0.66) and overall survival 45.7 against 33.9 months (HR 0.67), grade 3 or 4 events 27% against 25%; at about 10 years, survival 44.9 against 33.3 months (HR 0.70). Pending Zach's sign-off.",
+  },
+  {
+    id: KOV_HIPEC_TRIAL_SOURCE,
+    title: "KOV-HIPEC-01: primary or interval cytoreduction with or without HIPEC for ovarian cancer",
+    kind: "article",
+    citation: "Lim MC, et al. JAMA Surgery, 2022;157:374-383. PMID 35262624.",
+    url: "https://doi.org/10.1001/jamasurg.2022.0143",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 184 patients with stage III or IV disease at primary or interval cytoreduction; cisplatin 75 mg/m² at 41.5 °C for 90 minutes; no overall difference in progression-free (19.8 against 18.8 months) or overall survival (69.5 against 61.3 months); in the interval subgroup survival was 61.8 against 48.2 months (HR 0.53). Pending Zach's sign-off.",
+  },
+  {
+    id: CHIPOR_TRIAL_SOURCE,
+    title: "CHIPOR: secondary cytoreduction with or without HIPEC at first platinum-sensitive ovarian cancer relapse",
+    kind: "article",
+    citation: "Classe JM, et al. Lancet Oncology, 2024;25:1551-1562. PMID 39549720.",
+    url: "https://doi.org/10.1016/S1470-2045(24)00531-X",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 415 patients at first relapse at least 6 months after platinum, after 6 cycles of platinum, with complete cytoreduction; cisplatin 75 mg/m² at 41 °C for 60 minutes; overall survival 54.3 against 45.8 months (HR 0.73); grade 3 or worse events 49% against 27%, renal failure 10% against 1%. Pending Zach's sign-off.",
+  },
+  {
+    id: FISER_GYNECOLOGY_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Gynecology",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 40, Gynecology, ovarian cancer, page 606.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the Gynecologic Neoplasms packet. Fiser treats every stage with total abdominal hysterectomy and bilateral oophorectomy with cisplatin and paclitaxel and gives no role for neoadjuvant chemotherapy, interval cytoreduction, PARP inhibitors, or HIPEC; the topic carries the difference as a split. OCR of a scan, read locally.",
+  },
+  {
+    id: ASCO_2025_OVARIAN_SOURCE,
+    title: "ASCO 2025 ovarian cancer guideline",
+    kind: "article",
+    citation: "Gaillard, et al. ASCO ovarian cancer guideline, 2025. PMID 39841949.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gynecologic Neoplasms entry's outside research: HIPEC may be offered at interval cytoreduction for stage III disease with good performance status and adequate renal function. The specific creatinine exclusions quoted elsewhere are not in the abstract and are not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: OVHIPEC2_PROTOCOL_SOURCE,
+    title: "OVHIPEC-2: primary cytoreduction with or without HIPEC, trial protocol",
+    kind: "article",
+    citation: "Koole S, et al. International Journal of Gynecological Cancer, 2020;30:888-892. PMID 32205449.",
+    url: "https://doi.org/10.1136/ijgc-2020-001231",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch: the phase 3 protocol (target 538 patients). PubMed was searched again on November 1, 2026 and showed no results publication, only the protocol and a 2023 letter, so no result is stated. Pending Zach's sign-off.",
+  },
+  {
+    id: LION_TRIAL_SOURCE,
+    title: "LION: systematic lymphadenectomy in advanced ovarian cancer",
+    kind: "article",
+    citation: "Harter, et al. New England Journal of Medicine, 2019. PMID 30811909.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gynecologic Neoplasms entry's outside research: with complete resection and clinically normal nodes, systematic pelvic and para-aortic lymphadenectomy gave no survival benefit (65.5 against 69.2 months, HR 1.06) and more repeat laparotomy (12.4% against 6.5%) and 60-day mortality (3.1% against 0.9%). Pending Zach's sign-off.",
   },
 ];
