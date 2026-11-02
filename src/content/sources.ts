@@ -408,6 +408,17 @@ export const BIOPEX_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003051";
 export const PELVEX_2019_SOURCE = "00000000-0000-4000-8000-000000003052";
 export const ACOSOG_Z6051_SOURCE = "00000000-0000-4000-8000-000000003053";
 export const ACT2_ANAL_SOURCE = "00000000-0000-4000-8000-000000003054";
+export const CRS_HIPEC_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003055";
+export const CRS_HIPEC_OE_SOURCE = "00000000-0000-4000-8000-000000003056";
+export const SUGARBAKER_1995_SOURCE = "00000000-0000-4000-8000-000000003057";
+export const ERAS_CRS_HIPEC_2020_SOURCE = "00000000-0000-4000-8000-000000003058";
+export const GLEHEN_2004_SOURCE = "00000000-0000-4000-8000-000000003059";
+export const PSOGI_2022_COLORECTAL_HIPEC_SOURCE = "00000000-0000-4000-8000-000000003060";
+export const LEVINE_2018_PMP_HIPEC_SOURCE = "00000000-0000-4000-8000-000000003061";
+export const KEPENEKIAN_2023_MESOTHELIOMA_SOURCE = "00000000-0000-4000-8000-000000003062";
+export const TAN_2018_HIPEC_RENAL_SOURCE = "00000000-0000-4000-8000-000000003063";
+export const KURRECK_2022_THIOSULFATE_SOURCE = "00000000-0000-4000-8000-000000003064";
+export const FARON_2016_PCI_SOURCE = "00000000-0000-4000-8000-000000003065";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3879,5 +3890,97 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Glynne-Jones, et al. Lancet Oncology, 2017. PMID 28209296.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: complete clinical response in 52% at 11 weeks, 71% at 18 weeks, and 78% at 26 weeks from the start of chemoradiation, so persistent disease is observed to 26 weeks before salvage resection. Pending Zach's sign-off.",
+  },
+  {
+    id: CRS_HIPEC_PLAYBOOK_SOURCE,
+    title: "Owner-supplied cytoreductive surgery with HIPEC playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for cytoreductive surgery with hyperthermic intraperitoneal chemotherapy, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the batch's verified evidence landscape and the SCORE Peritoneal Neoplasms, Appendiceal Tumors, and Gynecologic Malignant Neoplasms modules, with every trial claim carrying its PMID; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "No SCORE or Fiser operative module exists for this operation, so the source is built from PubMed abstracts and the three SCORE modules' cytoreduction passages. It supplies the selection rules, the workup, the operative flow, Sugarbaker's six peritonectomies, the regimen table with a cell for every trial value, the complication list, and postoperative care. It records that no primary guideline on occupational chemotherapy exposure during HIPEC was found on PubMed, so the playbook prints staff safety as UNSUPPORTED. Pending Zach's sign-off.",
+  },
+  {
+    id: CRS_HIPEC_OE_SOURCE,
+    title: "Owner-supplied cytoreductive surgery with HIPEC procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Cytoreductive Surgery with HIPEC: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Carries inline attributions, chiefly Sugarbaker (1995), the ERAS Society CRS and HIPEC guidelines (2020), the PSOGI 2022 colorectal, pseudomyxoma, mesothelioma, and technical consensus statements, NCCN Peritoneal Mesothelioma and Gastric, ASCO 2023 and 2025, Faron (2016), Tan (2018), Laplace (2020), Kurreck (2022), Kapoor (2019), and Vining (2020). Used for technique within each peritonectomy, the gastric blood supply at omentectomy, open against closed delivery, the drug-specific toxicity, and special scenarios. Not carried after the primary-source check on November 1, 2026, or printed as UNVERIFIED: every NCCN mesothelioma dose row, the PSOGI technical figures (perfusate volume, catheters, probes, temperature, anastomosis timing), open-against-closed morbidity and evisceration figures, a misattributed morbidity range and mitomycin absorption figure, the ERAS drains claim (the only no-consensus item was pre-emptive plasma), the sodium thiosulfate doses (units unclear in the abstract), the cisplatin creatinine thresholds, and temperatures and durations no abstract states. Pending Zach's sign-off.",
+  },
+  {
+    id: SUGARBAKER_1995_SOURCE,
+    title: "Sugarbaker 1995: peritonectomy procedures",
+    kind: "article",
+    citation: "Sugarbaker PH. Annals of Surgery, 1995;221:29-42. PMID 7826158.",
+    url: "https://doi.org/10.1097/00000658-199501000-00004",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract in the batch's evidence landscape: the six peritonectomy procedures, namely greater omentectomy with splenectomy, left upper quadrant peritonectomy, right upper quadrant peritonectomy, lesser omentectomy and cholecystectomy with stripping of the omental bursa, pelvic peritonectomy with sleeve resection of the sigmoid colon, and antrectomy. Pending Zach's sign-off.",
+  },
+  {
+    id: ERAS_CRS_HIPEC_2020_SOURCE,
+    title: "ERAS Society guidelines for cytoreductive surgery with or without HIPEC, parts 1 and 2",
+    kind: "article",
+    citation: "Hübner M, et al. European Journal of Surgical Oncology, 2020;46:2292-2310 (PMID 32873454) and 2311-2323 (PMID 32826114).",
+    url: "https://doi.org/10.1016/j.ejso.2020.07.041",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from both PubMed abstracts: consensus on 71 of 72 items, 37 of them strong recommendations, with no consensus only on pre-emptive fresh frozen plasma. Individual item wording is UNVERIFIED and is not quoted. Pending Zach's sign-off.",
+  },
+  {
+    id: GLEHEN_2004_SOURCE,
+    title: "Glehen 2004: multi-institutional cytoreduction with intraperitoneal chemotherapy for colorectal carcinomatosis",
+    kind: "article",
+    citation: "Glehen O, et al. Journal of Clinical Oncology, 2004;22:3284-3292. PMID 15310771.",
+    url: "https://doi.org/10.1200/JCO.2004.10.012",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract in the batch's evidence landscape: 506 patients; morbidity 22.9% and mortality 4%; complete cytoreduction was the strongest prognostic factor, with median survival 32.4 against 8.4 months. Pending Zach's sign-off.",
+  },
+  {
+    id: PSOGI_2022_COLORECTAL_HIPEC_SOURCE,
+    title: "PSOGI 2022 consensus on HIPEC for colorectal peritoneal metastases",
+    kind: "article",
+    citation: "Hübner, et al. Annals of Surgical Oncology, 2024. PMID 37940803.",
+    url: "https://doi.org/10.1245/s10434-023-14368-5",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: a strong negative consensus against short high-dose oxaliplatin HIPEC (55.7% of votes) and a weak positive recommendation for the Dutch mitomycin C protocol, 35 mg/m² over 90 minutes in three fractions; HIPEC suggested at repeat cytoreduction for recurrence more than a year after the index operation. The temperature is not in the abstract. Pending Zach's sign-off.",
+  },
+  {
+    id: LEVINE_2018_PMP_HIPEC_SOURCE,
+    title: "Levine 2018: mitomycin C against oxaliplatin HIPEC for appendiceal peritoneal disease",
+    kind: "article",
+    citation: "Levine, et al. 2018. PMID 29331663. Ten-year follow-up: 2025, PMID 39531120.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: a randomized trial of closed HIPEC for 120 minutes with mitomycin C 40 mg against oxaliplatin 200 mg/m²; mitomycin C gave lower white counts on postoperative days 5 to 10; 10-year survival 56.2% against 47.5% (p=0.83). Pending Zach's sign-off.",
+  },
+  {
+    id: KEPENEKIAN_2023_MESOTHELIOMA_SOURCE,
+    title: "PSOGI 2022 consensus on HIPEC for peritoneal mesothelioma",
+    kind: "article",
+    citation: "Kepenekian, et al. Annals of Surgical Oncology, 2023. PMID 37481492.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: two-drug regimens are preferred, cisplatin is favored, and cisplatin with doxorubicin is the first-line HIPEC regimen. No doses are in the abstract, so none is printed. Pending Zach's sign-off.",
+  },
+  {
+    id: TAN_2018_HIPEC_RENAL_SOURCE,
+    title: "Tan 2018: renal and bleeding toxicity by HIPEC agent",
+    kind: "article",
+    citation: "Tan, et al. International Journal of Hyperthermia, 2018. PMID 28633580.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: acute renal impairment 32% with cisplatin, with dialysis in 5.6%, 62% with oxaliplatin, and 5.6% with mitomycin C; postoperative bleeding 25% with oxaliplatin against about 1% with other agents. The oxaliplatin group was only 8 patients. Pending Zach's sign-off.",
+  },
+  {
+    id: KURRECK_2022_THIOSULFATE_SOURCE,
+    title: "Kurreck 2022: sodium thiosulfate with cisplatin HIPEC",
+    kind: "article",
+    citation: "Kurreck, et al. Annals of Surgical Oncology, 2022. PMID 34350529.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: acute kidney injury fell from 30.7% to 6.5% with sodium thiosulfate. The dose is not printed because the units in a related abstract are unclear. Pending Zach's sign-off.",
+  },
+  {
+    id: FARON_2016_PCI_SOURCE,
+    title: "Faron 2016: peritoneal cancer index and survival after cytoreduction and HIPEC for colorectal disease",
+    kind: "article",
+    citation: "Faron, et al. Annals of Surgical Oncology, 2016. PMID 26014158.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: 173 patients, 5-year survival 41%; survival fell linearly with the index (HR 1.1 per point); the authors consider cytoreduction with HIPEC generally indicated under 12, contraindicated over 17, and a gray zone between. A single-center series, not a guideline. Pending Zach's sign-off.",
   },
 ];

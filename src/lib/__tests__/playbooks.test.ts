@@ -334,6 +334,32 @@ describe("playbook library", () => {
         "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
         "perineal hernia -> unusual-hernias",
       ],
+      // Every disease, trial and score destination is the topic that owns it (the HIPEC auto-links stay with Peritoneal
+      // Neoplasms by design). Reworded instead: "Sugarbaker's six peritonectomies" reached the parastomal Sugarbaker
+      // repair, and "watchful waiting" reached the inguinal hernia trials.
+      "cytoreductive-surgery-with-hipec": [
+        "CHIPOR -> gynecologic-neoplasms",
+        "Cytoreductive surgery -> peritoneal-neoplasms",
+        "GASTRIPEC -> gastric-adenocarcinoma",
+        "HAMN -> peritoneal-neoplasms",
+        "HIPEC -> peritoneal-neoplasms",
+        "LAMN -> peritoneal-neoplasms",
+        "OVHIPEC -> gynecologic-neoplasms",
+        "PERISCOPE II -> gastric-adenocarcinoma",
+        "PSDSS -> peritoneal-neoplasms",
+        "Peritoneal mesothelioma -> peritoneal-neoplasms",
+        "Pseudomyxoma peritonei -> peritoneal-neoplasms",
+        "acute kidney injury -> renal-failure",
+        "appendectomy -> appendectomy",
+        "enterocutaneous fistula -> enterocutaneous-fistula",
+        "interval cytoreduction -> gynecologic-neoplasms",
+        "ovarian cancer -> gynecologic-neoplasms",
+        "peritoneal cancer index -> peritoneal-neoplasms",
+        "peritoneal metastases -> peritoneal-neoplasms",
+        "renal failure -> renal-failure",
+        "splenectomy -> splenectomy-and-splenorrhaphy",
+        "splenic hilum -> splenectomy-and-splenorrhaphy",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
@@ -387,7 +413,8 @@ describe("playbook library", () => {
     // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior
     // pancreatic neck in a Whipple, and to reach the middle colic root in a right colectomy.
     expect(slugs("Henle")).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);
-    expect(slugs("Sugarbaker")).toEqual(["colostomy-takedown-with-parastomal-hernia-repair"]);
+    // Two different operations carry the name: the parastomal mesh repair, and the peritonectomy (a search-only alias).
+    expect(slugs("Sugarbaker")).toEqual(["cytoreductive-surgery-with-hipec", "colostomy-takedown-with-parastomal-hernia-repair"]);
     expect(slugs("lamppost")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
     expect(slugs("eTEP")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
     expect(slugs("linea semilunaris")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
