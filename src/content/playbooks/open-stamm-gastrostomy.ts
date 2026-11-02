@@ -1,0 +1,205 @@
+import { buildPlaybook, references, sourced, sourcedUnits } from "@/content/authoring";
+import {
+  KOHLI_2021_GASTROSTOMY_SOURCE as KOHLI,
+  OPEN_STAMM_OE_SOURCE as OE,
+  OPEN_STAMM_PLAYBOOK_SOURCE as SOURCE,
+  SCORE_ACCESS_NUTRITION_SOURCE as SCORE,
+  SCORE_SDM_TRACH_GTUBE_SOURCE as SCORE_SDM,
+  SZARY_2011_EARLY_FEEDING_SOURCE as SZARY,
+} from "@/content/sources";
+import type { TopicBlock } from "@/lib/types";
+
+// Source: ~/Desktop/Pocket Chief/Inbox/2026-11-01-open-stamm-gastrostomy/playbook-source.md, checked against the
+// folder's OpenEvidence procedure guide and 4-claude-research.md. The Stamm steps are the SCORE Access Procedures
+// module's; tube size, exit site, venting detail and dislodgement management come from OE.
+const blocks: TopicBlock[] = [
+  sourced({
+    id: "block-stamm-summary",
+    type: "summary",
+    heading: "At a glance",
+    text: "An open Stamm gastrostomy brings a tube into the anterior gastric wall through two concentric purse-strings and tacks the stomach to the abdominal wall around it. It is the fallback when PEG cannot be done safely, an add-on during another laparotomy, and the route to a venting tube in malignant obstruction. The two things that keep it out of trouble are a site well away from the pylorus and secure tacking of the stomach to the wall.",
+  }, SOURCE),
+  sourced({
+    id: "block-stamm-warning",
+    type: "warning",
+    tone: "danger",
+    heading: "Never blindly replace an immature tract",
+    text: "A tube that falls out in the first 4 weeks, before the tract matures, can leave the stomach away from the wall and a free perforation. Do not reinsert it blindly: with peritonitis, give broad-spectrum antibiotics, get a water-soluble contrast CT, and re-explore; without it, replace under endoscopic or fluoroscopic guidance.",
+  }, OE),
+  sourcedUnits({
+    id: "block-stamm-indications",
+    type: "bullets",
+    heading: "Indications",
+    items: [
+      "Durable gastric access for enteral feeding, medications, and bolus feeding when the gastric route is appropriate.",
+      "Fiser's board answer is a PEG when regular feeding is not possible, or will not resume for more than 4 weeks.",
+      "Venting gastrostomy for malignant bowel obstruction or gastroparesis decompresses the stomach, relieves nausea, and can let the patient go home without a nasogastric tube.",
+      "Open placement when PEG is contraindicated or fails: if the stomach cannot be clearly apposed to the abdominal wall at endoscopy, abort and convert to a laparoscopic or open gastrostomy.",
+      "An obstructing head and neck or esophageal cancer, where the endoscope cannot pass and pulling a tube through the tumor risks seeding the stoma.",
+      "As an adjunct during another laparotomy, for decompression or feeding.",
+    ],
+  }, [[SCORE], [SOURCE], [SCORE_SDM], [SCORE], [OE], [OE]]),
+  sourced({
+    id: "block-stamm-contra",
+    type: "bullets",
+    heading: "↳ When gastric access is the wrong choice",
+    items: [
+      "Severe gastroesophageal reflux, gastric outlet obstruction, gastroparesis for feeding, and gastric or esophageal cancer when the stomach may be needed as a conduit.",
+      "Uncorrectable coagulopathy, and in some cases gastric varices or arteriovenous malformations.",
+      "Consider postpyloric access, by nasojejunal tube, gastrojejunostomy tube, or jejunostomy, when aspiration risk, reflux, or gastric emptying makes gastric feeding unsafe.",
+    ],
+  }, SCORE),
+  sourced({
+    id: "block-stamm-goals",
+    type: "bullets",
+    heading: "Questions before placement",
+    items: [
+      "Does a durable tube serve this patient's goals? Placement marks a transition from acute to chronic illness, and families often conflate nutrition with functional recovery.",
+      "After stroke, early PEG increases mortality and poor outcomes, so use a temporary tube and delay durable placement while prognosis is uncertain, often about 3 months.",
+      "In advanced dementia, feeding tubes do not improve survival or prevent aspiration pneumonia, raise pressure-injury risk, and increase restraint use; careful hand feeding is the alternative.",
+      "In cancer cachexia, ASPEN and ASCO recommend against routine artificial nutrition because it rarely improves energy, quality of life, or survival.",
+      "In ALS, earlier placement in a willing patient may optimize nutrition and preserve pulmonary function.",
+      "In malignant bowel obstruction, life expectancy averages under 3 months at presentation, and the aim of the tube is venting, not feeding.",
+      "A time-limited trial with a temporary tube is often the pragmatic path when prognosis is unclear.",
+    ],
+  }, SCORE_SDM),
+  sourced({
+    id: "block-stamm-setup",
+    type: "bullets",
+    heading: "Setup",
+    items: [
+      "General anesthesia, supine, with a nasogastric tube to decompress the stomach.",
+      "A balloon gastrostomy tube or a Malecot or mushroom catheter, commonly 16 to 24 Fr in adults.",
+      "Cefazolin within 60 minutes before incision.",
+    ],
+  }, OE),
+  sourced({
+    id: "block-stamm-flow",
+    type: "flow",
+    heading: "Operative flow",
+    nodes: [
+      { id: "open", label: "Upper midline or left upper quadrant incision" },
+      { id: "site", label: "Anterior wall two-thirds of the way toward the pylorus" },
+      { id: "purse", label: "Two concentric purse-strings, left untied" },
+      { id: "exit", label: "Separate stab incision; pull the tube through" },
+      { id: "gastrotomy", label: "Gastrotomy inside the inner purse-string; insert the tube" },
+      { id: "tie", label: "Tie inner, then outer purse-string" },
+      { id: "pexy", label: "Four-point tacking; stomach flush to the wall", tone: "good" },
+      { id: "secure", label: "Secure the tube, record the depth, close", tone: "good" },
+    ],
+    edges: [
+      { from: "open", to: "site" },
+      { from: "site", to: "purse" },
+      { from: "purse", to: "exit" },
+      { from: "exit", to: "gastrotomy" },
+      { from: "gastrotomy", to: "tie" },
+      { from: "tie", to: "pexy" },
+      { from: "pexy", to: "secure" },
+    ],
+  }, SCORE),
+  sourcedUnits({
+    id: "block-stamm-steps",
+    type: "sequence",
+    heading: "Step by step",
+    steps: [
+      { title: "Incision", detail: "Open the abdomen through a short upper midline or left upper quadrant incision." },
+      { title: "Deliver the stomach", detail: "Grasp the stomach along the greater curvature, bring it into the field, and confirm it reaches the abdominal wall without tension." },
+      { title: "Choose the site", detail: "Use the anterior gastric wall about two-thirds of the way from the lower esophageal sphincter to the pylorus, not so close to the pylorus that the balloon obstructs the outlet." },
+      { title: "Inner purse-string", detail: "Place an inner seromuscular purse-string around the chosen site and leave it untied." },
+      { title: "Outer purse-string", detail: "Place a second purse-string about 1 cm outside the first and leave it untied." },
+      { title: "Exit site", detail: "Make a separate stab incision in the left upper quadrant, at least two fingerbreadths below the costal margin and away from the wound, pull the tube through, and check the balloon for rupture." },
+      { title: "Gastrotomy", detail: "Make a gastrotomy in the center of the purse-strings with electrocautery." },
+      { title: "Insert and tie", detail: "Insert the tube, then tie the inner and then the outer purse-string, which inverts the gastric wall around the tube." },
+      { title: "Tack the stomach", detail: "Tack the stomach around the gastrotomy to the anterior abdominal wall at four points." },
+      { title: "Bring it up", detail: "Inflate the balloon, pull the tube back until the stomach sits flush against the abdominal wall, and tie down the tacking sutures." },
+      { title: "Secure", detail: "Secure the tube to the skin without tension, so it rotates freely, and record the depth marking at the skin." },
+      { title: "Close", detail: "Close the fascia and skin in the usual way." },
+    ],
+  }, [[SCORE, OE], [SCORE, OE], [SCORE], [SCORE, OE], [SCORE, OE], [SCORE, OE], [SCORE], [SCORE, OE], [SCORE], [SCORE], [SCORE, OE], [OE]]),
+  sourced({
+    id: "block-stamm-why",
+    type: "bullets",
+    heading: "↳ Why two purse-strings and the tacking sutures",
+    items: [
+      "The inner purse-string makes the seal, and the outer one inverts and buries it as a second barrier against an intraperitoneal leak.",
+      "The tacking sutures hold the stomach against the abdominal wall so that early dislodgement does not leave a free perforation, and it helps the tract mature.",
+    ],
+  }, OE),
+  sourcedUnits({
+    id: "block-stamm-venting",
+    type: "table",
+    heading: "Venting against feeding",
+    columns: ["Feature", "Feeding gastrostomy", "Venting gastrostomy"],
+    rows: [
+      ["Purpose", "Nutrition and medications when oral intake is not possible", "Decompression of gastric contents to relieve nausea and avoid a long-term nasogastric tube in malignant bowel obstruction"],
+      ["Tube", "A smaller bore is acceptable", "A larger bore is preferred for thick secretions"],
+      ["Site", "Body-antrum junction, away from the pylorus", "Dependent body; a gastrojejunostomy tube if feeding is also needed"],
+      ["Watch for", "Aspiration with reflux or gastroparesis, which calls for postpyloric access", "Peritoneal fluid from carcinomatosis, which delays tract maturation and raises leak risk; drain it first"],
+    ],
+  }, [[SCORE_SDM], [OE], [OE], [OE]]),
+  sourcedUnits({
+    id: "block-stamm-compare",
+    type: "table",
+    heading: "Open Stamm against PEG and IR",
+    columns: ["Feature", "Open Stamm", "PEG", "IR gastrostomy"],
+    rows: [
+      ["Anesthesia", "General", "Moderate sedation", "Local with or without sedation"],
+      ["Needs a passable pharynx and esophagus", "No", "Yes", "Not for the tube itself"],
+      ["Fixing the stomach to the wall", "Always, with sutures", "Optional", "Usually, with T-fasteners"],
+      ["Best niche", "Obstructing tumors, failed PEG or IR, a concurrent laparotomy, hostile anatomy", "The default when feasible", "Head and neck or esophageal obstruction"],
+      ["Safety against PEG in US inpatients", "Colon perforation odds ratio 6.65, infection 1.61, mortality 1.55", "Reference", "Colon perforation odds ratio 1.90, infection 1.28, mortality 1.09"],
+    ],
+  }, [[OE], [OE], [OE], [OE], [KOHLI]]),
+  sourcedUnits({
+    id: "block-stamm-complications",
+    type: "table",
+    heading: "Pitfalls and complications",
+    columns: ["Problem", "Move"],
+    rows: [
+      ["Site too close to the pylorus", "The balloon obstructs the outlet; deflate, pull back, and re-secure"],
+      ["Late dislodgement, tract mature", "Replace at the bedside right away, putting a Foley in the tract if no tube is on hand, and confirm position with water-soluble contrast if in doubt"],
+      ["Peristomal infection with crepitus, spreading erythema, or toxicity", "Treat as necrotizing fasciitis: broad-spectrum antibiotics and debridement now"],
+      ["Peristomal leakage", "Keep the tube at 90 degrees without lateral traction and avoid upsizing, which enlarges the stoma"],
+      ["Buried bumper or balloon", "Stop feeds, start antibiotics, and extract it even without symptoms"],
+      ["Intra-abdominal leak, fistula, visceral injury, or bleeding", "Intra-abdominal leak needs reoperation; gastrocutaneous fistula, tube leakage, injury to stomach, small bowel, or colon, obstruction, and bleeding are the listed complications"],
+    ],
+  }, [[SCORE, OE], [OE], [OE], [OE], [OE], [SCORE]]),
+  sourcedUnits({
+    id: "block-stamm-postop",
+    type: "bullets",
+    heading: "Postoperative care",
+    items: [
+      "Confirm position and use, and record the depth at the skin.",
+      "After PEG, feeding within 3 hours did not change complications or 72-hour mortality in a meta-analysis of 5 trials; those data are not from open Stamm placement.",
+      "Flush routinely, keep the external bolster loose enough to avoid pressure necrosis, and plan tube changes.",
+    ],
+  }, [[SCORE], [SZARY], [OE]]),
+  sourcedUnits({
+    id: "block-stamm-splits",
+    type: "table",
+    heading: "Board answer versus current practice",
+    columns: ["Question", "Board answer", "Current practice"],
+    rows: [
+      ["Who gets a gastrostomy", "Fiser: PEG for anyone who will not eat for more than 4 weeks", "SCORE: decide by goals of care, delay durable access after stroke, and avoid tubes in advanced dementia and cancer cachexia"],
+      ["Surgical against endoscopic", "No difference in morbidity or mortality", "Database studies favor PEG for perforation, infection, and mortality, likely confounded by harder anatomy in surgical patients"],
+      ["Surgical gastrostomy technique", "Open Stamm is the surgical gastrostomy", "Laparoscopic or laparoscopic-assisted placement is used for most surgical cases, and open Stamm is now uncommon"],
+    ],
+  }, [[SOURCE, SCORE_SDM], [OE, KOHLI], [OE]]),
+  references("block-stamm-references", [SOURCE, OE, SCORE, SCORE_SDM, KOHLI, SZARY]),
+];
+
+export const openStammGastrostomyPlaybook = buildPlaybook({
+  id: "00000000-0000-4000-9000-000000000023",
+  slug: "open-stamm-gastrostomy",
+  title: "Open Stamm Gastrostomy",
+  aliases: ["Stamm gastrostomy", "Open gastrostomy", "Surgical gastrostomy", "Venting gastrostomy", "Decompressive gastrostomy", "Gastrostomy with gastropexy", "G-tube"],
+  procedureId: "open_stamm_gastrostomy",
+  approach: "open",
+  specialty: "Foregut",
+  tags: ["foregut", "gastrostomy", "enteral access", "venting", "palliation"],
+  sourceId: SOURCE,
+  additionalSourceIds: [OE, SCORE, SCORE_SDM, KOHLI, SZARY],
+  relatedTopicSlugs: ["peritoneal-neoplasms"],
+  blocks,
+  reviewedAt: "2026-11-01T00:00:00.000Z",
+});

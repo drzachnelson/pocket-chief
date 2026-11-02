@@ -360,6 +360,12 @@ describe("playbook library", () => {
         "splenectomy -> splenectomy-and-splenorrhaphy",
         "splenic hilum -> splenectomy-and-splenorrhaphy",
       ],
+      // Reworded instead: "gastropexy" reached paraesophageal hernia repair, a different fixation for a different
+      // purpose (kept as a search alias), and "ascites" reached cirrhosis from malignant fluid in carcinomatosis.
+      "open-stamm-gastrostomy": [
+        "gastroesophageal reflux -> gastroesophageal-reflux-and-barrett-esophagus",
+        "peritonitis -> abdominal-pain",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",

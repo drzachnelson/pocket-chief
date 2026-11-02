@@ -419,6 +419,12 @@ export const KEPENEKIAN_2023_MESOTHELIOMA_SOURCE = "00000000-0000-4000-8000-0000
 export const TAN_2018_HIPEC_RENAL_SOURCE = "00000000-0000-4000-8000-000000003063";
 export const KURRECK_2022_THIOSULFATE_SOURCE = "00000000-0000-4000-8000-000000003064";
 export const FARON_2016_PCI_SOURCE = "00000000-0000-4000-8000-000000003065";
+export const SCORE_ACCESS_NUTRITION_SOURCE = "00000000-0000-4000-8000-000000003066";
+export const SCORE_SDM_TRACH_GTUBE_SOURCE = "00000000-0000-4000-8000-000000003067";
+export const OPEN_STAMM_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003068";
+export const OPEN_STAMM_OE_SOURCE = "00000000-0000-4000-8000-000000003069";
+export const KOHLI_2021_GASTROSTOMY_SOURCE = "00000000-0000-4000-8000-000000003070";
+export const SZARY_2011_EARLY_FEEDING_SOURCE = "00000000-0000-4000-8000-000000003071";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3982,5 +3988,55 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Faron, et al. Annals of Surgical Oncology, 2016. PMID 26014158.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: 173 patients, 5-year survival 41%; survival fell linearly with the index (HR 1.1 per point); the authors consider cytoreduction with HIPEC generally indicated under 12, contraindicated over 17, and a gray zone between. A single-center series, not a guideline. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_ACCESS_NUTRITION_SOURCE,
+    title: "SCORE: Access Procedures for Nutritional Support",
+    kind: "website",
+    citation: "Busch RA. Access Procedures for Nutritional Support. SCORE, October 14, 2024; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128073",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the open Stamm gastrostomy playbook source: indications, contraindications to gastric access, the questions before placement, the open Stamm steps, PEG pull and push and laparoscopic technique, and complications. The operative steps are fully supported by this module. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: SCORE_SDM_TRACH_GTUBE_SOURCE,
+    title: "SCORE: Shared Decision-Making Around Tracheostomy and Gastrostomy Tubes",
+    kind: "website",
+    citation: "Bartek M, Kochis M, Marterre B. Shared Decision-Making Around Tracheostomy and Gastrostomy Tubes. SCORE, May 2, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000994",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the open Stamm gastrostomy playbook source: venting gastrostomy for malignant bowel obstruction, and goals-of-care framing for stroke, advanced dementia, cancer cachexia, ALS, and malignant obstruction. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: OPEN_STAMM_PLAYBOOK_SOURCE,
+    title: "Owner-supplied open Stamm gastrostomy playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for open (Stamm) gastrostomy with purse-string fixation and gastropexy, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the SCORE Access Procedures for Nutritional Support and Shared Decision-Making modules and Fiser chapters 10 and 30, with items beyond those sources marked; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Supplies the indications, contraindications, the questions before placement, the twelve Stamm steps, the PEG and laparoscopic comparison, venting specifics, pitfalls, and Fiser's board answer of PEG for anyone not eating for more than 4 weeks. Positioning, tube types, venting tube size, ascites handling, tract maturation, and comparative outcomes are marked beyond those sources and come from the OpenEvidence guide. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_STAMM_OE_SOURCE,
+    title: "Owner-supplied open Stamm gastrostomy procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Open Stamm Gastrostomy: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Carries inline attributions, chiefly AAST (Farrell 2023), ASGE, SIR (2019), Kohli (2021), Haddadin and Guha (2026), and Szary (2011). Used for the exit site and tube size, the purse-string and gastropexy rationale, venting against feeding, dislodgement management by tract age, peristomal complications, and special scenarios. Corrected or not carried after the primary-source check on November 1, 2026: early feeding after PEG was within 3 hours in the meta-analysis and day-1 residuals did not differ significantly; the coagulation thresholds, antibiotic doses, buried bumper and dislodgement rates, and a 2026 gastropexy trial could not be confirmed and are left out. Pending Zach's sign-off.",
+  },
+  {
+    id: KOHLI_2021_GASTROSTOMY_SOURCE,
+    title: "Kohli 2021: outcomes of endoscopic, radiologic, and surgical gastrostomy in US inpatients",
+    kind: "article",
+    citation: "Kohli, et al. Gastrointestinal Endoscopy, 2021. PMID 32931781.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open Stamm gastrostomy entry's outside research: 184,068 inpatients from 2016 to 2017; against PEG, surgical gastrostomy had colon perforation odds ratio 6.65, infection 1.61, mortality 1.55, and 30-day readmission 1.13, and IR gastrostomy had perforation 1.90, infection 1.28, transfusion 1.84, and mortality 1.09. Administrative data, so confounding by indication is likely. Pending Zach's sign-off.",
+  },
+  {
+    id: SZARY_2011_EARLY_FEEDING_SOURCE,
+    title: "Szary 2011: early against delayed feeding after PEG",
+    kind: "article",
+    citation: "Szary, et al. 2011. PMID 20733512.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open Stamm gastrostomy entry's outside research: a meta-analysis of 5 randomized trials (355 patients); feeding within 3 hours of PEG did not change complications (odds ratio 0.78) or 72-hour mortality (0.60), and day-1 gastric residuals did not differ significantly. PEG and IR data, not open Stamm. Pending Zach's sign-off.",
   },
 ];
