@@ -325,6 +325,15 @@ describe("playbook library", () => {
         "peritonitis -> abdominal-pain",
         "rectal stump -> total-and-subtotal-colectomy",
       ],
+      // Reworded instead: "prone jackknife" reached hemorrhoid procedures, and "stoma necrosis" reached the ileostomy topic
+      // from an end colostomy.
+      "open-abdominoperineal-resection": [
+        "End colostomy -> colostomy-and-colostomy-closure",
+        "colostomy -> colostomy-and-colostomy-closure",
+        "end colostomy -> colostomy-and-colostomy-closure",
+        "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
+        "perineal hernia -> unusual-hernias",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
@@ -373,8 +382,8 @@ describe("playbook library", () => {
     // The transaxillary rib exposure also protects this nerve in the axilla.
     expect(slugs("intercostobrachial")).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);
     expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
-    // The white line of Toldt is taken down on the left for a low anterior resection as on the right for a colectomy.
-    expect(slugs("Toldt")).toEqual(["open-low-anterior-resection", "right-hemicolectomy"]);
+    // The white line of Toldt is taken down on the left for a rectal resection as on the right for a colectomy.
+    expect(slugs("Toldt")).toEqual(["open-abdominoperineal-resection", "open-low-anterior-resection", "right-hemicolectomy"]);
     // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior
     // pancreatic neck in a Whipple, and to reach the middle colic root in a right colectomy.
     expect(slugs("Henle")).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);

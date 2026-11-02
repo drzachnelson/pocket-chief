@@ -400,6 +400,14 @@ export const ALACART_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003043";
 export const ROLARR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003044";
 export const REAL_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003045";
 export const EMILE_2024_ILEOSTOMY_CLOSURE_SOURCE = "00000000-0000-4000-8000-000000003046";
+export const OPEN_APR_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003047";
+export const OPEN_APR_OE_SOURCE = "00000000-0000-4000-8000-000000003048";
+export const WEST_2010_ELAPE_SOURCE = "00000000-0000-4000-8000-000000003049";
+export const MUSTERS_2014_PERINEAL_SOURCE = "00000000-0000-4000-8000-000000003050";
+export const BIOPEX_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003051";
+export const PELVEX_2019_SOURCE = "00000000-0000-4000-8000-000000003052";
+export const ACOSOG_Z6051_SOURCE = "00000000-0000-4000-8000-000000003053";
+export const ACT2_ANAL_SOURCE = "00000000-0000-4000-8000-000000003054";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3806,5 +3814,70 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Emile, et al. Annals of Surgery, 2024. PMID 37788345.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: closure within 2 weeks raised the anastomotic leak risk (odds ratio 2.12), so routine early closure is not recommended. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_APR_PLAYBOOK_SOURCE,
+    title: "Owner-supplied open abdominoperineal resection playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for open abdominoperineal resection of the rectum and anus with end colostomy, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the SCORE Abdominoperineal Resection and Pelvic Exenteration and Rectal Cancer modules and Fiser chapters 36 and 37, with items beyond those sources marked; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Supplies the indications, the exenteration boundary, preparation, the fifteen abdominal and perineal steps as SCORE frames them, intraoperative decisions, complications and their treatment, and the board-versus-current points, including Fiser's salvage APR for anal cancer persisting 6 months after chemoradiation. Positioning detail, the extralevator comparison, flap choices, and the variant approaches are marked beyond those sources and come from the OpenEvidence guide. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_APR_OE_SOURCE,
+    title: "Owner-supplied open abdominoperineal resection procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Open Abdominoperineal Resection: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "States it was checked against NCCN Rectal Cancer version 2.2026, NCCN Anal Carcinoma version 3.2026, the ASCRS 2020 rectal cancer guideline and its 2023 supplement, and the ASTRO rectal cancer guideline; also cites West (2010), Musters (2014), BIOPEX, BIOPEX-2, PelvEx, ACOSOG Z6051, ALaCaRT, COLOR II, COREAN, LASRE, ROLARR, REAL, ACT II, Kávási (2026), Jiang (2013), and Colov (2016). Used for positioning, the standard perineal phase, stopping the abdominal dissection at the levator origin, presacral hemorrhage control, closure options, the exenteration boundary, and the variant approaches. Not carried after the primary-source check on November 1, 2026: the capecitabine radiosensitizer trial labels, Maslekar's Quirke-grade recurrence figures (MRC CR07 is used instead), REAL's function and APR-subgroup claims, the radiation dose constraints, the VRAM review and BIOPEX-2 figures, and the presacral bleeding rate, none of which an abstract confirmed; its 6-week bevacizumab hold conflicts with the low anterior resection guide's 28 days and is not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: WEST_2010_ELAPE_SOURCE,
+    title: "West 2010: extralevator against standard abdominoperineal excision",
+    kind: "article",
+    citation: "West NP, et al. British Journal of Surgery, 2010. PMID 20186891.",
+    url: "https://doi.org/10.1002/bjs.6916",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, read November 1, 2026 during authoring because the entry's outside research had not found it: 176 extralevator excisions from 11 European surgeons against 124 standard excisions from one UK center; circumferential margin involvement fell from 49.6% to 20.3% and intraoperative perforation from 28.2% to 8.2%, while perineal wound complications rose from 20% to 38.0%. Nonrandomized. Pending Zach's sign-off.",
+  },
+  {
+    id: MUSTERS_2014_PERINEAL_SOURCE,
+    title: "Musters 2014: perineal wound healing after abdominoperineal resection",
+    kind: "article",
+    citation: "Musters, et al. Diseases of the Colon and Rectum, 2014. PMID 25101610.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: after primary closure, perineal wound problems in 15.3% (standard, no radiation), 14.8% (extralevator, no radiation), 30.2% (standard with radiation), and 37.6% (extralevator with radiation); radiation odds ratio 2.22; 7.3% after biological mesh closure following extralevator resection with radiation. Pending Zach's sign-off.",
+  },
+  {
+    id: BIOPEX_TRIAL_SOURCE,
+    title: "BIOPEX: biological mesh against primary perineal closure after extralevator resection",
+    kind: "article",
+    citation: "Blok, et al. Annals of Surgery, 2022. PMID 33534231.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: 5-year symptomatic perineal hernia 7% with biological mesh against 30% with primary closure (p=0.006); reoperation for small bowel obstruction 2% against 9% (not significant). Pending Zach's sign-off.",
+  },
+  {
+    id: PELVEX_2019_SOURCE,
+    title: "PelvEx Collaborative 2019: resection margins after exenteration for locally advanced primary rectal cancer",
+    kind: "article",
+    citation: "PelvEx Collaborative. Annals of Surgery, 2019. PMID 28938268.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: 1,291 patients, R0 in 79.9%; 3-year survival 56.4% after R0, 29.6% after R1, and 8.1% after R2 resection; 30-day mortality 1.5%; major complications 37.8%. Pending Zach's sign-off.",
+  },
+  {
+    id: ACOSOG_Z6051_SOURCE,
+    title: "ACOSOG Z6051: laparoscopic against open resection for stage II and III rectal cancer",
+    kind: "article",
+    citation: "Fleshman, et al. JAMA, 2015. PMID 26441179.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: successful resection 81.7% laparoscopic against 86.9% open, so noninferiority was not met; circumferential margin negative 87.9% against 92.3%; 23.3% of the trial were abdominoperineal resections. The 2-year survival figures are from a later report that was not opened and are not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: ACT2_ANAL_SOURCE,
+    title: "ACT II: timing of response assessment after chemoradiation for anal cancer",
+    kind: "article",
+    citation: "Glynne-Jones, et al. Lancet Oncology, 2017. PMID 28209296.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: complete clinical response in 52% at 11 weeks, 71% at 18 weeks, and 78% at 26 weeks from the start of chemoradiation, so persistent disease is observed to 26 weeks before salvage resection. Pending Zach's sign-off.",
   },
 ];

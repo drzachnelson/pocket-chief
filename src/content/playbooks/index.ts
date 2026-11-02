@@ -7,6 +7,7 @@ import { openPoplitealAneurysmRepairPlaybook } from "@/content/playbooks/open-po
 import { saphenousVeinHarvestPlaybook } from "@/content/playbooks/saphenous-vein-harvest";
 import { roboticDistalPancreatectomyPlaybook } from "@/content/playbooks/robotic-distal-pancreatectomy";
 import { openLowAnteriorResectionPlaybook } from "@/content/playbooks/open-low-anterior-resection";
+import { openAbdominoperinealResectionPlaybook } from "@/content/playbooks/open-abdominoperineal-resection";
 import type { Playbook } from "@/lib/types";
 import { carotidEndarterectomyBovinePatchPlaybook } from "@/content/playbooks/carotid-endarterectomy-bovine-patch";
 import { colostomyTakedownWithParastomalHerniaRepairPlaybook } from "@/content/playbooks/colostomy-takedown-with-parastomal-hernia-repair";
@@ -30,6 +31,7 @@ export {
   saphenousVeinHarvestPlaybook,
   roboticDistalPancreatectomyPlaybook,
   openLowAnteriorResectionPlaybook,
+  openAbdominoperinealResectionPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
@@ -54,6 +56,7 @@ export const libraryPlaybooks: Playbook[] = [
   saphenousVeinHarvestPlaybook,
   roboticDistalPancreatectomyPlaybook,
   openLowAnteriorResectionPlaybook,
+  openAbdominoperinealResectionPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
