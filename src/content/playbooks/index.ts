@@ -6,6 +6,10 @@ import { transcarotidArteryRevascularizationPlaybook } from "@/content/playbooks
 import { openPoplitealAneurysmRepairPlaybook } from "@/content/playbooks/open-popliteal-aneurysm-repair";
 import { saphenousVeinHarvestPlaybook } from "@/content/playbooks/saphenous-vein-harvest";
 import { roboticDistalPancreatectomyPlaybook } from "@/content/playbooks/robotic-distal-pancreatectomy";
+import { openLowAnteriorResectionPlaybook } from "@/content/playbooks/open-low-anterior-resection";
+import { openAbdominoperinealResectionPlaybook } from "@/content/playbooks/open-abdominoperineal-resection";
+import { cytoreductiveSurgeryWithHipecPlaybook } from "@/content/playbooks/cytoreductive-surgery-with-hipec";
+import { openStammGastrostomyPlaybook } from "@/content/playbooks/open-stamm-gastrostomy";
 import type { Playbook } from "@/lib/types";
 import { carotidEndarterectomyBovinePatchPlaybook } from "@/content/playbooks/carotid-endarterectomy-bovine-patch";
 import { colostomyTakedownWithParastomalHerniaRepairPlaybook } from "@/content/playbooks/colostomy-takedown-with-parastomal-hernia-repair";
@@ -28,6 +32,10 @@ export {
   openPoplitealAneurysmRepairPlaybook,
   saphenousVeinHarvestPlaybook,
   roboticDistalPancreatectomyPlaybook,
+  openLowAnteriorResectionPlaybook,
+  openAbdominoperinealResectionPlaybook,
+  cytoreductiveSurgeryWithHipecPlaybook,
+  openStammGastrostomyPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
@@ -51,6 +59,10 @@ export const libraryPlaybooks: Playbook[] = [
   openPoplitealAneurysmRepairPlaybook,
   saphenousVeinHarvestPlaybook,
   roboticDistalPancreatectomyPlaybook,
+  openLowAnteriorResectionPlaybook,
+  openAbdominoperinealResectionPlaybook,
+  cytoreductiveSurgeryWithHipecPlaybook,
+  openStammGastrostomyPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,

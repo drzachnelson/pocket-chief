@@ -544,20 +544,22 @@ As of 2026-10-19: **76 topics and 16 playbooks**. **67 of the 366 outline entrie
 
 2026-10-30, pancreatic tail cluster: Pancreatic Tail Mass added at Pancreas › Diseases & Conditions as a partial match for four Pancreas entries (see the Pancreas row), with the Robotic Distal Pancreatectomy playbook outside the outline. Headline counts not recounted.
 
+2026-11-01, HIPEC/PMP batch: three outline entries added (Appendectomy, Gastric Adenocarcinoma, Gynecologic Neoplasms), and Peritoneal Neoplasms deepened in place. The open LAR, open APR, CRS/HIPEC and open Stamm gastrostomy playbooks sit outside the outline and do not count as topic coverage. Authored content remains pending Zach’s clinical review in the unmerged batch PR. Headline counts not recounted.
+
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
 | Module | Entries | Covered | Partial | App topics |
 |---|---|---|---|---|
-| General Abdomen | 6 | 6 | — | All six, under the outline's own titles |
+| General Abdomen | 6 | 6 | — | All six, under the outline's own titles; Peritoneal Neoplasms deepened in place (HIPEC/PMP batch, November 1, 2026) |
 | Hernia | 8 | 6 | — | Inguinal Hernia and Femoral Hernia (one outline entry), Unusual Hernias, Umbilical & Epigastric Hernia, Ventral & Incisional Hernia, Groin Hernia Repair, Abdominal Wall Reconstruction (Ventral Hernia Repair) |
 | Biliary | 18 | 1 | 1 | Symptomatic Gallstones and Cholecystitis (Call Problems I, October 2026); partial: Choledocholithiasis (Benign Biliary Obstruction; deepened in place October 2026 with cholangitis management and duct exploration — the outline has no Choledocholithiasis entry of its own) |
 | Liver | 8 | 8 | — | Hepatic Abscess, Hepatic Abscess Drainage, Primary Hepatic Neoplasms, Metastatic Hepatic Neoplasms (batch 1); Hepatic Resection, Intraoperative Hepatic Ultrasound, Liver Biopsy, Cirrhosis and Portal Hypertension (batch 2), October 2026 |
 | Pancreas | 11 | 2 | 4 | Pancreaticoduodenectomy, Acute Pancreatitis (Call Problems I, October 2026); partial, all through Pancreatic Tail Mass (October 30, 2026), a location-led topic that is not an outline title: Exocrine Pancreatic Neoplasms (body and tail adenocarcinoma only; head disease sits in Pancreaticoduodenectomy, and no palliation or AJCC staging), Pancreatic Cystic Neoplasms (all four cyst types and IPMN surveillance, framed as a tail differential), Endocrine Pancreatic Neoplasms (nonfunctional PNET, insulinoma and glucagonoma; no gastrinoma, VIPoma or somatostatinoma management), Distal Pancreatectomy (principles only; the operation is the robotic distal pancreatectomy playbook, and there is no open-technique topic) |
 | Spleen | 3 | — | 1 | Splenectomy and Splenorrhaphy, written as a trauma topic |
 | Esophagus | 10 | 1 | — | Paraesophageal Hernia Repair |
-| Stomach | 15 | — | — | |
+| Stomach | 15 | 1 | — | Gastric Adenocarcinoma (HIPEC/PMP batch, November 1, 2026) |
 | Small Intestine | 13 | 1 | 1 | Small Intestinal Obstruction (Call Problems I, October 2026); partial: Crohn Disease (Procedures for Crohn Disease; the topic is disease-led) |
-| Large Intestine | 15 | 4 | 1 | Appendicitis, Diverticulitis, Colonic Volvulus and Obstruction, Lower Gastrointestinal Bleeding (Call Problems I, October 2026); partial: Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
+| Large Intestine | 15 | 5 | 1 | Appendectomy (HIPEC/PMP batch, November 1, 2026); Appendicitis, Diverticulitis, Colonic Volvulus and Obstruction, Lower Gastrointestinal Bleeding (Call Problems I, October 2026); partial: Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
 | Anorectal | 17 | 2 | — | Hemorrhoids, Procedures for Hemorrhoids |
 | Endoscopy | 3 | — | — | |
 | Breast | 21 | 2 | — | Fibroadenoma vs Phyllodes Tumor, Percutaneous Breast Biopsy and Cyst Aspiration |
@@ -573,7 +575,7 @@ As of 2026-10-19: **76 topics and 16 playbooks**. **67 of the 366 outline entrie
 | Pediatric Surgery | 39 | 2 | 1 | Malrotation, Malrotation Operation; partial: Groin Hernia in Children (Inguinal Hernia; filed under Hernia) |
 | Plastic Surgery | 2 | — | — | |
 | Genitourinary | 6 | — | — | |
-| Obstetrics & Gynecology | 6 | — | — | |
+| Obstetrics & Gynecology | 6 | 1 | — | Gynecologic Neoplasms (HIPEC/PMP batch, November 1, 2026); new taxonomy section |
 | Head and Neck | 6 | — | — | |
 
 The outline lists Splenectomy/Splenorrhaphy under both Spleen and Trauma, and Biliary Atresia, Choledochal Cyst, Appendicitis, Meckel Diverticulum, Lower GI Bleeding, Mesenteric Ischemia, and Diaphragmatic Hernia Repair under two modules each. Each listing is counted where it appears.

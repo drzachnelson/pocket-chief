@@ -6,7 +6,10 @@ import { aorticAneurysmsTopic } from "@/content/topics/aortic-aneurysms";
 import { acuteAorticDissectionTopic } from "@/content/topics/acute-aortic-dissection";
 import { arterialPeripheralAneurysmsTopic } from "@/content/topics/arterial-peripheral-aneurysms";
 import { peripheralAneurysmsRepairTopic } from "@/content/topics/peripheral-aneurysms-repair";
+import { appendectomyTopic } from "@/content/topics/appendectomy";
 import { appendicitisTopic } from "@/content/topics/appendicitis";
+import { gastricAdenocarcinomaTopic } from "@/content/topics/gastric-adenocarcinoma";
+import { gynecologicNeoplasmsTopic } from "@/content/topics/gynecologic-neoplasms";
 import { diverticulitisTopic } from "@/content/topics/diverticulitis";
 import { smallIntestinalObstructionTopic } from "@/content/topics/small-intestinal-obstruction";
 import { symptomaticGallstonesAndCholecystitisTopic } from "@/content/topics/symptomatic-gallstones-and-cholecystitis";
@@ -153,6 +156,9 @@ export const libraryTopics: Topic[] = [
   arterialPeripheralAneurysmsTopic,
   peripheralAneurysmsRepairTopic,
   appendicitisTopic,
+  appendectomyTopic,
+  gastricAdenocarcinomaTopic,
+  gynecologicNeoplasmsTopic,
   diverticulitisTopic,
   smallIntestinalObstructionTopic,
   symptomaticGallstonesAndCholecystitisTopic,

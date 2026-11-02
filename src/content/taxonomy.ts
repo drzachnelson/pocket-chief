@@ -58,4 +58,6 @@ export const taxonomy: TaxonomyNode[] = [
   {"id": "stomach-procedures", "title": "Operations & Procedures", "slug": "stomach-operations-procedures", "parentId": "stomach", "order": 54},
   {"id": "endoscopy", "title": "Endoscopy", "slug": "endoscopy", "parentId": "score", "order": 55},
   {"id": "endoscopy-procedures", "title": "Operations & Procedures", "slug": "endoscopy-operations-procedures", "parentId": "endoscopy", "order": 56},
+  { id: "obstetrics-gynecology", title: "Obstetrics & Gynecology", slug: "obstetrics-gynecology", parentId: "score", order: 57 },
+  { id: "obstetrics-gynecology-conditions", title: "Diseases & Conditions", slug: "obstetrics-gynecology-diseases-conditions", parentId: "obstetrics-gynecology", order: 58 },
 ];

@@ -142,7 +142,7 @@ const blocks: TopicBlock[] = [
       "A neuroendocrine tumor over 2 cm needs **right hemicolectomy**, because nodal metastasis is far more likely.",
       "For a 1 to 2 cm neuroendocrine tumor, hemicolectomy is individualized for high-risk features: base or margin involvement, mesoappendiceal invasion over 3 mm, lymphovascular invasion, or grade above G1.",
       "Appendiceal adenocarcinoma needs right hemicolectomy.",
-      "A low-grade appendiceal mucinous neoplasm usually needs only negative-margin appendectomy, but perforation or extra-appendiceal mucin raises the risk of pseudomyxoma peritonei.",
+      "A low-grade appendiceal mucinous neoplasm usually needs only negative-margin appendectomy, but perforation or extra-appendiceal mucin raises the risk of pseudomyxoma peritonei, and its staging and follow-up run through [[Peritoneal Neoplasms]].",
     ],
   }, OE),
 
@@ -154,7 +154,7 @@ export const appendicitisTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000005221",
   slug: "appendicitis",
   title: "Appendicitis",
-  aliases: ["acute appendicitis", "appendectomy", "laparoscopic appendectomy", "Alvarado score", "McBurney point", "perforated appendicitis", "periappendiceal abscess", "appendicolith", "CODA trial", "interval appendectomy", "appendiceal neuroendocrine tumor", "appendiceal carcinoid"],
+  aliases: ["acute appendicitis", "Alvarado score", "McBurney point", "perforated appendicitis", "periappendiceal abscess", "appendicolith", "CODA trial", "appendiceal neuroendocrine tumor", "appendiceal carcinoid"],
   scoreNodeId: "large-intestine-conditions",
   scoreCategory: "SCORE · Large Intestine · Diseases & Conditions",
   tags: ["large-intestine", "appendicitis", "appendectomy", "right-lower-quadrant-pain", "alvarado", "perforation", "abscess", "general-surgery-call", "absite", "score"],

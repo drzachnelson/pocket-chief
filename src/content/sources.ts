@@ -340,6 +340,91 @@ export const FUKUOKA_IPMN_2017_SOURCE = "00000000-0000-4000-8000-000000006005";
 export const DIPLOMA_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006006";
 export const ROBOTIC_DISTAL_PANCREATECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003034";
 export const ROBOTIC_DISTAL_PANCREATECTOMY_OE_SOURCE = "00000000-0000-4000-8000-000000003035";
+// HIPEC / pseudomyxoma batch (November 2026): Peritoneal Neoplasms 06100 (the topic keeps its original ids),
+// Appendectomy 06200, Gastric Adenocarcinoma 06300, Gynecologic Neoplasms 06400, topics at +20/+21. The trial
+// sources here are reused by the CRS/HIPEC playbook. PMIDs come from the batch's verified evidence landscape.
+export const SCORE_PERITONEAL_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000006100";
+export const SCORE_APPENDICEAL_TUMORS_SOURCE = "00000000-0000-4000-8000-000000006101";
+export const PERITONEAL_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000006102";
+export const PSOGI_2016_PMP_SOURCE = "00000000-0000-4000-8000-000000006103";
+export const VERWAAL_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006104";
+export const PRODIGE7_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006105";
+export const PROPHYLOCHIP_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006106";
+export const COLOPEC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006107";
+export const CHUA_2012_PMP_REGISTRY_SOURCE = "00000000-0000-4000-8000-000000006108";
+export const YAN_2009_MESOTHELIOMA_SOURCE = "00000000-0000-4000-8000-000000006109";
+export const PSDSS_SOURCE = "00000000-0000-4000-8000-000000006110";
+export const KUSAMURA_2021_PMP_HIPEC_SOURCE = "00000000-0000-4000-8000-000000006111";
+export const ASCO_2023_MCRC_SOURCE = "00000000-0000-4000-8000-000000006112";
+export const CAIRO6_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006113";
+export const HIPECT4_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006114";
+export const PCI_CC_SCORE_SOURCE = "00000000-0000-4000-8000-000000006115";
+export const SCORE_GI_NET_SOURCE = "00000000-0000-4000-8000-000000006200";
+export const APPENDECTOMY_OE_SOURCE = "00000000-0000-4000-8000-000000006201";
+export const GONZALEZ_MORENO_2004_SOURCE = "00000000-0000-4000-8000-000000006202";
+export const LAKMAL_2024_LAMN_SOURCE = "00000000-0000-4000-8000-000000006203";
+export const GONZALEZ_MORENO_1998_SOURCE = "00000000-0000-4000-8000-000000006204";
+export const YILMAZ_2026_MUCOCELE_SOURCE = "00000000-0000-4000-8000-000000006205";
+export const NESTI_2023_NET_SOURCE = "00000000-0000-4000-8000-000000006206";
+export const WSES_APPENDICITIS_2020_SOURCE = "00000000-0000-4000-8000-000000006207";
+export const PERIAPPAC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006208";
+export const SCORE_GASTRIC_ADENOCARCINOMA_SOURCE = "00000000-0000-4000-8000-000000006300";
+export const GASTRIC_ADENOCARCINOMA_OE_SOURCE = "00000000-0000-4000-8000-000000006301";
+export const YANG_2011_GASTRIC_HIPEC_SOURCE = "00000000-0000-4000-8000-000000006302";
+export const CYTO_CHIP_SOURCE = "00000000-0000-4000-8000-000000006303";
+export const GASTRIPEC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006304";
+export const PERISCOPE2_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006305";
+export const FLOT4_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006306";
+export const DUTCH_D1D2_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006307";
+export const MATTERHORN_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006308";
+export const REGATTA_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006309";
+export const FISER_GASTRIC_CANCER_SOURCE = "00000000-0000-4000-8000-000000006310";
+export const SCORE_GYNECOLOGIC_MALIGNANT_NEOPLASMS_SOURCE = "00000000-0000-4000-8000-000000006400";
+export const GYNECOLOGIC_NEOPLASMS_OE_SOURCE = "00000000-0000-4000-8000-000000006401";
+export const OVHIPEC1_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006402";
+export const KOV_HIPEC_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006403";
+export const CHIPOR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006404";
+export const FISER_GYNECOLOGY_SOURCE = "00000000-0000-4000-8000-000000006405";
+export const ASCO_2025_OVARIAN_SOURCE = "00000000-0000-4000-8000-000000006406";
+export const OVHIPEC2_PROTOCOL_SOURCE = "00000000-0000-4000-8000-000000006407";
+export const LION_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006408";
+// HIPEC / pseudomyxoma batch playbooks (November 2026), allocated singly from 03036.
+export const SCORE_RECTAL_CANCER_SOURCE = "00000000-0000-4000-8000-000000003036";
+export const SCORE_TRANSANAL_RESECTION_SOURCE = "00000000-0000-4000-8000-000000003037";
+export const SCORE_APR_EXENTERATION_SOURCE = "00000000-0000-4000-8000-000000003038";
+export const OPEN_LAR_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003039";
+export const OPEN_LAR_OE_SOURCE = "00000000-0000-4000-8000-000000003040";
+export const MATTHIESSEN_2007_SOURCE = "00000000-0000-4000-8000-000000003041";
+export const MRC_CR07_PLANE_SOURCE = "00000000-0000-4000-8000-000000003042";
+export const ALACART_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003043";
+export const ROLARR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003044";
+export const REAL_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003045";
+export const EMILE_2024_ILEOSTOMY_CLOSURE_SOURCE = "00000000-0000-4000-8000-000000003046";
+export const OPEN_APR_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003047";
+export const OPEN_APR_OE_SOURCE = "00000000-0000-4000-8000-000000003048";
+export const WEST_2010_ELAPE_SOURCE = "00000000-0000-4000-8000-000000003049";
+export const MUSTERS_2014_PERINEAL_SOURCE = "00000000-0000-4000-8000-000000003050";
+export const BIOPEX_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003051";
+export const PELVEX_2019_SOURCE = "00000000-0000-4000-8000-000000003052";
+export const ACOSOG_Z6051_SOURCE = "00000000-0000-4000-8000-000000003053";
+export const ACT2_ANAL_SOURCE = "00000000-0000-4000-8000-000000003054";
+export const CRS_HIPEC_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003055";
+export const CRS_HIPEC_OE_SOURCE = "00000000-0000-4000-8000-000000003056";
+export const SUGARBAKER_1995_SOURCE = "00000000-0000-4000-8000-000000003057";
+export const ERAS_CRS_HIPEC_2020_SOURCE = "00000000-0000-4000-8000-000000003058";
+export const GLEHEN_2004_SOURCE = "00000000-0000-4000-8000-000000003059";
+export const PSOGI_2022_COLORECTAL_HIPEC_SOURCE = "00000000-0000-4000-8000-000000003060";
+export const LEVINE_2018_PMP_HIPEC_SOURCE = "00000000-0000-4000-8000-000000003061";
+export const KEPENEKIAN_2023_MESOTHELIOMA_SOURCE = "00000000-0000-4000-8000-000000003062";
+export const TAN_2018_HIPEC_RENAL_SOURCE = "00000000-0000-4000-8000-000000003063";
+export const KURRECK_2022_THIOSULFATE_SOURCE = "00000000-0000-4000-8000-000000003064";
+export const FARON_2016_PCI_SOURCE = "00000000-0000-4000-8000-000000003065";
+export const SCORE_ACCESS_NUTRITION_SOURCE = "00000000-0000-4000-8000-000000003066";
+export const SCORE_SDM_TRACH_GTUBE_SOURCE = "00000000-0000-4000-8000-000000003067";
+export const OPEN_STAMM_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003068";
+export const OPEN_STAMM_OE_SOURCE = "00000000-0000-4000-8000-000000003069";
+export const KOHLI_2021_GASTROSTOMY_SOURCE = "00000000-0000-4000-8000-000000003070";
+export const SZARY_2011_EARLY_FEEDING_SOURCE = "00000000-0000-4000-8000-000000003071";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3239,5 +3324,719 @@ export const suppliedSources: SuppliedSource[] = [
       "Used for the robotic setup, port map, artery-first vessel control, stapler technique and the evidence behind it, the Kimura-to-Warshaw bailout, frozen section and extraction, drain amylase timing, and the outcomes beyond the playbook source. Every figure is carried as the document attributes it, without the primary paper being opened unless registered separately, and is pending Zach's sign-off; items it calls common practice are labeled that way in the playbook.",
       "Not carried: the emergency undocking time target, the falciform and mattress stump techniques, cartridge colors, and the detailed vaccine-by-vaccine schedule (the Splenectomy and Splenorrhaphy topic carries it).",
     ].join(" "),
+  },
+  {
+    id: SCORE_PERITONEAL_NEOPLASMS_SOURCE,
+    title: "SCORE: Peritoneal Neoplasms",
+    kind: "website",
+    citation: "Abdel-Misih SR. Peritoneal Neoplasms. SCORE, October 9, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=161157",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the Peritoneal Neoplasms packet: histology, epidemiology, presentation, diagnosis, pseudomyxoma peritonei, the peritoneal cancer index and staging, the completeness of cytoreduction score and HIPEC, nonoperative management, and surveillance. Licensed module read locally; paraphrased, no question stems reproduced.",
+      "The module dates from 2023 and predates PRODIGE 7 in its text. Its pseudomyxoma incidence of about 0.2% of laparotomies is probably ten times too high and is not carried. It defines CC-1 as residual disease under 2.5 mm, where the Appendiceal Tumors module uses under 5 mm; the topic prints both.",
+    ].join(" "),
+  },
+  {
+    id: SCORE_APPENDICEAL_TUMORS_SOURCE,
+    title: "SCORE: Appendiceal Tumors (Surgical Oncology)",
+    kind: "website",
+    citation: "Wach and Greco. Appendiceal Tumors (Surgical Oncology). SCORE, March 18, 2026; local module captured November 1, 2026 from a browser print (20 of 21 pages; images and the objectives tab not captured).",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000594",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the Peritoneal Neoplasms packet and a source for the Appendectomy topic: pathologic entities, workup, staging, preoperative planning, systemic therapy, operative management and cytoreduction principles, complications, palliation, and surveillance. Licensed module read locally; paraphrased.",
+      "It settles the mucocele flow in favor of appendectomy for LAMN and HAMN and right hemicolectomy for other histologies. In one passage it lists HAMN among indolent tumors as a high-grade mucinous adenocarcinoma while defining it as noninvasive in another; the topics use the noninvasive definition, which matches PSOGI 2016.",
+    ].join(" "),
+  },
+  {
+    id: PERITONEAL_NEOPLASMS_OE_SOURCE,
+    title: "Owner-supplied peritoneal neoplasms study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: \"Peritoneal Neoplasms: Board-Review Study Guide\", an OpenEvidence synthesis (https://www.openevidence.com/ask/ff745291-ea84-449f-8974-09234faadca1) provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions. Works it cites include Carr (PSOGI 2016), Quénet (PRODIGE 7), Goéré (PROPHYLOCHIP), Klaver and Zwanenburg (COLOPEC), Arjona-Sánchez (HIPECT4), Rovers (CAIRO6), Hamm (BJS 2025), Esquivel (PSDSS), Hübner (PSOGI 2022 colorectal consensus, PMID 37940803), Kepenekian (PSOGI 2022 mesothelioma consensus, PMID 37481492), van Ruth (Annals of Surgical Oncology 2002, PMID 12464587), Steadman and Grotz (JNCCN 2023), ASCO 2023, and NCCN Colon, Peritoneal Mesothelioma and Appendiceal guidance.",
+      "Checked claim by claim against PubMed abstracts on November 1, 2026 before authoring. Carried only where an abstract confirmed it: the tumor marker figures (van Ruth), the PSOGI 2022 consensus positions, and cisplatin with doxorubicin as first-line mesothelioma HIPEC. Not carried because a primary source contradicted or could not confirm it: the CAIRO6 recurrence figures (the trial's survival endpoint was negative), Verwaal's hazard ratio and CC-0 subgroup, a 2024 Kusamura paper on oxaliplatin morbidity that could not be found, the ASCO evidence grades, the pseudomyxoma incidence, and every statement attributed to an NCCN appendiceal guideline, whose existence could not be confirmed.",
+    ].join(" "),
+  },
+  {
+    id: PSOGI_2016_PMP_SOURCE,
+    title: "PSOGI 2016 consensus on appendiceal mucinous neoplasia and pseudomyxoma peritonei",
+    kind: "article",
+    citation: "Carr NJ, et al. Peritoneal Surface Oncology Group International (PSOGI) modified Delphi consensus on the classification and pathologic reporting of pseudomyxoma peritonei and associated appendiceal neoplasia. American Journal of Surgical Pathology, 2016;40:14-26. PMID 26492181.",
+    url: "https://doi.org/10.1097/PAS.0000000000000535",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, read November 1, 2026: mucinous adenocarcinoma reserved for infiltrative invasion, LAMN endorsed, cystadenoma retired, HAMN introduced, three grades of pseudomyxoma with acellular mucin classified separately, and low grade and high grade equated with Ronnett's DPAM and PMCA. Pending Zach's sign-off.",
+  },
+  {
+    id: VERWAAL_TRIAL_SOURCE,
+    title: "Verwaal trial: cytoreduction with HIPEC versus systemic chemotherapy for colorectal peritoneal carcinomatosis",
+    kind: "article",
+    citation: "Verwaal VJ, et al. Randomized trial of cytoreduction and HIPEC against systemic chemotherapy with or without palliative surgery for colorectal peritoneal carcinomatosis. Journal of Clinical Oncology, 2003;21:3737-3743. PMID 14551293. Eight-year follow-up: Annals of Surgical Oncology, 2008;15:2426-2432. PMID 18521686.",
+    url: "https://doi.org/10.1200/JCO.2003.04.187",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from both PubMed abstracts: 105 patients, median survival 22.3 against 12.6 months, treatment mortality 8%, and 5-year survival 45% after macroscopically complete (R1) resection in the follow-up. The trial graded resection as R1, R2a and R2b, not by CC score. A hazard ratio and a CC-0 subgroup quoted elsewhere are not in either abstract and are not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: PRODIGE7_TRIAL_SOURCE,
+    title: "PRODIGE 7: cytoreduction with or without oxaliplatin HIPEC for colorectal peritoneal metastases",
+    kind: "article",
+    citation: "Quénet F, et al. PRODIGE 7, a phase 3 randomized trial of cytoreduction with or without oxaliplatin HIPEC for colorectal peritoneal metastases. Lancet Oncology, 2021;22:256-266. PMID 33476595.",
+    url: "https://doi.org/10.1016/S1470-2045(20)30599-4",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 265 patients aged 18 to 70 with a peritoneal cancer index of 25 or less, cleared to no residual disease or nodules under 1 mm, all with systemic chemotherapy; oxaliplatin 360 mg/m² closed or 460 mg/m² open with intravenous fluorouracil 400 mg/m² and folinic acid 20 mg/m² 20 minutes before; median survival 41.7 against 41.2 months (HR 1.00); 30-day mortality 2% in each arm; grade 3 or worse events 42% against 32% at 30 days and 26% against 15% at 60 days. The 30-minute duration comes from the batch evidence landscape. UNVERIFIED and flagged where printed: the perfusion temperature and the exploratory subgroup with a peritoneal cancer index of 11 to 15, both full-text only. Pending Zach's sign-off.",
+  },
+  {
+    id: PROPHYLOCHIP_TRIAL_SOURCE,
+    title: "PROPHYLOCHIP-PRODIGE 15: second-look surgery with oxaliplatin HIPEC after high-risk colorectal cancer resection",
+    kind: "article",
+    citation: "Goéré D, et al. PROPHYLOCHIP-PRODIGE 15, a phase 3 randomized trial of second-look surgery with HIPEC against surveillance. Lancet Oncology, 2020;21:1147-1154. PMID 32717180.",
+    url: "https://doi.org/10.1016/S1470-2045(20)30322-3",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 150 high-risk patients (resected synchronous peritoneal metastases, ovarian metastases, or perforation) disease-free after six months of adjuvant chemotherapy; HIPEC with oxaliplatin 460 mg/m², or oxaliplatin 300 mg/m² with irinotecan 200 mg/m², plus intravenous fluorouracil 400 mg/m², or mitomycin C 35 mg/m² for neuropathy; 3-year disease-free survival 44% against 53% (HR 0.97); grade 3 or 4 complications 41%. Pending Zach's sign-off.",
+  },
+  {
+    id: COLOPEC_TRIAL_SOURCE,
+    title: "COLOPEC: adjuvant oxaliplatin HIPEC for T4 or perforated colon cancer",
+    kind: "article",
+    citation: "Klaver CEL, et al. COLOPEC, a randomized trial of adjuvant HIPEC in locally advanced colon cancer. Lancet Gastroenterology and Hepatology, 2019;4:761-770. PMID 31371228. Five-year outcomes: Zwanenburg ES, et al. Journal of Clinical Oncology, 2024;42:140-145. PMID 37922442.",
+    url: "https://doi.org/10.1016/S2468-1253(19)30239-0",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from both PubMed abstracts: 204 patients; oxaliplatin 460 mg/m² for 30 minutes at 42 °C; 18-month peritoneal metastasis-free survival 80.9% against 76.2% (not significant); 5-year overall survival 69.6% against 70.9%. The 5-year peritoneal figures (63.9% against 63.2%) carry a label in the abstract that conflicts with its disease-free survival, so they are not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: CHUA_2012_PMP_REGISTRY_SOURCE,
+    title: "Chua 2012: PSOGI registry of cytoreduction and HIPEC for pseudomyxoma peritonei",
+    kind: "article",
+    citation: "Chua TC, et al. Early- and long-term outcomes of cytoreduction and HIPEC for pseudomyxoma peritonei of appendiceal origin, PSOGI registry. Journal of Clinical Oncology, 2012;30:2449-2456. PMID 22614976.",
+    url: "https://doi.org/10.1200/JCO.2011.39.7166",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 2,298 patients from 16 units; median survival 196 months; 10- and 15-year survival 63% and 59%; mortality 2% and major complications 24%; worse outcomes with PMCA histology, incomplete cytoreduction, and prior chemotherapy. Pending Zach's sign-off.",
+  },
+  {
+    id: YAN_2009_MESOTHELIOMA_SOURCE,
+    title: "Yan 2009: multi-institutional registry of cytoreduction and HIPEC for peritoneal mesothelioma",
+    kind: "article",
+    citation: "Yan TD, et al. Cytoreduction and HIPEC for malignant peritoneal mesothelioma, multi-institutional registry. Journal of Clinical Oncology, 2009;27:6237-6242. PMID 19917862.",
+    url: "https://doi.org/10.1200/JCO.2009.23.9640",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 405 patients, 92% given HIPEC; median survival 53 months, 3- and 5-year survival 60% and 47%; grade 3 or 4 morbidity 31% and mortality 2%; epithelioid subtype, negative nodes, CC-0 or CC-1, and HIPEC predict better survival. No randomized trial exists. Pending Zach's sign-off.",
+  },
+  {
+    id: PSDSS_SOURCE,
+    title: "Peritoneal Surface Disease Severity Score: derivation and ASPSM validation",
+    kind: "article",
+    citation: "Pelz JO, et al. Journal of Surgical Oncology, 2009;99:9-15. PMID 18937291. Esquivel J, et al. American Society of Peritoneal Surface Malignancies multi-institution evaluation of the PSDSS. Annals of Surgical Oncology, 2014;21:4195-4201. PMID 24854493.",
+    url: "https://doi.org/10.1245/s10434-014-3798-z",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from both PubMed abstracts: a preoperative score from symptoms, peritoneal cancer index and primary histology in four tiers; median survival with cytoreduction and HIPEC 86, 43, 29 and 28 months by tier, against 45, 19, 8 and 6 without. UNVERIFIED and flagged where printed: the point weights for each component, which are full-text only and are stated from secondary teaching. Pending Zach's sign-off.",
+  },
+  {
+    id: KUSAMURA_2021_PMP_HIPEC_SOURCE,
+    title: "Kusamura 2021: PSOGI registry comparison of cytoreduction with and without HIPEC for pseudomyxoma",
+    kind: "article",
+    citation: "Kusamura S, et al. PSOGI registry cohort on the role of HIPEC after cytoreduction for pseudomyxoma peritonei. JAMA Surgery, 2021;156:e206363. PMID 33502455.",
+    url: "https://doi.org/10.1001/jamasurg.2020.6363",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 1,924 weighted patients, 1,548 with HIPEC and 376 without; weighted 5-year survival 57.8% against 46.2% (HR 0.65); mitomycin C HIPEC associated with more morbidity (odds ratio 1.99). The best available, nonrandomized, support for HIPEC in pseudomyxoma. Pending Zach's sign-off.",
+  },
+  {
+    id: ASCO_2023_MCRC_SOURCE,
+    title: "ASCO 2023 guideline: treatment of metastatic colorectal cancer",
+    kind: "article",
+    citation: "Morris VK, et al. Treatment of Metastatic Colorectal Cancer: ASCO Guideline. Journal of Clinical Oncology, 2023;41:678-700. PMID 36252154.",
+    url: "https://doi.org/10.1200/JCO.22.01690",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: cytoreduction with systemic chemotherapy may be recommended for selected patients with colorectal peritoneal metastases, and adding HIPEC is not recommended. The abstract gives no evidence grades and is not specific to oxaliplatin, so neither is stated. Pending Zach's sign-off.",
+  },
+  {
+    id: CAIRO6_TRIAL_SOURCE,
+    title: "CAIRO6: perioperative systemic therapy with cytoreduction and HIPEC for colorectal peritoneal metastases",
+    kind: "article",
+    citation: "Rovers KP, et al. CAIRO6, a phase 3 randomized trial of perioperative systemic therapy with cytoreduction and HIPEC against cytoreduction and HIPEC alone. Lancet Oncology, 2026;27:849-863. PMID 42372745.",
+    url: "https://doi.org/10.1016/S1470-2045(26)00085-9",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 358 patients; median survival 44 against 39 months (HR 0.85, not significant); major 90-day morbidity 36% against 26% in operated patients; grade 3 or 4 abscess, leak and fascial dehiscence each under 13%; perioperative systemic therapy cannot be recommended for every patient. Pending Zach's sign-off.",
+  },
+  {
+    id: HIPECT4_TRIAL_SOURCE,
+    title: "HIPECT4: adjuvant mitomycin C HIPEC for locally advanced T4 colon cancer",
+    kind: "article",
+    citation: "Arjona-Sánchez A, et al. HIPECT4, a phase 3 randomized trial of mitomycin C HIPEC in locally advanced colon cancer. JAMA Surgery, 2023;158:683-691. PMID 37099280. Final analysis: BJS Open, 2025;10. PMID 41891861.",
+    url: "https://doi.org/10.1001/jamasurg.2023.0662",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 184 patients with cT4 colon cancer; mitomycin C 30 mg/m² for 60 minutes; 3-year locoregional control 97.6% against 87.6% (HR 0.21), with no difference in disease-free or overall survival. Pending Zach's sign-off.",
+  },
+  {
+    id: PCI_CC_SCORE_SOURCE,
+    title: "Jacquet and Sugarbaker 1996: the peritoneal cancer index and completeness of cytoreduction score",
+    kind: "article",
+    citation: "Jacquet P, Sugarbaker PH. Cancer Treatment and Research, 1996;82:359-374. PMID 8849962.",
+    url: "https://doi.org/10.1007/978-1-4613-1247-5_23",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch. The PubMed abstract confirms 13 abdominopelvic regions (0 to 12) each scored 0 to 3 by lesion size, for a maximum of 39. UNVERIFIED and flagged where printed: the centimeter cutoffs for each lesion-size score and the CC-2 and CC-3 thresholds, which are in the full text only and are stated from the SCORE module and secondary teaching. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_GI_NET_SOURCE,
+    title: "SCORE: Gastrointestinal Stromal and Neuroendocrine Tumors and Lymphomas",
+    kind: "website",
+    citation: "Gastrointestinal Stromal and Neuroendocrine Tumors and Lymphomas. SCORE, February 10, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=136240",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S3 of the Appendectomy packet, for its appendiceal neuroendocrine tumor passage only: most are under 1 cm and cured by appendectomy, and right hemicolectomy with lymphadenectomy is recommended over 2 cm or with mesoappendiceal or lymphovascular invasion, a high mitotic index, or goblet cell histology. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: APPENDECTOMY_OE_SOURCE,
+    title: "Owner-supplied appendectomy study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: \"Appendectomy: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Carries inline author-year attributions, chiefly WSES 2020 and 2025, SAGES, Moris (JAMA 2021), Nesti (Lancet Oncology 2023), ENETS 2023, Park (Surgical Endoscopy 2015), Kim (2018), Massoumi and King (JAMA 2020), and an NCCN appendiceal guideline whose existence the batch could not confirm.",
+      "Used for the intraoperative mass and mucocele steps (handle only the mesoappendix, retrieve in a bag, partial cecectomy or ileocecal resection for a broad base, explore and record the extent, sample free mucin for cytology and biopsy an implant, then stop and refer) and the stump technique. The cytology and stop-and-refer steps are attributed in the document to that NCCN guideline and are printed as UNVERIFIED.",
+      "Corrected against primary sources on November 1, 2026 and not carried as the document gives them: the APPAC II results it credits to Talan, the WSES 2025 age-35 and 14.3% neoplasm figures for interval appendectomy (not in the abstract; printed as UNVERIFIED), three different durations for postoperative antibiotics, a nodal positivity table by NET size that could not be found, and Nesti's metastasis wording.",
+    ].join(" "),
+  },
+  {
+    id: GONZALEZ_MORENO_2004_SOURCE,
+    title: "González-Moreno 2004: right hemicolectomy in mucinous appendiceal tumors with peritoneal seeding",
+    kind: "article",
+    citation: "González-Moreno S, Sugarbaker PH. British Journal of Surgery, 2004;91:304-311. PMID 14991630.",
+    url: "https://doi.org/10.1002/bjs.4393",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: nodes were positive in 4.2% of mucinous against 66.7% of intestinal-type tumors, and right hemicolectomy gave no survival benefit on multivariate analysis. Pending Zach's sign-off.",
+  },
+  {
+    id: LAKMAL_2024_LAMN_SOURCE,
+    title: "Lakmal 2024: outcomes of pTis and pT3 LAMN after complete excision",
+    kind: "article",
+    citation: "Lakmal C, et al. European Journal of Surgical Oncology, 2024;50:108600. PMID 39167862.",
+    url: "https://doi.org/10.1016/j.ejso.2024.108600",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 193 specialist-center patients with pTis or pT3 LAMN; none of the 185 followed (median 6.45 years) developed pseudomyxoma, so a correctly staged, completely excised lesion needs no further surgery and only low-intensity surveillance. Pending Zach's sign-off.",
+  },
+  {
+    id: GONZALEZ_MORENO_1998_SOURCE,
+    title: "González Moreno 1998: dissemination after laparoscopic removal of an appendiceal mucocele",
+    kind: "article",
+    citation: "González Moreno S, et al. Surgical Endoscopy, 1998;12:1177-1179. PMID 9716778.",
+    url: "https://doi.org/10.1007/s004649900811",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a case report of dissemination nine months after laparoscopic removal of a mucocele, with the authors advising conversion to open. The origin of the convert-to-open board answer. Pending Zach's sign-off.",
+  },
+  {
+    id: YILMAZ_2026_MUCOCELE_SOURCE,
+    title: "Yılmaz 2026: laparoscopic versus open resection of appendiceal mucinous lesions",
+    kind: "article",
+    citation: "Yılmaz M, et al. JSLS, 2026;30. PMID 42516431.",
+    url: "https://doi.org/10.4293/JSLS.2026.00051",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a retrospective series of 53 patients (20 laparoscopic, 33 open) with no difference in rupture or margins and faster recovery after laparoscopy. Low-level support for careful laparoscopic removal. Pending Zach's sign-off.",
+  },
+  {
+    id: NESTI_2023_NET_SOURCE,
+    title: "Nesti 2023: hemicolectomy versus appendectomy for 1 to 2 cm appendiceal neuroendocrine tumors",
+    kind: "article",
+    citation: "Nesti, et al. Lancet Oncology, 2023. PMID 36640790.",
+    url: "https://doi.org/10.1016/S1470-2045(22)00750-1",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: 278 patients with 1 to 2 cm tumors followed a median of 13 years; peritoneal metastases in about 1% and liver metastases in about 1%, all synchronous, with no tumor-related deaths; right hemicolectomy gave no survival benefit over appendectomy (HR 0.88). Pending Zach's sign-off.",
+  },
+  {
+    id: WSES_APPENDICITIS_2020_SOURCE,
+    title: "WSES Jerusalem guidelines on acute appendicitis, 2020 update",
+    kind: "article",
+    citation: "Di Saverio, et al. World Journal of Emergency Surgery, 2020. PMID 32295644. Open full text PMC7386163.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from the open full text, read November 1, 2026 in the Appendectomy entry's outside research: against routine interval appendectomy under 40 after successful nonoperative care (6.3); neoplasm in 3% to 17% of patients 40 and older, with colonoscopy and interval CT suggested (6.4); suction alone rather than irrigation (4.8); no drains after complicated appendectomy in adults (4.12); and a single preoperative antibiotic dose with no postoperative antibiotics for uncomplicated disease (7.1). Pending Zach's sign-off.",
+  },
+  {
+    id: PERIAPPAC_TRIAL_SOURCE,
+    title: "PeriAPPAC: interval appendectomy versus follow-up after periappendicular abscess",
+    kind: "article",
+    citation: "Mällinen, et al. 2019. PMID 30484824.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Appendectomy entry's outside research: neoplasm in 20% (12 of 60) of patients after a periappendicular abscess, all over age 40; the trial stopped early. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_GASTRIC_ADENOCARCINOMA_SOURCE,
+    title: "SCORE: Gastric Adenocarcinoma",
+    kind: "website",
+    citation: "Gastric Adenocarcinoma. SCORE, April 30, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128003",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the Gastric Adenocarcinoma packet: burden, epidemiology and hereditary syndromes, presentation, diagnostic tests, Lauren and Siewert classification, staging, treatment by stage, operative management, surveillance, and palliation. Its line that GAPPS accounts for 90% of gastric cancers looks like a capture error and is not carried. Licensed module read locally; paraphrased, no question stems reproduced.",
+  },
+  {
+    id: GASTRIC_ADENOCARCINOMA_OE_SOURCE,
+    title: "Owner-supplied gastric adenocarcinoma study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: a gastric adenocarcinoma board-review study guide, an OpenEvidence synthesis provided as a Word document and Markdown copy to check the packet for this topic.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "Carries inline attributions, chiefly NCCN Gastric version 4.2026, JGCA, ESMO, FLOT4, MAGIC, the Dutch D1D2 and Italian trials, JCOG 9501, CLASSIC, INT-0116, ToGA, REGATTA, MATTERHORN, KEYNOTE-811, GASTRIPEC-I, PERISCOPE II, and RENAISSANCE.",
+      "Used for the endoscopic resection criteria, the non-curative resection rule, the NCCN re-staging pathway for cytology-positive disease, and the JGCA conversion position. Its account of NCCN listing gastrectomy with cytoreduction and HIPEC for a peritoneal cancer index of 10 or less conflicts with a secondary report that NCCN restricts HIPEC to trials; neither was checked against NCCN text, so both print as UNVERIFIED.",
+      "Not carried after the primary-source check on November 1, 2026: MATTERHORN final survival and subgroup figures, the RENAISSANCE subgroup, KEYNOTE-811 survival, the Dutch trial's no-pancreaticosplenectomy subgroup, the laparoscopy yield and washing volumes, and the vitamin B12 figures, none of which an abstract confirmed.",
+    ].join(" "),
+  },
+  {
+    id: YANG_2011_GASTRIC_HIPEC_SOURCE,
+    title: "Yang 2011: cytoreduction with HIPEC for gastric peritoneal carcinomatosis",
+    kind: "article",
+    citation: "Yang XJ, et al. Annals of Surgical Oncology, 2011;18:1575-1581. PMID 21431408.",
+    url: "https://doi.org/10.1245/s10434-011-1631-5",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a single-center phase 3 trial in China, 68 patients; cytoreduction with mitomycin C and cisplatin HIPEC against cytoreduction alone; median survival 11.0 against 6.5 months (p=0.046). Pending Zach's sign-off.",
+  },
+  {
+    id: CYTO_CHIP_SOURCE,
+    title: "CYTO-CHIP: HIPEC after complete cytoreduction for gastric peritoneal metastases",
+    kind: "article",
+    citation: "Bonnot PE, et al. Journal of Clinical Oncology, 2019;37:2028-2040. PMID 31084544.",
+    url: "https://doi.org/10.1200/JCO.18.01688",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: a French propensity-weighted cohort of 277 patients after complete cytoreduction; median survival 18.8 against 12.1 months and 5-year survival 19.9% against 6.4% (HR 0.60) with HIPEC, with no added morbidity. Observational. Pending Zach's sign-off.",
+  },
+  {
+    id: GASTRIPEC_TRIAL_SOURCE,
+    title: "GASTRIPEC-I: cytoreduction with or without HIPEC for gastric peritoneal metastases",
+    kind: "article",
+    citation: "Rau B, et al. Journal of Clinical Oncology, 2024;42:146-156. PMID 37906724.",
+    url: "https://doi.org/10.1200/JCO.22.02867",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 105 patients given perioperative chemotherapy and cytoreduction with or without mitomycin C 15 mg/m² and cisplatin 75 mg/m² at 42 °C for 60 minutes; median survival 14.9 months in both arms; progression-free survival 7.1 against 3.5 months; 55 patients never reached cytoreduction; stopped early for slow accrual; grade 3 or worse events similar. Pending Zach's sign-off.",
+  },
+  {
+    id: PERISCOPE2_TRIAL_SOURCE,
+    title: "PERISCOPE II: gastrectomy with cytoreduction and HIPEC for limited gastric peritoneal disease",
+    kind: "article",
+    citation: "Quik JSE, et al. Lancet Oncology, 2026;27:1031-1042. PMID 42419336.",
+    url: "https://doi.org/10.1016/S1470-2045(26)00144-0",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 102 patients with cT3 to cT4a tumors, a peritoneal cancer index under 7 and/or positive cytology, and no progression after at least three cycles; gastrectomy with cytoreduction and HIPEC (oxaliplatin 460 mg/m² at 41 °C, then docetaxel 50 mg/m² at 37 °C) against continued systemic therapy; median survival 15.7 against 16.6 months (HR 1.10, p=0.70); grade 3 or worse events 42% against 20%, serious events 44% against 6%, three treatment deaths, all in the surgery arm; closed for futility. Pending Zach's sign-off.",
+  },
+  {
+    id: FLOT4_TRIAL_SOURCE,
+    title: "FLOT4: perioperative FLOT against ECF or ECX for resectable gastric or junctional adenocarcinoma",
+    kind: "article",
+    citation: "Al-Batran, et al. Lancet, 2019. PMID 30982686.",
+    url: "https://doi.org/10.1016/S0140-6736(18)32557-1",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: 716 patients with cT2 or deeper and/or node-positive, M0 disease; docetaxel 50, oxaliplatin 85, leucovorin 200 and fluorouracil 2600 mg/m² by 24-hour infusion every 2 weeks, four cycles before and four after surgery; median survival 50 against 35 months (HR 0.77). Pending Zach's sign-off.",
+  },
+  {
+    id: DUTCH_D1D2_TRIAL_SOURCE,
+    title: "Dutch D1D2 trial, 15-year follow-up",
+    kind: "article",
+    citation: "Songun, et al. Lancet Oncology, 2010. PMID 20409751.",
+    url: "https://doi.org/10.1016/S1470-2045(10)70070-X",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: 711 curatively treated patients; 15-year survival 21% for D1 against 29% for D2 (p=0.34); gastric cancer death 48% against 37%, local recurrence 22% against 12%; postoperative mortality 4% against 10% and complications 25% against 43%. The authors recommend D2 because spleen-preserving D2 is now safer. Pending Zach's sign-off.",
+  },
+  {
+    id: MATTERHORN_TRIAL_SOURCE,
+    title: "MATTERHORN: perioperative durvalumab with FLOT for resectable gastric or junctional adenocarcinoma",
+    kind: "article",
+    citation: "Janjigian, et al. New England Journal of Medicine, 2025. PMID 40454643.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: durvalumab 1500 mg every 4 weeks with FLOT for two four-week cycles before and two after surgery, then durvalumab alone for ten more; 2-year event-free survival 67.4% against 58.5% (HR 0.71); pathologic complete response 19.2% against 7.2%. Overall survival at that analysis had not crossed its significance threshold, so no survival benefit is stated. Pending Zach's sign-off.",
+  },
+  {
+    id: REGATTA_TRIAL_SOURCE,
+    title: "REGATTA: gastrectomy plus chemotherapy against chemotherapy alone for gastric cancer with a single non-curable factor",
+    kind: "article",
+    citation: "Fujitani, et al. Lancet Oncology, 2016. PMID 26822397.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gastric Adenocarcinoma entry's outside research: median survival 16.6 months with chemotherapy alone against 14.3 months with gastrectomy first; stopped for futility. Palliative gastrectomy for a single non-curable factor does not extend survival. Pending Zach's sign-off.",
+  },
+  {
+    id: FISER_GASTRIC_CANCER_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Stomach, gastric adenocarcinoma",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 30, Stomach, gastric adenocarcinoma section, page 404.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the Gastric Adenocarcinoma packet; the existing chapter 30 entry covers only the benign pages. Fiser's board answers differ from current SCORE teaching on the staging laparoscopy threshold (T2 or deeper), nodal extent (D1 with at least 15 nodes), neoadjuvant chemoradiation, 5-FU-based chemotherapy, and treating tumors within 5 cm of the junction as esophageal; the topic carries each as a split. OCR of a scan, read locally.",
+  },
+  {
+    id: SCORE_GYNECOLOGIC_MALIGNANT_NEOPLASMS_SOURCE,
+    title: "SCORE: Gynecologic Malignant Neoplasms",
+    kind: "website",
+    citation: "Katz C, Krill L. Gynecologic Malignant Neoplasms. SCORE, September 19, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000558",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the Gynecologic Neoplasms packet: endometrial, ovarian, cervical, and vulvar cancer epidemiology, prevention, diagnosis, staging, operative treatment, and follow-up, and hysterectomy anatomy. It states the HIPEC benefit at interval cytoreduction in one sentence without naming trials. The outline calls the topic Gynecologic Neoplasms; the module title is kept as an alias. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: GYNECOLOGIC_NEOPLASMS_OE_SOURCE,
+    title: "Owner-supplied gynecologic neoplasms study guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Study document supplied to Pocket Chief, November 1, 2026: \"Gynecologic Neoplasms: Board-Review Study Guide\", an OpenEvidence synthesis resubmitted by hand after a timed-out run, provided as a full Markdown copy with per-claim citations and a condensed copy.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: [
+      "The condensed copy was checked against PubMed abstracts on November 1, 2026; the full copy was not reviewed line by line. Works it cites include NCCN Ovarian, Cervical and Vulvar, ACR O-RADS, OVHIPEC-1, KOV-HIPEC-01, CHIPOR, ASCO 2025, LION, LACC, SHAPE, KEYNOTE-A18, GROINSS-V, DESKTOP III, Meagher (2019), and Secchi (European Journal of Cancer 2026).",
+      "Used for the intraoperative adnexal mass steps, the mucinous ovarian tumor rule, primary against interval cytoreduction, and the NCCN HIPEC listing, which prints as UNVERIFIED with no evidence category.",
+      "Not carried because a primary source contradicted or could not confirm it: radiotherapy as an alternative to lymphadenectomy for sentinel node metastases over 2 mm (contradicted by GROINSS-V II), SATB2 as the best single marker of lower GI origin (CK7 was, in the test cohort), the FIGO 2018 cervical IB boundaries, the 50% ovarian spread of appendiceal mucinous neoplasms (a case report), the ASCO creatinine exclusions, the NCCN stage IV category, and a 2026 meta-analysis of HIPEC at recurrence.",
+    ].join(" "),
+  },
+  {
+    id: OVHIPEC1_TRIAL_SOURCE,
+    title: "OVHIPEC-1: interval cytoreduction with or without HIPEC for stage III ovarian cancer",
+    kind: "article",
+    citation: "van Driel WJ, et al. New England Journal of Medicine, 2018;378:230-240. PMID 29342393. Final analysis: Aronson SL, et al. Lancet Oncology, 2023;24:1109-1118. PMID 37708912.",
+    url: "https://doi.org/10.1056/NEJMoa1708618",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstracts: 245 patients with stage III epithelial ovarian cancer after neoadjuvant chemotherapy; interval cytoreduction with or without cisplatin 100 mg/m² HIPEC; recurrence-free survival 14.2 against 10.7 months (HR 0.66) and overall survival 45.7 against 33.9 months (HR 0.67), grade 3 or 4 events 27% against 25%; at about 10 years, survival 44.9 against 33.3 months (HR 0.70). Pending Zach's sign-off.",
+  },
+  {
+    id: KOV_HIPEC_TRIAL_SOURCE,
+    title: "KOV-HIPEC-01: primary or interval cytoreduction with or without HIPEC for ovarian cancer",
+    kind: "article",
+    citation: "Lim MC, et al. JAMA Surgery, 2022;157:374-383. PMID 35262624.",
+    url: "https://doi.org/10.1001/jamasurg.2022.0143",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 184 patients with stage III or IV disease at primary or interval cytoreduction; cisplatin 75 mg/m² at 41.5 °C for 90 minutes; no overall difference in progression-free (19.8 against 18.8 months) or overall survival (69.5 against 61.3 months); in the interval subgroup survival was 61.8 against 48.2 months (HR 0.53). Pending Zach's sign-off.",
+  },
+  {
+    id: CHIPOR_TRIAL_SOURCE,
+    title: "CHIPOR: secondary cytoreduction with or without HIPEC at first platinum-sensitive ovarian cancer relapse",
+    kind: "article",
+    citation: "Classe JM, et al. Lancet Oncology, 2024;25:1551-1562. PMID 39549720.",
+    url: "https://doi.org/10.1016/S1470-2045(24)00531-X",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract: 415 patients at first relapse at least 6 months after platinum, after 6 cycles of platinum, with complete cytoreduction; cisplatin 75 mg/m² at 41 °C for 60 minutes; overall survival 54.3 against 45.8 months (HR 0.73); grade 3 or worse events 49% against 27%, renal failure 10% against 1%. Pending Zach's sign-off.",
+  },
+  {
+    id: FISER_GYNECOLOGY_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Gynecology",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 40, Gynecology, ovarian cancer, page 606.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the Gynecologic Neoplasms packet. Fiser treats every stage with total abdominal hysterectomy and bilateral oophorectomy with cisplatin and paclitaxel and gives no role for neoadjuvant chemotherapy, interval cytoreduction, PARP inhibitors, or HIPEC; the topic carries the difference as a split. OCR of a scan, read locally.",
+  },
+  {
+    id: ASCO_2025_OVARIAN_SOURCE,
+    title: "ASCO 2025 ovarian cancer guideline",
+    kind: "article",
+    citation: "Gaillard, et al. ASCO ovarian cancer guideline, 2025. PMID 39841949.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gynecologic Neoplasms entry's outside research: HIPEC may be offered at interval cytoreduction for stage III disease with good performance status and adequate renal function. The specific creatinine exclusions quoted elsewhere are not in the abstract and are not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: OVHIPEC2_PROTOCOL_SOURCE,
+    title: "OVHIPEC-2: primary cytoreduction with or without HIPEC, trial protocol",
+    kind: "article",
+    citation: "Koole S, et al. International Journal of Gynecological Cancer, 2020;30:888-892. PMID 32205449.",
+    url: "https://doi.org/10.1136/ijgc-2020-001231",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch: the phase 3 protocol (target 538 patients). PubMed was searched again on November 1, 2026 and showed no results publication, only the protocol and a 2023 letter, so no result is stated. Pending Zach's sign-off.",
+  },
+  {
+    id: LION_TRIAL_SOURCE,
+    title: "LION: systematic lymphadenectomy in advanced ovarian cancer",
+    kind: "article",
+    citation: "Harter, et al. New England Journal of Medicine, 2019. PMID 30811909.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gynecologic Neoplasms entry's outside research: with complete resection and clinically normal nodes, systematic pelvic and para-aortic lymphadenectomy gave no survival benefit (65.5 against 69.2 months, HR 1.06) and more repeat laparotomy (12.4% against 6.5%) and 60-day mortality (3.1% against 0.9%). Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_RECTAL_CANCER_SOURCE,
+    title: "SCORE: Rectal Cancer",
+    kind: "website",
+    citation: "Kavalukas S, Hawkins A. Rectal Cancer. SCORE, March 17, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130244",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the open low anterior resection playbook source and a source for the open abdominoperineal resection playbook: indications, workup, neoadjuvant therapy, the TME paragraph that is the operative spine, distal margins, quality metrics, and surveillance. There is no SCORE operative module for low anterior resection. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: SCORE_TRANSANAL_RESECTION_SOURCE,
+    title: "SCORE: Transanal Resection",
+    kind: "website",
+    citation: "Martin BM. Transanal Resection. SCORE; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=159462",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S3 of the open low anterior resection playbook source: local excision criteria and conversion to transabdominal resection after unfavorable histology. Its circumference limit (under 30%) differs from the Rectal Cancer module's (under 40%). Licensed module read locally; paraphrased.",
+  },
+  {
+    id: SCORE_APR_EXENTERATION_SOURCE,
+    title: "SCORE: Abdominoperineal Resection and Pelvic Exenteration",
+    kind: "website",
+    citation: "Lipman JM. Abdominoperineal Resection and Pelvic Exenteration. SCORE, November 20, 2024; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=162148",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as the backbone of the open abdominoperineal resection playbook source and S4 of the open low anterior resection source: indications, rectal anatomy, the operative steps, ureter and nerve protection, quality metrics, and the pelvic exenteration boundary. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: OPEN_LAR_PLAYBOOK_SOURCE,
+    title: "Owner-supplied open low anterior resection playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for open low anterior resection with total mesorectal excision, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the SCORE Rectal Cancer, Ileostomy, Transanal Resection, and Abdominoperineal Resection modules and Fiser chapter 36, with items beyond those sources marked; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Supplies the indications, the alternatives (APR, local excision), workup, the fifteen operative steps, the loop ileostomy technique, pitfalls, postoperative care, and the board-versus-current points. Positioning, IMV division, the leak test, stapling technique, presacral bleeding, low anterior resection syndrome, and the variant-approach evidence are marked in the document as beyond those sources and are carried from the OpenEvidence procedure guide. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_LAR_OE_SOURCE,
+    title: "Owner-supplied open low anterior resection procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Open Low Anterior Resection — Board Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Carries inline attributions, chiefly NCCN Rectal Cancer version 2.2026, the ASCRS 2020 rectal cancer guideline, ASCRS/SAGES 2023, Matthiessen (2007), Emile (2024), Kinugasa (2006, 2007), RAPIDO, OPRA, CAO/ARO/AIO-94, MRC CR07, ACOSOG Z6051, ALaCaRT, ROLARR, REAL, COLOR II, COLRAR, and Simillis (2019). Used for positioning, IMA and IMV ligation, the TME planes, the leak test and perfusion check, diversion criteria, ileostomy closure timing, leak management by ISREC grade, low anterior resection syndrome, and the variant approaches. Corrected or not carried after the primary-source check on November 1, 2026: REAL is Feng (JAMA 2025), not Kim, and its CRM figures are not in the abstract; Sassun's ligation meta-analysis is 2026; the Kim 2026 ligation RCT, the Z6051 survival figures, COLOR II and COLRAR recurrence, and the bowel preparation, ICG and leak-test percentages could not be confirmed and print as UNVERIFIED or are left out; its 28-day bevacizumab hold conflicts with the abdominoperineal resection guide's 6 weeks and is not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: MATTHIESSEN_2007_SOURCE,
+    title: "Matthiessen 2007: defunctioning stoma after low anterior resection",
+    kind: "article",
+    citation: "Matthiessen, et al. Annals of Surgery, 2007. PMID 17667498. Open full text PMC1933561.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1933561/",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: 234 patients with an anastomosis 7 cm or less from the anal verge, 79% after preoperative radiotherapy; symptomatic leak 10.3% with a defunctioning stoma against 28.0% without, and urgent reoperation 8.6% against 25.4%. Randomization required a negative air-leak test and intact donuts. Pending Zach's sign-off.",
+  },
+  {
+    id: MRC_CR07_PLANE_SOURCE,
+    title: "MRC CR07: plane of mesorectal surgery and local recurrence",
+    kind: "article",
+    citation: "Quirke, et al. Lancet, 2009. PMID 19269520.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: 3-year local recurrence 4% with a mesorectal plane, 7% intramesorectal, and 13% with a muscularis propria plane; 17% against 6% with a positive against negative circumferential margin. Pending Zach's sign-off.",
+  },
+  {
+    id: ALACART_TRIAL_SOURCE,
+    title: "ALaCaRT: laparoscopic against open resection for rectal cancer",
+    kind: "article",
+    citation: "Stevenson, et al. JAMA, 2015. PMID 26441180.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: successful resection 82% laparoscopic against 89% open, so noninferiority was not met; circumferential margin clear 93% against 97%. Pending Zach's sign-off.",
+  },
+  {
+    id: ROLARR_TRIAL_SOURCE,
+    title: "ROLARR: robotic against laparoscopic resection for rectal cancer",
+    kind: "article",
+    citation: "Jayne, et al. JAMA, 2017. PMID 29067426.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: conversion 8.1% robotic against 12.2% laparoscopic (adjusted odds ratio 0.61, not significant); positive circumferential margin 5.1% against 6.3%. Pending Zach's sign-off.",
+  },
+  {
+    id: REAL_TRIAL_SOURCE,
+    title: "REAL: robotic against laparoscopic surgery for middle and low rectal cancer",
+    kind: "article",
+    citation: "Feng, et al. JAMA, 2025. PMID 40455621.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: 1,240 patients; 3-year locoregional recurrence 1.6% robotic against 4.0% laparoscopic (HR 0.45), 3-year disease-free survival 87.2% against 83.4% (HR 0.74), overall survival 94.7% against 93.0% (not significant). Pending Zach's sign-off.",
+  },
+  {
+    id: EMILE_2024_ILEOSTOMY_CLOSURE_SOURCE,
+    title: "Emile 2024: early against standard closure of a diverting ileostomy",
+    kind: "article",
+    citation: "Emile, et al. Annals of Surgery, 2024. PMID 37788345.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: closure within 2 weeks raised the anastomotic leak risk (odds ratio 2.12), so routine early closure is not recommended. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_APR_PLAYBOOK_SOURCE,
+    title: "Owner-supplied open abdominoperineal resection playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for open abdominoperineal resection of the rectum and anus with end colostomy, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the SCORE Abdominoperineal Resection and Pelvic Exenteration and Rectal Cancer modules and Fiser chapters 36 and 37, with items beyond those sources marked; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Supplies the indications, the exenteration boundary, preparation, the fifteen abdominal and perineal steps as SCORE frames them, intraoperative decisions, complications and their treatment, and the board-versus-current points, including Fiser's salvage APR for anal cancer persisting 6 months after chemoradiation. Positioning detail, the extralevator comparison, flap choices, and the variant approaches are marked beyond those sources and come from the OpenEvidence guide. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_APR_OE_SOURCE,
+    title: "Owner-supplied open abdominoperineal resection procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Open Abdominoperineal Resection: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "States it was checked against NCCN Rectal Cancer version 2.2026, NCCN Anal Carcinoma version 3.2026, the ASCRS 2020 rectal cancer guideline and its 2023 supplement, and the ASTRO rectal cancer guideline; also cites West (2010), Musters (2014), BIOPEX, BIOPEX-2, PelvEx, ACOSOG Z6051, ALaCaRT, COLOR II, COREAN, LASRE, ROLARR, REAL, ACT II, Kávási (2026), Jiang (2013), and Colov (2016). Used for positioning, the standard perineal phase, stopping the abdominal dissection at the levator origin, presacral hemorrhage control, closure options, the exenteration boundary, and the variant approaches. Not carried after the primary-source check on November 1, 2026: the capecitabine radiosensitizer trial labels, Maslekar's Quirke-grade recurrence figures (MRC CR07 is used instead), REAL's function and APR-subgroup claims, the radiation dose constraints, the VRAM review and BIOPEX-2 figures, and the presacral bleeding rate, none of which an abstract confirmed; its 6-week bevacizumab hold conflicts with the low anterior resection guide's 28 days and is not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: WEST_2010_ELAPE_SOURCE,
+    title: "West 2010: extralevator against standard abdominoperineal excision",
+    kind: "article",
+    citation: "West NP, et al. British Journal of Surgery, 2010. PMID 20186891.",
+    url: "https://doi.org/10.1002/bjs.6916",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, read November 1, 2026 during authoring because the entry's outside research had not found it: 176 extralevator excisions from 11 European surgeons against 124 standard excisions from one UK center; circumferential margin involvement fell from 49.6% to 20.3% and intraoperative perforation from 28.2% to 8.2%, while perineal wound complications rose from 20% to 38.0%. Nonrandomized. Pending Zach's sign-off.",
+  },
+  {
+    id: MUSTERS_2014_PERINEAL_SOURCE,
+    title: "Musters 2014: perineal wound healing after abdominoperineal resection",
+    kind: "article",
+    citation: "Musters, et al. Diseases of the Colon and Rectum, 2014. PMID 25101610.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: after primary closure, perineal wound problems in 15.3% (standard, no radiation), 14.8% (extralevator, no radiation), 30.2% (standard with radiation), and 37.6% (extralevator with radiation); radiation odds ratio 2.22; 7.3% after biological mesh closure following extralevator resection with radiation. Pending Zach's sign-off.",
+  },
+  {
+    id: BIOPEX_TRIAL_SOURCE,
+    title: "BIOPEX: biological mesh against primary perineal closure after extralevator resection",
+    kind: "article",
+    citation: "Blok, et al. Annals of Surgery, 2022. PMID 33534231.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: 5-year symptomatic perineal hernia 7% with biological mesh against 30% with primary closure (p=0.006); reoperation for small bowel obstruction 2% against 9% (not significant). Pending Zach's sign-off.",
+  },
+  {
+    id: PELVEX_2019_SOURCE,
+    title: "PelvEx Collaborative 2019: resection margins after exenteration for locally advanced primary rectal cancer",
+    kind: "article",
+    citation: "PelvEx Collaborative. Annals of Surgery, 2019. PMID 28938268.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: 1,291 patients, R0 in 79.9%; 3-year survival 56.4% after R0, 29.6% after R1, and 8.1% after R2 resection; 30-day mortality 1.5%; major complications 37.8%. Pending Zach's sign-off.",
+  },
+  {
+    id: ACOSOG_Z6051_SOURCE,
+    title: "ACOSOG Z6051: laparoscopic against open resection for stage II and III rectal cancer",
+    kind: "article",
+    citation: "Fleshman, et al. JAMA, 2015. PMID 26441179.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: successful resection 81.7% laparoscopic against 86.9% open, so noninferiority was not met; circumferential margin negative 87.9% against 92.3%; 23.3% of the trial were abdominoperineal resections. The 2-year survival figures are from a later report that was not opened and are not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: ACT2_ANAL_SOURCE,
+    title: "ACT II: timing of response assessment after chemoradiation for anal cancer",
+    kind: "article",
+    citation: "Glynne-Jones, et al. Lancet Oncology, 2017. PMID 28209296.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open abdominoperineal resection entry's outside research: complete clinical response in 52% at 11 weeks, 71% at 18 weeks, and 78% at 26 weeks from the start of chemoradiation, so persistent disease is observed to 26 weeks before salvage resection. Pending Zach's sign-off.",
+  },
+  {
+    id: CRS_HIPEC_PLAYBOOK_SOURCE,
+    title: "Owner-supplied cytoreductive surgery with HIPEC playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for cytoreductive surgery with hyperthermic intraperitoneal chemotherapy, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the batch's verified evidence landscape and the SCORE Peritoneal Neoplasms, Appendiceal Tumors, and Gynecologic Malignant Neoplasms modules, with every trial claim carrying its PMID; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "No SCORE or Fiser operative module exists for this operation, so the source is built from PubMed abstracts and the three SCORE modules' cytoreduction passages. It supplies the selection rules, the workup, the operative flow, Sugarbaker's six peritonectomies, the regimen table with a cell for every trial value, the complication list, and postoperative care. It records that no primary guideline on occupational chemotherapy exposure during HIPEC was found on PubMed, so the playbook prints staff safety as UNSUPPORTED. Pending Zach's sign-off.",
+  },
+  {
+    id: CRS_HIPEC_OE_SOURCE,
+    title: "Owner-supplied cytoreductive surgery with HIPEC procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Cytoreductive Surgery with HIPEC: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Carries inline attributions, chiefly Sugarbaker (1995), the ERAS Society CRS and HIPEC guidelines (2020), the PSOGI 2022 colorectal, pseudomyxoma, mesothelioma, and technical consensus statements, NCCN Peritoneal Mesothelioma and Gastric, ASCO 2023 and 2025, Faron (2016), Tan (2018), Laplace (2020), Kurreck (2022), Kapoor (2019), and Vining (2020). Used for technique within each peritonectomy, the gastric blood supply at omentectomy, open against closed delivery, the drug-specific toxicity, and special scenarios. Not carried after the primary-source check on November 1, 2026, or printed as UNVERIFIED: every NCCN mesothelioma dose row, the PSOGI technical figures (perfusate volume, catheters, probes, temperature, anastomosis timing), open-against-closed morbidity and evisceration figures, a misattributed morbidity range and mitomycin absorption figure, the ERAS drains claim (the only no-consensus item was pre-emptive plasma), the sodium thiosulfate doses (units unclear in the abstract), the cisplatin creatinine thresholds, and temperatures and durations no abstract states. Pending Zach's sign-off.",
+  },
+  {
+    id: SUGARBAKER_1995_SOURCE,
+    title: "Sugarbaker 1995: peritonectomy procedures",
+    kind: "article",
+    citation: "Sugarbaker PH. Annals of Surgery, 1995;221:29-42. PMID 7826158.",
+    url: "https://doi.org/10.1097/00000658-199501000-00004",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract in the batch's evidence landscape: the six peritonectomy procedures, namely greater omentectomy with splenectomy, left upper quadrant peritonectomy, right upper quadrant peritonectomy, lesser omentectomy and cholecystectomy with stripping of the omental bursa, pelvic peritonectomy with sleeve resection of the sigmoid colon, and antrectomy. Pending Zach's sign-off.",
+  },
+  {
+    id: ERAS_CRS_HIPEC_2020_SOURCE,
+    title: "ERAS Society guidelines for cytoreductive surgery with or without HIPEC, parts 1 and 2",
+    kind: "article",
+    citation: "Hübner M, et al. European Journal of Surgical Oncology, 2020;46:2292-2310 (PMID 32873454) and 2311-2323 (PMID 32826114).",
+    url: "https://doi.org/10.1016/j.ejso.2020.07.041",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from both PubMed abstracts: consensus on 71 of 72 items, 37 of them strong recommendations, with no consensus only on pre-emptive fresh frozen plasma. Individual item wording is UNVERIFIED and is not quoted. Pending Zach's sign-off.",
+  },
+  {
+    id: GLEHEN_2004_SOURCE,
+    title: "Glehen 2004: multi-institutional cytoreduction with intraperitoneal chemotherapy for colorectal carcinomatosis",
+    kind: "article",
+    citation: "Glehen O, et al. Journal of Clinical Oncology, 2004;22:3284-3292. PMID 15310771.",
+    url: "https://doi.org/10.1200/JCO.2004.10.012",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract in the batch's evidence landscape: 506 patients; morbidity 22.9% and mortality 4%; complete cytoreduction was the strongest prognostic factor, with median survival 32.4 against 8.4 months. Pending Zach's sign-off.",
+  },
+  {
+    id: PSOGI_2022_COLORECTAL_HIPEC_SOURCE,
+    title: "PSOGI 2022 consensus on HIPEC for colorectal peritoneal metastases",
+    kind: "article",
+    citation: "Hübner, et al. Annals of Surgical Oncology, 2024. PMID 37940803.",
+    url: "https://doi.org/10.1245/s10434-023-14368-5",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: a strong negative consensus against short high-dose oxaliplatin HIPEC (55.7% of votes) and a weak positive recommendation for the Dutch mitomycin C protocol, 35 mg/m² over 90 minutes in three fractions; HIPEC suggested at repeat cytoreduction for recurrence more than a year after the index operation. The temperature is not in the abstract. Pending Zach's sign-off.",
+  },
+  {
+    id: LEVINE_2018_PMP_HIPEC_SOURCE,
+    title: "Levine 2018: mitomycin C against oxaliplatin HIPEC for appendiceal peritoneal disease",
+    kind: "article",
+    citation: "Levine, et al. 2018. PMID 29331663. Ten-year follow-up: 2025, PMID 39531120.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: a randomized trial of closed HIPEC for 120 minutes with mitomycin C 40 mg against oxaliplatin 200 mg/m²; mitomycin C gave lower white counts on postoperative days 5 to 10; 10-year survival 56.2% against 47.5% (p=0.83). Pending Zach's sign-off.",
+  },
+  {
+    id: KEPENEKIAN_2023_MESOTHELIOMA_SOURCE,
+    title: "PSOGI 2022 consensus on HIPEC for peritoneal mesothelioma",
+    kind: "article",
+    citation: "Kepenekian, et al. Annals of Surgical Oncology, 2023. PMID 37481492.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: two-drug regimens are preferred, cisplatin is favored, and cisplatin with doxorubicin is the first-line HIPEC regimen. No doses are in the abstract, so none is printed. Pending Zach's sign-off.",
+  },
+  {
+    id: TAN_2018_HIPEC_RENAL_SOURCE,
+    title: "Tan 2018: renal and bleeding toxicity by HIPEC agent",
+    kind: "article",
+    citation: "Tan, et al. International Journal of Hyperthermia, 2018. PMID 28633580.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: acute renal impairment 32% with cisplatin, with dialysis in 5.6%, 62% with oxaliplatin, and 5.6% with mitomycin C; postoperative bleeding 25% with oxaliplatin against about 1% with other agents. The oxaliplatin group was only 8 patients. Pending Zach's sign-off.",
+  },
+  {
+    id: KURRECK_2022_THIOSULFATE_SOURCE,
+    title: "Kurreck 2022: sodium thiosulfate with cisplatin HIPEC",
+    kind: "article",
+    citation: "Kurreck, et al. Annals of Surgical Oncology, 2022. PMID 34350529.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: acute kidney injury fell from 30.7% to 6.5% with sodium thiosulfate. The dose is not printed because the units in a related abstract are unclear. Pending Zach's sign-off.",
+  },
+  {
+    id: FARON_2016_PCI_SOURCE,
+    title: "Faron 2016: peritoneal cancer index and survival after cytoreduction and HIPEC for colorectal disease",
+    kind: "article",
+    citation: "Faron, et al. Annals of Surgical Oncology, 2016. PMID 26014158.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the cytoreductive surgery with HIPEC entry's outside research: 173 patients, 5-year survival 41%; survival fell linearly with the index (HR 1.1 per point); the authors consider cytoreduction with HIPEC generally indicated under 12, contraindicated over 17, and a gray zone between. A single-center series, not a guideline. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_ACCESS_NUTRITION_SOURCE,
+    title: "SCORE: Access Procedures for Nutritional Support",
+    kind: "website",
+    citation: "Busch RA. Access Procedures for Nutritional Support. SCORE, October 14, 2024; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=128073",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the open Stamm gastrostomy playbook source: indications, contraindications to gastric access, the questions before placement, the open Stamm steps, PEG pull and push and laparoscopic technique, and complications. The operative steps are fully supported by this module. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: SCORE_SDM_TRACH_GTUBE_SOURCE,
+    title: "SCORE: Shared Decision-Making Around Tracheostomy and Gastrostomy Tubes",
+    kind: "website",
+    citation: "Bartek M, Kochis M, Marterre B. Shared Decision-Making Around Tracheostomy and Gastrostomy Tubes. SCORE, May 2, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000994",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S2 of the open Stamm gastrostomy playbook source: venting gastrostomy for malignant bowel obstruction, and goals-of-care framing for stroke, advanced dementia, cancer cachexia, ALS, and malignant obstruction. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: OPEN_STAMM_PLAYBOOK_SOURCE,
+    title: "Owner-supplied open Stamm gastrostomy playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for open (Stamm) gastrostomy with purse-string fixation and gastropexy, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the SCORE Access Procedures for Nutritional Support and Shared Decision-Making modules and Fiser chapters 10 and 30, with items beyond those sources marked; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Supplies the indications, contraindications, the questions before placement, the twelve Stamm steps, the PEG and laparoscopic comparison, venting specifics, pitfalls, and Fiser's board answer of PEG for anyone not eating for more than 4 weeks. Positioning, tube types, venting tube size, ascites handling, tract maturation, and comparative outcomes are marked beyond those sources and come from the OpenEvidence guide. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_STAMM_OE_SOURCE,
+    title: "Owner-supplied open Stamm gastrostomy procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Open Stamm Gastrostomy: Board-Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Carries inline attributions, chiefly AAST (Farrell 2023), ASGE, SIR (2019), Kohli (2021), Haddadin and Guha (2026), and Szary (2011). Used for the exit site and tube size, the purse-string and gastropexy rationale, venting against feeding, dislodgement management by tract age, peristomal complications, and special scenarios. Corrected or not carried after the primary-source check on November 1, 2026: early feeding after PEG was within 3 hours in the meta-analysis and day-1 residuals did not differ significantly; the coagulation thresholds, antibiotic doses, buried bumper and dislodgement rates, and a 2026 gastropexy trial could not be confirmed and are left out. Pending Zach's sign-off.",
+  },
+  {
+    id: KOHLI_2021_GASTROSTOMY_SOURCE,
+    title: "Kohli 2021: outcomes of endoscopic, radiologic, and surgical gastrostomy in US inpatients",
+    kind: "article",
+    citation: "Kohli, et al. Gastrointestinal Endoscopy, 2021. PMID 32931781.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open Stamm gastrostomy entry's outside research: 184,068 inpatients from 2016 to 2017; against PEG, surgical gastrostomy had colon perforation odds ratio 6.65, infection 1.61, mortality 1.55, and 30-day readmission 1.13, and IR gastrostomy had perforation 1.90, infection 1.28, transfusion 1.84, and mortality 1.09. Administrative data, so confounding by indication is likely. Pending Zach's sign-off.",
+  },
+  {
+    id: SZARY_2011_EARLY_FEEDING_SOURCE,
+    title: "Szary 2011: early against delayed feeding after PEG",
+    kind: "article",
+    citation: "Szary, et al. 2011. PMID 20733512.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open Stamm gastrostomy entry's outside research: a meta-analysis of 5 randomized trials (355 patients); feeding within 3 hours of PEG did not change complications (odds ratio 0.78) or 72-hour mortality (0.60), and day-1 gastric residuals did not differ significantly. PEG and IR data, not open Stamm. Pending Zach's sign-off.",
   },
 ];

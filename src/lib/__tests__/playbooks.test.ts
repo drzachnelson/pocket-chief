@@ -311,6 +311,61 @@ describe("playbook library", () => {
         "splenic mobilization -> splenectomy-and-splenorrhaphy",
         "worrisome features -> pancreatic-tail-mass",
       ],
+      // HIPEC / pseudomyxoma batch, reviewed 2026-11-01. Every destination names the same stoma, electrolyte,
+      // prophylaxis or vessel the line is about; the IMA, peritonitis and rectal stump rows follow the colostomy pins.
+      "open-low-anterior-resection": [
+        "Stoma necrosis -> ileostomy-and-ileostomy-closure",
+        "VTE prophylaxis -> prophylaxis-of-venous-thromboembolism",
+        "colostomy -> colostomy-and-colostomy-closure",
+        "hyponatremia -> derangements-of-electrolytes-and-acid-base-balance",
+        "ileostomy -> ileostomy-and-ileostomy-closure",
+        "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
+        "loop colostomy -> colostomy-and-colostomy-closure",
+        "loop ileostomy -> ileostomy-and-ileostomy-closure",
+        "peritonitis -> abdominal-pain",
+        "rectal stump -> total-and-subtotal-colectomy",
+      ],
+      // Reworded instead: "prone jackknife" reached hemorrhoid procedures, and "stoma necrosis" reached the ileostomy topic
+      // from an end colostomy.
+      "open-abdominoperineal-resection": [
+        "End colostomy -> colostomy-and-colostomy-closure",
+        "colostomy -> colostomy-and-colostomy-closure",
+        "end colostomy -> colostomy-and-colostomy-closure",
+        "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
+        "perineal hernia -> unusual-hernias",
+      ],
+      // Every disease, trial and score destination is the topic that owns it (the HIPEC auto-links stay with Peritoneal
+      // Neoplasms by design). Reworded instead: "Sugarbaker's six peritonectomies" reached the parastomal Sugarbaker
+      // repair, and "watchful waiting" reached the inguinal hernia trials.
+      "cytoreductive-surgery-with-hipec": [
+        "CHIPOR -> gynecologic-neoplasms",
+        "Cytoreductive surgery -> peritoneal-neoplasms",
+        "GASTRIPEC -> gastric-adenocarcinoma",
+        "HAMN -> peritoneal-neoplasms",
+        "HIPEC -> peritoneal-neoplasms",
+        "LAMN -> peritoneal-neoplasms",
+        "OVHIPEC -> gynecologic-neoplasms",
+        "PERISCOPE II -> gastric-adenocarcinoma",
+        "PSDSS -> peritoneal-neoplasms",
+        "Peritoneal mesothelioma -> peritoneal-neoplasms",
+        "Pseudomyxoma peritonei -> peritoneal-neoplasms",
+        "acute kidney injury -> renal-failure",
+        "appendectomy -> appendectomy",
+        "enterocutaneous fistula -> enterocutaneous-fistula",
+        "interval cytoreduction -> gynecologic-neoplasms",
+        "ovarian cancer -> gynecologic-neoplasms",
+        "peritoneal cancer index -> peritoneal-neoplasms",
+        "peritoneal metastases -> peritoneal-neoplasms",
+        "renal failure -> renal-failure",
+        "splenectomy -> splenectomy-and-splenorrhaphy",
+        "splenic hilum -> splenectomy-and-splenorrhaphy",
+      ],
+      // Reworded instead: "gastropexy" reached paraesophageal hernia repair, a different fixation for a different
+      // purpose (kept as a search alias), and "ascites" reached cirrhosis from malignant fluid in carcinomatosis.
+      "open-stamm-gastrostomy": [
+        "gastroesophageal reflux -> gastroesophageal-reflux-and-barrett-esophagus",
+        "peritonitis -> abdominal-pain",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
@@ -359,11 +414,13 @@ describe("playbook library", () => {
     // The transaxillary rib exposure also protects this nerve in the axilla.
     expect(slugs("intercostobrachial")).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);
     expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
-    expect(slugs("Toldt")).toEqual(["right-hemicolectomy"]);
+    // The white line of Toldt is taken down on the left for a rectal resection as on the right for a colectomy.
+    expect(slugs("Toldt")).toEqual(["open-abdominoperineal-resection", "open-low-anterior-resection", "right-hemicolectomy"]);
     // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior
     // pancreatic neck in a Whipple, and to reach the middle colic root in a right colectomy.
     expect(slugs("Henle")).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);
-    expect(slugs("Sugarbaker")).toEqual(["colostomy-takedown-with-parastomal-hernia-repair"]);
+    // Two different operations carry the name: the parastomal mesh repair, and the peritonectomy (a search-only alias).
+    expect(slugs("Sugarbaker")).toEqual(["cytoreductive-surgery-with-hipec", "colostomy-takedown-with-parastomal-hernia-repair"]);
     expect(slugs("lamppost")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
     expect(slugs("eTEP")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
     expect(slugs("linea semilunaris")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
