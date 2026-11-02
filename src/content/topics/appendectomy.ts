@@ -190,7 +190,7 @@ const blocks: TopicBlock[] = [
       ["Neoplasm at the tip under 2 cm", "SCORE Appendectomy: continue the appendectomy for any neoplasm", "SCORE Appendiceal Tumors: the size rule is for neuroendocrine tumors; other tumors go by histology"],
       ["Neuroendocrine tumor of 1 to 2 cm", "Right hemicolectomy for any high-risk feature", "In 278 patients followed 13 years, hemicolectomy gave no survival benefit, and metastases (about 1% peritoneal, 1% liver) were all synchronous"],
       ["Mucinous lesion at the base", "SCORE Appendectomy: a neoplasm at the base gets right hemicolectomy", "Partial cecectomy or ileocecal resection to clear the margin, with hemicolectomy only after histology"],
-      ["Interval appendectomy after an abscess", "Drain, then interval appendectomy for everyone", "Age-stratified: WSES 2020 uses 40, and the 2025 update reportedly 35"],
+      ["Interval appendectomy after an abscess", "Drain, then interval appendectomy for everyone", `Age-stratified: WSES 2020 uses 40, and the 2025 update reportedly 35 ${UNVERIFIED}`],
     ],
   }, [[FISER, GM_1998, YILMAZ], [FISER, GM_2004, LAKMAL], [SCORE, SCORE_APPX], [SCORE_APPX, NESTI], [SCORE, OE], [FISER, WSES_2020, OE]]),
   references("block-appy-references", [SCORE, SCORE_APPX, SCORE_NET, FISER, OE, GM_2004, LAKMAL, GM_1998, YILMAZ, NESTI, WSES_2020, PERIAPPAC]),

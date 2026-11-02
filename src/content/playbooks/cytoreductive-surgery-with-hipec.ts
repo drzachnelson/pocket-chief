@@ -67,7 +67,7 @@ const blocks: TopicBlock[] = [
       ["First platinum-sensitive ovarian relapse", "CHIPOR: overall survival 54.3 against 45.8 months with cisplatin HIPEC", "Positive, with more renal toxicity"],
       ["Gastric peritoneal metastases", "GASTRIPEC and PERISCOPE II: no survival benefit", "Trials only"],
     ],
-  }, [[CHUA, KUSAMURA], [YAN], [GLEHEN, PRODIGE7], [OVHIPEC1], [CHIPOR], [GASTRIPEC, PERISCOPE2]]),
+  }, [[CHUA, KUSAMURA], [YAN], [GLEHEN, PRODIGE7, ASCO], [OVHIPEC1], [CHIPOR], [GASTRIPEC, PERISCOPE2]]),
   sourcedUnits({
     id: "block-crs-selection",
     type: "bullets",
