@@ -388,6 +388,18 @@ export const FISER_GYNECOLOGY_SOURCE = "00000000-0000-4000-8000-000000006405";
 export const ASCO_2025_OVARIAN_SOURCE = "00000000-0000-4000-8000-000000006406";
 export const OVHIPEC2_PROTOCOL_SOURCE = "00000000-0000-4000-8000-000000006407";
 export const LION_TRIAL_SOURCE = "00000000-0000-4000-8000-000000006408";
+// HIPEC / pseudomyxoma batch playbooks (November 2026), allocated singly from 03036.
+export const SCORE_RECTAL_CANCER_SOURCE = "00000000-0000-4000-8000-000000003036";
+export const SCORE_TRANSANAL_RESECTION_SOURCE = "00000000-0000-4000-8000-000000003037";
+export const SCORE_APR_EXENTERATION_SOURCE = "00000000-0000-4000-8000-000000003038";
+export const OPEN_LAR_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003039";
+export const OPEN_LAR_OE_SOURCE = "00000000-0000-4000-8000-000000003040";
+export const MATTHIESSEN_2007_SOURCE = "00000000-0000-4000-8000-000000003041";
+export const MRC_CR07_PLANE_SOURCE = "00000000-0000-4000-8000-000000003042";
+export const ALACART_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003043";
+export const ROLARR_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003044";
+export const REAL_TRIAL_SOURCE = "00000000-0000-4000-8000-000000003045";
+export const EMILE_2024_ILEOSTOMY_CLOSURE_SOURCE = "00000000-0000-4000-8000-000000003046";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -3702,5 +3714,97 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Harter, et al. New England Journal of Medicine, 2019. PMID 30811909.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the Gynecologic Neoplasms entry's outside research: with complete resection and clinically normal nodes, systematic pelvic and para-aortic lymphadenectomy gave no survival benefit (65.5 against 69.2 months, HR 1.06) and more repeat laparotomy (12.4% against 6.5%) and 60-day mortality (3.1% against 0.9%). Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_RECTAL_CANCER_SOURCE,
+    title: "SCORE: Rectal Cancer",
+    kind: "website",
+    citation: "Kavalukas S, Hawkins A. Rectal Cancer. SCORE, March 17, 2023; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=130244",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S1 of the open low anterior resection playbook source and a source for the open abdominoperineal resection playbook: indications, workup, neoadjuvant therapy, the TME paragraph that is the operative spine, distal margins, quality metrics, and surveillance. There is no SCORE operative module for low anterior resection. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: SCORE_TRANSANAL_RESECTION_SOURCE,
+    title: "SCORE: Transanal Resection",
+    kind: "website",
+    citation: "Martin BM. Transanal Resection. SCORE; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=159462",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as S3 of the open low anterior resection playbook source: local excision criteria and conversion to transabdominal resection after unfavorable histology. Its circumference limit (under 30%) differs from the Rectal Cancer module's (under 40%). Licensed module read locally; paraphrased.",
+  },
+  {
+    id: SCORE_APR_EXENTERATION_SOURCE,
+    title: "SCORE: Abdominoperineal Resection and Pelvic Exenteration",
+    kind: "website",
+    citation: "Lipman JM. Abdominoperineal Resection and Pelvic Exenteration. SCORE, November 20, 2024; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=162148",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Added for the November 1, 2026 HIPEC and pseudomyxoma batch as the backbone of the open abdominoperineal resection playbook source and S4 of the open low anterior resection source: indications, rectal anatomy, the operative steps, ureter and nerve protection, quality metrics, and the pelvic exenteration boundary. Licensed module read locally; paraphrased.",
+  },
+  {
+    id: OPEN_LAR_PLAYBOOK_SOURCE,
+    title: "Owner-supplied open low anterior resection playbook source",
+    kind: "user_notes",
+    citation: "Playbook source document for open low anterior resection with total mesorectal excision, written November 1, 2026 for the HIPEC and pseudomyxoma batch from the SCORE Rectal Cancer, Ileostomy, Transanal Resection, and Abdominoperineal Resection modules and Fiser chapter 36, with items beyond those sources marked; supplied to Pocket Chief as Markdown.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Supplies the indications, the alternatives (APR, local excision), workup, the fifteen operative steps, the loop ileostomy technique, pitfalls, postoperative care, and the board-versus-current points. Positioning, IMV division, the leak test, stapling technique, presacral bleeding, low anterior resection syndrome, and the variant-approach evidence are marked in the document as beyond those sources and are carried from the OpenEvidence procedure guide. Pending Zach's sign-off.",
+  },
+  {
+    id: OPEN_LAR_OE_SOURCE,
+    title: "Owner-supplied open low anterior resection procedure guide (OpenEvidence)",
+    kind: "user_notes",
+    citation: "Procedure document supplied to Pocket Chief, November 1, 2026: \"Open Low Anterior Resection — Board Review Study Guide\", an OpenEvidence synthesis provided as a Word document and Markdown copy to check the playbook source.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Carries inline attributions, chiefly NCCN Rectal Cancer version 2.2026, the ASCRS 2020 rectal cancer guideline, ASCRS/SAGES 2023, Matthiessen (2007), Emile (2024), Kinugasa (2006, 2007), RAPIDO, OPRA, CAO/ARO/AIO-94, MRC CR07, ACOSOG Z6051, ALaCaRT, ROLARR, REAL, COLOR II, COLRAR, and Simillis (2019). Used for positioning, IMA and IMV ligation, the TME planes, the leak test and perfusion check, diversion criteria, ileostomy closure timing, leak management by ISREC grade, low anterior resection syndrome, and the variant approaches. Corrected or not carried after the primary-source check on November 1, 2026: REAL is Feng (JAMA 2025), not Kim, and its CRM figures are not in the abstract; Sassun's ligation meta-analysis is 2026; the Kim 2026 ligation RCT, the Z6051 survival figures, COLOR II and COLRAR recurrence, and the bowel preparation, ICG and leak-test percentages could not be confirmed and print as UNVERIFIED or are left out; its 28-day bevacizumab hold conflicts with the abdominoperineal resection guide's 6 weeks and is not carried. Pending Zach's sign-off.",
+  },
+  {
+    id: MATTHIESSEN_2007_SOURCE,
+    title: "Matthiessen 2007: defunctioning stoma after low anterior resection",
+    kind: "article",
+    citation: "Matthiessen, et al. Annals of Surgery, 2007. PMID 17667498. Open full text PMC1933561.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1933561/",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: 234 patients with an anastomosis 7 cm or less from the anal verge, 79% after preoperative radiotherapy; symptomatic leak 10.3% with a defunctioning stoma against 28.0% without, and urgent reoperation 8.6% against 25.4%. Randomization required a negative air-leak test and intact donuts. Pending Zach's sign-off.",
+  },
+  {
+    id: MRC_CR07_PLANE_SOURCE,
+    title: "MRC CR07: plane of mesorectal surgery and local recurrence",
+    kind: "article",
+    citation: "Quirke, et al. Lancet, 2009. PMID 19269520.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: 3-year local recurrence 4% with a mesorectal plane, 7% intramesorectal, and 13% with a muscularis propria plane; 17% against 6% with a positive against negative circumferential margin. Pending Zach's sign-off.",
+  },
+  {
+    id: ALACART_TRIAL_SOURCE,
+    title: "ALaCaRT: laparoscopic against open resection for rectal cancer",
+    kind: "article",
+    citation: "Stevenson, et al. JAMA, 2015. PMID 26441180.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: successful resection 82% laparoscopic against 89% open, so noninferiority was not met; circumferential margin clear 93% against 97%. Pending Zach's sign-off.",
+  },
+  {
+    id: ROLARR_TRIAL_SOURCE,
+    title: "ROLARR: robotic against laparoscopic resection for rectal cancer",
+    kind: "article",
+    citation: "Jayne, et al. JAMA, 2017. PMID 29067426.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: conversion 8.1% robotic against 12.2% laparoscopic (adjusted odds ratio 0.61, not significant); positive circumferential margin 5.1% against 6.3%. Pending Zach's sign-off.",
+  },
+  {
+    id: REAL_TRIAL_SOURCE,
+    title: "REAL: robotic against laparoscopic surgery for middle and low rectal cancer",
+    kind: "article",
+    citation: "Feng, et al. JAMA, 2025. PMID 40455621.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: 1,240 patients; 3-year locoregional recurrence 1.6% robotic against 4.0% laparoscopic (HR 0.45), 3-year disease-free survival 87.2% against 83.4% (HR 0.74), overall survival 94.7% against 93.0% (not significant). Pending Zach's sign-off.",
+  },
+  {
+    id: EMILE_2024_ILEOSTOMY_CLOSURE_SOURCE,
+    title: "Emile 2024: early against standard closure of a diverting ileostomy",
+    kind: "article",
+    citation: "Emile, et al. Annals of Surgery, 2024. PMID 37788345.",
+    suppliedAt: "2026-11-01T00:00:00.000Z",
+    details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open low anterior resection entry's outside research: closure within 2 weeks raised the anastomotic leak risk (odds ratio 2.12), so routine early closure is not recommended. Pending Zach's sign-off.",
   },
 ];

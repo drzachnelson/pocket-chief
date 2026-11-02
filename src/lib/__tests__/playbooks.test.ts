@@ -311,6 +311,20 @@ describe("playbook library", () => {
         "splenic mobilization -> splenectomy-and-splenorrhaphy",
         "worrisome features -> pancreatic-tail-mass",
       ],
+      // HIPEC / pseudomyxoma batch, reviewed 2026-11-01. Every destination names the same stoma, electrolyte,
+      // prophylaxis or vessel the line is about; the IMA, peritonitis and rectal stump rows follow the colostomy pins.
+      "open-low-anterior-resection": [
+        "Stoma necrosis -> ileostomy-and-ileostomy-closure",
+        "VTE prophylaxis -> prophylaxis-of-venous-thromboembolism",
+        "colostomy -> colostomy-and-colostomy-closure",
+        "hyponatremia -> derangements-of-electrolytes-and-acid-base-balance",
+        "ileostomy -> ileostomy-and-ileostomy-closure",
+        "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
+        "loop colostomy -> colostomy-and-colostomy-closure",
+        "loop ileostomy -> ileostomy-and-ileostomy-closure",
+        "peritonitis -> abdominal-pain",
+        "rectal stump -> total-and-subtotal-colectomy",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
@@ -359,7 +373,8 @@ describe("playbook library", () => {
     // The transaxillary rib exposure also protects this nerve in the axilla.
     expect(slugs("intercostobrachial")).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);
     expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
-    expect(slugs("Toldt")).toEqual(["right-hemicolectomy"]);
+    // The white line of Toldt is taken down on the left for a low anterior resection as on the right for a colectomy.
+    expect(slugs("Toldt")).toEqual(["open-low-anterior-resection", "right-hemicolectomy"]);
     // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior
     // pancreatic neck in a Whipple, and to reach the middle colic root in a right colectomy.
     expect(slugs("Henle")).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);
