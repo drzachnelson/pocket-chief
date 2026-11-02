@@ -213,7 +213,7 @@ export const gastricAdenocarcinomaTopic = buildTopic({
   aliases: ["gastric cancer", "stomach cancer", "gastric carcinoma", "linitis plastica", "signet ring gastric cancer", "hereditary diffuse gastric cancer", "HDGC", "CDH1", "Lauren classification", "Siewert classification", "D2 lymphadenectomy", "FLOT", "Krukenberg tumor", "Virchow node", "gastrectomy for cancer", "GASTRIPEC", "PERISCOPE II"],
   scoreNodeId: "stomach-conditions",
   scoreCategory: "SCORE · Stomach · Diseases & Conditions",
-  tags: ["stomach", "gastric-cancer", "upper-gi", "surgical-oncology", "peritoneal-surface", "absite", "score"],
+  tags: ["stomach", "gastric-cancer", "surgical-oncology", "peritoneal-surface", "absite", "score"],
   sourceId: SCORE,
   additionalSourceIds: [FISER, OE, FLOT4, MATTERHORN, DUTCH, REGATTA, YANG, CYTO_CHIP, GASTRIPEC, PERISCOPE2],
   blocks,
