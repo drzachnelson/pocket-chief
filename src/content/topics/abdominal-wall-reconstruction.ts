@@ -124,7 +124,7 @@ export const abdominalWallReconstructionTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000518",
   slug: "abdominal-wall-reconstruction",
   title: "Abdominal Wall Reconstruction",
-  aliases: ["component separation", "TAR", "transversus abdominis release", "Rives-Stoppa", "retrorectus", "sublay mesh", "IPOM", "onlay", "arcuate line", "mesh infection", "abdominal compartment syndrome", "ACS", "Ramirez"],
+  aliases: ["component separation", "TAR", "transversus abdominis release", "Rives-Stoppa", "retrorectus", "sublay mesh", "IPOM", "onlay", "arcuate line", "mesh infection", "ACS", "Ramirez"],
   scoreNodeId: "hernia-procedures",
   scoreCategory: "SCORE · Hernia · Operations & Procedures",
   tags: ["hernia", "abdominal-wall", "operative-technique", "reconstruction", "absite", "score"],

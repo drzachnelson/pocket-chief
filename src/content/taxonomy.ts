@@ -60,4 +60,6 @@ export const taxonomy: TaxonomyNode[] = [
   {"id": "endoscopy-procedures", "title": "Operations & Procedures", "slug": "endoscopy-operations-procedures", "parentId": "endoscopy", "order": 56},
   { id: "obstetrics-gynecology", title: "Obstetrics & Gynecology", slug: "obstetrics-gynecology", parentId: "score", order: 57 },
   { id: "obstetrics-gynecology-conditions", title: "Diseases & Conditions", slug: "obstetrics-gynecology-diseases-conditions", parentId: "obstetrics-gynecology", order: 58 },
+  { id: "skin-soft-tissue", title: "Skin and Soft Tissue", slug: "skin-and-soft-tissue", parentId: "score", order: 59 },
+  { id: "skin-soft-tissue-conditions", title: "Diseases & Conditions", slug: "skin-soft-tissue-diseases-conditions", parentId: "skin-soft-tissue", order: 60 },
 ];

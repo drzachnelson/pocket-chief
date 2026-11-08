@@ -1,3 +1,11 @@
+import { acuteMesentericIschemiaTopic } from "@/content/topics/acute-mesenteric-ischemia";
+import { necrotizingSoftTissueInfectionsTopic } from "@/content/topics/necrotizing-soft-tissue-infections";
+import { esophagealPerforationTopic } from "@/content/topics/esophageal-perforation";
+import { pilonidalDiseaseTopic } from "@/content/topics/pilonidal-disease";
+import { breastAbscessAndMastitisTopic } from "@/content/topics/breast-abscess-and-mastitis";
+import { gastrointestinalForeignBodiesTopic } from "@/content/topics/gastrointestinal-foreign-bodies";
+import { abdominalCompartmentSyndromeTopic } from "@/content/topics/abdominal-compartment-syndrome";
+import { thermalInjuryBurnsTopic } from "@/content/topics/thermal-injury-burns";
 import { superiorVenaCavaSyndromeTopic } from "@/content/topics/superior-vena-cava-syndrome";
 import { thoracicOutletSyndromeTopic } from "@/content/topics/thoracic-outlet-syndrome";
 import { prophylaxisOfVenousThromboembolismTopic } from "@/content/topics/prophylaxis-of-venous-thromboembolism";
@@ -131,6 +139,15 @@ export { suppliedSources } from "@/content/sources";
 export { taxonomy } from "@/content/taxonomy";
 
 export const libraryTopics: Topic[] = [
+  acuteMesentericIschemiaTopic,
+  necrotizingSoftTissueInfectionsTopic,
+  esophagealPerforationTopic,
+  pilonidalDiseaseTopic,
+  breastAbscessAndMastitisTopic,
+  gastrointestinalForeignBodiesTopic,
+  abdominalCompartmentSyndromeTopic,
+  thermalInjuryBurnsTopic,
+
   superiorVenaCavaSyndromeTopic,
   thoracicOutletSyndromeTopic,
   prophylaxisOfVenousThromboembolismTopic,

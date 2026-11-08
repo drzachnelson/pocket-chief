@@ -58,6 +58,8 @@ describe("playbook library", () => {
         "iliofemoral DVT -> deep-venous-thrombosis",
       ],
       "endovenous-ablation": [
+        // Skin burns are an ablation complication; the new burn disease page is relevant.
+        "burns -> thermal-injury-burns",
         "proximal DVT -> deep-venous-thrombosis",
         "superficial thrombophlebitis -> thrombophlebitis",
         "varicosities -> varicose-veins",
@@ -150,7 +152,6 @@ describe("playbook library", () => {
         "metabolic acidosis -> derangements-of-electrolytes-and-acid-base-balance",
         "popliteal aneurysm -> arterial-peripheral-aneurysms",
         "renal failure -> renal-failure",
-        "reperfusion injury -> fasciotomy",
         "rhabdomyolysis -> fasciotomy",
         "thrombosed popliteal aneurysm -> peripheral-aneurysms-repair",
       ],
@@ -304,6 +305,7 @@ describe("playbook library", () => {
         "cyst fluid CEA -> pancreatic-tail-mass",
         "left-sided portal hypertension -> pancreatic-tail-mass",
         "main-duct IPMN -> pancreatic-tail-mass",
+        "mesenteric ischemia -> acute-mesenteric-ischemia",
         "mucinous cystic neoplasm -> pancreatic-tail-mass",
         "pancreatoduodenectomy -> pancreaticoduodenectomy",
         "serous cystadenoma -> pancreatic-tail-mass",
@@ -364,6 +366,7 @@ describe("playbook library", () => {
       // purpose (kept as a search alias), and "ascites" reached cirrhosis from malignant fluid in carcinomatosis.
       "open-stamm-gastrostomy": [
         "gastroesophageal reflux -> gastroesophageal-reflux-and-barrett-esophagus",
+        "necrotizing fasciitis -> necrotizing-soft-tissue-infections",
         "peritonitis -> abdominal-pain",
       ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
