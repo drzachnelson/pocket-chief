@@ -4039,4 +4039,520 @@ export const suppliedSources: SuppliedSource[] = [
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open Stamm gastrostomy entry's outside research: a meta-analysis of 5 randomized trials (355 patients); feeding within 3 hours of PEG did not change complications (odds ratio 0.78) or 72-hour mortality (0.60), and day-1 gastric residuals did not differ significantly. PEG and IR data, not open Stamm. Pending Zach's sign-off.",
   },
+  // Call Problems II, Runs 1 and 2 — clinical draft pending owner sign-off.
+  {
+    "id": "00000000-0000-4000-8000-000000007800",
+    "title": "SCORE: Burns",
+    "kind": "website",
+    "citation": "Thompson CM. Burns. SCORE, May 3, 2024; local module retrieved August 12, 2026.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000539",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Call Problems II Run 2 saved board packet, October 23, 2026, S1; checked against the complete local module. Supplies assessment, depth and zones, TBSA, classic Parkland and output targets, burn physiology, topical agents, chemical/electrical injuries, compression syndromes and follow-up. Licensed material paraphrased. Module adds HF toxicity, topical agents and scar care beyond the abbreviated packet. The pediatric rule-of-nines is approximate; use an age-adjusted chart. SCORE silver-sulfadiazine penetration wording conflicts with Fiser, retained visibly. Draft pending Zach clinical sign-off."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007801",
+    "title": "Fiser: ABSITE Review, 8th edition, chapter 17",
+    "kind": "book",
+    "citation": "Fiser SM. The ABSITE Review. 8th ed. Chapter 17, Burns, pp. 208–222.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Saved board packet S2, cross-checked against local chapter OCR. Supplies historical admission thresholds, 50% Parkland cap, infant output target, classic excision/infection/nutrition rules and organism, retained as attributed board rules rather than current mandates. Inhalation/airway evaluation, electrical injury, tetanus, nonaccidental-injury patterns and infection management were added from the chapter beyond the abbreviated packet. OCR has garbled anatomy/figures; no literal reproduction or image ingestion. The erroneous blanket avoidance of first-day albumin is not carried; the ABA guideline provides current fluid context. Draft pending Zach clinical sign-off."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007802",
+    "title": "SCORE: Skin Grafting for Burn Injuries",
+    "kind": "website",
+    "citation": "Thompson CM. Skin Grafting for Burn Injuries. SCORE, March 26, 2024; local module retrieved August 12, 2026.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000919",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Saved board packet S3. Local module verified for indications, excision differences, graft choice, donor healing and causes of graft loss; grafting summarized as disease-management principles, not counted as full coverage of the separate operation. The module refines deep partial-thickness graft indication to failure to heal within 21 days, especially function-critical sites. Draft pending Zach clinical sign-off."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007803",
+    "title": "ABA: Clinical Practice Guidelines on Burn Shock Resuscitation",
+    "kind": "article",
+    "citation": "Cartotto R, et al. American Burn Association Clinical Practice Guidelines on Burn Shock Resuscitation. J Burn Care Res. 2024;45(3):565–589. doi:10.1093/jbcr/irad125. PMID 38051821.",
+    "url": "https://academic.oup.com/jbcr/article/45/3/565/7458089",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary guideline abstract verified November 8, 2026 through PubMed/publisher search results; full publisher page inaccessible. Adds an adult current-practice comparison beyond supplied packet, with pediatric scope explicitly excluded. Clinical sign-off pending."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007804",
+    "title": "ABA: Guidelines for Burn Patient Referral",
+    "kind": "website",
+    "citation": "American Burn Association. Guidelines for Burn Patient Referral. Official online consultation/transfer table; accessed November 8, 2026.",
+    "url": "https://www.ameriburn.org/burn-care-team/resources/guidelines-for-burn-patient-referral",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Official primary referral table read November 8, 2026 to fill the saved packet FLAG requesting current ABA referral criteria and clarify that superficial erythema is excluded from TBSA. Original summarized teaching, not a reproduction of the referral handout. Local resources and judgment govern transfer. Draft pending Zach clinical sign-off."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007805",
+    "title": "ANZBA/BBA: Emergency Management of Severe Burns course manual",
+    "kind": "book",
+    "citation": "Australian and New Zealand Burn Association Education Committee. Emergency Management of Severe Burns. UK version for the British Burn Association. 18th ed. January 2020. Chapter 3, pp.25–26.",
+    "url": "https://www.britishburnassociation.org/wp-content/uploads/2024/07/2020-Manual-18th-Edition-for-printers-final.pdf",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary manual checked November 8, 2026 after independent review: Jackson zones are concentric injury/perfusion regions within a wound, not interchangeable depth grades. Clarifies the saved packet/SCORE teaching shorthand without discarding the stasis-conversion principle. Additional primary authority beyond packet; clinical sign-off pending."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007600",
+    "title": "Gastrointestinal Foreign Bodies — supplied SCORE/Fiser packet",
+    "kind": "user_notes",
+    "citation": "Owner-supplied NotebookLM board packet, 2026-10-23; Gastrointestinal Foreign Bodies.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Read in full through SOURCES and FLAGS; no CONTINUED marker or mid-sentence ending. Underlying local SCORE modules and Fiser OCR cross-checked. Packet source inventory: S1 | SCORE Curriculum — Gastric Foreign Bodies module | epidemiology, passage and intervention rates, object-specific thresholds (6 cm/2 cm, sharp-object perforation 15%-35%, battery size/age pathways, magnet timing), endoscopic devices, glucagon, overtube\nS2 | SCORE Curriculum — Esophageal Caustic Ingestion and Foreign Bodies module | esophageal narrowings, adult risk factors, perforation signs, two-view radiography, contrast caution, emergent/urgent/nonurgent endoscopy categories\nS3 | SCORE Curriculum — Aerodigestive Tract Foreign Bodies (Pediatric) module | esophageal lodging percentages, coin predominance, battery double-contour sign and 2-hour removal, pediatric coin and gastric battery observation windows\nS4 | Fiser — ABSITE Review, 8th ed. | ch. 29, esophagus (foreign body diagnosis/treatment by endoscopy, cricopharyngeus) and ch. 43, pediatric surgery (toddler aerodigestive foreign body presentations)\nPreserved source disagreements: - Divergent gastric coin dwell time: the SCORE gastric module (S1) keys endoscopic retrieval when a gastric coin remains beyond 3 to 4 weeks, while the SCORE pediatric module (S3) keys a repeat radiograph at 2 weeks with endoscopic removal if the coin is still in the stomach; the packet table follows S1 for the general rule and this divergence is preserved rather than harmonized.\n- Divergent contrast guidance: S2 states oral contrast examinations should not be performed (aspiration risk, interference with endoscopy) unless diagnosing perforation, while S3 describes a contrast esophagram as helpful when radiographs are normal but globus, pain, and dysphagia persist; the packet body follows S2's caution and flags S3's exception.\n- Single-source framing tension: S3 calls button battery ingestion \"a surgical emergency\" in its header, then explicitly exempts the asymptomatic child with a gastric battery from emergency management; the packet follows the detailed S1 size- and symptom-based pathway.\n- Classic-source gap: Fiser's extracted chapters contain no quantitative foreign-body rules (no battery timelines, magnet counts, size cutoffs, or observation windows), so the packet's numbers are SCORE-only and have no classic board counterpart in the sources.\n- Scope exclusion: The Zargar caustic-injury grading and caustic management content shares the S2 module but is excluded from this packet as a separate topic; only S2's foreign-body material was used.\n- Beyond sources: None.\nOriginal paraphrase only; licensed full module text is not reproduced. This entry remains a clinical draft pending Zach’s explicit sign-off in an unmerged batch PR."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007601",
+    "title": "Gastrointestinal Foreign Bodies — supplied Word review",
+    "kind": "user_notes",
+    "citation": "Owner-supplied “Gastrointestinal Foreign Bodies Pocket Chief” Word review, received 2026-11-08; inline author/year attributions retained in source details.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Complete supplied extraction read through its final vignette; no standalone numbered bibliography exists in the document. The full available document reference inventory consists of these inline attributions (not invented full bibliographic records): Green et al., Successful Training in GI Endoscopy, 2022; Liu et al., Med Sci Monit, 2022; Kramer et al., JPGN, 2015; Mubarak et al., JPGN, 2021; Nugud et al., JPGN, 2023; Ledder et al., JPGN, 2026; Chirica et al., WSES, 2019; Valerio and Williamson, Am Fam Physician, 2026; WSES 2019; ESGE 2016 via Doğan et al., BMC Gastroenterol, 2026; Mubarak et al., ESPGHAN, 2021; Stone and Lembo, Pediatr Rev, 2026; WSES 2019; ESGE 2016; Kramer et al., NASPGHAN, 2015; Stone and Lembo, 2026; Evans et al., JAMA, 2023; Mubarak et al., 2021; Saha et al., Curr Gastroenterol Rep, 2025; Gomez-Esquivel, The Esophagus, 2021; Valerio and Williamson, 2026; Jin et al., BMC Pediatr, 2022; Manfredi and Lightdale, 2022; Levels from Gomez-Esquivel, The Esophagus, 2021; Zhao et al., Surg Endosc, 2024; cited in Sbeit et al., Surg Endosc, 2024; Yoo et al., BMC Gastroenterol, 2021; Kramer et al., 2015; Doğan et al., 2026; Yogev et al., Pediatrics, 2020; Cagil et al., Pediatr Rev, 2021; Kamalumpundi et al., Mayo Clin Proc, 2025; Reed et al., Yamada's Textbook, 2022; Chirica et al., 2019; Sbeit et al., 2024; Cagil et al., 2021; Green et al., 2022; Rizvi et al., Pediatr Surg Int, 2024; Chirica et al., 2019; Green et al., 2022; Stone and Lembo, 2026; Cagil et al., 2021; Kramer et al., 2015; Rizvi et al., 2024; Meyer et al., Int J Pediatr Otorhinolaryngol, 2020; Whelan et al., 2019; Green et al., 2022; Cagil et al., 2021; ASGE and ESGE, via Green et al., 2022; Mubarak et al., 2021; ASGE 2011 / ESGE 2016; Evans et al., JAMA, 2023; Doğan et al., 2026; Rizvi et al., 2024; Saha et al., 2025; Reed et al., Yamada's, 2022; Walsh et al., Cotton and Williams, 2023; Coronel and Waxman, Yamada's, 2022; Reed et al., 2022; Gomez-Esquivel, 2021; Kramer et al., 2015; Green et al., 2022; Coronel and Waxman, 2022; Walsh et al., 2023; Overtube lengths from Green et al., 2022; Green et al., 2022; Reed et al., 2022; Obri et al., Dig Dis Sci, 2024; de Benito Sanz et al., Am J Gastroenterol, 2024; Peksa et al., Pharmacotherapy, 2019; Hardman et al., Cochrane, 2020; Kramer et al., NASPGHAN, 2015; Quitadamo et al., Am J Gastroenterol, 2024; ASGE via Green et al., 2022; ASGE; Valerio and Williamson, 2026; Luo et al., Clin Oral Investig, 2026; Stone and Lembo, 2026; Luo et al., 2026; Kramer et al., 2015; Yogev et al., 2020; Liu et al., 2022; Yogev et al., 2020; Mubarak et al., ESPGHAN, 2021; Kramer et al., 2015; Mubarak et al., 2021; Akilov et al., Pediatr Surg Int, 2021; cited in Akilov et al., 2021; Nezhentsev et al., Emerg Med J, 2026; Kramer et al., 2015; Stone and Lembo, 2026; consensus; Nezhentsev et al., 2026; Kramer et al., 2015; Dong et al., BMC Pediatr, 2026; Dixon et al., Surgery, 2026, where **94%** of observation failures needed surgery; Chen et al., 2025; Nezhentsev et al., 2026; Yoo et al., 2021; Dong et al., 2026; Zheng et al., Abdom Radiol, 2026; Evans et al., 2023; Luo et al., 2026; ASGE via Green et al., 2022; Walsh et al., 2023; Mubarak et al., 2021; Saha et al., 2025.\nCompanion packet and named primary guidelines were cross-checked. Repeated board pearls/vignettes were consolidated; descriptive study percentages, technique success rates, and population incidence were retained as context rather than universal treatment thresholds. Clinical output remains draft pending Zach’s review. Corrections and additions from guideline verification are recorded in output/call-problems-ii/foreign-compartment-review.md. The word “current” in the supplied document does not establish currency.\nSupplementary descriptive evidence from supplied review (not universal action thresholds): pediatric coin ED visits nearly doubled over20y; >22,000 magnet ingestions2002–2011, half multiple, market resumption2017; adult EFI incidence~13/100,000/y, distal lodging77% in one series and underlying pathology>75%; adult cohort spontaneous passage44.8%, food/bones/dentures intervention50–75%, children>60% passage and coins~30%. Sharp-object delayed perforation mean10.4d, asymptomatic injury~50%, contemporary surgery~4%, adult endoscopic complications17.9%/major7.7% in586 cases, historical35% morbidity/26% mortality. Magnet symptoms may lag7d, selected reports perforation up to50%. Large lithium batteries≥20mm reportedly severe/fatal outcomes~13%; gastric damage60% of68 removals versus registry reassurance, and vascular injury mortality~81% are highly selected estimates. Flexible retrieval success up to98%, push184/189(97%); pediatric esophageal coin passage up to25% in8–16h and65% of mid/distal coins in807-child study. Glucagon meta-analysis1185 patients30.2% vs33.0%, adverse events15% vs0%; older diazepam/glucagon RCT38% vs32%; newer RCT removal times4 vs3.5min. Adult cohort length cutoffs3.5cm stomach/3cm bowel predict nonpassage but do not replace guideline6cm. Selected smooth distal objects<1cm and ordinary post-duodenal objects may be observed only after excluding hazardous objects/symptoms. The review’s AFP2026 gastric battery algorithm(<6y,>14mm,multiple batteries/magnets) differs from society algorithms; retained for reviewer sign-off, not substituted for them. Modified Zargar and CT/MR battery injury scores are proposed, not presented as validated decision rules. Overtube lengths cited25cm proximal/50cm long are device descriptions, not universal requirements. Papain harms include perforation, aspiration pneumonitis, hypernatremia, death. The asserted universal step-off visibility is corrected against NCPC. The review’s battery-injury15min figure reinforces immediate care but does not establish a safe interval. Source scope excludes separate caustic-ingestion management."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007700",
+    "title": "Abdominal Compartment Syndrome — supplied SCORE/Fiser packet",
+    "kind": "user_notes",
+    "citation": "Owner-supplied NotebookLM board packet, 2026-10-23; Abdominal Compartment Syndrome.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Read in full through SOURCES and FLAGS; no CONTINUED marker or mid-sentence ending. Underlying local SCORE modules and Fiser OCR cross-checked. Packet source inventory: S1 | SCORE Curriculum — Abdominal Compartment Syndrome module | WSACS definitions and IAH grades, epidemiology and mortality, risk factors, organ-system effects, presentation, intravesical measurement, medical ladder, decompressive laparotomy, delayed closure\nS2 | Fiser — ABSITE Review, 8th ed. | ch. 15, trauma (abdominal compartment syndrome: 5 X's, bladder pressure threshold, sedation/paralysis, decompressive laparotomy)\nPreserved source disagreements: - Divergent decompression threshold: Fiser keys decompressive laparotomy at a persistent bladder pressure greater than 25 to 30, whereas SCORE defines ACS above 20 mm Hg with new organ dysfunction and treats medically from 12 mm Hg; the packet body follows SCORE (WSACS) and flags Fiser's number as the classic trauma answer.\n- Divergent medical therapy depth: Fiser's medical treatment is sedation and paralysis only; SCORE's ladder adds luminal decompression, prokinetics, paracentesis/percutaneous drainage, fluid restriction, diuresis, and renal replacement therapy — SCORE-only content.\n- Internal inconsistency in the SCORE extraction: the module text describes one Foley method as \"directly injecting 50 mL,\" while its illustrated three-way Foley manometer method instills 20 to 25 mL of saline; the packet teaches the illustrated 20-to-25 mL technique in the sequence block and does not reconcile the two figures.\n- Single-source framing: The \"5 X's\" presentation cluster and the massive-resuscitation-after-prolonged-laparotomy setting come only from Fiser; SCORE's risk list is broader and includes secondary ACS from causes outside the abdomen.\n- Single-source numbers: IAH incidence of 30% to 50%, ACS incidence of 5% to 15%, and ACS mortality as high as 75% to 90% appear only in SCORE; Fiser gives no incidence or mortality figures.\n- Beyond sources: None.\nOriginal paraphrase only; licensed full module text is not reproduced. This entry remains a clinical draft pending Zach’s explicit sign-off in an unmerged batch PR."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007701",
+    "title": "Abdominal Compartment Syndrome — supplied Word review",
+    "kind": "user_notes",
+    "citation": "Owner-supplied “Abdominal Compartment Syndrome Pocket Chief” Word review, received 2026-11-08; inline author/year attributions retained in source details.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Complete supplied extraction read through its final vignette; no standalone numbered bibliography exists in the document. The full available document reference inventory consists of these inline attributions (not invented full bibliographic records): Gottlieb et al., J Emerg Med, 2020; Van Hoef et al., Hernia, 2024; Balogh et al., Lancet, 2014; Cheatham and Safcsak, Chest, 2011; De Laet et al., Crit Care, 2020; Balogh et al., Lancet, 2014; Kwon et al., Eur J Trauma Emerg Surg, 2022; Kňazovický et al., Langenbecks Arch Surg, 2026; De Laet et al., Crit Care, 2020; Aaron et al., ACS GI Surgical Emergencies, 2021; Van Damme and De Waele, Crit Care, 2018; De Laet et al., Crit Care, 2020; Mohmand and Goldfarb, JASN, 2011; Miao et al., Sci Rep, 2025; IAP/APA pancreatitis guideline, 2013; Achavanuntakul et al., Sci Rep, 2025; Rogers and Garcia, Chest, 2018; Othman et al., J Surg Res, 2026; WSES, 2018; IAP/APA, 2013; Al-Abassi et al., BMC Anesthesiol, 2018; Lombardi et al., Abdom Radiol, 2026; Kirkpatrick et al., World J Surg, 2009; van Brunschot et al., Clin Gastroenterol Hepatol, 2012; Griggs and Butler, J Intensive Care Med, 2016; Van Hoef et al., Hernia, 2024; 1984; Aaron et al., ACS, 2021; De Laet et al., Crit Care, 2020; Depauw et al., Acta Neurochir, 2019; De Laet et al., Crit Care, 2020; Aaron et al., ACS, 2021; Kušar et al., Sci Rep, 2022; Ejike et al., Crit Care Med, 2008; di Natale et al., Pediatr Surg Int, 2020; Wiegandt et al., BMC Pediatr, 2023; I 10–12, II 13–15, III 16–18, IV more than 18 mm Hg; Li et al., BMC Pediatr, 2025; WSACS 2013; Rodríguez-Blanco et al., J Int Med Res, 2022; Lerner, Aliment Pharmacol Ther, 2008; He et al., Crit Care, 2022; Hecker et al., Langenbecks Arch Surg, 2016; Loftus et al., J Trauma Acute Care Surg, 2019; Griggs and Butler, J Intensive Care Med, 2016; De Laet et al., Ann Intensive Care, 2012; Mullens et al., J Card Fail, 2008; Marshall and Golper, Semin Dial, 2011; Connor et al., Evidence-Based Nephrology, 2022; Larson et al., J Intensive Care Med, 2026; WSES SAP, 2019, Grade 1A; De Waele et al., Br J Surg, 2016; Balogh et al., Lancet, 2014; De Laet et al., Crit Care, 2020; Griggs and Butler, J Intensive Care Med, 2016; Balogh et al., Lancet, 2014; Kňazovický et al., Langenbecks Arch Surg, 2026; Pillay et al., World J Surg, 2023; Chiara et al., J Trauma Acute Care Surg, 2016; Kňazovický et al., 2026; Rasilainen et al., J Trauma Acute Care Surg, 2020; EAST, 2022; Fung et al., Langenbecks Arch Surg, 2022; Mahoney et al., EAST, 2022; Cheng et al., Cochrane, 2022; EAST SLEEP-TIME; Kwon et al., Eur J Trauma Emerg Surg, 2022; Chiara et al., 2016; Cheatham and Safcsak, Crit Care Med, 2010; WSES, 2018; Van Hoef et al., Hernia, 2024; WSES non-trauma open abdomen, 2017; Poillucci et al., Eur J Trauma Emerg Surg, 2021; Wainstein et al., Surgery, 2023; SVS, 2018; Hörer et al., J Endovasc Ther, 2026; Ersryd et al., Eur J Vasc Endovasc Surg, 2021; Rubenstein et al., J Vasc Surg, 2015; DeCarlo et al., Ann Vasc Surg, 2022; ABA guideline, 2025; Strang et al., BURNIAH, 2022; IAP/APA, 2013; WSES SAP, 2019; Adebayo and Wong, Clin Gastroenterol Hepatol, 2023.\nCompanion packet and named primary guidelines were cross-checked. Repeated board pearls/vignettes were consolidated; descriptive study percentages, technique success rates, and population incidence were retained as context rather than universal treatment thresholds. Clinical output remains draft pending Zach’s review. Corrections and additions from guideline verification are recorded in output/call-problems-ii/foreign-compartment-review.md. The word “current” in the supplied document does not establish currency.\nSupplementary supplied-review evidence (heterogeneous study estimates, not universal treatment thresholds): healthy resting IAP may be near0 and chronically10–15mmHg with obesity/pregnancy/ascites; PEEP>12cmH2O reportedly adds only1–2mmHg IAP; IAP>16 associated with AKI/CRRT in MIMIC-IV, not an intervention threshold. IAH30–49% ICU,59% trauma,57% emergency surgery,64% ventilation; ACS2.7% at ICU admission,4.2–14% trauma,~1% general ICU; pancreatitis IAH60–80%. Reported crystalloid-reduction series ACS7.4%→0%, mortality22.8%→10.6%; risk OR4.95 distension and3.41 BMI>30. Burns≥20%TBSA, massive fluids and ECMO are risk settings. Untreated mortality~85%, treated25–55%; early-vs-late decompression associations38% within24h versus up to80% beyond48h cannot prove causality. Awake pressure can reach20 without dysfunction; pressure trends and measurement validity matter. Conversion1mmHg=1.36cmH2O. Pediatric normal7±3 approximates WSACS4–10; investigational grading10–12/13–15/16–18/>18 is not a universal WSACS scale. RRT retrospective25 sessions removed1.9L, IAP12→10.5; HF fluid removal13→7. Controlled/low-efficiency RRT may improve tolerance; peritoneal dialysis is unsuitable in relevant acute abdominal pathology, not universally prohibited for every abdominal diagnosis. Hypertonic3% protocol closure81→93% is observational; hypertonic/colloid steps are historical and not endorsed as routine resuscitation here. Decompression cohort IAP23→12 at2h then12–13 through72h; meta-analysis airway peak−10.1cmH2O, P/F+70.4, urine+95.3mL/h, CVP−4.6 andPCWP−5.8, hemodynamic improvement small/mainly gradeIV. Decompression mortality49.7% adults/60.8%children; cohort36%28d/55%1y. TAC series: Bogotá often<20–30%closure but54.9% in one comparison; NPWT18–59%; traction77–100%,676-patient cohort failed-closure OR0.1; Wittmann+NPWT77.8%closure/2.8%fistula, dynamic retention72%. EAST2022 favors traction without increased mortality/fistula; nontrauma Cochrane evidence uncertain. First takeback>24h associated lower closure; >8d exposure raises frozen abdomen/fistula risk. Protocol series closure59→81%, survival50→72%. Septic OA fistula5–54%. rAAA ACS~7% overall, EVAR7–30%, a2026 series21%; hypotension<70, balloon,>5PRBC occurred in97%ACS; index-EVAR score≥8 is a selected model, not general prophylactic indication. Modern burn cohort IAH53% with noACS after≥15%TBSA. Surgical decompression alternatives in pancreatitis include midline/subcostal laparostomy or selected linea-alba fasciotomy; choice is specialist-dependent. Source’s fixed pancreatitis>25 threshold and ABA2025 attribution corrected with IAP2025 and ABA2024. Fiser OCR says IVC expansion and renal/visceral hyperperfusion; those are inconsistent with the intended compression/hypoperfusion physiology and not reproduced."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007602",
+    "title": "ESGE — adult upper-GI foreign bodies (2016)",
+    "kind": "article",
+    "citation": "Birk M, Bauerfeind P, Deprez PH, et al. Removal of foreign bodies in the upper gastrointestinal tract in adults: ESGE Clinical Guideline. Endoscopy. 2016;48:489–496. doi:10.1055/s-0042-100456.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named in supplied review; primary guideline checked 2026-11-08. Verified 2–6-hour emergency tier, 24-hour urgent tier, 72-hour nonurgent tier, adult gastric battery approach, imaging/contrast caution, protective retrieval, 2.5-cm diameter and 5–6-cm length thresholds. No claim that this search proves no newer adult guideline exists.",
+    "url": "https://www.esge.com/assets/downloads/pdfs/guidelines/2016_s_0042_100456.pdf"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007603",
+    "title": "ESPGHAN — pediatric foreign-body position paper (2026)",
+    "kind": "article",
+    "citation": "Ledder O, Furlano R, Papadopoulou A, et al. Foreign body ingestions in children and adolescents: ESPGHAN Endoscopy SIG position paper. J Pediatr Gastroenterol Nutr. 2026;83:539–554. doi:10.1002/jpn3.70485.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named in supplied review and independently retrieved 2026-11-08. Verified emergency reachable multiple magnets; individualized gastric sharps; emergency water-bead retrieval; delayed gastric battery risk criteria (<5 years and ≥20 mm with unwitnessed/>12-hour history), 7–14-day follow-up, impacted battery graspers, and post-removal risk. These clarify older packet/Word blanket recommendations and need Zach’s sign-off.",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1002/jpn3.70485"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007604",
+    "title": "National Capital Poison Center — battery guideline",
+    "kind": "website",
+    "citation": "National Capital Poison Center. Button battery ingestion triage and treatment guideline. Accessed 2026-11-08.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named in supplied review. Verified honey starts at ≥12 months (correcting supplied >12 months), <12-hour ingestion, ability to swallow, 10 mL every 10 minutes up to 6 doses; confirmed esophageal battery sucralfate 1 g/10 mL, 10 mL every 10 minutes up to 3 doses until sedation. Never delay removal for fasting or mitigation; avoid mitigation if dwell may exceed 12 hours. Thin batteries/poor lateral alignment can lack visible step-off, correcting supplied assertion of universal visibility. Post-removal irrigation requires exclusion of perforation.",
+    "url": "https://www.poison.org/battery/guideline"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007605",
+    "title": "NASPGHAN — pediatric ingested foreign bodies (2015)",
+    "kind": "article",
+    "citation": "Kramer RE, Lerner DG, Lin T, et al. Management of ingested foreign bodies in children: clinical report of the NASPGHAN Endoscopy Committee. J Pediatr Gastroenterol Nutr. 2015;60:562–574. doi:10.1097/MPG.0000000000000729.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied authority; verified multi-view magnet count, reachable multiple-magnet management, >12-hour surgical involvement, controlled distal observation with clear ownership, age/size battery risks, coins and sharp-object historical data. Older recommendations are explicitly distinguished from ESPGHAN 2026.",
+    "url": "https://naspghan.org/files/documents/pdfs/training/curriculum-resources/procedures-curriculum/Kramer_et_al_2015_Management_of_Ingested_Foreign_Bodies_in_Children_A_Clinical_Report_of_the_NASPGHAN_Endoscopy_Committee.pdf"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007606",
+    "title": "ESPGHAN — button batteries (2021)",
+    "kind": "article",
+    "citation": "Mubarak A, Benninga MA, Broekaert I, et al. Diagnosis, management, and prevention of button battery ingestion in childhood: an ESPGHAN position paper. J Pediatr Gastroenterol Nutr. 2021;73:129–136. doi:10.1097/MPG.0000000000003048.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied authority; primary verified delayed >12-hour diagnosis/removal CT consideration before removal, prior esophageal injury despite gastric location, emergent esophageal removal, and 7–14-day follow-up for selected asymptomatic early-diagnosed post-esophageal batteries. Differences versus NASPGHAN and 2026 refinement retained.",
+    "url": "https://doi.org/10.1097/MPG.0000000000003048"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007607",
+    "title": "ASGE — ingested foreign bodies and food impaction (2011)",
+    "kind": "article",
+    "citation": "ASGE Standards of Practice Committee; Ikenberry SO, Jue TL, Anderson MA, et al. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73:1085–1091. doi:10.1016/j.gie.2010.11.010.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied authority; primary verified >2.5-cm gastric diameter threshold correcting SCORE >2 cm generalization, >6-cm length, retained esophageal coin removal within 24 hours, selected gastric battery observation up to 48 hours, and avoiding drug-packet endoscopy.",
+    "url": "https://www.asge.org/home/resources/publications/guidelines/management-of-ingested-foreign-bodies-and-food-impactions"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007608",
+    "title": "Glucagon versus placebo for food impaction — randomized trial",
+    "kind": "article",
+    "citation": "de Benito Sanz M, Tejedor-Tejada J, Mangas-Sanjuan C, et al. Double-Blind Multicenter Randomized Clinical Trial Comparing Glucagon vs Placebo in the Resolution of Alimentary Esophageal Impaction. Am J Gastroenterol. 2024;119:87–96. doi:10.14309/ajg.0000000000002511.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named in supplied review; primary abstract checked for absence of benefit in 140 participants. Packet glucagon-first phrasing is retained only as a classic/optional bridge, never a delay to endoscopy. Pediatric dosing from supplied secondary review is not independently validated and requires clinical sign-off.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/37734342/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007702",
+    "title": "WSACS — consensus definitions and practice guidance (2013)",
+    "kind": "article",
+    "citation": "Kirkpatrick AW, Roberts DJ, De Waele J, et al. Intra-abdominal hypertension and the abdominal compartment syndrome: updated consensus definitions and clinical practice guidelines from WSACS. Intensive Care Med. 2013;39:1190–1206. doi:10.1007/s00134-013-2906-z.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied authority. Primary tables checked 2026-11-08: adult IAH ≥12, ACS >20 plus organ dysfunction, grades; ≤25-mL bladder instillation, supine end-expiratory midaxillary zero; pediatric IAH >10 (corrects Word ≥10), pediatric ACS >10 with new/worsening attributable dysfunction, 1mL/kg minimum3 maximum25mL. No recommendation for APP-targeted resuscitation, diuretics or RRT; these are not mandatory ACS rescue steps. Open-abdomen classification verified.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3680657/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007703",
+    "title": "WSES — open abdomen in trauma and non-trauma (2018)",
+    "kind": "article",
+    "citation": "Coccolini F, Roberts D, Ansaloni L, et al. The open abdomen in trauma and non-trauma patients: WSES guidelines. World J Emerg Surg. 2018;13:7. doi:10.1186/s13017-018-0167-4.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied authority; checked NPWT/fascial traction, 24–48-hour re-exploration, early closure commonly4–7 days, safe primary fascia closure, definitive synthetic bridging caveat, planned ventral hernia, nutritional/fistula precautions, and trauma risk markers. Technique series percentages in Word are heterogeneous observational data, not head-to-head probabilities.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5797335/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007704",
+    "title": "IAP — revised acute pancreatitis guidelines (2025)",
+    "kind": "article",
+    "citation": "International Association of Pancreatology. Revised Guidelines on Acute Pancreatitis 2025, endorsed by APA, EPC, Indian Pancreas Club and Japan Pancreas Society. Pancreatology. 2025. doi:10.1016/j.pan.2025.04.020.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Added beyond supplied 2013 guidance after required currency verification. Checked recommendations45–48: ACS >20 with new/progressive dysfunction; monitor IAP in severe pancreatitis; nonoperative drainage/decompression/fluid strategy; consider surgical decompression for worsening dysfunction after nonoperative failure. Supersedes Word claim that >25 is the mandatory current operative threshold; addition requires Zach’s sign-off.",
+    "url": "https://doi.org/10.1016/j.pan.2025.04.020"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007705",
+    "title": "Percutaneous catheter decompression — matched study",
+    "kind": "article",
+    "citation": "Cheatham ML, Safcsak K. Percutaneous catheter decompression in the treatment of elevated intraabdominal pressure. Chest. 2011;140:1428–1435. doi:10.1378/chest.10-2789.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied primary study; abstract independently checked: 62 matched patients, 25/31 avoided laparotomy, >1000mL drainage OR >9mmHg IAP fall within4h associated with success; lack of adequate drainage and pressure response associated with failure. Word converts this into an over-rigid universal rule; topic preserves numbers as study-derived markers and does not mandate waiting4h despite worsening organ failure.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/21903735/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007706",
+    "title": "WSES — severe acute pancreatitis (2019)",
+    "kind": "article",
+    "citation": "Leppäniemi A, Tolonen M, Tarasconi A, et al. 2019 WSES guidelines for the management of severe acute pancreatitis. World J Emerg Surg. 2019;14:27. doi:10.1186/s13017-019-0247-0.",
+    "suppliedAt": "2026-11-08T12:00:00.000Z",
+    "details": "Named supplied authority; primary verified nonoperative-first when feasible, prompt decompression for refractory ACS, avoidance of early necrosectomy when OA needed for ACS/ischemia, and 24–48-hour re-exploration. No added instruction to open the necrosis cavity during decompression.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6567462/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007100",
+    "title": "SCORE/Fiser packet — Acute Mesenteric Ischemia",
+    "kind": "user_notes",
+    "citation": "Acute Mesenteric Ischemia. User-supplied SCORE/Fiser packet saved 2026-10-23. Source works: Healy L. SCORE Curriculum, Acute Mesenteric Ischemia (2025) and Management of Mesenteric Occlusive Disease (2026); Fiser SM. The ABSITE Review, 8th ed., ch. 27 (vascular).",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete saved packet read through SOURCES/FLAGS and compared with the full DOCX extraction. Relevant local SCORE modules retrieved 2026-08-12 were cross-checked directly: AMI module id 128339; companion management module https://www.surgicalcore.org/modulecontent.aspx?id=264033. Fiser ch.27 is OCR: the embolus distance reads “a to 4 cm”; saved packet interprets this as 3–4 cm, so it is flagged rather than silently repaired. Preserved all five packet FLAGS: type distribution, mortality denominators, embolus location, SCORE-only NOMI vasodilators, and second-look resection rates. The supplied packet contains the internal heparin divergence (immediate heparin versus no routine NOMI heparin); current WSES correction is separately sourced. No relevant pending qbank note matched. Licensed source text is paraphrased, not reproduced.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=128339"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007101",
+    "title": "Supplied clinical review — Acute Mesenteric Ischemia Pocket Chief",
+    "kind": "user_notes",
+    "citation": "Acute Mesenteric Ischemia Pocket Chief. User-supplied clinical review, DOCX-to-Markdown extraction reviewed 2026-11-08.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Clinical draft pending Zach sign-off; supplied source coverage is not independent clinical approval. No terminal reference list exists in the supplied DOCX extract; author/journal/year attributions are retained below rather than fabricating missing titles, DOIs or pages. Numerical observational outcomes remain attributed to this supplied synthesis unless independently checked. The complete 308-line extract ends with completed board vignettes; no CONTINUED marker or interrupted sentence. Preserved its distinct clinical points and quantitative outcomes, deduplicating repeated triage rules, tables and vignettes. Its universal full-dose UFH mandate for every NOMI is qualified against WSES; dose examples are explicitly VTE-extrapolated or center-specific, not AMI standards. ROMS does not waive required bowel reassessment; no universal bowel-length threshold or safe delay is asserted. Modern frequency figures are not forced to sum across unlike categories. Supplied attributions (bibliographic completeness unverified): Bala et al., World Journal of Emergency Surgery, 2022; Sermonesi et al., WSES Cesena Guidelines, 2023; Hirschl, Endovascular Procedures, 2023; Hirschl, 2023; Brandt et al., ACG Colon Ischemia Guideline, 2015; Brandt et al., 2015; Theodore et al., NEJM Evidence, 2024; Brandt et al., 2015; Pinto et al., Abdominal Radiology, 2022; Tamme et al., BMJ Open, 2022 meta-analysis; Reintam Blaser et al., Critical Care, 2024; Aaron et al., ACS Gastrointestinal Surgical Emergencies, 2021; Reintam Blaser et al., 2024; Tamme et al., 2022; Manuel Rafael et al., Abdominal Radiology, 2026; Manuel Rafael et al., 2026; Vrba et al., Scientific Reports, 2025; Bala et al., 2022; Mazzolai et al., ESC Guidelines, 2024; Reintam Blaser et al., Scientific Reports, 2025 meta-analysis of 81 studies; Bala et al., 2022; Ginsburg et al., ACR Appropriateness Criteria, 2018; Ginsburg et al., 2018; Gnanapandithan and Feuerstadt, Current Gastroenterology Reports, 2020; Gnanapandithan and Feuerstadt, 2020; Reintam Blaser et al., 2025; Manuel Rafael et al., 2026; Vrba et al., 2025; Mazzolai et al., 2024; Sermonesi et al., 2023; Gnanapandithan and Feuerstadt, 2020; Ronot et al., AJR Expert Panel, 2026; Clair and Beach, NEJM, 2016; Gnanapandithan and Feuerstadt, 2020; Clair and Beach, 2016; Bala et al., 2022; Köhler et al., Abdominal Radiology, 2026; Lam et al., ACR Appropriateness Criteria, 2022; Kapalla et al., Langenbeck's Archives of Surgery, 2023; Qiu et al., European Journal of Trauma and Emergency Surgery, 2024; Lakbar et al., Intensive Care Medicine, 2025; Brandt and Boley, Gastroenterology, 2000; Lakbar et al., 2025; Theodore et al., NEJM Evidence, 2024; Theodore et al., NEJM Evidence, 2024; Agarwal et al., Abdominal Radiology, 2026; Sermonesi et al., 2023, citing WSES 2022; Lam et al., 2022; Mazzolai et al., 2024; Costello et al., Digestive Surgery, 2025; Prakash et al., Current Gastroenterology Reports, 2019; Tilsed et al., ESTES Guidelines, 2016; Clair and Beach, 2016; Aaron et al., 2021; Prakash et al., 2019; Peter et al., Langenbeck's Archives, 2025; ESVS 2025 **Class IIb** ; Köhler et al., 2026; Lam et al., 2022; Bala et al., 2022; Mazzolai et al., 2024; Bakó et al., European Journal of Vascular and Endovascular Surgery, 2025; 48 patients, mean age 79; Chamseddine et al., Journal of Vascular Surgery, 2025; single center, 92 patients; Tilsed et al., 2016; Aaron et al., 2021; Peter et al., 2025; De Simone et al., WSES ICG Position Paper, 2025; Clough et al., ANZ Journal of Surgery, 2026, systematic review of 196 patients; Clough et al., 2026; Sermonesi et al., 2023; De Simone et al., 2025; Bala et al., 2022; Theodore et al., 2024; Bala et al., 2022; low-level evidence; Theodore et al., 2024; Vrba et al., 2025; AMESI; Reintam Blaser et al., 2024; Peter et al., 2025; 68.7% before 2000; **55.0% from 2000 on** ; Bakó et al., 2025; Chamseddine et al., 2025; Prakash et al., 2019; WSES 1B; ESVS 2025 Class I; Köhler et al., 2026; ESVS 2025 Class IIb; Takiguchi et al., Critical Care Medicine, 2020; Bala et al., 2022; Ginsburg et al., 2018; Pinto et al., 2022; Brandt et al., 2015; Tilsed et al., ESTES, 2016"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007102",
+    "title": "WSES acute mesenteric ischemia guideline (2022)",
+    "kind": "article",
+    "citation": "Bala M, Catena F, Kashuk J, et al. Acute mesenteric ischemia: updated guidelines of the World Society of Emergency Surgery. World J Emerg Surg. 2022;17:54. doi:10.1186/s13017-022-00443-x.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary text checked 2026-11-08 for immediate arterial/venous CTA without oral contrast despite AKI; no accurate lactate/D-dimer rule-out; urgent exploration with peritonitis; heparin for MVT and before AMI surgery; NOMI cause correction with optional heparin; damage control/second look 24–48 h, mandatory with extensive bowel involvement; WSES antithrombotic and surveillance schedules. Source-specific six-month antithrombotic examples and second-look timing are retained with limitations; ESVS recommendations have a separate source.",
+    "url": "https://doi.org/10.1186/s13017-022-00443-x"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007103",
+    "title": "ESVS mesenteric and renal vascular disease guideline (2025)",
+    "kind": "article",
+    "citation": "Koelemay MJ, Geelkerken RH, Kärkkäinen J, et al. European Society for Vascular Surgery (ESVS) 2025 Clinical Practice Guidelines on the Management of Diseases of the Mesenteric and Renal Arteries and Veins. Eur J Vasc Endovasc Surg. 2025;70:153–218. doi:10.1016/j.ejvs.2025.06.010.",
+    "url": "https://doi.org/10.1016/j.ejvs.2025.06.010",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Publisher PDF checked 2026-11-08 through Erasmus University repository: https://pure.eur.nl/ws/files/205891340/Editor_s_Choice_European_Society_for_Vascular_Surgery_ESVS_2025_Clinical_Practice_Guidelines_on_the_Management_of_Diseases_of_the_Mesenteric_and_Renal_Arteries_and_Veins.pdf . Recommendations 33, 50–56 and 18 examined. Added correction beyond supplied synthesis: MVT anticoagulation 3–6 months, indefinite with idiopathic/persistent-risk disease; after atherosclerotic mesenteric stenting, a short DAPT course (minimum 1 month) may be considered. These supplement rather than silently replace WSES source-specific six-month examples. Needs Zach sign-off."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007200",
+    "title": "SCORE/Fiser packet — Esophageal Perforation",
+    "kind": "user_notes",
+    "citation": "Esophageal Perforation. User-supplied SCORE/Fiser packet saved 2026-10-23. Source works: Collins ML, Okusanya OT. SCORE Curriculum, Esophageal Injury (2026) and Repair of Esophageal Injury (2024); Fiser SM. The ABSITE Review, 8th ed., ch. 29 (esophagus).",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete saved packet read through SOURCES/FLAGS and cross-checked against local SCORE Injury and Repair modules retrieved 2026-08-12 (repair https://www.surgicalcore.org/modulecontent.aspx?id=1000916) and Fiser ch.29 OCR. All five FLAGS preserved: endoscopy divergence; Fiser-only timing/suture/achalasia details; Boerhaave distance/sign/mortality split; SCORE-only PEG conduit caution; SCORE-only stent/EVT/exclusion timing details. The OCR explicitly reads Hartmann sign; correction to Hamman is flagged and independently corroborated. Fiser timing cutoffs are retained as historical board teaching, not absolute operative rules. Licensed passages paraphrased. No relevant pending qbank note matched.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000575"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007201",
+    "title": "Supplied clinical review — Esophageal Perforation Pocket Chief",
+    "kind": "user_notes",
+    "citation": "Esophageal Perforation Pocket Chief. User-supplied clinical review, DOCX-to-Markdown extraction reviewed 2026-11-08.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Clinical draft pending Zach sign-off; supplied source coverage is not independent clinical approval. No terminal reference list exists in the supplied DOCX extract; author/journal/year attributions are retained below rather than fabricating missing titles, DOIs or pages. Numerical observational outcomes remain attributed to this supplied synthesis unless independently checked. The complete 279-line extract ends in completed vignettes. Preserved distinct clinical points, risk score, device intervals, comparative outcomes and special settings; repeated summaries/vignettes merged. CT sensitivity/NPV 100% is identified as a series-specific result, not a universal guarantee. Routine antifungal coverage is separated from risk-selected practice. The supplied review attributes possible omission of imaging in typical spontaneous pneumomediastinum to STS 2026; full selection criteria could not be independently checked, so that suggestion is explicitly qualified and is not extended to suspected rupture. NCCN feeding-access advice is labeled cancer-care extrapolation. No RCT superiority claim for EVT/stents is made. Supplied attributions (bibliographic completeness unverified): Chirica et al., World Journal of Emergency Surgery, 2019; Worrell et al., Annals of Thoracic Surgery, September 2026; Raff et al., Journal of Trauma and Acute Care Surgery, 2020; Chirica et al., WSES, 2019; Ge and Raju, The Esophagus, 2021; Wei et al., AJR, 2020; Worrell et al., STS, 2026; Barakat et al., Digestive Diseases and Sciences, 2018; Bologheanu et al., Langenbeck's Archives of Surgery, 2026; Barakat et al., 2018; Gurwara and Clayton, Current Gastroenterology Reports, 2019; Pickering et al., 2021; Papaconstantinou et al., Diseases of the Esophagus, 2024; Barakat et al., 2018; Han et al., BioMed Research International, 2018; Vallabhajosyula et al., Journal of Intensive Care Medicine, 2016; Gurwara and Clayton, 2019; Papaconstantinou et al., Surgical Endoscopy, 2026; Vallabhajosyula et al., 2016; Pickering et al., 2021; Ge and Raju, 2021; Han et al., 2018; WSES 2019; STS 2026; Wei et al., AJR, 2020; Wei et al., 2020; da Nobrega Oliveira et al., American Surgeon, 2026; ACR, 2026; Reed et al., Yamada's Textbook, 2022; da Nobrega Oliveira et al., 2026; Salehpoor and Thompson, Abdominal Radiology, 2026; Worrell et al., 2026; Shehata et al., Surgery, 2025; Schweigert et al., JTCVS, 2016; Kooij et al., Surgical Endoscopy, 2025; Yang et al., BMC Gastroenterology, 2022; Chirica et al., 2019; Kooij et al., 2025; Khaitan et al., Journal of Gastrointestinal Surgery, 2022; 1979; Chirica et al., 2019; Gregory and Hecht, 2018; Gregory and Hecht, 2018; ACS Gastrointestinal Surgical Emergencies, 2021; Vogel, cited in Chirica et al., 2019; Pan et al., International Journal of Surgery, 2025; Charalampakis et al., Surgical Endoscopy, 2023; Chen et al., JAMA Otolaryngology, 2020; Vudatha et al., 2025; de Oliveira et al., 2024; Charalampakis et al., 2023; Papaconstantinou et al., 2026; AGA, 2021; Wannhoff et al., GIE, 2025; Gil Losada, EAES abstract, 2025; Momblan et al., AJG, 2023; Cho et al., Journal of Surgical Research, 2026; do Monte Junior et al., Digestive Endoscopy, 2021; 2007; 2014; Thornblade, cited in Kooij et al., 2025; Chirica et al., WSES, 2019; Chenevas-Paule et al., 2026; ACS, 2021; Chirica et al., 2019; Chenevas-Paule et al., 2026; Ge and Raju, 2021; WSES; WSES; Kooij et al., 2025; WSES; Wall and Mattox, JTACS, 2025; Pan et al., 2025; Kooij et al., 2025; Wall and Mattox, 2025; Suzuki et al., JTCVS, 2025; WSES; Napolitano et al., Journal of Clinical Medicine, 2025; NCCN, 2026; Pan et al., 2025; Vermeulen et al., Surgical Endoscopy, 2021; Reed et al., 2022; Kooij et al., 2025; Napolitano et al., 2025; Hauge et al., BJS, 2025; Momblan et al., 2023; Suzuki et al., 2025; Reed et al., 2022; Wannhoff et al., 2025; Chirica et al., WSES, 2019; Raff et al., EAST study, 2020; Worrell et al., STS, 2026"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007202",
+    "title": "WSES esophageal emergencies guideline (2019)",
+    "kind": "article",
+    "citation": "Chirica M, Kelly MD, Siboni S, et al. Esophageal emergencies: WSES guidelines. World J Emerg Surg. 2019;14:26. doi:10.1186/s13017-019-0245-2.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary WSES full text checked 2026-11-08: CT/CT esophagography first-line, experienced selective endoscopy, clips for defects <2 cm, covered stents with advocated minimum 2–4-week duration, containment/stability/minimal-contamination NOM criteria, PSS ≤2 as possible aid, immediate surgery when NOM inappropriate, repair and drainage, single-/double-layer options and salvage. Other separately checked works (STS, Wei diagnostic series, scoring algorithm and Hamman-sign case report) have individual source entries.",
+    "url": "https://doi.org/10.1186/s13017-019-0245-2"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007203",
+    "title": "STS esophageal perforation expert consensus (2026)",
+    "kind": "article",
+    "citation": "Worrell S, et al. The Society of Thoracic Surgeons (2026) Expert Consensus Document on Management of Esophageal Perforation. Ann Thorac Surg. Published online September 17, 2026. doi:10.1016/j.athoracsur.2026.08.015.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42753881/",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Existence, date and abstract checked 2026-11-08; abstract endorses early CT esophagram and individualized endoscopic options such as stent/EVT with multidisciplinary management. Full consensus text was not available for this review. Do not attribute specific imaging-omission criteria for spontaneous pneumomediastinum to independently verified STS guidance; the supplied review makes that attribution, which is visibly qualified in the topic. Needs Zach sign-off."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007204",
+    "title": "Wei: CT versus esophagography in suspected perforation (2020)",
+    "kind": "article",
+    "citation": "Wei CJ, Levenson RB, Lee KS. Diagnostic Utility of CT and Fluoroscopic Esophagography for Suspected Esophageal Perforation in the Emergency Department. AJR Am J Roentgenol. 2020;215:631–638. doi:10.2214/AJR.19.22166.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/32515607/",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary abstract checked 2026-11-08: retrospective ED series, 103 patients. CT sensitivity/specificity/NPV 100%/79.8%/100%; esophagram sensitivity/specificity 77.8%/98.9%; combining did not improve results. Numerical performance is series-specific, not universal exclusion after negative CT. Supports the supplied clinical review and this qualifier; no universal testing omission is inferred."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007205",
+    "title": "JTACS nontraumatic esophageal perforation algorithm",
+    "kind": "article",
+    "citation": "Evidence-based, cost-effective management of nontraumatic esophageal perforations: An algorithm of the Journal of Trauma and Acute Care Surgery Emergency General Surgery Algorithms Work Group. J Trauma Acute Care Surg. doi:10.1097/TA.0000000000004910.",
+    "url": "https://doi.org/10.1097/TA.0000000000004910",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary algorithm Table 2 examined 2026-11-08 to cross-check the supplied Pittsburgh score point structure: age >75, HR >100, WBC >10,000, effusion (1); fever >38.5, noncontained leak, respiratory distress, delay >24h (2); systolic BP <90 and esophageal cancer (3). Added precise hypotension threshold to supplied score; needs Zach sign-off. The supplied review remains the source for historical score mortality strata and the Boerhaave nonvalidation caveat."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007206",
+    "title": "Primary corroboration: Hamman mediastinal crunch",
+    "kind": "article",
+    "citation": "Successful surgical management of severe mediastinitis caused by a perforating esophageal foreign body. Primary case report, 2013. PubMed Central PMC3738406.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3738406/",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Indexed primary case-report excerpt identifies mediastinal crunch as Hamman sign. Used narrowly to flag/correct the supplied Fiser OCR/packet attribution Hartmann, not as authority for perforation management. Needs Zach sign-off. Direct full-page open encountered an access challenge; the indexed primary excerpt, rather than complete full-text review, corroborates this narrow naming point."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007300",
+    "title": "Necrotizing Soft-Tissue Infections — supplied board packet",
+    "kind": "user_notes",
+    "citation": "Owner-supplied NotebookLM packet, 23 October 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete packet read through final FLAGS; local file /Users/dada/Desktop/Pocket Chief/Inbox/2026-10-23-necrotizing-soft-tissue-infections/1-packet.md. Supplied source list:\nS1 | SCORE Curriculum — Soft Tissue Infections module | superficial versus deep infection, NSTI recognition, depth and type classification, LRINEC, finger test, empiric and directed antibiotics, adjuncts\nS2 | SCORE Curriculum — Surgical Management of Soft Tissue Infections module | debridement technique, noncontractile muscle, negative pressure dressing, second look at 24–48 hours, Fournier gangrene positioning and testicle preservation, coverage\nS3 | Fiser — ABSITE Review, 8th ed. | ch. 5, infection (necrotizing soft tissue infections)\nSource documents checked on device. This is an AI synthesis, not independent clinical approval. Conflicts and corrections recorded in skin-breast-review.md; no beyond-source clinical approval implied."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007301",
+    "title": "Necrotizing Soft-Tissue Infections — supplied Word review",
+    "kind": "user_notes",
+    "citation": "Owner-supplied Pocket Chief Word/OpenEvidence-style review, extracted 8 November 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete extracted document read: /Users/dada/Documents/Cowork OS/Pocket Chief/output/call-problems-review-2026-11-08/packets/necrotizing-soft-tissue-infections.md; ends at final vignette, not mid-sentence. No standalone numbered bibliography exists in the supplied extraction. Full available author/year citation inventory follows (titles, DOI and missing bibliographic fields have not been invented):\nMcDermott et al., JAMA Surgery, 2024; Fernando et al., Annals of Surgery, 2019\nStevens et al., IDSA guideline, Clinical Infectious Diseases, 2014\nMcDermott et al., JAMA Surgery, 2024\nJay et al., JAMA, 2026; Wongwaisayawan et al., Abdominal Radiology, 2020\nStevens et al., IDSA guideline, 2014; Hua et al., Lancet Infectious Diseases, 2023\nStevens and Bryant, NEJM, 2017\nChen et al., Scientific Reports, 2025\nChen et al., 2025\nFan et al., Microorganisms, 2026; Tessier et al., Surgical Infections, 2020; Brouwer et al., Nature Reviews Microbiology, 2023; Bisno and Stevens, NEJM, 1996\nTessier et al., 2020\nBrouwer et al., Nature Reviews Microbiology, 2023\nBabiker et al., Lancet Infectious Diseases, 2025\nHussain et al., Microorganisms, 2024\nDuane et al., SIS guideline, Surgical Infections, 2021\nWhite et al., Bone & Joint Journal, 2026\nHua et al., Cochrane, 2018\nHong et al., BMC Infectious Diseases, 2024\nHua et al., 2023\nStevens and Bryant, 2017; Hong et al., 2024\nFernando et al., Annals of Surgery, 2019\nStevens et al., IDSA guideline, 2014\nStevens and Bryant, 2017\nWhite et al., 2026\nHua et al., 2023; McDermott et al., 2024\nFernando et al., Annals of Surgery, 2019; Abdalla et al., PLOS One, 2023; Stevens et al., IDSA guideline, 2014\nWong, 2004\nMcDermott et al., 2024\nHsiao et al., PLOS One, 2020\nHenry et al., Surgical Infections, 2021\nTedesco et al., Langenbeck's Archives of Surgery, 2026\nFernando et al., 2019; McDermott et al., 2024\nStevens et al., IDSA guideline, 2014; Hua et al., 2023\nChen et al., 2025; White et al., 2026; Nixon et al., Surgical Infections, 2025\nOrtega Ferrete et al., Langenbeck's Archives of Surgery, 2023\nTedesco et al., 2026\nWhite et al., 2026; Stevens et al., IDSA guideline, 2014\n2014\nMcDermott et al., 2024; Tedesco et al., 2026\nLarson et al., Journal of Intensive Care Medicine, 2025\nCharlier et al., Critical Care, 2025\nBabiker et al., 2025\nHeil et al., Open Forum Infectious Diseases, 2023\nCharlier et al., 2025\nLarson et al., 2025; Cortés-Penfield and Ryder, Clinical Infectious Diseases, 2023\nLuther et al., Critical Care Medicine, 2018\nPan et al., Journal of Antimicrobial Chemotherapy, 2025\nDuane et al., SIS guideline, 2021\nStevens et al., IDSA guideline, 2014; Jay et al., JAMA, 2026\nMadsen et al., 2020; Hua et al., 2023\nLarson et al., 2025\nMcDermott et al., 2024; Hua et al., 2023\nKitamura and Horie, 2021\nChen et al., 2025; Tedesco et al., 2026\nLeiblein et al., European Journal of Trauma and Emergency Surgery, 2018\nJain, Infectious Disease Clinics of North America, 2026\nTownsend et al., Clinical and Experimental Dermatology, 2026\nChuang et al., PLOS One, 2019\nHong et al., 2024\nTownsend et al., 2026\nBowen et al., World Journal of Urology, 2022\nSweet et al., Abdominal Radiology, 2020\nWongwaisayawan et al., 2020\nSweet et al., 2020\nTarasconi et al., WSES-AAST guideline, 2021\nLaucks, Surgical Clinics of North America, 1994\nTarasconi et al., 2021\nBowen et al., 2022\nHuang et al., BJU International, 2024\nOrtega Ferrete et al., 2023\nStevens et al., IDSA guideline, 2014; Duane et al., SIS guideline, 2021\nVinh and Embil, Lancet Infectious Diseases, 2005\nBaker-Austin et al., Nature Reviews Disease Primers, 2018\nJay et al., JAMA, 2026\nJay et al., 2026\nJay et al., 2026; Stevens et al., IDSA guideline, 2014\nBaker-Austin et al., 2018\nHenry et al., 2021\nFernando et al., 2019\nStevens et al., IDSA guideline, 2014; Hua et al., Cochrane, 2018\nTessier et al., 2020; Brouwer et al., 2023\nStevens et al., IDSA guideline, 2014; Babiker et al., 2025\nStatements not independently verified remain supplied-document claims pending Zach sign-off. Primary checks and omitted unsupported details are recorded in skin-breast-review.md. No numerical citation markers rendered."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007302",
+    "title": "IDSA skin and soft-tissue infection guideline (2014)",
+    "kind": "article",
+    "citation": "Stevens DL, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by IDSA. Clin Infect Dis. 2014;59:e10–e52. doi:10.1093/cid/ciu296.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary guideline checked 8 November 2026: exploration on suspicion; empiric broad antibiotics; penicillin plus clindamycin for GAS/clostridia; 24–36 h relook then daily; stop when no further debridement, clinical improvement, afebrile 48–72 h; no HBO for clostridial myonecrosis. Additional source verification is pending Zach sign-off.",
+    "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007303",
+    "title": "WSES multisociety skin and soft-tissue pathways (2022)",
+    "kind": "article",
+    "citation": "Sartelli M, et al. WSES/GAIS/WSIS/SIS-E/AAST global clinical pathways for patients with skin and soft tissue infections. World J Emerg Surg. 2022;17:3. doi:10.1186/s13017-022-00406-2.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary text checked: source control within 6 h, relook at least every 12–24 h or sooner for deterioration. This does not mean waiting until 6 h. Linezolid-containing alternative appears in pathway; no universal aminoglycoside requirement authored.",
+    "url": "https://doi.org/10.1186/s13017-022-00406-2"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007304",
+    "title": "CDC clinical overview of vibriosis",
+    "kind": "website",
+    "citation": "Centers for Disease Control and Prevention. Clinical Overview of Vibriosis. Accessed 8 November 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary CDC guidance checked: ceftazidime plus doxycycline 7–14 d; fluoroquinolone-based alternatives; children can receive doxycycline or a fluoroquinolone. This corrects supplied SCORE blanket pediatric contraindications and Word duration of at least 2 weeks.",
+    "url": "https://www.cdc.gov/vibrio/hcp/clinical-overview/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007305",
+    "title": "EAST timing of NSTI debridement (2018)",
+    "kind": "article",
+    "citation": "Gelbard RB, et al. Optimal timing of initial debridement for necrotizing soft tissue infection: an EAST practice management guideline. J Trauma Acute Care Surg. 2018;85:208–214.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Verified guideline recommendation: initial debridement within 12 h of suspected diagnosis; distinct from WSES 6 h after admission target.",
+    "url": "https://www.east.org/education-resources/practice-management-guidelines/details/timing-of-operative-debridement-for-necrotizing-soft-tissue"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007306",
+    "title": "WSES-AAST anorectal emergencies: Fournier gangrene (2021)",
+    "kind": "article",
+    "citation": "Tarasconi A, et al. Anorectal emergencies: WSES-AAST guidelines. World J Emerg Surg. 2021;16:48. doi:10.1186/s13017-021-00384-x.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary guidance checked: orchiectomy only strictly necessary; diversion tailored to sphincter/urethral damage and fecal contamination. Colostomy indications include sphincter involvement, fecal incontinence, ongoing contamination; no routine colostomy.",
+    "url": "https://doi.org/10.1186/s13017-021-00384-x"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007307",
+    "title": "SCORE: Soft Tissue Infections",
+    "kind": "website",
+    "citation": "SCORE Curriculum. Soft Tissue Infections. Local supplied module, retrieved 12 August 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Read relevant deep-infection sections. SCORE M-protein superantigen statement, LRINEC low band <5, and pediatric Vibrio drug exclusions are corrected rather than adopted. Surgical management remains a separately named SCORE procedure scope.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=140003"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007309",
+    "title": "SCORE: Surgical Management of Soft Tissue Infections",
+    "kind": "website",
+    "citation": "Widmann WD, Gallimore J. SCORE Curriculum: Surgical Management of Soft Tissue Infections. 19 September 2025; retrieved 12 August 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Read complete module. Principles summarized for disease page; operative procedure topic not created. SCORE relook 24–48 h preserved as disagreement, not current directive. Post-source-control wound coverage, rehabilitation and chronic-ulcer biopsy retained.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=132697"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007308",
+    "title": "Fiser ABSITE Review: infection",
+    "kind": "book",
+    "citation": "Fiser SM. The ABSITE Review. 8th ed. Chapter 5, Infection, p.45.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Local OCR cross-check: WBC >20 thousand, gray drainage, scant PMNs, high-dose penicillin, testis preservation. No diagnostic WBC cutoff used. Licensed source text remains on device."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007400",
+    "title": "Pilonidal Disease — supplied board packet",
+    "kind": "user_notes",
+    "citation": "Owner-supplied NotebookLM packet, 23 October 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete packet read through final FLAGS; local file /Users/dada/Desktop/Pocket Chief/Inbox/2026-10-23-pilonidal-disease/1-packet.md. Supplied source list:\nS1 | SCORE Curriculum — Pilonidal Disease module | acquired hair mechanism, epidemiology and risk factors, presentation and diagnosis, off-midline drainage, unroofing and excision, flap procedures, outcome and recurrence figures, phenol/glue/video-assisted options, prevention\nS2 | SCORE Curriculum — Procedures for Pilonidal Disease module | excision and unroofing steps, abscess encountered at excision, tension and off-midline closure, complications, wound breakdown management, referral for advanced disease\nS3 | Fiser — ABSITE Review, 8th ed. | ch. 37, anal and rectal (pilonidal cysts)\nSource documents checked on device. This is an AI synthesis, not independent clinical approval. Conflicts and corrections recorded in skin-breast-review.md; no beyond-source clinical approval implied."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007401",
+    "title": "Pilonidal Disease — supplied Word review",
+    "kind": "user_notes",
+    "citation": "Owner-supplied Pocket Chief Word/OpenEvidence-style review, extracted 8 November 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete extracted document read: /Users/dada/Documents/Cowork OS/Pocket Chief/output/call-problems-review-2026-11-08/packets/pilonidal-disease.md; ends at final vignette, not mid-sentence. No standalone numbered bibliography exists in the supplied extraction. Full available author/year citation inventory follows (titles, DOI and missing bibliographic fields have not been invented):\nJohnson et al., Diseases of the Colon & Rectum, 2019\nIesalnieks et al., Langenbeck's Archives of Surgery, 2021\nCai et al., 2024\nGil, Deans, Minneci, 2023\nMinneci et al., JAMA Surgery, 2024\nGerman Guideline, 2021\nASCRS 1B, 2019; German Guideline, 2021\nASCRS, 2019\nCochrane, 2024; German Guideline, 2021\nGil et al., JAMA Surgery, 2023\nGil et al., 2023\nDarbandi et al., Pediatric Surgery International, 2026\nde Kort et al., Langenbeck's Archives of Surgery, 2025\nIesalnieks & Ommer, Deutsches Ärzteblatt, 2019\nAdams et al., Pediatric Surgery International, 2023\nde Kort et al., 2025\nTokocin et al., International Wound Journal, 2026; n = 2,222, at least 5 years of follow-up\nHarlak et al., Clinics, 2010; 587 cases, 2,780 controls\nGil et al., 2023; Doll et al., Scientific Reports, 2021\nTokocin et al., 2026\nStauffer et al., Scientific Reports, 2018\nASCRS 1C, 2019\nGerman Guideline, 2021; Iesalnieks & Ommer, 2019\n1C, 2019\nIesalnieks & Ommer, 2019\nPronk et al., as cited in ISoLP, 2025\nASCRS strong recommendation, 1B, 2019\n2021\nO'Guinn et al., Surgical Clinics, 2026\nASCRS 2B, 2019\n1B, 2019\nStauffer et al., 2018\n2023\nCai et al., Cochrane, 2024\nCochrane, 2024\nBi et al., Scientific Reports, 2020\nSabapaty et al., Pediatric Surgery International, 2024\nOuali et al., Lasers in Surgery and Medicine, 2025\nASCRS, 2019; Gil et al., 2023\nAdams et al., 2023\nSaleem et al., Journal of Pediatric Surgery, 2026\nStatements not independently verified remain supplied-document claims pending Zach sign-off. Primary checks and omitted unsupported details are recorded in skin-breast-review.md. No numerical citation markers rendered."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007402",
+    "title": "ASCRS pilonidal disease guideline (2019)",
+    "kind": "article",
+    "citation": "Johnson EK, Vogel JD, Cowan ML, Feingold DL, Steele SR. The American Society of Colon and Rectal Surgeons’ clinical practice guidelines for the management of pilonidal disease. Dis Colon Rectum. 2019;62:146–157. doi:10.1097/DCR.0000000000001237.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary guideline located and checked against supplied document: acute abscess drainage, hair-control limitations, off-midline benefit and disease-based selection. No numeric 1–2 cm drainage distance is presented as a guideline threshold.",
+    "url": "https://fascrs.org/ascrs/media/files/downloads/Clinical%20Practice%20Guidelines/the-american-society-of-colon-practical-guideline-sinus-pilonidalis.pdf"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007403",
+    "title": "German national pilonidal guideline: update 2020",
+    "kind": "article",
+    "citation": "Iesalnieks I, Ommer A, Petersen S, Doll D, Herold A. German National Guideline on the management of pilonidal disease: update 2020. Langenbecks Arch Surg. 2021;406:2569–2580. doi:10.1007/s00423-020-02060-1.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Verified primary guideline: no asymptomatic prophylactic surgery; acute drainage before definitive surgery; limited excision, minimal procedures for small primary disease, avoid midline closure, off-midline options for other disease; no universally superior flap.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8097120/"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007404",
+    "title": "Laser epilation for pilonidal recurrence: randomized trial",
+    "kind": "article",
+    "citation": "Minneci PC, et al. Laser epilation as an adjunct to standard care in reducing pilonidal disease recurrence in adolescents and young adults: a randomized clinical trial. JAMA Surg. 2024;159:19–27. doi:10.1001/jamasurg.2023.5526.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary results checked: 10/96=10.4% versus 45/134=33.6% at 1 year. Corrects Word review 10.5%. Single-center young cohort and incomplete follow-up limit generalizability; not proof of durable cure or stand-alone treatment.",
+    "url": "https://jamanetwork.com/journals/jamasurgery/fullarticle/2811756"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007405",
+    "title": "SCORE: Pilonidal Disease",
+    "kind": "website",
+    "citation": "Grimes A, Cross A. SCORE Curriculum: Pilonidal Disease. 1 November 2023; retrieved 12 August 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete local module read; rare/selected nonoperative outcomes and recurrence figures are reported series, not interchangeable estimates. Unsupported comparative thresholds not promoted as rules.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=132572"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007406",
+    "title": "SCORE: Procedures for Pilonidal Disease",
+    "kind": "website",
+    "citation": "Grimes A, Cross A. SCORE Curriculum: Procedures for Pilonidal Disease. 1 November 2023; retrieved 12 August 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete local module read. Separate procedure scope retained; disease page gives procedure-selection principles, not a new operative entry. Module recurrence estimates 12–30%, ~12% open/~23% closed conflict with disease module 10–15%; preserved as disagreement.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=134401"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007407",
+    "title": "Fiser ABSITE Review: pilonidal disease",
+    "kind": "book",
+    "citation": "Fiser SM. The ABSITE Review. 8th ed. Chapter 37, Anal and Rectal, p.560.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Local OCR checked. Brief drainage/packing then excision teaching; no flap comparison or numeric recurrence evidence. Licensed source text remains on device."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007500",
+    "title": "Breast Abscess and Mastitis — supplied board packet",
+    "kind": "user_notes",
+    "citation": "Owner-supplied NotebookLM packet, 23 October 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete packet read through final FLAGS; local file /Users/dada/Desktop/Pocket Chief/Inbox/2026-10-23-breast-abscess-and-mastitis/1-packet.md. Supplied source list:\nS1 | SCORE Curriculum — Benign Inflammatory Disease of the Breast module | mastitis types and organisms, SMOLD, granulomatous mastitis, Mondor disease, ultrasound diagnosis, antibiotic and MRSA management, serial aspiration, incision and drainage, fistula\nS2 | Fiser — ABSITE Review, 8th ed. | ch. 24, breast (benign breast disease: infectious mastitis, breast abscess, periductal mastitis)\nS3 | SCORE Curriculum — Breast Disease During Pregnancy and Lactation module | abscess and mastitis in pregnancy and lactation, complete ultrasound-guided aspiration, 7- to 14-day antibiotic course, continued breastfeeding, milk fistula\nSource documents checked on device. This is an AI synthesis, not independent clinical approval. Conflicts and corrections recorded in skin-breast-review.md; no beyond-source clinical approval implied."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007501",
+    "title": "Breast Abscess and Mastitis — supplied Word review",
+    "kind": "user_notes",
+    "citation": "Owner-supplied Pocket Chief Word/OpenEvidence-style review, extracted 8 November 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete extracted document read: /Users/dada/Documents/Cowork OS/Pocket Chief/output/call-problems-review-2026-11-08/packets/breast-abscess-and-mastitis.md; ends at final vignette, not mid-sentence. No standalone numbered bibliography exists in the supplied extraction. Full available author/year citation inventory follows (titles, DOI and missing bibliographic fields have not been invented):\nMitchell et al., JAMA Surgery, published June 2026\n2022; recommendations as summarized by Morcomb et al., American Family Physician, 2024\nStevens et al., 2014\n2026\nv1.2026\nMitchell et al., JAMA Surgery, 2026\nMitchell et al., JAMA Surgery, 2026; Morcomb et al., American Family Physician, 2024\nMorcomb et al., American Family Physician, 2024; Parsons et al., Nature Reviews Disease Primers, 2026\nNCCN, 2026; ACOG Practice Bulletin, 2016\nZhou et al., Annals of Medicine, 2023\nACR, 2026\nLouis-Jacques et al., JAMA, 2023\nMorcomb et al., American Family Physician, 2024\nJohnson and Mitchell, Breast Journal, 2020\nPileri et al., Journal of Human Lactation, 2025; Amir et al., BMC Primary Care, 2024; Irusen et al., Cochrane, 2015\nBharat et al., World Journal of Surgery, 2009; Mitchell et al., JAMA Surgery, 2026\nIrusen et al., Cochrane, 2015\nLouis-Jacques et al., JAMA, 2023; Johnson and Mitchell, Breast Journal, 2020\nBharat et al., World Journal of Surgery, 2009\nBundred et al., British Journal of Surgery, 1992\nGollapalli et al., JACS, 2010\nBharat et al., World Journal of Surgery, 2009; Gollapalli et al., JACS, 2010\nGoh et al., PLoS One, 2025\nChang et al., Scientific Reports, 2019\nMitchell et al., JAMA Surgery, 2026; Abdelwahab et al., Dermatology, 2023\nGoh et al., PLoS One, 2025; Wang et al., PLoS One, 2025\nNCCN Breast Cancer, 2026; Hester et al., AJOG, 2021\nAmir et al., BMC Primary Care, 2024\nACOG Practice Bulletin, 2016\nNCCN, 2026\nIrusen et al., Cochrane, 2015; McLuckey et al., Pediatric Radiology, 2026\nJohnson and Mitchell, Breast Journal, 2020; Morcomb et al., American Family Physician, 2024\nMehra et al., Breast Cancer Research and Treatment, 2026; Goh et al., PLoS One, 2025\nMorcomb et al., American Family Physician, 2024; Mitchell et al., JAMA Surgery, 2026\nMitchell et al., JAMA Surgery, 2026; Louis-Jacques et al., JAMA, 2023\nParsons et al., Nature Reviews Disease Primers, 2026; Stevens et al., IDSA, 2014\nLactMed, 2024\nASBrS 2025\nACOG Committee Opinion, 2021; Louis-Jacques et al., JAMA, 2023\nStevens et al., IDSA, 2014\nACOG Committee Opinion, 2021\nParsons et al., Nature Reviews Disease Primers, 2026\nMiller et al., NEJM, 2015\nACOG 2021\nJAMA 2023, ASBrS\nMitchell et al., JAMA Surgery, 2026; Boyle et al., SSO Primer, 2025\nLam et al., Expert Review of Anti-infective Therapy, 2014\nPileri et al., IJERPH, 2022\nLee et al., World Journal of Surgery, 2023\nMitchell et al., JAMA Surgery, 2026; ACOG Practice Bulletin, 2016\nTaffurelli et al., Surgery, 2016; Almasad, ANZ Journal of Surgery, 2006\nAlmasad, ANZ Journal of Surgery, 2006\nMehra et al., Breast Cancer Research and Treatment, 2026\nAmano and Shimizu, Internal Medicine, 2018; Bukhari et al., Vascular Medicine, 2024\nBukhari et al., Vascular Medicine, 2024; Soler-González and Ruiz, NEJM, 2005\nShirah et al., Breast Journal, 2017\nBelleflamme et al., American Journal of Emergency Medicine, 2012; Amano and Shimizu, Internal Medicine, 2018\nNCCN Breast Cancer, 2026; Boyle et al., SSO Primer, 2025\nNCCN Breast Cancer, 2026\nHester et al., AJOG, 2021\nBoyle et al., SSO Primer, 2025\nStatements not independently verified remain supplied-document claims pending Zach sign-off. Primary checks and omitted unsupported details are recorded in skin-breast-review.md. No numerical citation markers rendered."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007502",
+    "title": "ASBrS/SBI/CAP infectious and inflammatory breast guideline (2025)",
+    "kind": "article",
+    "citation": "Mitchell KB, Valente SA, Snider HC, et al. American Society of Breast Surgeons, Society of Breast Imaging, and College of American Pathology 2025 guidelines for the management of infectious and inflammatory lesions of the breast. JAMA Surg. 2026;161:637–645. doi:10.1001/jamasurg.2026.0613.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary full text (including guideline Tables 1–3) checked 8 November 2026 via publisher guest-access result. Published online 1 April 2026; June issue. Verified 24–48 h reassessment, <3 cm aspiration versus >3 cm or failed aspiration gravity drain for lactational collections; 3–5 d drain removal; no packing; heavily loculated/solidified collections may require OR; phlegmon ≥10 d and 1-month biopsy; SMOLD 1–2 wk/age ≥30 imaging escalation; GM and duct/fistula surgery principles. Exactly 3 cm is not assigned by guideline and is individualized. Guideline does not cover all nonlactational breast infections or antenatal mastitis.",
+    "url": "https://jamanetwork.com/journals/jamasurgery/fullarticle/2847015"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007503",
+    "title": "ABM Clinical Protocol #36: The Mastitis Spectrum (2022)",
+    "kind": "article",
+    "citation": "Mitchell KB, Johnson HM, Rodríguez JM, et al. Academy of Breastfeeding Medicine Clinical Protocol #36: The Mastitis Spectrum, Revised 2022. Breastfeed Med. 2022;17:360–376. doi:10.1089/bfm.2022.29207.kbm.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary protocol checked: physiologic breastfeeding; no pumping to empty or deep massage; antibiotics only bacterial infection; drug doses and TMP-SMX infant cautions; culture after 48 h nonresponse; aspiration often first intervention but consider index gravity drain; continued feeding and low milk-fistula incidence; symptomatic/infected galactocele drainage.",
+    "url": "https://abm.memberclicks.net/assets/DOCUMENTS/PROTOCOLS/36-mitchell-et-al-2022-academy-of-breastfeeding-medicine-clinical-protocol-36-the-mastitis-spectrum-revised-2022.pdf"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007504",
+    "title": "SCORE: Benign Inflammatory Disease of the Breast",
+    "kind": "website",
+    "citation": "Stimac G, Bailey K, Partin J. SCORE Curriculum: Benign Inflammatory Disease of the Breast. 17 March 2026; retrieved 12 August 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete local supplied module read. Distinguishes SMOLD, GM and Mondor, malignancy workup, serial aspiration, 48–72 h review, breast-feeding advice. Machine-pumping blanket avoidance, lactation antibiotic bans, routine abscess packing, and serial aspiration as universal default require current-guideline qualification. Stains/cultures exclude infection, not sarcoidosis.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=137613"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007505",
+    "title": "SCORE: Breast Disease During Pregnancy and Lactation",
+    "kind": "website",
+    "citation": "Welsh JL. SCORE Curriculum: Breast Disease During Pregnancy and Lactation. 12 March 2025; retrieved 12 August 2026.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Complete local supplied module read. Antibiotic course 7–14 d and milk-fistula cessation teaching differ from other supplied sources. No compulsory cessation of breastfeeding authored. Pregnancy-associated malignancy is a separate topic scope.",
+    "url": "https://www.surgicalcore.org/modulecontent.aspx?id=1000452"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007506",
+    "title": "Fiser ABSITE Review: breast infection and Mondor disease",
+    "kind": "book",
+    "citation": "Fiser SM. The ABSITE Review. 8th ed. Chapter 24, Breast, p.288.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Actual OCR checked: 2-week mastitis antibiotics; nonlactational abscess cancer-until-proven-otherwise I&D/biopsies/cytology; lactational percutaneous drainage; Mondor is present (contrary to saved packet coverage flag), with superficial cord and NSAID therapy. Licensed text stays on device."
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000007507",
+    "title": "International inflammatory breast cancer diagnostic consensus",
+    "kind": "article",
+    "citation": "Dawood S, et al. International expert panel on inflammatory breast cancer: consensus statement for standardized diagnosis and treatment. Ann Oncol. 2011;22:515–523. doi:10.1093/annonc/mdq345.",
+    "suppliedAt": "2026-11-08T00:00:00.000Z",
+    "details": "Primary consensus checked for ≤6-month rapid onset, ≥one-third skin involvement, invasive carcinoma on core biopsy; dermal lymphatic invasion is not required. Current NCI teaching independently agrees. NCCN v1.2026 referenced in supplied Word was not directly retrieved in this session.",
+    "url": "https://www.annalsofoncology.org/article/S0923-7534%2819%2938596-5/fulltext"
+  },
 ];

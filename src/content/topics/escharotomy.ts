@@ -133,7 +133,7 @@ export const escharotomyTopic = buildTopic({
   aliases: ["burn escharotomy", "burn eschar", "burn-induced compartment syndrome", "BICS", "circumferential burn", "chest escharotomy", "digital escharotomy", "Grayson's ligament", "Cleland's ligament", "bromelain", "torso escharotomy", "extremity escharotomy", "compartment syndrome", "burn compartment syndrome", "NexoBrid", "anacaulase", "enzymatic escharotomy", "escharotomy incisions", "decompressive incision", "ulnar nerve", "peroneal nerve"],
   scoreNodeId: "trauma-procedures",
   scoreCategory: "SCORE · Trauma · Operations & Procedures",
-  tags: ["trauma", "burns", "operative-technique", "compartment-syndrome", "absite", "score", "emergency"],
+  tags: ["trauma", "burn-release", "operative-technique", "compartment-syndrome", "absite", "score", "emergency"],
   sourceId: PACKET,
   blocks,
   reviewedAt: "2026-08-18T00:00:00.000Z",

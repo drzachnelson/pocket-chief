@@ -113,7 +113,7 @@ export const abdominalExplorationTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000000415",
   slug: "abdominal-exploration",
   title: "Abdominal Exploration",
-  aliases: ["exploratory laparotomy", "ex lap", "damage control surgery", "Kocher maneuver", "Cattell-Braasch", "Mattox maneuver", "retroperitoneal hematoma", "abdominal compartment syndrome"],
+  aliases: ["exploratory laparotomy", "ex lap", "damage control surgery", "damage-control laparotomy", "Kocher maneuver", "Cattell-Braasch", "Mattox maneuver", "retroperitoneal hematoma"],
   scoreNodeId: "abdomen-procedures",
   scoreCategory: "SCORE · General Abdomen · Operations & Procedures",
   tags: ["general-abdomen", "trauma", "damage-control", "absite", "score"],

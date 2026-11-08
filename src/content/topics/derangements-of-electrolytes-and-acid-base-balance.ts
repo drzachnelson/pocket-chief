@@ -198,7 +198,7 @@ export const derangementsOfElectrolytesAndAcidBaseBalanceTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001611",
   slug: "derangements-of-electrolytes-and-acid-base-balance",
   title: "Derangements of Electrolytes and Acid-Base Balance",
-  aliases: ["fluid and electrolyte disorders", "acid-base disorders", "hyponatremia", "hypernatremia", "hyperkalemia", "hypokalemia", "hypercalcemia", "hypocalcemia", "refeeding syndrome", "anion gap", "MUDPILES", "metabolic acidosis", "metabolic alkalosis", "respiratory acidosis", "respiratory alkalosis", "Parkland formula", "free water deficit", "osmotic demyelination syndrome", "central pontine myelinolysis", "SIADH", "diabetes insipidus"],
+  aliases: ["fluid and electrolyte disorders", "acid-base disorders", "hyponatremia", "hypernatremia", "hyperkalemia", "hypokalemia", "hypercalcemia", "hypocalcemia", "refeeding syndrome", "anion gap", "MUDPILES", "metabolic acidosis", "metabolic alkalosis", "respiratory acidosis", "respiratory alkalosis", "free water deficit", "osmotic demyelination syndrome", "central pontine myelinolysis", "SIADH", "diabetes insipidus"],
   scoreNodeId: "critical-care-conditions",
   scoreCategory: "SCORE · Surgical Critical Care · Diseases & Conditions",
   tags: ["surgical-critical-care", "fluids", "electrolytes", "acid-base", "absite", "score", "icu"],

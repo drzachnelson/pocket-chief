@@ -207,7 +207,7 @@ export const hepaticAbscessDrainageTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000004231",
   slug: "hepatic-abscess-drainage",
   title: "Hepatic Abscess Drainage",
-  aliases: ["liver abscess drainage", "percutaneous abscess drainage", "percutaneous catheter drainage", "needle aspiration of liver abscess", "PCD versus needle aspiration", "laparoscopic liver abscess drainage", "PAIR technique", "puncture-aspiration-injection-reaspiration", "scolicidal agent"],
+  aliases: ["liver abscess drainage", "percutaneous abscess drainage", "percutaneous catheter drainage of liver abscess", "needle aspiration of liver abscess", "PCD versus needle aspiration", "laparoscopic liver abscess drainage", "PAIR technique", "puncture-aspiration-injection-reaspiration", "scolicidal agent"],
   scoreNodeId: "liver-procedures",
   scoreCategory: "SCORE · Liver · Operations & Procedures",
   tags: ["liver", "abscess", "interventional-radiology", "absite", "score"],
