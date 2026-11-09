@@ -437,3 +437,14 @@ Six topics from six supplied Word reviews: Colonic Polyps, Colon Cancer, Colonic
 - **Aliases narrowed at source:** malrotation-operation `detorsion` → `midgut detorsion` (caught sigmoid volvulus), `shock index` moved from splenic-injury to hypovolemic-shock, and pancreaticoduodenectomy dropped `FOLFIRINOX`/`mFOLFIRINOX` — superseding the tail-mass decision above, because rectal TNT uses the regimen too. Endoscopy dropped `CO2 insufflation`, `tagged red blood cell scan`, `superselective embolization`, `endoloop`; polyposis dropped `SMAD4` (caught the somatic 18q step). Auto-link keys under 4 characters never link, so 3-letter aliases (APC, TME, FAP) are search-only.
 
 Content status: **authored but unreviewed — draft until Zach reads it.**
+
+## PD catheter playbook (November 9, 2026)
+
+- **One playbook covers placement and removal**, filed as `laparoscopic` because advanced laparoscopic insertion is the main technique; open removal and the other insertion approaches are sections inside it, as IVC filter placement and retrieval does. `procedureId` is `peritoneal_dialysis_catheter_placement_and_removal`. The board content stays in the `peritoneal-dialysis-catheter-insertion` topic, linked through `relatedTopicSlugs`.
+- **Specialty is "General Abdomen"**, a new string that mirrors where SCORE files the PD catheter topic; no existing specialty fit.
+- **Sources take 03072-03076**: the owner's Word playbook (its author-year citation list folded into details), SAGES 2023, SAGES 2014, ISPD peritonitis 2022 and the 2017 Cochrane prophylaxis review. SAGES 2023 and ISPD 2022 were added beyond the packet as the authorities for the key-question table and the corrected peritonitis content.
+- **Packet corrections:** peritonitis target under 0.4 per patient-year (ISPD 2022), not 0.5; Pseudomonas peritonitis is a removal indication only with concomitant exit-site or tunnel infection or no response at 5 days; refractory peritonitis may be observed past day 5 if the count is falling; SAGES 2023 does suggest concomitant laparoscopic cholecystectomy.
+- **Split written** as "Where the sources disagree": staged against simultaneous hernia repair, and laparoscopic against percutaneous insertion (SAGES equivalence against a 2026 Kaiser cohort and a 2025 meta-analysis).
+- **Auto-links:** "PD peritonitis" is used where a line should reach the PD topic; "pericardial window", "hemoperitoneum" and "VATS" were reworded off FAST and chest trauma, and "linea semilunaris" was reworded so the anatomy guard still pins it to the ventral hernia playbook.
+
+Content status: **authored but unreviewed: draft until Zach reads it.**

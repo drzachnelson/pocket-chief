@@ -397,6 +397,24 @@ describe("playbook library", () => {
         "necrotizing fasciitis -> necrotizing-soft-tissue-infections",
         "peritonitis -> abdominal-pain",
       ],
+      // PD catheter, November 9: "pericardial window", "hemoperitoneum" (both to the FAST topic) and "VATS" (to
+      // chest trauma) were reworded; "PD peritonitis" is used where it should reach the PD topic, and the bare
+      // "peritonitis" left in removal, prophylaxis and surgical-peritonitis lines reaches abdominal pain as it does
+      // for HIPEC. "arcuate line" to rectus sheath hematoma is shared abdominal wall anatomy.
+      "peritoneal-dialysis-catheter-placement-and-removal": [
+        "Crohn disease -> crohn-disease",
+        "Loss of domain -> ventral-and-incisional-hernia",
+        "PD peritonitis -> peritoneal-dialysis-catheter-insertion",
+        "Rectus sheath hematoma -> rectus-sheath-hematoma",
+        "VTE prophylaxis -> prophylaxis-of-venous-thromboembolism",
+        "arcuate line -> rectus-sheath-hematoma",
+        "diverticulitis -> diverticulitis",
+        "laparoscopic cholecystectomy -> symptomatic-gallstones-and-cholecystitis",
+        "omental wrap -> peritoneal-dialysis-catheter-insertion",
+        "patent processus vaginalis -> groin-hernia-in-children",
+        "peritonitis -> abdominal-pain",
+        "ulcerative colitis -> ulcerative-colitis",
+      ],
       "simple-mastectomy-with-sentinel-node-biopsy": [
         "intermittent pneumatic compression -> prophylaxis-of-venous-thromboembolism",
         "proximal and distal control -> vascular-exposure-principles",
