@@ -548,6 +548,8 @@ As of this 2026-11-08 Call Problems II draft: **129 topics and 23 playbooks** on
 
 2026-11-08, Call Problems II Runs 1 and 2: eight topics authored together from the saved October 23 packets and seven November 8 Word guides. Acute Mesenteric Ischemia serves both Small Intestine and Arterial Disease; Esophageal Perforation and Thermal Injury and Burns sit under Trauma; Abdominal Compartment Syndrome under Surgical Critical Care; gastrointestinal foreign bodies under Stomach; pilonidal disease and NSTI open Skin and Soft Tissue; mastitis/abscess uses Benign Breast Disease. Narrower coverage stays partial below. Operative principles inside a disease page do not close its separate procedure entry. All eight require Zach’s clinical sign-off before merge.
 
+2026-11-09, colorectal batch: six topics from six supplied Word reviews, all under the outline's own titles. Colon Cancer, Colonic Polyps, Colonic Polyposis Syndromes (from the hereditary polyposis review), and Partial Colectomy sit under Large Intestine; Rectal Cancer under Anorectal; Lower GI Endoscopy opens Endoscopy. Hereditary syndrome content from three reviews is consolidated in Colonic Polyposis Syndromes. All six require Zach’s clinical sign-off before merge.
+
 "Partial" means the app topic is narrower than the outline entry. Only rename a topic to an outline title when its content covers that title's scope. Matching the label without the content makes coverage look complete when it is not. Leave the existing splits alone; for new content, prefer the outline's titles and granularity so coverage stays countable.
 
 | Module | Entries | Covered | Partial | App topics |
@@ -561,9 +563,9 @@ As of this 2026-11-08 Call Problems II draft: **129 topics and 23 playbooks** on
 | Esophagus | 10 | 1 | 1 | Paraesophageal Hernia Repair; partial: Gastrointestinal Foreign Bodies covers the foreign-body/food-impaction portion of Esophageal Caustic Ingestion and Foreign Bodies, not caustic injury |
 | Stomach | 15 | 2 | — | Gastric Adenocarcinoma (HIPEC/PMP batch, November 1, 2026); Gastrointestinal Foreign Bodies covers Gastric Foreign Bodies (Call Problems II, November 8, 2026) |
 | Small Intestine | 13 | 2 | 1 | Small Intestinal Obstruction (Call Problems I, October 2026); Acute Mesenteric Ischemia (Call Problems II, November 8, 2026); partial: Crohn Disease (Procedures for Crohn Disease; the topic is disease-led) |
-| Large Intestine | 15 | 5 | 1 | Appendectomy (HIPEC/PMP batch, November 1, 2026); Appendicitis, Diverticulitis, Colonic Volvulus and Obstruction, Lower Gastrointestinal Bleeding (Call Problems I, October 2026); partial: Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
-| Anorectal | 17 | 2 | — | Hemorrhoids, Procedures for Hemorrhoids |
-| Endoscopy | 3 | — | — | |
+| Large Intestine | 15 | 9 | 1 | Colon Cancer, Colonic Polyps, Colonic Polyposis Syndromes, Partial Colectomy (colorectal batch, November 9, 2026); Appendectomy (HIPEC/PMP batch, November 1, 2026); Appendicitis, Diverticulitis, Colonic Volvulus and Obstruction, Lower Gastrointestinal Bleeding (Call Problems I, October 2026); partial: Ulcerative Colitis (Procedures for Ulcerative Colitis; the topic is disease-led) |
+| Anorectal | 17 | 3 | — | Rectal Cancer (colorectal batch, November 9, 2026); Hemorrhoids, Procedures for Hemorrhoids |
+| Endoscopy | 3 | 1 | — | Lower GI Endoscopy (colorectal batch, November 9, 2026) |
 | Breast | 21 | 2 | 2 | Fibroadenoma vs Phyllodes Tumor, Percutaneous Breast Biopsy and Cyst Aspiration; partial: Breast Abscess and Mastitis covers inflammatory/infectious disease and lactational infection, not all Benign Inflammatory Disease of the Breast or Breast Disease During Pregnancy and Lactation (noninfectious and oncologic pregnancy/lactation management remains incomplete) |
 | Endocrine | 17 | — | — | |
 | Skin and Soft Tissue | 17 | 1 | 1 | Pilonidal Disease; partial: Necrotizing Soft Tissue Infections covers the urgent necrotizing subset of Soft Tissue Infections, not its full nonnecrotizing spectrum. Separate Procedures for Pilonidal Disease and Procedures for Soft Tissue Infections remain open |

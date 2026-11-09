@@ -127,6 +127,12 @@ import { acutePancreatitisTopic } from "@/content/topics/acute-pancreatitis";
 import { colonicVolvulusAndObstructionTopic } from "@/content/topics/colonic-volvulus-and-obstruction";
 import { lowerGastrointestinalBleedingTopic } from "@/content/topics/lower-gastrointestinal-bleeding";
 import { pancreaticTailMassTopic } from "@/content/topics/pancreatic-tail-mass";
+import { colonicPolypsTopic } from "@/content/topics/colonic-polyps";
+import { colonCancerTopic } from "@/content/topics/colon-cancer";
+import { colonicPolyposisSyndromesTopic } from "@/content/topics/colonic-polyposis-syndromes";
+import { partialColectomyTopic } from "@/content/topics/partial-colectomy";
+import { rectalCancerTopic } from "@/content/topics/rectal-cancer";
+import { lowerGiEndoscopyTopic } from "@/content/topics/lower-gi-endoscopy";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -269,6 +275,12 @@ export const libraryTopics: Topic[] = [
   colonicVolvulusAndObstructionTopic,
   lowerGastrointestinalBleedingTopic,
   pancreaticTailMassTopic,
+  colonicPolypsTopic,
+  colonCancerTopic,
+  colonicPolyposisSyndromesTopic,
+  partialColectomyTopic,
+  rectalCancerTopic,
+  lowerGiEndoscopyTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

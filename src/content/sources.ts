@@ -425,6 +425,22 @@ export const OPEN_STAMM_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003068"
 export const OPEN_STAMM_OE_SOURCE = "00000000-0000-4000-8000-000000003069";
 export const KOHLI_2021_GASTROSTOMY_SOURCE = "00000000-0000-4000-8000-000000003070";
 export const SZARY_2011_EARLY_FEEDING_SOURCE = "00000000-0000-4000-8000-000000003071";
+export const COLONIC_POLYPS_PACKET_SOURCE = "00000000-0000-4000-8000-000000007900";
+export const USMSTF_SURVEILLANCE_2020_SOURCE = "00000000-0000-4000-8000-000000007901";
+export const USMSTF_MALIGNANT_POLYP_2020_SOURCE = "00000000-0000-4000-8000-000000007902";
+export const COLON_CANCER_PACKET_SOURCE = "00000000-0000-4000-8000-000000008000";
+export const NCCN_COLON_2026_SOURCE = "00000000-0000-4000-8000-000000008001";
+export const RECTAL_CANCER_PACKET_SOURCE = "00000000-0000-4000-8000-000000008100";
+export const NCCN_RECTAL_2026_SOURCE = "00000000-0000-4000-8000-000000008101";
+export const DOSTARLIMAB_FDA_2026_SOURCE = "00000000-0000-4000-8000-000000008102";
+export const POLYPOSIS_PACKET_SOURCE = "00000000-0000-4000-8000-000000008200";
+export const NCCN_GENETIC_COLORECTAL_2026_SOURCE = "00000000-0000-4000-8000-000000008201";
+export const ACG_POLYPOSIS_2026_SOURCE = "00000000-0000-4000-8000-000000008202";
+export const PARTIAL_COLECTOMY_PACKET_SOURCE = "00000000-0000-4000-8000-000000008300";
+export const ASCRS_COLON_CANCER_2022_SOURCE = "00000000-0000-4000-8000-000000008301";
+export const LOWER_GI_ENDOSCOPY_PACKET_SOURCE = "00000000-0000-4000-8000-000000008400";
+export const ACG_LGIB_2023_SOURCE = "00000000-0000-4000-8000-000000008401";
+export const COLONOSCOPY_QUALITY_2024_SOURCE = "00000000-0000-4000-8000-000000008402";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -4554,5 +4570,140 @@ export const suppliedSources: SuppliedSource[] = [
     "suppliedAt": "2026-11-08T00:00:00.000Z",
     "details": "Primary consensus checked for ≤6-month rapid onset, ≥one-third skin involvement, invasive carcinoma on core biopsy; dermal lymphatic invasion is not required. Current NCI teaching independently agrees. NCCN v1.2026 referenced in supplied Word was not directly retrieved in this session.",
     "url": "https://www.annalsofoncology.org/article/S0923-7534%2819%2938596-5/fulltext"
+  },
+  // Colorectal batch (November 9, 2026): six owner-supplied Word reviews. Inline author-year attributions were
+  // stripped from block text at the owner's request and are kept here. Clinical draft pending Zach's sign-off.
+  {
+    id: COLONIC_POLYPS_PACKET_SOURCE,
+    title: "Colonic Polyps — supplied Word review",
+    kind: "user_notes",
+    citation: "Owner-supplied “Colonic Polyps Pocket Chief” Word review, received 2026-11-09; built from SCORE notebook notes and checked by its author against USMSTF 2020 and 2026, NCCN 2026, ACG 2026, and ASCRS 2024.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Read in full through its board pearls; no numbered bibliography, only inline attributions: Hecht and Trieu (Yamada's Textbook 2022); van der Pool (J Laparoendosc Adv Surg Tech 2018); NCCN Colon Cancer, Rectal Cancer, CRC Screening, and Genetic/Familial (2026); Rex, Shaukat, and Wallace (Clin Gastroenterol Hepatol 2019); Shaukat (USMSTF malignant polyp 2020); Kaltenbach (USMSTF endoscopic removal 2020); Gupta (USMSTF surveillance 2020); Kastrinos (Gastroenterology 2020); Mankaney (ACG 2026); Poylin (ASCRS 2024); Zammit (Int J Colorectal Dis 2022); Lieberman and Dekker (Dig Dis Sci 2025); He (Gastroenterology 2020); Monahan (Gastroenterology 2025); Orchard (Ann R Coll Surg Engl 2018); Liesegang (Int J Colorectal Dis 2026); Yee (ACR C-RADS 2024); Rex (ACG quality indicators 2024); Copland (AGA 2024); Guardiola (Clin Gastroenterol Hepatol 2025); Ngamruengphong (AGA 2025); Zhang (JAMA 2020); Abu-Freha (UEG J 2021); Medina-Prado (Clin Gastroenterol Hepatol 2021). Its hereditary syndrome table and FAP surgical detail are carried in colonic-polyposis-syndromes rather than duplicated here. The packet's unfavorable-depth wording (more than 1 mm) is harmonized to 1 mm or more, matching its own favorable cutoff of under 1 mm. Pending Zach's sign-off.",
+  },
+  {
+    id: USMSTF_SURVEILLANCE_2020_SOURCE,
+    title: "USMSTF 2020: follow-up after colonoscopy and polypectomy",
+    kind: "article",
+    citation: "Gupta S, Lieberman D, Anderson JC, et al. Recommendations for follow-up after colonoscopy and polypectomy: a consensus update by the US Multi-Society Task Force on Colorectal Cancer. Gastroenterology. 2020;158(4):1131–1153.e5.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the post-polypectomy surveillance tables in colonic-polyps and lower-gi-endoscopy. Intervals are as relayed by both supplied Word reviews, which agree with each other; the full text was not re-read this session. Pending Zach's sign-off.",
+  },
+  {
+    id: USMSTF_MALIGNANT_POLYP_2020_SOURCE,
+    title: "USMSTF 2020: endoscopic recognition and management of malignant colorectal polyps",
+    kind: "article",
+    citation: "Shaukat A, Kaltenbach T, Dominitz JA, et al. Endoscopic recognition and management strategies for malignant colorectal polyps: recommendations of the US Multi-Society Task Force on Colorectal Cancer. Gastroenterology. 2020;159(5):1916–1934.e2.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the Haggitt, Kikuchi, and micrometer-depth nodal-risk table in colonic-polyps, as relayed by the supplied colonic polyps review; not re-read this session. Pending Zach's sign-off.",
+  },
+  {
+    id: COLON_CANCER_PACKET_SOURCE,
+    title: "Colon Cancer — supplied Word review",
+    kind: "user_notes",
+    citation: "Owner-supplied “Colon Cancer Pocket Chief” Word review, received 2026-11-09; SCORE notebook draft checked by its author against NCCN Colon Cancer v3.2026 and current trials.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Read in full through its board pearls; inline attributions only: Wagle (CA Cancer J Clin 2025); Miller (CA Cancer J Clin 2019); O'Connell (JNCI 2004, AJCC 6th edition survival); Pan (Am J Surg Pathol 2026, AJCC 9th proposal); Justesen (Clin Infect Dis 2022, bacteremia and CRC); Wolf (ACS screening guideline 2026); Siegel (CA Cancer J Clin 2026); Krauss (Cancer Consult 2023); USPSTF (JAMA 2021); Brenner and Hoffmeister (Nat Rev Gastroenterol Hepatol 2021); Jayakrishnan and Ng (JAMA 2025); Vogel (ASCRS colon cancer 2022); McHugh (Dis Colon Rectum 2024); Kim (Sci Rep 2023); Iveson (J Clin Oncol 2026, SCOT); Martling (NEJM 2025, ALASCCA); Courneya (NEJM 2025, CHALLENGE); Sinicrope (NEJM 2026, ATOMIC); Chalabi (Lancet 2026, NICHE-2); Dottorini (Ann Surg Oncol 2026) and Lopes (Int J Colorectal Dis 2026) for FOxTROT; Wadhwani (JAMA Surg 2026, NeoCol); Nair (Curr Treat Options Oncol 2024); Eng (Lancet 2024); Ecker (Lancet Oncol 2022); Papadia (World J Surg Oncol 2026); ACR Appropriateness Criteria (2026); Quénet (Lancet Oncol 2021, PRODIGE 7); Morris (ASCO 2023); Williams (Nat Rev Clin Oncol 2024, KEYNOTE-177); Lonardi (Ann Oncol 2026, CheckMate 8HW); Shiraiwa (Cochrane 2026); Killock (Nat Rev Clin Oncol 2024 and 2025); NCCN Genetic/Familial (2026); ACG adenomatous polyposis (2026); Poylin (ASCRS 2024). Items the packet itself marks UNVERIFIED (synchronous cancer 2.3%–12.4%, ovarian drop metastasis 5%) are not carried. Its hereditary polyposis surgery section is carried in colonic-polyposis-syndromes. NCCN aspirin dosing for PI3K-altered tumors was spot-checked against secondary coverage on November 9, 2026. Pending Zach's sign-off.",
+  },
+  {
+    id: NCCN_COLON_2026_SOURCE,
+    title: "NCCN Clinical Practice Guidelines in Oncology: Colon Cancer (2026)",
+    kind: "website",
+    citation: "National Comprehensive Cancer Network. NCCN Clinical Practice Guidelines in Oncology: Colon Cancer. Version 3.2026.",
+    url: "https://www.nccn.org/guidelines/category_1",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the malignant polyp favorable and unfavorable features and the adjuvant therapy by stage block. Not retrieved directly this session; content is as relayed by the supplied colon cancer and colonic polyps reviews, which agree. Pending Zach's sign-off.",
+  },
+  {
+    id: RECTAL_CANCER_PACKET_SOURCE,
+    title: "Rectal Cancer — supplied Word review",
+    kind: "user_notes",
+    citation: "Owner-supplied “Rectal Cancer Pocket Chief” Word review, received 2026-11-09; SCORE notebook draft checked by its author against NCCN Rectal Cancer v2.2026, the ASCO 2024 locally advanced rectal cancer guideline, and the ASCRS 2020 guideline with its 2023 supplement.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Read in full through its board pearls; inline attributions only: NCCN Rectal Cancer (2026); ASCO locally advanced rectal cancer guideline (2024); ASCRS rectal cancer guideline (2020); SIR/ACR practice parameter (2023); ACR Appropriateness Criteria (2025); AGA clinical practice update (2023); Sung (Lancet Oncol 2025); Patel (USMSTF 2022); Chen (Lancet Gastroenterol Hepatol 2023); Cercek (NEJM 2022); Björkström (J Intern Med 2026); Cercek (Ann Oncol 2026, AZUR-1); Eng (Lancet 2024, SYNCHRONOUS); Ecker (Lancet Oncol 2022); Sauer (JCO 2012) and Massarweh (J Surg Oncol 2016) for CAO/ARO/AIO-94; Bhutiani (Cancer 2022) and Conroy (Ann Oncol 2024) for PRODIGE 23; Tao (Lancet Oncol 2026) for RAPIDO; Verheij (JCO 2024, OPRA); Schrag (NEJM 2023, PROSPECT); Wang (JCO 2026, TNTCRT); Williams (Ann Oncol 2025); Diefenhardt (JAMA Netw Open 2026); Beyer-Berjot (Gastroenterology 2026); Strong and Soper (JAMA 2015); Lee (Surg Endosc 2020); Fleshman (Ann Surg 2019); Jiang (Lancet Gastroenterol Hepatol 2025, LASRE); Folkerts (Cancer 2025, COLLISION); Shiraiwa (Cochrane 2026); Myrseth (Int J Colorectal Dis 2022); Emile (J Gastrointest Surg 2022); Ochiai (Ann Surg Oncol 2025); Matthiessen (Ann Surg 2007); Annesi and Chu (JAMA Netw Open 2026). AZUR-1's 12-month complete-response figure differs across reports (68% in the packet, 93% in FDA-label coverage), so no single figure is carried. Pending Zach's sign-off.",
+  },
+  {
+    id: NCCN_RECTAL_2026_SOURCE,
+    title: "NCCN Clinical Practice Guidelines in Oncology: Rectal Cancer (2026)",
+    kind: "website",
+    citation: "National Comprehensive Cancer Network. NCCN Clinical Practice Guidelines in Oncology: Rectal Cancer. Version 2.2026.",
+    url: "https://www.nccn.org/guidelines/category_1",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the transanal local excision criteria and the MRI circumferential margin definitions in rectal-cancer. Not retrieved directly this session; content is as relayed by the supplied rectal cancer review. Pending Zach's sign-off.",
+  },
+  {
+    id: DOSTARLIMAB_FDA_2026_SOURCE,
+    title: "FDA accelerated approval of dostarlimab for dMMR/MSI-H locally advanced rectal cancer",
+    kind: "website",
+    citation: "The ASCO Post. FDA approves dostarlimab for MSI-H/dMMR locally advanced rectal cancer. October 2026.",
+    url: "https://ascopost.com/news/october-2026/fda-approves-dostarlimab-for-msi-hdmmr-locally-advanced-rectal-cancer/",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Found by web search on November 9, 2026 to confirm the supplied reviews' approval claim: accelerated approval on October 19, 2026 for adults with stage II or III dMMR/MSI-H locally advanced rectal cancer, based on the single-arm AZUR-1 trial, 500 mg every 3 weeks for up to nine cycles. Added beyond the packet; pending Zach's sign-off.",
+  },
+  {
+    id: POLYPOSIS_PACKET_SOURCE,
+    title: "Hereditary Polyposis Syndromes — supplied Word review",
+    kind: "user_notes",
+    citation: "Owner-supplied “Hereditary Polyposis Syndromes Pocket Chief” Word review, received 2026-11-09; SCORE notebook draft checked by its author against NCCN Genetic/Familial High-Risk Assessment 2026, the ACG 2026 adenomatous polyposis guideline, ASCRS 2024, and USMSTF hamartomatous polyposis 2022.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Read in full through its board pearls and corrections log; inline attributions only: NCCN Genetic/Familial High-Risk Assessment: Colorectal, Endometrial, Esophageal, and Gastric (2026); NCCN Colon Cancer (2026); NCCN Soft Tissue Sarcoma (2026); ACG adenomatous polyposis guideline (Mankaney 2026); Monahan (Gastroenterology 2025); USMSTF hamartomatous polyposis (Boland 2022); USMSTF serrated polyposis (Rex 2026); ASGE (2020); ASCRS polyposis guideline (2024); ASCRS Lynch statement (2017); AGA (2020); Khalifeh (2026); Bouchiba (Am J Gastroenterol 2024); Tang (J Gastrointest Surg 2026); Aelvoet (Familial Cancer 2022); Vitellaro (BJS 2014); Church (Dis Colon Rectum 2015); Gounder (NEJM 2023, DeFi); Ratan (JCO 2025); Negro (2025); Hüneburg (2026); Campoy (JNCI 2026); Sinicrope (NEJM 2018); Pasqualotto (World J Surg 2025); Hill (JACS 2026); Burn (Lancet 2020, CAPP2); Burn (Lancet Gastroenterol Hepatol 2026, CaPP3); MacFarland (Clin Cancer Res 2024). Also carries the hereditary sections of the colonic polyps and colon cancer reviews, consolidated here. Where the polyps review cites juvenile polyposis CRC up to 68% and case series 14%–22%, and this review cites 39%–68% colon plus stomach and up to 50% colon, all are shown as a split rather than harmonized. Pending Zach's sign-off.",
+  },
+  {
+    id: NCCN_GENETIC_COLORECTAL_2026_SOURCE,
+    title: "NCCN Guidelines: Genetic/Familial High-Risk Assessment — Colorectal, Endometrial, and Gastric (2026)",
+    kind: "website",
+    citation: "National Comprehensive Cancer Network. NCCN Clinical Practice Guidelines in Oncology: Genetic/Familial High-Risk Assessment: Colorectal, Endometrial, and Gastric. 2026.",
+    url: "https://www.nccn.org/guidelines/category_2",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the Lynch gene-specific risk table and the modified Spigelman staging table in colonic-polyposis-syndromes. Version not stated in the supplied review; not retrieved directly this session. Pending Zach's sign-off.",
+  },
+  {
+    id: ACG_POLYPOSIS_2026_SOURCE,
+    title: "ACG clinical guideline: adenomatous colorectal polyposis syndromes (2026)",
+    kind: "article",
+    citation: "American College of Gastroenterology. Clinical guideline: adenomatous colorectal polyposis syndromes. Am J Gastroenterol. 2026. Attributed to Mankaney et al. in the supplied reviews.",
+    url: "https://www.guidelinecentral.com/insights/sep-2026-acg-adenomatouscolorectalpolyposissyndromes-guideline-spotlight/",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the IRA versus IPAA operation-choice block. The 20-or-fewer against more-than-20 rectal adenoma recommendation was confirmed on November 9, 2026 through a Guideline Central summary; the guideline text, grading, and author list were not retrieved directly. Pending Zach's sign-off.",
+  },
+  {
+    id: PARTIAL_COLECTOMY_PACKET_SOURCE,
+    title: "Partial Colectomy — supplied Word review",
+    kind: "user_notes",
+    citation: "Owner-supplied “Partial Colectomy Pocket Chief” Word review, received 2026-11-09; SCORE notebook draft corrected by its author against ASCRS, NCCN, and recent trials.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Read in full through its board pearls; inline attributions only: Hawkins (ASCRS diverticulitis 2026); Hall (ASCRS diverticulitis 2020); Vogel (ASCRS colon cancer 2022); NCCN Colon Cancer (2026); Awedew (Cochrane 2025); ACS Optimal Resources for Cancer Care (2024); Yazici (Cancer Control 2025); Lennon (EJSO network meta-analysis 2023); Hird (Colorectal Dis 2021); Benhammou (Am Surg 2026); de'Angelis (WSES 2023); Choy (Cochrane 2011); Nordholm-Carstensen (Dis Colon Rectum 2019); Gustafsson (World J Surg 2015); Kessler (Surg Endosc 2026); Schabl (Langenbecks Arch Surg 2025); ACS Gastrointestinal Surgical Emergencies (2021); Giron (Surg Endosc 2025); Irani (ASCRS/SAGES ERAS 2023); Shogan (ASCRS SSI 2024); Allegranzi (WHO 2016); Gosavi (Colorectal Dis 2025); Yanagisawa (BJU Int 2023); Mali (J Surg Oncol 2025); Chatani (JNCCN 2026); Brucchi (Surgery 2026); Maroli (Surg Endosc 2026); Green (BJS 2013, CLASICC); Nelson (NEJM 2004, COST); Buunen (Lancet Oncol 2009, COLOR); Boller and Nelson (Clin Cancer Res 2007); Kitaguchi (EJSO 2026); Díaz-Vico (Ann Surg Oncol 2021); Machicado (ASGE 2026); Kim (Sci Rep 2023); Brown (JAMA 2025); Sacks and Hall (JAMA Surg 2024); Alavi (ASCRS volvulus 2021); Poylin (ASCRS C. difficile 2021); Forrester (SIS 2022); Clarke and Allegretti (Aliment Pharmacol Ther 2024); McKechnie (J Gastrointest Surg 2023); SAGES ICG guideline (2025); Rajan (Int J Colorectal Dis 2022); Golda (Am J Surg 2020). Diverticulitis, volvulus, and C. difficile sections are condensed to the operative decision because those diseases have their own topics. Pending Zach's sign-off.",
+  },
+  {
+    id: ASCRS_COLON_CANCER_2022_SOURCE,
+    title: "ASCRS clinical practice guidelines for the management of colon cancer (2022)",
+    kind: "article",
+    citation: "Vogel JD, Felder SI, Bhama AR, et al. The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Colon Cancer. Dis Colon Rectum. 2022;65(2):148–177.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the obstructing left colon cancer options and the stent-bridge against emergency resection figures in colon-cancer and partial-colectomy, as relayed by both supplied reviews, which agree; not re-read this session. Pending Zach's sign-off.",
+  },
+  {
+    id: LOWER_GI_ENDOSCOPY_PACKET_SOURCE,
+    title: "Lower GI Endoscopy — supplied Word review",
+    kind: "user_notes",
+    citation: "Owner-supplied “Lower GI Endoscopy Pocket Chief” Word review, received 2026-11-09; SCORE notebook draft corrected by its author against ACG 2023, ACG/ASGE 2024 quality indicators, ACR, AGA, and NCCN screening v2.2026.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Read in full through its board pearls; inline attributions only: Aaron (ACS Gastrointestinal Surgical Emergencies 2021); Vajravelu (Gastroenterology 2018); Sengupta (ACG 2023); Alali (Aliment Pharmacol Ther 2024); Rex (ACG/ASGE quality indicators 2024); Sengupta and Cifu (JAMA 2018); Lee (Surg Endosc 2023); Imran (JAMA 2024); Karuppasamy (ACR Appropriateness Criteria 2021); Gralnek (NEJM 2017); Brejt (Yamada's Textbook 2022); Sengupta (ACG/SAR 2024); ASGE complications of colonoscopy (2011); Keswani (AGA 2021); Shaukat (ACG CRC screening 2021); Schoenfeld (Aliment Pharmacol Ther 2026); NCCN CRC Screening v2.2026; Kaltenbach (USMSTF 2020); Corley, as cited by Schoenfeld; Copland (AGA 2024); Draganov (AGA 2026); Wei (Surg Endosc 2026, CLIPPER); Forbes (ASGE 2026); Rodríguez de Santiago (2025); Hawks (AAFP summary of ACG 2024); Balvardi and Galante (Surg Clin 2026); Sue-Chue-Lam (JAMA Surg 2020); Mirza (Surg Endosc 2026); Çetinkaya (2026); Gupta (USMSTF 2020); Zhang (JAMA 2020); Jover (NEJM 2026, EPoS II); Carabotti (2024). Draft figures the packet marks NOT VERIFIED (embolization 97%, hematocrit under 20 and platelets under 140,000 as rebleeding predictors, surgical rebleeding 4%–10%) are named only as superseded board numbers. Its lower GI bleeding workup is condensed to the endoscopic and IR role because lower-gastrointestinal-bleeding is its own topic. Pending Zach's sign-off.",
+  },
+  {
+    id: ACG_LGIB_2023_SOURCE,
+    title: "ACG 2023 guideline: management of acute lower gastrointestinal bleeding",
+    kind: "article",
+    citation: "Sengupta N, Feuerstein JD, Jairath V, et al. Management of patients with acute lower gastrointestinal bleeding: an updated ACG guideline. Am J Gastroenterol. 2023;118(2):208–231.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for risk stratification, CT angiography first in the unstable bleeder, non-urgent inpatient colonoscopy, and antithrombotic management in lower-gi-endoscopy, as relayed by the supplied review; not re-read this session. Pending Zach's sign-off.",
+  },
+  {
+    id: COLONOSCOPY_QUALITY_2024_SOURCE,
+    title: "ACG/ASGE 2024 quality indicators for colonoscopy",
+    kind: "article",
+    citation: "Rex DK, Anderson JC, Butterly LF, et al. Quality indicators for colonoscopy. Am J Gastroenterol. 2024;119(9):1754–1780.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited for the colonoscopy quality targets table in lower-gi-endoscopy (adenoma detection rate at least 35%, withdrawal time at least 8 minutes, cecal intubation at least 95% in screening), as relayed by the supplied review; not re-read this session. Pending Zach's sign-off.",
   },
 ];

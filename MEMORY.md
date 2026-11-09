@@ -427,3 +427,13 @@ One SCORE topic and one playbook from the experimental packet pipeline: Pancreat
 - **Aliases:** the topic claims IPMN, cyst-type, PNET, insulinoma, glucagonoma, Whipple triad (which masks the bare "Whipple" link), Kimura/Warshaw, RAMPS and sinistral/left-sided portal hypertension. Whipple keeps "pancreatic cancer", "borderline resectable", "pancreatic fistula" and "FOLFIRINOX", so tail-mass text links there. Reworded instead of narrowing: "monitored fast" reached FAST, "CTNNB1" reached desmoid, and "chronic pancreatitis" in the playbook reached Acute Pancreatitis.
 
 Content status: **authored but unreviewed — draft until Zach reads it.** Figures carried from the two OpenEvidence documents are recorded in their source details as pending sign-off.
+
+## 2026-11-09 colorectal batch
+
+Six topics from six supplied Word reviews: Colonic Polyps, Colon Cancer, Colonic Polyposis Syndromes, Partial Colectomy, Rectal Cancer, Lower GI Endoscopy. Sources in the `…079xx`–`…084xx` blocks; one `user_notes` source per review plus the guideline authorities a block leans on (USMSTF 2020 ×2, NCCN colon/rectal/genetic 2026, ACG polyposis 2026, ASCRS colon 2022, ACG LGIB 2023, ACG/ASGE quality 2024, FDA dostarlimab coverage).
+
+- **Owner preference (2026-11-09): no inline author-year citations in block text, and trim wording without dropping content.** Attribution lives in each source's `details`. Applies to future packets that arrive densely cited in-line.
+- **Hereditary content lives once**, in Colonic Polyposis Syndromes; Colonic Polyps and Colon Cancer link to it. Lower GI Endoscopy carries only the endoscopic/IR side of bleeding and links to Lower Gastrointestinal Bleeding, whose SCORE-keyed numbers (24-h colonoscopy, 0.04 mL/min scan, 97% embolization, INR >2.5) its split table marks as superseded.
+- **Aliases narrowed at source:** malrotation-operation `detorsion` → `midgut detorsion` (caught sigmoid volvulus), `shock index` moved from splenic-injury to hypovolemic-shock, and pancreaticoduodenectomy dropped `FOLFIRINOX`/`mFOLFIRINOX` — superseding the tail-mass decision above, because rectal TNT uses the regimen too. Endoscopy dropped `CO2 insufflation`, `tagged red blood cell scan`, `superselective embolization`, `endoloop`; polyposis dropped `SMAD4` (caught the somatic 18q step). Auto-link keys under 4 characters never link, so 3-letter aliases (APC, TME, FAP) are search-only.
+
+Content status: **authored but unreviewed — draft until Zach reads it.**

@@ -203,7 +203,7 @@ export const hypovolemicShockTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000001711",
   slug: "hypovolemic-shock",
   title: "Hypovolemic Shock",
-  aliases: ["hemorrhagic shock", "hypovolemic hemorrhagic shock", "ATLS shock classification", "classes of hemorrhagic shock", "damage control resuscitation", "DCR", "massive transfusion protocol", "MTP", "1:1:1 transfusion", "diamond of death", "lethal triad", "REBOA", "resuscitative endovascular balloon occlusion of the aorta", "tranexamic acid", "TXA", "blood on the floor and four more"],
+  aliases: ["hemorrhagic shock", "shock index", "hypovolemic hemorrhagic shock", "ATLS shock classification", "classes of hemorrhagic shock", "damage control resuscitation", "DCR", "massive transfusion protocol", "MTP", "1:1:1 transfusion", "diamond of death", "lethal triad", "REBOA", "resuscitative endovascular balloon occlusion of the aorta", "tranexamic acid", "TXA", "blood on the floor and four more"],
   scoreNodeId: "critical-care-conditions",
   scoreCategory: "SCORE · Surgical Critical Care · Diseases & Conditions",
   tags: ["surgical-critical-care", "shock", "trauma", "absite", "score", "icu"],
