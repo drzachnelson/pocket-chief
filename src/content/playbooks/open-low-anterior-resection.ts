@@ -237,7 +237,7 @@ export const openLowAnteriorResectionPlaybook = buildPlaybook({
   tags: ["colorectal", "rectal cancer", "total mesorectal excision", "loop ileostomy", "surgical oncology"],
   sourceId: SOURCE,
   additionalSourceIds: [OE, SCORE_RECTAL, SCORE_APR, SCORE_TA, SCORE_ILEO, FISER, MATTHIESSEN, CR07, ALACART, ROLARR, REAL, EMILE],
-  relatedTopicSlugs: [],
+  relatedTopicSlugs: ["rectal-cancer"],
   blocks,
   reviewedAt: "2026-11-01T00:00:00.000Z",
 });

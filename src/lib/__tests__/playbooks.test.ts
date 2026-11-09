@@ -45,6 +45,9 @@ describe("playbook library", () => {
     // sentence to the Crohn topic. An auto-link is a clinical claim about relatedness, so new
     // ones fail here until someone looks at them rather than surfacing in the browser.
     const expected: Record<string, string[]> = {
+      // Colorectal batch, reviewed 2026-11-09: rectal-cancer, partial-colectomy, colon-cancer and lower-gi-endoscopy pins
+      // name the disease, operation, plane or procedure the line is about. Aliases narrowed at source instead: "detorsion"
+      // (malrotation), "shock index" (splenic injury), "FOLFIRINOX" (Whipple), and "endoloop" (from the cholecystectomy).
       // Venous batch: reviewed anatomic and clinical destinations. Pleural air/bleeding
       // was reworded in the rib guide because the bare terms reached the trauma FAST topic.
       "ivc-filter-placement-and-retrieval": ["cavogram -> vena-cava-filter-insertion"],
@@ -125,6 +128,7 @@ describe("playbook library", () => {
         "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
         "loop ileostomy -> ileostomy-and-ileostomy-closure",
         "marginal artery of Drummond -> colostomy-and-colostomy-closure",
+        "mechanical bowel preparation -> partial-colectomy",
         "parastomal hernia -> ventral-and-incisional-hernia",
         "peritonitis -> abdominal-pain",
         "rectal stump -> total-and-subtotal-colectomy",
@@ -178,22 +182,19 @@ describe("playbook library", () => {
       // "pancreatic fistula" left splenectomy for the pancreaticoduodenectomy topic, which defines
       // and grades it. That moves the right hemicolectomy's pancreatic-head row with it.
       "open-pancreaticoduodenectomy": [
-        // Kept: the biliary limb of the reconstruction is a hepaticojejunostomy, and its technique lives there.
         "Hepaticojejunostomy -> choledochoenteric-anastomosis",
         "Kocher maneuver -> abdominal-exploration",
         "MAPLE-PD -> pancreaticoduodenectomy",
         "Pancreaticojejunostomy -> pancreaticoduodenectomy",
         "SMA margin -> pancreaticoduodenectomy",
         "Whipple -> pancreaticoduodenectomy",
+        "gastrocolic trunk of Henle -> partial-colectomy",
         "hepaticojejunostomy -> choledochoenteric-anastomosis",
-        // Kept: hepatic artery injury and a biliary-enteric anastomosis are listed postoperative causes there.
         "liver abscess -> hepatic-abscess",
         "pancreatic fistula -> pancreaticoduodenectomy",
         "pancreaticoduodenectomy -> pancreaticoduodenectomy",
         "pancreaticojejunostomy -> pancreaticoduodenectomy",
         "pancreatoduodenectomy -> pancreaticoduodenectomy",
-        // Kept: the replaced hepatic arteries are dissected in the hepatoduodenal ligament here, and
-        // Hepatic Resection is where their anatomy and frequency live.
         "replaced left hepatic artery -> hepatic-resection",
         "replaced right hepatic artery -> hepatic-resection",
       ],
@@ -201,11 +202,21 @@ describe("playbook library", () => {
       // narrowed to "midgut volvulus" once Colonic Volvulus and Obstruction arrived, because it was also
       // catching gastric and sigmoid volvulus. "detorsion" stays unlinked: Ladd's procedure is a different operation.
       "right-hemicolectomy": [
+        "Colonoscopy -> lower-gi-endoscopy",
+        "Complete mesocolic excision -> partial-colectomy",
+        "Gastrocolic trunk of Henle -> partial-colectomy",
+        "Mechanical bowel preparation -> partial-colectomy",
         "Pancreatitis -> acute-pancreatitis",
+        "Right hemicolectomy -> partial-colectomy",
+        "White line of Toldt -> partial-colectomy",
         "appendicitis -> appendicitis",
+        "complete mesocolic excision -> partial-colectomy",
         "pancreatic fistula -> pancreaticoduodenectomy",
         "peritonitis -> abdominal-pain",
+        "right colectomy -> partial-colectomy",
+        "right hemicolectomy -> partial-colectomy",
         "small bowel obstruction -> small-intestinal-obstruction",
+        "white line of Toldt -> partial-colectomy",
       ],
       "robotic-cholecystectomy": [
         "Acute cholecystitis -> symptomatic-gallstones-and-cholecystitis",
@@ -316,25 +327,40 @@ describe("playbook library", () => {
       // HIPEC / pseudomyxoma batch, reviewed 2026-11-01. Every destination names the same stoma, electrolyte,
       // prophylaxis or vessel the line is about; the IMA, peritonitis and rectal stump rows follow the colostomy pins.
       "open-low-anterior-resection": [
+        "LARS -> rectal-cancer",
+        "Low anterior resection syndrome -> rectal-cancer",
+        "Mechanical bowel preparation -> partial-colectomy",
+        "Rectal Cancer -> rectal-cancer",
         "Stoma necrosis -> ileostomy-and-ileostomy-closure",
         "VTE prophylaxis -> prophylaxis-of-venous-thromboembolism",
+        "colon cancer -> colon-cancer",
+        "colonoscopy -> lower-gi-endoscopy",
         "colostomy -> colostomy-and-colostomy-closure",
         "hyponatremia -> derangements-of-electrolytes-and-acid-base-balance",
         "ileostomy -> ileostomy-and-ileostomy-closure",
         "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
         "loop colostomy -> colostomy-and-colostomy-closure",
         "loop ileostomy -> ileostomy-and-ileostomy-closure",
+        "mesorectal fascia -> rectal-cancer",
         "peritonitis -> abdominal-pain",
+        "rectal cancer -> rectal-cancer",
         "rectal stump -> total-and-subtotal-colectomy",
+        "total mesorectal excision -> rectal-cancer",
+        "white line of Toldt -> partial-colectomy",
       ],
       // Reworded instead: "prone jackknife" reached hemorrhoid procedures, and "stoma necrosis" reached the ileostomy topic
       // from an end colostomy.
       "open-abdominoperineal-resection": [
         "End colostomy -> colostomy-and-colostomy-closure",
+        "Rectal cancer -> rectal-cancer",
+        "colonoscopy -> lower-gi-endoscopy",
         "colostomy -> colostomy-and-colostomy-closure",
         "end colostomy -> colostomy-and-colostomy-closure",
         "inferior mesenteric artery -> abdominal-and-aortoiliac-aneurysm-repair",
+        "mesorectal fascia -> rectal-cancer",
         "perineal hernia -> unusual-hernias",
+        "rectal cancer -> rectal-cancer",
+        "white line of Toldt -> partial-colectomy",
       ],
       // Every disease, trial and score destination is the topic that owns it (the HIPEC auto-links stay with Peritoneal
       // Neoplasms by design). Reworded instead: "Sugarbaker's six peritonectomies" reached the parastomal Sugarbaker
@@ -353,12 +379,14 @@ describe("playbook library", () => {
         "Pseudomyxoma peritonei -> peritoneal-neoplasms",
         "acute kidney injury -> renal-failure",
         "appendectomy -> appendectomy",
+        "colonoscopy -> lower-gi-endoscopy",
         "enterocutaneous fistula -> enterocutaneous-fistula",
         "interval cytoreduction -> gynecologic-neoplasms",
         "ovarian cancer -> gynecologic-neoplasms",
         "peritoneal cancer index -> peritoneal-neoplasms",
         "peritoneal metastases -> peritoneal-neoplasms",
         "renal failure -> renal-failure",
+        "right hemicolectomy -> partial-colectomy",
         "splenectomy -> splenectomy-and-splenorrhaphy",
         "splenic hilum -> splenectomy-and-splenorrhaphy",
       ],

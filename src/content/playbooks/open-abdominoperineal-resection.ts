@@ -240,7 +240,7 @@ export const openAbdominoperinealResectionPlaybook = buildPlaybook({
   tags: ["colorectal", "rectal cancer", "anal cancer", "end colostomy", "perineal closure", "surgical oncology"],
   sourceId: SOURCE,
   additionalSourceIds: [OE, SCORE_APR, SCORE_RECTAL, WEST, MUSTERS, BIOPEX, PELVEX, Z6051, ALACART, ROLARR, REAL, CR07, ACT2],
-  relatedTopicSlugs: [],
+  relatedTopicSlugs: ["rectal-cancer"],
   blocks,
   reviewedAt: "2026-11-01T00:00:00.000Z",
 });
