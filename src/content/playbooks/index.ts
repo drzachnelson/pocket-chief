@@ -10,6 +10,7 @@ import { openLowAnteriorResectionPlaybook } from "@/content/playbooks/open-low-a
 import { openAbdominoperinealResectionPlaybook } from "@/content/playbooks/open-abdominoperineal-resection";
 import { cytoreductiveSurgeryWithHipecPlaybook } from "@/content/playbooks/cytoreductive-surgery-with-hipec";
 import { openStammGastrostomyPlaybook } from "@/content/playbooks/open-stamm-gastrostomy";
+import { peritonealDialysisCatheterPlacementAndRemovalPlaybook } from "@/content/playbooks/peritoneal-dialysis-catheter-placement-and-removal";
 import type { Playbook } from "@/lib/types";
 import { carotidEndarterectomyBovinePatchPlaybook } from "@/content/playbooks/carotid-endarterectomy-bovine-patch";
 import { colostomyTakedownWithParastomalHerniaRepairPlaybook } from "@/content/playbooks/colostomy-takedown-with-parastomal-hernia-repair";
@@ -36,6 +37,7 @@ export {
   openAbdominoperinealResectionPlaybook,
   cytoreductiveSurgeryWithHipecPlaybook,
   openStammGastrostomyPlaybook,
+  peritonealDialysisCatheterPlacementAndRemovalPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,
@@ -63,6 +65,7 @@ export const libraryPlaybooks: Playbook[] = [
   openAbdominoperinealResectionPlaybook,
   cytoreductiveSurgeryWithHipecPlaybook,
   openStammGastrostomyPlaybook,
+  peritonealDialysisCatheterPlacementAndRemovalPlaybook,
 
   carotidEndarterectomyBovinePatchPlaybook,
   colostomyTakedownWithParastomalHerniaRepairPlaybook,

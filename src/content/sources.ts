@@ -425,6 +425,11 @@ export const OPEN_STAMM_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003068"
 export const OPEN_STAMM_OE_SOURCE = "00000000-0000-4000-8000-000000003069";
 export const KOHLI_2021_GASTROSTOMY_SOURCE = "00000000-0000-4000-8000-000000003070";
 export const SZARY_2011_EARLY_FEEDING_SOURCE = "00000000-0000-4000-8000-000000003071";
+export const PD_CATHETER_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003072";
+export const SAGES_PD_ACCESS_2023_SOURCE = "00000000-0000-4000-8000-000000003073";
+export const SAGES_PD_ACCESS_2014_SOURCE = "00000000-0000-4000-8000-000000003074";
+export const ISPD_PERITONITIS_2022_SOURCE = "00000000-0000-4000-8000-000000003075";
+export const CAMPBELL_2017_PD_PROPHYLAXIS_SOURCE = "00000000-0000-4000-8000-000000003076";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -4038,6 +4043,50 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Szary, et al. 2011. PMID 20733512.",
     suppliedAt: "2026-11-01T00:00:00.000Z",
     details: "Registered for the November 1, 2026 HIPEC and pseudomyxoma batch from its PubMed abstract, verified in the open Stamm gastrostomy entry's outside research: a meta-analysis of 5 randomized trials (355 patients); feeding within 3 hours of PEG did not change complications (odds ratio 0.78) or 72-hour mortality (0.60), and day-1 gastric residuals did not differ significantly. PEG and IR data, not open Stamm. Pending Zach's sign-off.",
+  },
+  // Peritoneal dialysis catheter playbook, November 9, 2026: clinical draft pending owner sign-off.
+  {
+    id: PD_CATHETER_PLAYBOOK_SOURCE,
+    title: "Peritoneal dialysis catheter placement and removal operative playbook",
+    kind: "user_notes",
+    citation: "Owner-supplied Word document, Peritoneal Dialysis Catheter Placement and Removal: Pocket Chief Playbook, November 9, 2026.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "A literature synthesis with inline author-year attributions and no numbered reference list. Cited works: Haggerty et al., Surg Endosc 2024 (SAGES 2023) and 2014 (SAGES 2014); Teitelbaum, N Engl J Med 2021; Ash et al., Semin Dial 2017; Ash, Semin Dial 2003; Asif, Semin Dial 2004; Crabtree, Semin Dial 2014; Goh and Lim, Semin Dial 2022; Lew and Collins, Semin Dial 2020; Chang et al., Semin Dial 2023; Segal and Messana, Semin Dial 2013; Flythe and Watnick, JAMA 2024; Perl et al., JAMA 2022; Rompianesi et al., Surg Endosc 2026; Rege et al., Surg Endosc 2023; Kou et al., Surg Endosc 2023 and Hernia 2021; Yu et al., Surg Endosc 2025; Chua et al., BMC Nephrol 2026; Andrew et al., BMC Nephrol 2025; Zhang et al., BMC Nephrol 2020; Wang et al., BMC Nephrol 2025; Nardelli et al., BMC Nephrol 2024; Fukuzaki et al., Sci Rep 2022; Oki et al., Sci Rep 2021; Briggs et al., Evidence-Based Nephrology 2022 and Cochrane 2023; Ameh et al. and Nguyen et al., Evidence-Based Nephrology 2022; Htay et al., Cochrane 2020; Campbell et al., Cochrane 2017; Ballinger et al., Cochrane 2014; Kim et al., World J Surg 2022; Scalamogna et al., J Nephrol 2023; Punzalan, Renal Nursing 2024; Dai et al., Perit Dial Int 2023; Wang et al., Perit Dial Int 2021; Horvath et al., Hernia 2020; Twardowski et al., Am J Kidney Dis 1996; Szeto and Li, CJASN 2019; Pollmann et al., Langenbecks Arch Surg 2025; Wong et al., Clin Nephrol 2025; Shehata et al., Pediatr Surg Int 2026; Poyan Mehr et al., Clin Kidney J 2026; Nagaraja and Ghalli, Blandy's Urology 2019. Corrected on review, November 9, 2026, against the primary guidelines: the ISPD peritonitis target is under 0.4 episodes per patient-year (2022), not 0.5 (2016); Pseudomonas peritonitis alone is treated with two antibiotics for 3 weeks, and removal is for concomitant exit-site or tunnel infection or no response at 5 days, not for every episode; refractory peritonitis may be observed past day 5 if the effluent count is falling; SAGES 2023 suggests concomitant laparoscopic cholecystectomy in adults rather than making no recommendation on clean-contaminated surgery. The 2026 cohort, single-port, pediatric omentectomy, and peri-procedural bundle citations were not independently opened. Pending Zach's sign-off.",
+  },
+  {
+    id: SAGES_PD_ACCESS_2023_SOURCE,
+    title: "SAGES peritoneal dialysis access guideline update 2023",
+    kind: "article",
+    citation: "Haggerty SP, Kumar SS, Collings AT, et al. SAGES peritoneal dialysis access guideline update 2023. Surg Endosc. 2024;38(1). doi:10.1007/s00464-023-10550-8.",
+    url: "https://www.sages.org/publications/guidelines/peritoneal-dialysis-access-guideline-update-2023/",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Added beyond the packet on November 9, 2026 as the authority for the key-question table; recommendations checked against the SAGES guideline page. All adult recommendations are conditional with very low certainty or expert opinion: staged rather than simultaneous hernia repair; traditional over urgent start, with urgent start acceptable when medically necessary; concomitant laparoscopic cholecystectomy suggested, no recommendation for other clean-contaminated operations; advanced laparoscopic over basic laparoscopic and over open insertion; either advanced laparoscopic or image-guided percutaneous insertion; either operative or nonoperative salvage. Pending Zach's sign-off.",
+  },
+  {
+    id: SAGES_PD_ACCESS_2014_SOURCE,
+    title: "SAGES guidelines for laparoscopic peritoneal dialysis access surgery (2014)",
+    kind: "article",
+    citation: "Haggerty S, Roth S, Walsh D, et al. Guidelines for laparoscopic peritoneal dialysis access surgery. Surg Endosc. 2014;28(11):3016-3045. doi:10.1007/s00464-014-3851-4.",
+    url: "https://www.sages.org/publications/guidelines/guidelines-laparoscopic-peritoneal-dialysis-access-surgery/",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited throughout the packet as the source for the adjunct recommendations (adhesiolysis, rectus sheath tunnel, omentopexy), occult hernia detection, contraindications, and salvage options. Registered on November 9, 2026 so the packet's attribution is checkable; blocks cite the packet unless stated. Pending Zach's sign-off.",
+  },
+  {
+    id: ISPD_PERITONITIS_2022_SOURCE,
+    title: "ISPD peritonitis guideline recommendations: 2022 update",
+    kind: "article",
+    citation: "Li PKT, Chow KM, Cho Y, et al. ISPD peritonitis guideline recommendations: 2022 update on prevention and treatment. Perit Dial Int. 2022;42(2):110-153. doi:10.1177/08968608221080586.",
+    url: "https://journals.sagepub.com/doi/10.1177/08968608221080586",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Added beyond the packet on November 9, 2026 to correct its peritonitis content; recommendations checked against the NephJC summary of the guideline. Diagnosis needs 2 of 3: pain or cloudy effluent, effluent WBC above 100/uL after a dwell of at least 2 hours with more than 50% neutrophils, positive culture. Refractory (not clearing after 5 days): remove the catheter, though observation past day 5 is suggested if the count is falling. Fungal: immediate removal. Pseudomonas: two antibiotics for 3 weeks, removal for concomitant exit-site or tunnel infection or no response at 5 days. Relapsing, recurrent or repeat: consider timely removal; simultaneous removal and reinsertion once culture is negative and WBC is under 100/uL without exit-site or tunnel infection. Program target under 0.4 episodes per patient-year. Pending Zach's sign-off.",
+  },
+  {
+    id: CAMPBELL_2017_PD_PROPHYLAXIS_SOURCE,
+    title: "Campbell 2017 Cochrane review: antimicrobial agents for preventing peritonitis in PD",
+    kind: "article",
+    citation: "Campbell D, Mudge DW, Craig JC, Johnson DW, Tong A, Strippoli GF. Antimicrobial agents for preventing peritonitis in peritoneal dialysis patients. Cochrane Database Syst Rev. 2017;4:CD004679. doi:10.1002/14651858.CD004679.pub3.",
+    suppliedAt: "2026-11-09T00:00:00.000Z",
+    details: "Cited by the packet for perioperative prophylaxis: pre- or perioperative IV antibiotics reduced early peritonitis (RR 0.35, 95% CI 0.15 to 0.80) without reducing exit-site or tunnel infection. Registered on November 9, 2026. Pending Zach's sign-off.",
   },
   // Call Problems II, Runs 1 and 2 — clinical draft pending owner sign-off.
   {
