@@ -1,18 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Trash } from "@phosphor-icons/react";
 import { clearPrivateOfflineData } from "@/lib/offline";
 import { AttendingBackup } from "@/components/attending-backup";
 
 export function SettingsForm() {
   const [status, setStatus] = useState("");
+  const [confirming, setConfirming] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const cancel = useRef<HTMLButtonElement>(null);
+  const opened = useRef(false);
+  // Swapping the button for the confirm unmounts the control that has focus; put it on the safe choice, and hand it back afterwards.
+  useEffect(() => { if (confirming) { opened.current = true; cancel.current?.focus(); } else if (opened.current) trigger.current?.focus(); }, [confirming]);
   async function clearOfflineData() {
+    setConfirming(false);
     setStatus("");
     try {
       await clearPrivateOfflineData();
       navigator.serviceWorker?.controller?.postMessage({ type: "CLEAR_PRIVATE_DATA" });
-      setStatus("Cleared. Reload to restore the atlas from the app bundle.");
+      setStatus("Cleared. Reload to restore topics and playbooks.");
     } catch { setStatus("Could not clear offline storage. Close other Pocket Chief tabs and try again."); }
   }
   return (
@@ -21,15 +28,13 @@ export function SettingsForm() {
         <div className="section-heading"><h2>Offline storage</h2><span>This device</span></div>
         {/* Says plainly what this does and does not touch. Attending preferences live in a
             separate database precisely so this control cannot reach them. */}
-        <p className="settings-copy">Pocket Chief keeps the atlas, your bookmarks, and your reading history in this browser. Clearing removes all three; the atlas comes back on the next load, your bookmarks do not. Attending preferences are stored separately and are not affected.</p>
-        <div className="settings-actions"><button type="button" className="button ghost danger" onClick={clearOfflineData}><Trash size={15} />Clear offline data</button></div>
+        <p className="settings-copy">Pocket Chief keeps topics and playbooks, your Saved topics and your reading history in this browser. Clearing removes all three; topics and playbooks come back on the next load, your Saved topics do not. Attending preferences are stored separately and are not affected.</p>
+        {confirming
+          ? <div className="settings-confirm" role="group" aria-label="Confirm clearing offline data"><p className="settings-copy">This removes your Saved topics and reading history from this device. There is no server copy to restore them from.</p><div className="settings-actions"><button type="button" className="button secondary danger" onClick={clearOfflineData}>Clear Saved topics and history</button><button type="button" className="button ghost" ref={cancel} onClick={() => setConfirming(false)}>Cancel</button></div></div>
+          : <div className="settings-actions"><button type="button" className="button ghost danger" ref={trigger} onClick={() => setConfirming(true)}><Trash size={15} />Clear offline data</button></div>}
         {status && <p className="form-message" role="status">{status}</p>}
       </section>
       <AttendingBackup />
-      <section className="form-card">
-        <div className="section-heading"><h2>The library</h2><span>Read only</span></div>
-        <p className="settings-copy">Topics and playbooks are authored as files in <code>src/content/</code> and ship with the app. Adding or revising one is a commit to the repository, not an edit here. Attending preferences are the exception: those you write in the app, and they never leave this device.</p>
-      </section>
     </div>
   );
 }

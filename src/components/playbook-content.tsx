@@ -33,6 +33,7 @@ export function PlaybookContent({ playbook, sources, linkEntries }: { playbook: 
   const [notes, setNotes] = useState<AttendingNote[]>([]);
   const [editing, setEditing] = useState<AttendingNote | null | undefined>(undefined);
   const [storageError, setStorageError] = useState("");
+  const [tab, setTab] = useState("notes");
 
   // Storage can be blocked outright, and a blocked open never settles, so every read is raced
   // against a timeout the same way the topic reader races its saved/reviewed lookups.
@@ -64,6 +65,8 @@ export function PlaybookContent({ playbook, sources, linkEntries }: { playbook: 
   // Derived, so switching back to standard technique hides the deltas without a state write.
   // Memoized because `annotate` depends on it and runs once per block on every render.
   const selectedIdentity = selected?.id ?? "";
+  // Choosing standard technique removes the Attending tab; a controlled value that no longer exists would leave every panel empty.
+  if (tab === "attending" && !selected) setTab("notes");
   const visibleNotes = useMemo(() => selectedIdentity ? notes.filter((note) => note.attendingId === selectedIdentity) : [], [notes, selectedIdentity]);
 
   const annotate = useCallback((blockId: string, stepTitle?: string) => {
@@ -93,7 +96,7 @@ export function PlaybookContent({ playbook, sources, linkEntries }: { playbook: 
       <div className="topic-actions-row">
         {collapse.collapsibleIds.length > 0 && <button className="expand-toggle" onClick={collapse.toggleAll}>{collapse.allOpen ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}{collapse.allOpen ? "Close all" : "Open all"}</button>}
       </div>
-      <Tabs.Root defaultValue="notes" className="topic-tabs">
+      <Tabs.Root value={tab} onValueChange={setTab} className="topic-tabs">
         <Tabs.List className="tabs-list" aria-label="Playbook views">
           <Tabs.Trigger value="notes">Notes</Tabs.Trigger>
           {selected && <Tabs.Trigger value="attending">Attending <span>{visibleNotes.length}</span></Tabs.Trigger>}

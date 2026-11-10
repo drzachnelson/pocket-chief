@@ -32,7 +32,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   return (
     <div className="topic-reading">
       <header className="topic-header"><div><p className="eyebrow">{scorePath}</p><h1 className="page-title">{topic.title}</h1><p className="topic-updated">Last updated {updatedAt}</p></div></header>
-      <TopicContent key={topic.id} topic={topic} sources={suppliedSources.filter((source) => version.sourceIds.includes(source.id))} linkEntries={linkEntries} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
+      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
     </div>
   );
 }

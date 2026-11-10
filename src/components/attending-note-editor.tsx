@@ -2,15 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ATTENDING_SECTIONS, anchorTargets, newId, type AttendingNote, type AttendingSectionId } from "@/lib/attending";
-import { headingLevel } from "@/lib/inline";
+import { stripMarkup } from "@/lib/inline";
 import type { TopicBlock } from "@/lib/types";
 
 const anchorKey = (blockId: string, stepTitle?: string) => stepTitle ? `${blockId}\0${stepTitle}` : blockId;
 
 function anchorLabel(blocks: TopicBlock[], blockId: string, stepTitle?: string) {
   const block = blocks.find((candidate) => candidate.id === blockId);
-  const heading = block?.heading ? headingLevel(block.heading).text : "Untitled section";
-  return stepTitle ? `${heading} — ${stepTitle}` : heading;
+  const heading = block?.heading ? stripMarkup(block.heading) : "Untitled section";
+  return stepTitle ? `${heading} — ${stripMarkup(stepTitle)}` : heading;
 }
 
 /**

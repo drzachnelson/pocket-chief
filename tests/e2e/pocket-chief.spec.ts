@@ -9,7 +9,7 @@ test("search, read, and save a topic", async ({ page }) => {
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
   await page.getByRole("button", { name: "Save", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Saved offline" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
 
   await page.goto("./saved/");
   await expect(page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
@@ -81,10 +81,10 @@ test("topic sections start collapsed, toggle together, and reviewed state persis
   await page.getByRole("button", { name: "Close all" }).click();
   await expect(sections.first()).not.toHaveAttribute("open", "");
 
-  await page.getByRole("button", { name: "Mark reviewed" }).click();
-  await expect(page.getByText("Reviewed on this device")).toBeVisible();
+  await page.getByRole("button", { name: "Studied" }).click();
+  await expect(page.getByRole("button", { name: "Studied" })).toHaveAttribute("aria-pressed", "true");
   await page.reload();
-  await expect(page.getByRole("button", { name: "Mark not reviewed" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Studied" })).toHaveAttribute("aria-pressed", "true");
   // Choledocholithiasis is no longer alone in Alimentary Tract; the next biliary topic follows it.
   await expect(page.getByRole("link", { name: "Next topic: Iatrogenic Bile Duct Injury — Alimentary Tract" })).toHaveAttribute("href", "/pocket-chief/topics/iatrogenic-bile-duct-injury/");
 });

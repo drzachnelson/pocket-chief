@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { TopicContent } from "@/components/topic-content";
 import type { Topic, TopicBlock, TopicVersion } from "@/lib/types";
@@ -101,12 +102,13 @@ describe("renderer redesign", () => {
     const details = container.querySelector<HTMLDetailsElement>("#b1")!;
     await waitFor(() => expect(details.open).toBe(true));
 
-    const reviewed = screen.getByRole("button", { name: "Mark reviewed" });
+    const reviewed = screen.getByRole("button", { name: "Studied" });
     await waitFor(() => expect(reviewed).not.toBeDisabled());
     expect(reviewed).toHaveAttribute("aria-pressed", "false");
     fireEvent.click(reviewed);
     await waitFor(() => expect(offlineMocks.setTopicReviewed).toHaveBeenCalledWith(topic, true));
-    expect(screen.getByText("Reviewed on this device")).toBeInTheDocument();
+    await waitFor(() => expect(reviewed).toHaveAttribute("aria-pressed", "true"));
+    expect(reviewed).toHaveAccessibleName("Studied");
     expect(screen.getByRole("link", { name: "Next topic: Next topic — Foregut" })).toHaveAttribute("href", "/topics/next");
   });
 
@@ -161,6 +163,17 @@ describe("renderer redesign", () => {
     expect(diagram!.querySelectorAll(".flow-relationship")).toHaveLength(flow.edges.length);
     expect(diagram).not.toHaveTextContent("Compare the source-linked paths");
     expect(diagram).not.toHaveTextContent("Then");
+  });
+
+  it("prints a version's review date in UTC, matching the header's Last updated", async () => {
+    const zone = process.env.TZ;
+    process.env.TZ = "America/Los_Angeles"; // 02:30 UTC on the 22nd is still the 21st here
+    try {
+      const reviewed: TopicVersion = { ...version, reviewedAt: "2026-10-22T02:30:00.000Z" };
+      render(<TopicContent topic={{ ...topic, approvedVersion: reviewed, versions: [reviewed] }} sources={[]} linkEntries={entries} />);
+      await userEvent.click(screen.getByRole("tab", { name: /History/ }));
+      expect(screen.getByText("Reviewed Oct 22, 2026")).toBeInTheDocument();
+    } finally { if (zone === undefined) delete process.env.TZ; else process.env.TZ = zone; }
   });
 
   it("offers no flashcard affordance anywhere in the reading view", () => {
