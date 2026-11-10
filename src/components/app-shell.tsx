@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { BookmarkSimple, GearSix, MagnifyingGlass, Notebook, ShieldCheck, Steps } from "@phosphor-icons/react";
+import { BookmarkSimple, GearSix, IconContext, MagnifyingGlass, Notebook, ShieldCheck, Steps } from "@phosphor-icons/react";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -11,6 +11,9 @@ import { ThemeToggle } from "@/components/theme-toggle";
 // Next prefixes basePath onto <Link> and router navigations, but NOT onto a plain <form action>.
 // Left as "/" the header search submits to the origin root, outside the mount point, and 404s.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+// Every icon in the app is decorative (the control or text beside it carries the name), so the client icons are hidden from assistive tech in one place. The `dist/ssr` icons do not read this context and take the attribute directly.
+const decorativeIcons = { "aria-hidden": true } as const;
 
 export const primaryNavigation = [
   { href: "/", label: "Search", icon: MagnifyingGlass },
@@ -75,7 +78,7 @@ function NavLink({ href, label, icon: Icon, mobile = false }: (typeof primaryNav
 export function MobileHeader() {
   return <header className="mobile-header">
     <div className="mobile-header-top">
-      <Link className="brand compact" href="/"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong><small>Private surgery atlas</small></span></Link>
+      <Link className="brand compact" href="/"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong></span></Link>
       <div className="mobile-head-actions"><ThemeToggle compact /><Link className="icon-link" href="/settings" aria-label="Settings"><GearSix size={21} /></Link></div>
     </div>
     <form action={`${basePath}/`} role="search" className="mobile-global-search"><MagnifyingGlass size={17} aria-hidden="true" /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
@@ -90,7 +93,7 @@ export function MobileNavigation() {
 /** Reusable global navigation content for the standard sidebar and the Topics workspace sidebar. */
 export function GlobalNavigation() {
   return <>
-    <Link className="brand" href="/" aria-label="Pocket Chief home"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong><small>General Surgery Atlas</small></span></Link>
+    <Link className="brand" href="/" aria-label="Pocket Chief home"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong></span></Link>
     <nav className="side-nav" aria-label="Primary navigation">{primaryNavigation.map((item) => <NavLink key={item.href} {...item} />)}</nav>
   </>;
 }
@@ -115,5 +118,5 @@ function TopicsRouteShell({ children }: { children: React.ReactNode }) {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  return <TopicsDrawerProvider><ServiceWorkerRegistration /><OfflineHydrator />{pathname.startsWith("/topics") ? <TopicsRouteShell>{children}</TopicsRouteShell> : <StandardShell>{children}</StandardShell>}</TopicsDrawerProvider>;
+  return <IconContext.Provider value={decorativeIcons}><TopicsDrawerProvider><ServiceWorkerRegistration /><OfflineHydrator />{pathname.startsWith("/topics") ? <TopicsRouteShell>{children}</TopicsRouteShell> : <StandardShell>{children}</StandardShell>}</TopicsDrawerProvider></IconContext.Provider>;
 }

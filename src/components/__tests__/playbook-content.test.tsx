@@ -129,6 +129,29 @@ describe("PlaybookContent", () => {
     expect(screen.getAllByText("Nothing recorded yet.")).toHaveLength(8);
   });
 
+  it("falls back to Notes when the Attending tab disappears", async () => {
+    renderPlaybook();
+    fireEvent.change(await screen.findByLabelText("Whose preferences?"), { target: { value: "a1" } });
+    await waitFor(() => expect(screen.getByRole("tab", { name: /Attending/ })).toBeInTheDocument());
+    await openTab(/Attending/);
+    expect(screen.getByRole("tab", { name: /Attending/ })).toHaveAttribute("aria-selected", "true");
+
+    fireEvent.change(screen.getByLabelText("Whose preferences?"), { target: { value: "" } });
+    await waitFor(() => expect(screen.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true"));
+    expect(screen.getByRole("heading", { name: "Anatomy" })).toBeInTheDocument();
+    // Choosing the attending again does not jump back to a tab the reader left.
+    fireEvent.change(screen.getByLabelText("Whose preferences?"), { target: { value: "a1" } });
+    await waitFor(() => expect(screen.getByRole("tab", { name: /Attending/ })).toHaveAttribute("aria-selected", "false"));
+  });
+
+  it("names the note on each delta's edit button", async () => {
+    store.listNotes.mockResolvedValue([note({ anchor: { blockId: "b1" } })]);
+    renderPlaybook();
+    fireEvent.change(await screen.findByLabelText("Whose preferences?"), { target: { value: "a1" } });
+    const delta = await screen.findByRole("group", { name: "Alvarez's preference" });
+    expect(within(delta).getByRole("button", { name: "Edit note: Runs the tunnel subsartorially, always." })).toBeInTheDocument();
+  });
+
   it("survives storage being blocked without losing the guide", async () => {
     store.listAttendings.mockRejectedValue(new Error("blocked"));
     renderPlaybook();

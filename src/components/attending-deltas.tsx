@@ -16,7 +16,7 @@ export function AttendingDeltas({ notes, attending, onEdit }: { notes: Attending
   return (
     <>
       {notes.map((note) => (
-        <aside key={note.id} className="topic-block attending-delta" aria-label={`${attending.name}'s preference`}>
+        <div key={note.id} role="group" className="topic-block attending-delta" aria-label={`${attending.name}'s preference`}>
           <p className="attending-delta-byline">
             <span className="callout-icon"><UserFocus size={14} weight="fill" /></span>
             {attending.name}
@@ -25,12 +25,12 @@ export function AttendingDeltas({ notes, attending, onEdit }: { notes: Attending
           <p>{note.text}</p>
           {onEdit && (
             <div className="attending-delta-actions">
-              <button type="button" className="button ghost small" onClick={() => onEdit(note)}>
+              <button type="button" className="button ghost small" aria-label={`Edit note: ${note.text.length > 48 ? `${note.text.slice(0, 48)}…` : note.text}`} onClick={() => onEdit(note)}>
                 <PencilSimple size={13} />Edit
               </button>
             </div>
           )}
-        </aside>
+        </div>
       ))}
     </>
   );

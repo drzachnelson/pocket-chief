@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode, type
 import { Brain, CaretDown, CheckCircle, Warning, WarningOctagon } from "@phosphor-icons/react";
 import type { TopicBlock } from "@/lib/types";
 import type { InlineSegment, LinkIndexEntry } from "@/lib/inline";
-import { bulletDepth, createLinkScope, headingLevel, parseInline } from "@/lib/inline";
+import { bulletDepth, createLinkScope, headingLevel, parseInline, stripMarkup } from "@/lib/inline";
 import { InlineText } from "@/components/inline-text";
 import { DecisionFlow } from "@/components/decision-flow";
 
@@ -76,7 +76,7 @@ export function Block({ block, expanded, linkEntries, selfSlug, onToggle, annota
   const frame = (children: ReactNode, extra = "") => {
     const anchors = { id: block.id, "data-block-id": block.id, ...(title?.level === 3 ? { "data-level": "3" } : {}) };
     const body = <>{children}{blockNotes}</>;
-    if (collapsible) return <details {...anchors} className={`topic-block section-block${extra}`} open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={title!.text}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{body}</details>;
+    if (collapsible) return <details {...anchors} className={`topic-block section-block${extra}`} open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={stripMarkup(title!.text)}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{body}</details>;
     return <section {...anchors} className={`topic-block${extra}`}>{title ? <div className="block-heading">{icon}{headingNode}{actions}</div> : icon}{body}</section>;
   };
   if (block.type === "summary") return frame(<p>{inline(block.text)}</p>, " summary-block");

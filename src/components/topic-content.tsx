@@ -43,7 +43,7 @@ export function TopicContent({ topic, sources, linkEntries, nextTopic }: { topic
   function toggleSaved() {
     savedTouched.current = true;
     const next = !saved; setSaved(next); setSaveError("");
-    setTopicSaved(topic, next).catch(() => setSaveError("This device blocked private storage, so the bookmark was not kept."));
+    setTopicSaved(topic, next).catch(() => setSaveError("This device blocked private storage, so this topic was not saved."));
   }
 
   function toggleReviewed() {
@@ -55,25 +55,24 @@ export function TopicContent({ topic, sources, linkEntries, nextTopic }: { topic
     setTopicReviewed(topic, next)
       .catch((error) => {
         setReviewed(!next);
-        setReviewError(error instanceof Error ? error.message : "Could not save reviewed status on this device.");
+        setReviewError(error instanceof Error ? error.message : "Could not save study progress on this device.");
       })
       .finally(() => setReviewSaving(false));
   }
 
   return (
     <>
-      <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved offline" : "Save"}</button>{collapse.collapsibleIds.length > 0 && <button className="expand-toggle" onClick={collapse.toggleAll}>{collapse.allOpen ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}{collapse.allOpen ? "Close all" : "Open all"}</button>}{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
+      <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>{collapse.collapsibleIds.length > 0 && <button className="expand-toggle" onClick={collapse.toggleAll}>{collapse.allOpen ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}{collapse.allOpen ? "Close all" : "Open all"}</button>}{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
       <Tabs.Root defaultValue="notes" className="topic-tabs">
         <Tabs.List className="tabs-list" aria-label="Topic views"><Tabs.Trigger value="notes">Notes</Tabs.Trigger><Tabs.Trigger value="sources">Sources <span>{sources.length}</span></Tabs.Trigger><Tabs.Trigger value="history">History <span>{topic.versions.length}</span></Tabs.Trigger></Tabs.List>
         <Tabs.Content value="notes"><BlockList blocks={blocks} collapse={collapse} linkEntries={linkEntries} selfSlug={topic.slug} /></Tabs.Content>
         <Tabs.Content value="sources"><div className="source-list">{sources.map((source, index) => <article key={source.id}><span>{index + 1}</span><div><h2>{source.title}</h2><p>{source.citation}</p>{source.details && <small>{source.details}</small>}</div></article>)}</div></Tabs.Content>
-        <Tabs.Content value="history"><div className="history-list">{topic.versions.map((item) => <article key={item.id}><span className="status-dot" /><div><h2>Version {item.versionNumber} · {item.status}</h2><p>{item.reviewedAt ? `Reviewed ${new Date(item.reviewedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` : "Draft in review"}</p></div></article>)}</div></Tabs.Content>
+        <Tabs.Content value="history"><div className="history-list">{topic.versions.map((item) => <article key={item.id}><span className="status-dot" /><div><h2>Version {item.versionNumber} · {item.status}</h2><p>{item.reviewedAt ? `Reviewed ${new Date(item.reviewedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}` : "Draft in review"}</p></div></article>)}</div></Tabs.Content>
       </Tabs.Root>
       <section className="topic-progress" aria-label="Study progress">
         <div className="topic-progress-status">
           <p className="eyebrow">Study progress</p>
-          <p className="topic-review-status" role="status">{reviewed ? "Reviewed on this device" : "Not reviewed on this device"}</p>
-          <button className={`button secondary small ${reviewed ? "saved" : ""}`} type="button" aria-pressed={reviewed} disabled={!reviewedReady || reviewSaving} onClick={toggleReviewed}>{reviewSaving ? "Saving…" : reviewed ? "Mark not reviewed" : "Mark reviewed"}</button>
+          <button className={`button secondary small ${reviewed ? "saved" : ""}`} type="button" aria-pressed={reviewed} disabled={!reviewedReady || reviewSaving} onClick={toggleReviewed}>Studied</button>
           {reviewError && <span className="form-message" role="alert">{reviewError}</span>}
         </div>
         <div className="topic-next">
