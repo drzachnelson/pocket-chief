@@ -45,6 +45,11 @@ describe("BlockList", () => {
     expect(detail("b2")!.open).toBe(true);
   });
 
+  it("labels a section's summary with its heading text, not its markup", () => {
+    render(<Harness blocks={[{ id: "m1", type: "prose", heading: "↳ **Borchardt** triad", text: "One", claims: [] }]} />);
+    expect(detail("m1")!.querySelector("summary")).toHaveAttribute("aria-label", "Borchardt triad");
+  });
+
   it("drops open sections when it is handed a different set of blocks", () => {
     // useState initializes once, so without an identity check a mounted list keeps the previous
     // surface's open sections — a playbook opening pre-expanded because a topic was.
