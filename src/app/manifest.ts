@@ -10,15 +10,15 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Pocket Chief · General Surgery Atlas",
+    name: "Pocket Chief",
     short_name: "Pocket Chief",
-    description: "Private general surgery notes for rapid reference.",
+    description: "General surgery reference",
     start_url: `${basePath}/`,
     scope: `${basePath}/`,
     display: "standalone",
-    background_color: "#f5f7fb",
-    theme_color: "#1748d2",
-    orientation: "portrait",
+    // A manifest cannot switch by theme, so both take the light canvas. No `orientation`: tables and flows scroll sideways, so landscape is how a phone reads them.
+    background_color: "#f4f6fa",
+    theme_color: "#f4f6fa",
     categories: ["medical", "education", "productivity"],
     icons: [
       { src: `${basePath}/icon.svg`, sizes: "any", type: "image/svg+xml", purpose: "any" },
