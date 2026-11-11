@@ -15,6 +15,13 @@ const confirmClear = () => {
 };
 
 describe("SettingsForm", () => {
+  it("holds the one theme control: System, Light, Dark", () => {
+    render(<SettingsForm />);
+    expect(screen.getAllByRole("radiogroup")).toHaveLength(1);
+    expect(screen.getByRole("radiogroup", { name: "Theme" })).toBeInTheDocument();
+    expect(screen.getAllByRole("radio").map((item) => item.closest("label")?.textContent)).toEqual(["System", "Light", "Dark"]);
+  });
+
   it("asks before clearing, naming what is lost, and clears nothing on the first tap", () => {
     render(<SettingsForm />);
     fireEvent.click(screen.getByRole("button", { name: /clear offline data/i }));

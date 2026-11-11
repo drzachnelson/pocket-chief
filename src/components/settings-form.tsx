@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Trash } from "@phosphor-icons/react";
+import { ThemeSetting } from "@/components/theme-setting";
 import { clearPrivateOfflineData } from "@/lib/offline";
 
 export function SettingsForm() {
@@ -23,6 +24,11 @@ export function SettingsForm() {
   }
   return (
     <div className="settings-grid">
+      <section className="form-card">
+        <div className="section-heading"><h2 id="theme-heading">Theme</h2><span>This device</span></div>
+        <p className="settings-copy">System follows your device. Light and Dark stay as you set them.</p>
+        <ThemeSetting labelledBy="theme-heading" />
+      </section>
       <section className="form-card">
         <div className="section-heading"><h2>Offline storage</h2><span>This device</span></div>
         <p className="settings-copy">Pocket Chief keeps topics and playbooks, your Saved topics and your reading history in this browser. Clearing removes all three; topics and playbooks come back on the next load, your Saved topics do not.</p>
