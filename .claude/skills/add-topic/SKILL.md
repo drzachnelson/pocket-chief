@@ -81,7 +81,7 @@ Confirm taxonomy placement against `Pocket Chief Resources/score-module-outline.
 
 ### Playbook path
 
-Read `references/playbooks.md` before writing your first one. Placement is three fields rather than a tree. Attending preference notes join on **`procedureId`, deliberately not on the slug** (`src/lib/attending.ts:50`), so the slug is safe to rename later and the `procedureId` is not: changing one orphans hand-written notes that live only on Zach's device, in a second database, and are not in the build.
+Read `references/playbooks.md` before writing your first one. Placement is three fields rather than a tree. The `procedureId` is a stable `lowercase_underscore` key that `content-contract.test.ts` checks for shape; keep it stable rather than letting it drift with the title.
 
 ```bash
 grep -n "procedureId\|approach\|specialty" src/content/playbooks/*.ts

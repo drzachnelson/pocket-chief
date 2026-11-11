@@ -5,13 +5,13 @@ import { listPlaybooks, listTopics } from "@/lib/library";
 
 /**
  * GitHub Pages serves the build regardless of repository visibility, and `next build` bundles
- * every client module into `out/`. So "attending preferences stay on the device" is not a
- * property of where we intend to put them — it is a property of what never enters the build.
+ * every client module into `out/`. So "nothing private reaches the build" is not a property of
+ * where we intend to put data — it is a property of what never enters the build.
  *
- * This is the mechanical half of that promise. It is deliberately cheap and deliberately blunt:
- * no module that ships may import the attending types, and no real name may reach the published
- * JSON. The other half — never committing a real card as a fixture — is a review rule the
- * migration step in the plan spells out, because no test can see what was never written down.
+ * The attending-preference feature was removed on 2026-11-11. The owner's notes stay in the
+ * `pocket-chief-attendings` IndexedDB database on their device, unread: the app must never open,
+ * migrate or delete it again, and no stored record may appear in the published files. This is
+ * the mechanical half of that promise, deliberately cheap and blunt.
  */
 const ROOT = join(import.meta.dirname, "..", "..");
 
@@ -33,12 +33,9 @@ function sourceFiles(dir: string): string[] {
 }
 
 describe("published content carries no attending data", () => {
-  it("keeps src/content free of the device-only attending modules", () => {
-    for (const file of sourceFiles(join(ROOT, "content"))) {
-      const text = readFileSync(file, "utf8");
-      const relative = file.slice(ROOT.length + 1);
-      expect(text, `${relative} imports device-only attending code`).not.toMatch(/@\/lib\/attending/);
-      expect(text, `${relative} mentions attending storage`).not.toMatch(/attendingId|attendingNotes/);
+  it("never names the old attending database in shipped source", () => {
+    for (const file of sourceFiles(ROOT)) {
+      expect(readFileSync(file, "utf8"), `${file.slice(ROOT.length + 1)} touches the removed attending database`).not.toMatch(/pocket-chief-attendings/);
     }
   });
 
@@ -71,6 +68,7 @@ describe("the published build carries no attending data", () => {
       // an attendingId.
       expect(text, `${relative} looks like it embeds a stored attending note`).not.toMatch(/"attendingId"\s*:/);
       expect(text, `${relative} looks like it embeds an attending backup`).not.toMatch(/pocket-chief-attending"\s*,\s*"version"/);
+      expect(text, `${relative} opens the removed attending database`).not.toMatch(/pocket-chief-attendings/);
     }
   });
 });
