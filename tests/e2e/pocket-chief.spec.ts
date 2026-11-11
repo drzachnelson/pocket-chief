@@ -85,8 +85,8 @@ test("topic sections start collapsed, toggle together, and reviewed state persis
   await expect(page.getByRole("button", { name: "Studied" })).toHaveAttribute("aria-pressed", "true");
   await page.reload();
   await expect(page.getByRole("button", { name: "Studied" })).toHaveAttribute("aria-pressed", "true");
-  // Choledocholithiasis is no longer alone in Alimentary Tract; the next biliary topic follows it.
-  await expect(page.getByRole("link", { name: "Next topic: Iatrogenic Bile Duct Injury — Alimentary Tract" })).toHaveAttribute("href", "/pocket-chief/topics/iatrogenic-bile-duct-injury/");
+  // Choledocholithiasis is not alone in Biliary; the next topic in its section follows it.
+  await expect(page.getByRole("link", { name: "Next topic: Iatrogenic Bile Duct Injury — Biliary" })).toHaveAttribute("href", "/pocket-chief/topics/iatrogenic-bile-duct-injury/");
 });
 
 test("a guide followed by another topic in its category links straight to it", async ({ page }) => {
@@ -164,14 +164,14 @@ test("canonical topic navigation keeps the workspace, active path, anchors, and 
   // The topics index renders the searchable browser alongside the workspace tree, so this
   // walk has to stay inside the tree to keep naming its own links.
   const tree = page.getByRole("navigation", { name: "Topics curriculum" });
-  await tree.getByRole("button", { name: "Alimentary Tract" }).click();
-  await tree.getByRole("button", { name: "Biliary Tract" }).click();
+  await tree.getByRole("button", { name: "Biliary" }).click();
+  await tree.getByRole("button", { name: "Diseases & Conditions" }).click();
   await tree.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
 
   await expect(page).toHaveURL(/\/topics\/choledocholithiasis\/$/);
   await expect(page.getByLabel("Topics workspace")).toBeVisible();
   const curriculum = page.getByRole("navigation", { name: "Topics curriculum" });
-  await expect(curriculum.getByRole("button", { name: "Alimentary Tract" })).toHaveAttribute("aria-expanded", "true");
+  await expect(curriculum.getByRole("button", { name: "Biliary" })).toHaveAttribute("aria-expanded", "true");
   await expect(curriculum.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
   await expect(page.getByText("Last updated Oct 23, 2026", { exact: true })).toBeVisible();
 
