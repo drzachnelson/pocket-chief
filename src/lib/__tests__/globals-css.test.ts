@@ -3,10 +3,11 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 /**
- * Tripwire for the type scale and ink (DESIGN.md, Typography). It reads `globals.css` as text,
- * because jsdom does no layout and these are properties of the stylesheet, not of any one page.
- * A later slice that reintroduces a 10px label, an uppercase eyebrow, the faint grey or a stray
- * weight fails here instead of shipping.
+ * Tripwire for the type scale, ink and chrome (DESIGN.md, Typography and Components). It reads
+ * `globals.css` as text, because jsdom does no layout and these are properties of the stylesheet,
+ * not of any one page. A later slice that reintroduces a 10px label, an uppercase eyebrow, the faint
+ * grey, a stray weight, a blur, a one-off shadow, a literal duration or a hover that moves fails
+ * here instead of shipping.
  */
 const css = readFileSync(join(import.meta.dirname, "..", "..", "app", "globals.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
 
@@ -106,5 +107,88 @@ describe("globals.css touch targets and tables", () => {
     expect(wide.map(({ declarations }) => declarations.get("min-width"))).toContain("120px");
     // Pinned on every table, so one that still overflows keeps its row labels in view.
     expect(rules.find(({ selector }) => selector === "thead th:first-child, tbody th")?.declarations.get("position")).toBe("sticky");
+  });
+});
+
+describe("globals.css chrome", () => {
+  const rule = (selector: string) => rules.find((candidate) => candidate.selector === selector)?.declarations;
+  const DARK_BLOCKS = [':root:not([data-theme="light"])', ':root[data-theme="dark"]'];
+
+  it("has no backdrop blur anywhere", () => {
+    // Built from parts: Tailwind scans this file, and the literal property name would add an unused utility class to the built CSS.
+    expect(css).not.toMatch(new RegExp(["backdrop", "filter"].join("-")));
+  });
+
+  it("defines the float shadow, scrim, tile edge and motion tokens, with the dark values in both dark blocks", () => {
+    expect(root.get("--shadow-float")).toBe("0 8px 24px rgb(16 24 40 / 0.12), 0 2px 6px rgb(16 24 40 / 0.08)");
+    expect(root.get("--dark-shadow-float")).toBe("0 8px 24px rgb(0 0 0 / 0.5)");
+    expect(root.get("--scrim")).toBe("rgb(7 12 24 / 0.5)");
+    expect(root.get("--tile-edge")).toBe("transparent");
+    expect([root.get("--dur-fast"), root.get("--dur-sheet"), root.get("--ease-out")]).toEqual(["120ms", "220ms", "cubic-bezier(.22, .9, .3, 1)"]);
+    for (const selector of DARK_BLOCKS) {
+      expect(rule(selector)?.get("--shadow-float"), selector).toBe("var(--dark-shadow-float)");
+      expect(rule(selector)?.get("--tile-edge"), selector).toBe("var(--dark-line-strong)");
+    }
+  });
+
+  it("has dropped the old shadow tokens", () => {
+    expect(css).not.toMatch(/--(?:dark-)?shadow(?![\w-])/);
+  });
+
+  it("allows a box-shadow only as the float token, and an rgb() colour only inside the token blocks", () => {
+    for (const { selector, value } of declared("box-shadow")) expect(value, `${selector} { box-shadow: ${value} }`).toBe("var(--shadow-float)");
+    for (const { selector, declarations } of rules) {
+      if (selector.startsWith(":root")) continue;
+      for (const [property, value] of declarations) expect(value, `${selector} { ${property}: ${value} }`).not.toMatch(/\brgba?\(/);
+    }
+  });
+
+  it("takes every transition and animation from the motion tokens", () => {
+    // `.skeleton` still shimmers on a literal 1.5s until the loading rows replace it.
+    const motion = [...declared("transition"), ...declared("animation")].filter(({ selector, value }) => selector !== ".skeleton" && !value.startsWith("none"));
+    expect(motion.length).toBeGreaterThanOrEqual(8);
+    for (const { selector, value } of motion) {
+      const label = `${selector} { ${value} }`;
+      expect(value, label).toMatch(/var\(--dur-(?:fast|sheet)\)/);
+      expect(value, label).toMatch(/var\(--ease-out\)/);
+      // A literal time, a keyword curve or a literal curve would bypass the tokens.
+      expect(value, label).not.toMatch(/\d(?:ms|s)\b|cubic-bezier|(?:^|[\s,])(?:ease|ease-in|ease-out|ease-in-out|linear)(?=[\s,]|$)/);
+    }
+  });
+
+  it("keeps every :hover rule inside (hover: hover), changing one colour or fill and nothing else", () => {
+    // Strip each `@media (hover: hover) { … }` block by brace depth; a :hover left outside would stick on a phone.
+    const OPEN = "@media (hover: hover) {";
+    let outside = css;
+    for (let at = outside.indexOf(OPEN); at >= 0; at = outside.indexOf(OPEN)) {
+      let depth = 0;
+      let end = outside.length;
+      for (let i = at; i < outside.length; i++) {
+        if (outside[i] === "{") depth++;
+        if (outside[i] === "}" && --depth === 0) { end = i + 1; break; }
+      }
+      outside = outside.slice(0, at) + outside.slice(end);
+    }
+    expect(outside).not.toMatch(/:hover/);
+    const hover = rules.filter(({ selector }) => selector.includes(":hover"));
+    expect(hover.length).toBeGreaterThan(10);
+    for (const { selector, declarations } of hover) {
+      expect([...declarations.keys()], `${selector} changes more than one thing`).toHaveLength(1);
+      expect(["background", "color", "border-color", "text-decoration-color"], selector).toContain([...declarations.keys()][0]);
+    }
+  });
+
+  it("sets the phone header on the canvas and the tab bar on the surface, each with one hairline and no shadow", () => {
+    expect(rule(".mobile-header")?.get("background")).toBe("var(--canvas)");
+    expect(rule(".mobile-header")?.get("border-bottom")).toBe("1px solid var(--line)");
+    expect(rule(".mobile-nav")?.get("background")).toBe("var(--surface)");
+    expect(rule(".mobile-nav")?.get("border-top")).toBe("1px solid var(--line)");
+    for (const selector of [".mobile-header", ".mobile-nav", ".brand-mark", ".search-field input", ".form-card"]) expect(rule(selector)?.has("box-shadow"), `${selector} is flat`).toBe(false);
+    expect(rule(".topics-drawer-backdrop")?.get("background")).toBe("var(--scrim)");
+  });
+
+  it("has no history status dot and no tone on a summary", () => {
+    for (const { selector, declarations } of rules.filter(({ selector }) => selector.includes(".status-dot"))) expect([...declarations.entries()], selector).toEqual([["display", "none"]]);
+    expect(rules.filter(({ selector }) => /\.summary-block\.tone-/.test(selector))).toEqual([]);
   });
 });
