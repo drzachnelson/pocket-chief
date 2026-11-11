@@ -6,7 +6,6 @@ import { createContext, useCallback, useContext, useRef, useState } from "react"
 import { BookmarkSimple, GearSix, IconContext, MagnifyingGlass, Notebook, ShieldCheck, Steps } from "@phosphor-icons/react";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 // Next prefixes basePath onto <Link> and router navigations, but NOT onto a plain <form action>.
 // Left as "/" the header search submits to the origin root, outside the mount point, and 404s.
@@ -79,7 +78,7 @@ export function MobileHeader() {
   return <header className="mobile-header">
     <div className="mobile-header-top">
       <Link className="brand compact" href="/"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong></span></Link>
-      <div className="mobile-head-actions"><ThemeToggle compact /><Link className="icon-link" href="/settings" aria-label="Settings"><GearSix size={21} /></Link></div>
+      <div className="mobile-head-actions"><Link className="icon-link" href="/settings" aria-label="Settings"><GearSix size={21} /></Link></div>
     </div>
     <form action={`${basePath}/`} role="search" className="mobile-global-search"><MagnifyingGlass size={17} aria-hidden="true" /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
   </header>;
@@ -102,7 +101,6 @@ export function GlobalNavigationFooter({ compact = false }: { compact?: boolean 
   return <>
     <div className="side-spacer" />
     {!compact && <div className="privacy-note"><ShieldCheck size={18} weight="fill" aria-hidden="true" /><span><strong>Private reference</strong><small>No patient information</small></span></div>}
-    <ThemeToggle />
     <NavLink href="/settings" label="Settings" icon={GearSix} />
     <p className="education-label">Educational reference only.<br />Not patient-specific guidance.</p>
   </>;

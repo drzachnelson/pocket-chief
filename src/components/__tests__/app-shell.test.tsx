@@ -21,6 +21,14 @@ describe("AppShell", () => {
     expect(screen.queryByRole("link", { name: "Topics" })).not.toBeInTheDocument();
   });
 
+  it.each(["/topics", "/topics/neck-trauma", "/settings"])("carries no theme control on %s; the choice lives in Settings", (path) => {
+    pathname = path;
+    render(<AppShell><p>Content</p></AppShell>);
+    expect(screen.queryByRole("radio")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /theme/i })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Settings" }).length).toBeGreaterThan(0);
+  });
+
   it("renders four reader destinations without Add", () => {
     pathname = "/topics";
     render(<AppShell><p>Content</p></AppShell>);
