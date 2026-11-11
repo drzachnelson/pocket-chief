@@ -72,6 +72,15 @@ describe("BlockList", () => {
     expect(detail("b2")!.open).toBe(true);
   });
 
+  it("tells CSS how many columns each table has so narrow ones wrap and wide ones scroll", () => {
+    const tables: TopicBlock[] = [
+      { id: "t3", type: "table", columns: ["Type", "Sign", "Action"], rows: [["A", "a1", "a2"]], claims: [] },
+      { id: "t4", type: "table", columns: ["Type", "Sign", "Action", "Note"], rows: [["A", "a1", "a2", "a3"]], claims: [] },
+    ];
+    const { container } = render(<Harness blocks={tables} />);
+    expect([...container.querySelectorAll("table")].map((table) => table.dataset.columns)).toEqual(["3", "4"]);
+  });
+
   it("opens only the list that owns the hash target when two lists share a block id", async () => {
     // Block ids are unique within a topic or playbook, not across them, so two surfaces on one
     // page can both hold "b1". getElementById is global and resolves to the first; without the
