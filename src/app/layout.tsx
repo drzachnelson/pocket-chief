@@ -27,11 +27,11 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children, contents }: Readonly<{ children: React.ReactNode; contents: React.ReactNode }>) {
   return (
     <html lang="en" className={GeistSans.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: themeInitScript }} /></head>
-      <body><a className="skip-link" href="#main-content">Skip to content</a><AppShell>{children}</AppShell></body>
+      <body><a className="skip-link" href="#main-content">Skip to content</a><AppShell contents={contents}>{children}</AppShell></body>
     </html>
   );
 }

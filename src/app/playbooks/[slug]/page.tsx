@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { PlaybookContent } from "@/components/playbook-content";
 import { buildLinkIndex } from "@/lib/inline";
 import { getPlaybookBySlug, listPlaybooks, listSources, listTopics } from "@/lib/library";
-
-const APPROACH_LABELS = { open: "Open", laparoscopic: "Laparoscopic", robotic: "Robotic", endovascular: "Endovascular" } as const;
+import { playbookContents } from "@/lib/reader-contents";
+import { APPROACH_LABELS } from "@/lib/types";
 
 /** One prerendered HTML file per playbook; the export has no server to resolve a slug. */
 export function generateStaticParams() {
@@ -35,7 +35,7 @@ export default async function PlaybookPage({ params }: { params: Promise<{ slug:
           <p className="topic-updated">Last updated {updatedAt}</p>
         </div>
       </header>
-      <PlaybookContent key={playbook.id} playbook={playbook} sources={sources} linkEntries={linkEntries} />
+      <PlaybookContent key={playbook.id} playbook={playbook} sources={sources} linkEntries={linkEntries} contents={playbookContents(slug)!} />
     </div>
   );
 }

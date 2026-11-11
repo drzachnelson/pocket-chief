@@ -74,6 +74,23 @@ describe("AppShell navigation", () => {
   });
 });
 
+describe("AppShell reader slots", () => {
+  it("shows the server-rendered Contents in the sidebar on a reader page, and a toolbar slot in the top row", () => {
+    pathname = "/topics/neck-trauma/";
+    const { container } = render(<AppShell contents={<nav aria-label="Contents" />}><p>Content</p></AppShell>);
+    expect(within(container.querySelector<HTMLElement>(".sidebar")!).getByRole("navigation", { name: "Contents" })).toBeInTheDocument();
+    expect(container.querySelector(".top-row #shell-toolbar")).not.toBeNull();
+    expect(container.querySelector(".app-frame")).toHaveClass("is-reader");
+  });
+
+  it.each(["/", "/topics/", "/playbooks", "/saved/", "/settings"])("holds no Contents on %s, whatever the route slot still remembers", (path) => {
+    pathname = path;
+    const { container } = render(<AppShell contents={<nav aria-label="Contents" />}><p>Content</p></AppShell>);
+    expect(screen.queryByRole("navigation", { name: "Contents" })).not.toBeInTheDocument();
+    expect(container.querySelector(".app-frame")).not.toHaveClass("is-reader");
+  });
+});
+
 describe("AppShell structure", () => {
   it.each(["/", "/topics/", "/topics/neck-trauma/", "/playbooks/temporal-artery-biopsy/", "/saved/", "/settings/"])("has one main, one search and no aside, banner or footer on %s", (path) => {
     renderShell(path);
@@ -92,10 +109,10 @@ describe("AppShell structure", () => {
     expect(form).toHaveAttribute("action", "/");
   });
 
-  // The slot is where the reader-chrome slice puts Contents. It is empty here on purpose.
+  // The slot is where the route's server-rendered Contents goes; with none supplied it stays empty.
   it.each(["/topics/neck-trauma", "/topics/neck-trauma/", "/playbooks/temporal-artery-biopsy/"])("holds an empty Contents slot in the sidebar on %s", (path) => {
     const { container } = renderShell(path);
-    const slot = container.querySelector("#shell-contents");
+    const slot = container.querySelector(".side-contents");
     expect(slot).toBeEmptyDOMElement();
     expect(container.querySelector(".sidebar")).toContainElement(slot as HTMLElement);
     expect(screen.queryByRole("navigation", { name: "Contents" })).not.toBeInTheDocument();
@@ -103,7 +120,7 @@ describe("AppShell structure", () => {
 
   it.each(["/", "/topics", "/topics/", "/playbooks/", "/saved/", "/settings/"])("has no Contents slot on %s", (path) => {
     const { container } = renderShell(path);
-    expect(container.querySelector("#shell-contents")).toBeNull();
+    expect(container.querySelector(".side-contents")).toBeNull();
   });
 
   it("no longer carries the privacy note, the education line or a collapse control", () => {

@@ -1,12 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { PlaybookContent } from "@/components/playbook-content";
+import type { ContentsData } from "@/lib/reader-contents";
 import type { Playbook, TopicBlock } from "@/lib/types";
 
 // The topic stores must stay untouched: a playbook written into `saved` or `recent` renders as a
 // TopicCard pointing at /topics/<playbook slug>, which is a 404.
 const offline = vi.hoisted(() => ({ recordRecentView: vi.fn(), setTopicSaved: vi.fn(), isTopicSaved: vi.fn(), isTopicReviewed: vi.fn(), setTopicReviewed: vi.fn() }));
 vi.mock("@/lib/offline", () => offline);
+vi.mock("next/navigation", () => ({ usePathname: () => "/playbooks/femoropopliteal-bypass", useRouter: () => ({ push: vi.fn() }) }));
+
+const contents: ContentsData = { corpus: "playbooks", sections: [], branches: [] };
 
 Element.prototype.scrollIntoView = vi.fn();
 
@@ -19,14 +23,22 @@ const playbook: Playbook = { id: "p1", slug: "femoropopliteal-bypass", title: "F
 
 describe("PlaybookContent", () => {
   it("never writes a playbook into the topic saved or recent stores", () => {
-    render(<PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} />);
+    render(<><div id="shell-toolbar" /><PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} contents={contents} /></>);
     expect(offline.recordRecentView).not.toHaveBeenCalled();
     expect(offline.setTopicSaved).not.toHaveBeenCalled();
     expect(screen.queryByRole("button", { name: "Save" })).not.toBeInTheDocument();
   });
 
+  it("shares the topic page's toolbar, Back falling back to its specialty on the Playbooks index", () => {
+    render(<><div id="shell-toolbar" /><PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} contents={contents} /></>);
+    expect(screen.getByRole("group", { name: "Page tools" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Playbooks" })).toHaveAttribute("href", "/playbooks");
+    expect(screen.getByRole("button", { name: "Expand all" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Contents" })).toHaveAttribute("aria-haspopup", "dialog");
+  });
+
   it("shows the guide with Notes and Sources tabs and nothing else", () => {
-    render(<PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} />);
+    render(<><div id="shell-toolbar" /><PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} contents={contents} /></>);
     expect(screen.getAllByRole("tab").map((tab) => tab.textContent)).toEqual(["Notes", "Sources 0"]);
     expect(screen.getByRole("heading", { name: "Anatomy" })).toBeInTheDocument();
     expect(screen.queryByLabelText(/preferences/i)).not.toBeInTheDocument();

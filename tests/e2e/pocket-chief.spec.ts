@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 test("search, read, and save a topic", async ({ page }) => {
   await page.goto("./");
@@ -62,7 +62,7 @@ test("browses to a playbook and reads its steps", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Temporal Artery Biopsy", level: 1 })).toBeVisible();
   await expect(page.getByText("Vascular · Open")).toBeVisible();
   // Sections ship collapsed, so the step titles are only reachable once the reader opens them.
-  await page.getByRole("button", { name: "Open all" }).click();
+  await page.getByRole("button", { name: "Expand all" }).click();
   await expect(page.getByText("Ligate and excise")).toBeVisible();
   // A playbook has no version list and nothing to bookmark yet.
   await expect(page.getByRole("tab", { name: /History/ })).toHaveCount(0);
@@ -142,9 +142,9 @@ test("topic sections start collapsed, toggle together, and reviewed state persis
   await page.goto("./topics/choledocholithiasis/");
   const sections = page.locator("details.section-block");
   await expect(sections.first()).not.toHaveAttribute("open", "");
-  await page.getByRole("button", { name: "Open all" }).click();
+  await page.getByRole("button", { name: "Expand all" }).click();
   await expect(sections.first()).toHaveAttribute("open", "");
-  await page.getByRole("button", { name: "Close all" }).click();
+  await page.getByRole("button", { name: "Collapse all" }).click();
   await expect(sections.first()).not.toHaveAttribute("open", "");
 
   await page.getByRole("button", { name: "Studied" }).click();
@@ -163,7 +163,7 @@ test("a guide followed by another topic in its category links straight to it", a
 test("decision flows keep labeled branches connected and readable on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
   await page.goto("./topics/fasciotomy/");
-  await page.getByRole("button", { name: "Open all" }).click();
+  await page.getByRole("button", { name: "Expand all" }).click();
   const flow = page.getByRole("group", { name: "The diagnostic decision flowchart" });
   await expect(flow).toBeVisible();
 
@@ -224,13 +224,11 @@ test("topics resumes a visited guide", async ({ page }) => {
   await expect(page.getByText("Reviewed", { exact: true })).toHaveCount(0);
 });
 
-test("a topic page keeps the shell: Topics current, an empty Contents slot and the exact update date", async ({ page }, testInfo) => {
+test("a topic page keeps the shell: Topics current, Contents in the sidebar and the exact update date", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Laptop sidebar only");
   await page.goto("./topics/choledocholithiasis/");
   await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "true");
-  // The Contents component arrives with the reader chrome; until then the slot is reserved and empty.
-  await expect(page.locator("#shell-contents")).toBeEmpty();
-  await expect(page.getByRole("navigation", { name: "Contents" })).toHaveCount(0);
+  await expect(page.locator(".sidebar").getByRole("navigation", { name: "Contents" })).toBeVisible();
   await expect(page.getByText("Last updated Oct 23, 2026", { exact: true })).toBeVisible();
 });
 
@@ -248,8 +246,246 @@ test("a previously visited Topics guide remains readable offline in the shell", 
   try {
     await page.goto("./topics/choledocholithiasis/#block-comparison", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
-    await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "true");
+    // On a phone the page toolbar replaces the tab bar, so the check reads the navigation whether or not the width shows it.
+    await expect(page.getByRole("navigation", { name: "Primary", includeHidden: true }).getByRole("link", { name: "Topics", includeHidden: true }).first()).toHaveAttribute("aria-current", "true");
   } finally {
     await page.context().setOffline(false);
   }
+});
+
+
+// The reader chrome: the page toolbar and Contents (one component for topics and playbooks), inline in the laptop sidebar and a native dialog below 1080px.
+const tools = (page: Page) => page.getByRole("group", { name: "Page tools" });
+const sidebarContents = (page: Page) => page.locator(".sidebar").getByRole("navigation", { name: "Contents" });
+const dialog = (page: Page) => page.getByRole("dialog", { name: "Contents" });
+// The dialog slides in over 220ms; geometry is read once it has settled.
+const settled = async (target: Locator) => { let previous = ""; await expect.poll(async () => { const now = JSON.stringify(await target.boundingBox()); const same = now === previous; previous = now; return same; }).toBe(true); return (await target.boundingBox())!; };
+const currentSections = (nav: Locator) => nav.locator('a[aria-current="location"]');
+
+test("phone: the page toolbar takes the tab bar's place on a reader page and only there", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("./topics/choledocholithiasis/");
+  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Contents", "Expand all"]);
+  await expect(tools(page).getByRole("link")).toHaveText(["Topics"]);
+  await expect(page.getByRole("navigation", { name: "Primary" }).first()).toBeHidden();
+  const bar = (await tools(page).boundingBox())!;
+  expect(bar.y + bar.height).toBe(812);
+  expect(bar.height).toBe(68);
+  // Four slots share the bar, and none is narrower than the 44px target.
+  for (const slot of await tools(page).locator("> *").all()) expect((await slot.boundingBox())!.width).toBeGreaterThanOrEqual(44);
+
+  await page.goto("./saved/");
+  await expect(tools(page)).toHaveCount(0);
+  await expect(page.getByRole("navigation", { name: "Primary" }).last()).toBeVisible();
+});
+
+test("tablet: the toolbar sits at the right of the top row without the index link, and Contents opens beside the rail", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Contents", "Expand all"]);
+  await expect(tools(page).getByRole("link")).toBeHidden();
+  const row = (await page.locator(".top-row").boundingBox())!;
+  const group = (await tools(page).boundingBox())!;
+  const field = (await page.getByRole("search").boundingBox())!;
+  expect(group.y).toBeGreaterThanOrEqual(row.y);
+  expect(group.x + group.width).toBeLessThanOrEqual(row.x + row.width + 1);
+  expect(field.x + field.width).toBeLessThanOrEqual(group.x);
+  expect(field.width).toBeGreaterThan(150);
+
+  await tools(page).getByRole("button", { name: "Contents" }).click();
+  const panel = await settled(dialog(page));
+  expect(panel.x).toBe(76);
+  expect(panel.height).toBe(1024);
+});
+
+test("laptop: Contents is inline in the sidebar, which no longer carries a Contents button, and sections follow the page", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Laptop sidebar only");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  const nav = sidebarContents(page);
+  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Expand all"]);
+  await expect(tools(page).getByRole("link")).toBeHidden();
+  await expect(nav.getByRole("group", { name: "On this page" }).getByRole("link").first()).toBeVisible();
+  await expect(nav.getByRole("group", { name: "Topics" })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(await nav.evaluate((element) => getComputedStyle(element.parentElement!).overflowY)).toBe("auto");
+
+  // Tapping a section opens it and marks it current; Sources and History mark nothing.
+  const comparison = nav.getByRole("link", { name: "Choose the route", exact: true });
+  await comparison.click();
+  await expect(page.locator("#block-comparison")).toHaveAttribute("open", "");
+  await expect(currentSections(nav)).toHaveCount(1);
+  await page.getByRole("tab", { name: /Sources/ }).click();
+  await expect(currentSections(nav)).toHaveCount(0);
+  await page.getByRole("tab", { name: /History/ }).click();
+  await expect(currentSections(nav)).toHaveCount(0);
+  await page.getByRole("tab", { name: "Notes" }).click();
+  await expect(currentSections(nav)).toHaveCount(1);
+
+  // A section link from another tab switches to Notes first, then scrolls.
+  await page.getByRole("tab", { name: /Sources/ }).click();
+  await nav.getByRole("link", { name: "Choose the route", exact: true }).click();
+  await expect(page.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#block-comparison")).toBeInViewport();
+  await expect(page.locator("#block-comparison")).toHaveAttribute("open", "");
+});
+
+test("laptop: the sidebar's Contents follows soft navigations between topics, an index and a playbook", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Laptop sidebar only");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  const nav = sidebarContents(page);
+  const firstSection = nav.getByRole("group", { name: "On this page" }).getByRole("link").first();
+  const before = await firstSection.textContent();
+
+  await nav.locator(".contents-branch a:not([aria-current])").first().click();
+  await expect(page).not.toHaveURL(/choledocholithiasis/);
+  await expect(firstSection).not.toHaveText(before!);
+  await expect(nav.locator('.contents-branch a[aria-current="page"]')).toHaveCount(1);
+  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText("Choledocholithiasis");
+
+  // An index page has no Contents, even though the route slot still remembers the last topic.
+  await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Playbooks" }).click();
+  await expect(page.getByRole("heading", { name: "Playbooks", level: 1 })).toBeVisible();
+  await expect(page.locator(".sidebar").getByRole("navigation", { name: "Contents" })).toHaveCount(0);
+  await page.getByRole("link", { name: /Temporal Artery Biopsy/ }).click();
+  await expect(nav.getByRole("group", { name: "Playbooks" })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Temporal Artery Biopsy", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(nav.getByRole("group", { name: "Topics" })).toHaveCount(0);
+});
+
+test("a #block link followed while Sources shows switches to Notes first", async ({ page }) => {
+  await page.goto("./topics/choledocholithiasis/");
+  await page.getByRole("tab", { name: /Sources/ }).click();
+  await expect(page.locator("#block-comparison")).toHaveCount(0);
+  await page.evaluate(() => { window.location.hash = "#block-comparison"; });
+  await expect(page.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#block-comparison")).toBeInViewport();
+});
+
+for (const [name, size, panelLeft] of [["phone sheet", { width: 375, height: 812 }, 0], ["tablet side panel", { width: 768, height: 1024 }, 76]] as const) {
+  test(`${name}: Contents is a modal dialog that traps focus, locks the page, and returns focus when it closes`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+    await page.setViewportSize(size);
+    await page.goto("./topics/choledocholithiasis/");
+    const open = tools(page).getByRole("button", { name: "Contents" });
+    await expect(open).toHaveAttribute("aria-haspopup", "dialog");
+    await open.click();
+
+    const sheet = dialog(page);
+    await expect(sheet).toBeVisible();
+    await expect(sheet.getByRole("heading", { level: 2, name: "Contents" })).toBeVisible();
+    expect(await sheet.evaluate((element) => element.matches(":modal"))).toBe(true);
+    await expect(sheet.getByRole("button", { name: "Close contents" })).toBeFocused();
+    expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).toBe("hidden");
+    const box = await settled(sheet);
+    expect(box.x).toBe(panelLeft);
+    if (panelLeft === 0) { expect(box.width).toBe(375); expect(box.y + box.height).toBe(812); } else expect(box.height).toBe(1024);
+
+    // Background inert: a point over the scrim hits the dialog's backdrop, and Tab never leaves the dialog in either direction.
+    expect(await page.evaluate(() => document.elementFromPoint(window.innerWidth - 4, 4)?.tagName)).toBe("DIALOG");
+    for (const key of ["Tab", "Shift+Tab"]) {
+      for (let press = 0; press < 14; press++) {
+        await page.keyboard.press(key);
+        expect(await page.evaluate(() => Boolean(document.activeElement?.closest("dialog"))), `${key} ${press}`).toBe(true);
+      }
+    }
+
+    // 44px rows in the dialog.
+    for (const row of await sheet.locator(".contents-tree button, .contents-branch a, .contents-sections a").all()) expect((await row.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+
+    // A group button lays out like a category button: caret, label, silent count, left to right on one row.
+    const group = sheet.locator(".contents-group > button").first();
+    const [caret, label, count] = await Promise.all([group.locator("svg"), group.locator("span"), group.locator("small")].map(async (part) => (await part.boundingBox())!));
+    expect(caret.x).toBeLessThan(label.x);
+    expect(label.x).toBeLessThan(count.x);
+    expect(Math.abs(label.y + label.height / 2 - (count.y + count.height / 2))).toBeLessThanOrEqual(2);
+
+    await page.keyboard.press("Escape");
+    await expect(sheet).toHaveCount(0);
+    await expect(open).toBeFocused();
+    expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
+  });
+
+  test(`${name}: the close button, the scrim and a tapped section each close Contents, and a tapped topic navigates`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+    await page.setViewportSize(size);
+    await page.goto("./topics/choledocholithiasis/");
+    const open = tools(page).getByRole("button", { name: "Contents" });
+
+    await open.click();
+    await dialog(page).getByRole("button", { name: "Close contents" }).click();
+    await expect(dialog(page)).toHaveCount(0);
+    await expect(open).toBeFocused();
+
+    await open.click();
+    await page.mouse.click(size.width - 4, 4);
+    await expect(dialog(page)).toHaveCount(0);
+
+    await open.click();
+    await dialog(page).getByRole("link", { name: "Choose the route", exact: true }).click();
+    await expect(dialog(page)).toHaveCount(0);
+    await expect(page.locator("#block-comparison")).toBeInViewport();
+    await expect(page.locator("#block-comparison")).toHaveAttribute("open", "");
+
+    await open.click();
+    const other = dialog(page).locator(".contents-branch a:not([aria-current])").first();
+    const href = await other.getAttribute("href");
+    await other.click();
+    await expect(page).toHaveURL(new RegExp(`${href!.replace(/\/$/, "")}/?$`));
+    await expect(dialog(page)).toHaveCount(0);
+  });
+}
+
+test("phone: a downward swipe on the sheet's header closes Contents", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chrome", "Touch emulation");
+  await page.goto("./topics/choledocholithiasis/");
+  await tools(page).getByRole("button", { name: "Contents" }).click();
+  const header = (await dialog(page).locator("header").boundingBox())!;
+  const x = header.x + 40;
+  const cdp = await page.context().newCDPSession(page);
+  const touch = (type: "touchStart" | "touchMove" | "touchEnd", y: number) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : [{ x, y }] });
+  await touch("touchStart", header.y + 20);
+  await touch("touchMove", header.y + 60);
+  await touch("touchMove", header.y + 140);
+  await touch("touchEnd", header.y + 140);
+  await expect(dialog(page)).toHaveCount(0);
+});
+
+test("a playbook's Contents lists its sections and the playbooks by specialty, in the dialog and inline", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  const inline = sidebarContents(page);
+  await expect(inline.getByRole("group", { name: "Playbooks" })).toBeVisible();
+  await expect(inline.getByRole("button", { name: "Vascular" })).toHaveAttribute("aria-expanded", "true");
+  await expect(inline.getByRole("link", { name: "Temporal Artery Biopsy", exact: true })).toHaveAttribute("aria-current", "page");
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  await tools(page).getByRole("button", { name: "Contents" }).click();
+  await expect(dialog(page).getByRole("group", { name: "On this page" }).getByRole("link").first()).toBeVisible();
+  await expect(dialog(page).getByRole("button", { name: "Vascular" })).toHaveAttribute("aria-expanded", "true");
+  // One category open at a time: opening another closes Vascular.
+  const others = dialog(page).locator(".contents-category > button[aria-expanded=false]");
+  await others.first().click();
+  await expect(dialog(page).getByRole("button", { name: "Vascular" })).toHaveAttribute("aria-expanded", "false");
+});
+
+test("Back is never dead: it goes to the index on a cold launch and back through history after an in-app visit", async ({ page }) => {
+  await page.goto("./topics/choledocholithiasis/");
+  await tools(page).getByRole("button", { name: "Back" }).click();
+  await expect(page).toHaveURL(/\/pocket-chief\/topics\/$/);
+
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await tools(page).getByRole("button", { name: "Back" }).click();
+  await expect(page).toHaveURL(/\/pocket-chief\/playbooks\/#vascular$/);
+
+  await page.goto("./topics/");
+  await page.getByRole("link", { name: /Choledocholithiasis/ }).first().click();
+  await expect(page).toHaveURL(/choledocholithiasis\/$/);
+  await tools(page).getByRole("button", { name: "Back" }).click();
+  await expect(page).toHaveURL(/\/pocket-chief\/topics\/$/);
 });

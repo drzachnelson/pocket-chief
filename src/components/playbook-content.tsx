@@ -1,37 +1,41 @@
 "use client";
 
 import * as Tabs from "@radix-ui/react-tabs";
-import { CaretDown, CaretUp } from "@phosphor-icons/react";
+import { useCallback, useState } from "react";
 import type { Playbook, SuppliedSource } from "@/lib/types";
 import type { LinkIndexEntry } from "@/lib/inline";
+import { specialtyId } from "@/lib/library-items";
+import type { ContentsData } from "@/lib/reader-contents";
 import { BlockList, useBlockCollapse } from "@/components/block-list";
+import { ReaderTools } from "@/components/page-toolbar";
+import { SourceList } from "@/components/source-list";
 
 /**
  * The playbook counterpart to `TopicContent`: same block rendering, different chrome.
  *
- * Deliberately does NOT record a recent view or offer Save. Both write Topic-shaped objects into
+ * Deliberately does NOT record a recent view or offer Save yet. Both write Topic-shaped objects into
  * the `saved` and `recent` stores, and every surface that reads those renders rows through
  * TopicCard, which reads `scoreCategory` and links to `/topics/<slug>`. A playbook in there
- * renders a broken card pointing at a 404. Playbook bookmarking needs its own store.
+ * renders a broken card pointing at a 404; the saved-loader and reader-header slices lift this.
  *
  * No History tab either — playbooks ship approved-only and have no version list.
  */
-export function PlaybookContent({ playbook, sources, linkEntries }: { playbook: Playbook; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[] }) {
+export function PlaybookContent({ playbook, sources, linkEntries, contents }: { playbook: Playbook; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[]; contents: ContentsData }) {
+  const [tab, setTab] = useState("notes");
   const blocks = playbook.blocks.filter((block) => block.type !== "references");
-  const collapse = useBlockCollapse(blocks);
+  const showNotes = useCallback(() => setTab("notes"), []);
+  const collapse = useBlockCollapse(blocks, showNotes);
 
   return (
     <>
-      <div className="topic-actions-row">
-        {collapse.collapsibleIds.length > 0 && <button className="expand-toggle" onClick={collapse.toggleAll}>{collapse.allOpen ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}{collapse.allOpen ? "Close all" : "Open all"}</button>}
-      </div>
-      <Tabs.Root defaultValue="notes" className="topic-tabs">
+      <ReaderTools corpus="playbooks" contents={contents} backFallback={`/playbooks#${specialtyId(playbook.specialty)}`} collapse={collapse} notesShown={tab === "notes"} />
+      <Tabs.Root value={tab} onValueChange={setTab} className="topic-tabs">
         <Tabs.List className="tabs-list" aria-label="Playbook views">
           <Tabs.Trigger value="notes">Notes</Tabs.Trigger>
-          <Tabs.Trigger value="sources">Sources <span>{sources.length}</span></Tabs.Trigger>
+          <Tabs.Trigger value="sources">Sources <span aria-hidden="true">{sources.length}</span></Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="notes"><BlockList blocks={blocks} collapse={collapse} linkEntries={linkEntries} selfSlug={playbook.slug} /></Tabs.Content>
-        <Tabs.Content value="sources"><div className="source-list">{sources.map((source, index) => <article key={source.id}><span>{index + 1}</span><div><h2>{source.title}</h2><p>{source.citation}</p>{source.details && <small>{source.details}</small>}</div></article>)}</div></Tabs.Content>
+        <Tabs.Content value="sources"><SourceList sources={sources} /></Tabs.Content>
       </Tabs.Root>
     </>
   );

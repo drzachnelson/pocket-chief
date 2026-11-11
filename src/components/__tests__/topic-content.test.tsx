@@ -1,7 +1,9 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { Contents } from "@/components/contents";
 import { TopicContent } from "@/components/topic-content";
+import type { ContentsData } from "@/lib/reader-contents";
 import type { Topic, TopicBlock, TopicVersion } from "@/lib/types";
 
 const offlineMocks = vi.hoisted(() => ({
@@ -12,6 +14,7 @@ const offlineMocks = vi.hoisted(() => ({
   setTopicSaved: vi.fn(async () => undefined),
 }));
 vi.mock("@/lib/offline", () => offlineMocks);
+vi.mock("next/navigation", () => ({ usePathname: () => "/topics/paraesophageal", useRouter: () => ({ push: vi.fn() }) }));
 
 // jsdom has no layout, so it leaves scrollIntoView undefined; the deep-link effect calls it.
 const scrollIntoView = vi.fn();
@@ -34,14 +37,18 @@ const blocks: TopicBlock[] = [
 
 const version: TopicVersion = { id: "v1", topicId: "t1", versionNumber: 1, status: "approved", blocks, sourceIds: ["s1"], scoreNodeId: "n", tags: [], warnings: [], createdAt: "2026-01-01" };
 const topic: Topic = { id: "t1", slug: "paraesophageal", title: "Paraesophageal", aliases: [], scoreNodeId: "n", scoreCategory: "SCORE", tags: [], approvedVersion: version, versions: [version], updatedAt: "2026-01-01" };
+const contents: ContentsData = { corpus: "topics", sections: [{ id: "b1", label: "Assessment", level: 2 }, { id: "b2", label: "Details", level: 3 }], branches: [] };
 const entries = [{ key: "choledocholithiasis", slug: "choledocholithiasis", title: "Choledocholithiasis" }, { key: "paraesophageal", slug: "paraesophageal", title: "Paraesophageal" }];
+
+// The shell hosts the toolbar in its top row; a bare page has no such slot, so the tests supply one.
+const renderTopic = (ui: React.ReactElement) => render(<><div id="shell-toolbar" />{ui}</>);
 
 describe("renderer redesign", () => {
   it("keeps guide controls compact without a version-reviewed decoration", () => {
-    render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
 
     expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Open all" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Expand all" })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /^Notes$/ })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /Sources/ })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /History/ })).toBeInTheDocument();
@@ -49,7 +56,7 @@ describe("renderer redesign", () => {
   });
 
   it("renders inline markup, nesting, tones, and collapse state", () => {
-    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
 
     expect(container.querySelector("strong.inline-term")!.textContent).toBe("Borchardt triad");
     const links = container.querySelectorAll("a.inline-link");
@@ -80,25 +87,25 @@ describe("renderer redesign", () => {
   });
 
   it("collapses and re-expands every section", () => {
-    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
     const details = container.querySelectorAll<HTMLDetailsElement>("details.section-block");
-    fireEvent.click(screen.getByRole("button", { name: "Open all" }));
+    fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
     expect([...details].every((item) => item.open)).toBe(true);
-    fireEvent.click(screen.getByRole("button", { name: "Close all" }));
+    fireEvent.click(screen.getByRole("button", { name: "Collapse all" }));
     expect([...details].every((item) => !item.open)).toBe(true);
-    fireEvent.click(screen.getByRole("button", { name: "Open all" }));
+    fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
     expect([...details].every((item) => item.open)).toBe(true);
     // A hand-closed section is mirrored into state, so Open all reopens it.
     details[0].open = false;
     fireEvent(details[0], new Event("toggle"));
-    expect(screen.getByRole("button", { name: "Open all" })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Open all" }));
+    expect(screen.getByRole("button", { name: "Expand all" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
     expect([...details].every((item) => item.open)).toBe(true);
   });
 
   it("opens a deep-linked section and records local reviewed state", async () => {
     window.history.replaceState({}, "", "/topics/paraesophageal#b1");
-    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} nextTopic={{ slug: "next", label: "Next topic", categoryLabel: "Foregut" }} />);
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} nextTopic={{ slug: "next", label: "Next topic", categoryLabel: "Foregut" }} />);
     const details = container.querySelector<HTMLDetailsElement>("#b1")!;
     await waitFor(() => expect(details.open).toBe(true));
 
@@ -114,7 +121,7 @@ describe("renderer redesign", () => {
 
   it("scrolls a deep-linked section into view once it has been opened", async () => {
     window.history.replaceState({}, "", "/topics/paraesophageal#b1");
-    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
     const details = container.querySelector<HTMLDetailsElement>("#b1")!;
 
     // The browser makes its own hash jump while the section is still closed, so it lands short.
@@ -125,7 +132,7 @@ describe("renderer redesign", () => {
   });
 
   it("falls back to the topics index at the end of a category", () => {
-    render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
     expect(screen.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/topics");
   });
 
@@ -151,7 +158,7 @@ describe("renderer redesign", () => {
     };
     const flowVersion = { ...version, blocks: [flow] };
     const flowTopic = { ...topic, approvedVersion: flowVersion, versions: [flowVersion] };
-    const { container } = render(<TopicContent topic={flowTopic} sources={[]} linkEntries={[]} />);
+    const { container } = renderTopic(<TopicContent contents={contents} topic={flowTopic} sources={[]} linkEntries={[]} />);
 
     const diagram = container.querySelector(".decision-flow");
     expect(diagram).toHaveAttribute("aria-label", "Treatment decision flowchart");
@@ -170,16 +177,81 @@ describe("renderer redesign", () => {
     process.env.TZ = "America/Los_Angeles"; // 02:30 UTC on the 22nd is still the 21st here
     try {
       const reviewed: TopicVersion = { ...version, reviewedAt: "2026-10-22T02:30:00.000Z" };
-      render(<TopicContent topic={{ ...topic, approvedVersion: reviewed, versions: [reviewed] }} sources={[]} linkEntries={entries} />);
+      renderTopic(<TopicContent contents={contents} topic={{ ...topic, approvedVersion: reviewed, versions: [reviewed] }} sources={[]} linkEntries={entries} />);
       await userEvent.click(screen.getByRole("tab", { name: /History/ }));
       expect(screen.getByText("Reviewed Oct 22, 2026")).toBeInTheDocument();
     } finally { if (zone === undefined) delete process.env.TZ; else process.env.TZ = zone; }
   });
 
   it("offers no flashcard affordance anywhere in the reading view", () => {
-    const { container } = render(<TopicContent topic={topic} sources={[]} linkEntries={entries} />);
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
     expect(container.querySelector("button.anki-inline")).toBeNull();
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(screen.queryByText(/anki/i)).not.toBeInTheDocument();
+  });
+});
+
+describe("reader chrome", () => {
+  const history: TopicVersion = { ...version, reviewedAt: "2026-10-22T02:30:00.000Z" };
+
+  it("keeps the tab in state, with silent counts and no tab in the address", async () => {
+    renderTopic(<TopicContent contents={contents} topic={{ ...topic, approvedVersion: history, versions: [history] }} sources={[]} linkEntries={entries} />);
+    expect(screen.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+    // The counts are aria-hidden, so the tabs are named by their words alone.
+    expect(screen.getByRole("tab", { name: "Sources" })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "History" })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("tab", { name: "History" }));
+    expect(screen.getByRole("tab", { name: "History" })).toHaveAttribute("aria-selected", "true");
+    expect(window.location.hash).toBe("");
+  });
+
+  it("draws no status dot on a history row", async () => {
+    const { container } = renderTopic(<TopicContent contents={contents} topic={{ ...topic, approvedVersion: history, versions: [history] }} sources={[]} linkEntries={entries} />);
+    await userEvent.click(screen.getByRole("tab", { name: "History" }));
+    expect(screen.getByText("Version 1 · approved")).toBeInTheDocument();
+    expect(container.querySelector(".status-dot")).toBeNull();
+  });
+
+  it("switches to Notes and opens the section when a #block link is followed from another tab", async () => {
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
+    await userEvent.click(screen.getByRole("tab", { name: /Sources/ }));
+    expect(container.querySelector("#b1")).toBeNull();
+
+    act(() => { window.history.replaceState({}, "", "/topics/paraesophageal#b1"); window.dispatchEvent(new HashChangeEvent("hashchange")); });
+    expect(screen.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+    const details = container.querySelector<HTMLDetailsElement>("#b1")!;
+    expect(details.open).toBe(true);
+    expect(scrollIntoView.mock.instances.at(-1)).toBe(details);
+  });
+
+  it("also switches to Notes when the link followed points at the hash the page already has, which fires no hashchange", async () => {
+    window.history.replaceState({}, "", "/topics/paraesophageal#b1");
+    const { container } = renderTopic(<><a href="#b1">Assessment</a><TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} /></>);
+    await userEvent.click(screen.getByRole("tab", { name: /Sources/ }));
+    expect(container.querySelector("#b1")).toBeNull();
+
+    await userEvent.click(screen.getByRole("link", { name: "Assessment" }));
+    expect(screen.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+    expect(container.querySelector<HTMLDetailsElement>("#b1")!.open).toBe(true);
+  });
+
+  it("keeps a section's open state across a tab change", async () => {
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
+    fireEvent.click(screen.getByRole("button", { name: "Expand all" }));
+    await userEvent.click(screen.getByRole("tab", { name: /Sources/ }));
+    await userEvent.click(screen.getByRole("tab", { name: "Notes" }));
+    expect([...container.querySelectorAll<HTMLDetailsElement>("details.section-block")].every((item) => item.open)).toBe(true);
+  });
+
+  it("marks no section current while Sources or History shows, and marks one again on Notes", async () => {
+    renderTopic(<><Contents data={contents} /><TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} /></>);
+    const current = () => screen.getAllByRole("link").filter((link) => link.getAttribute("aria-current") === "location");
+    await waitFor(() => expect(current()).toHaveLength(1));
+
+    await userEvent.click(screen.getByRole("tab", { name: /Sources/ }));
+    await waitFor(() => expect(current()).toHaveLength(0));
+    await userEvent.click(screen.getByRole("tab", { name: "Notes" }));
+    await waitFor(() => expect(current()).toHaveLength(1));
   });
 });
