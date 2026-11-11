@@ -30,7 +30,7 @@
   --shadow-float: 0 8px 24px rgb(16 24 40 / 0.12), 0 2px 6px rgb(16 24 40 / 0.08);
   --scrim: rgb(7 12 24 / 0.5);
   --tile-edge: transparent;
-  --sidebar: 236px;
+  --sidebar: 286px;
 
   /* Type roles. Theme-independent — never redeclare inside a dark block. One 12px floor at every width.
      title and heading carry their own weight, line height and tracking where they are used; see DESIGN.md. */
@@ -124,39 +124,33 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: var(--z-skip); background: var(--ink); color: var(--surface); padding: .65rem 1rem; border-radius: .5rem; }
 .skip-link:focus { top: 1rem; }
 .app-frame { min-height: 100vh; }
-.sidebar {
-  position: fixed; inset: 0 auto 0 0; z-index: var(--z-sidebar); width: var(--sidebar); padding: 20px 14px 18px;
-  display: none; flex-direction: column; background: var(--surface); border-right: 1px solid var(--line);
-}
-.brand { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 5px 7px; }
+/* One shell, three arrangements (names as in CONTEXT.md). Phone: the header row on top and the tab bar below, with the sidebar hidden.
+   Tablet: the sidebar is a labelled rail and the header row becomes the top row. Laptop: the full sidebar. The rail and laptop rules follow in the media queries. */
+.sidebar { display: none; }
+.brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
 .brand-mark { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 9px; background: var(--cobalt); color: var(--on-cobalt); }
 .brand-mark span { font-size: var(--text-caption); font-weight: 600; }
 .brand strong { display: block; white-space: nowrap; font-size: var(--text-body); font-weight: 600; }
-.side-nav { display: grid; gap: 4px; margin-top: 28px; }
-.side-nav-link { min-height: var(--target); display: flex; align-items: center; gap: 11px; padding: 3px 11px; border-radius: 9px; color: var(--ink-muted); font-size: var(--text-small); font-weight: 500; transition: background var(--dur-fast) var(--ease-out); }
+.side-nav { display: grid; gap: 4px; }
+.side-nav-link { min-height: var(--target); display: flex; align-items: center; gap: 11px; border-radius: 9px; color: var(--ink-muted); font-size: var(--text-small); font-weight: 500; transition: background var(--dur-fast) var(--ease-out); }
 @media (hover: hover) { .side-nav-link:hover { background: var(--surface-strong); } }
 .side-nav-link.active { background: var(--cobalt-soft); color: var(--cobalt-dark); }
-.side-spacer { flex: 1; }
-.privacy-note { display: flex; gap: 9px; align-items: center; margin: 0 7px 12px; padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--green); }
-.privacy-note span { min-width: 0; }
-.privacy-note strong, .privacy-note small { display: block; }
-.privacy-note strong { font-size: var(--text-caption); font-weight: 600; }
-.privacy-note small { color: var(--ink-muted); font-size: var(--text-caption); }
-.education-label { margin: 12px 8px 0; color: var(--ink-muted); font-size: var(--text-caption); line-height: 1.45; }
 .page-column { min-height: 100vh; }
-.mobile-header { position: sticky; top: 0; z-index: var(--z-header); display: grid; gap: 9px; padding: 8px 16px 7px; background: var(--canvas); border-bottom: 1px solid var(--line); }
-.mobile-header-top { display: flex; justify-content: space-between; align-items: center; }
-.brand.compact { padding: 0; }
-.brand.compact .brand-mark { width: 31px; height: 31px; flex-basis: 31px; }
-.icon-link { width: var(--target); height: var(--target); display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-muted); }
-.mobile-head-actions { display: flex; gap: 7px; }
-.mobile-global-search { display: none; }
-.mobile-global-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); }
+/* The header row (phone) and the top row (tablet, laptop) are one sticky bar. The bar is full width and carries the hairline; .top-row holds the controls. */
+.mobile-header { position: sticky; top: 0; z-index: var(--z-header); padding: 8px 16px 7px; background: var(--canvas); border-bottom: 1px solid var(--line); }
+.top-row { display: flex; align-items: center; gap: var(--space-4); }
+.header-brand { flex: 0 0 auto; }
+.icon-link { width: var(--target); height: var(--target); flex: 0 0 auto; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-muted); }
+.icon-link[aria-current="page"] { border-color: var(--cobalt); background: var(--cobalt-soft); color: var(--cobalt-dark); }
+.mobile-global-search { position: relative; flex: 1 1 0; min-width: 0; }
+.mobile-global-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); pointer-events: none; }
 .mobile-global-search input { width: 100%; height: var(--target); padding: 0 12px 0 36px; border: 1px solid var(--field-edge); border-radius: 8px; background: var(--surface); color: var(--ink); }
+.mobile-global-search input::placeholder { color: var(--ink-muted); }
 .main-content { width: min(100%, 1160px); margin: 0 auto; padding: 19px 16px 98px; }
+/* The skip link lands focus here; a ring around the whole page says nothing. */
+.main-content:focus-visible { outline: none; }
 .mobile-nav { position: fixed; z-index: var(--z-nav); left: 0; right: 0; bottom: 0; min-height: calc(68px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(4, 1fr); align-items: stretch; padding: 5px 10px max(5px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--surface); }
 .mobile-nav-link { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 12px; color: var(--ink-muted); font-size: var(--text-caption); font-weight: 500; }
-.mobile-nav button.mobile-nav-link { border: 0; background: transparent; cursor: pointer; }
 .mobile-nav-link.active { color: var(--cobalt-dark); background: var(--cobalt-soft); }
 
 .eyebrow { margin: 0 0 8px; color: var(--cobalt-dark); font-size: var(--text-small); font-weight: 600; }
@@ -221,8 +215,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Topics workspace. The complete hierarchy is server-projected; the client only receives labels,
    routes, and heading anchors, never clinical block text. */
-.topics-sidebar { display: none; }
-.topics-sidebar-browse { display: none; }
 .topic-reading { width: min(100%, 760px); margin: 0 auto; }
 /* Contents rows take --target; only the laptop sidebar with a mouse packs them tighter (32px category and topic rows, 28px section links). */
 .topics-tree { --tree-row: var(--target); --tree-link: var(--target); display: grid; gap: 2px; min-width: 0; }
@@ -487,48 +479,41 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .main-content { padding: 38px 32px 80px; }
   .settings-grid { grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); }
+  /* The sidebar is the labelled rail (about 76px): the mark alone, then each destination as an icon over its label, with Settings at the foot. */
+  .sidebar { position: fixed; inset: 0 auto 0 0; z-index: var(--z-sidebar); width: 76px; display: flex; flex-direction: column; padding: 14px 6px; background: var(--surface); border-right: 1px solid var(--line); }
+  .page-column { margin-left: 76px; }
+  .side-brand { justify-content: center; }
+  .side-brand strong { display: none; }
+  .side-nav { margin-top: var(--space-6); }
+  .side-nav-link { min-height: 56px; flex-direction: column; justify-content: center; gap: 3px; padding: 6px 2px; font-size: var(--text-caption); text-align: center; }
+  .side-contents { display: none; }
+  .side-foot { margin-top: auto; }
+  /* Phone-only controls: the rail carries the mark and Settings, and the tab bar gives way to the rail. */
+  .header-brand, .header-settings, .mobile-nav { display: none; }
+  /* The header row becomes the top row: one hairline bar, its controls held to the 760px reading width. */
+  .mobile-header { padding-inline: 32px; }
+  .top-row { max-width: 760px; margin-inline: auto; }
 }
 
-/* Half-width desktop and tablet: a compact persistent rail keeps global destinations
-   visible without turning a wide window into a stretched phone layout. */
+/* The tablet side panel opens beside the rail. */
 @media (min-width: 760px) and (max-width: 1079px) {
-  .sidebar, .topics-sidebar { position: fixed; inset: 0 auto 0 0; z-index: var(--z-sidebar); width: 64px; padding: 16px 9px; display: flex; flex-direction: column; align-items: center; background: var(--surface); border-right: 1px solid var(--line); }
-  .page-column, .topics-page-column { margin-left: 64px; }
-  .sidebar .brand, .topics-sidebar .brand { padding-inline: 5px; }
-  .sidebar .brand > span:last-child, .topics-sidebar .brand > span:last-child,
-  .sidebar .side-nav-link span, .topics-sidebar .side-nav-link span,
-  .sidebar .privacy-note, .topics-sidebar .privacy-note,
-  .sidebar .education-label, .topics-sidebar .education-label,
-  .sidebar .topics-tree, .topics-sidebar .topics-tree,
-  .topics-sidebar-divider, .topics-sidebar-toggle { display: none; }
-  .sidebar .side-nav, .topics-sidebar .side-nav { margin-top: var(--space-7); }
-  .sidebar .side-nav-link, .topics-sidebar .side-nav-link { width: var(--target); min-height: var(--target); justify-content: center; padding: 10px; }
-  .topics-sidebar-browse { width: 100%; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; margin-top: var(--space-5); padding: var(--space-2); border: 0; border-radius: var(--radius-sm); background: var(--cobalt-soft); color: var(--cobalt-dark); font-size: var(--text-caption); font-weight: 500; cursor: pointer; }
-  .mobile-header, .mobile-nav { display: none; }
-  .topics-drawer { inset: 0 auto 0 64px; width: min(380px, calc(100vw - 64px)); border-right: 1px solid var(--line); box-shadow: var(--shadow-float); animation-name: sheet-slide; }
+  .topics-drawer { inset: 0 auto 0 76px; width: min(380px, calc(100vw - 76px)); border-right: 1px solid var(--line); box-shadow: var(--shadow-float); animation-name: sheet-slide; }
   @keyframes sheet-slide { from { transform: translateX(-2.5%); opacity: 0; } }
 }
 
+/* Laptop: the full sidebar, 286px on every route. Navigation and the Settings foot are pinned; Contents sits between them on reader pages and is the only part that scrolls. */
 @media (min-width: 1080px) {
-  .sidebar { display: flex; }
+  .sidebar { width: var(--sidebar); padding: 20px 14px 18px; }
   .page-column { margin-left: var(--sidebar); }
-  .topics-sidebar { position: fixed; inset: 0 auto 0 0; z-index: var(--z-sidebar); width: 286px; padding: 20px 14px 18px; display: flex; flex-direction: column; background: var(--surface); border-right: 1px solid var(--line); }
-  .topics-page-column { margin-left: 286px; }
-  .topics-sidebar .topics-tree { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-right: 2px; }
-  .topics-sidebar-divider { height: 1px; margin: var(--space-5) 0 var(--space-4); background: var(--line); }
-  .topics-sidebar-toggle { min-height: var(--target); display: flex; align-items: center; gap: var(--space-2); margin: var(--space-3) 0; padding: 5px var(--space-2); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-muted); font-size: var(--text-small); cursor: pointer; }
-  @media (hover: hover) { .topics-sidebar-toggle:hover { background: var(--surface-strong); } }
-  .topics-sidebar.is-collapsed { width: 64px; align-items: center; padding-inline: 9px; }
-  .topics-sidebar.is-collapsed .brand { padding-inline: 6px; }
-  .topics-sidebar.is-collapsed .brand > span:last-child, .topics-sidebar.is-collapsed .side-nav span, .topics-sidebar.is-collapsed .topics-sidebar-divider, .topics-sidebar.is-collapsed .topics-tree, .topics-sidebar.is-collapsed .education-label, .topics-sidebar.is-collapsed .side-nav-link > span { display: none; }
-  .topics-sidebar.is-collapsed .side-nav { margin-top: 24px; }
-  .topics-sidebar.is-collapsed .side-nav-link { width: 42px; justify-content: center; padding: 9px; }
-  .topics-sidebar.is-collapsed .topics-sidebar-toggle { width: 42px; justify-content: center; }
-  .topics-page-column:has(.topics-sidebar.is-collapsed) { margin-left: 64px; }
-  .mobile-header, .mobile-nav { display: none; }
+  .side-brand { justify-content: flex-start; padding: 5px 7px; }
+  .side-brand strong { display: block; }
+  .side-nav { margin-top: 28px; }
+  .side-nav-link { min-height: var(--target); flex-direction: row; justify-content: flex-start; gap: 11px; padding: 3px 11px; font-size: var(--text-small); text-align: left; }
+  .side-nav-link svg { width: 18px; height: 18px; }
+  .side-contents { display: block; flex: 1 1 auto; min-height: 0; margin-top: var(--space-5); overflow-y: auto; }
+  .mobile-header { padding-inline: 42px; }
   .main-content { padding: 44px 42px 80px; }
   .search-hero { padding-top: 18px; }
-  .topic-block { scroll-margin-top: var(--space-7); }
 }
 
 @media (prefers-reduced-motion: reduce) {

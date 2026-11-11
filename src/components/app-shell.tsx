@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { BookmarkSimple, GearSix, IconContext, MagnifyingGlass, Notebook, ShieldCheck, Steps } from "@phosphor-icons/react";
+import { BookmarkSimple, GearSix, House, IconContext, MagnifyingGlass, Notebook, Steps } from "@phosphor-icons/react";
+import { BrandMark } from "@/components/brand-mark";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
+import { isReaderPath, normalizePath } from "@/lib/pathname";
 
 // Next prefixes basePath onto <Link> and router navigations, but NOT onto a plain <form action>.
 // Left as "/" the header search submits to the origin root, outside the mount point, and 404s.
@@ -15,7 +17,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const decorativeIcons = { "aria-hidden": true } as const;
 
 export const primaryNavigation = [
-  { href: "/", label: "Search", icon: MagnifyingGlass },
+  { href: "/", label: "Home", icon: House },
   { href: "/topics", label: "Topics", icon: Notebook },
   { href: "/playbooks", label: "Playbooks", icon: Steps },
   { href: "/saved", label: "Saved", icon: BookmarkSimple },
@@ -30,7 +32,8 @@ interface TopicsDrawerState {
 
 const TopicsDrawerContext = createContext<TopicsDrawerState | null>(null);
 
-/** Lets the persistent Topics workspace provide the mobile drawer used by the shared bottom nav. */
+// The Topics drawer has no trigger since this shell dropped the Topics button and the Browse button. It stays until
+// the reader-chrome slice replaces it with the Contents dialog and deletes this provider and its registration handshake.
 export function useTopicsDrawer() {
   const drawer = useContext(TopicsDrawerContext);
   if (!drawer) throw new Error("useTopicsDrawer must be used inside AppShell");
@@ -59,62 +62,54 @@ function TopicsDrawerProvider({ children }: { children: React.ReactNode }) {
   return <TopicsDrawerContext.Provider value={value}>{children}{isOpen ? content : null}</TopicsDrawerContext.Provider>;
 }
 
-function NavLink({ href, label, icon: Icon, mobile = false }: (typeof primaryNavigation)[number] & { mobile?: boolean }) {
-  const pathname = usePathname();
-  const drawer = useContext(TopicsDrawerContext);
-  const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
-  const className = `${mobile ? "mobile-nav-link" : "side-nav-link"} ${active ? "active" : ""}`;
-  if (mobile && href === "/topics" && pathname.startsWith("/topics/")) {
-    return <button type="button" className={className} aria-label="Browse topics" aria-current="page" aria-haspopup="dialog" aria-expanded={drawer?.isOpen ?? false} onClick={(event) => drawer?.open(event.currentTarget)}><Icon size={21} weight="fill" aria-hidden="true" /><span>{label}</span></button>;
-  }
-  return <Link href={href} className={className} aria-current={active ? "page" : undefined} aria-label={label}>
-    <Icon size={mobile ? 21 : 18} weight={active ? "fill" : "regular"} aria-hidden="true" />
-    <span>{label}</span>
-  </Link>;
+/** "page" on the link's own page, "true" on a page inside it (a topic is inside Topics), nothing elsewhere. */
+function currentState(pathname: string, href: string) {
+  const path = normalizePath(pathname);
+  if (path === href) return "page";
+  return href !== "/" && path.startsWith(`${href}/`) ? "true" : undefined;
 }
 
-/** Shared brand/header treatment, used by the standard shell and the Topics workspace route. */
-export function MobileHeader() {
-  return <header className="mobile-header">
-    <div className="mobile-header-top">
-      <Link className="brand compact" href="/"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong></span></Link>
-      <div className="mobile-head-actions"><Link className="icon-link" href="/settings" aria-label="Settings"><GearSix size={21} /></Link></div>
-    </div>
-    <form action={`${basePath}/`} role="search" className="mobile-global-search"><MagnifyingGlass size={17} aria-hidden="true" /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
-  </header>;
+function NavLink({ href, label, icon: Icon, className }: { href: string; label: string; icon: typeof House; className: string }) {
+  const current = currentState(usePathname(), href);
+  return <Link href={href} className={`${className}${current ? " active" : ""}`} aria-current={current}><Icon size={21} weight={current ? "fill" : "regular"} /><span>{label}</span></Link>;
 }
 
-/** Shared primary mobile navigation; its active Topics control opens the workspace drawer. */
-export function MobileNavigation() {
-  return <nav className="mobile-nav" aria-label="Mobile navigation">{primaryNavigation.map((item) => <NavLink key={item.href} {...item} mobile />)}</nav>;
+function PrimaryNavigation({ className, linkClassName }: { className: string; linkClassName: string }) {
+  return <nav className={className} aria-label="Primary">{primaryNavigation.map((item) => <NavLink key={item.href} {...item} className={linkClassName} />)}</nav>;
 }
 
-/** Reusable global navigation content for the standard sidebar and the Topics workspace sidebar. */
-export function GlobalNavigation() {
-  return <>
-    <Link className="brand" href="/" aria-label="Pocket Chief home"><span className="brand-mark"><span>PC</span></span><span><strong>Pocket Chief</strong></span></Link>
-    <nav className="side-nav" aria-label="Primary navigation">{primaryNavigation.map((item) => <NavLink key={item.href} {...item} />)}</nav>
-  </>;
+// The name shows on the phone header row and on the laptop sidebar; the tablet rail hides it, so the sidebar link keeps a label.
+function Brand({ className, label }: { className: string; label?: string }) {
+  return <Link className={`brand ${className}`} href="/" aria-label={label}><BrandMark /><strong>Pocket Chief</strong></Link>;
 }
 
-export function GlobalNavigationFooter({ compact = false }: { compact?: boolean }) {
-  return <>
-    <div className="side-spacer" />
-    {!compact && <div className="privacy-note"><ShieldCheck size={18} weight="fill" aria-hidden="true" /><span><strong>Private reference</strong><small>No patient information</small></span></div>}
-    <NavLink href="/settings" label="Settings" icon={GearSix} />
-    <p className="education-label">Educational reference only.<br />Not patient-specific guidance.</p>
-  </>;
-}
-
-function StandardShell({ children }: { children: React.ReactNode }) {
-  return <div className="app-frame"><aside className="sidebar"><GlobalNavigation /><GlobalNavigationFooter /></aside><div className="page-column"><MobileHeader /><main id="main-content" className="main-content">{children}</main></div><MobileNavigation /></div>;
-}
-
-function TopicsRouteShell({ children }: { children: React.ReactNode }) {
-  return <div className="app-frame topics-app-frame"><div className="page-column topics-page-column"><MobileHeader /><main id="main-content" className="main-content topics-main-content">{children}</main></div><MobileNavigation /></div>;
-}
-
+/**
+ * One shell for every route. By width it is arranged three ways:
+ * - phone: the header row on top (mark and name, search, Settings) and the tab bar at the bottom; the sidebar is hidden;
+ * - tablet: the sidebar is a labelled rail, and the top row holds the search field;
+ * - laptop: the full sidebar, with Contents between navigation and the Settings foot on reader pages.
+ * Landmarks: nav "Primary" (once visible; the tab bar and the sidebar are never shown together), search, main. No aside, banner or footer.
+ */
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  return <IconContext.Provider value={decorativeIcons}><TopicsDrawerProvider><ServiceWorkerRegistration /><OfflineHydrator />{pathname.startsWith("/topics") ? <TopicsRouteShell>{children}</TopicsRouteShell> : <StandardShell>{children}</StandardShell>}</TopicsDrawerProvider></IconContext.Provider>;
+  return <IconContext.Provider value={decorativeIcons}><TopicsDrawerProvider><ServiceWorkerRegistration /><OfflineHydrator />
+    <div className="app-frame">
+      <div className="sidebar">
+        <Brand className="side-brand" label="Pocket Chief home" />
+        <PrimaryNavigation className="side-nav" linkClassName="side-nav-link" />
+        {isReaderPath(pathname) && <div className="side-contents" id="shell-contents" />}
+        <div className="side-foot"><NavLink href="/settings" label="Settings" icon={GearSix} className="side-nav-link" /></div>
+      </div>
+      <div className="page-column">
+        <div className="mobile-header"><div className="top-row">
+          <Brand className="header-brand" />
+          {/* Search slot: the compact field as it stands, until the shared search field replaces it. */}
+          <form action={`${basePath}/`} role="search" className="mobile-global-search"><MagnifyingGlass size={17} /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
+          <Link className="icon-link header-settings" href="/settings" aria-label="Settings" aria-current={currentState(pathname, "/settings")}><GearSix size={21} /></Link>
+        </div></div>
+        <main id="main-content" tabIndex={-1} className="main-content">{children}</main>
+      </div>
+      <PrimaryNavigation className="mobile-nav" linkClassName="mobile-nav-link" />
+    </div>
+  </TopicsDrawerProvider></IconContext.Provider>;
 }

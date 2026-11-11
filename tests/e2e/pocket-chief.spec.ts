@@ -15,15 +15,44 @@ test("search, read, and save a topic", async ({ page }) => {
   await expect(page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
 });
 
-test("mobile navigation exposes four primary destinations", async ({ page }) => {
+const PRIMARY = ["Home", "Topics", "Playbooks", "Saved"];
+
+test("phone shows the header row and a 68px tab bar with four destinations", async ({ page }) => {
   await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto("./");
-  const navigation = page.getByRole("navigation", { name: "Mobile navigation" });
-  await expect(navigation.getByRole("link", { name: "Search" })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Topics" })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Playbooks" })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Saved" })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Add" })).toHaveCount(0);
+  await page.goto("./topics/");
+  const tabs = page.getByRole("navigation", { name: "Primary" });
+  await expect(tabs.getByRole("link")).toHaveText(PRIMARY);
+  await expect(tabs.getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "page");
+  await expect(tabs.getByRole("link", { name: "Add" })).toHaveCount(0);
+  expect((await tabs.boundingBox())!.height).toBeCloseTo(68, 0);
+
+  const header = page.locator(".mobile-header");
+  expect((await header.boundingBox())!.height).toBeCloseTo(60, 0);
+  await expect(header.getByRole("link", { name: "Pocket Chief" })).toHaveAttribute("href", "/pocket-chief/");
+  await expect(header.getByRole("search").getByRole("textbox")).toBeVisible();
+  await expect(header.getByRole("link", { name: "Settings" })).toBeVisible();
+  // The rail and its foot are for wider screens, so the phone has exactly one Settings link.
+  await expect(page.getByRole("link", { name: "Settings" })).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "Pocket Chief home" })).toHaveCount(0);
+});
+
+test("the skip link is the first stop and lands on the one main", async ({ page }) => {
+  await page.goto("./topics/");
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#main-content")).toBeFocused();
+});
+
+test("every page has one main and the shell's search, and no aside, banner or footer", async ({ page }) => {
+  for (const path of ["./", "./topics/", "./playbooks/", "./saved/", "./settings/", "./topics/choledocholithiasis/", "./playbooks/temporal-artery-biopsy/"]) {
+    await page.goto(path);
+    await expect(page.getByRole("main"), path).toHaveCount(1);
+    // Home still draws its own large field next to the header one until the Home slice removes it.
+    await expect(page.getByRole("search"), path).toHaveCount(path === "./" ? 2 : 1);
+    for (const role of ["banner", "contentinfo", "complementary"] as const) await expect(page.getByRole(role), `${path} ${role}`).toHaveCount(0);
+    await expect(page.getByText(/Educational reference only|No patient information/), path).toHaveCount(0);
+  }
 });
 
 test("browses to a playbook and reads its steps", async ({ page }) => {
@@ -57,19 +86,56 @@ test("topics index searches the grouped curriculum and offers an alphabetical vi
   await expect(page.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveCount(1);
 });
 
-test("half-width desktop uses a compact rail and a usable topics drawer", async ({ page }, testInfo) => {
+test("tablet width shows a labelled rail and a top row with the search field", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Half-width desktop layout only");
   await page.setViewportSize({ width: 860, height: 900 });
   await page.goto("./topics/choledocholithiasis/");
 
-  await expect(page.getByLabel("Topics workspace")).toBeVisible();
-  await expect(page.getByRole("navigation", { name: "Mobile navigation" })).not.toBeVisible();
-  const browse = page.getByRole("button", { name: "Browse topics" });
-  await expect(browse).toBeVisible();
-  await browse.click();
-  await expect(page.getByRole("dialog", { name: "Topics" })).toBeVisible();
+  const rail = page.getByRole("navigation", { name: "Primary" });
+  await expect(rail.getByRole("link")).toHaveText(PRIMARY);
+  // Labels are visible under the icons, not hidden behind them.
+  for (const label of PRIMARY) await expect(rail.getByText(label, { exact: true })).toBeVisible();
+  await expect(rail.getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "true");
+  const sidebar = page.locator(".sidebar");
+  expect((await sidebar.boundingBox())!.width).toBe(76);
+  await expect(sidebar.getByRole("link", { name: "Pocket Chief home" })).toBeVisible();
+  await expect(sidebar.getByRole("link", { name: "Settings" })).toBeVisible();
+  await expect(sidebar.getByText("Settings", { exact: true })).toBeVisible();
+  // One Settings link: the header gear and the phone tab bar belong to phones.
+  await expect(page.getByRole("link", { name: "Settings" })).toHaveCount(1);
+  await expect(page.getByRole("button", { name: "Browse topics" })).toHaveCount(0);
+
+  await expect(page.locator(".top-row").getByRole("search")).toBeVisible();
+  await page.evaluate(() => window.scrollTo(0, 600));
+  expect((await page.locator(".mobile-header").boundingBox())!.y).toBe(0);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
+});
+
+test("laptop has one 286px sidebar and the page edge does not move between routes", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Laptop layout only");
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const edges = new Set<number>();
+  for (const path of ["./", "./topics/", "./playbooks/", "./saved/", "./settings/", "./topics/choledocholithiasis/", "./playbooks/temporal-artery-biopsy/"]) {
+    await page.goto(path);
+    expect((await page.locator(".sidebar").boundingBox())!.width, path).toBe(286);
+    edges.add((await page.locator(".page-column").boundingBox())!.x);
+    await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link"), path).toHaveText(PRIMARY);
+    await expect(page.getByRole("link", { name: "Settings" }), path).toHaveCount(1);
+  }
+  expect([...edges]).toEqual([286]);
+
+  // The foot is pinned to the bottom of the sidebar, and the top row is a sticky 760px bar over the content column.
+  await page.goto("./topics/choledocholithiasis/");
+  const settings = (await page.locator(".side-foot").boundingBox())!;
+  expect(settings.y + settings.height).toBeGreaterThan(900 - 24 - 1);
+  const topRow = (await page.locator(".top-row").boundingBox())!;
+  expect(topRow.width).toBe(760);
+  const main = (await page.locator("#main-content").boundingBox())!;
+  expect(topRow.x + topRow.width / 2).toBeCloseTo(main.x + main.width / 2, 0);
+  await page.evaluate(() => window.scrollTo(0, 800));
+  expect((await page.locator(".mobile-header").boundingBox())!.y).toBe(0);
+  await expect(page.getByRole("link", { name: "Settings" })).toBeInViewport();
 });
 
 test("topic sections start collapsed, toggle together, and reviewed state persists", async ({ page }) => {
@@ -158,132 +224,31 @@ test("topics resumes a visited guide", async ({ page }) => {
   await expect(page.getByText("Reviewed", { exact: true })).toHaveCount(0);
 });
 
-test("canonical topic navigation keeps the workspace, active path, anchors, and exact update date", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-chrome", "Desktop workspace navigation only");
-  await page.goto("./topics/");
-  // The topics index renders the searchable browser alongside the workspace tree, so this
-  // walk has to stay inside the tree to keep naming its own links.
-  const tree = page.getByRole("navigation", { name: "Topics curriculum" });
-  await tree.getByRole("button", { name: "Biliary" }).click();
-  await tree.getByRole("button", { name: "Diseases & Conditions" }).click();
-  await tree.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
-
-  await expect(page).toHaveURL(/\/topics\/choledocholithiasis\/$/);
-  await expect(page.getByLabel("Topics workspace")).toBeVisible();
-  const curriculum = page.getByRole("navigation", { name: "Topics curriculum" });
-  await expect(curriculum.getByRole("button", { name: "Biliary" })).toHaveAttribute("aria-expanded", "true");
-  await expect(curriculum.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
+test("a topic page keeps the shell: Topics current, an empty Contents slot and the exact update date", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Laptop sidebar only");
+  await page.goto("./topics/choledocholithiasis/");
+  await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "true");
+  // The Contents component arrives with the reader chrome; until then the slot is reserved and empty.
+  await expect(page.locator("#shell-contents")).toBeEmpty();
+  await expect(page.getByRole("navigation", { name: "Contents" })).toHaveCount(0);
   await expect(page.getByText("Last updated Oct 23, 2026", { exact: true })).toBeVisible();
-
-  await curriculum.getByRole("link", { name: "Choose the route" }).click();
-  await expect(page).toHaveURL(/#block-comparison$/);
-  await expect(page.locator("#block-comparison")).toBeInViewport();
-  await expect(curriculum.getByRole("link", { name: "Choose the route" })).toHaveAttribute("aria-current", "location");
 });
 
-test("desktop rail collapse persists after reload and captures both desktop states", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-chrome", "Desktop rail only");
-  await page.setViewportSize({ width: 1440, height: 960 });
-  await page.goto("./topics/choledocholithiasis/");
-  await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
-  const rail = page.getByLabel("Topics workspace");
-  await expect(rail).not.toHaveClass(/is-collapsed/);
-  await page.screenshot({ path: "output/playwright/topics-desktop-expanded.png", fullPage: true });
-
-  await page.getByRole("button", { name: "Collapse Topics sidebar" }).click();
-  await expect(rail).toHaveClass(/is-collapsed/);
-  await page.screenshot({ path: "output/playwright/topics-desktop-slim-rail.png", fullPage: true });
-  await page.reload();
-  await expect(page.getByLabel("Topics workspace")).toHaveClass(/is-collapsed/);
-});
-
-test("mobile Topics drawer traps focus, restores it, and closes after topic or section selection", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile-chrome", "Mobile drawer only");
-  await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto("./topics/choledocholithiasis/");
-  const trigger = page.getByRole("button", { name: "Browse topics" });
-  const drawer = page.getByRole("dialog", { name: "Topics" });
-  const close = drawer.getByRole("button", { name: "Close topics navigation" });
-  // Click exactly once, and only after the shell has hydrated: the Topics button is server-rendered
-  // and tappable before React attaches its handler, so an earlier tap reaches nothing at all.
-  //
-  // Retrying the tap is NOT a valid workaround: `open()` sets state rather than toggling, so a
-  // second click leaves the drawer open while moving focus to the trigger, and the drawer never
-  // remounts to re-run its `closeRef.focus()` effect. Nor is waiting on the library.json response —
-  // the service worker precaches that same URL from its install handler, so it can land before React
-  // has run anything.
-  //
-  // A controlling worker is the honest gate for the *trigger*: registration happens in
-  // ServiceWorkerRegistration's mount effect, and that component ships in the same root-layout commit
-  // as the button. It proves nothing about the drawer's content, which TopicsWorkspace registers from
-  // the /topics segment layout — React commits that separately, and under load this gate opens first.
-  // Honouring a tap that lands in that window is TopicsDrawerProvider's job, not this gate's; see
-  // "honours a tap that lands before the workspace registers the drawer" in the unit suite.
-  await page.waitForFunction(async () => {
-    await navigator.serviceWorker.ready;
-    return Boolean(navigator.serviceWorker.controller);
-  });
-  await trigger.click();
-  await expect(close).toBeFocused();
-  await page.screenshot({ path: "output/playwright/topics-phone-drawer.png", fullPage: true });
-
-  const focusable = drawer.locator("a[href], button:not([disabled])");
-  await page.keyboard.press("Shift+Tab");
-  await expect(focusable.last()).toBeFocused();
-  await page.keyboard.press("Tab");
-  await expect(close).toBeFocused();
-  await page.keyboard.press("Escape");
-  await expect(drawer).toHaveCount(0);
-  await expect(trigger).toBeFocused();
-
-  await trigger.click();
-  await page.getByLabel("Dismiss topics navigation").click({ position: { x: 2, y: 2 } });
-  await expect(drawer).toHaveCount(0);
-  await expect(trigger).toBeFocused();
-
-  await trigger.click();
-  await drawer.getByRole("link", { name: "Choose the route" }).click();
-  await expect(page).toHaveURL(/#block-comparison$/);
-  await expect(drawer).toHaveCount(0);
-
-  await trigger.click();
-  await drawer.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
-  await expect(page).toHaveURL(/\/topics\/choledocholithiasis\/$/);
-  await expect(drawer).toHaveCount(0);
-});
-
-test("a previously visited Topics guide remains readable offline in its workspace", async ({ page }, testInfo) => {
+test("a previously visited Topics guide remains readable offline in the shell", async ({ page }) => {
   await page.goto("./topics/choledocholithiasis/");
   await page.waitForFunction(async () => {
     await navigator.serviceWorker.ready;
     return Boolean(navigator.serviceWorker.controller);
   });
-  // Reload under worker control so the dynamic guide and its persistent workspace are cached.
+  // Reload under worker control so the dynamic guide and its shell are cached.
   await page.reload();
   await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
-  if (testInfo.project.name === "mobile-chrome") {
-    await page.getByRole("button", { name: "Browse topics" }).click();
-    await page.getByRole("dialog", { name: "Topics" }).getByRole("link", { name: "Choose the route" }).click();
-  } else {
-    await page.getByLabel("Topics workspace").getByRole("link", { name: "Choose the route" }).click();
-  }
-  await expect(page).toHaveURL(/#block-comparison$/);
 
   await page.context().setOffline(true);
   try {
     await page.goto("./topics/choledocholithiasis/#block-comparison", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
-    if (testInfo.project.name === "mobile-chrome") {
-      await page.getByRole("button", { name: "Browse topics" }).click();
-      const drawer = page.getByRole("dialog", { name: "Topics" });
-      await expect(drawer.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
-      await expect(drawer.getByRole("link", { name: "Choose the route" })).toHaveAttribute("aria-current", "location");
-    } else {
-      const rail = page.getByLabel("Topics workspace");
-      await expect(rail).toBeVisible();
-      await expect(rail.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("aria-current", "page");
-      await expect(rail.getByRole("link", { name: "Choose the route" })).toHaveAttribute("aria-current", "location");
-    }
+    await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "true");
   } finally {
     await page.context().setOffline(false);
   }
