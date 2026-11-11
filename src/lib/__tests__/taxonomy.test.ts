@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { taxonomy } from "@/content/taxonomy";
 import { libraryTopics } from "@/lib/seed";
-import { taxonomyDescendantIds, taxonomyParentIsValid, taxonomySections } from "@/lib/taxonomy";
+import { taxonomyDescendantIds, taxonomyParentIsValid, taxonomySections, topicCategory } from "@/lib/taxonomy";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
 const nodes = [
@@ -101,5 +101,25 @@ describe("taxonomySections", () => {
     const sections = taxonomySections(nodes, [topic("t", "Topic", "owned")]);
     expect(sections.map((section) => section.node.id)).toEqual(["cat", "owned"]);
     expect(sections[1]!.topicCount).toBe(1);
+  });
+});
+
+describe("topicCategory", () => {
+  const tree = [
+    { id: "score", title: "SCORE Curriculum", slug: "score", order: 0 },
+    { id: "trauma", title: "Trauma", slug: "trauma", parentId: "score", order: 1 },
+    { id: "trauma-conditions", title: "Diseases & Conditions", slug: "trauma-diseases-conditions", parentId: "trauma", order: 2 },
+  ];
+
+  it("finds the top-level category from a group, from the category itself, and from nothing", () => {
+    expect(topicCategory("trauma-conditions", tree)?.id).toBe("trauma");
+    expect(topicCategory("trauma", tree)?.id).toBe("trauma");
+    expect(topicCategory("score", tree)).toBeUndefined();
+    expect(topicCategory("missing", tree)).toBeUndefined();
+  });
+
+  it("gives every authored topic a category that has a page", () => {
+    const categories = new Set(taxonomySections(taxonomy, libraryTopics.filter((topic) => topic.approvedVersion)).filter((section) => section.topicCount > 0).map((section) => section.node.id));
+    for (const topic of libraryTopics.filter((candidate) => candidate.approvedVersion)) expect(categories, topic.slug).toContain(topicCategory(topic.scoreNodeId, taxonomy)?.id);
   });
 });

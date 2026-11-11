@@ -29,6 +29,13 @@ describe("playbook library", () => {
     expect(searchPlaybookLibrary("")).toHaveLength(listPlaybooks().length);
   });
 
+  it("gives every playbook its own title, because the index lists titles alone", () => {
+    // The Playbooks index shows no approach, so two playbooks named the same would be indistinguishable rows. The editorial rule:
+    // a title names its approach whenever the same procedure exists in more than one approach ("Robotic Cholecystectomy").
+    const titles = listPlaybooks().map((playbook) => playbook.title.toLocaleLowerCase());
+    expect(new Set(titles).size).toBe(titles.length);
+  });
+
   it("leaves the SCORE taxonomy untouched", () => {
     // Playbooks are organized by specialty and approach. The moment one acquires a taxonomy node
     // the single-root assertion in library.test.ts and the ordered-sections list in

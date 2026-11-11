@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { TopicContent } from "@/components/topic-content";
 import { buildLinkIndex } from "@/lib/inline";
 import { getTopicBySlug, listSources, listTaxonomy, listTopics } from "@/lib/library";
-import { taxonomyAncestry } from "@/lib/taxonomy";
+import { categoryHref } from "@/lib/library-items";
+import { taxonomyAncestry, topicCategory } from "@/lib/taxonomy";
 import { topicContents } from "@/lib/reader-contents";
 import { buildTopicNavigation, nextTopicInCategory } from "@/lib/topic-navigation";
 
@@ -28,12 +29,13 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   const taxonomy = listTaxonomy();
   const ancestry = taxonomyAncestry(topic.scoreNodeId, taxonomy);
   const next = nextTopicInCategory(buildTopicNavigation(taxonomy, topics), topic.slug);
+  const category = topicCategory(topic.scoreNodeId, taxonomy);
   const scorePath = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");
   const updatedAt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(topic.updatedAt));
   return (
     <div className="topic-reading">
       <header className="topic-header"><div><p className="eyebrow">{scorePath}</p><h1 className="page-title">{topic.title}</h1><p className="topic-updated">Last updated {updatedAt}</p></div></header>
-      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} contents={topicContents(slug)!} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
+      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} contents={topicContents(slug)!} backFallback={category && categoryHref(category.slug)} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
     </div>
   );
 }
