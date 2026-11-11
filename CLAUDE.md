@@ -71,11 +71,9 @@ Every block renders some set of factual statements. `factualUnits(block)` in `sr
 - `sourcedUnits()` cites each factual unit separately. Reach for it when one block genuinely mixes societies; blanket multi-source citation passes `supportWarnings` while quietly claiming both works support both statements.
 - `src/lib/__tests__/playbooks.test.ts` pins the set of auto-links each playbook generates. An auto-link is a claim about clinical relatedness, and the topic link index is global, so a new one fails the test until someone reviews it. Three false positives have already been caught this way: "skip lesions" reaching Crohn disease, "a fast one" reaching the FAST exam, and "peroneal nerve" reaching escharotomy.
 
-### Attending preferences live in a second database
+### The removed attending database
 
-`pocket-chief-attendings`, separate from `pocket-chief-private`, and the separation is the whole point: the previously deployed bundle calls `deleteDB("pocket-chief-private")` unconditionally, and a stale tab keeps running that code. Everything in the old database is rebuildable from the shipped bundle; hand-written preferences are not.
-
-They never enter `src/content/` and never reach the build — `content-privacy.test.ts` asserts both, including a pass over `out/`. Notes are screened by `detectLikelyPHI()` before every write and import.
+The attending-preference feature was removed on 2026-11-11. An earlier build kept hand-written notes in the IndexedDB database `pocket-chief-attendings`; the app never opens, migrates or deletes it, and `content-privacy.test.ts` fails if shipped source or `out/` ever names it again. Do not add a read or a delete for it without asking.
 
 ### Library content
 
@@ -96,10 +94,6 @@ Adding content is a repeatable workflow — invoke the `/add-topic` skill rather
 - **Flows**: laid out by longest path from the root, so arbitrary width and depth work, but there must be exactly one root, all edge endpoints must exist, and every node must be reachable or it silently disappears.
 - **Bullets and sequences**: items and step titles are keys, so keep them unique.
 - Any block with a `heading` appears in the on-page table of contents.
-
-### Safety and AI
-
-`detectLikelyPHI()` (`src/lib/safety.ts`) runs on titles, notes, and source metadata **before** any model call and returns 422 `PHI_SUSPECTED`. The AI adapter is server-only, schema-constrained, rate-limited by an in-memory limiter (single-instance only), and has deterministic fallbacks so a model failure never replaces approved content.
 
 ## Conventions
 

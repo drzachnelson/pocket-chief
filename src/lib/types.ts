@@ -138,7 +138,7 @@ export interface Playbook {
   slug: string;
   title: string;
   aliases: string[];
-  /** Stable lowercase_underscore id, unique per playbook. Attending notes join on this. */
+  /** Stable lowercase_underscore id, unique per playbook. */
   procedureId: string;
   approach: PlaybookApproach;
   /** Service line, e.g. "Vascular". */

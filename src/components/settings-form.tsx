@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Trash } from "@phosphor-icons/react";
 import { clearPrivateOfflineData } from "@/lib/offline";
-import { AttendingBackup } from "@/components/attending-backup";
 
 export function SettingsForm() {
   const [status, setStatus] = useState("");
@@ -26,15 +25,12 @@ export function SettingsForm() {
     <div className="settings-grid">
       <section className="form-card">
         <div className="section-heading"><h2>Offline storage</h2><span>This device</span></div>
-        {/* Says plainly what this does and does not touch. Attending preferences live in a
-            separate database precisely so this control cannot reach them. */}
-        <p className="settings-copy">Pocket Chief keeps topics and playbooks, your Saved topics and your reading history in this browser. Clearing removes all three; topics and playbooks come back on the next load, your Saved topics do not. Attending preferences are stored separately and are not affected.</p>
+        <p className="settings-copy">Pocket Chief keeps topics and playbooks, your Saved topics and your reading history in this browser. Clearing removes all three; topics and playbooks come back on the next load, your Saved topics do not.</p>
         {confirming
           ? <div className="settings-confirm" role="group" aria-label="Confirm clearing offline data"><p className="settings-copy">This removes your Saved topics and reading history from this device. There is no server copy to restore them from.</p><div className="settings-actions"><button type="button" className="button secondary danger" onClick={clearOfflineData}>Clear Saved topics and history</button><button type="button" className="button ghost" ref={cancel} onClick={() => setConfirming(false)}>Cancel</button></div></div>
           : <div className="settings-actions"><button type="button" className="button ghost danger" ref={trigger} onClick={() => setConfirming(true)}><Trash size={15} />Clear offline data</button></div>}
         {status && <p className="form-message" role="status">{status}</p>}
       </section>
-      <AttendingBackup />
     </div>
   );
 }

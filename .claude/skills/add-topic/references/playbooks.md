@@ -34,7 +34,7 @@ Read `src/content/playbooks/temporal-artery-biopsy.ts` end to end before writing
 
 | Field | Rule |
 |---|---|
-| `procedureId` | Stable `lowercase_underscore`, unique per playbook. **Attending preference notes join on this, deliberately not on the slug** (`src/lib/attending.ts:50`). The slug is therefore safe to rename later; this is not. Changing it orphans hand-written notes that live in a second IndexedDB database on Zach's device and exist nowhere in the build. |
+| `procedureId` | Stable `lowercase_underscore`, unique per playbook; `content-contract.test.ts` checks the shape. Keep it stable rather than letting it drift with the title. |
 | `approach` | One of `"open" \| "laparoscopic" \| "robotic" \| "endovascular"`. Same procedure by a different approach is a separate playbook, not a section inside one. |
 | `specialty` | The service line, e.g. `"Vascular"`. Match an existing string exactly rather than coining a synonym. |
 

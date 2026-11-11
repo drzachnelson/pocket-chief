@@ -7,7 +7,6 @@ A private, installable, search-first general surgery reference. Forty-nine SCORE
 - A Next.js app exported to static HTML. No server, no database, no accounts, no API keys.
 - The library is `src/content/` — one TypeScript file per topic and per playbook, each block citing a supplied source.
 - **Topics** are what to know, organized by the SCORE curriculum. **Playbooks** are how the operation goes, organized by specialty and approach.
-- **Attending preferences** layer onto a playbook: one surgeon's deltas from the standard technique, anchored to the step they modify. They are written in the app, stored only on the device, and never published — see `docs/SECURITY.md`.
 - Bookmarks, reading history, and the offline copy of the atlas live in the browser's IndexedDB. They belong to the device, not to an account.
 - Typo-tolerant search over titles, aliases, headings, body text, SCORE categories, and tags — across both topics and playbooks, running entirely in the browser.
 

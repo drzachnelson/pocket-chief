@@ -94,8 +94,8 @@ describe("seeded content contract", () => {
     const slugs = new Set(libraryTopics.map((topic) => topic.slug));
     const approaches = new Set(["open", "laparoscopic", "robotic", "endovascular"]);
     for (const playbook of libraryPlaybooks) {
-      // procedureId is the join key attending notes carry, so it has to stay stable and
-      // machine-shaped rather than drift with the title.
+      // procedureId is the stable key for a procedure, so it has to stay machine-shaped
+      // rather than drift with the title.
       expect(playbook.procedureId, playbook.slug).toMatch(/^[a-z][a-z0-9_]*$/);
       expect(approaches, playbook.slug).toContain(playbook.approach);
       expect(playbook.specialty.length, playbook.slug).toBeGreaterThan(0);
