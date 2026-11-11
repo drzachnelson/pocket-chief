@@ -81,6 +81,9 @@ describe("seeded content contract", () => {
     expect(duplicates(libraryTopics.map((topic) => topic.approvedVersion!.id))).toEqual([]);
     expect(duplicates(libraryPlaybooks.map((playbook) => playbook.id))).toEqual([]);
     expect(duplicates(libraryPlaybooks.map((playbook) => playbook.procedureId))).toEqual([]);
+    // Ids are unique across both corpora too: saved and recent entries of either kind share one
+    // object store keyed by id, so a topic and a playbook with the same id would overwrite each other.
+    expect(duplicates([...libraryTopics.map((topic) => topic.id), ...libraryPlaybooks.map((playbook) => playbook.id)])).toEqual([]);
     // Slugs are unique across both corpora, not within each: they share a link index and will
     // share one ranked result list.
     expect(duplicates([...libraryTopics.map((topic) => topic.slug), ...libraryPlaybooks.map((playbook) => playbook.slug)])).toEqual([]);

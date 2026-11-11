@@ -1,7 +1,8 @@
 import { cache } from "react";
 import { libraryPlaybooks, libraryTopics, suppliedSources, taxonomy } from "@/content";
+import { groupRecentlyAdded, playbookItem, topicItem, type RecentlyAddedDay } from "@/lib/library-items";
 import { searchPlaybooks, searchTopics } from "@/lib/search";
-import type { Playbook, SuppliedSource, TaxonomyNode, Topic } from "@/lib/types";
+import type { Playbook, PlaybookSummary, SuppliedSource, TaxonomyNode, Topic } from "@/lib/types";
 
 // The library is the content authored in `src/content/`, read straight out of the module graph at
 // build time. There is no database, no request context and no async boundary: a server component,
@@ -29,3 +30,15 @@ export const listPlaybooks = cache((): Playbook[] => structuredClone(libraryPlay
 export const getPlaybookBySlug = cache((slug: string): Playbook | null => structuredClone(libraryPlaybooks.find((playbook) => playbook.slug === slug) ?? null));
 export function searchPlaybookLibrary(query: string): Playbook[] { return structuredClone(searchPlaybooks(query, libraryPlaybooks)); }
 
+/** `{slug, title, specialty, approach}` per playbook and nothing else, so an index or a Contents list never ships a body. */
+export const listPlaybookSummaries = cache((): PlaybookSummary[] => libraryPlaybooks.map(({ slug, title, specialty, approach }) => ({ slug, title, specialty, approach })));
+
+/**
+ * Home's Recently added feed: the `limit` newest topics and playbooks together, grouped by UTC
+ * review day. "Added" is the review date, so a deepened topic with a new date reads as new
+ * (spec gap G6: accept until re-dated topics clutter the list, then add an authored `addedAt`).
+ */
+export const listRecentlyAdded = cache((limit: number): RecentlyAddedDay[] => groupRecentlyAdded([
+  ...approved().map((topic) => ({ item: topicItem(topic), reviewedAt: topic.approvedVersion?.reviewedAt ?? topic.updatedAt })),
+  ...libraryPlaybooks.map((playbook) => ({ item: playbookItem(playbook), reviewedAt: playbook.reviewedAt })),
+], limit));
