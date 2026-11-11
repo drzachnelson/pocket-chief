@@ -1,5 +1,5 @@
 import { deleteDB, openDB, type IDBPDatabase } from "idb";
-import type { TaxonomyNode, Topic } from "@/lib/types";
+import type { EntryKind, Playbook, RecentEntry, SavedEntry, TaxonomyNode, Topic } from "@/lib/types";
 
 const DB_NAME = "pocket-chief-private";
 
@@ -83,16 +83,37 @@ export async function getCachedTaxonomy(): Promise<TaxonomyNode[]> {
   return database.getAll("taxonomy") as Promise<TaxonomyNode[]>;
 }
 
+// The `saved` and `recent` stores hold two generations of record, told apart by `kind`. A record
+// written before playbooks could be saved or viewed is a whole Topic snapshot with no `kind`, and
+// reads as a topic. Nothing here rewrites an old record: reads normalise in memory, and a record
+// changes only when the reader saves or views that same page again.
+//
+// shortcut: new topic records still carry the snapshot (plus `kind`), so a stale tab running the
+// previous bundle, which renders every record as a topic card, keeps working for topics. A
+// playbook record has no snapshot and that tab would show it as a broken card; only a separate
+// store avoids that, and a DB version bump makes the stale tab's own opens fail (VersionError).
+// Revisit once nobody can still hold an old tab: write `{ id, kind, savedAt }` for topics too.
+const kindOf = (record: { kind?: EntryKind }): EntryKind => record.kind ?? "topic";
+const isPlaybook = (item: Topic | Playbook): item is Playbook => "procedureId" in item;
+const newestFirst = <K extends string>(key: K) => (a: Record<K, string>, b: Record<K, string>) => b[key].localeCompare(a[key]);
+
 export async function setTopicSaved(topic: Topic, saved: boolean) {
   const database = await db();
   if (saved) {
     await cacheApprovedTopic(topic);
-    await database.put("saved", { ...topic, savedAt: new Date().toISOString() });
+    await database.put("saved", { ...topic, kind: "topic", savedAt: new Date().toISOString() });
   } else {
     await database.delete("saved", topic.id);
   }
 }
 
+export async function setPlaybookSaved(playbook: Playbook, saved: boolean) {
+  const database = await db();
+  if (saved) await database.put("saved", { id: playbook.id, kind: "playbook", savedAt: new Date().toISOString() });
+  else await database.delete("saved", playbook.id);
+}
+
+/** Keyed by id, so it answers for a playbook as well as a topic. */
 export async function isTopicSaved(topicId: string): Promise<boolean> {
   const database = await db();
   return Boolean(await database.get("saved", topicId));
@@ -113,20 +134,38 @@ export async function isTopicReviewed(topicId: string): Promise<boolean> {
   return Boolean(await database.get("reviewed", topicId));
 }
 
+/** Every saved item as an id into the library, newest first. Old snapshot records come back as topics, snapshot dropped. */
+export async function getSavedEntries(): Promise<SavedEntry[]> {
+  const database = await db();
+  const records = await database.getAll("saved") as Array<{ id: string; kind?: EntryKind; savedAt: string }>;
+  return records.map((record) => ({ id: record.id, kind: kindOf(record), savedAt: record.savedAt })).sort(newestFirst("savedAt"));
+}
+
+/** The saved topics as snapshots, for the views that still render them. Playbook records are not topics and are left out. */
 export async function getSavedTopics(): Promise<Topic[]> {
   const database = await db();
-  return database.getAll("saved") as Promise<Topic[]>;
+  return (await database.getAll("saved") as Array<Topic & { kind?: EntryKind }>).filter((record) => kindOf(record) === "topic");
 }
 
-export async function recordRecentView(topic: Topic) {
+export async function recordRecentView(item: Topic | Playbook) {
   const database = await db();
-  await cacheApprovedTopic(topic);
-  await database.put("recent", { ...topic, viewedAt: new Date().toISOString() });
+  const viewedAt = new Date().toISOString();
+  if (isPlaybook(item)) { await database.put("recent", { id: item.id, kind: "playbook", viewedAt }); return; }
+  await cacheApprovedTopic(item);
+  await database.put("recent", { ...item, kind: "topic", viewedAt });
 }
 
+/** Every viewed page as an id into the library, newest first. The store may hold more than any one view shows. */
+export async function getRecentEntries(): Promise<RecentEntry[]> {
+  const database = await db();
+  const records = await database.getAll("recent") as Array<{ id: string; kind?: EntryKind; viewedAt: string }>;
+  return records.map((record) => ({ id: record.id, kind: kindOf(record), viewedAt: record.viewedAt })).sort(newestFirst("viewedAt"));
+}
+
+/** The recent topics as snapshots, for the views that still render them. Playbook records are left out. */
 export async function getRecentTopics(limit = 6): Promise<Topic[]> {
   const database = await db();
-  const topics = await database.getAll("recent") as Array<Topic & { viewedAt: string }>;
+  const topics = (await database.getAll("recent") as Array<Topic & { kind?: EntryKind; viewedAt: string }>).filter((record) => kindOf(record) === "topic");
   return topics.sort((a, b) => b.viewedAt.localeCompare(a.viewedAt)).slice(0, limit);
 }
 

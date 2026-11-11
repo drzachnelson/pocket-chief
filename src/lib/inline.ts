@@ -127,7 +127,7 @@ export function parseInline(text: string, scope?: LinkScope): InlineSegment[] {
   return parseMarkers(text, undefined, scope);
 }
 
-/** Removes all markers, returning the plain sentence. Used on every Anki export path. */
+/** Removes all markers, returning the plain sentence. Used wherever markup must not leak into an accessible name or a spoken sentence. */
 export function stripMarkup(text: string): string {
   // Reuses the parser rather than a second set of regexes: whatever the reading view renders as
   // literal text is exactly what the card gets.

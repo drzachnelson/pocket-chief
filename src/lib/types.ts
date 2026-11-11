@@ -124,6 +124,19 @@ export interface TopicDraftInput {
 /** How the operation is done. A browse/filter facet; `procedureId` is the join key. */
 export type PlaybookApproach = "open" | "laparoscopic" | "robotic" | "endovascular";
 
+/** The one display name for each approach. `Record` makes adding an approach a compile error until it is labelled. */
+export const APPROACH_LABELS: Record<PlaybookApproach, string> = { open: "Open", laparoscopic: "Laparoscopic", robotic: "Robotic", endovascular: "Endovascular" };
+
+/** What the Playbooks index, Contents and the header line need; the bodies stay out of the page. */
+export type PlaybookSummary = Pick<Playbook, "slug" | "title" | "specialty" | "approach">;
+
+/** Which corpus a saved or recent entry points into. Entries stored before playbooks could be saved carry none and are topics. */
+export type EntryKind = "topic" | "playbook";
+/** A saved item as the app reads it: an id into the current library, never a snapshot. */
+export interface SavedEntry { id: string; kind: EntryKind; savedAt: string }
+/** A recently viewed item as the app reads it. */
+export interface RecentEntry { id: string; kind: EntryKind; viewedAt: string }
+
 /**
  * An operative procedure guide. Reuses TopicBlock so it inherits the claim-support invariant,
  * the renderer and the search scorer, but it is deliberately NOT a Topic:
