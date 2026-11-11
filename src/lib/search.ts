@@ -1,4 +1,9 @@
-import type { Playbook, Topic, TopicBlock } from "@/lib/types";
+import { playbookItem, topicItem, topicPath, type LibraryItem } from "@/lib/library-items";
+import { APPROACH_LABELS, type Playbook, type Topic, type TopicBlock } from "@/lib/types";
+
+// One matcher for topics and playbooks, run over an index that is normalised once, at export
+// (`src/app/search-index.json`), not over raw blocks on every keystroke. Client-safe: it imports
+// no content, so the browser can match against the downloaded index without the 9 MB library.
 
 function blockText(block: TopicBlock): string {
   if (block.type === "summary" || block.type === "prose" || block.type === "warning") return `${block.heading ?? ""} ${block.text}`;
@@ -21,97 +26,153 @@ function normalize(value: string) {
  * tolerance below stay tight. A plain edit distance of 2 is far too loose once
  * the library is large — every five-letter token finds some neighbour.
  */
+let cells = new Int32Array(0); // one flat matrix reused across calls: this runs thousands of times per keystroke
 function editDistance(a: string, b: string): number {
-  const matrix = Array.from({ length: b.length + 1 }, (_, row) => Array(a.length + 1).fill(0).map((__, col) => row === 0 ? col : col === 0 ? row : 0));
+  const width = a.length + 1;
+  if (cells.length < width * (b.length + 1)) cells = new Int32Array(width * (b.length + 1));
+  for (let col = 0; col <= a.length; col += 1) cells[col] = col;
   for (let row = 1; row <= b.length; row += 1) {
+    cells[row * width] = row;
     for (let col = 1; col <= a.length; col += 1) {
-      matrix[row][col] = b[row - 1] === a[col - 1]
-        ? matrix[row - 1][col - 1]
-        : Math.min(matrix[row - 1][col - 1], matrix[row][col - 1], matrix[row - 1][col]) + 1;
+      const at = row * width + col;
+      cells[at] = b[row - 1] === a[col - 1]
+        ? cells[at - width - 1]
+        : Math.min(cells[at - width - 1], cells[at - 1], cells[at - width]) + 1;
       if (row > 1 && col > 1 && b[row - 1] === a[col - 2] && b[row - 2] === a[col - 1]) {
-        matrix[row][col] = Math.min(matrix[row][col], matrix[row - 2][col - 2] + 1);
+        cells[at] = Math.min(cells[at], cells[at - 2 * width - 2] + 1);
       }
     }
   }
-  return matrix[b.length][a.length];
+  return cells[b.length * width + a.length];
 }
-/**
- * What the ranker reads. Any corpus that can produce one of these is searchable by the
- * same scorer, so playbooks do not get a second copy of the Damerau-Levenshtein ladder.
- */
-export interface SearchableRecord {
-  id: string;
-  /** Tiebreak sort key when two entries score equally. The raw title, not normalized. */
+
+/** One searchable entry. Everything here is already normalised (lowercase, letters and digits, single spaces). */
+export interface SearchEntry {
+  /** What a result row needs; the index carries no more of the entry than this. */
+  item: LibraryItem;
+  /** Names a user types from memory, strongest first: the title, then aliases, then labels (a topic's category, group and tags; a playbook's specialty, approach and tags). */
   title: string;
-  /** What a user types from memory. Typo tolerance is confined to these fields. */
-  identity: string[];
-  /** Everything the entry renders. */
-  body: TopicBlock[];
+  aliases: string[];
+  labels: string[];
+  /** Everything the entry renders, with a space at each end so a word starts at `indexOf(" word")`. */
+  body: string;
 }
 
-function scoreRecord(record: SearchableRecord, needle: string, needleWords: string[]): number {
-  // Identity is what a user types from memory; body is everything the entry renders.
-  const identity = record.identity.map(normalize);
-  // A tag or alias can equal another entry's title ("vascular-access" against "Vascular Access"); the title must still win.
-  if (normalize(record.title) === needle) return 120;
-  const fields = [...identity, ...record.body.map(blockText).map(normalize)];
-  let score = 0;
-  for (const field of fields) {
-    if (field === needle) score = Math.max(score, 100);
-    else if (field.startsWith(needle)) score = Math.max(score, 80);
-    else if (field.includes(needle)) score = Math.max(score, 60);
-  }
-  const tokenScores = needleWords.map((token) => {
-    let tokenScore = 0;
-    for (const field of fields) for (const word of field.split(" ")) {
-      if (word === token) tokenScore = Math.max(tokenScore, 50);
-      else if (word.length >= 3 && (word.startsWith(token) || token.startsWith(word))) tokenScore = Math.max(tokenScore, 42);
-    }
-    // Typo tolerance is deliberately confined to identity fields. Fuzzing every
-    // word of every block means any short token finds a neighbour once the library
-    // grows — "wound" reached topics through "round" and "found" — and the noise
-    // scales with the corpus while the benefit does not.
-    for (const field of identity) for (const word of field.split(" ")) {
-      const distance = editDistance(token, word);
-      const tolerance = token.length > 10 ? 2 : token.length >= 4 ? 1 : 0;
-      if (distance <= tolerance) tokenScore = Math.max(tokenScore, 38 - distance * 5);
-    }
-    return tokenScore;
-  });
-  if (tokenScores.every((value) => value > 0)) score = Math.max(score, tokenScores.reduce((sum, value) => sum + value, 0) / tokenScores.length);
-  return score;
-}
+export interface SearchIndex { entries: SearchEntry[] }
 
-/**
- * Ranks any indexable corpus. `toRecord` returning null excludes the item outright —
- * that is how a draft-only topic stays out of both the empty-query and scored paths.
- */
-export function searchRecords<T>(query: string, items: T[], toRecord: (item: T) => SearchableRecord | null): T[] {
-  const needle = normalize(query);
-  const included = items.flatMap((item) => { const record = toRecord(item); return record ? [{ item, record }] : []; });
-  if (!needle) return included.map(({ item }) => item);
-  const needleWords = needle.split(" ");
-  return included
-    .map((entry) => ({ ...entry, score: scoreRecord(entry.record, needle, needleWords) }))
-    .filter((entry) => entry.score > 0)
-    .sort((a, b) => b.score - a.score || a.record.title.localeCompare(b.record.title))
-    .map(({ item }) => item);
-}
+/** A ranked entry. `snippet` is set only when nothing in the names matched: the words around the first body match. */
+export interface SearchHit { item: LibraryItem; snippet?: string }
 
-/** A topic is searchable only once it has an approved version. */
-export const topicRecord = (topic: Topic): SearchableRecord | null => topic.approvedVersion
-  ? { id: topic.id, title: topic.title, identity: [topic.title, ...topic.aliases, topic.scoreCategory, ...topic.tags], body: topic.approvedVersion.blocks }
-  : null;
-
-export function searchTopics(query: string, topics: Topic[]): Topic[] { return searchRecords(query, topics, topicRecord); }
-
-/** Playbooks index on how a case is described out loud: the operation, its approach, its service. */
-export const playbookRecord = (playbook: Playbook): SearchableRecord => ({
-  id: playbook.id,
-  title: playbook.title,
-  identity: [playbook.title, ...playbook.aliases, playbook.specialty, playbook.approach, ...playbook.tags],
-  body: playbook.blocks,
+const entry = (item: LibraryItem, aliases: string[], labels: string[], blocks: TopicBlock[]): SearchEntry => ({
+  item,
+  title: normalize(item.title),
+  aliases: aliases.map(normalize).filter(Boolean),
+  labels: labels.map(normalize).filter(Boolean),
+  body: ` ${normalize(blocks.map(blockText).join(" "))} `,
 });
 
-export function searchPlaybooks(query: string, playbooks: Playbook[]): Playbook[] { return searchRecords(query, playbooks, playbookRecord); }
+/**
+ * The export-time index. A topic is searchable only once it has an approved version, and only its
+ * approved blocks are read, so no draft text can reach the index. Topic and playbook ids never
+ * collide (`library.test.ts` pins that), which lets callers find an item by id.
+ */
+export function buildSearchIndex(topics: Topic[], playbooks: Playbook[] = []): SearchIndex {
+  return { entries: [
+    ...topics.flatMap((topic) => topic.approvedVersion ? [entry(topicItem(topic), topic.aliases, [...topicPath(topic), ...topic.tags], topic.approvedVersion.blocks)] : []),
+    ...playbooks.map((playbook) => entry(playbookItem(playbook), playbook.aliases, [playbook.specialty, APPROACH_LABELS[playbook.approach], ...playbook.tags], playbook.blocks)),
+  ] };
+}
 
+/** 50 exact word, 42 shared prefix either way, 38 down to 28 a typo. A typo is priced only against names, never body text. */
+function wordScore(token: string, word: string): number {
+  if (word === token) return 50;
+  if (word.length >= 3 && (word.startsWith(token) || token.startsWith(word))) return 42;
+  // Fuzzing every word of every block means any short token finds a neighbour once the library
+  // grows ("wound" reached topics through "round" and "found"), so tolerance stays on names.
+  const tolerance = token.length > 10 ? 2 : token.length >= 4 ? 1 : 0;
+  if (!tolerance || Math.abs(word.length - token.length) > tolerance) return 0;
+  const distance = editDistance(token, word);
+  return distance <= tolerance ? 38 - distance * 5 : 0;
+}
+
+/** Title beats alias beats label, whatever the match quality: "Unusual Hernias" (a prefix) still outranks a topic whose tag is exactly "hernia". 0 means no name matches. */
+function nameScore(token: string, { title, aliases, labels }: SearchEntry): number {
+  let best = 0;
+  const read = (field: string, rank: number) => {
+    if (best >= rank * 100 + 50) return; // nothing in this field can beat what is already found
+    for (const word of field.split(" ")) { const quality = wordScore(token, word); if (quality) best = Math.max(best, rank * 100 + quality); }
+  };
+  read(title, 3);
+  for (const alias of aliases) read(alias, 2);
+  for (const label of labels) read(label, 1);
+  return best;
+}
+
+/**
+ * Body words are found as word prefixes with `indexOf` (the body is the biggest thing scanned per
+ * keystroke, so a miss costs one pass). One trailing "s" is dropped so "stones" finds "stone".
+ * `count` is how often the word starts there, capped at 20: a topic that is about the word
+ * outranks one that mentions it once.
+ */
+function bodyMatch(token: string, body: string): { at: number; count: number } | null {
+  const find = (word: string) => {
+    const probe = ` ${word}`, at = body.indexOf(probe);
+    if (at < 0) return null;
+    let count = 1;
+    for (let next = body.indexOf(probe, at + 1); next >= 0 && count < 20; next = body.indexOf(probe, next + 1)) count += 1;
+    return { at, count };
+  };
+  return find(token) ?? (token.length >= 5 && token.endsWith("s") ? find(token.slice(0, -1)) : null);
+}
+
+/** About eight words around a body match, cut on word boundaries. */
+function around(body: string, at: number): string {
+  const start = Math.max(0, at - 30), end = Math.min(body.length, at + 50);
+  const words = body.slice(start, end).split(" ").filter(Boolean);
+  if (start > 0 && body[start - 1] !== " ") words.shift();
+  if (end < body.length && body[end] !== " ") words.pop();
+  return words.join(" ");
+}
+
+/**
+ * Ranks the whole index for a query. Every query word must match somewhere, in a name or the
+ * body. Order: an exact title first; then more words matched in names (so a name match on every
+ * word beats anything that needed the body); then stronger name fields; then body matches, by how
+ * often the words appear; then the shorter title. What is left stays in index order, never
+ * alphabetical: the sort is stable. An empty query returns every entry.
+ */
+export function searchIndex(index: SearchIndex, query: string): SearchHit[] {
+  const needle = normalize(query);
+  if (!needle) return index.entries.map(({ item }) => ({ item }));
+  const tokens = needle.split(" ");
+  const ranked: Array<{ hit: SearchHit; exact: number; named: number; nameSum: number; bodySum: number; length: number }> = [];
+  entries: for (const entry of index.entries) {
+    let named = 0, nameSum = 0, bodySum = 0, snippetAt = -1;
+    for (const token of tokens) {
+      const score = nameScore(token, entry);
+      if (score) { named += 1; nameSum += score; continue; }
+      const found = bodyMatch(token, entry.body);
+      if (!found) continue entries;
+      bodySum += found.count;
+      if (snippetAt < 0) snippetAt = found.at;
+    }
+    ranked.push({ hit: named ? { item: entry.item } : { item: entry.item, snippet: around(entry.body, snippetAt) }, exact: entry.title === needle ? 1 : 0, named, nameSum, bodySum, length: entry.title.split(" ").length });
+  }
+  return ranked.sort((a, b) => b.exact - a.exact || b.named - a.named || b.nameSum - a.nameSum || b.bodySum - a.bodySum || a.length - b.length).map(({ hit }) => hit);
+}
+
+// The two functions below keep the per-corpus signatures that the search UI calls today, over the
+// same matcher. They index the array they are given once and reuse it for later keystrokes, so the
+// array must not be mutated in place (a loaded library never is). The UI moves to the prebuilt
+// asset in the search UI slice; until then the browser builds the index once per page load.
+const indexes = new WeakMap<object, SearchIndex>();
+
+function searchItems<T extends { id: string }>(query: string, items: T[], build: () => SearchIndex): T[] {
+  let index = indexes.get(items);
+  if (!index) indexes.set(items, index = build());
+  const byId = new Map(items.map((item) => [item.id, item]));
+  return searchIndex(index, query).map(({ item }) => byId.get(item.id)!);
+}
+
+export const searchTopics = (query: string, topics: Topic[]): Topic[] => searchItems(query, topics, () => buildSearchIndex(topics));
+export const searchPlaybooks = (query: string, playbooks: Playbook[]): Playbook[] => searchItems(query, playbooks, () => buildSearchIndex([], playbooks));
