@@ -469,3 +469,13 @@ Wayfinder map 48, slice S1 of the UI-review spec (decision 5 in the closed Acces
 - **Notes had to be exported from Settings before this ships** (spec action A1). The export panel was deleted with the feature, so the app can no longer make a JSON backup of them.
 - **`playbook-content.test.tsx` was kept, not deleted.** It now holds two tests: a playbook never writes to the `saved` or `recent` stores, and a playbook page shows only the Notes and Sources tabs.
 - **Left for later:** `fake-indexeddb` is now an unused devDependency (only `attending-db.test.ts` used it); `--z-dialog` may be unused (Chrome slice).
+
+## Reader chrome: toolbar, Contents, dialog, tabs (November 11, 2026)
+
+Wayfinder map 48, slice S9. The reader page now owns its chrome; the shell only hosts it.
+
+- **One page toolbar and one Contents for both corpora.** `PageToolbar` (Back, Index, Contents, Expand all) is portalled by `ReaderTools` into the shell's `#shell-toolbar` slot in the top row after hydration; CSS fixes it to the bottom on phones in place of the tab bar and hides Index from 760px and Contents from 1080px. `Contents` (`contents.tsx`) lists the page's sections, then the topic categories or the playbook specialties.
+- **Laptop Contents is server-rendered through a parallel route.** `src/app/@contents/{topics,playbooks}/[slug]/page.tsx` render it into the root layout's `contents` slot, which `AppShell` places in the sidebar on reader paths only (`isReaderPath`; the slot remembers the last reader page on a soft navigation, so the guard is load-bearing). Below 1080px the sidebar is hidden and the same list opens in a native `<dialog>` (`ContentsDialog`, mounted only while open) from the Contents button. `src/app/topics/layout.tsx`, the drawer and its registration handshake are deleted; topic pages shrank about 40% because the layout no longer ships every topic's sections.
+- **Tabs are controlled** in `TopicContent` and `PlaybookContent`. A `#block-` link, a click on any in-page `#` link or a `hashchange` switches to Notes first (`useBlockCollapse(blocks, showNotes)` resolves the target from the page's block ids, because Notes is unmounted elsewhere). A section is current only while its block is in the DOM, so Sources and History mark none; the sidebar copy hears tab changes through `READER_TAB_EVENT`.
+- **Back** goes through history after an in-app navigation (`lib/app-history.ts`) and otherwise to the playbook's `/playbooks#<specialty>` or, for a topic, the Topics index. The spec's category-page fallback for topics waits for the category route (S10).
+- **Find text is not built** (S11); its button joins the toolbar's slots there. The history status dot, its CSS rule and its tripwire pin are gone.

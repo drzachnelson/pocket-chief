@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
+import { flushSync } from "react-dom";
 import { Brain, CaretDown, CheckCircle, Warning, WarningOctagon } from "@phosphor-icons/react";
 import type { TopicBlock } from "@/lib/types";
 import type { InlineSegment, LinkIndexEntry } from "@/lib/inline";
@@ -95,10 +96,12 @@ export interface BlockCollapse {
  * Owns which sections are open, and the hash-deep-link handling that has to reopen one.
  *
  * Both are keyed on `block.id` alone, so the whole mechanism suits any surface that renders
- * blocks — the reason it lives here rather than in `TopicContent`.
+ * blocks — the reason it lives here rather than in `TopicContent`. `showNotes` switches a tabbed
+ * page back to the tab that renders these blocks before a deep link scrolls to one.
  */
-export function useBlockCollapse(blocks: TopicBlock[]): BlockCollapse {
+export function useBlockCollapse(blocks: TopicBlock[], showNotes?: () => void): BlockCollapse {
   const rootRef = useRef<HTMLElement | null>(null);
+  const blockIds = useMemo(() => new Set(blocks.map((block) => block.id)), [blocks]);
   // Callouts stay open prose; only headed non-callout sections carry a disclosure.
   const collapsibleIds = useMemo(() => blocks.filter((block) => block.heading && block.type !== "summary" && block.type !== "warning").map((block) => block.id), [blocks]);
   const identity = collapsibleIds.join(" ");
@@ -125,30 +128,35 @@ export function useBlockCollapse(blocks: TopicBlock[]): BlockCollapse {
     setState((current) => ({ ...current, collapsed: current.collapsed.size === 0 ? new Set(collapsibleIds) : new Set() }));
   }, [collapsibleIds]);
 
-  const openDeepLinkedBlock = useCallback(() => {
-    const hash = window.location.hash.slice(1);
-    if (!hash) return;
-    let targetId = hash;
-    try { targetId = decodeURIComponent(hash); } catch { return; }
+  const reveal = useCallback((targetId: string) => {
+    // Notes is unmounted on the other tabs, so a page's own block ids decide what the hash means, not the DOM. An element that is
+    // on the page but outside this list belongs to another list, because `getElementById` is global.
     const target = document.getElementById(targetId);
-    // Scope the hit to this list. `getElementById` is global, so on a page rendering more than
-    // one block surface an id could otherwise resolve into a list that does not own it.
-    if (!target || (rootRef.current && !rootRef.current.contains(target))) return;
-    const details = target.closest<HTMLDetailsElement>("details[data-block-id]");
-    if (!details) return;
-    const blockId = details.dataset.blockId;
-    if (blockId) setBlockOpen(blockId, true);
-    // The browser already made its own hash jump while this section was still closed, so it
-    // landed short of the heading. Re-aim once React has committed the open state and the
-    // sections below it have reflowed.
+    if (target && !rootRef.current?.contains(target)) return;
+    const blockId = blockIds.has(targetId) ? targetId : target?.closest<HTMLDetailsElement>("details[data-block-id]")?.dataset.blockId;
+    if (!blockId) return;
+    // Committed before the scroll, so the target exists and is open when the page is aimed at it. The browser's own hash jump
+    // already happened while Notes was hidden or the section closed, and landed short.
+    flushSync(() => { showNotes?.(); setBlockOpen(blockId, true); });
+    document.getElementById(targetId)?.scrollIntoView();
     window.requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView());
-  }, [setBlockOpen]);
+  }, [blockIds, setBlockOpen, showNotes]);
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(openDeepLinkedBlock);
-    window.addEventListener("hashchange", openDeepLinkedBlock);
-    return () => { window.cancelAnimationFrame(frame); window.removeEventListener("hashchange", openDeepLinkedBlock); };
-  }, [openDeepLinkedBlock]);
+    const decode = (hash: string) => { try { return decodeURIComponent(hash); } catch { return ""; } };
+    const fromLocation = () => { const id = decode(window.location.hash.slice(1)); if (id) reveal(id); };
+    // A link to the hash the page already has fires no hashchange, so an in-page link is also read where it is clicked. That covers Contents,
+    // whose sidebar copy sits outside this tree.
+    const onClick = (event: MouseEvent) => {
+      const href = (event.target as Element | null)?.closest?.("a[href^='#']")?.getAttribute("href");
+      const id = href && decode(href.slice(1));
+      if (id) reveal(id);
+    };
+    const frame = window.requestAnimationFrame(fromLocation);
+    window.addEventListener("hashchange", fromLocation);
+    document.addEventListener("click", onClick);
+    return () => { window.cancelAnimationFrame(frame); window.removeEventListener("hashchange", fromLocation); document.removeEventListener("click", onClick); };
+  }, [reveal]);
 
   return { rootRef, collapsed, collapsibleIds, allOpen, toggleAll, setBlockOpen };
 }

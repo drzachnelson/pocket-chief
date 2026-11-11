@@ -2,12 +2,15 @@
 
 import * as Tabs from "@radix-ui/react-tabs";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { BookmarkSimple, CaretDown, CaretUp } from "@phosphor-icons/react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { BookmarkSimple } from "@phosphor-icons/react";
 import type { SuppliedSource, Topic } from "@/lib/types";
 import type { LinkIndexEntry } from "@/lib/inline";
 import { isTopicReviewed, isTopicSaved, recordRecentView, setTopicReviewed, setTopicSaved } from "@/lib/offline";
 import { BlockList, useBlockCollapse } from "@/components/block-list";
+import { ReaderTools } from "@/components/page-toolbar";
+import { SourceList } from "@/components/source-list";
+import type { ContentsData } from "@/lib/reader-contents";
 
 export interface NextTopicMetadata {
   slug: string;
@@ -15,7 +18,8 @@ export interface NextTopicMetadata {
   categoryLabel: string;
 }
 
-export function TopicContent({ topic, sources, linkEntries, nextTopic }: { topic: Topic; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[]; nextTopic?: NextTopicMetadata }) {
+export function TopicContent({ topic, sources, linkEntries, contents, nextTopic }: { topic: Topic; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[]; contents: ContentsData; nextTopic?: NextTopicMetadata }) {
+  const [tab, setTab] = useState("notes");
   const [saved, setSaved] = useState(false);
   const [savedReady, setSavedReady] = useState(false);
   const [saveError, setSaveError] = useState("");
@@ -26,7 +30,8 @@ export function TopicContent({ topic, sources, linkEntries, nextTopic }: { topic
   const savedTouched = useRef(false);
   const version = topic.approvedVersion!;
   const blocks = useMemo(() => version.blocks.filter((block) => block.type !== "references"), [version]);
-  const collapse = useBlockCollapse(blocks);
+  const showNotes = useCallback(() => setTab("notes"), []);
+  const collapse = useBlockCollapse(blocks, showNotes);
 
   useEffect(() => {
     recordRecentView(topic).catch(() => undefined);
@@ -62,12 +67,13 @@ export function TopicContent({ topic, sources, linkEntries, nextTopic }: { topic
 
   return (
     <>
-      <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>{collapse.collapsibleIds.length > 0 && <button className="expand-toggle" onClick={collapse.toggleAll}>{collapse.allOpen ? <CaretUp size={13} weight="bold" /> : <CaretDown size={13} weight="bold" />}{collapse.allOpen ? "Close all" : "Open all"}</button>}{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
-      <Tabs.Root defaultValue="notes" className="topic-tabs">
-        <Tabs.List className="tabs-list" aria-label="Topic views"><Tabs.Trigger value="notes">Notes</Tabs.Trigger><Tabs.Trigger value="sources">Sources <span>{sources.length}</span></Tabs.Trigger><Tabs.Trigger value="history">History <span>{topic.versions.length}</span></Tabs.Trigger></Tabs.List>
+      <ReaderTools corpus="topics" contents={contents} collapse={collapse} notesShown={tab === "notes"} />
+      <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
+      <Tabs.Root value={tab} onValueChange={setTab} className="topic-tabs">
+        <Tabs.List className="tabs-list" aria-label="Topic views"><Tabs.Trigger value="notes">Notes</Tabs.Trigger><Tabs.Trigger value="sources">Sources <span aria-hidden="true">{sources.length}</span></Tabs.Trigger><Tabs.Trigger value="history">History <span aria-hidden="true">{topic.versions.length}</span></Tabs.Trigger></Tabs.List>
         <Tabs.Content value="notes"><BlockList blocks={blocks} collapse={collapse} linkEntries={linkEntries} selfSlug={topic.slug} /></Tabs.Content>
-        <Tabs.Content value="sources"><div className="source-list">{sources.map((source, index) => <article key={source.id}><span>{index + 1}</span><div><h2>{source.title}</h2><p>{source.citation}</p>{source.details && <small>{source.details}</small>}</div></article>)}</div></Tabs.Content>
-        <Tabs.Content value="history"><div className="history-list">{topic.versions.map((item) => <article key={item.id}><span className="status-dot" /><div><h2>Version {item.versionNumber} · {item.status}</h2><p>{item.reviewedAt ? `Reviewed ${new Date(item.reviewedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}` : "Draft in review"}</p></div></article>)}</div></Tabs.Content>
+        <Tabs.Content value="sources"><SourceList sources={sources} /></Tabs.Content>
+        <Tabs.Content value="history"><div className="history-list">{topic.versions.map((item) => <article key={item.id}><div><h2>Version {item.versionNumber} · {item.status}</h2><p>{item.reviewedAt ? `Reviewed ${new Date(item.reviewedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}` : "Draft in review"}</p></div></article>)}</div></Tabs.Content>
       </Tabs.Root>
       <section className="topic-progress" aria-label="Study progress">
         <div className="topic-progress-status">

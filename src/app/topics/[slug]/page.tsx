@@ -4,6 +4,7 @@ import { TopicContent } from "@/components/topic-content";
 import { buildLinkIndex } from "@/lib/inline";
 import { getTopicBySlug, listSources, listTaxonomy, listTopics } from "@/lib/library";
 import { taxonomyAncestry } from "@/lib/taxonomy";
+import { topicContents } from "@/lib/reader-contents";
 import { buildTopicNavigation, nextTopicInCategory } from "@/lib/topic-navigation";
 
 /** One prerendered HTML file per authored topic; the export has no server to resolve a slug. */
@@ -32,7 +33,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   return (
     <div className="topic-reading">
       <header className="topic-header"><div><p className="eyebrow">{scorePath}</p><h1 className="page-title">{topic.title}</h1><p className="topic-updated">Last updated {updatedAt}</p></div></header>
-      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
+      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} contents={topicContents(slug)!} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
     </div>
   );
 }

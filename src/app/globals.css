@@ -44,7 +44,7 @@
   /* Radii. */
   --radius-sm: 7px; --radius-md: 10px; --radius-lg: 14px; --radius-pill: 999px;
   /* Stacking order, low to high. */
-  --z-dropdown: 12; --z-header: 20; --z-sidebar: 30; --z-nav: 40; --z-sheet: 60; --z-dialog: 90; --z-skip: 100;
+  --z-dropdown: 12; --z-header: 20; --z-sidebar: 30; --z-nav: 40; --z-skip: 100;
 
   /* Dark palette values. Referenced only through the aliases in the two dark selectors. */
   --dark-canvas: #0b1020;
@@ -152,6 +152,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .mobile-nav { position: fixed; z-index: var(--z-nav); left: 0; right: 0; bottom: 0; min-height: calc(68px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(4, 1fr); align-items: stretch; padding: 5px 10px max(5px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--surface); }
 .mobile-nav-link { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 12px; color: var(--ink-muted); font-size: var(--text-caption); font-weight: 500; }
 .mobile-nav-link.active { color: var(--cobalt-dark); background: var(--cobalt-soft); }
+/* Page toolbar. The shell hosts it in the top row. On a phone it is fixed to the bottom in place of the tab bar, with the same height and hairline; from 760px it sits at the right of the top row. */
+.page-tools { display: contents; }
+.is-reader .mobile-nav { display: none; }
+.page-toolbar { position: fixed; z-index: var(--z-nav); left: 0; right: 0; bottom: 0; min-height: calc(68px + env(safe-area-inset-bottom)); display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; align-items: stretch; padding: 5px 10px max(5px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--surface); }
+.page-toolbar > button, .page-toolbar > a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 0; padding: 0 2px; border: 0; border-radius: 12px; background: transparent; color: var(--ink-muted); font-size: var(--text-caption); font-weight: 500; line-height: 1.2; text-align: center; cursor: pointer; }
+.page-toolbar > button:disabled { opacity: .45; cursor: default; }
+@media (hover: hover) { .page-toolbar > button:not(:disabled):hover, .page-toolbar > a:hover { background: var(--surface-strong); } }
 
 .eyebrow { margin: 0 0 8px; color: var(--cobalt-dark); font-size: var(--text-small); font-weight: 600; }
 .page-title { min-width: 0; margin: 0; font-size: var(--text-title); font-weight: 600; line-height: 1.2; letter-spacing: -.02em; overflow-wrap: break-word; hyphens: auto; }
@@ -213,40 +220,40 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .form-message { margin: 10px 0 0; padding: 9px 10px; border-radius: 8px; background: var(--surface-strong); color: var(--ink-muted); font-size: var(--text-small); }
 
 
-/* Topics workspace. The complete hierarchy is server-projected; the client only receives labels,
-   routes, and heading anchors, never clinical block text. */
+/* Contents. The hierarchy is server-projected; the client only receives labels, routes and heading anchors, never clinical block text. */
 .topic-reading { width: min(100%, 760px); margin: 0 auto; }
-/* Contents rows take --target; only the laptop sidebar with a mouse packs them tighter (32px category and topic rows, 28px section links). */
-.topics-tree { --tree-row: var(--target); --tree-link: var(--target); display: grid; gap: 2px; min-width: 0; }
-@media (min-width: 1080px) and (pointer: fine) { .topics-tree { --tree-row: 32px; --tree-link: 28px; } }
-.topics-tree > p { margin: 0 0 var(--space-2); color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; }
-.topics-tree-category > button { width: 100%; min-height: var(--tree-row); display: grid; grid-template-columns: 15px minmax(0, 1fr) auto; align-items: center; gap: var(--space-2); padding: 3px var(--space-2); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; text-align: left; cursor: pointer; }
-@media (hover: hover) { .topics-tree-category > button:hover { background: var(--surface-strong); } }
-.topics-tree-category > button[aria-expanded="true"] svg { transform: rotate(180deg); }
-.topics-tree-category > button small { color: var(--ink-muted); font-size: var(--text-caption); font-variant-numeric: tabular-nums; }
-.topics-tree-branch { display: grid; gap: 1px; margin: 2px 0 5px; padding-left: var(--space-4); border-left: 1px solid var(--line); }
-.topics-tree-topic > a, .topics-tree-sections a { display: block; border-radius: 6px; color: var(--ink-muted); font-size: var(--text-small); line-height: 1.35; }
-.topics-tree-topic > a { min-height: var(--tree-row); display: flex; align-items: center; padding: 3px var(--space-2); }
-/* The hover rule comes first so the current page keeps its tint under the pointer. */
-@media (hover: hover) { .topics-tree-topic > a:hover { background: var(--surface-strong); } }
-.topics-tree-topic > a[aria-current="page"] { background: var(--cobalt-soft); color: var(--cobalt-dark); font-weight: 600; }
-.topics-tree-child { display: grid; gap: 1px; margin-top: var(--space-2); }
-.topics-tree-child > button { width: 100%; min-height: var(--tree-row); display: grid; grid-template-columns: 12px minmax(0, 1fr) auto; align-items: center; gap: var(--space-1); margin: 0; padding: 3px var(--space-2); border: 0; border-radius: 6px; background: transparent; color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; text-align: left; cursor: pointer; }
-@media (hover: hover) { .topics-tree-child > button:hover { background: var(--surface-strong); } }
-.topics-tree-child > button[aria-expanded="true"] svg { transform: rotate(180deg); }
-.topics-tree-child > button small { font-size: var(--text-caption); font-variant-numeric: tabular-nums; }
-.topics-tree-sections { display: grid; gap: 1px; margin: 1px 0 4px; padding-left: var(--space-3); }
-.topics-tree-sections a { position: relative; min-height: var(--tree-link); display: flex; align-items: center; padding: 3px var(--space-2); color: var(--ink-muted); }
-.topics-tree-sections a[data-level="3"] { padding-left: var(--space-4); }
-.topics-tree-sections a[aria-current="location"] { color: var(--cobalt-dark); font-weight: 600; }
-.topics-tree-sections a[aria-current="location"]::before { content: ""; position: absolute; left: -13px; top: 5px; bottom: 5px; width: 2px; border-radius: 1px; background: var(--cobalt); }
-.topics-drawer-layer { position: fixed; z-index: var(--z-sheet); inset: 0; }
-.topics-drawer-backdrop { position: absolute; inset: 0; width: 100%; border: 0; background: var(--scrim); cursor: pointer; }
-.topics-drawer { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--surface); color: var(--ink); animation: sheet-rise var(--dur-sheet) var(--ease-out); }
+/* Rows take --target; only the laptop sidebar with a mouse packs them tighter (32px category and topic rows, 28px section links). */
+.contents-nav { --tree-row: var(--target); --tree-link: var(--target); display: grid; gap: var(--space-5); min-width: 0; }
+@media (min-width: 1080px) and (pointer: fine) { .contents-nav { --tree-row: 32px; --tree-link: 28px; } }
+.contents-nav ul { margin: 0; padding: 0; list-style: none; }
+.contents-nav [role="group"] > p { margin: 0 0 var(--space-2); color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; }
+.contents-sections { display: grid; gap: 1px; }
+.contents-sections a, .contents-branch a { display: flex; align-items: center; border-radius: 6px; color: var(--ink-muted); font-size: var(--text-small); line-height: 1.35; }
+.contents-sections a { min-height: var(--tree-link); padding: 3px var(--space-2); }
+.contents-sections a[data-level="3"] { padding-left: var(--space-4); }
+.contents-branch a { min-height: var(--tree-row); padding: 3px var(--space-2); }
+/* The hover rule comes first so the current page and section keep their tint under the pointer. */
+@media (hover: hover) { .contents-sections a:hover, .contents-branch a:hover, .contents-category button:hover { background: var(--surface-strong); } }
+.contents-sections a[aria-current="location"], .contents-branch a[aria-current="page"] { background: var(--cobalt-soft); color: var(--cobalt-dark); font-weight: 600; }
+.contents-tree { display: grid; gap: 2px; }
+.contents-tree button { width: 100%; min-height: var(--tree-row); display: grid; grid-template-columns: 15px minmax(0, 1fr) auto; align-items: center; gap: var(--space-2); padding: 3px var(--space-2); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; text-align: left; cursor: pointer; }
+.contents-group > button { grid-template-columns: 12px minmax(0, 1fr) auto; gap: var(--space-1); }
+.contents-category button[aria-expanded="true"] > svg { transform: rotate(180deg); }
+.contents-category button small { color: var(--ink-muted); font-size: var(--text-caption); font-variant-numeric: tabular-nums; }
+.contents-branch { display: grid; gap: 1px; margin: 2px 0 5px; padding-left: var(--space-4); border-left: 1px solid var(--line); }
+.contents-group { display: grid; gap: 1px; margin-top: var(--space-2); }
+.contents-group > ul { display: grid; gap: 1px; }
+
+/* The Contents dialog below 1080px: a bottom sheet on a phone, a side panel beside the rail on a tablet. The scrim is the dialog's own ::backdrop. */
+.contents-dialog { position: fixed; inset: auto 0 0 0; width: 100%; max-width: none; height: auto; max-height: min(85dvh, 680px); margin: 0; padding: 0; border: 0; border-top: 1px solid var(--line); border-radius: var(--radius-lg) var(--radius-lg) 0 0; background: var(--surface); color: var(--ink); animation: sheet-rise var(--dur-sheet) var(--ease-out); }
+.contents-dialog[open] { display: flex; flex-direction: column; }
+.contents-dialog::backdrop { background: var(--scrim); }
 @keyframes sheet-rise { from { transform: translateY(2.5%); opacity: 0; } }
-.topics-drawer > header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); padding: var(--space-5); border-bottom: 1px solid var(--line); }
-.topics-drawer h2 { margin: 0; font-size: var(--text-heading); font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
-.topics-drawer .topics-tree { flex: 1; overflow-y: auto; padding: var(--space-4); overscroll-behavior: contain; }
+.contents-dialog > header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) var(--space-5); border-bottom: 1px solid var(--line); touch-action: none; }
+.contents-dialog h2 { margin: 0; font-size: var(--text-heading); font-weight: 600; line-height: 1.25; letter-spacing: -.01em; }
+.contents-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: var(--space-4) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom)); overscroll-behavior: contain; }
+/* Nothing behind a modal dialog scrolls. */
+body:has(dialog[open]) { overflow: hidden; }
 
 /* Searchable SCORE curriculum index. Categories define the page rhythm; individual
    topics remain simple rows so the hierarchy does not dissolve into a card grid. */
@@ -317,8 +324,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .topic-updated { margin: var(--space-2) 0 0; color: var(--ink-muted); font-size: var(--text-caption); }
 .topic-actions-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin: var(--space-4) 0 var(--space-5); }
 .button.saved { color: var(--cobalt-dark); background: var(--cobalt-soft); border-color: color-mix(in srgb, var(--cobalt) 25%, var(--line)); }
-.expand-toggle { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--target); padding: 5px var(--space-3); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
-@media (hover: hover) { .expand-toggle:hover { background: var(--surface-strong); } }
 .topic-tabs { min-width: 0; }
 .tabs-list { display: flex; gap: 18px; border-bottom: 1px solid var(--line); }
 .tabs-list button { position: relative; min-height: var(--target); padding: 0 1px; border: 0; background: transparent; color: var(--ink-muted); font-size: var(--text-small); font-weight: 600; cursor: pointer; }
@@ -439,8 +444,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 .source-list, .history-list { display: grid; margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
 .source-list article, .history-list article { display: flex; gap: 11px; padding: 14px; border-bottom: 1px solid var(--line); }.source-list article:last-child, .history-list article:last-child { border-bottom: 0; }.source-list article > span { width: 25px; height: 25px; flex: 0 0 25px; display: grid; place-items: center; border-radius: 7px; background: var(--cobalt-soft); color: var(--cobalt-dark); font-size: var(--text-caption); font-weight: 600; }.source-list h2, .history-list h2 { margin: 0; font-size: var(--text-subheading); font-weight: 600; }.source-list p, .history-list p { margin: 2px 0; color: var(--ink-muted); font-size: var(--text-small); }.source-list small { display: block; color: var(--ink-muted); font-size: var(--text-caption); }
 .history-list article { align-items: center; }
-/* The status dot is gone. topic-content.tsx still renders its empty span: hidden so the flex gap does not indent the text, and both go with the next edit to that file. */
-.history-list .status-dot { display: none; }
 
 
 
@@ -493,11 +496,16 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   /* The header row becomes the top row: one hairline bar, its controls held to the 760px reading width. */
   .mobile-header { padding-inline: 32px; }
   .top-row { max-width: 760px; margin-inline: auto; }
+  .page-tools { display: block; flex: 0 0 auto; }
+  .page-tools:empty { display: none; }
+  .page-toolbar { position: static; min-height: 0; display: flex; gap: var(--space-1); padding: 0; border: 0; background: transparent; }
+  .page-toolbar > button, .page-toolbar > a { flex-direction: row; gap: var(--space-2); min-height: var(--target); padding: 0 var(--space-3); border-radius: var(--radius-sm); font-size: var(--text-small); font-weight: 600; white-space: nowrap; }
+  .page-toolbar > .toolbar-index { display: none; }
 }
 
 /* The tablet side panel opens beside the rail. */
 @media (min-width: 760px) and (max-width: 1079px) {
-  .topics-drawer { inset: 0 auto 0 76px; width: min(380px, calc(100vw - 76px)); border-right: 1px solid var(--line); box-shadow: var(--shadow-float); animation-name: sheet-slide; }
+  .contents-dialog { inset: 0 auto 0 76px; width: min(380px, calc(100vw - 76px)); height: 100dvh; max-height: none; border: 0; border-right: 1px solid var(--line); border-radius: 0; box-shadow: var(--shadow-float); animation-name: sheet-slide; }
   @keyframes sheet-slide { from { transform: translateX(-2.5%); opacity: 0; } }
 }
 
@@ -512,6 +520,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .side-nav-link svg { width: 18px; height: 18px; }
   .side-contents { display: block; flex: 1 1 auto; min-height: 0; margin-top: var(--space-5); overflow-y: auto; }
   .mobile-header { padding-inline: 42px; }
+  .page-toolbar > .toolbar-contents { display: none; }
   .main-content { padding: 44px 42px 80px; }
   .search-hero { padding-top: 18px; }
 }

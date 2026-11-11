@@ -86,6 +86,10 @@ Content lives in `src/content/`, one file per topic, aggregated by `src/content/
 
 Adding content is a repeatable workflow — invoke the `/add-topic` skill rather than reconstructing the steps. It covers **both corpora**: steps 2, 6 and 7 fork for playbooks, which use `buildPlaybook()`, register in `src/content/playbooks/index.ts` only, and are documented in that skill's `references/playbooks.md`.
 
+### Reader chrome: the shell hosts it, the page owns it
+
+`TopicContent` and `PlaybookContent` each render one `ReaderTools` (`src/components/page-toolbar.tsx`), which portals the page toolbar into the shell's `#shell-toolbar` slot and owns the Contents dialog. The laptop sidebar's Contents is a separate copy rendered at build time by the `@contents` parallel route (`src/app/@contents/`) and handed to `AppShell` as `contents`; it shows on reader paths only (`isReaderPath`), because the slot keeps its last page on a soft navigation. Both copies read `src/lib/reader-contents.ts`. They share no React state: tab changes reach the sidebar through `READER_TAB_EVENT`, and section links reach the page through `hashchange` and an in-page click listener in `useBlockCollapse`. A new route under `/topics/<x>` or `/playbooks/<x>` that is not a reader page must change `isReaderPath` or it gets an empty Contents slot.
+
 ### Renderer constraints on content
 
 `src/components/topic-content.tsx` renders every block type, and its React keys impose rules that content must respect:

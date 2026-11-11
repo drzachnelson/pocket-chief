@@ -146,7 +146,7 @@ describe("globals.css chrome", () => {
   it("takes every transition and animation from the motion tokens", () => {
     // `.skeleton` still shimmers on a literal 1.5s until the loading rows replace it.
     const motion = [...declared("transition"), ...declared("animation")].filter(({ selector, value }) => selector !== ".skeleton" && !value.startsWith("none"));
-    expect(motion.length).toBeGreaterThanOrEqual(8);
+    expect(motion.length).toBeGreaterThanOrEqual(7);
     for (const { selector, value } of motion) {
       const label = `${selector} { ${value} }`;
       expect(value, label).toMatch(/var\(--dur-(?:fast|sheet)\)/);
@@ -183,12 +183,14 @@ describe("globals.css chrome", () => {
     expect(rule(".mobile-header")?.get("border-bottom")).toBe("1px solid var(--line)");
     expect(rule(".mobile-nav")?.get("background")).toBe("var(--surface)");
     expect(rule(".mobile-nav")?.get("border-top")).toBe("1px solid var(--line)");
-    for (const selector of [".mobile-header", ".mobile-nav", ".brand-mark", ".search-field input", ".form-card"]) expect(rule(selector)?.has("box-shadow"), `${selector} is flat`).toBe(false);
-    expect(rule(".topics-drawer-backdrop")?.get("background")).toBe("var(--scrim)");
+    for (const selector of [".mobile-header", ".mobile-nav", ".page-toolbar", ".brand-mark", ".search-field input", ".form-card"]) expect(rule(selector)?.has("box-shadow"), `${selector} is flat`).toBe(false);
+    expect(rule(".contents-dialog::backdrop")?.get("background")).toBe("var(--scrim)");
+    for (const selector of [".page-toolbar", ".contents-dialog"]) expect(rule(selector)?.get("background"), selector).toBe("var(--surface)");
+    expect(rule(".page-toolbar")?.get("border-top")).toBe("1px solid var(--line)");
   });
 
   it("has no history status dot and no tone on a summary", () => {
-    for (const { selector, declarations } of rules.filter(({ selector }) => selector.includes(".status-dot"))) expect([...declarations.entries()], selector).toEqual([["display", "none"]]);
+    expect(rules.filter(({ selector }) => selector.includes(".status-dot"))).toEqual([]);
     expect(rules.filter(({ selector }) => /\.summary-block\.tone-/.test(selector))).toEqual([]);
   });
 });
