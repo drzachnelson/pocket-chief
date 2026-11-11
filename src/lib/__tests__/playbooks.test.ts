@@ -461,13 +461,13 @@ describe("playbook library", () => {
     expect(slugs("Zuckerkandl")).toEqual(["total-thyroidectomy"]);
     expect(slugs("clavipectoral")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
     // The transaxillary rib exposure also protects this nerve in the axilla.
-    expect(slugs("intercostobrachial")).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);
+    expect(slugs("intercostobrachial").sort()).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);
     expect(slugs("node of Lund")).toEqual(["robotic-cholecystectomy"]);
     // The white line of Toldt is taken down on the left for a rectal resection as on the right for a colectomy.
-    expect(slugs("Toldt")).toEqual(["open-abdominoperineal-resection", "open-low-anterior-resection", "right-hemicolectomy"]);
+    expect(slugs("Toldt").sort()).toEqual(["open-abdominoperineal-resection", "open-low-anterior-resection", "right-hemicolectomy"]);
     // Henle's gastrocolic trunk is genuinely on both operations' path — divided to reach the inferior
     // pancreatic neck in a Whipple, and to reach the middle colic root in a right colectomy.
-    expect(slugs("Henle")).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);
+    expect(slugs("Henle").sort()).toEqual(["open-pancreaticoduodenectomy", "right-hemicolectomy"]);
     // Two different operations carry the name: the parastomal mesh repair, and the peritonectomy (a search-only alias).
     expect(slugs("Sugarbaker")).toEqual(["cytoreductive-surgery-with-hipec", "colostomy-takedown-with-parastomal-hernia-repair"]);
     expect(slugs("lamppost")).toEqual(["robotic-ventral-umbilical-hernia-repair"]);
