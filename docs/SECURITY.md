@@ -5,7 +5,7 @@ Pocket Chief is a static site. It has no server, no database, no accounts, and n
 **What that means in practice**
 
 - Almost everything the app knows ships in the build: the 49 authored topics, the 3 operative playbooks and the SCORE taxonomy. Anyone who can load the site can read all of it.
-- Bookmarks and reading history are stored in the visitor's own browser (IndexedDB), as is the Topics sidebar state (`localStorage`). None of it leaves the device or is readable by anyone else.
+- Bookmarks and reading history are stored in the visitor's own browser (IndexedDB), as is the theme choice (`localStorage`). None of it leaves the device or is readable by anyone else.
 - Nothing private is ever built into the site. An earlier version let the owner keep device-only attending notes in the browser database `pocket-chief-attendings`; that feature was removed on 2026-11-11. The app never opens, reads, migrates or deletes that database, so any notes still on a device stay there until site data is cleared.
 - The app makes no outbound requests at all beyond fetching its own static assets from the origin it was served from. There is no analytics, no telemetry, no third-party script, and no API to call.
 

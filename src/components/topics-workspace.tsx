@@ -2,39 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CaretDown, CaretLeft, CaretRight, Notebook, X } from "@phosphor-icons/react";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { GlobalNavigation, GlobalNavigationFooter, useTopicsDrawer } from "@/components/app-shell";
+import { CaretDown, X } from "@phosphor-icons/react";
+import { useEffect, useRef, useState } from "react";
+import { useTopicsDrawer } from "@/components/app-shell";
+import { normalizePath } from "@/lib/pathname";
 import type { TopicNavigationCategory, TopicNavigationSection, TopicNavigationTopic } from "@/lib/topic-navigation";
 
-const SIDEBAR_KEY = "pocket-chief-topics-sidebar-collapsed";
-const SIDEBAR_EVENT = "pocket-chief-topics-sidebar-change";
 const FOCUSABLE = "a[href], button:not([disabled])";
-
-function readCollapsedSidebar() {
-  try { return window.localStorage?.getItem(SIDEBAR_KEY) === "true"; } catch { return false; }
-}
-
-function saveCollapsedSidebar(collapsed: boolean) {
-  try { window.localStorage?.setItem(SIDEBAR_KEY, String(collapsed)); } catch { /* private browsing can deny storage */ }
-  window.dispatchEvent(new Event(SIDEBAR_EVENT));
-}
-
-function subscribeCollapsedSidebar(update: () => void) {
-  window.addEventListener("storage", update);
-  window.addEventListener(SIDEBAR_EVENT, update);
-  return () => { window.removeEventListener("storage", update); window.removeEventListener(SIDEBAR_EVENT, update); };
-}
 
 function categoryTopics(category: TopicNavigationCategory) {
   return [category, ...category.children].flatMap((item) => item.topics);
 }
 
-// `trailingSlash: true` means usePathname() reports "/topics/<slug>/", so an exact match against the
-// unslashed form silently finds nothing — collapsing the curriculum tree and dropping the in-page
-// section links on every topic page. Normalise before comparing rather than assuming either shape.
+// usePathname() reports "/topics/<slug>/" on the static export, so the comparison goes through normalizePath.
 function activeTopic(navigation: TopicNavigationCategory[], pathname: string) {
-  const path = pathname.replace(/\/+$/, "");
+  const path = normalizePath(pathname);
   return navigation.flatMap(categoryTopics).find((topic) => path === `/topics/${topic.slug}`);
 }
 
@@ -70,7 +52,7 @@ function TopicSections({ topic, onSelect }: { topic: TopicNavigationTopic; onSel
   </div>;
 }
 
-function TopicTree({ navigation, onSelect }: { navigation: TopicNavigationCategory[]; onSelect?: () => void }) {
+export function TopicTree({ navigation, onSelect }: { navigation: TopicNavigationCategory[]; onSelect?: () => void }) {
   const pathname = usePathname();
   const currentTopic = activeTopic(navigation, pathname);
   const active = activeBranch(navigation, currentTopic);
@@ -132,27 +114,13 @@ function TopicsDrawer({ navigation }: { navigation: TopicNavigationCategory[] })
   </div></div>;
 }
 
+// The drawer's only job here is to receive the tree. The persistent sidebar tree, its collapse and the Browse button
+// went with the second shell; the reader-chrome slice turns this file into the Contents component.
 export function TopicsWorkspace({ navigation, children }: { navigation: TopicNavigationCategory[]; children: React.ReactNode }) {
-  const { setContent, open, isOpen } = useTopicsDrawer();
-  const pathname = usePathname();
-  // The server snapshot keeps hydration stable; React picks up the browser preference after it
-  // mounts and also follows changes from this tab or another open Pocket Chief tab.
-  const collapsed = useSyncExternalStore(subscribeCollapsedSidebar, readCollapsedSidebar, () => false);
+  const { setContent } = useTopicsDrawer();
   useEffect(() => {
     setContent(<TopicsDrawer navigation={navigation} />);
     return () => setContent(null);
   }, [navigation, setContent]);
-  const sidebarClass = `topics-sidebar${collapsed ? " is-collapsed" : ""}`;
-  const label = collapsed ? "Expand Topics sidebar" : "Collapse Topics sidebar";
-  return <>
-    <aside className={sidebarClass} aria-label="Topics workspace">
-      <GlobalNavigation />
-      <div className="topics-sidebar-divider" />
-      {pathname !== "/topics" && <button type="button" className="topics-sidebar-browse" aria-label="Browse topics" aria-haspopup="dialog" aria-expanded={isOpen} onClick={(event) => open(event.currentTarget)}><Notebook size={18} weight="fill" aria-hidden="true" /><span>Browse</span></button>}
-      <TopicTree key={pathname} navigation={navigation} />
-      <button type="button" className="topics-sidebar-toggle" aria-label={label} onClick={() => saveCollapsedSidebar(!collapsed)}>{collapsed ? <CaretRight size={15} /> : <CaretLeft size={15} />}<span>{collapsed ? "Expand" : "Collapse"}</span></button>
-      <GlobalNavigationFooter compact />
-    </aside>
-    {children}
-  </>;
+  return <>{children}</>;
 }
