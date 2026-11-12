@@ -44,6 +44,13 @@ describe("findMatches", () => {
     expect(findMatches(root, "steps")).toHaveLength(1);
   });
 
+  it("reaches a flow diagram's text although it is aria-hidden, and skips the hidden outline that mirrors it", () => {
+    const root = page(`<div class="decision-flow"><ul class="flow-outline visually-hidden"><li>Cholangitis suspected</li></ul><div class="flow-canvas" aria-hidden="true"><svg class="flow-connectors"><text>cholangitis</text></svg><div class="flow-node"><svg class="flow-glyph"><text>cholangitis</text></svg>Cholangitis suspected</div></div></div>`);
+    const matches = findMatches(root, "cholangitis");
+    expect(texts(matches)).toEqual(["Cholangitis"]);
+    expect(matches[0].startContainer.parentElement!.closest(".flow-node")).not.toBeNull();
+  });
+
   it("finds two matches in one node and a match that spans three", () => {
     const root = page("<p>aa aa</p><p>x<em>y</em><b>z</b>w</p>");
     expect(texts(findMatches(root, "aa"))).toEqual(["aa", "aa"]);
