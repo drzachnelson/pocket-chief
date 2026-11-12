@@ -191,6 +191,40 @@ describe("loadPlaybooks", () => {
   });
 });
 
+describe("loadSearchIndex", () => {
+  const shippedIndex = { entries: [] };
+
+  it("fetches the prebuilt index alone: no library download and no IndexedDB read", async () => {
+    const fetchMock = vi.fn(async () => ok(shippedIndex));
+    vi.stubGlobal("fetch", fetchMock);
+    const { loadSearchIndex } = await freshClient();
+    await expect(loadSearchIndex()).resolves.toEqual(shippedIndex);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith("/search-index.json");
+    expect(getCachedTopics).not.toHaveBeenCalled();
+  });
+
+  it("reports failure instead of an empty index, on a network error and on a bad response", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => { throw new Error("network down"); }));
+    const { loadSearchIndex } = await freshClient();
+    await expect(loadSearchIndex()).rejects.toThrow("network down");
+    vi.stubGlobal("fetch", vi.fn(async () => new Response("", { status: 500 })));
+    await expect(loadSearchIndex()).rejects.toThrow("The search index is unavailable.");
+  });
+
+  it("gives concurrent callers one fetch, and a call after a failure fetches again", async () => {
+    const fetchMock = vi.fn().mockImplementationOnce(async () => new Response("", { status: 500 })).mockImplementation(async () => ok(shippedIndex));
+    vi.stubGlobal("fetch", fetchMock);
+    const { loadSearchIndex } = await freshClient();
+    const results = await Promise.allSettled([loadSearchIndex(), loadSearchIndex()]);
+    expect(results.map((result) => result.status)).toEqual(["rejected", "rejected"]);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const [first, second] = await Promise.all([loadSearchIndex(), loadSearchIndex()]);
+    expect(first).toBe(second);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+});
+
 describe("loadCorpora", () => {
   it("resolves with topics, taxonomy and playbooks together", async () => {
     vi.stubGlobal("fetch", serve({ "/library.json": () => ok(shippedLibrary), "/playbooks.json": () => ok(shippedPlaybooks) }));

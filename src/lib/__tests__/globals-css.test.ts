@@ -183,7 +183,7 @@ describe("globals.css chrome", () => {
     expect(rule(".mobile-header")?.get("border-bottom")).toBe("1px solid var(--line)");
     expect(rule(".mobile-nav")?.get("background")).toBe("var(--surface)");
     expect(rule(".mobile-nav")?.get("border-top")).toBe("1px solid var(--line)");
-    for (const selector of [".mobile-header", ".mobile-nav", ".page-toolbar", ".brand-mark", ".search-field input", ".form-card"]) expect(rule(selector)?.has("box-shadow"), `${selector} is flat`).toBe(false);
+    for (const selector of [".mobile-header", ".mobile-nav", ".page-toolbar", ".brand-mark", ".search-input input", ".form-card"]) expect(rule(selector)?.has("box-shadow"), `${selector} is flat`).toBe(false);
     expect(rule(".contents-dialog::backdrop")?.get("background")).toBe("var(--scrim)");
     for (const selector of [".page-toolbar", ".contents-dialog"]) expect(rule(selector)?.get("background"), selector).toBe("var(--surface)");
     expect(rule(".page-toolbar")?.get("border-top")).toBe("1px solid var(--line)");
@@ -255,5 +255,31 @@ describe("globals.css find bar", () => {
     expect(rule(".find-bar[hidden]")?.get("display")).toBe("none");
     expect(rule(".page-tools > *")?.get("grid-area")).toBe("1 / 1");
     expect(rule(".page-toolbar[data-finding]")?.get("visibility")).toBe("hidden");
+  });
+});
+
+describe("globals.css search", () => {
+  const rule = (selector: string) => rules.find((candidate) => candidate.selector === selector)?.declarations;
+
+  it("floats the quick-results panel on the one float shadow with a 1px hairline edge, above the page", () => {
+    expect(rule(".quick-results")?.get("box-shadow")).toBe("var(--shadow-float)");
+    expect(rule(".quick-results")?.get("border")).toBe("1px solid var(--line)");
+    expect(rule(".quick-results")?.get("background")).toBe("var(--surface)");
+    expect(rule(".quick-results")?.get("z-index")).toBe("var(--z-dropdown)");
+  });
+
+  it("spans the full width under the header row on a phone and takes the field's width from 760px", () => {
+    // On a phone the form is not positioned, so the panel measures from the sticky header row.
+    expect(rule(".search-box")?.has("position")).toBe(false);
+    expect(rule(".quick-results")?.get("left")).toBe("0");
+    expect(rule(".quick-results")?.get("right")).toBe("0");
+    expect(rule(".quick-results")?.get("top")).toBe("100%");
+    expect(rules.filter(({ selector }) => selector === ".search-box").some(({ declarations }) => declarations.get("position") === "relative")).toBe(true);
+  });
+
+  it("gives the field the shared edge at the field size, and keeps none of the retired search classes", () => {
+    expect(rule(".search-input input")?.get("border")).toBe("1px solid var(--field-edge)");
+    expect(rule(".search-input input")?.get("height")).toBe("var(--target)");
+    expect(rules.filter(({ selector }) => /\.(search-hero|search-field|offline-results|search-hint|mobile-global-search)\b/.test(selector))).toEqual([]);
   });
 });

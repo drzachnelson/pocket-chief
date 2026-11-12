@@ -1,4 +1,4 @@
-import { playbookItem, topicItem, topicPath, type LibraryItem } from "@/lib/library-items";
+import { playbookItem, quietLine, topicItem, topicPath, type LibraryItem } from "@/lib/library-items";
 import { APPROACH_LABELS, type Playbook, type Topic, type TopicBlock } from "@/lib/types";
 
 // One matcher for topics and playbooks, run over an index that is normalised once, at export
@@ -160,6 +160,12 @@ export function searchIndex(index: SearchIndex, query: string): SearchHit[] {
   }
   return ranked.sort((a, b) => b.exact - a.exact || b.named - a.named || b.nameSum - a.nameSum || b.bodySum - a.bodySum || a.length - b.length).map(({ hit }) => hit);
 }
+
+/** Where a result opens: its topic or playbook page. */
+export const hitHref = ({ item }: SearchHit) => item.kind === "topic" ? `/topics/${item.slug}` : `/playbooks/${item.slug}`;
+
+/** A result row's quiet line: the phrase around the match when only the body matched, else a topic's category and group or a playbook's specialty and approach. */
+export const hitLine = ({ item, snippet }: SearchHit) => snippet ?? quietLine(item, { approach: true });
 
 // The two functions below keep the per-corpus signatures that the search UI calls today, over the
 // same matcher. They index the array they are given once and reuse it for later keystrokes, so the

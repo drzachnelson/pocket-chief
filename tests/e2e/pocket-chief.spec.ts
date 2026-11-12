@@ -2,9 +2,11 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 
 test("search, read, and save a topic", async ({ page }) => {
   await page.goto("./");
-  await page.getByLabel("Search Pocket Chief").fill("choledochoithiasis");
-  await page.getByRole("button", { name: "Search" }).click();
-  const result = page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ });
+  const field = page.getByRole("combobox", { name: "Search" });
+  await field.fill("choledochoithiasis");
+  await field.press("Enter");
+  await expect(page).toHaveURL(/\/search\/\?q=choledochoithiasis$/);
+  const result = page.getByRole("main").getByRole("link", { name: /^Choledocholithiasis/ }).first();
   await expect(result).toBeVisible();
   await result.click();
   await expect(page.getByRole("heading", { name: "Transcystic decision flow" })).toBeVisible();
@@ -105,7 +107,7 @@ test("phone shows the header row and a 68px tab bar with four destinations", asy
   const header = page.locator(".mobile-header");
   expect((await header.boundingBox())!.height).toBeCloseTo(60, 0);
   await expect(header.getByRole("link", { name: "Pocket Chief" })).toHaveAttribute("href", "/pocket-chief/");
-  await expect(header.getByRole("search").getByRole("textbox")).toBeVisible();
+  await expect(header.getByRole("search").getByRole("combobox", { name: "Search" })).toBeVisible();
   await expect(header.getByRole("link", { name: "Settings" })).toBeVisible();
   // The rail and its foot are for wider screens, so the phone has exactly one Settings link.
   await expect(page.getByRole("link", { name: "Settings" })).toHaveCount(1);
@@ -121,11 +123,10 @@ test("the skip link is the first stop and lands on the one main", async ({ page 
 });
 
 test("every page has one main and the shell's search, and no aside, banner or footer", async ({ page }) => {
-  for (const path of ["./", "./topics/", "./playbooks/", "./saved/", "./settings/", "./topics/choledocholithiasis/", "./playbooks/temporal-artery-biopsy/"]) {
+  for (const path of ["./", "./topics/", "./playbooks/", "./saved/", "./settings/", "./search/?q=hernia", "./topics/choledocholithiasis/", "./playbooks/temporal-artery-biopsy/"]) {
     await page.goto(path);
     await expect(page.getByRole("main"), path).toHaveCount(1);
-    // Home still draws its own large field next to the header one until the Home slice removes it.
-    await expect(page.getByRole("search"), path).toHaveCount(path === "./" ? 2 : 1);
+    await expect(page.getByRole("search"), path).toHaveCount(1);
     for (const role of ["banner", "contentinfo", "complementary"] as const) await expect(page.getByRole(role), `${path} ${role}`).toHaveCount(0);
     await expect(page.getByText(/Educational reference only|No patient information/), path).toHaveCount(0);
   }
@@ -420,8 +421,8 @@ test("a category page is precached, so one never visited opens offline", async (
     await navigator.serviceWorker.ready;
     return Boolean(navigator.serviceWorker.controller);
   });
-  // The worker names its caches by version; v6 is the first to hold the category pages.
-  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v6"]));
+  // The worker names its caches by version; v7 adds the search page and index to the precache.
+  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v7"]));
   const slugs: string[] = await page.evaluate(async () => (await fetch("categories.json")).json());
   expect(slugs.length).toBeGreaterThan(10);
 
@@ -844,3 +845,178 @@ test("find text without the Highlight API counts and scrolls while typing, and s
   await expect(findButton(page)).toBeFocused();
   expect(await page.evaluate(() => getSelection()!.rangeCount)).toBe(0);
 });
+
+// Search: the one shared field, quick results as a combobox, the results page, and the offline path.
+const searchField = (page: Page) => page.getByRole("combobox", { name: "Search" });
+const quickRows = (page: Page) => page.getByRole("listbox", { name: "Quick results" }).getByRole("option");
+const resultCount = async (page: Page) => Number((await page.getByRole("main").getByRole("status").textContent())!.split(" ")[0]);
+
+test("quick results: six rows, Up and Down move, Escape closes and keeps focus, Enter opens the highlighted row", async ({ page }) => {
+  await page.goto("./");
+  await searchField(page).fill("hernia");
+  await expect(quickRows(page)).toHaveCount(6);
+  await expect(searchField(page)).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("ArrowDown");
+  await expect(quickRows(page).first()).toHaveAttribute("aria-selected", "true");
+  await page.keyboard.press("Escape");
+  await expect(quickRows(page)).toHaveCount(0);
+  await expect(searchField(page)).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  const second = quickRows(page).nth(1);
+  await expect(second).toHaveAttribute("aria-selected", "true");
+  await expect(searchField(page)).toHaveAttribute("aria-activedescendant", (await second.getAttribute("id"))!);
+  const href = (await second.locator("a").getAttribute("href"))!;
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(new RegExp(`${href}/?$`));
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  // Leaving the page empties the field.
+  await expect(searchField(page)).toHaveValue("");
+});
+
+test("Enter with no row highlighted opens the results page, and a slash from anywhere focuses the field", async ({ page }) => {
+  await page.goto("./topics/");
+  await page.locator("body").press("/");
+  await expect(searchField(page)).toBeFocused();
+  await page.keyboard.type("inguinal hernia");
+  await expect(quickRows(page).first()).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/search\/\?q=inguinal%20hernia$/);
+  await expect(searchField(page)).toHaveValue("inguinal hernia");
+  await expect(page.getByRole("main").getByRole("status")).toHaveText(/^\d+ results?$/);
+  // The slash is only a shortcut: inside the field it types a slash.
+  await searchField(page).press("/");
+  await expect(searchField(page)).toHaveValue("inguinal hernia/");
+});
+
+test("results page: every match under a count, the address replaced as you type, and No matches with links to the indexes", async ({ page }) => {
+  await page.goto("./search/?q=hernia");
+  await expect(page.getByRole("main").getByRole("status")).toHaveText(/^\d+ results$/);
+  const count = await resultCount(page);
+  // Past the six quick rows: this page lists every match.
+  expect(count).toBeGreaterThan(10);
+  await expect(page.getByRole("main").getByRole("listitem")).toHaveCount(count);
+  // The count is the only live region on the page body.
+  await expect(page.getByRole("main").locator("[role=status], [role=alert], [aria-live]")).toHaveCount(1);
+  await expect(searchField(page)).toHaveValue("hernia");
+  // Playbook rows say so; topic rows do not.
+  await expect(page.getByRole("main").getByText("Playbook", { exact: true }).first()).toBeVisible();
+
+  const history = await page.evaluate(() => window.history.length);
+  await searchField(page).fill("hernia inguinal");
+  await expect(page).toHaveURL(/\/search\/\?q=hernia%20inguinal$/);
+  await expect.poll(() => resultCount(page)).toBeLessThan(count);
+  expect(await page.evaluate(() => window.history.length), "typing replaces the address and adds no history entry").toBe(history);
+  await expect(page.getByRole("listbox")).toHaveCount(0);
+
+  await searchField(page).fill("zzzxqj");
+  await expect(page.getByRole("main").getByRole("status")).toHaveText("No matches");
+  await expect(page.getByRole("main").getByRole("link", { name: "Browse topics" })).toHaveAttribute("href", "/pocket-chief/topics/");
+  await expect(page.getByRole("main").getByRole("link", { name: "Browse playbooks" })).toHaveAttribute("href", "/pocket-chief/playbooks/");
+});
+
+test("results page says Search isn't available when the index cannot be read, and Try again recovers", async ({ page }) => {
+  let blocked = true;
+  await page.route("**/search-index.json", (route) => blocked ? route.abort() : route.continue());
+  await page.goto("./search/?q=hernia");
+  await expect(page.getByRole("main").getByRole("status")).toHaveText(/Search isn't available\./);
+  await expect(page.getByText("No matches")).toHaveCount(0);
+  blocked = false;
+  await page.getByRole("button", { name: "Try again" }).click();
+  await expect(page.getByRole("main").getByRole("status")).toHaveText(/^\d+ results$/);
+});
+
+const workerReady = async (page: Page) => {
+  await page.goto("./");
+  await page.waitForFunction(async () => {
+    await navigator.serviceWorker.ready;
+    return Boolean(navigator.serviceWorker.controller);
+  });
+  await page.reload();
+};
+
+test("a search submitted offline lands on the results page, not Home, with /search/ and its index in the precache", async ({ page }) => {
+  await workerReady(page);
+  const cached = await page.evaluate(async () => (await (await caches.open("pocket-chief-shell-v7")).keys()).map((request) => new URL(request.url).pathname));
+  expect(cached).toEqual(expect.arrayContaining(["/pocket-chief/search/", "/pocket-chief/search-index.json"]));
+
+  await page.context().setOffline(true);
+  try {
+    await searchField(page).fill("inguinal hernia");
+    await searchField(page).press("Enter");
+    // The router cannot fetch the page's payload offline, so it falls back to a browser navigation to the results address. The worker must answer that with /search/, never with Home.
+    await expect(page).toHaveURL(/\/search\/\?q=inguinal%20hernia$/);
+    await expect(page.getByRole("heading", { name: "Search results", level: 1 })).toBeVisible();
+  } finally {
+    await page.context().setOffline(false);
+  }
+});
+
+test("offline, the results page lists its matches from the precached index, on a reload and on a query never searched", async ({ page }) => {
+  test.skip(process.env.E2E_EXPORT !== "1", "`next dev` names its script chunks afresh on every compile, so only the export's precache can serve them offline: run `next build`, then `E2E_EXPORT=1` with this spec");
+  await workerReady(page);
+  await page.context().setOffline(true);
+  try {
+    await searchField(page).fill("inguinal hernia");
+    await searchField(page).press("Enter");
+    await expect(page.getByRole("main").getByRole("status")).toHaveText(/^\d+ results?$/);
+    await expect(page.getByRole("main").getByRole("link", { name: /Inguinal/ }).first()).toBeVisible();
+    await expect(searchField(page)).toHaveValue("inguinal hernia");
+    // A reload asks for the document with its query, which the precache answers with /search/.
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main").getByRole("status")).toHaveText(/^\d+ results?$/);
+    await page.goto("./search/?q=achalasia", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("main").getByRole("status")).toHaveText(/^\d+ results?$/);
+  } finally {
+    await page.context().setOffline(false);
+  }
+});
+
+for (const scheme of ["light", "dark"] as const) {
+  test(`quick results, phone at 375px in ${scheme}: full width under the header row, six rows at list-row height, the float shadow and a hairline`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("./");
+    await searchField(page).fill("hernia");
+    await expect(quickRows(page)).toHaveCount(6);
+    const panel = page.locator(".quick-results");
+    const box = (await panel.boundingBox())!;
+    const header = (await page.locator(".mobile-header").boundingBox())!;
+    expect(box.x).toBe(0);
+    expect(box.width).toBe(375);
+    expect(Math.abs(box.y - (header.y + header.height))).toBeLessThanOrEqual(1);
+    for (const height of await quickRows(page).evaluateAll((rows) => rows.map((row) => row.getBoundingClientRect().height))) expect(height).toBeGreaterThanOrEqual(44);
+    const style = await panel.evaluate((element) => { const css = getComputedStyle(element); return { shadow: css.boxShadow, edge: css.borderBottomWidth + " " + css.borderBottomStyle, edgeColor: css.borderBottomColor, surface: css.backgroundColor }; });
+    expect(style.shadow).toBe(scheme === "light" ? "rgba(16, 24, 40, 0.12) 0px 8px 24px 0px, rgba(16, 24, 40, 0.08) 0px 2px 6px 0px" : "rgba(0, 0, 0, 0.5) 0px 8px 24px 0px");
+    expect(style.edge).toBe("1px solid");
+    expect(style.edgeColor).toBe(scheme === "light" ? "rgb(223, 228, 236)" : "rgb(38, 50, 74)");
+    expect(style.surface).toBe(scheme === "light" ? "rgb(255, 255, 255)" : "rgb(17, 24, 42)");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
+    // The field is the 44px row's field, and the panel did not move it.
+    expect((await searchField(page).boundingBox())!.height).toBeCloseTo(44, 0);
+  });
+
+  test(`quick results, tablet at 768px and laptop at 1280px in ${scheme}: the panel is the field's width, under it, and covers no toolbar`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+    await page.emulateMedia({ colorScheme: scheme });
+    for (const width of [768, 1280]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("./topics/choledocholithiasis/");
+      // The toolbar mounts after hydration and narrows the field; measure once it is in.
+      await expect(tools(page).getByRole("button", { name: "Find text" })).toBeVisible();
+      const form = (await page.getByRole("search").boundingBox())!;
+      await searchField(page).fill("hernia");
+      await expect(quickRows(page)).toHaveCount(6);
+      const panel = (await page.locator(".quick-results").boundingBox())!;
+      expect(Math.abs(panel.x - form.x), `${width}px left edge`).toBeLessThanOrEqual(1);
+      expect(Math.abs(panel.width - form.width), `${width}px width`).toBeLessThanOrEqual(1);
+      expect(panel.y, `${width}px under the field`).toBeGreaterThanOrEqual(form.y + form.height);
+      expect(await page.getByRole("search").boundingBox(), `${width}px the field did not move`).toEqual(form);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
+      await page.keyboard.press("Escape");
+      await expect(quickRows(page)).toHaveCount(0);
+    }
+  });
+}

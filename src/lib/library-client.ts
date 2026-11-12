@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { cacheApprovedTopic, cacheTaxonomy, getCachedTaxonomy, getCachedTopics, getRecentEntries, getSavedEntries } from "@/lib/offline";
+import type { SearchIndex } from "@/lib/search";
 import type { Playbook, RecentEntry, SavedEntry, TaxonomyNode, Topic } from "@/lib/types";
 
 export interface Library { topics: Topic[]; taxonomy: TaxonomyNode[] }
@@ -72,6 +73,28 @@ export async function loadPlaybooks(): Promise<PlaybookLibrary> {
     throw error;
   });
   return playbooksInFlight;
+}
+
+let searchIndexInFlight: Promise<SearchIndex> | undefined;
+
+/**
+ * The prebuilt search index (`search-index.json`), memoized and single-flighted like the others.
+ * One read carries topics and playbooks together, so search never waits on the 9 MB library and
+ * never holds half a corpus: it is loaded only when the whole index has arrived. Nothing loads it
+ * until the reader focuses the field or opens the results page, so reading pays nothing for it.
+ * There is no IndexedDB copy; the service worker precache is what serves it offline. A failed
+ * read rejects and clears the memo so Try again fetches again.
+ */
+export async function loadSearchIndex(): Promise<SearchIndex> {
+  searchIndexInFlight ??= (async () => {
+    const response = await fetch(`${basePath}/search-index.json`);
+    if (!response.ok) throw new Error("The search index is unavailable.");
+    return await response.json() as SearchIndex;
+  })().catch((error) => {
+    searchIndexInFlight = undefined;
+    throw error;
+  });
+  return searchIndexInFlight;
 }
 
 export interface Corpora extends Library, PlaybookLibrary {}
