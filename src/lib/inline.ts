@@ -145,3 +145,24 @@ export function headingLevel(heading: string): { level: 2 | 3; text: string } {
   const match = /^↳ +/.exec(heading);
   return match ? { level: 3, text: heading.slice(match[0].length) } : { level: 2, text: heading };
 }
+
+/** Summaries and warnings are callouts: boxes that stay open, never a disclosure. */
+export const isCallout = (block: { type: string }) => block.type === "summary" || block.type === "warning";
+
+export interface SectionGroup<B> { block: B; merged: B[] }
+
+/**
+ * A `↳` heading that repeats the heading of the block above adds no title, so its block joins that block's section
+ * instead of opening a second row under the same words. One that differs stays a sub-heading of its own. A callout
+ * above never takes one in, because a callout has no disclosure to hold it.
+ */
+export function groupSections<B extends { type: string; heading?: string }>(blocks: B[]): SectionGroup<B>[] {
+  const groups: SectionGroup<B>[] = [];
+  blocks.forEach((block, index) => {
+    const own = block.heading === undefined ? null : headingLevel(block.heading);
+    const above = blocks[index - 1];
+    const repeats = own?.level === 3 && above?.heading !== undefined && headingLevel(above.heading).text === own.text && !isCallout(groups[groups.length - 1].block);
+    if (repeats) groups[groups.length - 1].merged.push(block); else groups.push({ block, merged: [] });
+  });
+  return groups;
+}

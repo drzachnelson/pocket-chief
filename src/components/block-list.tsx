@@ -3,24 +3,30 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { flushSync } from "react-dom";
-import { Brain, CaretDown, CheckCircle, Warning, WarningOctagon } from "@phosphor-icons/react";
+import { Brain, CaretDown, Info, Lightbulb, Warning, WarningCircle, WarningOctagon } from "@phosphor-icons/react";
 import type { TopicBlock } from "@/lib/types";
 import type { InlineSegment, LinkIndexEntry } from "@/lib/inline";
-import { bulletDepth, createLinkScope, headingLevel, parseInline, stripMarkup } from "@/lib/inline";
+import { bulletDepth, createLinkScope, groupSections, headingLevel, isCallout, parseInline, stripMarkup } from "@/lib/inline";
 import { InlineText } from "@/components/inline-text";
 import { DecisionFlow } from "@/components/decision-flow";
 
-function SupportMark({ block }: { block: TopicBlock }) {
-  const supported = block.claims.every((claim) => claim.status === "cited" && claim.citationIds.length > 0);
-  return <span className={`support-mark ${supported ? "supported" : "unsupported"}`} title={supported ? "All factual claims linked to supplied sources" : "Unresolved source support"}><CheckCircle size={13} weight="fill" />{supported ? "Supported" : "Needs support"}</span>;
+// Supported blocks show and say nothing; only the exception is marked.
+const isSupported = (block: TopicBlock) => block.claims.every((claim) => claim.status === "cited" && claim.citationIds.length > 0);
+
+function UnsupportedMark() {
+  return <span className="unsupported-mark" role="img" aria-label="Unsupported" title="Unsupported"><WarningCircle size={20} weight="fill" /></span>;
 }
 
-const CALLOUT_ICONS = { pearl: CheckCircle, mnemonic: Brain, danger: WarningOctagon } as const;
+const TONE_ICONS = { pearl: Lightbulb, mnemonic: Brain, danger: WarningOctagon } as const;
 
-function CalloutIcon({ tone }: { tone?: "pearl" | "mnemonic" | "danger" }) {
-  const Icon = tone ? CALLOUT_ICONS[tone] : Warning;
-  return <span className="callout-icon"><Icon size={15} weight="fill" /></span>;
+/** Tone is colour and a decorative icon; nothing about it is spoken. */
+function calloutIcon(block: TopicBlock) {
+  if (!isCallout(block)) return null;
+  const Icon = block.type === "summary" ? Info : block.type === "warning" && block.tone ? TONE_ICONS[block.tone] : Warning;
+  return <span className="callout-icon"><Icon size={18} weight="fill" /></span>;
 }
+
+const calloutClass = (block: TopicBlock) => block.type === "summary" ? " summary-block" : block.type === "warning" ? ` warning-block${block.tone ? ` tone-${block.tone}` : ""}` : "";
 
 interface BulletNode { item: string; segments: InlineSegment[]; depth: 0 | 1 | 2; children: BulletNode[] }
 
@@ -49,38 +55,48 @@ function BulletList({ nodes, nested }: { nodes: BulletNode[]; nested?: boolean }
   return <ul className={nested ? "clinical-list clinical-list-nested" : "clinical-list"}>{nodes.map((node) => <li key={node.item} data-depth={node.depth}><span><InlineText segments={node.segments} /></span>{node.children.length > 0 && <BulletList nodes={node.children} nested />}</li>)}</ul>;
 }
 
-export function Block({ block, expanded, linkEntries, selfSlug, onToggle }: { block: TopicBlock; expanded: boolean; linkEntries: LinkIndexEntry[]; selfSlug: string; onToggle: (id: string, open: boolean) => void }) {
+/** What a block shows under its heading. Each block gets its own link scope, so a section that took in repeated-heading blocks links the same terms it did when they were rows. */
+function blockContent(block: TopicBlock, linkEntries: LinkIndexEntry[], selfSlug: string): ReactNode {
   // Built fresh on every render, never memoized: parseInline records each linked key on the
   // scope so a term fires once per block, which means a reused scope renders the second pass
   // with every link already spent.
   const scope = createLinkScope(linkEntries, selfSlug);
   const inline = (text: string) => <InlineText segments={parseInline(text, scope)} />;
+  if (block.type === "summary" || block.type === "prose" || block.type === "warning") return <p>{inline(block.text)}</p>;
+  if (block.type === "bullets") return <BulletList nodes={bulletTree(block.items, (text) => parseInline(text, scope))} />;
+  if (block.type === "table") return <div className="table-scroll"><table data-columns={block.columns.length}><thead><tr>{block.columns.map((column) => <th key={column}>{inline(column)}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{inline(cell)}</th> : <td key={`${row[0]}-${cell}`}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>;
+  if (block.type === "sequence") return <ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p></div></li>)}</ol>;
+  if (block.type === "flow") return <DecisionFlow block={block} renderInline={inline} />;
+  if (block.type === "image") return <><Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
+  return null;
+}
+
+/**
+ * One section of the page. `merged` holds the blocks whose `↳` heading only repeated this block's: their content follows
+ * under this one title and disclosure, each still addressable by its own id.
+ */
+export function Block({ block, merged = [], expanded, linkEntries, selfSlug, onToggle }: { block: TopicBlock; merged?: TopicBlock[]; expanded: boolean; linkEntries: LinkIndexEntry[]; selfSlug: string; onToggle: (id: string, open: boolean) => void }) {
+  if (block.type === "references") return null;
   const title = block.heading ? headingLevel(block.heading) : null;
-  const callout = block.type === "summary" || block.type === "warning";
-  const collapsible = Boolean(title) && !callout;
+  const collapsible = Boolean(title) && !isCallout(block);
   const Heading = title?.level === 3 ? "h3" : "h2";
   // Headings parse emphasis but not links — an anchor inside a <summary> would both navigate
   // and toggle the section on the same click.
   const headingNode = title && <Heading><InlineText segments={parseInline(title.text)} /></Heading>;
-  const icon = block.type === "warning" ? <CalloutIcon tone={block.tone} /> : null;
-  const actions = title && <div className="block-actions"><SupportMark block={block} /></div>;
-  const frame = (children: ReactNode, extra = "") => {
-    const anchors = { id: block.id, "data-block-id": block.id, ...(title?.level === 3 ? { "data-level": "3" } : {}) };
-    if (collapsible) return <details {...anchors} className={`topic-block section-block${extra}`} open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={stripMarkup(title!.text)}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{children}</details>;
-    return <section {...anchors} className={`topic-block${extra}`}>{title ? <div className="block-heading">{icon}{headingNode}{actions}</div> : icon}{children}</section>;
-  };
-  if (block.type === "summary") return frame(<p>{inline(block.text)}</p>, " summary-block");
-  if (block.type === "prose") return frame(<p>{inline(block.text)}</p>);
-  if (block.type === "warning") return frame(<p>{inline(block.text)}</p>, ` warning-block${block.tone ? ` tone-${block.tone}` : ""}`);
-  if (block.type === "bullets") return frame(<BulletList nodes={bulletTree(block.items, (text) => parseInline(text, scope))} />);
-  if (block.type === "table") return frame(<div className="table-scroll"><table data-columns={block.columns.length}><thead><tr>{block.columns.map((column) => <th key={column}>{inline(column)}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{inline(cell)}</th> : <td key={`${row[0]}-${cell}`}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>);
-  if (block.type === "sequence") return frame(<ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p></div></li>)}</ol>);
-  if (block.type === "flow") return frame(<DecisionFlow block={block} renderInline={inline} />);
-  if (block.type === "image") {
-    const media = <><Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
-    return collapsible ? frame(<figure>{media}</figure>) : <figure id={block.id} data-block-id={block.id} className="topic-block">{media}</figure>;
+  // The one mark for the whole section: a merged block has no row of its own to carry one.
+  const mark = [block, ...merged].every(isSupported) ? null : <UnsupportedMark />;
+  const icon = calloutIcon(block);
+  const anchors = { id: block.id, "data-block-id": block.id, ...(title?.level === 3 ? { "data-level": "3" } : {}) };
+  const actions = mark && <div className="block-actions">{mark}</div>;
+  // A block with no heading row has nowhere to put its icon and mark, so they lead it instead.
+  const lead = !title && (icon || mark) ? <div className="block-heading">{icon}{mark}</div> : null;
+  if (block.type === "image" && !collapsible) return <figure {...anchors} className="topic-block">{lead}{blockContent(block, linkEntries, selfSlug)}</figure>;
+  const content = (part: TopicBlock) => part.type === "image" ? <figure>{blockContent(part, linkEntries, selfSlug)}</figure> : blockContent(part, linkEntries, selfSlug);
+  if (collapsible) {
+    const parts = merged.map((part) => { const partIcon = calloutIcon(part); return <div key={part.id} id={part.id} data-block-id={part.id} className={`topic-block section-part${calloutClass(part)}`}>{partIcon && <div className="block-heading">{partIcon}</div>}{content(part)}</div>; });
+    return <details {...anchors} className="topic-block section-block" open={expanded} onToggle={(event) => onToggle(block.id, event.currentTarget.open)}><summary className="block-heading" aria-label={`${stripMarkup(title!.text)}${mark ? ", unsupported" : ""}`}>{headingNode}<span className="block-disclosure" aria-hidden="true"><CaretDown size={13} weight="bold" /></span>{actions}</summary>{content(block)}{parts}</details>;
   }
-  return null;
+  return <section {...anchors} className={`topic-block${calloutClass(block)}`}>{title ? <div className="block-heading">{icon}{headingNode}{actions}</div> : lead}{content(block)}</section>;
 }
 
 /**
@@ -110,8 +126,11 @@ export interface BlockCollapse {
 export function useBlockCollapse(blocks: TopicBlock[], showNotes?: () => void): BlockCollapse {
   const rootRef = useRef<HTMLElement | null>(null);
   const blockIds = useMemo(() => new Set(blocks.map((block) => block.id)), [blocks]);
+  const groups = useMemo(() => groupSections(blocks), [blocks]);
+  // A block merged into the section above has no disclosure of its own; a link to it opens that section.
+  const owners = useMemo(() => new Map(groups.flatMap(({ block, merged }) => merged.map((part) => [part.id, block.id] as const))), [groups]);
   // Callouts stay open prose; only headed non-callout sections carry a disclosure.
-  const collapsibleIds = useMemo(() => blocks.filter((block) => block.heading && block.type !== "summary" && block.type !== "warning").map((block) => block.id), [blocks]);
+  const collapsibleIds = useMemo(() => groups.filter(({ block }) => block.heading && !isCallout(block)).map(({ block }) => block.id), [groups]);
   const identity = collapsibleIds.join(" ");
   const [state, setState] = useState<{ identity: string; collapsed: ReadonlySet<string> }>(() => ({ identity, collapsed: new Set(collapsibleIds) }));
   // `useState` initializes once, so a mounted list handed a different set of blocks would keep
@@ -141,14 +160,14 @@ export function useBlockCollapse(blocks: TopicBlock[], showNotes?: () => void): 
     // on the page but outside this list belongs to another list, because `getElementById` is global.
     const target = document.getElementById(targetId);
     if (target && !rootRef.current?.contains(target)) return;
-    const blockId = blockIds.has(targetId) ? targetId : target?.closest<HTMLDetailsElement>("details[data-block-id]")?.dataset.blockId;
+    const blockId = blockIds.has(targetId) ? owners.get(targetId) ?? targetId : target?.closest<HTMLDetailsElement>("details[data-block-id]")?.dataset.blockId;
     if (!blockId) return;
     // Committed before the scroll, so the target exists and is open when the page is aimed at it. The browser's own hash jump
     // already happened while Notes was hidden or the section closed, and landed short.
     flushSync(() => { showNotes?.(); setBlockOpen(blockId, true); });
     document.getElementById(targetId)?.scrollIntoView();
     window.requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView());
-  }, [blockIds, setBlockOpen, showNotes]);
+  }, [blockIds, owners, setBlockOpen, showNotes]);
 
   useEffect(() => {
     const decode = (hash: string) => { try { return decodeURIComponent(hash); } catch { return ""; } };
@@ -173,5 +192,6 @@ export function BlockList({ blocks, collapse, linkEntries, selfSlug }: { blocks:
   // Destructured rather than used as `collapse.rootRef` in the JSX: react-hooks/refs reads a
   // property access in a ref position as reading ref.current during render.
   const { rootRef, collapsed, setBlockOpen } = collapse;
-  return <article className="topic-article" ref={rootRef}>{blocks.map((block) => <Block key={block.id} block={block} expanded={!collapsed.has(block.id)} linkEntries={linkEntries} selfSlug={selfSlug} onToggle={setBlockOpen} />)}</article>;
+  const groups = useMemo(() => groupSections(blocks), [blocks]);
+  return <article className="topic-article" ref={rootRef}>{groups.map(({ block, merged }) => <Block key={block.id} block={block} merged={merged} expanded={!collapsed.has(block.id)} linkEntries={linkEntries} selfSlug={selfSlug} onToggle={setBlockOpen} />)}</article>;
 }
