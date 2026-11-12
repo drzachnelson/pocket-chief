@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { groupRecentlyAdded, playbookItem, resolveEntries, specialtyId, topicItem, topicPath, type LibraryItem } from "@/lib/library-items";
+import { categoryHref, groupRecentlyAdded, playbookItem, quietLine, resolveEntries, specialtyId, topicItem, topicPath, type LibraryItem } from "@/lib/library-items";
 import { APPROACH_LABELS, type Playbook, type PlaybookApproach, type Topic } from "@/lib/types";
 
 const topic = (id: string, slug: string, scoreCategory = "SCORE · Trauma · Diseases & Conditions"): Topic => ({ id, slug, title: `Title ${slug}`, aliases: [], scoreNodeId: "n", scoreCategory, tags: [], approvedVersion: null, versions: [], updatedAt: "2026-11-01T00:00:00.000Z" });
@@ -82,5 +82,26 @@ describe("groupRecentlyAdded", () => {
   it("returns nothing for an empty library or a zero limit", () => {
     expect(groupRecentlyAdded([], 8)).toEqual([]);
     expect(groupRecentlyAdded([at("A", "2026-11-09T00:00:00.000Z")], 0)).toEqual([]);
+  });
+});
+
+describe("categoryHref", () => {
+  it("puts a category page under /topics/category/, apart from the topic slugs", () => {
+    expect(categoryHref("biliary")).toBe("/topics/category/biliary");
+  });
+});
+
+describe("quietLine", () => {
+  const trauma: LibraryItem = { kind: "topic", id: "t", slug: "t", title: "T", path: ["Trauma", "Diseases & Conditions"] };
+  const tab = playbookItem(playbook("p", "p"));
+
+  it("gives a topic its category then group", () => {
+    expect(quietLine(trauma)).toBe("Trauma · Diseases & Conditions");
+    expect(quietLine({ ...trauma, path: ["Hernia"] })).toBe("Hernia");
+  });
+
+  it("gives a playbook its specialty, and adds the approach only when asked", () => {
+    expect(quietLine(tab)).toBe("Surgical Oncology");
+    expect(quietLine(tab, { approach: true })).toBe("Surgical Oncology · Robotic");
   });
 });

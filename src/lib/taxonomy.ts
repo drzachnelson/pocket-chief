@@ -22,6 +22,12 @@ export function taxonomyAncestry(nodeId: string | undefined, nodes: TaxonomyNode
   return path;
 }
 
+/** The top-level category a node sits under (the node itself when it is one), or undefined for the curriculum root and unknown ids. */
+export function topicCategory(nodeId: string | undefined, nodes: TaxonomyNode[]): TaxonomyNode | undefined {
+  const ancestry = taxonomyAncestry(nodeId, nodes);
+  return ancestry[0]?.slug === curriculumRootSlug ? ancestry[1] : ancestry[0];
+}
+
 export function taxonomyDepth(nodeId: string | undefined, nodes: TaxonomyNode[]) {
   return Math.max(taxonomyAncestry(nodeId, nodes).length - 1, 0);
 }

@@ -18,7 +18,8 @@ export interface NextTopicMetadata {
   categoryLabel: string;
 }
 
-export function TopicContent({ topic, sources, linkEntries, contents, nextTopic }: { topic: Topic; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[]; contents: ContentsData; nextTopic?: NextTopicMetadata }) {
+/** `backFallback` is where Back goes when nothing in-app is behind the page: the topic's category page. */
+export function TopicContent({ topic, sources, linkEntries, contents, backFallback, nextTopic }: { topic: Topic; sources: SuppliedSource[]; linkEntries: LinkIndexEntry[]; contents: ContentsData; backFallback?: string; nextTopic?: NextTopicMetadata }) {
   const [tab, setTab] = useState("notes");
   const [saved, setSaved] = useState(false);
   const [savedReady, setSavedReady] = useState(false);
@@ -67,7 +68,7 @@ export function TopicContent({ topic, sources, linkEntries, contents, nextTopic 
 
   return (
     <>
-      <ReaderTools corpus="topics" contents={contents} collapse={collapse} tab={tab} />
+      <ReaderTools corpus="topics" contents={contents} backFallback={backFallback} collapse={collapse} tab={tab} />
       <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
       <Tabs.Root value={tab} onValueChange={setTab} className="topic-tabs">
         <Tabs.List className="tabs-list" aria-label="Topic views"><Tabs.Trigger value="notes">Notes</Tabs.Trigger><Tabs.Trigger value="sources">Sources <span aria-hidden="true">{sources.length}</span></Tabs.Trigger><Tabs.Trigger value="history">History <span aria-hidden="true">{topic.versions.length}</span></Tabs.Trigger></Tabs.List>

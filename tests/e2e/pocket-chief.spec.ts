@@ -69,21 +69,60 @@ test("browses to a playbook and reads its steps", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Save" })).toHaveCount(0);
 });
 
-test("topics index searches the grouped curriculum and offers an alphabetical view", async ({ page }) => {
+test("the Topics index lists every category in outline order, and a category page lists its groups over title-only rows", async ({ page }) => {
   await page.goto("./topics/");
-  await expect(page.getByRole("heading", { name: "Topics" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Find a topic" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Topics", level: 1 })).toBeVisible();
+  const names = await page.locator("main .list-row .list-row-text").allTextContents();
+  expect(names[0]).toBe("General Abdomen");
+  expect(names.at(-1)).toBe("Preoperative Evaluation and Perioperative Care");
+  expect(new Set(names).size).toBe(names.length);
+  // One browse model: no search box, view toggle or resume on the index.
+  await expect(page.getByRole("searchbox", { name: "Search topics" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "All topics" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Resume topic" })).toHaveCount(0);
 
-  const search = page.getByRole("searchbox", { name: "Search topics" });
-  // "choledocho" alone now also matches Choledochal Cyst and Choledochoenteric Anastomosis.
-  await search.fill("choledocholith");
-  await expect(page.getByRole("link", { name: "Choledocholithiasis", exact: true })).toBeVisible();
-  await expect(page.getByText("1 topic", { exact: true })).toBeVisible();
+  await page.getByRole("link", { name: "Biliary", exact: true }).click();
+  await expect(page).toHaveURL(/\/pocket-chief\/topics\/category\/biliary\/$/);
+  await expect(page.getByRole("heading", { name: "Biliary", level: 1 })).toBeVisible();
+  const conditions = page.getByRole("heading", { name: "Diseases & Conditions", level: 2 });
+  await expect(conditions).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Operations & Procedures", level: 2 })).toBeVisible();
+  await expect(page.locator("section", { has: conditions }).getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveAttribute("href", "/pocket-chief/topics/choledocholithiasis/");
+  // Rows are title only: no quiet line, no trailing text.
+  await expect(page.locator("main .list-row small, main .list-row .list-row-trailing")).toHaveCount(0);
+  // Topics stays current on the index and on a page inside it.
+  await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Topics" })).toHaveAttribute("aria-current", "true");
+});
 
-  await page.getByRole("button", { name: "All topics" }).click();
-  await expect(page.getByRole("heading", { name: "All topics" })).toBeVisible();
-  await search.fill("");
-  await expect(page.getByRole("link", { name: "Choledocholithiasis", exact: true })).toHaveCount(1);
+test("every list row is 44px with a title only, and a category page's groups and the specialty anchors clear the sticky top row", async ({ page }) => {
+  await page.goto("./topics/");
+  for (const row of await page.locator("main .list-row").all()) expect((await row.boundingBox())!.height).toBeCloseTo(44, 0);
+  await page.goto("./topics/category/trauma/");
+  for (const row of await page.locator("main .list-row").all()) expect((await row.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+
+  // A middle specialty: the last one sits too near the page end to scroll up under the top row, which is what the margin is for.
+  await page.goto("./playbooks/");
+  const middle = page.getByRole("heading", { level: 2 }).nth(2);
+  const id = await middle.getAttribute("id");
+  await page.goto(`./playbooks/#${id}`);
+  const topRow = await page.locator(".mobile-header").boundingBox();
+  // The jump may still be animating when the page loads, so wait for the heading to settle just under the sticky row.
+  await expect(async () => {
+    const heading = await page.locator(`h2[id="${id}"]`).boundingBox();
+    expect(heading!.y).toBeGreaterThanOrEqual(topRow!.y + topRow!.height);
+    expect(heading!.y).toBeLessThan(topRow!.y + topRow!.height + 40);
+  }).toPass();
+});
+
+test("the Playbooks index is an h1 over title-only rows under one heading per specialty", async ({ page }) => {
+  await page.goto("./playbooks/");
+  const headings = page.getByRole("heading", { level: 2 });
+  const specialties = await headings.evaluateAll((nodes) => nodes.map((node) => node.firstElementChild!.textContent));
+  expect(specialties).toEqual([...specialties].sort((a, b) => a!.localeCompare(b!)));
+  expect(specialties.length).toBeGreaterThan(1);
+  await expect(page.getByRole("button")).toHaveCount(0);
+  // Approach is a search term and a header line, not a way to browse.
+  await expect(page.locator("main").getByText(/^(Open|Laparoscopic|Robotic|Endovascular)$/)).toHaveCount(0);
 });
 
 test("tablet width shows a labelled rail and a top row with the search field", async ({ page }, testInfo) => {
@@ -200,30 +239,6 @@ test("decision flows keep labeled branches connected and readable on mobile", as
   await expect(flow.getByText("cannot be reliably examined", { exact: true })).toBeVisible();
 });
 
-test("topics resumes a visited guide", async ({ page }) => {
-  await page.goto("./topics/choledocholithiasis/");
-  await expect(page.getByRole("heading", { name: "Choledocholithiasis", exact: true })).toBeVisible();
-  // Not waitForFunction: it treats an async predicate's Promise as truthy and returns at once, so
-  // the goto below raced the guide's recent write and lost it to the navigation.
-  await expect.poll(() => page.evaluate(async () => {
-    if (!(await indexedDB.databases()).some((database) => database.name === "pocket-chief-private")) return false;
-    return new Promise<boolean>((resolve, reject) => {
-      const request = indexedDB.open("pocket-chief-private");
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        const database = request.result;
-        if (!database.objectStoreNames.contains("recent")) { database.close(); resolve(false); return; }
-        const recent = database.transaction("recent").objectStore("recent").get("00000000-0000-4000-8000-000000000101");
-        recent.onerror = () => { database.close(); reject(recent.error); };
-        recent.onsuccess = () => { database.close(); resolve(recent.result?.slug === "choledocholithiasis"); };
-      };
-    });
-  })).toBe(true);
-  await page.goto("./topics/");
-  await expect(page.getByRole("link", { name: "Resume topic" })).toHaveAttribute("href", "/pocket-chief/topics/choledocholithiasis/");
-  await expect(page.getByText("Reviewed", { exact: true })).toHaveCount(0);
-});
-
 test("a topic page keeps the shell: Topics current, Contents in the sidebar and the exact update date", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Laptop sidebar only");
   await page.goto("./topics/choledocholithiasis/");
@@ -253,6 +268,27 @@ test("a previously visited Topics guide remains readable offline in the shell", 
   }
 });
 
+
+test("a category page is precached, so one never visited opens offline", async ({ page }) => {
+  await page.goto("./");
+  await page.waitForFunction(async () => {
+    await navigator.serviceWorker.ready;
+    return Boolean(navigator.serviceWorker.controller);
+  });
+  // The worker names its caches by version; v6 is the first to hold the category pages.
+  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v6"]));
+  const slugs: string[] = await page.evaluate(async () => (await fetch("categories.json")).json());
+  expect(slugs.length).toBeGreaterThan(10);
+
+  await page.context().setOffline(true);
+  try {
+    await page.goto("./topics/category/trauma/", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Trauma", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Diseases & Conditions", level: 2 })).toBeVisible();
+  } finally {
+    await page.context().setOffline(false);
+  }
+});
 
 // The reader chrome: the page toolbar and Contents (one component for topics and playbooks), inline in the laptop sidebar and a native dialog below 1080px.
 const tools = (page: Page) => page.getByRole("group", { name: "Page tools" });
@@ -355,6 +391,26 @@ test("laptop: the sidebar's Contents follows soft navigations between topics, an
   await expect(nav.getByRole("group", { name: "Playbooks" })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Temporal Artery Biopsy", exact: true })).toHaveAttribute("aria-current", "page");
   await expect(nav.getByRole("group", { name: "Topics" })).toHaveCount(0);
+});
+
+test("laptop: a category page carries no Contents, even soft-navigated from a topic that did", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Laptop sidebar only");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  await expect(sidebarContents(page)).toBeVisible();
+
+  // The route slot still remembers the topic here; only the shell's reader-path guard keeps its Contents off the category page.
+  await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Topics" }).click();
+  await page.getByRole("link", { name: "Biliary", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Biliary", level: 1 })).toBeVisible();
+  await expect(page.locator(".sidebar").getByRole("navigation", { name: "Contents" })).toHaveCount(0);
+  await page.getByRole("link", { name: "Choledocholithiasis", exact: true }).click();
+  await expect(sidebarContents(page)).toBeVisible();
+  await page.getByRole("link", { name: "Playbooks" }).first().click();
+  await expect(page.getByRole("heading", { name: "Playbooks", level: 1 })).toBeVisible();
+  await page.getByRole("link", { name: /Temporal Artery Biopsy/ }).click();
+  await tools(page).getByRole("button", { name: "Back" }).click();
+  await expect(page.getByRole("heading", { name: "Playbooks", level: 1 })).toBeVisible();
 });
 
 test("a #block link followed while Sources shows switches to Notes first", async ({ page }) => {
@@ -474,20 +530,21 @@ test("a playbook's Contents lists its sections and the playbooks by specialty, i
   await expect(dialog(page).getByRole("button", { name: "Vascular" })).toHaveAttribute("aria-expanded", "false");
 });
 
-test("Back is never dead: it goes to the index on a cold launch and back through history after an in-app visit", async ({ page }) => {
+test("Back is never dead: a cold launch goes to the page's category or specialty, and an in-app visit goes back through history", async ({ page }) => {
   await page.goto("./topics/choledocholithiasis/");
   await tools(page).getByRole("button", { name: "Back" }).click();
-  await expect(page).toHaveURL(/\/pocket-chief\/topics\/$/);
+  await expect(page).toHaveURL(/\/pocket-chief\/topics\/category\/biliary\/$/);
 
   await page.goto("./playbooks/temporal-artery-biopsy/");
   await tools(page).getByRole("button", { name: "Back" }).click();
   await expect(page).toHaveURL(/\/pocket-chief\/playbooks\/#vascular$/);
 
   await page.goto("./topics/");
-  await page.getByRole("link", { name: /Choledocholithiasis/ }).first().click();
-  await expect(page).toHaveURL(/choledocholithiasis\/$/);
+  await page.getByRole("link", { name: "Trauma", exact: true }).click();
+  await page.getByRole("link", { name: "Escharotomy", exact: true }).click();
+  await expect(page).toHaveURL(/escharotomy\/$/);
   await tools(page).getByRole("button", { name: "Back" }).click();
-  await expect(page).toHaveURL(/\/pocket-chief\/topics\/$/);
+  await expect(page).toHaveURL(/\/pocket-chief\/topics\/category\/trauma\/$/);
 });
 
 // Find text. The toolbar is hidden while the bar is open, so its button is reached with includeHidden and the bar through its own group.

@@ -1,5 +1,5 @@
 import { slugify } from "@/lib/text";
-import type { EntryKind, Playbook, PlaybookApproach, Topic } from "@/lib/types";
+import { APPROACH_LABELS, type EntryKind, type Playbook, type PlaybookApproach, type Topic } from "@/lib/types";
 
 // Client-safe on purpose: this file imports no content, so a list row, the Saved page and the
 // build-time feeds in `library.ts` all share one reading of a topic's path and a playbook's anchor.
@@ -13,10 +13,16 @@ export function topicPath({ scoreCategory }: Pick<Topic, "scoreCategory">): stri
 /** The anchor id of a specialty heading on the Playbooks index. One helper, so a heading and the link to it cannot drift. */
 export const specialtyId = (specialty: string) => slugify(specialty);
 
+/** A category page: `/topics/<slug>` belongs to topics, so categories live under `/topics/category/`. A test pins that no topic slug is `category`. */
+export const categoryHref = (categorySlug: string) => `/topics/category/${categorySlug}`;
+
 /** One library entry as a list row needs it, whichever corpus it came from. */
 export type LibraryItem =
   | { kind: "topic"; id: string; slug: string; title: string; path: string[] }
   | { kind: "playbook"; id: string; slug: string; title: string; specialty: string; approach: PlaybookApproach };
+
+/** A list row's quiet line. A topic shows category then group. A playbook shows its specialty; `approach` adds how it is done, which search rows need to explain a match and Home and Saved leave out (G4: one helper and a flag, so the lists cannot drift). */
+export const quietLine = (item: LibraryItem, { approach = false }: { approach?: boolean } = {}) => item.kind === "topic" ? item.path.join(" · ") : approach ? `${item.specialty} · ${APPROACH_LABELS[item.approach]}` : item.specialty;
 
 export const topicItem = (topic: Topic): LibraryItem => ({ kind: "topic", id: topic.id, slug: topic.slug, title: topic.title, path: topicPath(topic) });
 export const playbookItem = (playbook: Playbook): LibraryItem => ({ kind: "playbook", id: playbook.id, slug: playbook.slug, title: playbook.title, specialty: playbook.specialty, approach: playbook.approach });

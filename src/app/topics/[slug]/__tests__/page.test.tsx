@@ -5,7 +5,7 @@ import { getTopicBySlug, listTaxonomy, listTopics } from "@/lib/library";
 import type { TaxonomyNode, Topic } from "@/lib/types";
 
 vi.mock("@/lib/library", () => ({ getTopicBySlug: vi.fn(), listSources: vi.fn(() => []), listTaxonomy: vi.fn(), listTopics: vi.fn(() => []) }));
-vi.mock("@/components/topic-content", () => ({ TopicContent: ({ nextTopic }: { nextTopic?: { slug: string; label: string; categoryLabel: string } }) => <div data-testid="topic-content" data-next-slug={nextTopic?.slug} data-next-label={nextTopic?.label} data-next-category={nextTopic?.categoryLabel} /> }));
+vi.mock("@/components/topic-content", () => ({ TopicContent: ({ nextTopic, backFallback }: { nextTopic?: { slug: string; label: string; categoryLabel: string }; backFallback?: string }) => <div data-testid="topic-content" data-back-fallback={backFallback} data-next-slug={nextTopic?.slug} data-next-label={nextTopic?.label} data-next-category={nextTopic?.categoryLabel} /> }));
 
 const readTopic = vi.mocked(getTopicBySlug);
 const readTaxonomy = vi.mocked(listTaxonomy);
@@ -45,6 +45,16 @@ describe("TopicPage", () => {
     expect(screen.queryByText("airway")).not.toBeInTheDocument();
     expect(screen.getByTestId("topic-content")).toHaveAttribute("data-next-slug", "neck-wound");
     expect(screen.getByTestId("topic-content")).toHaveAttribute("data-next-category", "Trauma");
+  });
+
+  it("sends Back to the category page when nothing in-app is behind the topic", async () => {
+    readTopic.mockReturnValue(topic);
+    readTaxonomy.mockReturnValue(taxonomy);
+    readTopics.mockReturnValue([topic]);
+
+    render(await TopicPage({ params: Promise.resolve({ slug: topic.slug }) }));
+    // The category is the top-level node (Trauma), not the group the topic sits in (Neck).
+    expect(screen.getAllByTestId("topic-content").at(-1)).toHaveAttribute("data-back-fallback", "/topics/category/trauma");
   });
 
   it("does not wrap into another category at the end", async () => {

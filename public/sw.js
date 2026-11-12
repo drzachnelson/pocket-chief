@@ -1,12 +1,16 @@
-// v5 discards every earlier cache. The worker derives its own mount point from its script URL, so
+// v6 discards every earlier cache. The worker derives its own mount point from its script URL, so
 // the same file works at the site root and under a GitHub Pages project path with no build step.
 const BASE = new URL("./", self.location).pathname;
-const SHELL = "pocket-chief-shell-v5";
-const CONTENT = "pocket-chief-content-v5";
+const SHELL = "pocket-chief-shell-v6";
+const CONTENT = "pocket-chief-content-v6";
 const SHELL_ASSETS = [BASE, `${BASE}topics/`, `${BASE}playbooks/`, `${BASE}saved/`, `${BASE}icon.svg`, `${BASE}manifest.webmanifest`, `${BASE}library.json`, `${BASE}playbooks.json`];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(SHELL).then((cache) => cache.addAll(SHELL_ASSETS)).then(() => self.skipWaiting()));
+  // One page per category, listed by the build in categories.json so a taxonomy change cannot leave a stale slug here: addAll fails the whole install on a 404.
+  event.waitUntil(caches.open(SHELL).then(async (cache) => {
+    const categories = await fetch(`${BASE}categories.json`).then((response) => response.json());
+    await cache.addAll([...SHELL_ASSETS, ...categories.map((slug) => `${BASE}topics/category/${slug}/`)]);
+  }).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (event) => {
