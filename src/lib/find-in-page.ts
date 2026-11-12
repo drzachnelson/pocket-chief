@@ -3,8 +3,10 @@
  * nodes (and the keys the renderer derives from their text) are left alone, and the ranges are painted through the CSS Custom Highlight API.
  */
 
-// What a reader sees but did not write: the flow's hidden relationship list, icons, and the per-block support mark.
-const SKIPPED = ".visually-hidden, [aria-hidden='true'], .block-actions, svg, script, style";
+// What a reader sees but did not write: icons and the per-block support mark, and what they cannot see at all: a flow's hidden outline.
+// A flow diagram is the reverse. It is aria-hidden because the outline replaces it for assistive tech, but it is the text a reader sees,
+// so it stays searchable and its hidden outline copy does not count a second time.
+const SKIPPED = ".visually-hidden, [aria-hidden='true']:not(.flow-canvas), .block-actions, svg, script, style";
 const MATCH = "find-match";
 const CURRENT = "find-current";
 

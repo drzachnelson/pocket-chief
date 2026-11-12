@@ -95,7 +95,7 @@ Adding content is a repeatable workflow — invoke the `/add-topic` skill rather
 `src/components/topic-content.tsx` renders every block type, and its React keys impose rules that content must respect:
 
 - **Tables**: `row[0]` is the row key and `${row[0]}-${cell}` is the cell key — row headers must be unique and no cell may repeat within its own row.
-- **Flows**: laid out by longest path from the root, so arbitrary width and depth work, but there must be exactly one root, all edge endpoints must exist, and every node must be reachable or it silently disappears.
+- **Flows**: laid out by longest path from the root. A flow whose widest level has more than two boxes renders only as a nested outline (`condition → step`, a shared step written out again under each branch that reaches it); two columns or fewer also draw a diagram, hidden from assistive tech, with each condition above its box. There must be exactly one root, all edge endpoints must exist, and every node must be reachable or it silently disappears from both forms.
 - **Bullets and sequences**: items and step titles are keys, so keep them unique.
 - Any block with a `heading` appears in the on-page table of contents.
 
