@@ -28,7 +28,7 @@ export function PlaybookContent({ playbook, sources, linkEntries, contents }: { 
 
   return (
     <>
-      <ReaderTools corpus="playbooks" contents={contents} backFallback={`/playbooks#${specialtyId(playbook.specialty)}`} collapse={collapse} notesShown={tab === "notes"} />
+      <ReaderTools corpus="playbooks" contents={contents} backFallback={`/playbooks#${specialtyId(playbook.specialty)}`} collapse={collapse} tab={tab} />
       <Tabs.Root value={tab} onValueChange={setTab} className="topic-tabs">
         <Tabs.List className="tabs-list" aria-label="Playbook views">
           <Tabs.Trigger value="notes">Notes</Tabs.Trigger>

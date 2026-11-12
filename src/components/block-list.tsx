@@ -83,6 +83,14 @@ export function Block({ block, expanded, linkEntries, selfSlug, onToggle }: { bl
   return null;
 }
 
+/**
+ * Opens the section a node sits in, so a find match inside it can be seen. It sets the native attribute, as a tap on the summary does,
+ * and the `toggle` event mirrors that into state through `setBlockOpen`; nothing closes a section again.
+ */
+export function openSectionAround(node: Node) {
+  for (let section = node.parentElement?.closest("details"); section; section = section.parentElement?.closest("details")) section.open = true;
+}
+
 export interface BlockCollapse {
   rootRef: RefObject<HTMLElement | null>;
   collapsed: ReadonlySet<string>;
