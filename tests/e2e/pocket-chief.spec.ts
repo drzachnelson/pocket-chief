@@ -12,7 +12,83 @@ test("search, read, and save a topic", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
 
   await page.goto("./saved/");
-  await expect(page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
+  await expect(page.locator(".list-rows").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
+});
+
+/** Writes records into the saved store the way an earlier bundle, or a page that has since left the library, would have left them. */
+async function seedSaved(page: Page, records: object[]) {
+  await page.evaluate((entries) => new Promise<void>((resolve, reject) => {
+    const open = indexedDB.open("pocket-chief-private");
+    open.onerror = () => reject(open.error);
+    open.onsuccess = () => {
+      const tx = open.result.transaction("saved", "readwrite");
+      for (const record of entries) tx.objectStore("saved").put(record);
+      tx.oncomplete = () => { open.result.close(); resolve(); };
+      tx.onerror = () => reject(tx.error);
+    };
+  }), records);
+}
+
+test("Saved: one mixed newest-first list rebuilt by id, with old snapshots, playbooks and a gone page", async ({ page, request }) => {
+  const { topics } = await (await request.get("library.json")).json() as { topics: Array<{ id: string; slug: string; title: string }> };
+  const { playbooks } = await (await request.get("playbooks.json")).json() as { playbooks: Array<{ id: string; slug: string; title: string; specialty: string }> };
+  const [oldTopic] = topics;
+  const [playbook] = playbooks;
+  await page.goto("./saved/");
+  await expect(page.getByText("Nothing saved yet.")).toBeVisible();
+  await expect(page.getByText("Use Save on a topic or playbook.")).toBeVisible();
+  // An old entry is a whole Topic snapshot with no kind; a stale title proves the row is rebuilt from the current library.
+  await seedSaved(page, [
+    { ...oldTopic, title: "Stale snapshot title", savedAt: "2026-10-01T00:00:00.000Z" },
+    { id: playbook.id, kind: "playbook", savedAt: "2026-10-03T00:00:00.000Z" },
+    { id: "no-longer-in-the-library", kind: "topic", savedAt: "2026-10-02T00:00:00.000Z" },
+  ]);
+  await page.reload();
+
+  await expect(page.getByRole("heading", { name: "Saved", level: 1 })).toBeVisible();
+  const rows = page.locator("main .list-rows > li");
+  await expect(rows).toHaveCount(3);
+  await expect(rows.nth(0)).toContainText(playbook.title);
+  await expect(rows.nth(0)).toContainText(playbook.specialty);
+  await expect(rows.nth(0)).toContainText("Playbook");
+  await expect(rows.nth(0).getByRole("link")).toHaveAttribute("href", new RegExp(`/playbooks/${playbook.slug}/?$`));
+  await expect(rows.nth(1)).toHaveText("No longer available");
+  await expect(rows.nth(1).getByRole("link")).toHaveCount(0);
+  await expect(rows.nth(1).getByRole("button")).toHaveCount(1);
+  await expect(rows.nth(2)).toContainText(oldTopic.title);
+  await expect(rows.nth(2)).not.toContainText("Stale snapshot title");
+  await expect(rows.nth(2).getByRole("link")).toHaveAttribute("href", new RegExp(`/topics/${oldTopic.slug}/?$`));
+
+  // The toggle takes the page off Saved but leaves the row in place until the next visit; a second tap restores it.
+  const toggle = rows.nth(2).getByRole("button", { name: `Save ${oldTopic.title}` });
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await expect(rows).toHaveCount(3);
+  await page.reload();
+  await expect(rows).toHaveCount(2);
+  await expect(page.getByText(oldTopic.title)).toHaveCount(0);
+});
+
+test("Saved: the bookmark toggle is a target tall and the row is the shared list row, at every width", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.goto("./topics/choledocholithiasis/");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+  for (const [width, target] of [[375, 44], [768, 44], [1280, 36]] as const) {
+    await page.setViewportSize({ width, height: 812 });
+    await page.goto("./saved/");
+    const toggle = page.getByRole("button", { name: "Save Choledocholithiasis" });
+    await expect(toggle).toBeVisible();
+    const box = (await toggle.boundingBox())!;
+    expect(box.width).toBe(target);
+    expect(box.height).toBe(target);
+    const column = (await page.locator("main .list-rows").boundingBox())!;
+    // The icon sits where the chevron does: its right edge on the column's right edge.
+    const icon = (await toggle.locator("svg").boundingBox())!;
+    expect(Math.abs(icon.x + icon.width - (column.x + column.width))).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  }
 });
 
 const PRIMARY = ["Home", "Topics", "Playbooks", "Saved"];

@@ -276,9 +276,23 @@ body:has(dialog[open]) { overflow: hidden; }
 .list-row-text small { color: var(--ink-muted); font-size: var(--text-small); }
 .list-row-trailing { flex: 0 0 auto; color: var(--ink-muted); font-size: var(--text-caption); font-variant-numeric: tabular-nums; }
 .list-row > svg { flex: 0 0 auto; color: var(--ink-muted); }
-@media (hover: hover) { .list-row:hover { background: var(--cobalt-soft); } }
+@media (hover: hover) { a.list-row:hover { background: var(--cobalt-soft); } }
 /* Press feedback for touch, where hover does not apply: the same fill the hover uses. */
-.list-row:active { background: var(--cobalt-soft); }
+a.list-row:active { background: var(--cobalt-soft); }
+/* A row with an action (Saved's bookmark toggle): the title area is the link, the control takes the chevron's place, and its icon sits where the chevron would. A row whose page is gone is static, muted text with no tint. */
+.list-row-split { display: flex; align-items: center; }
+.list-row-split > .list-row { flex: 1 1 auto; min-width: 0; margin-right: 0; }
+.list-row-static { color: var(--ink-muted); }
+.row-toggle { flex: 0 0 auto; width: var(--target); height: var(--target); margin-right: calc((var(--target) - 20px) / -2); display: grid; place-items: center; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--cobalt); cursor: pointer; }
+.row-toggle[aria-pressed="false"] { color: var(--ink-muted); }
+@media (hover: hover) { .row-toggle:hover { background: var(--cobalt-soft); } }
+.row-toggle:active { background: var(--cobalt-soft); }
+/* States (loading, failed read, empty) stand where the rows would. Loading is three static muted rows at list-row height, no shimmer and no words; the failed read and the empty list are plain muted sentences. */
+.loading-rows, .list-state { margin-top: var(--space-5); }
+.loading-rows > div { height: 44px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.loading-rows > div::before { content: ""; width: 48%; height: 14px; border-radius: var(--radius-sm); background: var(--surface-strong); }
+.list-state { display: grid; justify-items: start; gap: var(--space-3); color: var(--ink-muted); font-size: var(--text-body); }
+.list-state p { margin: 0; }
 /* A list heading (Topics groups, Playbooks specialties) is an h2 at the subheading role; its count is a caption. scroll-margin-top clears the sticky top row on an anchor jump. */
 .list-heading { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); margin: var(--space-7) 0 var(--space-1); scroll-margin-top: 72px; font-size: var(--text-subheading); font-weight: 600; }
 .list-heading span:last-child { color: var(--ink-muted); font-size: var(--text-caption); font-weight: 400; font-variant-numeric: tabular-nums; }
