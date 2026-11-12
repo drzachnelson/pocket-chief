@@ -149,6 +149,36 @@ test("browses to a playbook and reads its steps", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
 });
 
+test("Saved lists what the reader pages save: a playbook and a topic, newest first, each toggle pressed", async ({ page }) => {
+  await page.goto("./topics/choledocholithiasis/");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+
+  await page.goto("./saved/");
+  const rows = page.locator("main .list-rows > li");
+  await expect(rows).toHaveCount(2);
+  // The playbook was saved last, so it leads; the row is rebuilt from the library, with its specialty and the trailing "Playbook".
+  await expect(rows.nth(0)).toContainText("Temporal Artery Biopsy");
+  await expect(rows.nth(0)).toContainText("Vascular");
+  await expect(rows.nth(0)).toContainText("Playbook");
+  await expect(rows.nth(0).getByRole("link")).toHaveAttribute("href", /\/playbooks\/temporal-artery-biopsy\/?$/);
+  await expect(rows.nth(0).getByRole("button", { name: "Save Temporal Artery Biopsy" })).toHaveAttribute("aria-pressed", "true");
+  await expect(rows.nth(1)).toContainText("Choledocholithiasis");
+  await expect(rows.nth(1)).not.toContainText("Playbook");
+  await expect(rows.nth(1).getByRole("button", { name: "Save Choledocholithiasis" })).toHaveAttribute("aria-pressed", "true");
+
+  // Un-saving from the reader page takes the row off Saved on the next visit.
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await page.getByRole("button", { name: "Saved", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Save", exact: true })).toBeVisible();
+  await page.goto("./saved/");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.nth(0)).toContainText("Choledocholithiasis");
+});
+
 test("the reader header is a breadcrumb with Save, the title and the tabs, 146px on a phone with a two-line title", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
   await page.setViewportSize({ width: 375, height: 812 });
