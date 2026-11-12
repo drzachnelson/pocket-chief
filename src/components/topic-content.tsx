@@ -67,7 +67,7 @@ export function TopicContent({ topic, sources, linkEntries, contents, nextTopic 
 
   return (
     <>
-      <ReaderTools corpus="topics" contents={contents} collapse={collapse} notesShown={tab === "notes"} />
+      <ReaderTools corpus="topics" contents={contents} collapse={collapse} tab={tab} />
       <div className="topic-actions-row"><button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!savedReady} onClick={toggleSaved}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>{saveError && <span className="form-message" role="alert">{saveError}</span>}</div>
       <Tabs.Root value={tab} onValueChange={setTab} className="topic-tabs">
         <Tabs.List className="tabs-list" aria-label="Topic views"><Tabs.Trigger value="notes">Notes</Tabs.Trigger><Tabs.Trigger value="sources">Sources <span aria-hidden="true">{sources.length}</span></Tabs.Trigger><Tabs.Trigger value="history">History <span aria-hidden="true">{topic.versions.length}</span></Tabs.Trigger></Tabs.List>

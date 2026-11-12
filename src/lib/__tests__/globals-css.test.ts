@@ -194,3 +194,35 @@ describe("globals.css chrome", () => {
     expect(rules.filter(({ selector }) => /\.summary-block\.tone-/.test(selector))).toEqual([]);
   });
 });
+
+describe("globals.css find bar", () => {
+  const rule = (selector: string) => rules.find((candidate) => candidate.selector === selector)?.declarations;
+  const channel = (value: number) => { const c = value / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  const rgb = (hex: string) => { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+  const luminance = (colour: number[]) => 0.2126 * channel(colour[0]) + 0.7152 * channel(colour[1]) + 0.0722 * channel(colour[2]);
+  const contrast = (a: number[], b: number[]) => { const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x); return (hi + 0.05) / (lo + 0.05); };
+
+  it("paints matches from tokens only: an amber wash under the ink, and the current match as cobalt under its own ink", () => {
+    expect(rule("::highlight(find-match)")).toEqual(new Map([["background-color", "color-mix(in srgb, var(--amber) 38%, var(--surface))"], ["color", "var(--ink)"]]));
+    expect(rule("::highlight(find-current)")).toEqual(new Map([["background-color", "var(--cobalt)"], ["color", "var(--on-cobalt)"]]));
+  });
+
+  it("keeps the text on both highlights at 4.5:1 or better in light and dark", () => {
+    for (const [amber, surface, ink, cobalt, onCobalt] of [["--amber", "--surface", "--ink", "--cobalt", "--on-cobalt"], ["--dark-amber", "--dark-surface", "--dark-ink", "--dark-cobalt", "--dark-on-cobalt"]]) {
+      const wash = rgb(root.get(amber)!).map((value, index) => value * 0.38 + rgb(root.get(surface)!)[index] * 0.62);
+      expect(contrast(rgb(root.get(ink)!), wash), `${ink} on the match wash`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(rgb(root.get(onCobalt)!), rgb(root.get(cobalt)!)), `${onCobalt} on ${cobalt}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it("gives the field the shared edge and the bar the toolbar's row on a phone, and its cell in the top row from 760px", () => {
+    expect(rule(".find-field")?.get("border")).toBe("1px solid var(--field-edge)");
+    expect(rule(".find-field")?.get("font-size")).toBeUndefined();
+    expect(rule(".find-bar")?.get("border-top")).toBe("1px solid var(--line)");
+    expect(rule(".find-bar")?.get("min-height")).toBe(rule(".page-toolbar")?.get("min-height"));
+    expect(rule(".find-bar")?.has("box-shadow")).toBe(false);
+    expect(rule(".find-bar[hidden]")?.get("display")).toBe("none");
+    expect(rule(".page-tools > *")?.get("grid-area")).toBe("1 / 1");
+    expect(rule(".page-toolbar[data-finding]")?.get("visibility")).toBe("hidden");
+  });
+});
