@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { LoadingRows } from "@/components/read-states";
+import { LoadingRows } from "@/components/list-states";
 import { SearchResults } from "@/components/search-results";
 
 export const metadata: Metadata = { title: "Search" };

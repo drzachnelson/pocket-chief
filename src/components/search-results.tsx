@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useDeferredValue, useMemo } from "react";
 import { ListRow } from "@/components/list-row";
-import { FailedRead, LoadingRows } from "@/components/read-states";
+import { LoadingRows, ReadFailed } from "@/components/list-states";
 import { loadSearchIndex, useLoader } from "@/lib/library-client";
 import { hitHref, hitLine, searchIndex } from "@/lib/search";
 
@@ -20,7 +20,7 @@ export function SearchResults() {
   const index = useLoader(loadSearchIndex);
   const hits = useMemo(() => index.ready && query ? searchIndex(index.data, query) : [], [index.data, index.ready, query]);
   if (!query) return null; // the field is right above; the index still loads so the first keystroke finds it ready
-  if (index.failed) return <FailedRead message="Search isn't available." retrying={index.retrying} retry={index.retry} />;
+  if (index.failed) return <ReadFailed message="Search isn't available." retrying={index.retrying} onRetry={index.retry} />;
   if (index.loading) return <LoadingRows />;
   if (!hits.length) return (
     <>

@@ -47,7 +47,7 @@ describe("SearchResults", () => {
   it("says nothing while loading: three static rows, no count and no zero", () => {
     read.mockReturnValue(new Promise<SearchIndex>(() => {}));
     const { container } = render(<SearchResults />);
-    expect(container.querySelectorAll(".loading-rows li")).toHaveLength(3);
+    expect(container.querySelectorAll(".loading-rows > div")).toHaveLength(3);
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
     expect(container).not.toHaveTextContent(/\d|no matches/i);
   });

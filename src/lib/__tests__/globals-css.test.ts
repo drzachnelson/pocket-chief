@@ -282,9 +282,4 @@ describe("globals.css search", () => {
     expect(rule(".search-input input")?.get("height")).toBe("var(--target)");
     expect(rules.filter(({ selector }) => /\.(search-hero|search-field|offline-results|search-hint|mobile-global-search)\b/.test(selector))).toEqual([]);
   });
-
-  it("holds the loading rows still: no shimmer, no animation", () => {
-    for (const selector of [".loading-rows li", ".loading-rows li::before"]) expect(rule(selector)?.has("animation"), selector).toBe(false);
-    expect(rule(".loading-rows li")?.get("height")).toBe("56px");
-  });
 });

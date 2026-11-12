@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useDeferredValue, useEffect, useId, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { ChangeEvent, FocusEvent, FormEvent, KeyboardEvent } from "react";
 import { CaretRight, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { FailedRead } from "@/components/read-states";
+import { ReadFailed } from "@/components/list-states";
 import { loadSearchIndex, useLoader } from "@/lib/library-client";
 import { normalizePath } from "@/lib/pathname";
 import { hitHref, hitLine, searchIndex } from "@/lib/search";
@@ -109,7 +109,7 @@ export function SearchForm() {
       {(showRows || showFailed) && (
         // Pressing inside the panel must not blur the field, or the panel would close before the click lands.
         <div className="quick-results" onMouseDown={(event) => event.preventDefault()}>
-          {showFailed ? <FailedRead message="Search isn't available." retrying={index.retrying} retry={index.retry} /> : (
+          {showFailed ? <ReadFailed message="Search isn't available." retrying={index.retrying} onRetry={index.retry} /> : (
             <ul className="list-rows" role="listbox" id={listId} aria-label="Quick results">
               {hits.map((hit, row) => (
                 <li key={hit.item.id} role="option" id={`${listId}-${row}`} aria-selected={row === active}>

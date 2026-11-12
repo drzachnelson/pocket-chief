@@ -205,16 +205,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .quick-results .list-row { margin-inline: 0; padding-inline: var(--space-5); border-radius: 0; }
 .quick-results .list-rows > li:last-child { border-bottom: 0; }
 .quick-results [aria-selected="true"] .list-row { background: var(--cobalt-soft); }
-.quick-results .failed-read { padding: var(--space-4) var(--space-5); }
+.quick-results .list-state { margin-top: 0; padding: var(--space-4) var(--space-5); }
 /* The results page: a count, then the rows. */
 .search-count { margin: 0; padding-bottom: var(--space-2); color: var(--ink-muted); font-size: var(--text-caption); }
 .search-empty { margin: 0 0 var(--space-3); color: var(--ink-muted); font-size: var(--text-body); }
-/* Reading states shared by search and, later, Saved: three static rows while loading, one sentence and a button when a read fails. */
-.loading-rows { margin: 0; padding: 0; list-style: none; }
-.loading-rows li { height: 56px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
-.loading-rows li::before { content: ""; width: 55%; height: 14px; border-radius: var(--radius-sm); background: var(--surface-strong); }
-.failed-read { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-4); }
-.failed-read p { margin: 0; color: var(--ink-muted); font-size: var(--text-body); }
 
 .topic-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .topic-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 13px; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: border-color var(--dur-fast) var(--ease-out); }
