@@ -334,6 +334,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .topic-block > p + p { margin-top: var(--space-4); }
 .topic-block img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius-md); }
 figure.topic-block { margin: 0; }
+/* A block whose ↳ heading only repeated its parent's: its content follows under the parent's title, with no row, rule or padding of its own. */
+.section-part { margin-top: var(--space-4); padding: 0; border-bottom: 0; }
 figcaption { margin-top: var(--space-3); padding-left: var(--space-3); border-left: 2px solid var(--line-strong); color: var(--ink-muted); font-size: var(--text-caption); line-height: 1.5; }
 
 /* Collapsible sections. The summary is the only tap target; the chevron sits in the gutter. */
@@ -366,23 +368,21 @@ figcaption { margin-top: var(--space-3); padding-left: var(--space-3); border-le
    Only .block-actions is pinned. */
 .block-heading > div { display: flex; align-items: center; gap: 7px; }
 .block-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 7px; }
-.support-mark { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 4px; color: var(--ink-muted); font-size: var(--text-caption); }
-.support-mark.supported svg { color: var(--green); }
-.support-mark.unsupported { color: var(--amber); }
+/* Supported blocks show nothing; the one mark is the exception. */
+.unsupported-mark { display: inline-flex; flex: 0 0 auto; align-items: center; color: var(--amber); }
 
-/* Callouts. One idiom, four tones: hairline box, 3px gutter strip, tinted ground. */
-.summary-block, .warning-block { --callout: var(--cobalt); --callout-soft: var(--cobalt-soft); margin: var(--space-6) 0; padding: var(--space-5) var(--space-5) var(--space-5) var(--space-4); border: 1px solid color-mix(in srgb, var(--callout) 24%, var(--line)); border-left: 3px solid var(--callout); border-radius: var(--radius-md); background: var(--callout-soft); }
+/* Callouts. A tinted ground and a full hairline in the tone colour, inset at every width. No stripe: tone is the tint, the border and the icon. */
+.summary-block, .warning-block { --callout: var(--cobalt); --callout-soft: var(--cobalt-soft); margin: var(--space-6) 0; padding: 14px; border: 1px solid color-mix(in srgb, var(--callout) 40%, var(--line)); border-radius: var(--radius-md); background: var(--callout-soft); }
 .summary-block { margin-top: var(--space-5); }
 .warning-block { --callout: var(--amber); --callout-soft: var(--amber-soft); }
 /* Only a warning carries a tone; a summary is always the default cobalt. */
 .warning-block.tone-pearl { --callout: var(--green); --callout-soft: var(--green-soft); }
 .warning-block.tone-mnemonic { --callout: var(--violet); --callout-soft: var(--violet-soft); }
 .warning-block.tone-danger { --callout: var(--danger); --callout-soft: var(--danger-soft); }
-.summary-block .block-heading, .warning-block .block-heading { border: 0; padding: 0; }
-.summary-block .block-heading h2, .warning-block .block-heading h2 { font-size: var(--text-subheading); font-weight: 600; letter-spacing: 0; }
+.summary-block .block-heading, .warning-block .block-heading { gap: var(--space-3); border: 0; padding: 0; }
+.summary-block .block-heading h2, .warning-block .block-heading h2 { color: var(--ink); font-size: var(--text-subheading); font-weight: 600; letter-spacing: 0; }
 .summary-block > p, .warning-block > p { color: var(--ink); }
-.callout-icon { flex: 0 0 auto; display: inline-flex; align-items: center; margin-right: var(--space-2); color: var(--callout, var(--cobalt)); }
-.callout-icon:last-child { margin-right: 0; }
+.callout-icon { flex: 0 0 auto; display: inline-flex; align-items: center; color: var(--callout, var(--cobalt)); }
 
 /* Tables. Up to three columns wrap to the column width and never scroll; four or more get a
    120px minimum per column and scroll sideways. The row header is pinned on every table, so one
@@ -443,8 +443,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .topic-actions-row { margin: 7px 0 var(--space-3); }
   .tabs-list { gap: 19px; }
   th, td { padding-inline: 7px; }
-  /* Callouts run to the screen edge so the accent strip lands on the bezel. */
-  .summary-block, .warning-block { margin: var(--space-4) -16px; padding: var(--space-4) 16px var(--space-4) 13px; border: 0; border-left: 3px solid var(--callout); border-bottom: 1px solid var(--line); border-radius: 0; }
+  .summary-block, .warning-block { margin-block: var(--space-4); }
   .summary-block { margin-top: var(--space-1); }
   .clinical-list { margin-top: var(--space-2); }
   .sequence-list li { padding-block: var(--space-3); }

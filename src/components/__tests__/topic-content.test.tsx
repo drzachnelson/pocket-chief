@@ -70,7 +70,10 @@ describe("renderer redesign", () => {
     expect(details[1].getAttribute("data-level")).toBe("3");
     expect(details[1].querySelector("h3")!.textContent).toBe("Details");
     expect(details[0].querySelector("summary.block-heading .block-disclosure")).not.toBeNull();
-    expect(details[0].querySelector("summary.block-heading .block-actions")).not.toBeNull();
+    // A supported block shows and says nothing: no actions slot, no mark, no word.
+    expect(details[0].querySelector("summary.block-heading .block-actions")).toBeNull();
+    expect(container.querySelector(".support-mark, .unsupported-mark")).toBeNull();
+    expect(container.textContent).not.toMatch(/supported/i);
 
     const outer = container.querySelector("ul.clinical-list")!;
     expect(outer.classList.contains("clinical-list-nested")).toBe(false);
@@ -223,6 +226,23 @@ describe("reader chrome", () => {
     const details = container.querySelector<HTMLDetailsElement>("#b1")!;
     expect(details.open).toBe(true);
     expect(scrollIntoView.mock.instances.at(-1)).toBe(details);
+  });
+
+  it("switches to Notes, opens the section and aims at a merged block when its #block link is followed from another tab", async () => {
+    // b1x repeats b1's heading, so it is folded into b1's section and has no disclosure to open of its own.
+    const merged: TopicBlock[] = [blocks[0], { id: "b1x", type: "prose", heading: "↳ Assessment", text: "Folded in", claims: [] }, ...blocks.slice(1)];
+    const folded: TopicVersion = { ...version, blocks: merged };
+    const { container } = renderTopic(<TopicContent contents={contents} topic={{ ...topic, approvedVersion: folded, versions: [folded] }} sources={[]} linkEntries={entries} />);
+    await userEvent.click(screen.getByRole("tab", { name: /Sources/ }));
+    expect(container.querySelector("#b1x")).toBeNull();
+
+    act(() => { window.history.replaceState({}, "", "/topics/paraesophageal#b1x"); window.dispatchEvent(new HashChangeEvent("hashchange")); });
+    expect(screen.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+    const part = container.querySelector<HTMLElement>("#b1x")!;
+    expect(part.closest("details")).toBe(container.querySelector("#b1"));
+    expect(container.querySelector<HTMLDetailsElement>("#b1")!.open).toBe(true);
+    expect(container.querySelectorAll("details.section-block")).toHaveLength(2);
+    expect(scrollIntoView.mock.instances.at(-1)).toBe(part);
   });
 
   it("also switches to Notes when the link followed points at the hash the page already has, which fires no hashchange", async () => {

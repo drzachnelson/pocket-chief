@@ -165,7 +165,7 @@ Block text runs through `src/lib/inline.ts`, which gives you more than emphasis:
 - `[[Term]]` — an explicit cross-link to another topic, resolved against titles and aliases. Bold goes **outside**: `**[[Cooper's ligament]]**`.
 - Plain text **auto-links** against every other topic's title and aliases, longest match first, at most once per block. You get cross-links for free — and you inherit any over-broad alias another topic claimed, so audit what it produced (see `references/verify.md`).
 - A leading `- ` or `-- ` on a bullets item nests it one or two levels.
-- A leading `↳ ` on a block heading renders it as a sub-heading under the block above.
+- A leading `↳ ` on a block heading renders it as a sub-heading under the block above, so give it a title of its own. Never repeat the parent's heading after `↳`: the renderer folds a block whose `↳` heading repeats the heading above into that section, so it shows no row or title of its own and its content sits under the parent's. If a block only continues the section above, fold the content into that block instead, or title the new block for what it adds.
 
 Strip the packet's `[N]` markers out of block text — they become part of the claim string and render as literal junk.
 
@@ -189,7 +189,7 @@ node node_modules/eslint/bin/eslint.js . --max-warnings=0
 node node_modules/vitest/vitest.mjs run
 ```
 
-Then read `references/verify.md` and work through it — the worktree setup, the preview, the ghost, the auto-link audit, and e2e. Every block must read **Supported** before you call this done.
+Then read `references/verify.md` and work through it — the worktree setup, the preview, the ghost, the auto-link audit, and e2e. No block may show the unsupported symbol (`[aria-label="Unsupported"]`) before you call this done.
 
 **A new playbook adds one step the topic path does not have.** The deploy workflow gates on `out/playbooks.json` existing, being non-empty, and every playbook having prerendered to `out/playbooks/<slug>/index.html`. The dev server happily serves routes the static export never generated, so a green browser pass proves nothing about the deploy. Build the real artifact and assert against it:
 

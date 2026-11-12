@@ -98,6 +98,7 @@ Adding content is a repeatable workflow — invoke the `/add-topic` skill rather
 - **Flows**: laid out by longest path from the root, so arbitrary width and depth work, but there must be exactly one root, all edge endpoints must exist, and every node must be reachable or it silently disappears.
 - **Bullets and sequences**: items and step titles are keys, so keep them unique.
 - Any block with a `heading` appears in the on-page table of contents.
+- A `↳` heading that repeats the heading of the block above is folded into that section (`groupSections` in `src/lib/inline.ts`): no row, title or Contents entry of its own, content under the parent's, the block's id still a link target that opens the parent. A `↳` heading that differs stays a real sub-heading. Author with distinct titles; do not repeat the parent's.
 
 ## Conventions
 

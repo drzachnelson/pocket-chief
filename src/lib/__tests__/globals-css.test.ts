@@ -195,6 +195,37 @@ describe("globals.css chrome", () => {
   });
 });
 
+describe("globals.css callouts and support mark", () => {
+  const rule = (selector: string) => rules.find((candidate) => candidate.selector === selector)?.declarations;
+  // `:not(.summary-block)` excludes a callout (the level-3 bracket), so it must not count as styling one.
+  const styled = (selector: string) => selector.split(",").some((part) => /\.(?:summary|warning)-block(?![\w-])/.test(part.replace(/:not\([^)]*\)/g, "")));
+  const callouts = rules.filter(({ selector }) => styled(selector));
+
+  it("draws a callout as a tinted box with one full hairline at 40% of its tone, inset at every width", () => {
+    const base = rule(".summary-block, .warning-block")!;
+    expect(base.get("border")).toBe("1px solid color-mix(in srgb, var(--callout) 40%, var(--line))");
+    expect(base.get("background")).toBe("var(--callout-soft)");
+    expect(base.get("border-radius")).toBe("var(--radius-md)");
+    expect(base.get("padding")).toBe("14px");
+    // No stripe on any side, and no full-bleed variant: a band running to the screen edge cannot carry the full border.
+    for (const { selector, declarations } of callouts) {
+      for (const side of ["border-left", "border-right", "border-top", "border-bottom"]) expect(declarations.get(side), `${selector} { ${side} }`).toBeUndefined();
+      expect(declarations.get("margin") ?? "", `${selector} runs to the screen edge`).not.toMatch(/-\d+px/);
+      expect(declarations.get("border-radius") ?? "var(--radius-md)", selector).toBe("var(--radius-md)");
+    }
+  });
+
+  it("sets the title in full ink at the subheading step, and tints by tone", () => {
+    expect(rule(".summary-block .block-heading h2, .warning-block .block-heading h2")).toEqual(new Map([["color", "var(--ink)"], ["font-size", "var(--text-subheading)"], ["font-weight", "600"], ["letter-spacing", "0"]]));
+    expect([".warning-block.tone-pearl", ".warning-block.tone-mnemonic", ".warning-block.tone-danger"].map((selector) => rule(selector)?.get("--callout-soft"))).toEqual(["var(--green-soft)", "var(--violet-soft)", "var(--danger-soft)"]);
+  });
+
+  it("has no support mark: not the class, not a supported state, and the unsupported symbol is amber", () => {
+    expect(css).not.toMatch(/\.support-mark|\.supported(?![\w-])/);
+    expect(rule(".unsupported-mark")?.get("color")).toBe("var(--amber)");
+  });
+});
+
 describe("globals.css find bar", () => {
   const rule = (selector: string) => rules.find((candidate) => candidate.selector === selector)?.declarations;
   const channel = (value: number) => { const c = value / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
