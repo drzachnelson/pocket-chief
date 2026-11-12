@@ -11,10 +11,15 @@ afterEach(() => vi.clearAllMocks());
 
 const confirmClear = () => {
   fireEvent.click(screen.getByRole("button", { name: /clear offline data/i }));
-  fireEvent.click(screen.getByRole("button", { name: "Clear Saved topics and history" }));
+  fireEvent.click(screen.getByRole("button", { name: "Clear Saved topics, playbooks and history" }));
 };
 
 describe("SettingsForm", () => {
+  it("names Saved topics and playbooks in the storage copy", () => {
+    render(<SettingsForm />);
+    expect(screen.getByText(/keeps topics and playbooks, your Saved topics and playbooks and your reading history/)).toBeInTheDocument();
+  });
+
   it("holds the one theme control: System, Light, Dark", () => {
     render(<SettingsForm />);
     expect(screen.getAllByRole("radiogroup")).toHaveLength(1);
@@ -26,7 +31,7 @@ describe("SettingsForm", () => {
     render(<SettingsForm />);
     fireEvent.click(screen.getByRole("button", { name: /clear offline data/i }));
     expect(clear).not.toHaveBeenCalled();
-    expect(screen.getByRole("group", { name: "Confirm clearing offline data" })).toHaveTextContent("Saved topics and reading history");
+    expect(screen.getByRole("group", { name: "Confirm clearing offline data" })).toHaveTextContent("Saved topics and playbooks");
     expect(screen.getByRole("group", { name: "Confirm clearing offline data" })).toHaveTextContent("no server copy");
     expect(screen.queryByRole("button", { name: /clear offline data/i })).not.toBeInTheDocument();
   });

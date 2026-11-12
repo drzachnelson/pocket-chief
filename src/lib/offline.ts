@@ -113,6 +113,13 @@ export async function setPlaybookSaved(playbook: Playbook, saved: boolean) {
   else await database.delete("saved", playbook.id);
 }
 
+/** Puts back, or takes off, a saved id the library no longer has: there is no Topic or Playbook to hand to the setters above, so the entry itself goes in and out. */
+export async function setSavedEntry(entry: SavedEntry, saved: boolean) {
+  const database = await db();
+  if (saved) await database.put("saved", entry);
+  else await database.delete("saved", entry.id);
+}
+
 /** Keyed by id, so it answers for a playbook as well as a topic. */
 export async function isTopicSaved(topicId: string): Promise<boolean> {
   const database = await db();
@@ -141,10 +148,10 @@ export async function getSavedEntries(): Promise<SavedEntry[]> {
   return records.map((record) => ({ id: record.id, kind: kindOf(record), savedAt: record.savedAt })).sort(newestFirst("savedAt"));
 }
 
-/** The saved topics as snapshots, for the views that still render them. Playbook records are not topics and are left out. */
+/** The saved topics as snapshots, for the views that still render them. Playbook records are not topics and are left out, and neither is an entry put back by `setSavedEntry`, which carries no snapshot. */
 export async function getSavedTopics(): Promise<Topic[]> {
   const database = await db();
-  return (await database.getAll("saved") as Array<Topic & { kind?: EntryKind }>).filter((record) => kindOf(record) === "topic");
+  return (await database.getAll("saved") as Array<Topic & { kind?: EntryKind }>).filter((record) => kindOf(record) === "topic" && record.slug);
 }
 
 export async function recordRecentView(item: Topic | Playbook) {

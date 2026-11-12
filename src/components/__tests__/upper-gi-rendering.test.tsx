@@ -34,7 +34,9 @@ describe("upper GI topic rendering", () => {
       const nodes = blocks.flatMap((block) => block.type === "flow" ? block.nodes : []);
       expect(container.querySelectorAll("tbody tr"), topic.slug).toHaveLength(rows.length);
       expect(container.querySelectorAll(".sequence-list > li"), topic.slug).toHaveLength(steps.length);
-      expect(container.querySelectorAll("[data-node-id]"), topic.slug).toHaveLength(nodes.length);
+      // Every flow reads as an outline, whether or not it is also drawn, so each node is a step in one.
+      const outlineSteps = new Set([...container.querySelectorAll(".flow-outline .flow-step")].map((step) => step.textContent));
+      for (const node of nodes) expect(outlineSteps.has(node.label), `${topic.slug}: ${node.label}`).toBe(true);
       const paragraphs = container.querySelectorAll("p");
       expect([...paragraphs].some((p) => p.textContent?.includes("[S1")), topic.slug).toBe(false);
     });
