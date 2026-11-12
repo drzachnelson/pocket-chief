@@ -70,7 +70,10 @@ describe("renderer redesign", () => {
     expect(details[1].getAttribute("data-level")).toBe("3");
     expect(details[1].querySelector("h3")!.textContent).toBe("Details");
     expect(details[0].querySelector("summary.block-heading .block-disclosure")).not.toBeNull();
-    expect(details[0].querySelector("summary.block-heading .block-actions")).not.toBeNull();
+    // A supported block shows and says nothing: no actions slot, no mark, no word.
+    expect(details[0].querySelector("summary.block-heading .block-actions")).toBeNull();
+    expect(container.querySelector(".support-mark, .unsupported-mark")).toBeNull();
+    expect(container.textContent).not.toMatch(/supported/i);
 
     const outer = container.querySelector("ul.clinical-list")!;
     expect(outer.classList.contains("clinical-list-nested")).toBe(false);
@@ -136,40 +139,145 @@ describe("renderer redesign", () => {
     expect(screen.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/topics");
   });
 
-  it("renders every supplied decision edge as a connector instead of flattening nodes by depth", () => {
-    const flow: TopicBlock = {
-      id: "flow-1",
-      type: "flow",
-      heading: "Treatment decision",
-      nodes: [
-        { id: "start", label: "Suspected condition" },
-        { id: "stable", label: "Stable", tone: "good" },
-        { id: "unstable", label: "Unstable", tone: "caution" },
-        { id: "observe", label: "Observe" },
-        { id: "operate", label: "Operate", tone: "caution" },
-      ],
-      edges: [
-        { from: "start", to: "stable", label: "stable" },
-        { from: "start", to: "unstable", label: "unstable" },
-        { from: "stable", to: "observe" },
-        { from: "unstable", to: "operate" },
-      ],
-      claims: [],
-    };
+  const renderFlow = (flow: TopicBlock, linkEntries: typeof entries = []) => {
     const flowVersion = { ...version, blocks: [flow] };
-    const flowTopic = { ...topic, approvedVersion: flowVersion, versions: [flowVersion] };
-    const { container } = renderTopic(<TopicContent contents={contents} topic={flowTopic} sources={[]} linkEntries={[]} />);
+    return renderTopic(<TopicContent contents={contents} topic={{ ...topic, approvedVersion: flowVersion, versions: [flowVersion] }} sources={[]} linkEntries={linkEntries} />);
+  };
+  const twoColumnFlow: TopicBlock = {
+    id: "flow-1",
+    type: "flow",
+    heading: "Treatment decision",
+    nodes: [
+      { id: "start", label: "Suspected condition" },
+      { id: "stable", label: "Stable", tone: "good" },
+      { id: "unstable", label: "Unstable", tone: "caution" },
+      { id: "observe", label: "Observe" },
+      { id: "operate", label: "Operate", tone: "caution" },
+    ],
+    edges: [
+      { from: "start", to: "stable", label: "stable" },
+      { from: "start", to: "unstable", label: "unstable" },
+      { from: "stable", to: "observe" },
+      { from: "unstable", to: "operate" },
+    ],
+    claims: [],
+  };
+  // Three exits at one level make this wider than two columns; "shared" is reached by two branches.
+  const wideFlow: TopicBlock = {
+    id: "flow-2",
+    type: "flow",
+    heading: "Wide decision",
+    nodes: [
+      { id: "start", label: "Presentation" },
+      { id: "a", label: "Branch A" },
+      { id: "b", label: "Branch B" },
+      { id: "c", label: "Branch C", tone: "good" },
+      { id: "shared", label: "Shared step", tone: "caution" },
+      { id: "end", label: "Outcome" },
+    ],
+    edges: [
+      { from: "start", to: "a", label: "first" },
+      { from: "start", to: "b", label: "second" },
+      { from: "start", to: "c" },
+      { from: "a", to: "shared", label: "from A" },
+      { from: "b", to: "shared" },
+      { from: "shared", to: "end" },
+    ],
+    claims: [],
+  };
+
+  it("draws a flow of two columns or fewer with every supplied edge as a connector and the condition above its box", () => {
+    const { container } = renderFlow(twoColumnFlow);
 
     const diagram = container.querySelector(".decision-flow");
     expect(diagram).toHaveAttribute("aria-label", "Treatment decision flowchart");
-    expect(diagram!.querySelectorAll(".flow-node[data-node-id]")).toHaveLength(flow.nodes.length);
-    expect(diagram!.querySelectorAll("svg.flow-connectors path.flow-edge")).toHaveLength(flow.edges.length);
-    for (const edge of flow.edges) {
+    expect(diagram!.querySelectorAll(".flow-node[data-node-id]")).toHaveLength(twoColumnFlow.nodes.length);
+    expect(diagram!.querySelectorAll("svg.flow-connectors path.flow-edge")).toHaveLength(twoColumnFlow.edges.length);
+    for (const edge of twoColumnFlow.edges) {
       expect(diagram!.querySelector(`path[data-from="${edge.from}"][data-to="${edge.to}"]`)).not.toBeNull();
     }
-    expect(diagram!.querySelectorAll(".flow-relationship")).toHaveLength(flow.edges.length);
+    // A condition is a sibling placed right before the box it leads to, not a label floating on the connector.
+    const stable = diagram!.querySelector('.flow-node[data-node-id="stable"]')!;
+    expect(stable.previousElementSibling).toHaveClass("flow-conditions");
+    expect(stable.previousElementSibling).toHaveTextContent("stable");
+    expect(diagram!.querySelector('.flow-node[data-node-id="observe"]')!.previousElementSibling).toBeNull();
     expect(diagram).not.toHaveTextContent("Compare the source-linked paths");
     expect(diagram).not.toHaveTextContent("Then");
+  });
+
+  it("keeps the old kicker, kind, root tint, chip, relationships list and scroller out of the markup", () => {
+    const { container } = renderFlow(twoColumnFlow);
+
+    expect(container.querySelector("[data-node-kind]")).toBeNull();
+    expect(container.querySelector(".flow-node small")).toBeNull();
+    expect(container.querySelector(".flow-node.root, .flow-node.good, .flow-node.caution")).toBeNull();
+    expect(container.querySelector(".flow-edge-label")).toBeNull();
+    expect(container.querySelector(".flow-relationships, .flow-relationship")).toBeNull();
+    expect(container.querySelector(".flow-canvas")).not.toHaveStyle({ minWidth: "100%" });
+    for (const word of ["Start", "Decision", "Merge", "Outcome", "Step"]) expect(container.querySelector(".flow-node")).not.toHaveTextContent(new RegExp(`^${word}`));
+  });
+
+  it("hides the diagram from assistive tech and gives it the outline instead, one item per step", () => {
+    const { container } = renderFlow(twoColumnFlow);
+
+    expect(container.querySelector(".flow-canvas")).toHaveAttribute("aria-hidden", "true");
+    const outline = container.querySelector(".decision-flow > ul.flow-outline")!;
+    expect(outline).toHaveClass("visually-hidden");
+    expect(outline.closest("[aria-hidden='true']")).toBeNull();
+    expect(outline.querySelectorAll("li")).toHaveLength(twoColumnFlow.nodes.length);
+    expect(outline.textContent).toContain("stable → Stable");
+    expect(outline.textContent).toContain("unstable → Unstable");
+    expect(outline.textContent).toContain("→ Observe");
+    // The first step has no exit, so it carries no arrow.
+    expect(outline.querySelector(":scope > li > .flow-exit")).toBeNull();
+  });
+
+  it("marks tone with a silent 15px glyph in the diagram and in the outline, and nowhere else", () => {
+    const { container } = renderFlow(twoColumnFlow);
+
+    for (const scope of [".flow-canvas", ".flow-outline"]) {
+      expect(container.querySelectorAll(`${scope} svg.flow-glyph.good`)).toHaveLength(1);
+      expect(container.querySelectorAll(`${scope} svg.flow-glyph.caution`)).toHaveLength(2);
+    }
+    for (const glyph of container.querySelectorAll(".decision-flow svg.flow-glyph")) {
+      expect(glyph).toHaveAttribute("aria-hidden", "true");
+      expect(glyph).toHaveAttribute("width", "15");
+    }
+    expect(container.querySelectorAll(".flow-node:not([data-node-id='stable']):not([data-node-id='unstable']):not([data-node-id='operate']) svg")).toHaveLength(0);
+  });
+
+  it("renders a flow wider than two columns as a visible outline and no diagram, repeating the shared step", () => {
+    const { container } = renderFlow(wideFlow);
+
+    const diagram = container.querySelector(".decision-flow")!;
+    expect(diagram).toHaveAttribute("aria-label", "Wide decision flowchart");
+    expect(diagram.querySelector(".flow-canvas, svg.flow-connectors, .flow-node")).toBeNull();
+    const outline = diagram.querySelector("ul.flow-outline")!;
+    expect(outline).not.toHaveClass("visually-hidden");
+    expect(outline.closest("[aria-hidden='true']")).toBeNull();
+    // start + a, b, c + "Shared step" and "Outcome" once under each branch that reaches them.
+    expect(outline.querySelectorAll("li")).toHaveLength(1 + 3 + 2 + 2);
+    const steps = [...outline.querySelectorAll(".flow-step")].map((step) => step.textContent);
+    expect(steps.filter((step) => step === "Shared step")).toHaveLength(2);
+    expect(steps.filter((step) => step === "Outcome")).toHaveLength(2);
+    // Each branch carries its own subtree.
+    const branchA = [...outline.querySelectorAll(":scope > li > ul > li")].find((li) => li.textContent?.startsWith("first"))!;
+    expect([...branchA.querySelectorAll(".flow-exit, .flow-step")].map((part) => part.textContent)).toEqual(["first → ", "Branch A", "from A → ", "Shared step", "→ ", "Outcome"]);
+    const branchC = [...outline.querySelectorAll(":scope > li > ul > li")].find((li) => li.textContent?.startsWith("→ Branch C"))!;
+    expect(branchC.querySelector("ul")).toBeNull();
+  });
+
+  it("leaves each link focusable once: the outline keeps it, the hidden diagram copy leaves the tab order", () => {
+    const linked: TopicBlock = { ...twoColumnFlow, nodes: twoColumnFlow.type === "flow" ? twoColumnFlow.nodes.map((node) => node.id === "observe" ? { ...node, label: "Observe, then choledocholithiasis workup" } : node) : [] };
+    const { container } = renderFlow(linked, entries);
+
+    const inDiagram = container.querySelectorAll(".flow-canvas a.inline-link");
+    const inOutline = container.querySelectorAll(".flow-outline a.inline-link");
+    expect(inDiagram).toHaveLength(1);
+    expect(inOutline).toHaveLength(1);
+    expect(inDiagram[0]).toHaveAttribute("tabindex", "-1");
+    expect(inOutline[0]).not.toHaveAttribute("tabindex");
+    expect(inDiagram[0].getAttribute("href")).toBe(inOutline[0].getAttribute("href"));
   });
 
   it("prints a version's review date in UTC, matching the header's Last updated", async () => {
@@ -223,6 +331,23 @@ describe("reader chrome", () => {
     const details = container.querySelector<HTMLDetailsElement>("#b1")!;
     expect(details.open).toBe(true);
     expect(scrollIntoView.mock.instances.at(-1)).toBe(details);
+  });
+
+  it("switches to Notes, opens the section and aims at a merged block when its #block link is followed from another tab", async () => {
+    // b1x repeats b1's heading, so it is folded into b1's section and has no disclosure to open of its own.
+    const merged: TopicBlock[] = [blocks[0], { id: "b1x", type: "prose", heading: "↳ Assessment", text: "Folded in", claims: [] }, ...blocks.slice(1)];
+    const folded: TopicVersion = { ...version, blocks: merged };
+    const { container } = renderTopic(<TopicContent contents={contents} topic={{ ...topic, approvedVersion: folded, versions: [folded] }} sources={[]} linkEntries={entries} />);
+    await userEvent.click(screen.getByRole("tab", { name: /Sources/ }));
+    expect(container.querySelector("#b1x")).toBeNull();
+
+    act(() => { window.history.replaceState({}, "", "/topics/paraesophageal#b1x"); window.dispatchEvent(new HashChangeEvent("hashchange")); });
+    expect(screen.getByRole("tab", { name: "Notes" })).toHaveAttribute("aria-selected", "true");
+    const part = container.querySelector<HTMLElement>("#b1x")!;
+    expect(part.closest("details")).toBe(container.querySelector("#b1"));
+    expect(container.querySelector<HTMLDetailsElement>("#b1")!.open).toBe(true);
+    expect(container.querySelectorAll("details.section-block")).toHaveLength(2);
+    expect(scrollIntoView.mock.instances.at(-1)).toBe(part);
   });
 
   it("also switches to Notes when the link followed points at the hash the page already has, which fires no hashchange", async () => {

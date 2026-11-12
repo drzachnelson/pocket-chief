@@ -46,7 +46,8 @@ No slug with the prefix present means the ghost, not a bug in your content. Ask 
 Read the DOM rather than the screenshot wherever a number can settle it:
 
 - `document.querySelectorAll('.flow-start, .flow-card').length` against the authored node count catches a node the layout silently dropped.
-- Counting `Supported` in the article text catches a claim mismatch faster than reading for it.
+- Counting `document.querySelectorAll('[aria-label="Unsupported"]').length` catches a claim mismatch faster than reading for it. It must be 0: a supported block shows nothing.
+- Counting `details.section-block > summary` against the authored headings catches a `↳` heading that repeats the one above: the renderer folds it into that section, so the count comes out lower than the headed blocks.
 
 When the Browser pane is hidden, layout metrics collapse: `document.body.innerText` returns almost nothing and `scrollTo` does nothing, while `querySelectorAll` and `textContent` keep working. An apparently empty page is that quirk far more often than a real failure — confirm with `curl` before debugging it.
 
@@ -64,7 +65,7 @@ Every destination should be somewhere a reader would want to land. A wrong one o
 
 For each new or revised topic:
 
-- Every block reads **Supported**.
+- No block shows the unsupported symbol (`[aria-label="Unsupported"]`), and no `↳` heading repeats the heading above it.
 - Flows draw every branch, and the node count matches.
 - Tables render every row, with no dropped cell from a duplicate key.
 - `/topics` groups the topic under the right section, and a new section appears in the jump rail.

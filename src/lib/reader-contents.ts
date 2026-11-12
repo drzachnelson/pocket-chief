@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { headingLevel } from "@/lib/inline";
+import { groupSections, headingLevel } from "@/lib/inline";
 import { getPlaybookBySlug, getTopicBySlug, listPlaybookSummaries, listTaxonomy, listTopics } from "@/lib/library";
 import { specialtyId } from "@/lib/library-items";
 import { buildTopicNavigation } from "@/lib/topic-navigation";
@@ -14,7 +14,7 @@ export interface ContentsBranch extends ContentsGroup { groups: ContentsGroup[] 
 export interface ContentsSection { id: string; label: string; level: 2 | 3 }
 export interface ContentsData { corpus: "topics" | "playbooks"; sections: ContentsSection[]; branches: ContentsBranch[] }
 
-const sectionsOf = (blocks: TopicBlock[]): ContentsSection[] => blocks.filter((block) => block.heading && block.type !== "references").map((block) => { const { level, text } = headingLevel(block.heading!); return { id: block.id, label: text, level }; });
+const sectionsOf = (blocks: TopicBlock[]): ContentsSection[] => groupSections(blocks).map(({ block }) => block).filter((block) => block.heading && block.type !== "references").map((block) => { const { level, text } = headingLevel(block.heading!); return { id: block.id, label: text, level }; });
 
 const topicBranches = cache((): ContentsBranch[] => buildTopicNavigation(listTaxonomy(), listTopics()).map((category) => ({
   id: category.id, label: category.label, links: category.topics.map(({ slug, label }) => ({ slug, label })),

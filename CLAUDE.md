@@ -67,7 +67,7 @@ Every block renders some set of factual statements. `factualUnits(block)` in `sr
 
 - A playbook is organized by `procedureId` + `approach` + `specialty` and **never enters the SCORE taxonomy**. `library.test.ts:29` (one parentless root) and `taxonomy.test.ts:30` (the exact ordered section list) are the tripwire that proves it — do not add a taxonomy node for a playbook.
 - Playbooks ship approved-only, so there is no `TopicVersion` wrapper and no History tab.
-- `PlaybookContent` must never call `recordRecentView` or `setTopicSaved`. Every reader of the `saved`/`recent` stores renders rows through `TopicCard`, which reads `scoreCategory` and links to `/topics/<slug>` — a playbook in there is a broken card pointing at a 404.
+- A playbook can be saved and viewed like a topic. The `saved` and `recent` stores hold one record per id with a `kind` (`topic` or `playbook`); a record with no `kind` is an old topic snapshot and reads as a topic. Rebuild rows from the current library by id with `resolveEntries()` (`src/lib/library-items.ts`) and render them in the shared `ListRow`, never from a stored snapshot and never through `TopicCard`, which reads `scoreCategory` and links to `/topics/<slug>` (a 404 for a playbook). A missing id is a muted "No longer available" row on Saved. Home's sections still read topic snapshots through `getRecentTopics()` and `getSavedTopics()`, which skip playbook records, until Home moves to the shared row.
 - `sourcedUnits()` cites each factual unit separately. Reach for it when one block genuinely mixes societies; blanket multi-source citation passes `supportWarnings` while quietly claiming both works support both statements.
 - `src/lib/__tests__/playbooks.test.ts` pins the set of auto-links each playbook generates. An auto-link is a claim about clinical relatedness, and the topic link index is global, so a new one fails the test until someone reviews it. Three false positives have already been caught this way: "skip lesions" reaching Crohn disease, "a fast one" reaching the FAST exam, and "peroneal nerve" reaching escharotomy.
 
@@ -95,9 +95,10 @@ Adding content is a repeatable workflow — invoke the `/add-topic` skill rather
 `src/components/topic-content.tsx` renders every block type, and its React keys impose rules that content must respect:
 
 - **Tables**: `row[0]` is the row key and `${row[0]}-${cell}` is the cell key — row headers must be unique and no cell may repeat within its own row.
-- **Flows**: laid out by longest path from the root, so arbitrary width and depth work, but there must be exactly one root, all edge endpoints must exist, and every node must be reachable or it silently disappears.
+- **Flows**: laid out by longest path from the root. A flow whose widest level has more than two boxes renders only as a nested outline (`condition → step`, a shared step written out again under each branch that reaches it); two columns or fewer also draw a diagram, hidden from assistive tech, with each condition above its box. There must be exactly one root, all edge endpoints must exist, and every node must be reachable or it silently disappears from both forms.
 - **Bullets and sequences**: items and step titles are keys, so keep them unique.
 - Any block with a `heading` appears in the on-page table of contents.
+- A `↳` heading that repeats the heading of the block above is folded into that section (`groupSections` in `src/lib/inline.ts`): no row, title or Contents entry of its own, content under the parent's, the block's id still a link target that opens the parent. A `↳` heading that differs stays a real sub-heading. Author with distinct titles; do not repeat the parent's.
 
 ## Conventions
 

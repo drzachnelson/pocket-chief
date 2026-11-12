@@ -14,7 +14,83 @@ test("search, read, and save a topic", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
 
   await page.goto("./saved/");
-  await expect(page.locator(".topic-grid").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
+  await expect(page.locator(".list-rows").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
+});
+
+/** Writes records into the saved store the way an earlier bundle, or a page that has since left the library, would have left them. */
+async function seedSaved(page: Page, records: object[]) {
+  await page.evaluate((entries) => new Promise<void>((resolve, reject) => {
+    const open = indexedDB.open("pocket-chief-private");
+    open.onerror = () => reject(open.error);
+    open.onsuccess = () => {
+      const tx = open.result.transaction("saved", "readwrite");
+      for (const record of entries) tx.objectStore("saved").put(record);
+      tx.oncomplete = () => { open.result.close(); resolve(); };
+      tx.onerror = () => reject(tx.error);
+    };
+  }), records);
+}
+
+test("Saved: one mixed newest-first list rebuilt by id, with old snapshots, playbooks and a gone page", async ({ page, request }) => {
+  const { topics } = await (await request.get("library.json")).json() as { topics: Array<{ id: string; slug: string; title: string }> };
+  const { playbooks } = await (await request.get("playbooks.json")).json() as { playbooks: Array<{ id: string; slug: string; title: string; specialty: string }> };
+  const [oldTopic] = topics;
+  const [playbook] = playbooks;
+  await page.goto("./saved/");
+  await expect(page.getByText("Nothing saved yet.")).toBeVisible();
+  await expect(page.getByText("Use Save on a topic or playbook.")).toBeVisible();
+  // An old entry is a whole Topic snapshot with no kind; a stale title proves the row is rebuilt from the current library.
+  await seedSaved(page, [
+    { ...oldTopic, title: "Stale snapshot title", savedAt: "2026-10-01T00:00:00.000Z" },
+    { id: playbook.id, kind: "playbook", savedAt: "2026-10-03T00:00:00.000Z" },
+    { id: "no-longer-in-the-library", kind: "topic", savedAt: "2026-10-02T00:00:00.000Z" },
+  ]);
+  await page.reload();
+
+  await expect(page.getByRole("heading", { name: "Saved", level: 1 })).toBeVisible();
+  const rows = page.locator("main .list-rows > li");
+  await expect(rows).toHaveCount(3);
+  await expect(rows.nth(0)).toContainText(playbook.title);
+  await expect(rows.nth(0)).toContainText(playbook.specialty);
+  await expect(rows.nth(0)).toContainText("Playbook");
+  await expect(rows.nth(0).getByRole("link")).toHaveAttribute("href", new RegExp(`/playbooks/${playbook.slug}/?$`));
+  await expect(rows.nth(1)).toHaveText("No longer available");
+  await expect(rows.nth(1).getByRole("link")).toHaveCount(0);
+  await expect(rows.nth(1).getByRole("button")).toHaveCount(1);
+  await expect(rows.nth(2)).toContainText(oldTopic.title);
+  await expect(rows.nth(2)).not.toContainText("Stale snapshot title");
+  await expect(rows.nth(2).getByRole("link")).toHaveAttribute("href", new RegExp(`/topics/${oldTopic.slug}/?$`));
+
+  // The toggle takes the page off Saved but leaves the row in place until the next visit; a second tap restores it.
+  const toggle = rows.nth(2).getByRole("button", { name: `Save ${oldTopic.title}` });
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await expect(rows).toHaveCount(3);
+  await page.reload();
+  await expect(rows).toHaveCount(2);
+  await expect(page.getByText(oldTopic.title)).toHaveCount(0);
+});
+
+test("Saved: the bookmark toggle is a target tall and the row is the shared list row, at every width", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.goto("./topics/choledocholithiasis/");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+  for (const [width, target] of [[375, 44], [768, 44], [1280, 36]] as const) {
+    await page.setViewportSize({ width, height: 812 });
+    await page.goto("./saved/");
+    const toggle = page.getByRole("button", { name: "Save Choledocholithiasis" });
+    await expect(toggle).toBeVisible();
+    const box = (await toggle.boundingBox())!;
+    expect(box.width).toBe(target);
+    expect(box.height).toBe(target);
+    const column = (await page.locator("main .list-rows").boundingBox())!;
+    // The icon sits where the chevron does: its right edge on the column's right edge.
+    const icon = (await toggle.locator("svg").boundingBox())!;
+    expect(Math.abs(icon.x + icon.width - (column.x + column.width))).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  }
 });
 
 const PRIMARY = ["Home", "Topics", "Playbooks", "Saved"];
@@ -207,11 +283,16 @@ test("decision flows keep labeled branches connected and readable on mobile", as
   const flow = page.getByRole("group", { name: "The diagnostic decision flowchart" });
   await expect(flow).toBeVisible();
 
+  // No scroller: a diagram is two columns at most, so it fits the phone.
   const metrics = await flow.evaluate((element) => ({
     clientWidth: element.clientWidth,
     scrollWidth: element.scrollWidth,
+    pageOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    overflowX: getComputedStyle(element).overflowX,
   }));
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+  expect(metrics.pageOverflow).toBeLessThanOrEqual(1);
+  expect(metrics.overflowX).toBe("visible");
 
   const awake = await flow.locator('[data-node-id="awake"]').boundingBox();
   const obtunded = await flow.locator('[data-node-id="obtunded"]').boundingBox();
@@ -227,17 +308,81 @@ test("decision flows keep labeled branches connected and readable on mobile", as
   for (let index = 0; index < await edges.count(); index += 1) {
     await expect(edges.nth(index)).not.toHaveAttribute("d", "");
   }
+  // A long edge still drops down an outer gutter, on whichever side its source sits.
   const rightBypass = await flow.locator('path[data-from="obtunded"][data-to="icp"]').getAttribute("d");
   const leftBypass = await flow.locator('path[data-from="clinicalpos"][data-to="fasciotomy"]').getAttribute("d");
   expect(rightBypass).not.toContain("H 5 ");
   expect(leftBypass).toContain("H 5 ");
-  const flowBox = await flow.boundingBox();
-  const bypassLabel = await flow.getByText("clinical diagnosis alone is enough", { exact: true }).boundingBox();
-  expect(flowBox).not.toBeNull();
-  expect(bypassLabel).not.toBeNull();
-  expect(bypassLabel!.x).toBeGreaterThanOrEqual(flowBox!.x);
+
+  // A condition is the text just above the box it leads to, inside that box's column, and not on the connector.
+  const fasciotomy = await flow.locator('[data-node-id="fasciotomy"]').boundingBox();
+  const bypass = await flow.locator(".flow-conditions", { hasText: "clinical diagnosis alone is enough" }).boundingBox();
+  expect(fasciotomy).not.toBeNull();
+  expect(bypass).not.toBeNull();
+  expect(bypass!.y + bypass!.height).toBeLessThanOrEqual(fasciotomy!.y + 1);
+  expect(fasciotomy!.y - (bypass!.y + bypass!.height)).toBeLessThanOrEqual(8);
+  expect(bypass!.x).toBeGreaterThanOrEqual(fasciotomy!.x - 1);
+  expect(bypass!.x + bypass!.width).toBeLessThanOrEqual(fasciotomy!.x + fasciotomy!.width + 1);
   await expect(flow.getByText("awake and examinable", { exact: true })).toBeVisible();
   await expect(flow.getByText("cannot be reliably examined", { exact: true })).toBeVisible();
+  await expect(flow.locator("[data-node-kind], .flow-node small")).toHaveCount(0);
+  // The reset makes an svg a block; the tone glyph has to stay on its label's line.
+  await expect(flow.locator(".flow-canvas svg.flow-glyph").first()).toHaveCSS("display", "inline-block");
+});
+
+test("assistive tech reads a diagram as its outline and the drawn diagram is skipped", async ({ page }) => {
+  await page.goto("./topics/fasciotomy/");
+  await page.getByRole("button", { name: "Expand all" }).click();
+  const flow = page.getByRole("group", { name: "The diagnostic decision flowchart" });
+  await expect(flow).toBeVisible();
+
+  const tree = await flow.ariaSnapshot();
+  // Each step is spoken once, from the outline, and the branch condition leads the step it reaches.
+  // "Proceed to fasciotomy" follows a positive exam directly and the low delta P step, and the pressure-measurement
+  // step before that is itself reached from two branches, so the step is written out three times.
+  expect(tree.match(/Proceed to fasciotomy/g)).toHaveLength(3);
+  expect(tree).toContain("clinical diagnosis alone is enough");
+  expect(tree.match(/Awake, reliable, and can be serially examined/g)).toHaveLength(1);
+  expect(tree).toContain("listitem");
+  await expect(flow.locator(".flow-canvas")).toHaveAttribute("aria-hidden", "true");
+});
+
+test("a flow wider than two columns is only an outline, with the shared step written out under each branch", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("./topics/carotid-artery-disease/");
+  await page.getByRole("button", { name: "Expand all" }).click();
+  const flow = page.getByRole("group", { name: "Who gets revascularized flowchart" });
+  await expect(flow).toBeVisible();
+
+  await expect(flow.locator(".flow-canvas, svg.flow-connectors, .flow-node")).toHaveCount(0);
+  await expect(flow.locator("ul.flow-outline")).toBeVisible();
+  await expect(flow.locator(".flow-step", { hasText: "Occluded or near-occluded" })).toHaveCount(2);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+  expect(await flow.evaluate((element) => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
+});
+
+test("flow connectors keep at least 3:1 contrast against the page in light and dark", async ({ page }) => {
+  await page.setViewportSize({ width: 393, height: 852 });
+  for (const scheme of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto("./topics/fasciotomy/");
+    await page.getByRole("button", { name: "Expand all" }).click();
+    const edge = page.locator("path.flow-edge").first();
+    await expect(edge).toBeVisible();
+    const { stroke, width, background } = await edge.evaluate((element) => {
+      const luminance = (color: string) => {
+        const [r, g, b] = (color.match(/[\d.]+/g) ?? []).slice(0, 3).map((channel) => { const value = Number(channel) / 255; return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4; });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
+      let behind: Element | null = element.parentElement;
+      while (behind && /rgba?\(.*, 0\)$|transparent/.test(getComputedStyle(behind).backgroundColor)) behind = behind.parentElement;
+      const [a, b] = [luminance(getComputedStyle(element).stroke), luminance(getComputedStyle(behind ?? document.body).backgroundColor)].sort((x, y) => y - x);
+      return { stroke: (a + 0.05) / (b + 0.05), width: getComputedStyle(element).strokeWidth, background: getComputedStyle(behind ?? document.body).backgroundColor };
+    });
+    expect(stroke, `${scheme} stroke on ${background}`).toBeGreaterThanOrEqual(3);
+    expect(width).toBe("1.5px");
+  }
 });
 
 test("a topic page keeps the shell: Topics current, Contents in the sidebar and the exact update date", async ({ page }, testInfo) => {

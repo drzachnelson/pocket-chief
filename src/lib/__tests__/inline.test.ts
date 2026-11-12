@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildLinkIndex, bulletDepth, createLinkScope, headingLevel, parseInline, stripMarkup } from "@/lib/inline";
+import { buildLinkIndex, bulletDepth, createLinkScope, groupSections, headingLevel, parseInline, stripMarkup } from "@/lib/inline";
 
 const library = [
   { slug: "choledocholithiasis", title: "Choledocholithiasis", aliases: ["CBD stones", "CBD"] },
@@ -132,6 +132,31 @@ describe("indent prefixes", () => {
   it("reads and removes the subsection prefix", () => {
     expect(headingLevel("Operative steps")).toEqual({ level: 2, text: "Operative steps" });
     expect(headingLevel("↳ Acute pulmonary exacerbations")).toEqual({ level: 3, text: "Acute pulmonary exacerbations" });
+  });
+});
+
+describe("repeated sub-headings", () => {
+  const block = (id: string, heading?: string, type = "prose") => ({ id, type, heading });
+  const shape = (blocks: ReturnType<typeof block>[]) => groupSections(blocks).map(({ block: head, merged }) => [head.id, ...merged.map((part) => part.id)]);
+
+  it("folds a ↳ block that repeats the heading above into the section above", () => {
+    expect(shape([block("a", "Landmarks"), block("b", "↳ Landmarks"), block("c", "Next")])).toEqual([["a", "b"], ["c"]]);
+  });
+
+  it("keeps a chain of repeats in one section, whether the first block is a sub-heading or not", () => {
+    expect(shape([block("a", "Readiness"), block("b", "↳ Readiness"), block("c", "↳ Readiness")])).toEqual([["a", "b", "c"]]);
+    expect(shape([block("a", "↳ Readiness"), block("b", "↳ Readiness")])).toEqual([["a", "b"]]);
+  });
+
+  it("leaves a ↳ heading that differs, a plain repeat and a headless block as blocks of their own", () => {
+    expect(shape([block("a", "Guidance"), block("b", "↳ Current guidance on decompression")])).toEqual([["a"], ["b"]]);
+    expect(shape([block("a", "Guidance"), block("b", "Guidance")])).toEqual([["a"], ["b"]]);
+    expect(shape([block("a"), block("b", "↳ Guidance")])).toEqual([["a"], ["b"]]);
+    expect(shape([block("a", "Guidance"), block("b"), block("c", "↳ Guidance")])).toEqual([["a"], ["b"], ["c"]]);
+  });
+
+  it("never folds into a callout, which has no disclosure to hold it", () => {
+    expect(shape([block("a", "Caution", "warning"), block("b", "↳ Caution")])).toEqual([["a"], ["b"]]);
   });
 });
 
