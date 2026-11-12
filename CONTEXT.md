@@ -118,6 +118,10 @@ _Not_: the tab bar.
 The page toolbar's accessible name.
 _Not_: a visible label.
 
+**Find bar**:
+The field, match count, Previous, Next and Close that Find text opens. It takes the page toolbar's place in the top row (on phone, the toolbar's row) and is named Find in page.
+_Not_: the shared search field, or a second search landmark.
+
 **Contents**:
 The open reader page's sections plus the other pages of its corpus.
 _Not_: Browse, the button it replaces.

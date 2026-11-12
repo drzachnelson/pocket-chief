@@ -302,7 +302,7 @@ test("phone: the page toolbar takes the tab bar's place on a reader page and onl
   test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("./topics/choledocholithiasis/");
-  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Contents", "Expand all"]);
+  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Contents", "Find text", "Expand all"]);
   await expect(tools(page).getByRole("link")).toHaveText(["Topics"]);
   await expect(page.getByRole("navigation", { name: "Primary" }).first()).toBeHidden();
   const bar = (await tools(page).boundingBox())!;
@@ -320,7 +320,7 @@ test("tablet: the toolbar sits at the right of the top row without the index lin
   test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.goto("./playbooks/temporal-artery-biopsy/");
-  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Contents", "Expand all"]);
+  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Contents", "Find text", "Expand all"]);
   await expect(tools(page).getByRole("link")).toBeHidden();
   const row = (await page.locator(".top-row").boundingBox())!;
   const group = (await tools(page).boundingBox())!;
@@ -341,7 +341,7 @@ test("laptop: Contents is inline in the sidebar, which no longer carries a Conte
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("./topics/choledocholithiasis/");
   const nav = sidebarContents(page);
-  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Expand all"]);
+  await expect(tools(page).getByRole("button")).toHaveText(["Back", "Find text", "Expand all"]);
   await expect(tools(page).getByRole("link")).toBeHidden();
   await expect(nav.getByRole("group", { name: "On this page" }).getByRole("link").first()).toBeVisible();
   await expect(nav.getByRole("group", { name: "Topics" })).toBeVisible();
@@ -545,4 +545,157 @@ test("Back is never dead: a cold launch goes to the page's category or specialty
   await expect(page).toHaveURL(/escharotomy\/$/);
   await tools(page).getByRole("button", { name: "Back" }).click();
   await expect(page).toHaveURL(/\/pocket-chief\/topics\/category\/trauma\/$/);
+});
+
+// Find text. The toolbar is hidden while the bar is open, so its button is reached with includeHidden and the bar through its own group.
+const findButton = (page: Page) => page.locator(".page-toolbar").getByRole("button", { name: "Find text", includeHidden: true });
+const findBar = (page: Page) => page.getByRole("group", { name: "Find in page" });
+const findField = (page: Page) => findBar(page).getByRole("searchbox", { name: "Find in page" });
+const findStatus = (page: Page) => findBar(page).getByRole("status");
+const highlightSize = (page: Page, name: "find-match" | "find-current") => page.evaluate((key) => CSS.highlights.get(key)?.size ?? 0, name);
+/** The current match as painted: what it sits in, whether its section is open, and where it landed on screen. */
+const currentMatch = (page: Page) => page.evaluate(() => {
+  const range = [...CSS.highlights.get("find-current")!][0] as Range;
+  const element = range.startContainer.parentElement!;
+  const box = range.getBoundingClientRect();
+  return { text: range.toString(), cell: Boolean(element.closest("td, th")), flow: Boolean(element.closest(".flow-node, .flow-edge-label")), open: element.closest("details")?.open ?? true, top: box.top, bottom: box.bottom };
+});
+const total = async (page: Page) => Number(/of (\d+)/.exec((await findStatus(page).textContent()) ?? "")?.[1]);
+
+test("find text, phone: the bar takes the toolbar's row, paints every match, lands the current one in view and gives focus back", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("./topics/choledocholithiasis/");
+  await expect(findButton(page)).toHaveAttribute("aria-expanded", "false");
+  await expect(findBar(page)).toBeHidden();
+  await tools(page).getByRole("button", { name: "Find text" }).click();
+
+  await expect(findButton(page)).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator(".page-toolbar")).toBeHidden();
+  const bar = (await findBar(page).boundingBox())!;
+  expect(bar.y + bar.height).toBe(812);
+  expect(bar.height).toBe(68);
+  await expect(findField(page)).toBeFocused();
+  expect((await findField(page).boundingBox())!.width).toBeGreaterThan(140);
+  for (const name of ["Previous match", "Next match", "Close find"]) expect((await findBar(page).getByRole("button", { name }).boundingBox())!.width).toBeGreaterThanOrEqual(44);
+
+  await page.keyboard.type("cholangitis");
+  await expect(findStatus(page)).toHaveText(/^1 of \d+$/);
+  const count = await total(page);
+  expect(count).toBeGreaterThan(3);
+  expect(await highlightSize(page, "find-match")).toBe(count);
+  expect(await highlightSize(page, "find-current")).toBe(1);
+  const match = await currentMatch(page);
+  expect(match.open).toBe(true);
+  // Between the 60px header and the 68px bar.
+  expect(match.top).toBeGreaterThan(60);
+  expect(match.bottom).toBeLessThan(812 - 68);
+
+  await page.keyboard.press("Escape");
+  await expect(findBar(page)).toBeHidden();
+  await expect(findButton(page)).toBeFocused();
+  await expect(findButton(page)).toHaveAttribute("aria-expanded", "false");
+  expect(await highlightSize(page, "find-match")).toBe(0);
+  await expect(tools(page).getByRole("button", { name: "Find text" })).toBeVisible();
+});
+
+test("find text, tablet at 760px: the bar replaces the toolbar in the top row, one row, with a field of at least 160px", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 760, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  const row = page.locator(".mobile-header");
+  const rowBefore = (await row.boundingBox())!;
+  const group = (await tools(page).boundingBox())!;
+  const search = (await page.getByRole("search").boundingBox())!;
+  await tools(page).getByRole("button", { name: "Find text" }).click();
+
+  const bar = (await findBar(page).boundingBox())!;
+  expect(bar.x).toBeGreaterThanOrEqual(group.x - 1);
+  expect(bar.x + bar.width).toBeLessThanOrEqual(group.x + group.width + 1);
+  expect((await findField(page).boundingBox())!.width).toBeGreaterThanOrEqual(160);
+  // The row did not grow or wrap, nothing overflows sideways, and the search field did not move.
+  expect(await row.boundingBox()).toEqual(rowBefore);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
+  expect(await page.getByRole("search").boundingBox()).toEqual(search);
+  await expect(findField(page)).toBeFocused();
+});
+
+test("find text, laptop: keyboard stepping reaches table cells and flow labels, opens their sections, and Escape returns focus", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  const group = (await tools(page).boundingBox())!;
+  await tools(page).getByRole("button", { name: "Find text" }).click();
+  const bar = (await findBar(page).boundingBox())!;
+  // The bar ends where the toolbar did; it may start a little earlier, to keep a 160px field.
+  expect(Math.abs(bar.x + bar.width - (group.x + group.width))).toBeLessThanOrEqual(1);
+  expect(bar.height).toBe(36);
+  expect((await findField(page).boundingBox())!.width).toBeGreaterThanOrEqual(160);
+
+  await page.keyboard.type("ercp");
+  await expect(findStatus(page)).toHaveText(/^1 of \d+$/);
+  const count = await total(page);
+  const seen = [await currentMatch(page)];
+  for (let step = 1; step < count; step++) { await page.keyboard.press("Enter"); await expect(findStatus(page)).toHaveText(`${step + 1} of ${count}`); seen.push(await currentMatch(page)); }
+  expect(seen.some((match) => match.cell)).toBe(true);
+  expect(seen.some((match) => match.flow)).toBe(true);
+  expect(seen.every((match) => match.open && match.text.toLowerCase() === "ercp")).toBe(true);
+  await page.keyboard.press("Enter");
+  await expect(findStatus(page)).toHaveText(`1 of ${count}`);
+  await page.keyboard.press("Shift+Enter");
+  await expect(findStatus(page)).toHaveText(`${count} of ${count}`);
+
+  // Tab order inside the bar: field, Previous, Next, Close.
+  await page.keyboard.press("Tab");
+  await expect(findBar(page).getByRole("button", { name: "Previous match" })).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(findBar(page).getByRole("button", { name: "Next match" })).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(findStatus(page)).toHaveText(`1 of ${count}`);
+  await page.keyboard.press("Tab");
+  await expect(findBar(page).getByRole("button", { name: "Close find" })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(findButton(page)).toBeFocused();
+  await expect(tools(page).getByRole("button", { name: "Find text" })).toBeVisible();
+});
+
+test("find text searches the tab being read and follows a tab change", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  await tools(page).getByRole("button", { name: "Find text" }).click();
+  // "Sabiston" is named once in the sources and nowhere in the notes.
+  await page.keyboard.type("sabiston");
+  await expect(findStatus(page)).toHaveText("No matches");
+  await page.getByRole("tab", { name: /Sources/ }).click();
+  await expect(findStatus(page)).toHaveText("1 of 1");
+  expect(await highlightSize(page, "find-match")).toBe(1);
+  await page.getByRole("tab", { name: /^Notes$/ }).click();
+  await expect(findStatus(page)).toHaveText("No matches");
+  expect(await highlightSize(page, "find-match")).toBe(0);
+});
+
+test("find text without the Highlight API counts and scrolls while typing, and selects the current match only from the buttons", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.addInitScript(() => Object.defineProperty(CSS, "highlights", { value: undefined, configurable: true }));
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("./topics/choledocholithiasis/");
+  await tools(page).getByRole("button", { name: "Find text" }).click();
+  // Typing must keep working after the first match: a selection outside the field would swallow the next keystroke.
+  await page.keyboard.type("bile", { delay: 120 });
+  await expect(findField(page)).toHaveValue("bile");
+  await expect(findStatus(page)).toHaveText(/^1 of \d+$/);
+  await page.keyboard.type("x", { delay: 120 });
+  await expect(findStatus(page)).toHaveText("No matches");
+  await page.keyboard.press("Backspace");
+  await expect(findStatus(page)).toHaveText(/^1 of \d+$/);
+  // The caret is in the field, so nothing on the page is selected.
+  expect(await page.evaluate(() => getSelection()!.toString())).toBe("");
+
+  await findBar(page).getByRole("button", { name: "Next match" }).click();
+  await expect(findStatus(page)).toHaveText(/^2 of \d+$/);
+  expect(await page.evaluate(() => getSelection()!.toString().toLowerCase())).toBe("bile");
+  await page.keyboard.press("Escape");
+  await expect(findButton(page)).toBeFocused();
+  expect(await page.evaluate(() => getSelection()!.rangeCount)).toBe(0);
 });
