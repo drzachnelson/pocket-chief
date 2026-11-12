@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "@/components/breadcrumb";
+import { ReaderEnd } from "@/components/reader-end";
 import { TopicContent } from "@/components/topic-content";
 import { buildLinkIndex } from "@/lib/inline";
 import { getTopicBySlug, listSources, listTaxonomy, listTopics } from "@/lib/library";
 import { categoryHref } from "@/lib/library-items";
-import { taxonomyAncestry, topicCategory } from "@/lib/taxonomy";
+import { curriculumRootSlug, taxonomyAncestry } from "@/lib/taxonomy";
 import { topicContents } from "@/lib/reader-contents";
 import { buildTopicNavigation, nextTopicInCategory } from "@/lib/topic-navigation";
 
@@ -27,15 +29,15 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   const topics = listTopics();
   const linkEntries = buildLinkIndex(topics);
   const taxonomy = listTaxonomy();
-  const ancestry = taxonomyAncestry(topic.scoreNodeId, taxonomy);
+  // Category, then group when the topic sits in one. The curriculum root is a container and never shown.
+  const [category, group] = taxonomyAncestry(topic.scoreNodeId, taxonomy).filter((node) => node.slug !== curriculumRootSlug);
   const next = nextTopicInCategory(buildTopicNavigation(taxonomy, topics), topic.slug);
-  const category = topicCategory(topic.scoreNodeId, taxonomy);
-  const scorePath = ancestry.map((node) => node.title === "SCORE Curriculum" ? "SCORE" : node.title).join(" · ");
-  const updatedAt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(topic.updatedAt));
+  const categoryLink = category && { label: category.title, href: categoryHref(category.slug) };
+  const crumbs = categoryLink ? [categoryLink, ...(group ? [{ label: group.title, href: `${categoryLink.href}#${group.slug}` }] : [])] : [];
   return (
     <div className="topic-reading">
-      <header className="topic-header"><div><p className="eyebrow">{scorePath}</p><h1 className="page-title">{topic.title}</h1><p className="topic-updated">Last updated {updatedAt}</p></div></header>
-      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} contents={topicContents(slug)!} backFallback={category && categoryHref(category.slug)} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
+      <TopicContent key={topic.id} topic={topic} sources={suppliedSources} linkEntries={linkEntries} contents={topicContents(slug)!} breadcrumb={<Breadcrumb items={crumbs} />} category={categoryLink} nextTopic={next && { slug: next.topic.slug, label: next.topic.label, categoryLabel: next.categoryLabel }} />
+      <ReaderEnd updatedAt={topic.updatedAt} />
     </div>
   );
 }
