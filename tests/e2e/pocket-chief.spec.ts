@@ -128,7 +128,8 @@ test("every page has one main and the shell's search, and no aside, banner or fo
     await expect(page.getByRole("main"), path).toHaveCount(1);
     await expect(page.getByRole("search"), path).toHaveCount(1);
     for (const role of ["banner", "contentinfo", "complementary"] as const) await expect(page.getByRole(role), `${path} ${role}`).toHaveCount(0);
-    await expect(page.getByText(/Educational reference only|No patient information/), path).toHaveCount(0);
+    // The disclaimer line belongs to the end of a reader page and nowhere else.
+    await expect(page.getByText(/Educational reference only|No patient information/), path).toHaveCount(/topics\/choledo|playbooks\/temporal/.test(path) ? 1 : 0);
   }
 });
 
@@ -137,13 +138,164 @@ test("browses to a playbook and reads its steps", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Playbooks", level: 1 })).toBeVisible();
   await page.getByRole("link", { name: /Temporal Artery Biopsy/ }).click();
   await expect(page.getByRole("heading", { name: "Temporal Artery Biopsy", level: 1 })).toBeVisible();
-  await expect(page.getByText("Vascular · Open")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Breadcrumb" }).getByRole("listitem")).toHaveText(["Vascular", "Open"]);
   // Sections ship collapsed, so the step titles are only reachable once the reader opens them.
   await page.getByRole("button", { name: "Expand all" }).click();
   await expect(page.getByText("Ligate and excise")).toBeVisible();
-  // A playbook has no version list and nothing to bookmark yet.
+  // A playbook has no version list, but it can be saved, like a topic.
   await expect(page.getByRole("tab", { name: /History/ })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Save" })).toHaveCount(0);
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+});
+
+test("Saved lists what the reader pages save: a playbook and a topic, newest first, each toggle pressed", async ({ page }) => {
+  await page.goto("./topics/choledocholithiasis/");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Saved", exact: true })).toBeVisible();
+
+  await page.goto("./saved/");
+  const rows = page.locator("main .list-rows > li");
+  await expect(rows).toHaveCount(2);
+  // The playbook was saved last, so it leads; the row is rebuilt from the library, with its specialty and the trailing "Playbook".
+  await expect(rows.nth(0)).toContainText("Temporal Artery Biopsy");
+  await expect(rows.nth(0)).toContainText("Vascular");
+  await expect(rows.nth(0)).toContainText("Playbook");
+  await expect(rows.nth(0).getByRole("link")).toHaveAttribute("href", /\/playbooks\/temporal-artery-biopsy\/?$/);
+  await expect(rows.nth(0).getByRole("button", { name: "Save Temporal Artery Biopsy" })).toHaveAttribute("aria-pressed", "true");
+  await expect(rows.nth(1)).toContainText("Choledocholithiasis");
+  await expect(rows.nth(1)).not.toContainText("Playbook");
+  await expect(rows.nth(1).getByRole("button", { name: "Save Choledocholithiasis" })).toHaveAttribute("aria-pressed", "true");
+
+  // Un-saving from the reader page takes the row off Saved on the next visit.
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await page.getByRole("button", { name: "Saved", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Save", exact: true })).toBeVisible();
+  await page.goto("./saved/");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.nth(0)).toContainText("Choledocholithiasis");
+});
+
+test("the reader header is a breadcrumb with Save, the title and the tabs, 146px on a phone with a two-line title", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("./topics/focused-assessment-with-sonography-for-trauma/");
+  await expect(page.getByRole("button", { name: "Save", exact: true })).toBeEnabled();
+  const crumbs = page.getByRole("navigation", { name: "Breadcrumb" });
+  await expect(crumbs.getByRole("link")).toHaveText(["Trauma", "Operations & Procedures"]);
+  await expect(page.getByText(/^SCORE/)).toHaveCount(0);
+  // Last updated is not in the header.
+  await expect(page.locator(".page-header").getByText(/Last updated/)).toHaveCount(0);
+
+  // One read, so nothing can move between the rectangles.
+  const box = await page.evaluate(() => {
+    const rect = (selector: string) => { const { x, y, width, height } = document.querySelector(selector)!.getBoundingClientRect(); return { x, y, width, height }; };
+    return { header: rect(".page-header"), lead: rect(".page-header-lead"), crumbs: rect(".page-header-lead nav"), save: rect(".page-header-lead .button"), title: rect(".page-header h1"), tabs: rect(".tabs-list"), overflow: document.documentElement.scrollWidth - window.innerWidth };
+  });
+  // Breadcrumb left, Save right, on one 44px row; the title has two lines; the tabs are 44px plus their hairline.
+  expect(box.lead.height).toBeCloseTo(44, 0);
+  expect(box.save.x).toBeGreaterThan(box.crumbs.x + box.crumbs.width - 1);
+  expect(box.save.y).toBeGreaterThanOrEqual(box.lead.y - 0.5);
+  expect(box.save.y + box.save.height).toBeLessThanOrEqual(box.lead.y + box.lead.height + 0.5);
+  expect(box.title.height).toBeCloseTo(2 * 24 * 1.2, 0);
+  expect(box.tabs.height).toBeCloseTo(45, 0);
+  expect(box.header.height).toBeGreaterThanOrEqual(145);
+  expect(box.header.height).toBeLessThanOrEqual(147.5);
+  expect(box.overflow).toBeLessThanOrEqual(0);
+
+  // Both links land on the category page, the second on its group's heading.
+  await expect(crumbs.getByRole("link", { name: "Trauma" })).toHaveAttribute("href", "/pocket-chief/topics/category/trauma/");
+  await expect(crumbs.getByRole("link", { name: "Operations & Procedures" })).toHaveAttribute("href", "/pocket-chief/topics/category/trauma/#trauma-operations-procedures");
+  await crumbs.getByRole("link", { name: "Operations & Procedures" }).click();
+  await expect(page.locator("#trauma-operations-procedures")).toBeVisible();
+});
+
+test("a playbook's header names its specialty as a link to its heading on the index and its approach as text", async ({ page }) => {
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  const crumbs = page.getByRole("navigation", { name: "Breadcrumb" });
+  await expect(crumbs.getByRole("listitem")).toHaveText(["Vascular", "Open"]);
+  await expect(crumbs.getByRole("link")).toHaveCount(1);
+  await crumbs.getByRole("link", { name: "Vascular" }).click();
+  await expect(page).toHaveURL(/\/pocket-chief\/playbooks\/#vascular$/);
+  await expect(page.getByRole("heading", { name: "Vascular", level: 2 })).toBeInViewport();
+});
+
+test("a playbook opened is recorded as recently viewed without reaching the topic lists", async ({ page }) => {
+  await page.goto("./playbooks/temporal-artery-biopsy/");
+  await expect(page.getByRole("heading", { name: "Temporal Artery Biopsy", level: 1 })).toBeVisible();
+  // The app creates its own database; opening it before then would create an empty one, so wait for it by name.
+  const kinds = async () => page.evaluate(async () => {
+    if (!(await indexedDB.databases()).some(({ name }) => name === "pocket-chief-private")) return [];
+    const open = indexedDB.open("pocket-chief-private");
+    const db = await new Promise<IDBDatabase>((resolve, reject) => { open.onsuccess = () => resolve(open.result); open.onerror = () => reject(open.error); });
+    try {
+      if (!db.objectStoreNames.contains("recent")) return [];
+      const read = db.transaction("recent").objectStore("recent").getAll();
+      return await new Promise<Array<{ kind: string }>>((resolve) => { read.onsuccess = () => resolve(read.result); });
+    } finally { db.close(); }
+  });
+  await expect.poll(async () => (await kinds()).map(({ kind }) => kind)).toEqual(["playbook"]);
+  // Home still draws its resume and recent rows from topic snapshots; a playbook entry has none and is left out.
+  await page.goto("./");
+  await expect(page.getByText("Temporal Artery Biopsy")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /^Resume/ })).toHaveCount(0);
+});
+
+for (const tab of ["Notes", "Sources", "History"]) {
+  test(`${tab}: Studied and Next topic come first, then Last updated, then the disclaimer, all below the panel`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("./topics/choledocholithiasis/");
+    await page.getByRole("tab", { name: tab }).click();
+    const box = async (locator: Locator) => (await locator.boundingBox())!;
+    const panel = await box(page.getByRole("tabpanel"));
+    const studied = await box(page.getByRole("button", { name: "Studied" }));
+    const next = await box(page.getByRole("link", { name: /^Next topic:/ }));
+    const updated = await box(page.getByText(/^Last updated /));
+    const disclaimer = await box(page.getByText("Educational reference only. Not patient-specific guidance."));
+    expect(studied.y).toBeGreaterThanOrEqual(panel.y + panel.height - 1);
+    expect(next.y).toBeGreaterThanOrEqual(panel.y + panel.height - 1);
+    expect(updated.y).toBeGreaterThan(Math.max(studied.y + studied.height, next.y + next.height) - 1);
+    expect(disclaimer.y).toBeGreaterThan(updated.y + updated.height - 1);
+    // Studied is `small` 600 at the 44px target.
+    expect(studied.height).toBeGreaterThanOrEqual(44);
+    await expect(page.getByRole("button", { name: "Studied" })).toHaveCSS("font-size", "13px");
+    await expect(page.getByRole("button", { name: "Studied" })).toHaveCSS("font-weight", "600");
+    await expect(page.getByText("Study progress")).toHaveCount(0);
+    await expect(page.getByText("Continue studying")).toHaveCount(0);
+  });
+}
+
+test("phone: the last line of a long page clears the fixed toolbar", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Sized explicitly");
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("./topics/choledocholithiasis/");
+  // Browsers cap safe-area insets at zero in this emulation, so a notch is simulated through CDP where the build supports it.
+  const session = await page.context().newCDPSession(page);
+  await session.send("Emulation.setSafeAreaInsetsOverride", { insets: { bottom: 34 } }).catch(() => undefined);
+  await page.getByRole("button", { name: "Expand all" }).click();
+  await page.getByText("Educational reference only. Not patient-specific guidance.").scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  const disclaimer = (await page.getByText("Educational reference only. Not patient-specific guidance.").boundingBox())!;
+  const toolbar = (await page.locator(".page-toolbar").boundingBox())!;
+  expect(toolbar.height).toBeGreaterThanOrEqual(68);
+  expect(disclaimer.y + disclaimer.height).toBeLessThanOrEqual(toolbar.y);
+});
+
+test("the last topic of a category ends with a link to that category's page, and a topic with a next topic offers the next one", async ({ page }) => {
+  // Trauma's topics follow title order; the last one has no next topic.
+  await page.goto("./topics/category/trauma/");
+  const titles = await page.locator("main .list-row .list-row-text").allTextContents();
+  await page.getByRole("link", { name: titles.at(-1)!, exact: true }).click();
+  const end = page.getByRole("link", { name: "End of category: back to Trauma" });
+  await expect(end).toHaveAttribute("href", "/pocket-chief/topics/category/trauma/");
+  await expect(page.getByRole("link", { name: /^Next topic:/ })).toHaveCount(0);
+  await end.click();
+  await expect(page).toHaveURL(/\/pocket-chief\/topics\/category\/trauma\/$/);
 });
 
 test("the Topics index lists every category in outline order, and a category page lists its groups over title-only rows", async ({ page }) => {

@@ -1,9 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import PlaybooksPage from "@/app/playbooks/page";
 import PlaybookPage, { generateStaticParams } from "@/app/playbooks/[slug]/page";
 import { listPlaybooks, listPlaybookSummaries } from "@/lib/library";
 import { specialtyId } from "@/lib/library-items";
+
+// The page mounts the real reader, whose Save and recent view write to IndexedDB; jsdom has none.
+vi.mock("@/lib/offline", () => ({ recordRecentView: vi.fn(async () => undefined), isTopicSaved: vi.fn(async () => false), setPlaybookSaved: vi.fn(async () => undefined) }));
 
 describe("playbooks index", () => {
   const specialties = () => [...new Set(listPlaybookSummaries().map(({ specialty }) => specialty))].sort((a, b) => a.localeCompare(b));
@@ -45,22 +48,33 @@ describe("playbook page", () => {
     expect(generateStaticParams()).toEqual(listPlaybooks().map((playbook) => ({ slug: playbook.slug })));
   });
 
-  it("renders the guide with its specialty, approach and a UTC-stable date", async () => {
+  it("renders the guide under a breadcrumb: its specialty linking to its heading on the index, then its approach as plain text", async () => {
     render(await PlaybookPage({ params: Promise.resolve({ slug: "temporal-artery-biopsy" }) }));
 
     expect(screen.getByRole("heading", { name: "Temporal Artery Biopsy", level: 1 })).toBeInTheDocument();
-    expect(screen.getByText("Vascular · Open")).toBeInTheDocument();
-    // Formatted in UTC so the printed date does not shift with the build machine's timezone.
-    expect(screen.getByText("Last updated Sep 10, 2026")).toBeInTheDocument();
+    const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
+    expect(within(nav).getAllByRole("listitem").map((item) => item.textContent)).toEqual(["Vascular", "Open"]);
+    // The anchor exists on the index (the heading test above pins `specialtyId`), and only the specialty is a link.
+    expect(within(nav).getByRole("link", { name: "Vascular" })).toHaveAttribute("href", `/playbooks#${specialtyId("Vascular")}`);
+    expect(within(nav).getAllByRole("link")).toHaveLength(1);
+    expect(screen.queryByRole("link", { name: /all playbooks/i })).not.toBeInTheDocument();
   });
 
-  it("offers Sources but neither History nor Save", async () => {
+  it("closes with a UTC-stable Last updated line, then the disclaimer, once", async () => {
+    const { container } = render(await PlaybookPage({ params: Promise.resolve({ slug: "temporal-artery-biopsy" }) }));
+
+    // Formatted in UTC so the printed date does not shift with the build machine's timezone.
+    const end = container.querySelector(".reader-end")!;
+    expect([...end.children].map((line) => line.textContent)).toEqual(["Last updated Sep 10, 2026", "Educational reference only. Not patient-specific guidance."]);
+    expect(screen.getAllByText(/Educational reference only/)).toHaveLength(1);
+    expect(container.lastElementChild!.lastElementChild).toBe(end);
+  });
+
+  it("offers Save and Sources but no History tab", async () => {
     render(await PlaybookPage({ params: Promise.resolve({ slug: "temporal-artery-biopsy" }) }));
 
     expect(screen.getByRole("tab", { name: /Sources/ })).toBeInTheDocument();
     expect(screen.queryByRole("tab", { name: /History/ })).not.toBeInTheDocument();
-    // Save writes a Topic-shaped row into the `saved` store, which every reader of that store
-    // renders through TopicCard — a broken card linking to /topics/<playbook slug>.
-    expect(screen.queryByRole("button", { name: "Save" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { Contents } from "@/components/contents";
 import { TopicContent } from "@/components/topic-content";
 import type { ContentsData } from "@/lib/reader-contents";
@@ -134,9 +135,10 @@ describe("renderer redesign", () => {
     expect(scrollIntoView.mock.instances[0]).toBe(details);
   });
 
-  it("falls back to the topics index at the end of a category", () => {
-    renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
-    expect(screen.getByRole("link", { name: "End of category: back to all topics" })).toHaveAttribute("href", "/topics");
+  it("ends the last topic of a category with a link to that category's page", () => {
+    renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} category={{ label: "Foregut", href: "/topics/category/foregut" }} />);
+    expect(screen.getByRole("link", { name: "End of category: back to Foregut" })).toHaveAttribute("href", "/topics/category/foregut");
+    expect(screen.queryByRole("link", { name: /all topics/i })).not.toBeInTheDocument();
   });
 
   const renderFlow = (flow: TopicBlock, linkEntries: typeof entries = []) => {
@@ -296,6 +298,50 @@ describe("renderer redesign", () => {
     expect(container.querySelector("button.anki-inline")).toBeNull();
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(screen.queryByText(/anki/i)).not.toBeInTheDocument();
+  });
+});
+
+describe("page header and end", () => {
+  const crumbs = <Breadcrumb items={[{ label: "Foregut", href: "/topics/category/foregut" }]} />;
+
+  it("opens with the breadcrumb and Save on one row, then the title, then the tabs", () => {
+    renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} breadcrumb={crumbs} />);
+    const row = screen.getByRole("navigation", { name: "Breadcrumb" }).parentElement!;
+    expect(row).toContainElement(screen.getByRole("button", { name: "Save" }));
+    // Document order: breadcrumb row, h1, then the tab list.
+    const title = screen.getByRole("heading", { name: "Paraesophageal", level: 1 });
+    expect(row.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(title.compareDocumentPosition(screen.getByRole("tablist")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.queryByText(/last updated/i)).not.toBeInTheDocument();
+  });
+
+  it("keeps Studied and Next topic in one block below the panels, on every tab, with no eyebrows", async () => {
+    const { container } = renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} nextTopic={{ slug: "next", label: "Next topic", categoryLabel: "Foregut" }} />);
+    const block = container.querySelector(".topic-progress")!;
+    expect(block).toContainElement(screen.getByRole("button", { name: "Studied" }));
+    expect(block).toContainElement(screen.getByRole("link", { name: /^Next topic:/ }));
+    expect(screen.queryByText("Study progress")).not.toBeInTheDocument();
+    expect(screen.queryByText("Continue studying")).not.toBeInTheDocument();
+    expect(container.querySelector(".eyebrow")).toBeNull();
+    // A block with a name would be a region landmark; the page has none beyond the shell's.
+    expect(screen.queryByRole("region")).not.toBeInTheDocument();
+    expect(screen.getByRole("tabpanel").compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+
+    for (const name of [/Sources/, /History/]) {
+      await userEvent.click(screen.getByRole("tab", { name }));
+      expect(block).toBeVisible();
+      expect(screen.getByRole("button", { name: "Studied" })).toBeInTheDocument();
+    }
+  });
+
+  it("records the view and saves the topic", async () => {
+    renderTopic(<TopicContent contents={contents} topic={topic} sources={[]} linkEntries={entries} />);
+    await waitFor(() => expect(offlineMocks.recordRecentView).toHaveBeenCalledWith(topic));
+    const save = screen.getByRole("button", { name: "Save" });
+    await waitFor(() => expect(save).not.toBeDisabled());
+    await userEvent.click(save);
+    expect(offlineMocks.setTopicSaved).toHaveBeenCalledWith(topic, true);
+    expect(screen.getByRole("button", { name: "Saved" })).toBeInTheDocument();
   });
 });
 

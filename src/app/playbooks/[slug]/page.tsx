@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { PlaybookContent } from "@/components/playbook-content";
+import { ReaderEnd } from "@/components/reader-end";
 import { buildLinkIndex } from "@/lib/inline";
 import { getPlaybookBySlug, listPlaybooks, listSources, listTopics } from "@/lib/library";
+import { specialtyId } from "@/lib/library-items";
 import { playbookContents } from "@/lib/reader-contents";
 import { APPROACH_LABELS } from "@/lib/types";
 
@@ -24,18 +27,10 @@ export default async function PlaybookPage({ params }: { params: Promise<{ slug:
   // Topics only. `InlineText` hardcodes /topics/<slug>, so a playbook cross-links *into* the
   // curriculum — the useful direction — and linking back out needs an href on LinkIndexEntry.
   const linkEntries = buildLinkIndex(listTopics());
-  // UTC so the printed date does not shift with the build machine's timezone.
-  const updatedAt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(playbook.updatedAt));
   return (
     <div className="topic-reading">
-      <header className="topic-header">
-        <div>
-          <p className="eyebrow">{playbook.specialty} · {APPROACH_LABELS[playbook.approach]}</p>
-          <h1 className="page-title">{playbook.title}</h1>
-          <p className="topic-updated">Last updated {updatedAt}</p>
-        </div>
-      </header>
-      <PlaybookContent key={playbook.id} playbook={playbook} sources={sources} linkEntries={linkEntries} contents={playbookContents(slug)!} />
+      <PlaybookContent key={playbook.id} playbook={playbook} sources={sources} linkEntries={linkEntries} contents={playbookContents(slug)!} breadcrumb={<Breadcrumb items={[{ label: playbook.specialty, href: `/playbooks#${specialtyId(playbook.specialty)}` }, { label: APPROACH_LABELS[playbook.approach] }]} />} />
+      <ReaderEnd updatedAt={playbook.updatedAt} />
     </div>
   );
 }
