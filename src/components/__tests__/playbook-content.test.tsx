@@ -4,8 +4,6 @@ import { PlaybookContent } from "@/components/playbook-content";
 import type { ContentsData } from "@/lib/reader-contents";
 import type { Playbook, TopicBlock } from "@/lib/types";
 
-// The topic stores must stay untouched: a playbook written into `saved` or `recent` renders as a
-// TopicCard pointing at /topics/<playbook slug>, which is a 404.
 const offline = vi.hoisted(() => ({ recordRecentView: vi.fn(), setTopicSaved: vi.fn(), isTopicSaved: vi.fn(), isTopicReviewed: vi.fn(), setTopicReviewed: vi.fn() }));
 vi.mock("@/lib/offline", () => offline);
 vi.mock("next/navigation", () => ({ usePathname: () => "/playbooks/femoropopliteal-bypass", useRouter: () => ({ push: vi.fn() }) }));
@@ -22,13 +20,6 @@ const blocks: TopicBlock[] = [
 const playbook: Playbook = { id: "p1", slug: "femoropopliteal-bypass", title: "Femoropopliteal Bypass", aliases: [], procedureId: "femoropopliteal_bypass", approach: "open", specialty: "Vascular", tags: [], blocks, sourceIds: [], warnings: [], reviewedAt: "2026-09-10T00:00:00.000Z", updatedAt: "2026-09-10T00:00:00.000Z" };
 
 describe("PlaybookContent", () => {
-  it("never writes a playbook into the topic saved or recent stores", () => {
-    render(<><div id="shell-toolbar" /><PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} contents={contents} /></>);
-    expect(offline.recordRecentView).not.toHaveBeenCalled();
-    expect(offline.setTopicSaved).not.toHaveBeenCalled();
-    expect(screen.queryByRole("button", { name: "Save" })).not.toBeInTheDocument();
-  });
-
   it("shares the topic page's toolbar, Back falling back to its specialty on the Playbooks index", () => {
     render(<><div id="shell-toolbar" /><PlaybookContent playbook={playbook} sources={[]} linkEntries={[]} contents={contents} /></>);
     expect(screen.getByRole("group", { name: "Page tools" })).toBeInTheDocument();

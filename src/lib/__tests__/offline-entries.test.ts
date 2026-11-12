@@ -95,6 +95,21 @@ describe("saving", () => {
   });
 });
 
+describe("a saved id the library no longer has", () => {
+  it("goes off and back on by its entry, keeping its date, and never reads as a topic snapshot", async () => {
+    const { getSavedEntries, getSavedTopics, setSavedEntry } = await freshOffline();
+    const gone = { id: "t-gone", kind: "topic" as const, savedAt: "2026-10-05T00:00:00.000Z" };
+    await setSavedEntry(gone, true);
+    expect(await getSavedEntries()).toEqual([gone]);
+    // Home's old card list renders snapshots, and this record has none to render.
+    expect(await getSavedTopics()).toEqual([]);
+    await setSavedEntry(gone, false);
+    expect(await getSavedEntries()).toEqual([]);
+    await setSavedEntry(gone, true);
+    expect(await getSavedEntries()).toEqual([gone]);
+  });
+});
+
 describe("recent views", () => {
   it("records a viewed topic with its kind and still caches it for offline reading", async () => {
     const { getCachedTopics, getRecentEntries, getRecentTopics, recordRecentView } = await freshOffline();
