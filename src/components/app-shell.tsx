@@ -3,16 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { BookmarkSimple, GearSix, House, IconContext, MagnifyingGlass, Notebook, Steps } from "@phosphor-icons/react";
+import { BookmarkSimple, GearSix, House, IconContext, Notebook, Steps } from "@phosphor-icons/react";
 import { BrandMark } from "@/components/brand-mark";
+import { SearchForm } from "@/components/search-form";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { OfflineHydrator } from "@/components/offline-hydrator";
 import { markNavigated } from "@/lib/app-history";
 import { isReaderPath, normalizePath } from "@/lib/pathname";
-
-// Next prefixes basePath onto <Link> and router navigations, but NOT onto a plain <form action>.
-// Left as "/" the header search submits to the origin root, outside the mount point, and 404s.
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 // Every icon in the app is decorative (the control or text beside it carries the name), so the client icons are hidden from assistive tech in one place. The `dist/ssr` icons do not read this context and take the attribute directly.
 const decorativeIcons = { "aria-hidden": true } as const;
@@ -70,8 +67,7 @@ export function AppShell({ children, contents }: { children: React.ReactNode; co
       <div className="page-column">
         <div className="mobile-header"><div className="top-row">
           <Brand className="header-brand" />
-          {/* Search slot: the compact field as it stands, until the shared search field replaces it. */}
-          <form action={`${basePath}/`} role="search" className="mobile-global-search"><MagnifyingGlass size={17} /><input name="q" aria-label="Search surgery notes" placeholder="Search surgery notes" /></form>
+          <SearchForm />
           <Link className="icon-link header-settings" href="/settings" aria-label="Settings" aria-current={currentState(pathname, "/settings")}><GearSix size={21} /></Link>
           <div className="page-tools" id="shell-toolbar" />
         </div></div>

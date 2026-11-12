@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildSearchIndex, searchIndex, searchTopics } from "@/lib/search";
+import { buildSearchIndex, hitHref, hitLine, searchIndex, searchTopics } from "@/lib/search";
 import { libraryPlaybooks, libraryTopics } from "@/content";
 import type { Topic, TopicBlock } from "@/lib/types";
 
@@ -156,3 +156,23 @@ describe("search index", () => {
   });
 });
 
+
+describe("result rows", () => {
+  const hits = searchIndex(buildSearchIndex(libraryTopics, libraryPlaybooks), "robotic hernia");
+
+  it("links a topic to its page and a playbook to its page", () => {
+    const playbook = hits.find((hit) => hit.item.kind === "playbook")!;
+    const topic = hits.find((hit) => hit.item.kind === "topic")!;
+    expect(hitHref(playbook)).toBe(`/playbooks/${playbook.item.slug}`);
+    expect(hitHref(topic)).toBe(`/topics/${topic.item.slug}`);
+  });
+
+  it("gives a name match its category and group (topic) or specialty and approach (playbook), and a body-only match its phrase", () => {
+    const playbook = hits.find((hit) => hit.item.kind === "playbook")!;
+    expect(playbook.item.kind === "playbook" && hitLine(playbook)).toMatch(/^.+ · (Open|Laparoscopic|Robotic|Endovascular)$/);
+    const topics = [fixture("a", "Aardvark", { text: "The quokka is described here." }), fixture("z", "Zebra", { tags: ["quokka"] })];
+    const [named, bodyOnly] = searchIndex(buildSearchIndex(topics), "quokka").sort((a, b) => Number(Boolean(a.snippet)) - Number(Boolean(b.snippet)));
+    expect(hitLine(named)).toBe("Fixtures · Group");
+    expect(hitLine(bodyOnly)).toBe("the quokka is described here");
+  });
+});

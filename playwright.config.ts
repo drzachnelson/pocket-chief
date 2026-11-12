@@ -17,7 +17,8 @@ export default defineConfig({
     { name: "desktop-chrome", use: { ...devices["Desktop Chrome"] } },
   ],
   webServer: {
-    command: "node node_modules/next/dist/bin/next dev --port 3000",
+    // E2E_EXPORT=1 runs the suite against `next build` output instead, the artifact that ships: the worker's precache of script chunks only exists there.
+    command: process.env.E2E_EXPORT === "1" ? "node scripts/serve-out.mjs" : "node node_modules/next/dist/bin/next dev --port 3000",
     url: "http://127.0.0.1:3000/pocket-chief/",
     reuseExistingServer: false,
     // Default 60s is too tight on this machine's pathological iCloud-synced I/O, where the first

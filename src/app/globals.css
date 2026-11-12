@@ -142,10 +142,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .header-brand { flex: 0 0 auto; }
 .icon-link { width: var(--target); height: var(--target); flex: 0 0 auto; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink-muted); }
 .icon-link[aria-current="page"] { border-color: var(--cobalt); background: var(--cobalt-soft); color: var(--cobalt-dark); }
-.mobile-global-search { position: relative; flex: 1 1 0; min-width: 0; }
-.mobile-global-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); pointer-events: none; }
-.mobile-global-search input { width: 100%; height: var(--target); padding: 0 12px 0 36px; border: 1px solid var(--field-edge); border-radius: 8px; background: var(--surface); color: var(--ink); }
-.mobile-global-search input::placeholder { color: var(--ink-muted); }
+/* The shared search field. The form is not positioned on a phone, so the quick-results panel measures from the sticky header row and spans its full width; from 760px the form is the anchor and the panel is the field's width. */
+.search-box { flex: 1 1 0; min-width: 0; }
+.search-input { position: relative; }
+.search-input > svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); pointer-events: none; }
+.search-input input { width: 100%; height: var(--target); padding: 0 36px; border: 1px solid var(--field-edge); border-radius: 8px; background: var(--surface); color: var(--ink); }
+.search-input input::placeholder { color: var(--ink-muted); }
+/* The clear button below replaces the browser's own. */
+.search-input input::-webkit-search-cancel-button { display: none; }
+.search-clear { position: absolute; top: 0; right: 0; width: 36px; height: 100%; display: grid; place-items: center; border: 0; border-radius: 0 8px 8px 0; background: transparent; color: var(--ink-muted); cursor: pointer; }
+@media (hover: hover) { .search-clear:hover { color: var(--ink); } }
 .main-content { width: min(100%, 1160px); margin: 0 auto; padding: 19px 16px 98px; }
 /* The skip link lands focus here; a ring around the whole page says nothing. */
 .main-content:focus-visible { outline: none; }
@@ -194,19 +200,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .button.small { padding: 5px 11px; }
 .icon-button { width: var(--target); height: var(--target); display: grid; place-items: center; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink-muted); cursor: pointer; }
 
-.search-hero { padding: 28px 0 12px; }
-.search-field { position: relative; margin-top: 22px; max-width: 760px; }
-.search-field-wrap { position: relative; max-width: 760px; }
-.search-field-wrap .search-field { max-width: none; }
-.search-field svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--ink-muted); }
-.search-field input { width: 100%; height: 54px; padding: 0 118px 0 48px; border: 1px solid var(--field-edge); border-radius: 13px; background: var(--surface); color: var(--ink); }
-.search-field input::placeholder { color: var(--ink-muted); }
-.search-field button { position: absolute; right: 7px; top: 0; bottom: 0; margin-block: auto; height: var(--target); }
-.search-hint { margin: 8px 2px 0; color: var(--ink-muted); font-size: var(--text-caption); }
-.offline-results { position: absolute; z-index: var(--z-dropdown); left: 0; right: 0; top: calc(100% + 6px); display: grid; padding: 5px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); box-shadow: var(--shadow-float); }
-.offline-results a { display: flex; justify-content: space-between; gap: 10px; padding: 9px 10px; border-radius: 7px; font-size: var(--text-small); }
-@media (hover: hover) { .offline-results a:hover { background: var(--cobalt-soft); } }
-.offline-results small { color: var(--ink-muted); font-size: var(--text-caption); }
+/* Quick results: six list rows under the field, with the one float shadow and a hairline edge. */
+.quick-results { position: absolute; z-index: var(--z-dropdown); left: 0; right: 0; top: 100%; border: 1px solid var(--line); border-inline: 0; background: var(--surface); box-shadow: var(--shadow-float); }
+.quick-results .list-row { margin-inline: 0; padding-inline: var(--space-5); border-radius: 0; }
+.quick-results .list-rows > li:last-child { border-bottom: 0; }
+.quick-results [aria-selected="true"] .list-row { background: var(--cobalt-soft); }
+.quick-results .failed-read { padding: var(--space-4) var(--space-5); }
+/* The results page: a count, then the rows. */
+.search-count { margin: 0; padding-bottom: var(--space-2); color: var(--ink-muted); font-size: var(--text-caption); }
+.search-empty { margin: 0 0 var(--space-3); color: var(--ink-muted); font-size: var(--text-body); }
+/* Reading states shared by search and, later, Saved: three static rows while loading, one sentence and a button when a read fails. */
+.loading-rows { margin: 0; padding: 0; list-style: none; }
+.loading-rows li { height: 56px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.loading-rows li::before { content: ""; width: 55%; height: 14px; border-radius: var(--radius-sm); background: var(--surface-strong); }
+.failed-read { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-4); }
+.failed-read p { margin: 0; color: var(--ink-muted); font-size: var(--text-body); }
 
 .topic-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .topic-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 13px; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: border-color var(--dur-fast) var(--ease-out); }
@@ -470,6 +478,8 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .side-foot { margin-top: auto; }
   /* Phone-only controls: the rail carries the mark and Settings, and the tab bar gives way to the rail. */
   .header-brand, .header-settings, .mobile-nav { display: none; }
+  .search-box { position: relative; }
+  .quick-results { top: calc(100% + var(--space-2)); border-inline: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; }
   /* The header row becomes the top row: one hairline bar, its controls held to the 760px reading width. */
   .mobile-header { padding-inline: 32px; }
   .top-row { max-width: 760px; margin-inline: auto; }
@@ -503,7 +513,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
   .mobile-header { padding-inline: 42px; }
   .page-toolbar > .toolbar-contents { display: none; }
   .main-content { padding: 44px 42px 80px; }
-  .search-hero { padding-top: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

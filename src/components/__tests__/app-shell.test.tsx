@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { AppShell } from "@/components/app-shell";
 
 let pathname = "/";
-vi.mock("next/navigation", () => ({ usePathname: () => pathname }));
+vi.mock("next/navigation", () => ({ usePathname: () => pathname, useRouter: () => ({ push: vi.fn(), replace: vi.fn() }) }));
 
 afterEach(() => { pathname = "/"; });
 
@@ -102,11 +102,14 @@ describe("AppShell structure", () => {
     for (const role of ["banner", "contentinfo", "complementary"]) expect(screen.queryByRole(role), role).not.toBeInTheDocument();
   });
 
-  it("keeps the current compact field in the search slot", () => {
-    renderShell("/saved/");
-    const form = screen.getByRole("search");
-    expect(within(form).getByRole("textbox", { name: "Search surgery notes" })).toHaveAttribute("name", "q");
-    expect(form).toHaveAttribute("action", "/");
+  it("holds the one shared search field in the search slot, inside the top row", () => {
+    const { container } = renderShell("/saved/");
+    const form = within(container.querySelector<HTMLElement>(".top-row")!).getByRole("search");
+    const field = within(form).getByRole("combobox", { name: "Search" });
+    expect(field).toHaveAttribute("name", "q");
+    expect(field).toHaveAttribute("type", "search");
+    expect(field).toHaveAttribute("placeholder", "Search");
+    expect(form).toHaveAttribute("action", "/search/");
   });
 
   // The slot is where the route's server-rendered Contents goes; with none supplied it stays empty.
