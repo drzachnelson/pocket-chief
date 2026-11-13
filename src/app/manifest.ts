@@ -20,9 +20,11 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#f4f6fa",
     theme_color: "#f4f6fa",
     categories: ["medical", "education", "productivity"],
+    // The full drawing, opaque and full-bleed. Its mark sits inside the 410px centre circle, so the maskable file is the same picture.
     icons: [
-      { src: `${basePath}/icon.svg`, sizes: "any", type: "image/svg+xml", purpose: "any" },
-      { src: `${basePath}/icon-maskable.svg`, sizes: "any", type: "image/svg+xml", purpose: "maskable" },
+      { src: `${basePath}/icon-192.png`, sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: `${basePath}/icon-512.png`, sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: `${basePath}/icon-maskable-512.png`, sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }
