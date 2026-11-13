@@ -74,7 +74,7 @@ For each new or revised topic:
 
 For a revised topic, also confirm the old slug still resolves and its bookmark survives.
 
-For a playbook, the same block-level pass, plus: it appears on `/playbooks`, it is **absent** from `/topics` and from the taxonomy jump rail, and saving or viewing it does not put a row in Saved or Recent. Then the artifact check in `playbooks.md`.
+For a playbook, the same block-level pass, plus: it appears on `/playbooks`, it is **absent** from `/topics` and from the taxonomy jump rail, opening it puts a row under Recently viewed on Home (its specialty, trailing "Playbook"), and saving it lists it on Saved. Then the artifact check in `playbooks.md`.
 
 ## E2E last
 

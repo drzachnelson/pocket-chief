@@ -149,9 +149,8 @@ describe("globals.css chrome", () => {
   });
 
   it("takes every transition and animation from the motion tokens", () => {
-    // `.skeleton` still shimmers on a literal 1.5s until the loading rows replace it.
-    const motion = [...declared("transition"), ...declared("animation")].filter(({ selector, value }) => selector !== ".skeleton" && !value.startsWith("none"));
-    expect(motion.length).toBeGreaterThanOrEqual(7);
+    const motion = [...declared("transition"), ...declared("animation")].filter(({ value }) => !value.startsWith("none"));
+    expect(motion.length).toBeGreaterThanOrEqual(6);
     for (const { selector, value } of motion) {
       const label = `${selector} { ${value} }`;
       expect(value, label).toMatch(/var\(--dur-(?:fast|sheet)\)/);

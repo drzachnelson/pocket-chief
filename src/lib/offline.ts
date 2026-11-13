@@ -148,12 +148,6 @@ export async function getSavedEntries(): Promise<SavedEntry[]> {
   return records.map((record) => ({ id: record.id, kind: kindOf(record), savedAt: record.savedAt })).sort(newestFirst("savedAt"));
 }
 
-/** The saved topics as snapshots, for the views that still render them. Playbook records are not topics and are left out, and neither is an entry put back by `setSavedEntry`, which carries no snapshot. */
-export async function getSavedTopics(): Promise<Topic[]> {
-  const database = await db();
-  return (await database.getAll("saved") as Array<Topic & { kind?: EntryKind }>).filter((record) => kindOf(record) === "topic" && record.slug);
-}
-
 export async function recordRecentView(item: Topic | Playbook) {
   const database = await db();
   const viewedAt = new Date().toISOString();
@@ -167,13 +161,6 @@ export async function getRecentEntries(): Promise<RecentEntry[]> {
   const database = await db();
   const records = await database.getAll("recent") as Array<{ id: string; kind?: EntryKind; viewedAt: string }>;
   return records.map((record) => ({ id: record.id, kind: kindOf(record), viewedAt: record.viewedAt })).sort(newestFirst("viewedAt"));
-}
-
-/** The recent topics as snapshots, for the views that still render them. Playbook records are left out. */
-export async function getRecentTopics(limit = 6): Promise<Topic[]> {
-  const database = await db();
-  const topics = (await database.getAll("recent") as Array<Topic & { kind?: EntryKind; viewedAt: string }>).filter((record) => kindOf(record) === "topic");
-  return topics.sort((a, b) => b.viewedAt.localeCompare(a.viewedAt)).slice(0, limit);
 }
 
 export async function clearPrivateOfflineData() {
