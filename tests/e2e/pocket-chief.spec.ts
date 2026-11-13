@@ -644,8 +644,8 @@ test("a category page is precached, so one never visited opens offline", async (
     await navigator.serviceWorker.ready;
     return Boolean(navigator.serviceWorker.controller);
   });
-  // The worker names its caches by version; v8 follows the icon change; v7 added the search page and index to the precache.
-  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v8"]));
+  // The worker names its caches by version; v9 added the Settings page; v8 followed the icon change; v7 added the search page and index.
+  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v9"]));
   const slugs: string[] = await page.evaluate(async () => (await fetch("categories.json")).json());
   expect(slugs.length).toBeGreaterThan(10);
 
@@ -654,6 +654,21 @@ test("a category page is precached, so one never visited opens offline", async (
     await page.goto("./topics/category/trauma/", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Trauma", level: 1 })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Diseases & Conditions", level: 2 })).toBeVisible();
+  } finally {
+    await page.context().setOffline(false);
+  }
+});
+
+test("the Settings page is precached: the gear in the shell opens it offline, not Home", async ({ page }) => {
+  await page.goto("./");
+  await page.waitForFunction(async () => {
+    await navigator.serviceWorker.ready;
+    return Boolean(navigator.serviceWorker.controller);
+  });
+  await page.context().setOffline(true);
+  try {
+    await page.goto("./settings/", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Settings", level: 1 })).toBeVisible();
   } finally {
     await page.context().setOffline(false);
   }
@@ -1161,7 +1176,7 @@ const workerReady = async (page: Page) => {
 
 test("a search submitted offline lands on the results page, not Home, with /search/ and its index in the precache", async ({ page }) => {
   await workerReady(page);
-  const cached = await page.evaluate(async () => (await (await caches.open("pocket-chief-shell-v8")).keys()).map((request) => new URL(request.url).pathname));
+  const cached = await page.evaluate(async () => (await (await caches.open("pocket-chief-shell-v9")).keys()).map((request) => new URL(request.url).pathname));
   expect(cached).toEqual(expect.arrayContaining(["/pocket-chief/search/", "/pocket-chief/search-index.json"]));
 
   await page.context().setOffline(true);

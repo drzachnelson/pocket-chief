@@ -53,6 +53,10 @@ jobs:
       - name: Fail if a playbook page did not prerender
         run: node -e "const {existsSync}=require('fs');const p=require('./out/playbooks.json');const missing=p.playbooks.filter(b=>!existsSync('out/playbooks/'+b.slug+'/index.html'));if(missing.length){console.error('not prerendered:',missing.map(b=>b.slug).join(', '));process.exit(1)}"
 
+      # Every URL the service worker precaches, the search page and index, every category page and every topic page. One 404 in the precache list fails the worker's install, so offline reading would silently not exist.
+      - name: Fail if a precached URL, the search page, a category page or a topic page did not export
+        run: node scripts/check-export.mjs out
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
