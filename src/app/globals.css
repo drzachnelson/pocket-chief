@@ -128,8 +128,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
    Tablet: the sidebar is a labelled rail and the header row becomes the top row. Laptop: the full sidebar. The rail and laptop rules follow in the media queries. */
 .sidebar { display: none; }
 .brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
-.brand-mark { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 9px; background: var(--cobalt); color: var(--on-cobalt); }
-.brand-mark span { font-size: var(--text-caption); font-weight: 600; }
+.brand-mark { width: 34px; height: 34px; flex: 0 0 34px; display: block; }
+.brand-mark-edge { fill: none; stroke: var(--tile-edge); stroke-width: 15; }
 .brand strong { display: block; white-space: nowrap; font-size: var(--text-body); font-weight: 600; }
 .side-nav { display: grid; gap: 4px; }
 .side-nav-link { min-height: var(--target); display: flex; align-items: center; gap: 11px; border-radius: 9px; color: var(--ink-muted); font-size: var(--text-small); font-weight: 500; transition: background var(--dur-fast) var(--ease-out); }

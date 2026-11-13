@@ -644,8 +644,8 @@ test("a category page is precached, so one never visited opens offline", async (
     await navigator.serviceWorker.ready;
     return Boolean(navigator.serviceWorker.controller);
   });
-  // The worker names its caches by version; v7 adds the search page and index to the precache.
-  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v7"]));
+  // The worker names its caches by version; v8 follows the icon change; v7 added the search page and index to the precache.
+  expect(await page.evaluate(() => caches.keys())).toEqual(expect.arrayContaining(["pocket-chief-shell-v8"]));
   const slugs: string[] = await page.evaluate(async () => (await fetch("categories.json")).json());
   expect(slugs.length).toBeGreaterThan(10);
 
@@ -1161,7 +1161,7 @@ const workerReady = async (page: Page) => {
 
 test("a search submitted offline lands on the results page, not Home, with /search/ and its index in the precache", async ({ page }) => {
   await workerReady(page);
-  const cached = await page.evaluate(async () => (await (await caches.open("pocket-chief-shell-v7")).keys()).map((request) => new URL(request.url).pathname));
+  const cached = await page.evaluate(async () => (await (await caches.open("pocket-chief-shell-v8")).keys()).map((request) => new URL(request.url).pathname));
   expect(cached).toEqual(expect.arrayContaining(["/pocket-chief/search/", "/pocket-chief/search-index.json"]));
 
   await page.context().setOffline(true);

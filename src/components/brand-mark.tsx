@@ -1,4 +1,13 @@
-/** The 34px tile. Decorative: the name beside it, or the link's own label, carries the meaning. The brand slice replaces the body with the SVG; callers and sizing stay. */
+// The simple drawing of the C-and-scalpel mark in its 34px tile: fixed brand colours (not tokens, so the dark theme never recolours it), flat, no shadow. `--tile-edge` is the dark-only 1px stroke inside the tile edge.
+// Same picture as public/icon.svg (the favicon); a test keeps the two paths identical. Decorative: the name beside it, or the link's own label, carries the meaning.
+const GLYPH = "M422.3 146.4A194.5 194.5 0 1 0 426.9 362.7L403 342.3A159.7 159.7 0 1 1 400 170.8ZM263 258.4L431.4 249.7L419.8 277.3L384.9 277.3C344.3 288.9 301.7 281.2 263 258.4ZM241.5 123.9C218.1 128.2 207.3 134.9 197.5 151.3C192.1 160.5 189.5 162.2 178.7 164.1C167.6 165.9 161.6 170.1 154.2 180.9C147.4 191.1 146.2 198.3 150.6 202.9C154.7 206.8 159.1 206.5 171.1 201.7C174.4 200.4 180.7 197.9 185.2 196.2C199.9 190.7 205.4 187.3 217.1 176.6C237.2 158.5 249.5 155.6 277 163.1C290.7 166.8 292.2 167.1 309.7 167.5C332.1 168 335 169 345.7 179.4C349 182.5 352.5 185.6 353.5 186.1C364.8 193.1 374.5 179.9 367.8 166.8C363.6 158.6 348.1 145.4 334.6 138.6C324.1 133.4 318.8 133.8 309.8 140.5C298.4 149.2 292.5 147.6 273 131.2C264.1 123.7 254.7 121.5 241.5 123.9ZM258.4 183.1C248.9 185 242.2 188.5 232 197.3C222.4 205.7 216.5 208.9 206.2 211.8C179.9 219 165.7 227 153.7 241.2C125.6 274.8 132.1 316.3 171.7 356C195 379.1 219.8 392.4 246.8 395.8C261.3 397.8 270.4 391.4 264.8 383.3C262.5 379.8 259.5 378.4 244.9 373.8C197.3 359 166.4 326.6 166.5 292.1C166.6 261.1 192.7 239.6 230.4 239.5C246.9 239.5 253.9 236.5 262.9 225.2C270.2 215.9 274.2 215.3 287.5 221.4C304.4 229.1 319.6 223.5 318.5 209.8C317.2 193.4 283.3 178.4 258.4 183.1ZM210.5 268.8C196.5 271.4 184.8 284.5 184.5 297.7C184.2 308 189.8 312 200.9 309.7C211.3 307.6 213.1 308.8 216 320.8C221 341.1 236.3 349.5 255.3 342.4C266.3 338.3 267.5 338.5 275.9 346.5C286 356.1 294 358.9 307.3 357.2C322.7 355.3 331.8 349.6 331.8 341.8C331.8 335.5 327.3 332.6 314.8 331.5C303.1 330.4 299.9 328.5 290.9 317.5C281.6 306.1 276.3 303.3 262 302.5C250.4 301.8 248 300 244 289.4C238 273.6 225.6 266 210.5 268.8Z";
+
 export function BrandMark() {
-  return <span className="brand-mark" aria-hidden="true"><span>PC</span></span>;
+  return (
+    <svg className="brand-mark" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+      <rect width="512" height="512" rx="135.5" fill="#160146" />
+      <rect className="brand-mark-edge" x="7.5" y="7.5" width="497" height="497" rx="128" />
+      <path fill="#81fbb0" fillRule="evenodd" d={GLYPH} />
+    </svg>
+  );
 }

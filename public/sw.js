@@ -1,9 +1,9 @@
-// v7 discards every earlier cache. The worker derives its own mount point from its script URL, so
+// v8 discards every earlier cache (the old icon.svg was the "P" tile). The worker derives its own mount point from its script URL, so
 // the same file works at the site root and under a GitHub Pages project path with no build step.
 const BASE = new URL("./", self.location).pathname;
-const SHELL = "pocket-chief-shell-v7";
-const CONTENT = "pocket-chief-content-v7";
-const SHELL_ASSETS = [BASE, `${BASE}topics/`, `${BASE}playbooks/`, `${BASE}saved/`, `${BASE}search/`, `${BASE}icon.svg`, `${BASE}manifest.webmanifest`, `${BASE}library.json`, `${BASE}playbooks.json`, `${BASE}search-index.json`];
+const SHELL = "pocket-chief-shell-v8";
+const CONTENT = "pocket-chief-content-v8";
+const SHELL_ASSETS = [BASE, `${BASE}topics/`, `${BASE}playbooks/`, `${BASE}saved/`, `${BASE}search/`, `${BASE}icon.svg`, `${BASE}icon-32.png`, `${BASE}apple-touch-icon.png`, `${BASE}icon-192.png`, `${BASE}icon-512.png`, `${BASE}icon-maskable-512.png`, `${BASE}manifest.webmanifest`, `${BASE}library.json`, `${BASE}playbooks.json`, `${BASE}search-index.json`];
 
 self.addEventListener("install", (event) => {
   // One page per category, listed by the build in categories.json so a taxonomy change cannot leave a stale slug here: addAll fails the whole install on a 404.

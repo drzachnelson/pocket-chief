@@ -9,7 +9,7 @@ const ORIGIN = "http://localhost";
 const SEARCH_PAGE = `<script src="${BASE}_next/static/chunks/webpack-1.js" async=""></script><script src="${BASE}_next/static/chunks/app/search/page-2.js?v=99" async=""></script><link rel="stylesheet" href="${BASE}_next/static/css/3.css" data-precedence="next"/>`;
 const served: Record<string, string> = {
   [BASE]: "<h1>Home</h1>", [`${BASE}topics/`]: "topics", [`${BASE}playbooks/`]: "playbooks", [`${BASE}saved/`]: "saved", [`${BASE}search/`]: SEARCH_PAGE,
-  [`${BASE}icon.svg`]: "icon", [`${BASE}manifest.webmanifest`]: "{}", [`${BASE}library.json`]: "{}", [`${BASE}playbooks.json`]: "{}", [`${BASE}search-index.json`]: "{}",
+  [`${BASE}icon.svg`]: "icon", [`${BASE}icon-32.png`]: "p", [`${BASE}apple-touch-icon.png`]: "p", [`${BASE}icon-192.png`]: "p", [`${BASE}icon-512.png`]: "p", [`${BASE}icon-maskable-512.png`]: "p", [`${BASE}manifest.webmanifest`]: "{}", [`${BASE}library.json`]: "{}", [`${BASE}playbooks.json`]: "{}", [`${BASE}search-index.json`]: "{}",
   [`${BASE}categories.json`]: '["trauma"]', [`${BASE}topics/category/trauma/`]: "trauma",
   [`${BASE}_next/static/chunks/webpack-1.js`]: "1", [`${BASE}_next/static/chunks/app/search/page-2.js`]: "2", [`${BASE}_next/static/css/3.css`]: "3",
 };
@@ -53,16 +53,23 @@ function boot() {
 }
 
 describe("service worker", () => {
-  it("names its caches v7, past the version that held the category pages", () => {
-    expect(source).toContain('"pocket-chief-shell-v7"');
-    expect(source).toContain('"pocket-chief-content-v7"');
+  it("names its caches v8, past the version that held the old icon", () => {
+    expect(source).toContain('"pocket-chief-shell-v8"');
+    expect(source).toContain('"pocket-chief-content-v8"');
   });
 
   it("precaches /search/, the search index, and the search page's own scripts and styles", async () => {
     const worker = boot();
     await worker.install();
-    const keys = [...worker.stores.get("pocket-chief-shell-v7")!.keys()].map((key) => new URL(key, ORIGIN).pathname);
+    const keys = [...worker.stores.get("pocket-chief-shell-v8")!.keys()].map((key) => new URL(key, ORIGIN).pathname);
     expect(keys).toEqual(expect.arrayContaining([`${BASE}search/`, `${BASE}search-index.json`, `${BASE}topics/category/trauma/`, `${BASE}_next/static/chunks/app/search/page-2.js`, `${BASE}_next/static/css/3.css`]));
+  });
+
+  it("precaches the icon set", async () => {
+    const worker = boot();
+    await worker.install();
+    const keys = [...worker.stores.get("pocket-chief-shell-v8")!.keys()].map((key) => new URL(key, ORIGIN).pathname);
+    expect(keys).toEqual(expect.arrayContaining(["icon.svg", "icon-32.png", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png"].map((name) => `${BASE}${name}`)));
   });
 
   it("answers an offline document request for /search/?q=… with the precached /search/", async () => {

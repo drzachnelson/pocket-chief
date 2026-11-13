@@ -131,6 +131,11 @@ describe("globals.css chrome", () => {
     }
   });
 
+  it("strokes the brand tile with the tile edge and gives the tile no theme colour of its own", () => {
+    expect(rule(".brand-mark-edge")?.get("stroke")).toBe("var(--tile-edge)");
+    expect(rule(".brand-mark")?.has("background")).toBe(false);
+  });
+
   it("has dropped the old shadow tokens", () => {
     expect(css).not.toMatch(/--(?:dark-)?shadow(?![\w-])/);
   });
