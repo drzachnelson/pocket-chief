@@ -7,7 +7,7 @@ import { extname, join, normalize } from "node:path";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/pocket-chief";
 const port = Number(process.env.PORT ?? 3000);
-const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json", ".txt": "text/plain", ".ico": "image/x-icon", ".woff2": "font/woff2" };
+const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".webmanifest": "application/manifest+json", ".txt": "text/plain", ".ico": "image/x-icon", ".woff2": "font/woff2" };
 
 async function resolve(pathname) {
   // normalize() collapses any ".." before it can escape out/.

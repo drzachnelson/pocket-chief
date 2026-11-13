@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   robots: { index: false, follow: false, nocache: true },
   appleWebApp: { capable: true, title: "Pocket Chief", statusBarStyle: "default" },
-  icons: { icon: `${basePath}/icon.svg`, apple: `${basePath}/icon.svg` },
+  // The SVG is the simple drawing and is what a tab shows where it can; the 32px PNG is for browsers that cannot use an SVG icon. iOS needs a PNG for the home screen.
+  icons: { icon: [{ url: `${basePath}/icon.svg`, type: "image/svg+xml" }, { url: `${basePath}/icon-32.png`, sizes: "32x32", type: "image/png" }], apple: `${basePath}/apple-touch-icon.png` },
 };
 
 export const viewport: Viewport = {
