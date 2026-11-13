@@ -46,7 +46,7 @@ No `scoreNodeId`. No `scoreCategory`. See below.
 
 The tripwire is two assertions: `library.test.ts` requires exactly one parentless taxonomy root, and `taxonomy.test.ts` pins the complete ordered section list. `playbooks.test.ts` states the intent behind them directly — `listTaxonomy()` must be unchanged, and no playbook may carry a `scoreNodeId`. If one of those fails while you are writing a playbook, the content is wrong and the test is right.
 
-**2. `PlaybookContent` must never call `recordRecentView` or `setTopicSaved`.** Every reader of the saved and recent stores renders rows through `TopicCard`, which reads `scoreCategory` and links to `/topics/<slug>`. A playbook in those stores is a broken card pointing at a 404. This one is a component rule rather than a content rule, but it is the reason rule 1 exists, so it belongs here.
+**2. Saved and recent rows are rebuilt by id and kind.** `PlaybookContent` calls `recordRecentView` and its header saves through `setPlaybookSaved`; every list that shows those stores (Saved, Home) rebuilds rows with `resolveEntries()` from the current library, never from a stored snapshot, because a playbook has no `scoreCategory` and no `/topics/<slug>` page. This one is a component rule rather than a content rule, but it is the reason rule 1 exists, so it belongs here.
 
 ## Auto-links are pinned, and that is the point
 

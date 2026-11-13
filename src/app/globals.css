@@ -187,6 +187,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .section-heading h2 { margin: 0; font-size: var(--text-subheading); font-weight: 600; }
 .section-heading a { min-height: var(--target); display: inline-flex; align-items: center; color: var(--ink-muted); font-size: var(--text-small); font-weight: 500; }
 .section-heading span { color: var(--ink-muted); font-size: var(--text-caption); }
+.list-page > .section:first-of-type { margin-top: 0; }
+.date-label { margin: var(--space-5) 0 0; color: var(--ink-muted); font-size: var(--text-caption); }
 
 .button { min-height: var(--target); display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 14px; border: 1px solid transparent; border-radius: 9px; background: var(--cobalt); color: var(--on-cobalt); font-weight: 600; font-size: var(--text-small); cursor: pointer; transition: background var(--dur-fast) var(--ease-out); }
 @media (hover: hover) { .button:hover { background: var(--cobalt-dark); } }
@@ -210,16 +212,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .search-count { margin: 0; padding-bottom: var(--space-2); color: var(--ink-muted); font-size: var(--text-caption); }
 .search-empty { margin: 0 0 var(--space-3); color: var(--ink-muted); font-size: var(--text-body); }
 
-.topic-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-.topic-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 13px; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: border-color var(--dur-fast) var(--ease-out); }
-@media (hover: hover) { .topic-card:hover { border-color: color-mix(in srgb, var(--cobalt) 35%, var(--line)); } }
-.topic-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: var(--cobalt-soft); color: var(--cobalt-dark); }
-.topic-card h3 { margin: 0; font-size: var(--text-subheading); font-weight: 600; }
-.topic-card p { overflow: hidden; margin: 2px 0 0; color: var(--ink-muted); font-size: var(--text-small); white-space: nowrap; text-overflow: ellipsis; }
-.topic-card-meta { display: flex; align-items: center; gap: 8px; color: var(--ink-muted); font-size: var(--text-caption); }
-
 .empty-state { display: grid; place-items: center; max-width: 560px; margin-inline: auto; text-align: center; padding: 48px 18px; border: 1px dashed var(--line-strong); border-radius: 13px; background: var(--surface-muted); }
-.empty-state.compact { padding: 30px 18px; }
 .empty-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: var(--surface-strong); color: var(--ink-muted); }
 .empty-state h1, .empty-state h2 { margin: 14px 0 4px; font-size: var(--text-subheading); font-weight: 600; }
 .empty-state p { max-width: 380px; margin: 0 0 16px; color: var(--ink-muted); font-size: var(--text-body); }
@@ -309,10 +302,6 @@ a.list-row:active { background: var(--cobalt-soft); }
 .settings-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .settings-confirm { margin-top: var(--space-4); }
 .button.danger { color: var(--danger); }
-.loading-stack { display: grid; gap: 14px; padding-top: 10px; }
-.skeleton { border-radius: 9px; background: linear-gradient(90deg, var(--surface-strong), var(--surface-muted), var(--surface-strong)); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-.skeleton.wide { height: 42px; width: 54%; }.skeleton.medium { height: 18px; width: 38%; }.skeleton.card { height: 118px; width: 100%; }
-@keyframes shimmer { to { background-position: -200% 0; } }
 
 /* ---------------------------------------------------------------------------
    Reading view. One left gutter carries every structural signal: callout
@@ -482,7 +471,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; } tr th:last-child, tr td
 }
 
 @media (min-width: 760px) {
-  .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .main-content { padding: 38px 32px 80px; }
   .settings-grid { grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); }
   /* The sidebar is the labelled rail (about 76px): the mark alone, then each destination as an icon over its label, with Settings at the foot. */

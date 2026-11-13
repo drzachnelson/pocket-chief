@@ -17,18 +17,18 @@ test("search, read, and save a topic", async ({ page }) => {
   await expect(page.locator(".list-rows").getByRole("link", { name: /Choledocholithiasis/ })).toBeVisible();
 });
 
-/** Writes records into the saved store the way an earlier bundle, or a page that has since left the library, would have left them. */
-async function seedSaved(page: Page, records: object[]) {
-  await page.evaluate((entries) => new Promise<void>((resolve, reject) => {
+/** Writes records into the saved or recent store the way an earlier bundle, or a page that has since left the library, would have left them. */
+async function seedStore(page: Page, store: "saved" | "recent", records: object[]) {
+  await page.evaluate(([name, entries]) => new Promise<void>((resolve, reject) => {
     const open = indexedDB.open("pocket-chief-private");
     open.onerror = () => reject(open.error);
     open.onsuccess = () => {
-      const tx = open.result.transaction("saved", "readwrite");
-      for (const record of entries) tx.objectStore("saved").put(record);
+      const tx = open.result.transaction(name as string, "readwrite");
+      for (const record of entries as object[]) tx.objectStore(name as string).put(record);
       tx.oncomplete = () => { open.result.close(); resolve(); };
       tx.onerror = () => reject(tx.error);
     };
-  }), records);
+  }), [store, records] as const);
 }
 
 test("Saved: one mixed newest-first list rebuilt by id, with old snapshots, playbooks and a gone page", async ({ page, request }) => {
@@ -40,7 +40,7 @@ test("Saved: one mixed newest-first list rebuilt by id, with old snapshots, play
   await expect(page.getByText("Nothing saved yet.")).toBeVisible();
   await expect(page.getByText("Use Save on a topic or playbook.")).toBeVisible();
   // An old entry is a whole Topic snapshot with no kind; a stale title proves the row is rebuilt from the current library.
-  await seedSaved(page, [
+  await seedStore(page, "saved", [
     { ...oldTopic, title: "Stale snapshot title", savedAt: "2026-10-01T00:00:00.000Z" },
     { id: playbook.id, kind: "playbook", savedAt: "2026-10-03T00:00:00.000Z" },
     { id: "no-longer-in-the-library", kind: "topic", savedAt: "2026-10-02T00:00:00.000Z" },
@@ -224,7 +224,7 @@ test("a playbook's header names its specialty as a link to its heading on the in
   await expect(page.getByRole("heading", { name: "Vascular", level: 2 })).toBeInViewport();
 });
 
-test("a playbook opened is recorded as recently viewed without reaching the topic lists", async ({ page }) => {
+test("a playbook opened is recorded as recently viewed and listed under Recently viewed on Home", async ({ page }) => {
   await page.goto("./playbooks/temporal-artery-biopsy/");
   await expect(page.getByRole("heading", { name: "Temporal Artery Biopsy", level: 1 })).toBeVisible();
   // The app creates its own database; opening it before then would create an empty one, so wait for it by name.
@@ -239,10 +239,81 @@ test("a playbook opened is recorded as recently viewed without reaching the topi
     } finally { db.close(); }
   });
   await expect.poll(async () => (await kinds()).map(({ kind }) => kind)).toEqual(["playbook"]);
-  // Home still draws its resume and recent rows from topic snapshots; a playbook entry has none and is left out.
+  // Home lists it under Recently viewed as a playbook row (specialty, trailing "Playbook"), and no row is a resume link.
   await page.goto("./");
-  await expect(page.getByText("Temporal Artery Biopsy")).toHaveCount(0);
+  const recent = page.locator("section", { has: page.getByRole("heading", { name: "Recently viewed", level: 2 }) });
+  await expect(recent.getByRole("listitem")).toHaveCount(1);
+  await expect(recent.getByRole("listitem").first()).toContainText("Temporal Artery Biopsy");
+  await expect(recent.getByRole("listitem").first()).toContainText("Vascular");
+  await expect(recent.getByRole("listitem").first()).toContainText("Playbook");
+  await expect(recent.getByRole("link", { name: /Temporal Artery Biopsy/ })).toHaveAttribute("href", /\/playbooks\/temporal-artery-biopsy\/?$/);
   await expect(page.getByRole("link", { name: /^Resume/ })).toHaveCount(0);
+});
+
+const homeSection = (page: Page, name: string) => page.locator("section", { has: page.getByRole("heading", { name, level: 2 }) });
+
+test("Home: the field, then Recently added under date labels; a fresh device has no Recently viewed or Saved", async ({ page }) => {
+  await page.goto("./");
+  await expect(page.getByRole("heading", { name: "Pocket Chief", level: 1 })).toBeAttached();
+  await expect(page.getByRole("heading", { name: "Recently added", level: 2 })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2 })).toHaveText(["Recently added"]);
+  // Eight rows in all, newest day first, each day under a plain date label; the labels are UTC days ("Nov 9"), the year only for an earlier one.
+  const rows = homeSection(page, "Recently added").getByRole("listitem");
+  await expect(rows).toHaveCount(8);
+  const labels = await homeSection(page, "Recently added").locator(".date-label").allTextContents();
+  expect(labels.length).toBeGreaterThan(0);
+  for (const label of labels) expect(label).toMatch(/^[A-Z][a-z]{2} \d{1,2}(, \d{4})?$/);
+  await expect(page.getByRole("link", { name: /Browse|Library|Favorites|Resume/ })).toHaveCount(0);
+  await expect(page.getByRole("searchbox")).toHaveCount(0);
+  await expect(page.getByRole("combobox", { name: "Search" })).toHaveCount(1);
+});
+
+test("Home: Recently viewed shows five and Saved shows five with All saved only when there are more", async ({ page, request }) => {
+  const { topics } = await (await request.get("library.json")).json() as { topics: Array<{ id: string; slug: string; title: string }> };
+  const { playbooks } = await (await request.get("playbooks.json")).json() as { playbooks: Array<{ id: string; slug: string; title: string }> };
+  await page.goto("./saved/");
+  await expect(page.getByText("Nothing saved yet.")).toBeVisible();
+  const day = (n: number) => `2026-10-${String(n).padStart(2, "0")}T00:00:00.000Z`;
+  await seedStore(page, "recent", [
+    ...topics.slice(0, 6).map((topic, n) => ({ id: topic.id, kind: "topic", viewedAt: day(10 + n) })),
+    { id: "no-longer-in-the-library", kind: "topic", viewedAt: day(20) },
+  ]);
+  await seedStore(page, "saved", [
+    ...topics.slice(0, 5).map((topic, n) => ({ id: topic.id, kind: "topic", savedAt: day(10 + n) })),
+  ]);
+  await page.goto("./");
+  await expect(page.getByRole("heading", { level: 2 })).toHaveText(["Recently viewed", "Saved", "Recently added"]);
+  // The gone id drops silently; the five newest of the rest show, newest first.
+  const recent = homeSection(page, "Recently viewed").getByRole("listitem");
+  await expect(recent).toHaveCount(5);
+  await expect(recent.first()).toContainText(topics[5].title);
+  await expect(page.getByText("No longer available")).toHaveCount(0);
+  // Five saved is not more than five: no link, and no bookmark toggle on a Home row.
+  await expect(homeSection(page, "Saved").getByRole("listitem")).toHaveCount(5);
+  await expect(page.getByRole("link", { name: "All saved" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /^Save / })).toHaveCount(0);
+
+  await seedStore(page, "saved", [{ id: playbooks[0].id, kind: "playbook", savedAt: day(25) }]);
+  await page.reload();
+  await expect(homeSection(page, "Saved").getByRole("listitem")).toHaveCount(5);
+  await expect(homeSection(page, "Saved").getByRole("listitem").first()).toContainText(playbooks[0].title);
+  const all = homeSection(page, "Saved").getByRole("link", { name: "All saved" });
+  await expect(all).toHaveAttribute("href", /\/saved\/?$/);
+  expect((await all.boundingBox())!.height).toBeGreaterThanOrEqual(36);
+  await all.click();
+  await expect(page.getByRole("heading", { name: "Saved", level: 1 })).toBeVisible();
+  await expect(page.locator("main .list-rows > li")).toHaveCount(6);
+});
+
+test("Home: the static HTML holds the shell's field and the hidden heading alone, with no section, row or placeholder", async ({ request }) => {
+  test.skip(process.env.E2E_EXPORT !== "1", "`next dev` streams the route's loading fallback into the HTML: this reads the export that ships");
+  const html = await (await request.get("./")).text();
+  expect(html.match(/<h1[ >]/g)).toHaveLength(1);
+  expect(html).not.toMatch(/<h2[ >]/);
+  expect(html).toContain('type="search"');
+  // The page's own markup is the heading and an empty column. (The route's loading rows also appear in the page's script payload, so the body is read, not the whole file.)
+  const main = /<main[^>]*>([\s\S]*?)<\/main>/.exec(html)![1].replace(/<!--[\s\S]*?-->/g, "");
+  expect(main).toBe('<div class="list-page"><h1 class="visually-hidden">Pocket Chief</h1></div>');
 });
 
 for (const tab of ["Notes", "Sources", "History"]) {
