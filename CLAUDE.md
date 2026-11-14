@@ -99,6 +99,7 @@ Adding content is a repeatable workflow — invoke the `/add-topic` skill rather
 - **Bullets and sequences**: items and step titles are keys, so keep them unique.
 - Any block with a `heading` appears in the on-page table of contents.
 - A `↳` heading that repeats the heading of the block above is folded into that section (`groupSections` in `src/lib/inline.ts`): no row, title or Contents entry of its own, content under the parent's, the block's id still a link target that opens the parent. A `↳` heading that differs stays a real sub-heading. Author with distinct titles; do not repeat the parent's.
+- **Figures** are `image` blocks: `sourced({ id, type: "image", heading, mediaId: "name.svg", alt, caption }, SOURCE)`. `mediaId` is the file name in `public/media/`, served at `<basePath>/media/<mediaId>`. `alt` and `caption` are factual units, so each needs a citation like any other text. Draw dark-on-white with a `viewBox` (the plate behind an `<img>` is `--figure-ground`, white in both themes). `figures.test.ts` fails on a raster file, an `<image>` or `data:` URI inside an SVG, or a block whose file is missing; originals only (AGENTS.md).
 
 ## Conventions
 
