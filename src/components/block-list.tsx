@@ -67,7 +67,8 @@ function blockContent(block: TopicBlock, linkEntries: LinkIndexEntry[], selfSlug
   if (block.type === "table") return <div className="table-scroll"><table data-columns={block.columns.length}><thead><tr>{block.columns.map((column) => <th key={column}>{inline(column)}</th>)}</tr></thead><tbody>{block.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th key={cell}>{inline(cell)}</th> : <td key={`${row[0]}-${cell}`}>{inline(cell)}</td>)}</tr>)}</tbody></table></div>;
   if (block.type === "sequence") return <ol className="sequence-list">{block.steps.map((step, index) => <li key={step.title}><span className="step-number">{String(index + 1).padStart(2, "0")}</span><div><strong>{inline(step.title)}</strong><p>{inline(step.detail)}</p></div></li>)}</ol>;
   if (block.type === "flow") return <DecisionFlow block={block} renderInline={inline} />;
-  if (block.type === "image") return <><Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
+  // Eager, not lazy: a figure inside a closed section would never load, so the service worker would never cache it and it would be missing offline.
+  if (block.type === "image") return <><Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/media/${block.mediaId}`} alt={block.alt} width={1200} height={630} loading="eager" unoptimized />{block.caption && <figcaption>{inline(block.caption)}</figcaption>}</>;
   return null;
 }
 

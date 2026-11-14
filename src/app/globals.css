@@ -5,6 +5,8 @@
   /* Light palette. The dark values live in the --dark-* block below and are aliased onto these names. */
   --canvas: #f4f6fa;
   --surface: #ffffff;
+  /* Figures are drawn dark-on-white and an <img> cannot read the page's theme, so the plate behind one stays white in both themes. */
+  --figure-ground: #ffffff;
   --surface-muted: #f8f9fc;
   --surface-strong: #eef2f8;
   --ink: #182033;
@@ -346,7 +348,7 @@ a.list-row:active { background: var(--cobalt-soft); }
 .topic-block { scroll-margin-top: 84px; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .topic-block > p { margin: var(--space-3) 0 0; color: var(--ink); font-size: var(--text-body); line-height: 1.5; }
 .topic-block > p + p { margin-top: var(--space-4); }
-.topic-block img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius-md); }
+.topic-block img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--figure-ground); }
 figure.topic-block { margin: 0; }
 /* A block whose ↳ heading only repeated its parent's: its content follows under the parent's title, with no row, rule or padding of its own. */
 .section-part { margin-top: var(--space-4); padding: 0; border-bottom: 0; }

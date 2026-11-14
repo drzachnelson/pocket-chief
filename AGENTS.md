@@ -30,6 +30,7 @@ Follow my voice principles in 00_Resources (voice-principles.md).
 - Paraphrase paid resources; never reproduce question stems or proprietary explanations.
 - Every factual block must cite a supplied source or be visibly marked as needing support.
 - Never accept or retain patient identifiers or patient-specific clinical details.
+- Figures are original SVG drawings in `public/media/`, made from the anatomy or technique a supplied photo or figure is meant to teach. Never trace, copy or embed the source image, and keep its layout, labels and viewpoint out of the redraw. A supplied image is a brief, not a template.
 - Treat all AI output as a draft until Zach explicitly approves it.
 
 <!-- BEGIN:nextjs-agent-rules -->
