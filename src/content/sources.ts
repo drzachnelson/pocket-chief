@@ -430,6 +430,7 @@ export const SAGES_PD_ACCESS_2023_SOURCE = "00000000-0000-4000-8000-000000003073
 export const SAGES_PD_ACCESS_2014_SOURCE = "00000000-0000-4000-8000-000000003074";
 export const ISPD_PERITONITIS_2022_SOURCE = "00000000-0000-4000-8000-000000003075";
 export const CAMPBELL_2017_PD_PROPHYLAXIS_SOURCE = "00000000-0000-4000-8000-000000003076";
+export const CLAUS_2020_TEN_RULES_SOURCE = "00000000-0000-4000-8000-000000003077";
 export const COLONIC_POLYPS_PACKET_SOURCE = "00000000-0000-4000-8000-000000007900";
 export const USMSTF_SURVEILLANCE_2020_SOURCE = "00000000-0000-4000-8000-000000007901";
 export const USMSTF_MALIGNANT_POLYP_2020_SOURCE = "00000000-0000-4000-8000-000000007902";
@@ -1531,6 +1532,15 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "HerniaSurge Group. International guidelines for groin hernia management. Hernia, 2018;22(1):1-165.",
     suppliedAt: "2026-09-11T00:00:00.000Z",
     details: "Registered during review as the authority the supplied playbook attributes its antibiotic-prophylaxis and mesh positions to. Identified from that playbook rather than supplied directly, so recommendation-level numbering was not available.",
+  },
+  {
+    id: CLAUS_2020_TEN_RULES_SOURCE,
+    title: "Ten golden rules for a safe MIS inguinal hernia repair",
+    kind: "article",
+    citation: "Claus C, Furtado M, Malcher F, Cavazzola LT, Felix E. Ten golden rules for a safe MIS inguinal hernia repair using a new anatomical concept as a guide. Surgical Endoscopy, 2020;34(4):1458-1464. doi:10.1007/s00464-020-07449-z.",
+    suppliedAt: "2026-11-13T00:00:00.000Z",
+    url: "https://link.springer.com/article/10.1007/s00464-020-07449-z",
+    details: "Supplied by the owner as a link on November 13, 2026 and read in full from the publisher page; all 19 references present. It is an Editorial, not a trial. It pairs the Daes and Felix critical view of the myopectineal orifice (Annals of Surgery 2017) with the Furtado inverted Y and five triangles (Arquivos Brasileiros de Cirurgia Digestiva 2019) and sets out ten rules across three zones of dissection for TAPP, TEP, extended TEP and robotic TAPP. Its references include the European Hernia Society guidelines (2009, update 2014), HerniaSurge (2018) and the International Endohernia Society guidelines (2011), cited for mesh position and fixation; Kukleta (2006) for cord lipoma as a cause of recurrence; and Poobalan (2003) for the five-to-six fixation points, which rests on a review of chronic pain after inguinal herniorrhaphy rather than a fixation trial. The playbook uses the rules that apply to a transabdominal approach and leaves out the TEP-only content: balloon against telescopic space creation, assisted CO2 deflation and the vacuum-suction fixation technique. Noted during review and pending sign-off: the paper gives the dissection depth below the pubis as at least 2 cm in rule 3 and its figure 8 but 1 to 2 cm in rule 8 and the figure 4 caption, so the playbook states at least 2 cm for dissection and 1 to 2 cm for the mesh. The paper starts the peritoneal incision at least 4 cm above the deep ring and ends it at the medial umbilical fold, the obliterated umbilical artery. The supplied playbook says 5 to 8 cm and names the median umbilical fold, which is the urachal remnant; that older step is left as supplied and flagged for the owner.",
   },
   {
     id: TOTAL_THYROIDECTOMY_PLAYBOOK_SOURCE,

@@ -1,5 +1,5 @@
 import { buildPlaybook, references, sourced } from "@/content/authoring";
-import { HERNIASURGE_2018_SOURCE as HERNIASURGE, RTAPP_INGUINAL_PLAYBOOK_SOURCE as SOURCE } from "@/content/sources";
+import { CLAUS_2020_TEN_RULES_SOURCE as TEN_RULES, HERNIASURGE_2018_SOURCE as HERNIASURGE, RTAPP_INGUINAL_PLAYBOOK_SOURCE as SOURCE } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
 const blocks: TopicBlock[] = [
@@ -115,6 +115,19 @@ const blocks: TopicBlock[] = [
   }, SOURCE),
 
   sourced({
+    id: "block-rtapp-zones",
+    type: "bullets",
+    heading: "↳ Three zones of dissection",
+    items: [
+      "Zone 1 is the lateral area, lateral to the deep ring and the spermatic vessels, and the nerves lie here.",
+      "Zone 2 is medial to the inferior epigastric vessels and the vas deferens, and it is where direct hernias sit.",
+      "Zone 3 is the central zone and the one that demands the most attention. It takes in the inferior epigastric vessels and deep ring superiorly, plus the spermatic cord elements and the external iliac vessels.",
+      "Start in Zone 1 or Zone 2 by preference and leave Zone 3 for last. The medial zone has the most constant anatomy, and finding the pubis orients the surgeon.",
+      "Zone 3 is the hardest step and has the most variable anatomy. Injury to the vas or the vessels, and tears in the peritoneum, can occur here.",
+    ],
+  }, TEN_RULES),
+
+  sourced({
     id: "block-rtapp-flow",
     type: "flow",
     heading: "Operative flow",
@@ -162,6 +175,65 @@ const blocks: TopicBlock[] = [
       { title: "Close the peritoneum and exit", detail: "Close the flap fully over the mesh with a running absorbable barbed suture so no mesh sees bowel, leaving no gaps or buttonholes that could trap a loop. The pitfall is deep bites near the ring, which can catch the ilioinguinal or iliohypogastric nerve running superficial to the internal ring — take shallow bites." },
     ],
   }, SOURCE),
+
+  sourced({
+    id: "block-rtapp-ten-rules",
+    type: "prose",
+    heading: "Ten rules for a safe minimally invasive repair",
+    text: "The ten rules come from a 2020 editorial that pairs the critical view of the myopectineal orifice with the inverted Y and five triangles, and it covers TAPP, TEP, extended TEP and robotic TAPP alike. It is an editorial, so the thresholds are the authors' recommendations rather than trial results.",
+  }, TEN_RULES),
+
+  sourced({
+    id: "block-rtapp-ten-rules-table",
+    type: "table",
+    heading: "↳ Rule by rule",
+    columns: ["Rule", "What to do", "Why it matters"],
+    rows: [
+      ["1. Open high", "Incise the peritoneum at least 4 cm above the deep ring border, from the anterior superior iliac spine to the medial umbilical fold, which is the obliterated umbilical artery.", "A high flap leaves room for a large mesh in the preperitoneal space."],
+      ["2. Follow the peritoneal plane", "Keep the preperitoneal fat on the inguinal floor, not on the peritoneum, and stay out of the plane that exposes muscle. Do not dissect or identify the nerves routinely.", "The muscle plane puts the inferior epigastric vessels at risk in Zone 3 and the nerves at risk in Zone 1. Leaving the nerves covered may spare them the foreign-body reaction to the mesh and lower the chance of chronic pain."],
+      ["3. Dissect Zone 2 fully", "Dissect to at least the pubic symphysis and at least 2 cm below the pubis. Reduce a direct hernia, leave the attenuated transversalis fascia distal, and stay in the correct plane in case the bladder is part of the hernia. Empty the bladder before the operation.", "The mesh needs room to overlap the direct and femoral triangles by 3 to 4 cm without a distending bladder lifting it. A full bladder shrinks the field and can fold the lower mesh edge as the gas is released, a potential cause of recurrence."],
+      ["4. See the external iliac vein", "Visualize the external iliac vein in Zone 3 and inspect the femoral canal. Tell lymph nodes along the vein apart from preperitoneal fat protruding into the canal.", "A femoral hernia is missed if the vein is not seen."],
+      ["5. Parietalize far enough", "Dissect the peritoneum down to at least where the vas deferens crosses the external iliac vein in Zone 3, and until the iliopsoas is seen posteriorly in Zone 1. Mobilize the peritoneum medially and laterally off an indirect sac to find the vas and spermatic vessels. In women, transect the round ligament at least 1 cm proximal to the deep ring.", "Indirect sac dissection is the most demanding step, and the external iliac vessels lie just deep to the cord in the triangle of Doom. Transecting the round ligament proximal to the ring protects the genital branch of the genitofemoral nerve."],
+      ["6. Transect a large sac", "In a large or inguinoscrotal hernia, transect the sac and abandon the distal part in the scrotum, but only after the cord elements are identified.", "It avoids excess cord dissection. A pseudohydrocele is easier to manage than a scrotal hematoma, ischemic orchitis or cord injury."],
+      ["7. Look for a cord lipoma", "Explore the deep ring during Zone 3 dissection. Dissect any lipoma off the cord and reduce it from the canal. It need not be removed and can lie on top of the mesh.", "An untreated lipoma is a major cause of recurrence after laparoscopic repair, and a lipoma placed on top of the mesh helps stop it rolling upward. A visible iliopubic tract with only cord elements in the deep ring means no lipoma is left."],
+      ["8. Cover the whole orifice", "Use a mesh of usually at least 10 cm craniocaudal by 15 cm mediolateral. Lay it flat, do not split it, and leave no peritoneum behind it.", "The mesh must overlap the indirect, direct and femoral triangles by at least 3 to 4 cm. Wrinkles, folds or a split mesh risk chronic pain or recurrence, and peritoneum left behind it lets it fold or roll up as the gas leaves or the flap closes."],
+      ["9. Fix only when needed", "Most repairs need no fixation. Fixation is recommended in large hernias, especially a large direct hernia, EHS M3.", "Tacks, sutures, glue or a self-fixing mesh do not correct improper dissection or a malpositioned mesh."],
+      ["10. Close under vision", "Close the peritoneal flap with suture, not tacks, and make sure the closure neither lifts the mesh nor folds its lower edge. Close any gap, hole or tear in the peritoneum.", "Tacking the peritoneum may raise the risk of nerve injury. Peritoneal gaps risk early bowel obstruction or mesh exposure."],
+    ],
+  }, TEN_RULES),
+
+  sourced({
+    id: "block-rtapp-mesh-limits",
+    type: "bullets",
+    heading: "↳ Where the mesh should reach",
+    items: [
+      "Medially, to the pubic symphysis, lying between the pubic bone and the bladder in the space of Retzius.",
+      "In a direct hernia, 1 to 2 cm of the mesh crosses to the other side, which gives at least 3 cm of medial overlap from the defect.",
+      "Laterally, to the iliopsoas muscle and the anterior superior iliac spine.",
+      "Inferiorly, 1 to 2 cm below the pubis.",
+      "Superiorly, 3 to 4 cm over the anterior abdominal wall above the deep ring.",
+    ],
+  }, TEN_RULES),
+
+  sourced({
+    id: "block-rtapp-fixation-details",
+    type: "bullets",
+    heading: "↳ If you fixate",
+    items: [
+      "Tack above the pubic bone, into Cooper's ligament, and never into bone, to avoid chronic osteitis.",
+      "Avoid the inferior epigastric vessels.",
+      "Place nothing below the iliopubic tract. To stay clear of the triangles of Pain and Doom, keep fixation 2 cm above the tract.",
+      "Five or six fixation points are enough, and higher tack numbers are linked to more chronic pain.",
+      "Palpate the abdominal wall from outside while placing penetrating fixation, so an anchor does not go below the iliopubic tract or in too deep.",
+    ],
+  }, TEN_RULES),
+
+  sourced({
+    id: "block-rtapp-fascia-closure",
+    type: "prose",
+    heading: "↳ Unsettled: closing the transversalis fascia",
+    text: "As of the 2020 editorial, there is no consensus on suturing or plicating the transversalis fascia over a direct defect. Some feel it may reduce seroma, while others doubt it is needed and link it to possible nerve injury. The practice has become more common since robotic repair arrived, and its outcomes still need evaluation.",
+  }, TEN_RULES),
 
   sourced({
     id: "block-rtapp-mesh-weight",
@@ -228,21 +300,21 @@ const blocks: TopicBlock[] = [
     ],
   }, SOURCE),
 
-  references("block-rtapp-references", [SOURCE, HERNIASURGE]),
+  references("block-rtapp-references", [SOURCE, HERNIASURGE, TEN_RULES]),
 ];
 
 export const roboticTappInguinalHerniaRepairPlaybook = buildPlaybook({
   id: "00000000-0000-4000-9000-000000000004",
   slug: "robotic-tapp-inguinal-hernia-repair",
   title: "Robotic TAPP Inguinal Hernia Repair",
-  aliases: ["rTAPP", "TAPP", "Robotic inguinal hernia repair", "Transabdominal preperitoneal repair", "Robotic groin hernia repair"],
+  aliases: ["rTAPP", "TAPP", "Robotic inguinal hernia repair", "Transabdominal preperitoneal repair", "Robotic groin hernia repair", "Ten golden rules"],
   procedureId: "robotic_tapp_inguinal_hernia_repair",
   approach: "robotic",
   specialty: "Hernia",
   tags: ["hernia", "inguinal", "robotic", "minimally invasive", "mesh"],
   sourceId: SOURCE,
-  additionalSourceIds: [HERNIASURGE],
+  additionalSourceIds: [HERNIASURGE, TEN_RULES],
   relatedTopicSlugs: ["inguinal-hernia", "groin-hernia-repair", "femoral-hernia"],
   blocks,
-  reviewedAt: "2026-09-13T00:00:00.000Z",
+  reviewedAt: "2026-11-13T00:00:00.000Z",
 });

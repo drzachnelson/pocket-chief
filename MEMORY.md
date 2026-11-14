@@ -589,6 +589,16 @@ Wayfinder map 48, slice S18, the last UI slice. Home is the hidden h1 "Pocket Ch
 - **Verified (2026-11-12, branch cut from main 21231d6):** clean `main` first: tsc, eslint, vitest 453 and Playwright 85 passed with 31 skipped. After the change: tsc and eslint clean, vitest 450 passed with a fresh `out/` (448 passed and 2 skipped before the build, the 2 being the `out/` checks), `next build` clean, Playwright 88 passed, 33 skipped, 1 failed (S11's find-text laptop spec, the stale-count race S12 and S14 also saw; it passed on rerun with the Home specs). The static-HTML spec and the other Home specs pass against `serve-out` on the export (`E2E_EXPORT=1`). Screenshots at 375 and 1280px, light and dark, fresh and seeded, no console messages, no horizontal overflow.
 - **Not checked:** a real phone or iOS Safari, a screen reader, 320px, and a long history list at the owner's device speed (`loadHistory` fetches the 9 MB library on first read, as Saved does).
 
+## Robotic TAPP: ten golden rules added (November 13, 2026)
+
+- **Source:** Claus, Furtado, Malcher, Cavazzola and Felix, Surgical Endoscopy 2020;34:1458-1464, an Editorial (so the thresholds are recommendations, not trial data). Owner supplied the link; read in full with all 19 references. Registered as `CLAUS_2020_TEN_RULES_SOURCE` (03077) beside HerniaSurge.
+- **Added to `robotic-tapp-inguinal-hernia-repair`:** a zones block under the anatomy, then after the step-by-step an intro, a ten-row rule table, mesh limits, fixation details and an unsettled note on closing the transversalis fascia. No owner-approved block was edited; the new blocks cite the new source. TEP-only content (balloon against telescope, assisted deflation, vacuum-suction fixation) was left out.
+- **Open, owner-only:** the existing peritoneal-flap step says 5 to 8 cm cephalad and names the median umbilical fold. The paper says at least 4 cm above the deep ring, ending at the medial umbilical fold (the obliterated umbilical artery; the median fold is the urachus). Left as supplied.
+- **The paper contradicts itself** on depth below the pubis: at least 2 cm (rule 3, figure 8) against 1 to 2 cm (rule 8, figure 4 caption). The playbook dissects at least 2 cm and lets the mesh descend 1 to 2 cm.
+- **Dated claim:** the fascia-closure block says "as of the 2020 editorial". A 2026 randomized trial (Nageeb, PMC12996019) reports less seroma with plication; only its abstract was read, so it is not yet in the block.
+- **Auto-links:** five new pinned links reviewed and kept (direct hernia, femoral canal, femoral hernia, ischemic orchitis, spermatic cord).
+- **Verified 2026-11-13:** tsc and eslint clean, vitest 470 passed across 43 files, page renders at 375px with no horizontal overflow (the rule table is about 2,800px tall on a phone). Not checked: `next build` and the export, Playwright.
+
 ## Figures (November 13, 2026)
 
 Decision (2026-11-13, Zach): figures from the licensed books or from his own photos are not copied. He sends the image as a brief, with the teaching point, and the figure is an original SVG redrawn from the anatomy or technique, not a trace. Not legal advice: his licence terms are not in the repo and were not read.
