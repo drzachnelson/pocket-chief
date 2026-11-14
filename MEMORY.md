@@ -598,3 +598,13 @@ Wayfinder map 48, slice S18, the last UI slice. Home is the hidden h1 "Pocket Ch
 - **Dated claim:** the fascia-closure block says "as of the 2020 editorial". A 2026 randomized trial (Nageeb, PMC12996019) reports less seroma with plication; only its abstract was read, so it is not yet in the block.
 - **Auto-links:** five new pinned links reviewed and kept (direct hernia, femoral canal, femoral hernia, ischemic orchitis, spermatic cord).
 - **Verified 2026-11-13:** tsc and eslint clean, vitest 470 passed across 43 files, page renders at 375px with no horizontal overflow (the rule table is about 2,800px tall on a phone). Not checked: `next build` and the export, Playwright.
+
+## Figures (November 13, 2026)
+
+Decision (2026-11-13, Zach): figures from the licensed books or from his own photos are not copied. He sends the image as a brief, with the teaching point, and the figure is an original SVG redrawn from the anatomy or technique, not a trace. Not legal advice: his licence terms are not in the repo and were not read.
+
+- **The `image` block already existed** (type, `factualUnits`, search text, `block-list.tsx` render) and no topic used it. What was missing was the files and the guards: `public/media/` holds the SVGs (none shipped yet), `mediaId` is the file name with `.svg`, and `figures.test.ts` fails on a non-SVG file, an `<image>` or `data:` URI inside an SVG, a script, or an image block whose file is missing. It is a tripwire for a pasted raster, not proof a drawing is original.
+- **Eager loading.** `next/image` defaults to lazy, and an image inside a closed `<details>` never loads, so the worker (which caches every same-origin GET it sees) would never cache it. `sw.js` is unchanged and no cache bump was needed; a figure is cached the first time its topic opens online.
+- **White plate.** `--figure-ground` stays `#ffffff` in both themes because an `<img>` cannot read the page theme; figures are drawn dark-on-white.
+- **Verified (2026-11-13):** tsc and eslint clean, vitest 475 passed and 3 skipped. A throwaway SVG on the Anal Fissure page (reverted, nothing committed from it) loaded 200 under `/pocket-chief/media/`, rendered 760px wide on desktop and 343px at 375 with no horizontal scroll, on the white plate in the dark theme, with its caption.
+- **Not checked:** `next build` and Playwright, offline load of a figure (the dev server does not register the worker), light theme, and any real figure. The first real one still needs a clinical read before it is approved.

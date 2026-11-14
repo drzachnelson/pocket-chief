@@ -237,4 +237,21 @@ describe("callout icons", () => {
     expect(container.querySelector(".warning-block.tone-pearl, .warning-block.tone-danger, .warning-block.tone-mnemonic")).not.toBeNull();
     expect(container.querySelector("#s1 h2")).toHaveTextContent("At a glance");
   });
+
+  it("draws a figure from public/media, loads it eagerly inside a closed section and keeps its caption", () => {
+    // Lazy loading would never fetch an image inside a closed <details>, so the service worker would never cache it for offline.
+    const blocks: TopicBlock[] = [
+      { id: "f1", type: "image", heading: "Anatomy", mediaId: "gb.svg", alt: "Gallbladder and ducts", caption: "Cystic duct meets the **common hepatic duct**", claims: [] },
+      { id: "f2", type: "image", mediaId: "loose.svg", alt: "Unheaded figure", claims: [] },
+    ];
+    const { container } = render(<Harness blocks={blocks} />);
+
+    expect(detail("f1")!.open).toBe(false);
+    const figure = screen.getByAltText("Gallbladder and ducts");
+    expect(figure.getAttribute("src")).toMatch(/\/media\/gb\.svg$/);
+    expect(figure).toHaveAttribute("loading", "eager");
+    expect(figure.closest("figure")).toHaveTextContent("Cystic duct meets the common hepatic duct");
+    expect(container.querySelector("figure#f2 img")).toHaveAttribute("alt", "Unheaded figure");
+    expect(container.querySelector("figure#f2 figcaption")).toBeNull();
+  });
 });
