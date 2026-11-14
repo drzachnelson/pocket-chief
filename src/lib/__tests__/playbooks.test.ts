@@ -255,15 +255,23 @@ describe("playbook library", () => {
         "Triangle of Doom -> groin-hernia-repair",
         "Watchful waiting -> inguinal-hernia",
         "corona mortis -> groin-hernia-repair",
+        "direct hernia -> inguinal-hernia",
+        "femoral canal -> femoral-hernia",
+        "femoral hernia -> femoral-hernia",
         "iliopubic tract -> groin-hernia-repair",
         "inguinal hernia -> inguinal-hernia",
         "internal ring -> inguinal-hernia",
+        "ischemic orchitis -> groin-hernia-repair",
         "mechanical prophylaxis -> prophylaxis-of-venous-thromboembolism",
         "myopectineal orifice -> groin-hernia-repair",
         "peritonitis -> abdominal-pain",
+        "spermatic cord -> inguinal-hernia",
         "triangle of Doom -> groin-hernia-repair",
         "triangle of Pain -> groin-hernia-repair",
       ],
+      // The ten-rules additions (2026-11-13) added five links, all reviewed as correct: the direct
+      // hernia, the femoral canal and femoral hernia, ischemic orchitis after sac handling, and the
+      // spermatic cord each land on the topic that owns that anatomy or complication.
       // The robotic ventral/umbilical guide added 2026-09-13 was reviewed the same way, and it
       // links more widely than the others because the three abdominal-wall topics genuinely own
       // its vocabulary. Rejected and reworded in the playbook: "TAPP" reached groin hernia repair
