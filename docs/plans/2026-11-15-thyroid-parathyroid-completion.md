@@ -16,3 +16,7 @@ Use the selected worktree's add-topic skill, sourced blocks and actual registere
 4. Integrate: audit sources, taxonomy, links and registrations; address targeted issues; add tracked batch review notes with per-entry evidence/limitations. Run content contracts, typecheck, lint, unit suite, static build and desktop/mobile/export/offline checks. Review standards and scope independently. Commit explicit paths, push this branch, create/update one draft PR. Confirm remote SHA and CI; do not merge or deploy.
 
 Independent authors share the existing source registry read-only. Root owns shared source/registry/test changes and Git operations. Authors run targeted contract checks only; root runs final shared suite. Report needed shared changes to root.
+
+## Final review follow-through
+
+The export browser review reproduced a pre-existing save-state race: reader and Saved-list controls displayed completion before IndexedDB writes committed, allowing immediate navigation/reload to read stale data. Include the minimal pending-state/write-completion fix with deferred-write regression tests; preserve storage schema and all unrelated runtime behavior. Re-run affected component/browser checks and the final build.

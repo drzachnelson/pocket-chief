@@ -86,7 +86,7 @@ const blocks: TopicBlock[] = [
   }, ATA),
   sourced({
     id: "block-ht-atd-safety", type: "warning", heading: "Fever or sore throat on a thionamide", tone: "danger",
-    text: "Obtain a baseline CBC/differential and liver profile and teach symptom-triggered action. **Fever or pharyngitis → stop the drug and obtain an urgent CBC/differential.** After agranulocytosis or another major reaction, do not simply switch between PTU and MMI. Jaundice, dark urine or other liver-injury symptoms require urgent assessment. Mild isolated rash may be managed differently from a major reaction. PTU can cause severe hepatocellular injury; MMI can cause cholestatic injury. A blanket liver-test cutoff with automatic cross-switch is unsafe.",
+    text: "Obtain a baseline CBC/differential and liver profile and teach symptom-triggered action. **Fever or pharyngitis → stop the drug and obtain an urgent CBC/differential.** After agranulocytosis or another major reaction, do not simply switch between PTU and MMI. Jaundice, dark urine or other hepatotoxicity symptoms require urgent assessment. Mild isolated rash may be managed differently from a major reaction. PTU can cause severe hepatocellular injury; MMI can cause cholestatic injury. A blanket liver-test cutoff with automatic cross-switch is unsafe.",
   }, ATA),
   sourced({
     id: "block-ht-atd-course", type: "bullets", heading: "Monitoring, remission and relapse",
@@ -149,7 +149,7 @@ const blocks: TopicBlock[] = [
     columns: ["Target", "ATA adult regimen", "Sequence / caution"],
     rows: [
       ["Adrenergic excess", "Propranolol 60–80 mg orally every 4 hours, or titrated esmolol infusion.", "Assess perfusion and cardiac reserve first. Rapid blockade can precipitate collapse in low-output/decompensated failure; monitored titration is essential."],
-      ["New synthesis", "PTU 500–1,000 mg oral/NG loading dose, then 250 mg every 4 hours; MMI 60–80 mg/day is an alternative.", "PTU also reduces conversion; liver injury can change selection. Use a feasible formulation with pharmacy/endocrine input."],
+      ["New synthesis", "PTU 500–1,000 mg oral/NG loading dose, then 250 mg every 4 hours; MMI 60–80 mg/day is an alternative.", "PTU also reduces conversion; hepatotoxicity can change selection. Use a feasible formulation with pharmacy/endocrine input."],
       ["Hormone release", "SSKI 5 drops (0.25 mL; 250 mg) orally every 6 hours at the ATA concentration.", "Wait **at least 1 hour after thionamide** to avoid feeding new synthesis. Lugol is an alternative with product-specific dosing."],
       ["Conversion / adrenal support", "Hydrocortisone 300 mg IV loading dose, then 100 mg IV every 8 hours.", "Give promptly; steroids and resuscitation need not wait for completion of the thionamide–iodine sequence."],
       ["Systemic decompensation and trigger", "Cooling, acetaminophen, oxygen, appropriate fluid/glucose/electrolyte support and treatment of infection or another trigger.", "Avoid aspirin because it can increase free hormone. Consider cholestyramine as an adjunct; refractory disease may require plasma exchange and expert rescue thyroidectomy."],
@@ -167,9 +167,9 @@ const blocks: TopicBlock[] = [
     ],
   }, PREGNANCY),
   sourced({
-    id: "block-ht-trab-schedule", type: "prose", heading: "↳ Antibody surveillance schedule: verified 2016 framework",
-    text: "The 2016 ATA hyperthyroidism guideline repeats elevated TRAb at 18–22 weeks and, if still elevated, at 30–34 weeks to plan fetal/neonatal care; it makes an exception for an intact thyroid with no further ATD requirement. The detailed 2026 pregnancy Table 5 was not independently read here, so this timing is explicitly the verified older framework rather than a claim about an inspected 2026 table.",
-  }, ATA),
+    id: "block-ht-trab-schedule", type: "prose", heading: "↳ Antibody and fetal surveillance: ATA 2026",
+    text: "Check TRAb/TSI in the first trimester for active or past Graves disease. For women off ATDs with antibodies >3× ULN, repeat at 18–22 and 30–34 weeks; persistent elevation warrants fetal thyroid ultrasound from 18–20 weeks, generally monthly. In euthyroid women off ATDs with antibodies <3× ULN, antibody/fetal-hyperthyroidism follow-up may stop, while maternal thyroid-function follow-up continues. Continued maternal ATD treatment independently warrants fetal thyroid ultrasound regardless of antibody level, because the fetus is also at risk of treatment-related hypothyroidism.",
+  }, PREGNANCY),
   sourced({
     id: "block-ht-lactation", type: "table", heading: "Lactation: drug treatment and isotope precautions differ",
     columns: ["Intervention", "2026 ATA guidance"],

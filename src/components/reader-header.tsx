@@ -11,6 +11,7 @@ const isPlaybook = (item: Topic | Playbook): item is Playbook => "procedureId" i
 function SaveButton({ item }: { item: Topic | Playbook }) {
   const [saved, setSaved] = useState(false);
   const [ready, setReady] = useState(false);
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const touched = useRef(false);
 
@@ -23,14 +24,24 @@ function SaveButton({ item }: { item: Topic | Playbook }) {
       .then((value) => { if (typeof value === "boolean" && !touched.current) setSaved(value); }).catch(() => undefined).finally(() => setReady(true));
   }, [item.id]);
 
-  function toggle() {
+  async function toggle() {
+    if (pending) return;
     touched.current = true;
-    const next = !saved; setSaved(next); setError("");
-    (isPlaybook(item) ? setPlaybookSaved(item, next) : setTopicSaved(item, next)).catch(() => setError("This device blocked private storage, so this page was not saved."));
+    const next = !saved;
+    setPending(true);
+    setError("");
+    try {
+      await (isPlaybook(item) ? setPlaybookSaved(item, next) : setTopicSaved(item, next));
+      setSaved(next);
+    } catch {
+      setError("This device blocked private storage, so this page was not saved.");
+    } finally {
+      setPending(false);
+    }
   }
 
   return <>
-    <button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!ready} onClick={toggle}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>
+    <button className={`button secondary small ${saved ? "saved" : ""}`} disabled={!ready || pending} onClick={toggle}><BookmarkSimple size={14} weight={saved ? "fill" : "regular"} />{saved ? "Saved" : "Save"}</button>
     {error && <span className="form-message" role="alert">{error}</span>}
   </>;
 }

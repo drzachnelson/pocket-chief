@@ -152,7 +152,7 @@ const blocks: TopicBlock[] = [
   sourced({
     id: "block-hp-pregnancy", type: "bullets", heading: "PHPT in pregnancy",
     items: [
-      "Hydrate and monitor mild disease with coordinated endocrine/obstetric care. The Fifth Workshop considers second-trimester surgery when serum calcium is >11.0 mg/dL and surgery is suitable.",
+      "Hydrate and monitor mild disease with coordinated endocrine/obstetric care. The Fifth Workshop has an internal threshold discrepancy: summary 12.4 considers second-trimester surgery at calcium >11.0 mg/dL, whereas its pregnancy-panel item 4 uses >1 mg/dL above the laboratory upper limit of normal. These are not equivalent for every laboratory; interpret with pregnancy-appropriate calcium assessment, symptoms and specialist review rather than silently substituting one cutoff.",
       "Limit preoperative localization to ultrasound. Avoid bisphosphonates/denosumab in this setting; cinacalcet evidence is limited.",
       "If surgery is deferred, monitor the neonate for hypocalcemia and plan definitive maternal treatment after delivery before another pregnancy.",
     ],

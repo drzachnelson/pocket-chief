@@ -4846,7 +4846,7 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Tessler FN, Middleton WD, Grant EG, et al. ACR Thyroid Imaging, Reporting and Data System (TI-RADS): white paper of the ACR TI-RADS Committee. J Am Coll Radiol. 2017;14(5):587–595. Official ACR resource page and assessment chart.",
     url: "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/TI-RADS",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Batch review visually inspected the official ACR assessment-chart PDF on November 15, 2026, resolving the earlier extraction gap. All five point domains and TR1–TR5 categories agree with the topic: TR3 FNA ≥2.5 cm/follow-up ≥1.5 cm; TR4 ≥1.5/≥1 cm; TR5 ≥1/≥0.5 cm. Chart URL: https://edge.sitecorecloud.io/americancoldf5f-acrorgf92a-productioncb02-3650/media/ACR/Files/RADS/TI-RADS/TI-RADS-Assessment-Categories.pdf . The chart does not show the year-by-year surveillance schedules; those remain attributed to the supplied guide rather than a newly inspected complete white paper. Pending Zach's sign-off.",
+    details: "Batch review visually inspected the official ACR assessment-chart PDF on November 15, 2026, confirming all five point domains and TR1–TR5 size thresholds. The original JACR white paper was then checked directly: Timing of Follow-Up Sonograms confirms TR3 years 1/3/5, TR4 years 1/2/3/5 and TR5 annually up to 5 years. Primary white-paper copy: https://wiki.radiology.wisc.edu/images/c/ca/TI-RADS_JACR_2017.pdf . Thresholds and surveillance schedules no longer depend solely on the supplied guide. Pending Zach's sign-off.",
   },
   {
     id: BETHESDA_2023_SOURCE,
@@ -4855,7 +4855,7 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Ali SZ, Baloch ZW, Cochand-Priollet B, et al. The 2023 Bethesda System for Reporting Thyroid Cytopathology. Thyroid. 2023;33(9):1039–1044. doi:10.1089/thy.2023.0141.",
     url: "https://pubmed.ncbi.nlm.nih.gov/37427847/",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. Only the PubMed abstract was read by the packet reviewer (one name per category, FLUS retired, Hürthle replaced by oncocytic); the full numerical risk-of-malignancy table was not retrieved, so the risks (I 13%, II 4%, III 22%, IV 30%, V 74%, VI 97%) rest on the supplied draft. Pending Zach's sign-off.",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. Initial packet review used the abstract. Final batch review read the complete primary article (copy at https://semnro.com.ar/wp-content/uploads/thy.2023.0141.pdf), including Table 2: all six mean/range estimates, management choices and surgical-selection bias. The benign-category footnote gives approximately 1–2% overall risk from long-term follow-up rather than treating the selected resection cohort's 4% mean as a universal false-negative rate. Pending Zach's sign-off.",
   },
   {
     id: NCI_THYROID_PDQ_SOURCE,
@@ -4916,7 +4916,7 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Korevaar TIM, Leung AM, Alexander EK, et al. American Thyroid Association 2026 guidelines for thyroid disease in preconception, pregnancy, and postpartum. Thyroid. 2026;36(5):481–544. doi:10.1177/10507256261445624.",
     url: "https://journals.sagepub.com/doi/10.1177/10507256261445624",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full text on 2026-11-15 for gestational treatment, postpartum thyroiditis and radiopharmaceutical use during lactation; after 16 weeks the drug choice is uncertain, and diagnostic scintigraphy and I-131 treatment carry different lactation restrictions. Pending Zach's sign-off.",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full text on 2026-11-15 for gestational treatment, postpartum thyroiditis and radiopharmaceutical use during lactation; after 16 weeks the drug choice is uncertain, and diagnostic scintigraphy and I-131 treatment carry different lactation restrictions. Final review also checked the publisher PDF Recommendations Table 16 and Tables 4–5 for first-trimester TRAb/TSI, the >3× ULN repeat schedule and fetal ultrasound with ongoing ATDs; Section H and Recommendations Table 21 support the pregnancy scan prohibition and differentiated-cancer surgery timing. Direct local PDF downloads encountered a challenge; the indexed publisher PDF and HTML supplied the passages. Pending Zach's sign-off.",
   },
   {
     id: USPSTF_THYROID_SCREENING_SOURCE,
@@ -4943,7 +4943,7 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Bilezikian JP, Khan AA, Silverberg SJ, et al. Evaluation and management of primary hyperparathyroidism: summary statement and guidelines from the Fifth International Workshop. J Bone Miner Res. 2022;37(11):2293–2314. doi:10.1002/jbmr.4677.",
     url: "https://boneresearch.ca/wp-content/uploads/2022/11/PHPT-2022guideline.pdf",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full guideline on 2026-11-15: diagnosis and differential including the calcium-creatinine clearance ratio, genetics, surgical indications, imaging, medical options and the normocalcemic gap. It corrects absolute ratio cutoffs and the surgical criteria in the supplied drafts. Pending Zach's sign-off.",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full guideline on 2026-11-15: diagnosis and differential including the calcium-creatinine clearance ratio, genetics, surgical indications, imaging, medical options and the normocalcemic gap. It corrects absolute ratio cutoffs and the surgical criteria in the supplied drafts. Final review of the publisher full text identified an internal pregnancy threshold difference: summary 12.4 says >11.0 mg/dL, whereas the pregnancy panel item 4 says >1 mg/dL above the lab upper limit. The topic preserves both and requires albumin-adjusted calcium and clinical context rather than treating them as interchangeable. Pending Zach's sign-off.",
   },
   {
     id: KDIGO_CKD_MBD_2017_SOURCE,

@@ -10,7 +10,9 @@ import {
   ATA_ATC_2021_SOURCE as ATC,
   ROAR_ATC_2022_SOURCE as ROAR,
   ATA_NODULE_DTC_2015_SOURCE as ATA,
-  FISER_THYROID_SOURCE as FISER
+  FISER_THYROID_SOURCE as FISER,
+  ATA_PREGNANCY_THYROID_2026_SOURCE as PREGNANCY,
+  BETHESDA_2023_SOURCE as BETHESDA
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
@@ -145,7 +147,7 @@ const blocks: TopicBlock[] = [
   "steps": [
     {
       "title": "TSH and complete thyroid/neck ultrasound",
-      "detail": "Assess thyroid, central and both lateral compartments. Subnormal TSH prompts scintigraphy; a concordant hot nodule generally does not need FNA. Normal TSH does not exclude cancer."
+      "detail": "Assess thyroid, central and both lateral compartments. Outside pregnancy, subnormal TSH prompts scintigraphy; a concordant hot nodule generally does not need FNA. Normal TSH does not exclude cancer. In pregnancy, use ultrasound-based assessment and defer radionuclide scintigraphy."
     },
     {
       "title": "Choose FNA by one ultrasound system",
@@ -164,13 +166,13 @@ const blocks: TopicBlock[] = [
       "detail": "Contrast CT/MRI for suspected aerodigestive/mediastinal invasion or bulky nodes. Laryngoscopy for abnormal voice, prior at-risk surgery or invasive/bulky central disease. Needed contrast should not be withheld solely for near-term RAI; baseline Tg and PET/CT are not routine in ordinary preoperative DTC."
     }
   ]
-}, [[ATA], [ATA, PACKET], [PACKET], [DTC], [DTC]]),
+}, [[ATA, PREGNANCY], [ATA, PACKET], [PACKET], [DTC], [DTC]]),
   sourced({
   "id": "block-tc-cytology",
   "type": "prose",
   "heading": "Bethesda: name the category and its limitation",
-  "text": "2023 categories are I nondiagnostic, II benign, III AUS, IV follicular neoplasm including oncocytic, V suspicious for malignancy and VI malignant. The supplied guide reports mean ROMs 13/4/22/30/74/97% including NIFTP; the full numeric table was not independently retrieved. Use local prevalence, ultrasound and test context rather than treating these means as an individual probability. See Thyroid Nodule for repeat FNA and benign follow-up decisions."
-}, PACKET),
+  "text": "2023 categories are I nondiagnostic, II benign, III AUS, IV follicular neoplasm including oncocytic, V suspicious for malignancy and VI malignant. Bethesda 2023 Table 2 reports mean malignancy risks 13/4/22/30/74/97% including NIFTP; these surgically selected cohorts overestimate risk, especially in categories I–III. Use local prevalence, ultrasound and test context rather than treating these means as an individual probability. See Thyroid Nodule for repeat FNA and benign follow-up decisions."
+}, BETHESDA),
   sourced({
   "id": "block-tc-tnm",
   "type": "table",
@@ -283,6 +285,10 @@ const blocks: TopicBlock[] = [
     ]
   ]
 }, DTC),
+  sourced({
+    id: "block-tc-pregnancy", type: "prose", heading: "DTC diagnosed during pregnancy",
+    text: "Stable low-risk DTC can usually be monitored with ultrasound and surgery deferred until postpartum. Progression, gross invasion or impending complications require individualized multidisciplinary timing. If surgery is needed, the second trimester is preferred when feasible; urgent surgery should proceed when required in any trimester. Radioiodine is contraindicated during pregnancy.",
+  }, PREGNANCY),
   sourced({
   "id": "block-tc-tradeoffs",
   "type": "prose",
@@ -594,12 +600,12 @@ const blocks: TopicBlock[] = [
   "heading": "Recurrent structural disease",
   "text": "Reassess disease location, growth, prior surgery, nerve function and distant burden. Resect suitable clinically meaningful disease; selected nodal recurrences may suit ethanol or radiofrequency ablation. Laboratory change should trigger targeted evaluation rather than automatic reoperation or systemic therapy."
 }, DTC),
-  sourced({
+  sourcedUnits({
   "id": "block-tc-mtc-followup",
   "type": "prose",
   "heading": "MTC follow-up uses calcitonin and CEA",
   "text": "ATA measures calcitonin/CEA about 3 months after surgery, then at 6 months/annually when normal; persistent markers require risk-adapted neck US and marker doubling-time assessment. Postoperative calcitonin >150 pg/mL prompts neck/chest/liver and skeletal imaging. The supplied NCCN attribution uses ≥150, a source-specific boundary difference. Lower levels do not exclude neck disease. Continue MEN2 pheochromocytoma and MEN2A calcium surveillance."
-}, MTC),
+}, [[MTC, PACKET]]),
   sourced({
   "id": "block-tc-complications",
   "type": "table",
@@ -689,7 +695,7 @@ const blocks: TopicBlock[] = [
     "Psammoma/clear nuclei: PTC. Hematogenous bone/lung spread with invasion: FTC. Amyloid/calcitonin: MTC. Hashimoto with rapid goiter: lymphoma."
   ]
 }, PACKET),
-  references("block-tc-references", [PACKET, SCORE, DTC, ORIGIN, NCI, MTC, FDA, ATC, ROAR, ATA, FISER]),
+  references("block-tc-references", [PACKET, SCORE, DTC, ORIGIN, NCI, MTC, FDA, ATC, ROAR, ATA, FISER, PREGNANCY, BETHESDA]),
 ];
 
 export const thyroidCancerTopic = buildTopic({
@@ -702,7 +708,7 @@ export const thyroidCancerTopic = buildTopic({
   "scoreCategory": "SCORE · Endocrine · Diseases & Conditions",
   "tags": ["endocrine", "thyroid"],
   sourceId: PACKET,
-  additionalSourceIds: [SCORE, DTC, ORIGIN, NCI, MTC, FDA, ATC, ROAR, ATA, FISER],
+  additionalSourceIds: [SCORE, DTC, ORIGIN, NCI, MTC, FDA, ATC, ROAR, ATA, FISER, PREGNANCY, BETHESDA],
   blocks,
   reviewedAt: "2026-11-15T00:00:00.000Z",
 });

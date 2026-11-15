@@ -7,18 +7,19 @@ import {
   ACR_TIRADS_2017_SOURCE as ACR,
   BETHESDA_2023_SOURCE as BETHESDA,
   ATA_MTC_2015_SOURCE as MTC,
-  FISER_THYROID_SOURCE as FISER
+  FISER_THYROID_SOURCE as FISER,
+  ATA_PREGNANCY_THYROID_2026_SOURCE as PREGNANCY
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
 
 // Educational draft: clinical approval is tracked on the unmerged batch PR.
 const blocks: TopicBlock[] = [
-  sourced({
+  sourcedUnits({
   "id": "block-tn-summary",
   "type": "summary",
   "heading": "At a glance",
-  "text": "Start with TSH and ultrasound of the thyroid and cervical nodes. Subnormal TSH calls for scintigraphy; a concordant hyperfunctioning nodule usually does not need FNA. For other nodules, use ultrasound risk plus size to select FNA, then cytology and clinical context to choose surveillance, molecular testing or surgery. Most benign asymptomatic nodules need observation."
-}, ATA),
+  "text": "Start with TSH and ultrasound of the thyroid and cervical nodes. Outside pregnancy, subnormal TSH calls for scintigraphy; a concordant hyperfunctioning nodule usually does not need FNA. For other nodules, use ultrasound risk plus size to select FNA, then cytology and clinical context to choose surveillance, molecular testing or surgery. Most benign asymptomatic nodules need observation. In pregnancy, use ultrasound-based evaluation and defer radionuclide scintigraphy."
+}, [[ATA, PREGNANCY]]),
   sourced({
   "id": "block-tn-definitions",
   "type": "prose",
@@ -82,7 +83,7 @@ const blocks: TopicBlock[] = [
   "heading": "Familial nonmedullary screening",
   "text": "ATA 2025 permits screening ultrasound in relevant families with at least three affected first- or second-degree relatives. Selected two-case families may merit screening when unusually young onset or other concerning features suggest a true inherited disorder; this is not a universal ultrasound-screening recommendation."
 }, DTC),
-  sourced({
+  sourcedUnits({
   "id": "block-tn-workup",
   "type": "sequence",
   "heading": "Initial diagnostic pathway",
@@ -93,7 +94,7 @@ const blocks: TopicBlock[] = [
     },
     {
       "title": "If TSH is low, identify the source of hormone excess",
-      "detail": "Use radionuclide scintigraphy, preferably I-123. A concordant hot nodule generally needs no FNA; assess separate nonfunctioning nodules by their own ultrasound findings."
+      "detail": "Outside pregnancy, use radionuclide scintigraphy, preferably I-123. During pregnancy, scintigraphy is contraindicated; use ultrasound/biochemical assessment and defer isotope testing. A concordant hot nodule generally needs no FNA; assess separate nonfunctioning nodules by their own ultrasound findings."
     },
     {
       "title": "If nonfunctioning, apply ultrasound risk and size",
@@ -104,7 +105,7 @@ const blocks: TopicBlock[] = [
       "detail": "Report the Bethesda name and category. Reconcile an apparently benign result with highly suspicious imaging; cytology does not overrule discordant anatomy."
     }
   ]
-}, ATA),
+}, [[ATA], [ATA, PREGNANCY], [ATA], [ATA]]),
   sourced({
   "id": "block-tn-extra-tests",
   "type": "prose",
@@ -216,8 +217,8 @@ const blocks: TopicBlock[] = [
   "id": "block-tn-acr-use",
   "type": "prose",
   "heading": "Use the ACR rules as a separate system",
-  "text": "Choose one composition, echogenicity, shape and margin category; sum all relevant echogenic foci. Cystic/spongiform lesions score zero without scoring the remaining categories. Small comet-tail foci can be punctate rather than benign colloid tails. ATA patterns and ACR categories are not interchangeable. In multinodular glands, prioritize the most suspicious eligible nodules rather than simply the largest."
-}, PACKET),
+  "text": "Choose one composition, echogenicity, shape and margin category; sum all relevant echogenic foci. Cystic/spongiform lesions score zero without scoring the remaining categories. Small comet-tail foci can be punctate rather than benign colloid tails. ATA patterns and ACR categories are not interchangeable. In multinodular glands, sample no more than two nodules with the highest point totals that meet FNA criteria; size alone should not decide the targets."
+}, ACR),
   sourced({
   "id": "block-tn-acr-management",
   "type": "table",
@@ -254,20 +255,20 @@ const blocks: TopicBlock[] = [
       "At least 0.5 cm: yearly, up to 5 years."
     ]
   ]
-}, PACKET),
+}, ACR),
   sourced({
   "id": "block-tn-bethesda-names",
   "type": "prose",
   "heading": "Bethesda 2023 terminology",
   "text": "Report one category name: nondiagnostic, benign, atypia of undetermined significance (AUS), follicular neoplasm, suspicious for malignancy, or malignant. FLUS is retired; oncocytic replaces Hürthle terminology. AUS-nuclear and AUS-other convey different risks. Numeric risks vary with selection, local prevalence and whether NIFTP is counted."
 }, BETHESDA),
-  sourced({
+  sourcedUnits({
   "id": "block-tn-bethesda",
   "type": "table",
   "heading": "Cytology directs the next decision",
   "columns": [
     "Category",
-    "Supplied mean ROM (range)",
+    "Mean ROM (range), including NIFTP",
     "Usual next step"
   ],
   "rows": [
@@ -302,13 +303,13 @@ const blocks: TopicBlock[] = [
       "Histology- and risk-adapted treatment; total thyroidectomy is not automatic."
     ]
   ]
-}, PACKET),
+}, [[BETHESDA, ATA], [BETHESDA, ATA], [BETHESDA, PACKET], [BETHESDA], [BETHESDA, DTC, PACKET], [BETHESDA, DTC]]),
   sourced({
   "id": "block-tn-rom-limit",
   "type": "prose",
   "heading": "How to use the numeric risks",
-  "text": "The preceding 2023 means/ranges are retained from the supplied guide, including NIFTP, and have not been independently checked against the full Bethesda numerical table. Do not substitute them for local outcome data or combine them with unrelated surgical-cohort false-negative rates."
-}, PACKET),
+  "text": "Bethesda 2023 Table 2 estimates come from surgically resected nodules and are affected by selection bias, especially categories I–III. The 4% benign-category mean is not a universal false-negative risk; long-term follow-up supports an overall benign-FNA risk around 1–2%. Counting NIFTP changes the estimates. Interpret the numbers with local prevalence, ultrasound and clinical context."
+}, BETHESDA),
   sourced({
   "id": "block-tn-invasion",
   "type": "warning",
@@ -541,7 +542,7 @@ const blocks: TopicBlock[] = [
     "Rapid growth with Hashimoto: consider lymphoma and obtain adequate tissue/flow cytometry; a fixed invasive mass also raises ATC. See Thyroid Cancer for staging, oncologic follow-up and histology-specific treatment."
   ]
 }, PACKET),
-  references("block-tn-references", [ATA, PACKET, SCORE, DTC, ACR, BETHESDA, MTC, FISER]),
+  references("block-tn-references", [ATA, PACKET, SCORE, DTC, ACR, BETHESDA, MTC, FISER, PREGNANCY]),
 ];
 
 export const thyroidNoduleTopic = buildTopic({
@@ -554,7 +555,7 @@ export const thyroidNoduleTopic = buildTopic({
   "scoreCategory": "SCORE · Endocrine · Diseases & Conditions",
   "tags": ["endocrine", "thyroid"],
   sourceId: PACKET,
-  additionalSourceIds: [ATA, SCORE, DTC, ACR, BETHESDA, MTC, FISER],
+  additionalSourceIds: [ATA, SCORE, DTC, ACR, BETHESDA, MTC, FISER, PREGNANCY],
   blocks,
   reviewedAt: "2026-11-15T00:00:00.000Z",
 });
