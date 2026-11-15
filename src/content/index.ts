@@ -133,6 +133,11 @@ import { colonicPolyposisSyndromesTopic } from "@/content/topics/colonic-polypos
 import { partialColectomyTopic } from "@/content/topics/partial-colectomy";
 import { rectalCancerTopic } from "@/content/topics/rectal-cancer";
 import { lowerGiEndoscopyTopic } from "@/content/topics/lower-gi-endoscopy";
+import { thyroidNoduleTopic } from "@/content/topics/thyroid-nodule";
+import { thyroidCancerTopic } from "@/content/topics/thyroid-cancer";
+import { hyperthyroidismTopic } from "@/content/topics/hyperthyroidism";
+import { thyroiditisTopic } from "@/content/topics/thyroiditis";
+import { hyperparathyroidismTopic } from "@/content/topics/hyperparathyroidism";
 import type { Topic } from "@/lib/types";
 
 export { cardiacPacingTopic } from "@/content/topics/cardiac-pacing";
@@ -281,6 +286,11 @@ export const libraryTopics: Topic[] = [
   partialColectomyTopic,
   rectalCancerTopic,
   lowerGiEndoscopyTopic,
+  thyroidNoduleTopic,
+  thyroidCancerTopic,
+  hyperthyroidismTopic,
+  thyroiditisTopic,
+  hyperparathyroidismTopic,
 ];
 
 export { libraryPlaybooks } from "@/content/playbooks";

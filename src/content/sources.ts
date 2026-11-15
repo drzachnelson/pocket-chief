@@ -449,6 +449,45 @@ export const ASCRS_COLON_CANCER_2022_SOURCE = "00000000-0000-4000-8000-000000008
 export const LOWER_GI_ENDOSCOPY_PACKET_SOURCE = "00000000-0000-4000-8000-000000008400";
 export const ACG_LGIB_2023_SOURCE = "00000000-0000-4000-8000-000000008401";
 export const COLONOSCOPY_QUALITY_2024_SOURCE = "00000000-0000-4000-8000-000000008402";
+// Thyroid and parathyroid batch, November 15, 2026. Shared guideline sources take 08500–08522; each topic takes the packet source xx00,
+// its SCORE module xx01, and (when more are needed) xx02 upward. Playbook sources are allocated singly from 03078.
+export const ATA_NODULE_DTC_2015_SOURCE = "00000000-0000-4000-8000-000000008500";
+export const ATA_MTC_2015_SOURCE = "00000000-0000-4000-8000-000000008501";
+export const ACR_TIRADS_2017_SOURCE = "00000000-0000-4000-8000-000000008502";
+export const BETHESDA_2023_SOURCE = "00000000-0000-4000-8000-000000008503";
+export const NCI_THYROID_PDQ_SOURCE = "00000000-0000-4000-8000-000000008504";
+export const FDA_SELPERCATINIB_MTC_SOURCE = "00000000-0000-4000-8000-000000008505";
+export const ROAR_ATC_2022_SOURCE = "00000000-0000-4000-8000-000000008506";
+export const FISER_THYROID_SOURCE = "00000000-0000-4000-8000-000000008507";
+export const FISER_PARATHYROID_SOURCE = "00000000-0000-4000-8000-000000008508";
+export const ATA_HYPERTHYROIDISM_2016_SOURCE = "00000000-0000-4000-8000-000000008509";
+export const ATA_PREGNANCY_THYROID_2026_SOURCE = "00000000-0000-4000-8000-000000008510";
+export const USPSTF_THYROID_SCREENING_SOURCE = "00000000-0000-4000-8000-000000008511";
+export const AAES_PHPT_2016_SOURCE = "00000000-0000-4000-8000-000000008512";
+export const PHPT_WORKSHOP_2022_SOURCE = "00000000-0000-4000-8000-000000008513";
+export const KDIGO_CKD_MBD_2017_SOURCE = "00000000-0000-4000-8000-000000008514";
+export const ENDOCRINE_SOCIETY_HYPERCALCEMIA_SOURCE = "00000000-0000-4000-8000-000000008515";
+export const IOPTH_NETWORK_META_ANALYSIS_2025_SOURCE = "00000000-0000-4000-8000-000000008516";
+export const DAILYMED_CALCIUM_GLUCONATE_SOURCE = "00000000-0000-4000-8000-000000008517";
+export const ASCO_IRAE_2021_SOURCE = "00000000-0000-4000-8000-000000008518";
+export const ESE_ICI_ENDOCRINE_2022_SOURCE = "00000000-0000-4000-8000-000000008519";
+export const GULDVOG_HASHIMOTO_2019_SOURCE = "00000000-0000-4000-8000-000000008520";
+export const JOHANSSON_C_CELL_ORIGIN_2015_SOURCE = "00000000-0000-4000-8000-000000008521";
+export const ATA_ATC_2021_SOURCE = "00000000-0000-4000-8000-000000008522";
+export const HYPERPARATHYROIDISM_PACKET_SOURCE = "00000000-0000-4000-8000-000000008600";
+export const SCORE_HYPERPARATHYROIDISM_SOURCE = "00000000-0000-4000-8000-000000008601";
+export const HYPERTHYROIDISM_PACKET_SOURCE = "00000000-0000-4000-8000-000000008700";
+export const SCORE_HYPERTHYROIDISM_SOURCE = "00000000-0000-4000-8000-000000008701";
+export const THYROIDITIS_PACKET_SOURCE = "00000000-0000-4000-8000-000000008800";
+export const SCORE_THYROIDITIS_SOURCE = "00000000-0000-4000-8000-000000008801";
+export const THYROID_CANCER_PACKET_SOURCE = "00000000-0000-4000-8000-000000008900";
+export const SCORE_THYROID_CANCER_SOURCE = "00000000-0000-4000-8000-000000008901";
+export const THYROID_NODULE_PACKET_SOURCE = "00000000-0000-4000-8000-000000009000";
+export const SCORE_THYROID_NODULES_SOURCE = "00000000-0000-4000-8000-000000009001";
+export const OPEN_THYROID_LOBECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003078";
+export const PARATHYROIDECTOMY_PLAYBOOK_SOURCE = "00000000-0000-4000-8000-000000003079";
+export const SCORE_THYROIDECTOMY_SOURCE = "00000000-0000-4000-8000-000000003080";
+export const SCORE_PARATHYROIDECTOMY_SOURCE = "00000000-0000-4000-8000-000000003081";
 
 export const suppliedSources: SuppliedSource[] = [
   {
@@ -1556,9 +1595,10 @@ export const suppliedSources: SuppliedSource[] = [
     id: ATA_THYROID_2025_SOURCE,
     title: "American Thyroid Association guideline on differentiated thyroid cancer",
     kind: "article",
-    citation: "Ringel MD, et al. 2025 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer. Thyroid, 2025.",
+    citation: "Ringel MD, Sosa JA, et al. 2025 American Thyroid Association management guidelines for adult patients with differentiated thyroid cancer. Thyroid. 2025;35(8):841–985. doi:10.1177/10507256251363120.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13090833/",
     suppliedAt: "2026-09-11T00:00:00.000Z",
-    details: "Registered during review as the authority behind the extent-of-resection thresholds, the parathyroid-preservation recommendation and the loss-of-signal staging position the supplied playbook quotes by recommendation number. Identified from that playbook rather than supplied directly.",
+    details: "Registered during the original total-thyroidectomy review from its supplied playbook. Citation corrected against the PMC full text on November 15, 2026: this update covers differentiated thyroid cancer, not initial nodule workup. The thyroid/parathyroid batch rechecked the relevant recommendations on extent of surgery, nodal assessment, completion, nerve/parathyroid preservation, radioiodine and surveillance. Initial nodule evaluation remains attributed separately to the 2015 ATA guideline. Pending Zach's clinical sign-off.",
   },
   {
     id: MASTECTOMY_SLNB_PLAYBOOK_SOURCE,
@@ -4780,5 +4820,329 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Rex DK, Anderson JC, Butterly LF, et al. Quality indicators for colonoscopy. Am J Gastroenterol. 2024;119(9):1754–1780.",
     suppliedAt: "2026-11-09T00:00:00.000Z",
     details: "Cited for the colonoscopy quality targets table in lower-gi-endoscopy (adenoma detection rate at least 35%, withdrawal time at least 8 minutes, cecal intubation at least 95% in screening), as relayed by the supplied review; not re-read this session. Pending Zach's sign-off.",
+  },
+  {
+    id: ATA_NODULE_DTC_2015_SOURCE,
+    title: "ATA 2015 guideline on thyroid nodules and differentiated thyroid cancer",
+    kind: "article",
+    citation: "Haugen BR, Alexander EK, Bible KC, et al. 2015 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer. Thyroid. 2016;26(1):1–133.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4739132/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the PMC full text on 2026-11-15 (biopsy-threshold table, recommendations 2, 4, 6, 8, 23–28); this session has not re-read it unless a topic says so. Cited for sonographic-pattern FNA thresholds, benign follow-up by pattern, the no-TSH-suppression recommendation and iodine supplementation. Pending Zach's sign-off.",
+  },
+  {
+    id: ATA_MTC_2015_SOURCE,
+    title: "ATA 2015 guideline on medullary thyroid carcinoma",
+    kind: "article",
+    citation: "Wells SA Jr, Asa SL, Dralle H, et al. Revised American Thyroid Association guidelines for the management of medullary thyroid carcinoma. Thyroid. 2015;25(6):567–610.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4490627/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the PMC full text on 2026-11-15: calcitonin above 500 pg/mL before imaging, extent of initial surgery, completion criteria, RET risk tiers by age, pheochromocytoma exclusion, postoperative imaging above 150 pg/mL, and recommendation 43 on MEN2A parathyroid surgery. Pending Zach's sign-off.",
+  },
+  {
+    id: ACR_TIRADS_2017_SOURCE,
+    title: "ACR TI-RADS",
+    kind: "website",
+    citation: "Tessler FN, Middleton WD, Grant EG, et al. ACR Thyroid Imaging, Reporting and Data System (TI-RADS): white paper of the ACR TI-RADS Committee. J Am Coll Radiol. 2017;14(5):587–595. Official ACR resource page and assessment chart.",
+    url: "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/TI-RADS",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Batch review visually inspected the official ACR assessment-chart PDF on November 15, 2026, confirming all five point domains and TR1–TR5 size thresholds. The original JACR white paper was then checked directly: Timing of Follow-Up Sonograms confirms TR3 years 1/3/5, TR4 years 1/2/3/5 and TR5 annually up to 5 years. Primary white-paper copy: https://wiki.radiology.wisc.edu/images/c/ca/TI-RADS_JACR_2017.pdf . Thresholds and surveillance schedules no longer depend solely on the supplied guide. Pending Zach's sign-off.",
+  },
+  {
+    id: BETHESDA_2023_SOURCE,
+    title: "Bethesda System for Reporting Thyroid Cytopathology, 2023",
+    kind: "article",
+    citation: "Ali SZ, Baloch ZW, Cochand-Priollet B, et al. The 2023 Bethesda System for Reporting Thyroid Cytopathology. Thyroid. 2023;33(9):1039–1044. doi:10.1089/thy.2023.0141.",
+    url: "https://pubmed.ncbi.nlm.nih.gov/37427847/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. Initial packet review used the abstract. Final batch review read the complete primary article (copy at https://semnro.com.ar/wp-content/uploads/thy.2023.0141.pdf), including Table 2: all six mean/range estimates, management choices and surgical-selection bias. The benign-category footnote gives approximately 1–2% overall risk from long-term follow-up rather than treating the selected resection cohort's 4% mean as a universal false-negative rate. Pending Zach's sign-off.",
+  },
+  {
+    id: NCI_THYROID_PDQ_SOURCE,
+    title: "NCI PDQ: thyroid cancer treatment, health professional version",
+    kind: "website",
+    citation: "National Cancer Institute. Thyroid Cancer Treatment (PDQ), health professional version.",
+    url: "https://www.cancer.gov/types/thyroid/hp/thyroid-treatment-pdq",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch as the staging reference for differentiated, medullary and anaplastic thyroid cancer (AJCC 8th edition tables, M0 and M1 precedence). It is an NCI reproduction; the AJCC manual itself was not accessed. Pending Zach's sign-off.",
+  },
+  {
+    id: FDA_SELPERCATINIB_MTC_SOURCE,
+    title: "FDA approval of selpercatinib for RET-mutant medullary thyroid cancer",
+    kind: "website",
+    citation: "US Food and Drug Administration. FDA approves selpercatinib for medullary thyroid cancer with a RET mutation. September 27, 2024.",
+    url: "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-selpercatinib-medullary-thyroid-cancer-ret-mutation",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the FDA page on 2026-11-15: traditional approval for adults and children 2 years and older with advanced or metastatic RET-mutant medullary thyroid cancer who need systemic therapy. Other RET-inhibitor labels were not checked. Pending Zach's sign-off.",
+  },
+  {
+    id: ROAR_ATC_2022_SOURCE,
+    title: "ROAR: dabrafenib plus trametinib in BRAF V600E anaplastic thyroid cancer",
+    kind: "article",
+    citation: "Subbiah V, et al. Dabrafenib plus trametinib in BRAF V600E-mutant anaplastic thyroid cancer: updated analysis from the phase II ROAR basket study. Annals of Oncology. 2022.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9338780/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. Original packet review records an abstract/results check. Batch review rechecked the indexed primary abstract (PMID 35026411): overall response 56% including 3 complete responses, median progression-free survival 6.7 months and overall survival 14.5 months. Direct publisher access returned 403 and direct PMC full text encountered an access challenge; no new complete trial audit is claimed. Adult dabrafenib 150 mg twice daily plus trametinib 2 mg daily is corroborated separately in ATA 2021 guidance. Selected single-arm cohort, not a universal outcome guarantee. Pending Zach's sign-off.",
+  },
+  {
+    id: FISER_THYROID_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Thyroid",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 22, Thyroid, pages 263–273.",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch as the board-answer cross-check. OCR of a scan, read locally. Known disagreements with current guidance, carried in the topics as splits: the 5 mm FNA rule, the 1 cm total-thyroidectomy and radioiodine rule, obsolete Bethesda risks, and the right recurrent nerve and thyroid ima descriptions.",
+  },
+  {
+    id: FISER_PARATHYROID_SOURCE,
+    title: "Fiser ABSITE Review, 8th edition — Parathyroid",
+    kind: "book",
+    citation: "Fiser SM. The ABSITE Review. 8th ed. Chapter 23, Parathyroid, pages 274–284.",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch as the board-answer cross-check. OCR of a scan, read locally. Its parathyroid count (90% have four), its urine-calcium surgical threshold and its ioPTH and carcinoma teaching differ from the 2022 Workshop and AAES guidance and are carried as splits.",
+  },
+  {
+    id: ATA_HYPERTHYROIDISM_2016_SOURCE,
+    title: "ATA 2016 guideline on hyperthyroidism and other causes of thyrotoxicosis",
+    kind: "article",
+    citation: "Ross DS, Burch HB, Cooper DS, et al. 2016 American Thyroid Association guidelines for diagnosis and management of hyperthyroidism and other causes of thyrotoxicosis. Thyroid. 2016;26(10):1343–1421. doi:10.1089/thy.2016.0229.",
+    url: "https://nursing.duke.edu/sites/default/files/media/main/hyperthyroidism_guidelines_2016.pdf",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full guideline on 2026-11-15 (diagnosis, antithyroid drugs, surgery, storm, nodular disease, subclinical disease, ophthalmopathy, amiodarone and thyroiditis recommendations); table extraction misaligned some cells, so doses were reconciled with the narrative. Pending Zach's sign-off.",
+  },
+  {
+    id: ATA_PREGNANCY_THYROID_2026_SOURCE,
+    title: "ATA 2026 guideline on thyroid disease in pregnancy, preconception and postpartum",
+    kind: "article",
+    citation: "Korevaar TIM, Leung AM, Alexander EK, et al. American Thyroid Association 2026 guidelines for thyroid disease in preconception, pregnancy, and postpartum. Thyroid. 2026;36(5):481–544. doi:10.1177/10507256261445624.",
+    url: "https://journals.sagepub.com/doi/10.1177/10507256261445624",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full text on 2026-11-15 for gestational treatment, postpartum thyroiditis and radiopharmaceutical use during lactation; after 16 weeks the drug choice is uncertain, and diagnostic scintigraphy and I-131 treatment carry different lactation restrictions. Final review also checked the publisher PDF Recommendations Table 16 and Tables 4–5 for first-trimester TRAb/TSI, the >3× ULN repeat schedule and fetal ultrasound with ongoing ATDs; Section H and Recommendations Table 21 support the pregnancy scan prohibition and differentiated-cancer surgery timing. Direct local PDF downloads encountered a challenge; the indexed publisher PDF and HTML supplied the passages. Pending Zach's sign-off.",
+  },
+  {
+    id: USPSTF_THYROID_SCREENING_SOURCE,
+    title: "USPSTF: screening for thyroid dysfunction",
+    kind: "website",
+    citation: "US Preventive Services Task Force. Thyroid dysfunction: screening. Recommendation statement (I statement, nonpregnant asymptomatic adults).",
+    url: "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/thyroid-dysfunction-screening",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the recommendation summary on 2026-11-15; the Task Force finds insufficient evidence for screening nonpregnant asymptomatic adults. Pending Zach's sign-off.",
+  },
+  {
+    id: AAES_PHPT_2016_SOURCE,
+    title: "AAES guidelines for definitive management of primary hyperparathyroidism",
+    kind: "article",
+    citation: "Wilhelm SM, Wang TS, Ruan DT, et al. The American Association of Endocrine Surgeons guidelines for definitive management of primary hyperparathyroidism. JAMA Surgery. 2016;151(10):959–968.",
+    url: "https://jamanetwork.com/journals/jamasurgery/fullarticle/2542667",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full guideline on 2026-11-15: operative management, cure as normal calcium homeostasis lasting at least 6 months, recommendations 12-1 to 12-3 on carcinoma and no prophylactic neck dissection, and recommendation 13-1 on autotransplantation. Pending Zach's sign-off.",
+  },
+  {
+    id: PHPT_WORKSHOP_2022_SOURCE,
+    title: "Fifth International Workshop on primary hyperparathyroidism, 2022",
+    kind: "article",
+    citation: "Bilezikian JP, Khan AA, Silverberg SJ, et al. Evaluation and management of primary hyperparathyroidism: summary statement and guidelines from the Fifth International Workshop. J Bone Miner Res. 2022;37(11):2293–2314. doi:10.1002/jbmr.4677.",
+    url: "https://boneresearch.ca/wp-content/uploads/2022/11/PHPT-2022guideline.pdf",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full guideline on 2026-11-15: diagnosis and differential including the calcium-creatinine clearance ratio, genetics, surgical indications, imaging, medical options and the normocalcemic gap. It corrects absolute ratio cutoffs and the surgical criteria in the supplied drafts. Final review of the publisher full text identified an internal pregnancy threshold difference: summary 12.4 says >11.0 mg/dL, whereas the pregnancy panel item 4 says >1 mg/dL above the lab upper limit. The topic preserves both and requires albumin-adjusted calcium and clinical context rather than treating them as interchangeable. Pending Zach's sign-off.",
+  },
+  {
+    id: KDIGO_CKD_MBD_2017_SOURCE,
+    title: "KDIGO 2017 update on CKD-mineral and bone disorder",
+    kind: "article",
+    citation: "Kidney Disease: Improving Global Outcomes CKD-MBD Update Work Group. KDIGO 2017 clinical practice guideline update for the diagnosis, evaluation, prevention, and treatment of CKD-MBD. Kidney Int Suppl. 2017;7(1):1–59.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6340919/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read recommendations 4.2.3 to 4.2.5 (treatment of secondary hyperparathyroidism in CKD) on 2026-11-15. Pending Zach's sign-off.",
+  },
+  {
+    id: ENDOCRINE_SOCIETY_HYPERCALCEMIA_SOURCE,
+    title: "Endocrine Society: treatment of hypercalcemia of malignancy in adults",
+    kind: "website",
+    citation: "El-Hajj Fuleihan G, Clines GA, Hu MI, et al. Treatment of hypercalcemia of malignancy in adults: an Endocrine Society clinical practice guideline. JCEM. March 2023 (online December 21, 2022). Official recommendations page, recommendation 3.",
+    url: "https://www.endocrine.org/clinical-practice-guidelines/hypercalcemia",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Official recommendations page re-read November 15, 2026; title and publication dates confirmed there. Recommendation 3 addresses severe hypercalcemia of malignancy: calcitonin with an IV bisphosphonate or denosumab, with calcitonin limited to 48–72 hours. This is malignancy guidance, not primary-hyperparathyroidism trial evidence; other fluid/drug regimens in the supplied guide are not established by this recommendation. Pending Zach's sign-off.",
+  },
+  {
+    id: IOPTH_NETWORK_META_ANALYSIS_2025_SOURCE,
+    title: "Network meta-analysis of intraoperative PTH criteria, 2025",
+    kind: "article",
+    citation: "Staibano P, et al. Intraoperative parathyroid hormone monitoring criteria: diagnostic network meta-analysis. JAMA Otolaryngology–Head & Neck Surgery. 2025. doi:10.1001/jamaoto.2024.4453. PMID 39724136.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11907319/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the corrected full text on 2026-11-15: 72 studies and 19,072 adults, 95.8% classic primary hyperparathyroidism; definitions of the Miami, modified Miami, Vienna, Rome and Halle criteria and their diagnostic performance. A study conclusion, not a guideline mandate, and not evidence of long-term cure. Pending Zach's sign-off.",
+  },
+  {
+    id: DAILYMED_CALCIUM_GLUCONATE_SOURCE,
+    title: "Calcium gluconate injection prescribing information (DailyMed)",
+    kind: "website",
+    citation: "Calcium gluconate injection, prescribing information, label revised June 2025. DailyMed, US National Library of Medicine.",
+    url: "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=d6db3a1c-ed02-48fc-9134-ea1d58acf42e",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full label on 2026-11-15: adult initial dose 1,000 to 2,000 mg of gluconate salt, maximum 200 mg/min, dilution, monitoring, renal and digoxin cautions, and incompatibilities. One gram of calcium gluconate is 93 mg of elemental calcium. The label supports the IV dose and rate only, not the oral regimens or the rest of the supplied rescue scheme. Pending Zach's sign-off.",
+  },
+  {
+    id: ASCO_IRAE_2021_SOURCE,
+    title: "ASCO 2021 guideline update on immune-related adverse events",
+    kind: "article",
+    citation: "Schneider BJ, Naidoo J, Santomasso BD, et al. Management of immune-related adverse events in patients treated with immune checkpoint inhibitor therapy: ASCO guideline update. J Clin Oncol. 2021;39(36):4073–4126.",
+    url: "https://ascopubs.org/doi/10.1200/JCO.21.01440",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the endocrine-toxicities narrative on 2026-11-15, including the median onset of about 14.5 weeks; the dose and monitoring table was image-only and was not read, so those numbers are not attributed to it. Pending Zach's sign-off.",
+  },
+  {
+    id: ESE_ICI_ENDOCRINE_2022_SOURCE,
+    title: "ESE guideline on endocrine toxicity of checkpoint inhibitors, 2022",
+    kind: "article",
+    citation: "Husebye ES, Castinetti F, Criseno S, et al. Endocrine-related adverse conditions in patients receiving immune checkpoint inhibition: an ESE clinical practice guideline. Eur J Endocrinol. 2022;187(6):G1–G21.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9641795/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the thyroid recommendations (3.2 to 3.5) on 2026-11-15: monitoring early in treatment, symptom-directed beta-blockade, and no antithyroid drugs for ordinary destructive checkpoint-inhibitor thyroiditis. Pending Zach's sign-off.",
+  },
+  {
+    id: GULDVOG_HASHIMOTO_2019_SOURCE,
+    title: "Thyroidectomy versus medical management for symptomatic Hashimoto disease, 2019 trial",
+    kind: "article",
+    citation: "Guldvog I, Reitsma LC, Johnsen L, et al. Thyroidectomy versus medical management for euthyroid patients with Hashimoto disease and persisting symptoms: a randomized trial. Ann Intern Med. 2019;170(7):453–464. PMID 30856652.",
+    url: "https://pubmed.ncbi.nlm.nih.gov/30856652/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the abstract only on 2026-11-15 (population, 18-month outcome, anti-TPO values, limitations); longer follow-up figures remain supplied-draft statements. Pending Zach's sign-off.",
+  },
+  {
+    id: JOHANSSON_C_CELL_ORIGIN_2015_SOURCE,
+    title: "Revising the embryonic origin of thyroid C cells, 2015",
+    kind: "article",
+    citation: "Johansson E, Andersson L, Örnros J, et al. Revising the embryonic origin of thyroid C cells in mice and humans. Development. 2015;142(20):3519–3528.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4631767/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the abstract and lineage-tracing results on 2026-11-15: in mice the C cells arise from endoderm, which challenges the classical neural-crest teaching. It does not show direct fate mapping in humans. Pending Zach's sign-off.",
+  },
+  {
+    id: ATA_ATC_2021_SOURCE,
+    title: "ATA 2021 guidelines for anaplastic thyroid cancer",
+    kind: "article",
+    citation: "Bible KC, Kebebew E, Brierley J, et al. 2021 American Thyroid Association guidelines for management of patients with anaplastic thyroid cancer. Thyroid. 2021;31(3):337–386. doi:10.1089/thy.2020.0944.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8349723/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added during batch review beyond the supplied guide to support rapid tissue diagnosis, molecular and airway assessment, multidisciplinary resectability decisions and mutation-directed systemic therapy. Identified through the current official ATA guideline index and checked against primary full text during topic review. Not a source for inherited ASCO 2026 or unverified survival estimates. Pending Zach's sign-off.",
+  },
+  {
+    id: HYPERPARATHYROIDISM_PACKET_SOURCE,
+    title: "Hyperparathyroidism — supplied succinct guide",
+    kind: "user_notes",
+    citation: "Owner-supplied “Hyperparathyroidism Pocket Chief” Word review, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. A SCORE notebook draft corrected by its author, then consolidated from 3,299 to 2,927 words with a review pass against primary guidance. Inline author-year attributions only, kept here rather than in the topic: study-level figures for imaging, calcium-creatinine clearance ratio performance, ablation, cinacalcet and crisis regimens retain the draft's attribution and were not independently verified; the Fifth Workshop, AAES, KDIGO and Endocrine Society recommendations were read by the packet reviewer. The packet's SCORE and Fiser cross-checks are registered separately. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_HYPERPARATHYROIDISM_SOURCE,
+    title: "SCORE: Hyperparathyroidism",
+    kind: "website",
+    citation: "SCORE. Hyperparathyroidism. Module dated June 26, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=132347",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the Hyperparathyroidism topic. Licensed module read locally; paraphrased. Figures and videos were not reviewed.",
+  },
+  {
+    id: HYPERTHYROIDISM_PACKET_SOURCE,
+    title: "Hyperthyroidism — supplied succinct guide",
+    kind: "user_notes",
+    citation: "Owner-supplied “Hyperthyroidism Pocket Chief” Word review, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. A SCORE notebook draft corrected by its author, then consolidated from 5,140 to 3,742 words with a review pass against primary guidance. Inline author-year attributions only, kept here rather than in the topic: long-term methimazole control near 85%, relapse 52 to 53%, trial and radiofrequency ablation estimates and availability claims are the draft's own and were not independently verified; the 2016 ATA hyperthyroidism guideline, the 2026 ATA pregnancy guideline and the USPSTF statement were read by the packet reviewer. Open items from its review: the elemental-calcium amount in the 1 g prophylaxis regimen, the liver-based drug-selection rule in storm, and a current permanent-hypoparathyroidism definition. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_HYPERTHYROIDISM_SOURCE,
+    title: "SCORE: Hyperthyroidism",
+    kind: "website",
+    citation: "SCORE. Hyperthyroidism. Module dated February 10, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=138713",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the Hyperthyroidism topic. Licensed module read locally; paraphrased. Figures and videos were not reviewed.",
+  },
+  {
+    id: THYROIDITIS_PACKET_SOURCE,
+    title: "Thyroiditis — supplied succinct guide",
+    kind: "user_notes",
+    citation: "Owner-supplied “Thyroiditis Pocket Chief” Word review, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. A SCORE notebook draft corrected by its author, then consolidated from 4,125 to 2,884 words with a review pass against primary guidance. Inline author-year attributions only, kept here rather than in the topic: the 2025 and 2026 study estimates, the Riedel and lymphoma regimens, antimicrobial duration, and the 15 versus 30 mg steroid result (full text of that trial was inaccessible) are the draft's own and were not independently verified; the 2016 ATA hyperthyroidism guideline, the 2026 ATA pregnancy guideline, the Guldvog abstract, the ASCO 2021 narrative and the ESE 2022 recommendations were read by the packet reviewer. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_THYROIDITIS_SOURCE,
+    title: "SCORE: Thyroiditis",
+    kind: "website",
+    citation: "SCORE. Thyroiditis. Module dated March 17, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=159534",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the Thyroiditis topic. Licensed module read locally; paraphrased. Its tables and figures are image placeholders and were not reviewed.",
+  },
+  {
+    id: THYROID_CANCER_PACKET_SOURCE,
+    title: "Thyroid Cancer — supplied succinct guide",
+    kind: "user_notes",
+    citation: "Owner-supplied “Thyroid Cancer Pocket Chief” Word review, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. A SCORE notebook draft corrected by its author against the 2025 ATA guideline, NCCN v2.2026, Bethesda 2023, ASCO 2026 and landmark trials, then consolidated from 5,941 to 4,866 words. Inline author-year attributions only, kept here rather than in the topic. Not independently verified by the packet reviewer: NCCN v2.2026, the 2026 ASCO anaplastic guideline, the neoadjuvant 93.6% 12-month survival figure, lenvatinib with pembrolizumab, the ESTIMABL2 and IoN radioiodine figures, and most 2025 and 2026 cohort estimates. Read by the packet reviewer: the 2025 ATA guideline, the 2015 ATA nodule and medullary guidelines, the NCI staging tables, the FDA selpercatinib page, the ROAR report and the C-cell lineage paper. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_THYROID_CANCER_SOURCE,
+    title: "SCORE: Thyroid Cancer",
+    kind: "website",
+    citation: "SCORE. Thyroid Cancer. Module dated October 14, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=132220",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the Thyroid Cancer topic. Licensed module read locally; paraphrased. Its anatomy text calls the thyroid ima a 'thyroid inferior mesenteric artery' and gives a frequency that differs from Fiser's; the discrepancy is unresolved. Figures were not reviewed.",
+  },
+  {
+    id: THYROID_NODULE_PACKET_SOURCE,
+    title: "Thyroid Nodule — supplied succinct guide",
+    kind: "user_notes",
+    citation: "Owner-supplied “Thyroid Nodule Pocket Chief” Word review, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. A SCORE notebook draft corrected by its author against the 2015 ATA nodule guideline, Bethesda 2023, ACR TI-RADS 2017, the 2025 ATA guideline and NCCN 2026, then consolidated from 4,485 to 3,532 words. Inline author-year attributions only, kept here rather than in the topic. Not independently verified by the packet reviewer: NCCN 2026, BTA/BAETS 2026 and ETA follow-up alternatives, the molecular-test performance cohorts, radiofrequency ablation and toxic-nodule outcome figures, and the 'repeat FNA reclassifies up to 30% of AUS' figure, which its own correction log marks unverified. Read by the packet reviewer: the 2015 and 2025 ATA guidelines, the ACR TI-RADS chart, the Bethesda 2023 abstract and the 2015 ATA medullary guideline. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_THYROID_NODULES_SOURCE,
+    title: "SCORE: Thyroid Nodules",
+    kind: "website",
+    citation: "SCORE. Thyroid Nodules. Module dated July 29, 2026; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=132153",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the Thyroid Nodule topic (the outline's Initial Workup of a Thyroid Nodule). Licensed module read locally; paraphrased. Its thyroid physiology text carries protein-binding and free-fraction errors that the topic corrects. Figures and videos were not reviewed.",
+  },
+  {
+    id: OPEN_THYROID_LOBECTOMY_PLAYBOOK_SOURCE,
+    title: "Open thyroid lobectomy — supplied succinct playbook",
+    kind: "user_notes",
+    citation: "Owner-supplied open thyroid lobectomy playbook Word document, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. Inline author-year attributions only, kept here rather than in the playbook. Named among them: Fundakowski (recurrent nerve vulnerability near the ligament of Berry), Ringel (2025 ATA complication relative risks), Dixon (hematoma after thyroidectomy and bedside decompression), Diercks (loss-of-signal recovery and bilateral palsy), Awawda (remote-access and completion complication pools), Ajit-Roger (hematoma timing), Apostolou and Li (post-lobectomy hypothyroidism), Terris (blood pressure after ambulatory thyroidectomy), the JOMI operative technique videos used for incision, positioning and closure examples, and a 2026 ambulatory-surgery consensus. NCCN v2.2026 final-pathology triage and the institutional antithrombotic interruption examples are the draft's own and were not independently verified; the packet reviewer read the 2025 ATA guideline (recommendations 6 to 8, 10 to 16, 22 to 23, 25 and 26). The draft's inferior-pole sequencing differs from SCORE, and its SCORE thyroidectomy extract says 'cricopharyngeus' where cricothyroid is meant. Pending Zach's sign-off.",
+  },
+  {
+    id: PARATHYROIDECTOMY_PLAYBOOK_SOURCE,
+    title: "Parathyroidectomy — supplied succinct playbook",
+    kind: "user_notes",
+    citation: "Owner-supplied parathyroidectomy playbook Word document, revised into a succinct guide and prepared November 15, 2026 (draft pending clinical review).",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Read in full. Inline author-year attributions only, kept here rather than in the playbook. Named among them: Miller and Gundara (2024 review of focused versus bilateral exploration), Walker and Shane (2022 review), Asla and Arshad (calcium-creatinine clearance ratio), Hannabass, Yeh, Kattar, Sayed, Abts and Chander (localization performance), Yang (2026 focused-versus-bilateral pooling), Pappachan and Ahmadieh (complications and conversion), Burger and Khalatbari (gland anatomy and count), Correa Roa (wrong-localization conversions), Staibano (ioPTH, registered separately), Palermo (ablation and normocalcemic disease), Hearn (hematoma), and Carling (JOMI cervical block technique). The 2022 Workshop, AAES 2016 guideline, the ioPTH meta-analysis, the DailyMed calcium gluconate label and the 2015 ATA medullary guideline were read by the packet reviewer and are registered separately. Not independently verified: the CDC73 en bloc recommendation, renal graft choices, reoperation timing, the 2026 risk figures and nerve-monitoring thresholds, the oral calcium and calcitriol regimens (calcium salt versus elemental amount unspecified), the calcitriol 'acute maximum' and the magnesium sulfate rate. Pending Zach's sign-off.",
+  },
+  {
+    id: SCORE_THYROIDECTOMY_SOURCE,
+    title: "SCORE: Thyroidectomy",
+    kind: "website",
+    citation: "SCORE. Thyroidectomy. Module dated July 2, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=132409",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the open thyroid lobectomy playbook (the module covers thyroidectomy generally; no lobectomy-specific module exists). Licensed module read locally; paraphrased. Its external branch of the superior laryngeal nerve text says 'cricopharyngeus' where cricothyroid is meant. Figures and videos were not reviewed.",
+  },
+  {
+    id: SCORE_PARATHYROIDECTOMY_SOURCE,
+    title: "SCORE: Parathyroidectomy",
+    kind: "website",
+    citation: "SCORE. Parathyroidectomy. Module dated March 12, 2025; local module retrieved August 12, 2026.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000787",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added for the November 15, 2026 thyroid and parathyroid batch as the SCORE module behind the parathyroidectomy playbook. Licensed module read locally; paraphrased. Figures and videos were not reviewed.",
   },
 ];

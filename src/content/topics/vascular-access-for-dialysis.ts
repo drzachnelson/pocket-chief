@@ -225,7 +225,7 @@ export const vascularAccessForDialysisTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000004131",
   slug: "vascular-access-for-dialysis",
   title: "Vascular Access for Dialysis",
-  aliases: ["hemodialysis access", "dialysis access", "permanent dialysis access", "dialysis access planning", "ESKD Life-Plan", "ESKD Life Plan", "Fistula First", "vein preservation", "KDOQI", "dialysis access steal syndrome", "DASS", "access-related hand ischemia", "HAIDI", "ischemic monomelic neuropathy", "high-output cardiac failure", "Nicoladoni-Branham sign", "fistula failure to mature", "access thrombosis"],
+  aliases: ["hemodialysis access", "dialysis access", "permanent dialysis access", "dialysis access planning", "ESKD Life-Plan", "ESKD Life Plan", "Fistula First", "vein preservation", "KDOQI vascular access", "dialysis access steal syndrome", "DASS", "access-related hand ischemia", "HAIDI", "ischemic monomelic neuropathy", "high-output cardiac failure", "Nicoladoni-Branham sign", "fistula failure to mature", "access thrombosis"],
   scoreNodeId: "vascular-access-conditions",
   scoreCategory: "SCORE · Vascular Access · Diseases & Conditions",
   tags: ["vascular-access", "dialysis-access", "esrd", "absite", "score"],

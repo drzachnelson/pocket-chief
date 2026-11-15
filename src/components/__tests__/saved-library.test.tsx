@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SavedLibrary } from "@/components/saved-library";
 import { loadHistory, type History } from "@/lib/library-client";
@@ -56,31 +56,56 @@ describe("SavedLibrary", () => {
     expect(container.querySelector("a svg")).toBeNull();
   });
 
-  it("flips the icon and the write on a tap, leaves the row in place, and a second tap restores it", async () => {
+  it("updates the icon after the write, leaves the row in place, and a second tap restores it", async () => {
     read.mockResolvedValue(history([saved("t-chole", "topic", "2026-11-01T00:00:00.000Z"), saved("p-chole", "playbook", "2026-10-01T00:00:00.000Z")]));
     render(<SavedLibrary />);
     const topicToggle = await screen.findByRole("button", { name: "Save Choledocholithiasis" });
     fireEvent.click(topicToggle);
-    expect(topicToggle).toHaveAttribute("aria-pressed", "false");
+    await waitFor(() => expect(topicToggle).toHaveAttribute("aria-pressed", "false"));
     expect(writeTopic).toHaveBeenLastCalledWith(chole, false);
     expect(screen.getByRole("link", { name: /Choledocholithiasis/ })).toBeInTheDocument();
     fireEvent.click(topicToggle);
-    expect(topicToggle).toHaveAttribute("aria-pressed", "true");
+    await waitFor(() => expect(topicToggle).toHaveAttribute("aria-pressed", "true"));
     expect(writeTopic).toHaveBeenLastCalledWith(chole, true);
 
     const playbookToggle = screen.getByRole("button", { name: "Save Laparoscopic Cholecystectomy" });
     fireEvent.click(playbookToggle);
     expect(writePlaybook).toHaveBeenCalledWith(lapChole, false);
-    expect(playbookToggle).toHaveAttribute("aria-pressed", "false");
+    await waitFor(() => expect(playbookToggle).toHaveAttribute("aria-pressed", "false"));
   });
 
-  it("puts the icon back when the device blocks the write", async () => {
-    writeTopic.mockRejectedValue(new Error("blocked"));
+  it("keeps the committed icon while a removal or restore is pending and ignores duplicate taps", async () => {
+    let commit!: () => void;
+    writeTopic.mockImplementation(() => new Promise<void>((resolve) => { commit = resolve; }));
+    read.mockResolvedValue(history([saved("t-chole", "topic", "2026-11-01T00:00:00.000Z")]));
+    render(<SavedLibrary />);
+    const toggle = await screen.findByRole("button", { name: "Save Choledocholithiasis" });
+
+    for (const storedState of [true, false]) {
+      fireEvent.click(toggle);
+      expect(toggle).toHaveAttribute("aria-pressed", String(storedState));
+      expect(toggle).toBeDisabled();
+      fireEvent.click(toggle);
+      expect(writeTopic).toHaveBeenCalledTimes(storedState ? 1 : 2);
+      await act(async () => commit());
+      expect(toggle).toHaveAttribute("aria-pressed", String(!storedState));
+      expect(toggle).toBeEnabled();
+    }
+  });
+
+  it("keeps the committed icon when the device blocks the write and allows retry", async () => {
+    let reject!: (error: Error) => void;
+    writeTopic.mockReturnValueOnce(new Promise((_, fail) => { reject = fail; })).mockResolvedValueOnce(undefined);
     read.mockResolvedValue(history([saved("t-chole", "topic", "2026-11-01T00:00:00.000Z")]));
     render(<SavedLibrary />);
     const toggle = await screen.findByRole("button", { name: "Save Choledocholithiasis" });
     fireEvent.click(toggle);
-    await waitFor(() => expect(toggle).toHaveAttribute("aria-pressed", "true"));
+    expect(toggle).toHaveAttribute("aria-pressed", "true");
+    await act(async () => reject(new Error("blocked")));
+    expect(toggle).toHaveAttribute("aria-pressed", "true");
+    expect(toggle).toBeEnabled();
+    fireEvent.click(toggle);
+    await waitFor(() => expect(toggle).toHaveAttribute("aria-pressed", "false"));
   });
 
   it("shows a missing id as a muted row with the toggle only, and the toggle takes it off and puts it back by its entry", async () => {
@@ -93,7 +118,9 @@ describe("SavedLibrary", () => {
     const toggle = screen.getByRole("button", { name: "Save, no longer available" });
     fireEvent.click(toggle);
     expect(writeEntry).toHaveBeenLastCalledWith(gone, false);
+    await waitFor(() => expect(toggle).toHaveAttribute("aria-pressed", "false"));
     fireEvent.click(toggle);
+    await waitFor(() => expect(toggle).toHaveAttribute("aria-pressed", "true"));
     expect(writeEntry).toHaveBeenLastCalledWith(gone, true);
     expect(writeTopic).not.toHaveBeenCalled();
   });

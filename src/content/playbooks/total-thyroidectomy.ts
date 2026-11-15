@@ -293,7 +293,7 @@ export const totalThyroidectomyPlaybook = buildPlaybook({
   id: "00000000-0000-4000-9000-000000000005",
   slug: "total-thyroidectomy",
   title: "Total Thyroidectomy",
-  aliases: ["Thyroidectomy", "Completion thyroidectomy", "Thyroid lobectomy", "Total thyroid resection"],
+  aliases: ["Thyroidectomy", "Completion thyroidectomy", "Total thyroid resection"],
   procedureId: "total_thyroidectomy",
   approach: "open",
   specialty: "Endocrine",

@@ -19,12 +19,21 @@ function writeSaved({ topics, playbooks }: History, entry: SavedEntry, next: boo
 /** The row's bookmark. Tapping it only flips the icon and the write; the row stays put until the next visit, so a slip is one more tap to undo. */
 function SaveToggle({ name, write }: { name: string; write: (saved: boolean) => Promise<unknown> }) {
   const [saved, setSaved] = useState(true);
-  function toggle() {
+  const [pending, setPending] = useState(false);
+  async function toggle() {
+    if (pending) return;
     const next = !saved;
-    setSaved(next);
-    write(next).catch(() => setSaved(!next)); // storage blocked: the icon goes back to what is stored
+    setPending(true);
+    try {
+      await write(next);
+      setSaved(next);
+    } catch {
+      // Storage blocked: keep showing what is stored.
+    } finally {
+      setPending(false);
+    }
   }
-  return <button type="button" className="row-toggle" aria-label={name} aria-pressed={saved} onClick={toggle}><BookmarkSimple size={20} weight={saved ? "fill" : "regular"} aria-hidden="true" /></button>;
+  return <button type="button" className="row-toggle" aria-label={name} aria-pressed={saved} disabled={pending} onClick={toggle}><BookmarkSimple size={20} weight={saved ? "fill" : "regular"} aria-hidden="true" /></button>;
 }
 
 /** Everything saved on this device, topics and playbooks together, newest first. Rows are rebuilt from the current library by id; a stored snapshot is never shown. */

@@ -23,6 +23,8 @@ import { roboticVentralUmbilicalHerniaRepairPlaybook } from "@/content/playbooks
 import { simpleMastectomyWithSentinelNodeBiopsyPlaybook } from "@/content/playbooks/simple-mastectomy-with-sentinel-node-biopsy";
 import { temporalArteryBiopsyPlaybook } from "@/content/playbooks/temporal-artery-biopsy";
 import { totalThyroidectomyPlaybook } from "@/content/playbooks/total-thyroidectomy";
+import { openThyroidLobectomyPlaybook } from "@/content/playbooks/open-thyroid-lobectomy";
+import { parathyroidectomyPlaybook } from "@/content/playbooks/parathyroidectomy";
 
 export {
   ivcFilterPlacementAndRetrievalPlaybook,
@@ -50,6 +52,8 @@ export {
   simpleMastectomyWithSentinelNodeBiopsyPlaybook,
   temporalArteryBiopsyPlaybook,
   totalThyroidectomyPlaybook,
+  openThyroidLobectomyPlaybook,
+  parathyroidectomyPlaybook,
 };
 
 export const libraryPlaybooks: Playbook[] = [
@@ -78,4 +82,6 @@ export const libraryPlaybooks: Playbook[] = [
   simpleMastectomyWithSentinelNodeBiopsyPlaybook,
   temporalArteryBiopsyPlaybook,
   totalThyroidectomyPlaybook,
+  openThyroidLobectomyPlaybook,
+  parathyroidectomyPlaybook,
 ];
