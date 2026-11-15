@@ -101,7 +101,6 @@ describe("playbook library", () => {
         "Post-endarterectomy hypertension -> procedures-for-carotid-artery-stenosis",
         "amaurosis fugax -> carotid-artery-disease",
         "common facial vein -> neck-injuries-management",
-        "recurrent laryngeal nerve -> neck-injuries-management",
         "tracheostomy -> airway-access-intubation-and-surgical-airways",
       ],
       // Reviewed 2026-10-11. "ROADSTER" was dropped from the procedures topic's aliases instead of
@@ -436,10 +435,29 @@ describe("playbook library", () => {
       ],
       "temporal-artery-biopsy": [],
       "total-thyroidectomy": [
-        "Recurrent laryngeal nerve -> neck-injuries-management",
+        "Graves disease -> hyperthyroidism",
         "cricothyroidotomy -> airway-access-intubation-and-surgical-airways",
-        "recurrent laryngeal nerve -> neck-injuries-management",
         "tracheostomy -> airway-access-intubation-and-surgical-airways",
+      ],
+      "open-thyroid-lobectomy": [
+        "Graves disease -> hyperthyroidism",
+        "hyperparathyroidism -> hyperparathyroidism",
+        "hyperthyroidism -> hyperthyroidism",
+        "hypocalcemia -> derangements-of-electrolytes-and-acid-base-balance",
+        "thyroid cancer -> thyroid-cancer",
+        "thyroid nodule -> thyroid-nodule",
+        "thyroiditis -> thyroiditis",
+      ],
+      "parathyroidectomy": [
+        "VTE prophylaxis -> prophylaxis-of-venous-thromboembolism",
+        "calcium–creatinine clearance ratio -> hyperparathyroidism",
+        "familial hypocalciuric hypercalcemia -> hyperparathyroidism",
+        "hypercalcemia -> derangements-of-electrolytes-and-acid-base-balance",
+        "hypercalcemic crisis -> hyperparathyroidism",
+        "hyperparathyroidism -> hyperparathyroidism",
+        "hypocalcemia -> derangements-of-electrolytes-and-acid-base-balance",
+        "primary hyperparathyroidism -> hyperparathyroidism",
+        "thyroid nodule -> thyroid-nodule",
       ],
     };
     const entries = buildLinkIndex(listTopics());
@@ -473,7 +491,8 @@ describe("playbook library", () => {
     // a paragraph was carried across from another guide.
     expect(slugs("myopectineal")).toEqual(["robotic-tapp-inguinal-hernia-repair"]);
     expect(slugs("corona mortis")).toEqual(["robotic-tapp-inguinal-hernia-repair"]);
-    expect(slugs("Zuckerkandl")).toEqual(["total-thyroidectomy"]);
+    // Both operations mobilize the thyroid lobe at the same posterior nerve landmark.
+    expect(slugs("Zuckerkandl").sort()).toEqual(["open-thyroid-lobectomy", "total-thyroidectomy"]);
     expect(slugs("clavipectoral")).toEqual(["simple-mastectomy-with-sentinel-node-biopsy"]);
     // The transaxillary rib exposure also protects this nerve in the axilla.
     expect(slugs("intercostobrachial").sort()).toEqual(["first-rib-resection-for-venous-thoracic-outlet-syndrome", "simple-mastectomy-with-sentinel-node-biopsy"]);

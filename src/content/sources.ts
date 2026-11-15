@@ -449,7 +449,7 @@ export const ASCRS_COLON_CANCER_2022_SOURCE = "00000000-0000-4000-8000-000000008
 export const LOWER_GI_ENDOSCOPY_PACKET_SOURCE = "00000000-0000-4000-8000-000000008400";
 export const ACG_LGIB_2023_SOURCE = "00000000-0000-4000-8000-000000008401";
 export const COLONOSCOPY_QUALITY_2024_SOURCE = "00000000-0000-4000-8000-000000008402";
-// Thyroid and parathyroid batch, November 15, 2026. Shared guideline sources take 08500–08521; each topic takes the packet source xx00,
+// Thyroid and parathyroid batch, November 15, 2026. Shared guideline sources take 08500–08522; each topic takes the packet source xx00,
 // its SCORE module xx01, and (when more are needed) xx02 upward. Playbook sources are allocated singly from 03078.
 export const ATA_NODULE_DTC_2015_SOURCE = "00000000-0000-4000-8000-000000008500";
 export const ATA_MTC_2015_SOURCE = "00000000-0000-4000-8000-000000008501";
@@ -473,6 +473,7 @@ export const ASCO_IRAE_2021_SOURCE = "00000000-0000-4000-8000-000000008518";
 export const ESE_ICI_ENDOCRINE_2022_SOURCE = "00000000-0000-4000-8000-000000008519";
 export const GULDVOG_HASHIMOTO_2019_SOURCE = "00000000-0000-4000-8000-000000008520";
 export const JOHANSSON_C_CELL_ORIGIN_2015_SOURCE = "00000000-0000-4000-8000-000000008521";
+export const ATA_ATC_2021_SOURCE = "00000000-0000-4000-8000-000000008522";
 export const HYPERPARATHYROIDISM_PACKET_SOURCE = "00000000-0000-4000-8000-000000008600";
 export const SCORE_HYPERPARATHYROIDISM_SOURCE = "00000000-0000-4000-8000-000000008601";
 export const HYPERTHYROIDISM_PACKET_SOURCE = "00000000-0000-4000-8000-000000008700";
@@ -1594,9 +1595,10 @@ export const suppliedSources: SuppliedSource[] = [
     id: ATA_THYROID_2025_SOURCE,
     title: "American Thyroid Association guideline on differentiated thyroid cancer",
     kind: "article",
-    citation: "Ringel MD, et al. 2025 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer. Thyroid, 2025.",
+    citation: "Ringel MD, Sosa JA, et al. 2025 American Thyroid Association management guidelines for adult patients with differentiated thyroid cancer. Thyroid. 2025;35(8):841–985. doi:10.1177/10507256251363120.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13090833/",
     suppliedAt: "2026-09-11T00:00:00.000Z",
-    details: "Registered during review as the authority behind the extent-of-resection thresholds, the parathyroid-preservation recommendation and the loss-of-signal staging position the supplied playbook quotes by recommendation number. Identified from that playbook rather than supplied directly.",
+    details: "Registered during the original total-thyroidectomy review from its supplied playbook. Citation corrected against the PMC full text on November 15, 2026: this update covers differentiated thyroid cancer, not initial nodule workup. The thyroid/parathyroid batch rechecked the relevant recommendations on extent of surgery, nodal assessment, completion, nerve/parathyroid preservation, radioiodine and surveillance. Initial nodule evaluation remains attributed separately to the 2015 ATA guideline. Pending Zach's clinical sign-off.",
   },
   {
     id: MASTECTOMY_SLNB_PLAYBOOK_SOURCE,
@@ -4844,7 +4846,7 @@ export const suppliedSources: SuppliedSource[] = [
     citation: "Tessler FN, Middleton WD, Grant EG, et al. ACR Thyroid Imaging, Reporting and Data System (TI-RADS): white paper of the ACR TI-RADS Committee. J Am Coll Radiol. 2017;14(5):587–595. Official ACR resource page and assessment chart.",
     url: "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/TI-RADS",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the ACR resource page and assessment chart on 2026-11-15 for the point system and the TR5 biopsy versus follow-up distinction; the chart extraction left some TR3 and TR4 management cells unread, so those thresholds rest on the supplied draft. Pending Zach's sign-off.",
+    details: "Batch review visually inspected the official ACR assessment-chart PDF on November 15, 2026, resolving the earlier extraction gap. All five point domains and TR1–TR5 categories agree with the topic: TR3 FNA ≥2.5 cm/follow-up ≥1.5 cm; TR4 ≥1.5/≥1 cm; TR5 ≥1/≥0.5 cm. Chart URL: https://edge.sitecorecloud.io/americancoldf5f-acrorgf92a-productioncb02-3650/media/ACR/Files/RADS/TI-RADS/TI-RADS-Assessment-Categories.pdf . The chart does not show the year-by-year surveillance schedules; those remain attributed to the supplied guide rather than a newly inspected complete white paper. Pending Zach's sign-off.",
   },
   {
     id: BETHESDA_2023_SOURCE,
@@ -4878,9 +4880,9 @@ export const suppliedSources: SuppliedSource[] = [
     title: "ROAR: dabrafenib plus trametinib in BRAF V600E anaplastic thyroid cancer",
     kind: "article",
     citation: "Subbiah V, et al. Dabrafenib plus trametinib in BRAF V600E-mutant anaplastic thyroid cancer: updated analysis from the phase II ROAR basket study. Annals of Oncology. 2022.",
-    url: "https://www.sciencedirect.com/science/article/pii/S0923753422000059",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9338780/",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the abstract and results on 2026-11-15: oral dabrafenib 150 mg twice daily with trametinib 2 mg daily, overall response 56% including 3 complete responses, median progression-free survival 6.7 months and overall survival 14.5 months. Pending Zach's sign-off.",
+    details: "Registered for the November 15, 2026 thyroid and parathyroid batch. Original packet review records an abstract/results check. Batch review rechecked the indexed primary abstract (PMID 35026411): overall response 56% including 3 complete responses, median progression-free survival 6.7 months and overall survival 14.5 months. Direct publisher access returned 403 and direct PMC full text encountered an access challenge; no new complete trial audit is claimed. Adult dabrafenib 150 mg twice daily plus trametinib 2 mg daily is corroborated separately in ATA 2021 guidance. Selected single-arm cohort, not a universal outcome guarantee. Pending Zach's sign-off.",
   },
   {
     id: FISER_THYROID_SOURCE,
@@ -4911,7 +4913,7 @@ export const suppliedSources: SuppliedSource[] = [
     id: ATA_PREGNANCY_THYROID_2026_SOURCE,
     title: "ATA 2026 guideline on thyroid disease in pregnancy, preconception and postpartum",
     kind: "article",
-    citation: "Korevaar TIM, et al. American Thyroid Association guideline on thyroid disease during pregnancy, preconception and the postpartum period. Thyroid. 2026. doi:10.1177/10507256261445624.",
+    citation: "Korevaar TIM, Leung AM, Alexander EK, et al. American Thyroid Association 2026 guidelines for thyroid disease in preconception, pregnancy, and postpartum. Thyroid. 2026;36(5):481–544. doi:10.1177/10507256261445624.",
     url: "https://journals.sagepub.com/doi/10.1177/10507256261445624",
     suppliedAt: "2026-11-15T00:00:00.000Z",
     details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the full text on 2026-11-15 for gestational treatment, postpartum thyroiditis and radiopharmaceutical use during lactation; after 16 weeks the drug choice is uncertain, and diagnostic scintigraphy and I-131 treatment carry different lactation restrictions. Pending Zach's sign-off.",
@@ -4954,12 +4956,12 @@ export const suppliedSources: SuppliedSource[] = [
   },
   {
     id: ENDOCRINE_SOCIETY_HYPERCALCEMIA_SOURCE,
-    title: "Endocrine Society hypercalcemia guideline",
+    title: "Endocrine Society: treatment of hypercalcemia of malignancy in adults",
     kind: "website",
-    citation: "Endocrine Society. Clinical practice guideline on hypercalcemia, recommendations on severe hypercalcemia of malignancy (calcitonin with an IV bisphosphonate or denosumab, calcitonin limited to 48 to 72 hours).",
+    citation: "El-Hajj Fuleihan G, Clines GA, Hu MI, et al. Treatment of hypercalcemia of malignancy in adults: an Endocrine Society clinical practice guideline. JCEM. March 2023 (online December 21, 2022). Official recommendations page, recommendation 3.",
     url: "https://www.endocrine.org/clinical-practice-guidelines/hypercalcemia",
     suppliedAt: "2026-11-15T00:00:00.000Z",
-    details: "Registered for the November 15, 2026 thyroid and parathyroid batch from the packet reviewer's reading of the official recommendations page on 2026-11-15 (recommendation 3). Hypercalcemia of malignancy guidance, not primary hyperparathyroidism trial evidence; fluid and drug figures beyond that recommendation remain supplied-draft statements. The exact guideline title and year were not confirmed beyond that page. Pending Zach's sign-off.",
+    details: "Official recommendations page re-read November 15, 2026; title and publication dates confirmed there. Recommendation 3 addresses severe hypercalcemia of malignancy: calcitonin with an IV bisphosphonate or denosumab, with calcitonin limited to 48–72 hours. This is malignancy guidance, not primary-hyperparathyroidism trial evidence; other fluid/drug regimens in the supplied guide are not established by this recommendation. Pending Zach's sign-off.",
   },
   {
     id: IOPTH_NETWORK_META_ANALYSIS_2025_SOURCE,
@@ -5014,6 +5016,15 @@ export const suppliedSources: SuppliedSource[] = [
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4631767/",
     suppliedAt: "2026-11-15T00:00:00.000Z",
     details: "Registered for the November 15, 2026 thyroid and parathyroid batch. The packet reviewer read the abstract and lineage-tracing results on 2026-11-15: in mice the C cells arise from endoderm, which challenges the classical neural-crest teaching. It does not show direct fate mapping in humans. Pending Zach's sign-off.",
+  },
+  {
+    id: ATA_ATC_2021_SOURCE,
+    title: "ATA 2021 guidelines for anaplastic thyroid cancer",
+    kind: "article",
+    citation: "Bible KC, Kebebew E, Brierley J, et al. 2021 American Thyroid Association guidelines for management of patients with anaplastic thyroid cancer. Thyroid. 2021;31(3):337–386. doi:10.1089/thy.2020.0944.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8349723/",
+    suppliedAt: "2026-11-15T00:00:00.000Z",
+    details: "Added during batch review beyond the supplied guide to support rapid tissue diagnosis, molecular and airway assessment, multidisciplinary resectability decisions and mutation-directed systemic therapy. Identified through the current official ATA guideline index and checked against primary full text during topic review. Not a source for inherited ASCO 2026 or unverified survival estimates. Pending Zach's sign-off.",
   },
   {
     id: HYPERPARATHYROIDISM_PACKET_SOURCE,
