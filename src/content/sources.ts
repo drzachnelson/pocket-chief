@@ -201,6 +201,8 @@ export const CIRRHOSIS_PORTAL_HYPERTENSION_OE_SOURCE = "00000000-0000-4000-8000-
 export const HIATT_HEPATIC_ARTERIES_1994_SOURCE = "00000000-0000-4000-8000-000000004217";
 export const AASLD_PORTAL_HYPERTENSION_2024_SOURCE = "00000000-0000-4000-8000-000000004218";
 export const AASLD_ASCITES_2021_SOURCE = "00000000-0000-4000-8000-000000004219";
+// Added November 14, 2026, after the block above filled: the one Liver module no source cited (04260 to 04299 is free).
+export const SCORE_SEGMENTECTOMY_LOBECTOMY_SOURCE = "00000000-0000-4000-8000-000000004260";
 export const BOWEL_BOARDS_PACKET_SOURCE = "00000000-0000-4000-8000-000000004500";
 export const SCORE_CROHN_SOURCE = "00000000-0000-4000-8000-000000004501";
 export const SCORE_ULCERATIVE_COLITIS_SOURCE = "00000000-0000-4000-8000-000000004502";
@@ -2146,6 +2148,20 @@ export const suppliedSources: SuppliedSource[] = [
     url: "https://www.surgicalcore.org/modulecontent.aspx?id=144569",
     suppliedAt: "2026-10-19T00:00:00.000Z",
     details: "Local module retrieved August 12, 2026, and used for the outline entry Cirrhosis and Portal Hypertension. Supplies the causes, HVPG over 5, 10 and 16 mm Hg, noninvasive surrogates including elastography over 21 kPa, CTP classes and elective surgery, MELD and its rationale, ascites mechanism, SAAG and ascitic protein, albumin 6 to 8 g/L with paracentesis, chylous ascites, SBP (500 leukocytes or 250 neutrophils, cefotaxime, 48-hour failure prompting a search for a source, prophylaxis criteria and outcomes), encephalopathy grades and treatment, varices sites, beta-blockers and banding, surgical shunts and devascularization limited to CTP A and B, the bleeding protocol with Sengstaken-Blakemore and Minnesota tube technique, BRTO, vasoactive drugs for 2 to 5 days, ceftriaxone, PPI for 10 days, TIPS, and hepatorenal syndrome. Two statements are set beside current guidance as splits: MELD-Na as the current UNOS score (MELD 3.0 replaced it in 2023) and a transfusion target of 7 to 9 g/dL.",
+  },
+  {
+    id: SCORE_SEGMENTECTOMY_LOBECTOMY_SOURCE,
+    title: "SCORE curriculum module: Segmentectomy and Lobectomy",
+    kind: "website",
+    citation: "Labadie K, Park JO. \"Segmentectomy and Lobectomy.\" Surgical Council on Resident Education (SCORE) Portal, Liver module, June 16, 2023.",
+    url: "https://www.surgicalcore.org/modulecontent.aspx?id=1000472",
+    suppliedAt: "2026-11-14T00:00:00.000Z",
+    details: [
+      "Local module retrieved August 12, 2026, and used for the outline entry Hepatic Resection; the SCORE portal titles it Segmentectomy and Lobectomy. Registered November 14, 2026, because it was the one Liver module no source cited.",
+      "Supplies the Brisbane 2000 hierarchy (two hemilivers, four sections, nine segments), the eight major anatomic resections, and the synonym sets for five of them with their segments (right hepatectomy V to VIII, left hepatectomy II to IV, right trisectionectomy IV to VIII, left trisectionectomy II to V and VIII, left lateral sectionectomy II and III); the portal vein as the majority of inflow with the hepatic artery about 25% and sole arterial supply to the bile ducts; arterial variants up to 40% of the time, with the aberrant left artery most often from the left gastric and the aberrant right from the SMA; the left portal vein to II, III and IV; hepatic vein territories; HCC, cholangiocarcinoma and colorectal metastases as resection indications; future remnant measured by 3D volumetry; low CVP under 5 mm Hg; pneumoperitoneum of 7 to 12 mm Hg; and post-hepatectomy liver failure, bile leak and portal vein thrombosis.",
+      "Two differences from the sources already in Hepatic Resection are recorded as splits, not resolved: the module resects an adenoma over 4 cm only in a high-risk type (the Primary Hepatic Neoplasms module says over 5 cm), and its normal-liver remnant is 20 to 30%.",
+      "Not carried into the topic, pending the owner: HCC and cholangiocarcinoma contraindications to resection, cystadenoma as an indication, the remnant formula and its 30 to 40% (steatosis or chemotherapy) and over 40% (cirrhosis) bands, hepatic artery thrombosis, and laparoscopic port and hybrid technique. The module also treats percutaneous drainage as the first step for a bile leak and sphincterotomy as seldom needed, which is gentler than the topic's ERCP pearl.",
+    ].join(" "),
   },
   {
     id: HEPATIC_RESECTION_OE_SOURCE,
