@@ -55,7 +55,7 @@ describe.each([
     await act(async () => pending.reject(new Error("blocked")));
     expect(button).toHaveTextContent(initiallySaved ? /^Saved$/ : /^Save$/);
     expect(button).toBeEnabled();
-    expect(screen.getByRole("alert")).toHaveTextContent("This device blocked private storage, so this page was not saved.");
+    expect(screen.getByRole("alert")).toHaveTextContent("Could not update this bookmark. Please try again.");
 
     fireEvent.click(button);
     await waitFor(() => expect(button).toHaveTextContent(initiallySaved ? /^Save$/ : /^Saved$/));

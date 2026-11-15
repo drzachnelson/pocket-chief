@@ -34,7 +34,7 @@ function SaveButton({ item }: { item: Topic | Playbook }) {
       await (isPlaybook(item) ? setPlaybookSaved(item, next) : setTopicSaved(item, next));
       setSaved(next);
     } catch {
-      setError("This device blocked private storage, so this page was not saved.");
+      setError("Could not update this bookmark. Please try again.");
     } finally {
       setPending(false);
     }
