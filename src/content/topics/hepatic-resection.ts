@@ -3,6 +3,7 @@ import {
   FISER_LIVER_SOURCE as FISER,
   HEPATIC_RESECTION_OE_SOURCE as OE,
   HIATT_HEPATIC_ARTERIES_1994_SOURCE as HIATT,
+  SCORE_SEGMENTECTOMY_LOBECTOMY_SOURCE as SCORE,
   TRUELEARN_LIVER_SOURCE as TL,
 } from "@/content/sources";
 import type { TopicBlock } from "@/lib/types";
@@ -33,7 +34,7 @@ const blocks: TopicBlock[] = [
       ["Right posterior sector", "**VI** (inferior) and **VII** (superior)", "Behind the right hepatic vein"],
       ["Caudate lobe", "**I**", "Separate from both halves, with inflow from both right and left pedicles"],
     ],
-  }, [[TL, OE, FISER], [TL, OE, FISER], [TL, OE], [TL, OE], [TL, OE, FISER]]),
+  }, [[TL, OE, FISER, SCORE], [TL, OE, FISER], [TL, OE, SCORE], [TL, OE, SCORE], [TL, OE, FISER]]),
   sourcedUnits({
     id: "block-hr-segment-rules",
     type: "bullets",
@@ -46,7 +47,7 @@ const blocks: TopicBlock[] = [
       "The middle and left hepatic veins join in a **common trunk in about 80%** before entering the IVC.",
       "The left portal vein supplies II, III, and IV; the right supplies V to VIII. The portal triad enters, and the gallbladder lies under, segments IV and V.",
     ],
-  }, [[TL, FISER], [TL, OE], [TL, OE], [OE, FISER], [OE, FISER], [FISER]]),
+  }, [[TL, FISER, SCORE], [TL, OE], [TL, OE, SCORE], [OE, FISER], [OE, FISER], [FISER, SCORE]]),
   sourcedUnits({
     id: "block-hr-landmarks",
     type: "bullets",
@@ -71,7 +72,7 @@ const blocks: TopicBlock[] = [
       "**Hepatic arterial buffer response**: when portal flow falls, the hepatic artery dilates to compensate. The reverse does not happen.",
       "Most primary and secondary liver tumors are fed by the **hepatic artery**.",
     ],
-  }, [[OE], [OE], [OE, FISER], [OE], [FISER]]),
+  }, [[OE], [OE, SCORE], [OE, FISER], [OE], [FISER]]),
   sourcedUnits({
     id: "block-hr-arteries",
     type: "bullets",
@@ -82,7 +83,7 @@ const blocks: TopicBlock[] = [
       "Normal course: the common hepatic artery leaves the celiac, runs along the upper pancreas, gives off the gastroduodenal and right gastric arteries, joins the triad left of the bile duct, then splits into right and left. The right hepatic artery can cross **anterior** to the common hepatic duct.",
       "Conventional arterial anatomy is present in only about 55 to 75% of patients.",
     ],
-  }, [[OE, FISER, TL], [OE, FISER], [TL], [OE]]),
+  }, [[OE, FISER, TL, SCORE], [OE, FISER, SCORE], [TL], [OE]]),
   sourced({
     id: "block-hr-pars-flaccida",
     type: "warning",
@@ -94,8 +95,8 @@ const blocks: TopicBlock[] = [
     id: "block-hr-variant-split",
     type: "prose",
     heading: "↳ Board answer versus current practice: how common the variants are",
-    text: "Fiser keys each replaced artery at about **20%**. TrueLearn gives a replaced left hepatic artery from the left gastric in 4 to 10% and a replaced right hepatic artery from the SMA in 10 to 20%. The OpenEvidence guide gives 15 to 20% for the left and 10 to 17% for the right, with a replaced right from the SMA alone at 5 to 11%. Hiatt's 1,000-case series found a replaced or accessory left hepatic artery in about 10% and a replaced or accessory right in about 11%. The figures differ because some count replaced arteries alone and others add accessory ones. For an exam, the right hepatic artery off the SMA is the commonest variant, and both are common enough to look for every time.",
-  }, [[FISER, TL, OE, HIATT]]),
+    text: "Fiser keys each replaced artery at about **20%**. TrueLearn gives a replaced left hepatic artery from the left gastric in 4 to 10% and a replaced right hepatic artery from the SMA in 10 to 20%. The OpenEvidence guide gives 15 to 20% for the left and 10 to 17% for the right, with a replaced right from the SMA alone at 5 to 11%. Hiatt's 1,000-case series found a replaced or accessory left hepatic artery in about 10% and a replaced or accessory right in about 11%. SCORE gives no per-artery figure, only that hepatic arterial anatomy varies up to 40% of the time, with the aberrant left artery most often from the left gastric and the aberrant right from the SMA. The figures differ because some count replaced arteries alone and others add accessory ones. For an exam, the right hepatic artery off the SMA is the commonest variant, and both are common enough to look for every time.",
+  }, [[FISER, TL, OE, HIATT, SCORE]]),
   sourcedUnits({
     id: "block-hr-indications",
     type: "bullets",
@@ -108,7 +109,7 @@ const blocks: TopicBlock[] = [
       "**Living-donor** hepatectomy for transplant.",
       "A solitary colorectal metastasis in a fit patient gets **resection** when feasible, the best chance of cure. With up to four lesions, five-year survival after resection is 24 to 58%, and the old limits of three lesions, one lobe, and a 1 cm margin have been relaxed.",
     ],
-  }, [[OE], [OE], [OE], [OE], [OE], [TL]]),
+  }, [[OE, SCORE], [OE, SCORE], [OE], [OE], [OE], [TL]]),
   sourcedUnits({
     id: "block-hr-reserve",
     type: "bullets",
@@ -132,22 +133,22 @@ const blocks: TopicBlock[] = [
       "**ALPPS**: stage 1 ligates the tumor-side portal vein and transects the parenchyma; stage 2 completes the hepatectomy about 7 to 10 days later. It gives the fastest, largest growth and the highest completion rate, at higher morbidity and mortality (stage 2 mortality about 12 to 14% against 5 to 7% for PVE).",
       "Chemotherapy injury: **oxaliplatin** causes sinusoidal obstruction (blue liver); **irinotecan** causes steatohepatitis (yellow liver).",
     ],
-  }, [[OE], [OE, FISER], [OE, FISER], [OE], [OE], [OE]]),
+  }, [[OE, SCORE], [OE, FISER], [OE, FISER], [OE], [OE], [OE]]),
   sourcedUnits({
     id: "block-hr-resections",
     type: "table",
     heading: "Named resections (Brisbane 2000)",
     columns: ["Resection", "Also called", "Segments removed"],
     rows: [
-      ["Right hepatectomy", "Right hemihepatectomy", "V, VI, VII, VIII"],
-      ["Left hepatectomy", "Left hemihepatectomy", "II, III, IV, with or without I"],
-      ["Extended right hepatectomy", "Right trisectionectomy", "IV to VIII, with or without I"],
-      ["Extended left hepatectomy", "Left trisectionectomy", "II, III, IV, V, VIII, with or without I"],
-      ["Left lateral sectionectomy", "Left lateral bisegmentectomy", "II and III"],
+      ["Right hepatectomy", "Right hemihepatectomy, right hepatic lobectomy", "V, VI, VII, VIII"],
+      ["Left hepatectomy", "Left hemihepatectomy, left hepatic lobectomy", "II, III, IV, with or without I"],
+      ["Extended right hepatectomy", "Right trisectionectomy, right lobectomy, extended right hepatic lobectomy", "IV to VIII, with or without I"],
+      ["Extended left hepatectomy", "Left trisectionectomy, extended left lobectomy", "II, III, IV, V, VIII, with or without I"],
+      ["Left lateral sectionectomy", "Left lateral bisegmentectomy, left lateral segmentectomy, left lobectomy", "II and III"],
       ["Central hepatectomy", "Mesohepatectomy", "IVb and V, with or without VIII"],
       ["Non-anatomic wedge", "Parenchymal-sparing resection", "Targets the lesion"],
     ],
-  }, [[OE], [OE], [OE, FISER], [OE, FISER], [OE], [OE], [OE]]),
+  }, [[OE, SCORE], [OE, SCORE], [OE, FISER, SCORE], [OE, FISER, SCORE], [OE, SCORE], [OE], [OE]]),
   sourcedUnits({
     id: "block-hr-approach",
     type: "bullets",
@@ -173,7 +174,7 @@ const blocks: TopicBlock[] = [
       "Selective Glissonian pedicle clamping avoids global ischemia. The **hanging maneuver** passes a tape in the avascular plane in front of the IVC to lift and guide transection.",
       "Transection tools: clamp-crush, CUSA (which spares vessels and ducts), bipolar or argon energy, vascular staplers for major pedicles and hepatic vein trunks, and finger fracture.",
     ],
-  }, [[OE], [OE, FISER], [OE], [OE], [OE], [OE], [OE]]),
+  }, [[OE, SCORE], [OE, FISER], [OE], [OE], [OE], [OE], [OE]]),
   sourced({
     id: "block-hr-pringle-warning",
     type: "warning",
@@ -192,7 +193,7 @@ const blocks: TopicBlock[] = [
       "A laparoscopic Pringle with a vessel loop and tourniquet, laparoscopic ultrasound, and intact bagged extraction keep the operation oncologically sound.",
       "AASLD endorses minimally invasive resection in selected patients for faster recovery and lower morbidity.",
     ],
-  }, [[OE], [OE], [OE], [OE], [OE]]),
+  }, [[OE], [OE], [OE, SCORE], [OE], [OE]]),
   sourcedUnits({
     id: "block-hr-complications",
     type: "table",
@@ -207,7 +208,7 @@ const blocks: TopicBlock[] = [
       ["Portal vein thrombosis", "Ascites, variceal bleeding, decompensation", "Anticoagulation, with or without catheter-directed thrombolysis"],
       ["Chylous ascites", "Milky drain fluid with triglycerides over 110 mg/dL", "Low-fat, medium-chain triglyceride diet; TPN and octreotide if refractory"],
     ],
-  }, [[OE], [OE], [OE, FISER], [OE], [OE], [OE], [OE]]),
+  }, [[OE, SCORE], [OE], [OE, FISER, SCORE], [OE], [OE], [OE, SCORE], [OE]]),
   sourcedUnits({
     id: "block-hr-followup",
     type: "bullets",
@@ -224,12 +225,12 @@ const blocks: TopicBlock[] = [
     columns: ["Question", "Board answer", "Current practice"],
     rows: [
       ["Portal vein share", "Two thirds of hepatic blood flow (Fiser)", "About 75% of flow but only about half the oxygen"],
-      ["Adenoma resection", "Over 4 cm (Fiser)", "5 cm or more, or any size in men or with beta-catenin activation"],
-      ["Remnant in a normal liver", "25% (Fiser)", "At least 20% (NCCN) to over 30% (AASLD); a 2026 series of 1,748 hepatectomies proposed over 30% normal and over 50% impaired"],
+      ["Adenoma resection", "Over 4 cm (Fiser), or over 4 cm in a high-risk type (SCORE)", "5 cm or more, or any size in men or with beta-catenin activation"],
+      ["Remnant in a normal liver", "25% (Fiser)", "At least 20% (NCCN) to over 30% (AASLD), and 20 to 30% in SCORE; a 2026 series of 1,748 hepatectomies proposed over 30% normal and over 50% impaired"],
       ["Resection margin", "1 cm (Fiser)", "Any R0 margin of 1 mm or more drives survival for colorectal metastases; a wider margin helps only when it costs no remnant"],
       ["Low CVP", "Lower CVP to cut blood loss in every hepatectomy", "Proven in open resection; no reduction in blood loss in minimally invasive resection (PRESSURE trial)"],
     ],
-  }, [[FISER, OE], [FISER, OE], [FISER, OE], [FISER, OE], [OE]]),
+  }, [[FISER, OE, SCORE], [FISER, OE, SCORE], [FISER, OE, SCORE], [FISER, OE], [OE]]),
   sourcedUnits({
     id: "block-hr-pearls",
     type: "bullets",
@@ -244,7 +245,7 @@ const blocks: TopicBlock[] = [
       "Persistent high biliary drainage after resection: **ERCP with sphincterotomy**.",
     ],
   }, [[TL, FISER, OE], [TL, OE], [OE, FISER, TL], [FISER], [OE, FISER], [OE, FISER], [FISER, OE]]),
-  references("block-hr-references", [OE, FISER, TL, HIATT]),
+  references("block-hr-references", [OE, FISER, TL, HIATT, SCORE]),
 ];
 
 export const hepaticResectionTopic = buildTopic({
@@ -252,12 +253,12 @@ export const hepaticResectionTopic = buildTopic({
   versionId: "00000000-0000-4000-8000-000000004301",
   slug: "hepatic-resection",
   title: "Hepatic Resection",
-  aliases: ["hepatectomy", "liver resection", "hepatic lobectomy", "right hepatectomy", "left hepatectomy", "trisectionectomy", "left lateral sectionectomy", "central hepatectomy", "Couinaud segments", "Couinaud classification", "Cantlie's line", "Cantlie line", "caudate lobe", "replaced left hepatic artery", "replaced right hepatic artery", "accessory left hepatic artery", "hepatic artery variants", "Michels classification", "future liver remnant", "portal vein embolization", "ALPPS", "liver venous deprivation", "post-hepatectomy liver failure", "50-50 criteria", "Brisbane 2000", "hanging maneuver", "total hepatic vascular isolation", "low central venous pressure"],
+  aliases: ["hepatectomy", "liver resection", "hepatic lobectomy", "right hepatic lobectomy", "left hepatic lobectomy", "left lobectomy", "left lateral segmentectomy", "segmentectomy and lobectomy", "right hepatectomy", "left hepatectomy", "trisectionectomy", "left lateral sectionectomy", "central hepatectomy", "Couinaud segments", "Couinaud classification", "Cantlie's line", "Cantlie line", "caudate lobe", "replaced left hepatic artery", "replaced right hepatic artery", "accessory left hepatic artery", "hepatic artery variants", "Michels classification", "future liver remnant", "portal vein embolization", "ALPPS", "liver venous deprivation", "post-hepatectomy liver failure", "50-50 criteria", "Brisbane 2000", "hanging maneuver", "total hepatic vascular isolation", "low central venous pressure"],
   scoreNodeId: "liver-procedures",
   scoreCategory: "SCORE · Liver · Operations & Procedures",
   tags: ["liver", "oncology", "anatomy", "procedures", "absite", "score"],
   sourceId: OE,
-  additionalSourceIds: [FISER, TL, HIATT],
+  additionalSourceIds: [FISER, TL, HIATT, SCORE],
   blocks,
-  reviewedAt: "2026-10-19T00:00:00.000Z",
+  reviewedAt: "2026-11-14T00:00:00.000Z",
 });
